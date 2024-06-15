@@ -14,7 +14,7 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager
+    home-manager,
     systems,
     ...
   } @ inputs: let
