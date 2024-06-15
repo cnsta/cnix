@@ -63,6 +63,7 @@
     ripgrep
     git
     wireguard-tools
+    networkmanagerapplet
 
     # Desktop
     firefox
@@ -81,8 +82,6 @@
   # Hyprland & accessories
   wayland.windowManager.hyprland.enable = true;
   programs.waybar.enable = true;
-  programs.nm-applet.indicator = true;
-
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
