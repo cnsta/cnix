@@ -79,7 +79,7 @@
   ];
 
   # Hyprland & accessories
-  programs.hyprland.enable = true;
+  wayland.windowManager.hyprland.enable = true;
   programs.waybar.enable = true;
   programs.nm-applet.indicator = true;
 
