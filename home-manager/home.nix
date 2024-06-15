@@ -83,7 +83,6 @@
   wayland.windowManager.hyprland.enable = true;
   programs.waybar.enable = true;
 
-{
   home.file."~/.config/hypr/hyprland.conf".text = ''
     decoration {
       shadow_offset = 0 5
@@ -96,8 +95,6 @@
     bindm = $mod, mouse:273, resizewindow
     bindm = $mod ALT, mouse:272, resizewindow
   '';
-  # ...
-};
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
