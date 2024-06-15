@@ -1,12 +1,23 @@
-# This is just an example, you should generate yours with nixos-generate-config and put it in here.
+{ config, lib, pkgs, modulesPath, ... }:
+
 {
-  boot.loader.systemd-boot.enable = true;
+  imports =
+    [  (modulesPath + "/profiles/qemu-guest.nix")
+    ];
 
-  fileSystems."/" = {
-    device = "/dev/sda1";
-    fsType = "ext4";
-  };
+  boot.initrd.availableKernalModules = [ "ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk" ];
+  boot.initrd.kernalModules = [ ];
+  boot.kernalModules = [ "kvm-amd ];
+  boot.extraModulePackages = [ ];
 
-  # Set your system kind (needed for flakes)
-  nixpkgs.hostPlatform = "x86_64-linux";
+  filesSystems."/" =
+    { device = "/dev/disk/by-uuid/66495946-e6f4-48db-bab3-e1d4cafc326d";
+      fsType = "ext4";
+    };
+
+    swapDevices = [ ];
+
+    networking.useDHCP = lib.mkDefault true;
+
+    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

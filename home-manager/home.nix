@@ -40,13 +40,49 @@
 
   # TODO: Set your username
   home = {
-    username = "your-username";
-    homeDirectory = "/home/your-username";
+    username = "cnst";
+    homeDirectory = "/home/cnst";
   };
 
   # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  programs.neovim.enable = true;
+  home.packages = with pkgs; [ 
+    # Dev
+    pyright
+    python312Packages.pip
+    python3
+    nodejs_22
+    cargo
+
+    # Utils
+    unzip
+    wget
+    curl
+    gzip
+    p7zip
+    ripgrep
+    git
+    wireguard-tools
+
+    # Desktop
+    firefox
+    alacritty
+    wl-clipboard
+    dunst
+    keepassxc
+    ranger
+    xfce.thunar
+    xfce.thunar-volman
+    xfce.thunar-archive-plugin
+    xarchiver
+    gvfs
+  ];
+
+  # Hyprland & accessories
+  programs.hyprland.enable = true;
+  programs.waybar.enable = true;
+  programs.nm-applet.indicator = true;
+
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
@@ -56,5 +92,5 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.05";
 }
