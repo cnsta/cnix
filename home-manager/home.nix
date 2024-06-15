@@ -95,7 +95,15 @@
     bindm = $mod, mouse:273, resizewindow
     bindm = $mod ALT, mouse:272, resizewindow
   '';
-
+  
+  home.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = 1;
+    QT_QPA_PLATFORM = "wayland";
+  };
+  
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-wlr];
+  },
+  
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
