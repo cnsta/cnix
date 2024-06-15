@@ -14,10 +14,20 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager,
+    home-manager
+    systems,
     ...
   } @ inputs: let
     inherit (self) outputs;
+        lib = nixpkgs.lib // home-manager.lib;
+    forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
+    pkgsFor = lib.genAttrs (import systems) (
+      system:
+        import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        }
+    );
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
