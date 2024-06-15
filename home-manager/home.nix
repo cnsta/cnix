@@ -102,7 +102,7 @@
   };
   
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-wlr];
-  },
+  };
   
   # Enable home-manager and git
   programs.home-manager.enable = true;
