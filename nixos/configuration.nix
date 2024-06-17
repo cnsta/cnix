@@ -90,11 +90,22 @@
     LC_TIME = "sv_SE.UTF-8";
   };
 
-  # COnfigure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    extraLayouts.hhkbse = {
+      description = "HHKBse by cnst";
+      languages = [ "se" ];
+      symbolsFile = /home/cnst/Documents/nix-config/nixos/xkb/symbols/hhkbse;
+    };
+    layout = "hhkbse";
+   # dir = "/home/cnst/Documents/nix-config/nixos/xkb";
+    variant = "";
+    options = "lv3:rwin_switch";
   };
+
+  # Console keymap
+  console.useXkbConfig = true;
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
