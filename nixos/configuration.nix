@@ -62,6 +62,17 @@
   # System packages
   environment.systemPackages = with pkgs; [
     git
+    pyright
+    python3
+    gcc
+    nodejs_22
+    cargo
+    gnumake
+    stow
+    wget
+    curl
+    ripgrep
+    nixd
     neovim
   ];
 

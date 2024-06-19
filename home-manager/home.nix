@@ -47,24 +47,6 @@
   # Add stuff for your user as you see fit:
   programs.neovim.enable = true;
   home.packages = with pkgs; [ 
-    # Dev
-    pyright
-    python312Packages.pip
-    python3
-    nodejs_22
-    cargo
-
-    # Utils
-    unzip
-    wget
-    curl
-    gzip
-    p7zip
-    ripgrep
-    git
-    wireguard-tools
-    networkmanagerapplet
-
     # Desktop
     firefox
     alacritty
