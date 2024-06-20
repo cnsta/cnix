@@ -62,8 +62,8 @@
   ];
 
   # Hyprland & accessories
-  wayland.windowManager.hyprland.enable = true;
-  programs.waybar.enable = true;
+  # wayland.windowManager.hyprland.enable = true;
+  # programs.waybar.enable = true;
 
   home.file."~/.config/hypr/hyprland.conf".text = ''
     decoration {

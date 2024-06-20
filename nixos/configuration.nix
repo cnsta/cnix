@@ -23,6 +23,7 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
+        <kickstart-nix-nvim>.overlays.default
       # If you want to use overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
@@ -73,7 +74,7 @@
     curl
     ripgrep
     nixd
-    neovim
+    nvim-pkg
   ];
 
   # Bootloader
