@@ -5,6 +5,7 @@
   lib,
   config,
   pkgs,
+  system,
   ...
 }: {
   # You can import other NixOS modules here
@@ -60,9 +61,8 @@
   };
 
   # System packages
-  environment.systemPackages = [ inputs.nixvim.packages.${pkgs.system}.default ];
-
   environment.systemPackages = with pkgs; [
+    inputs.nixvim.packages.${system}.default
     git
     pyright
     python3
