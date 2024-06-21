@@ -54,11 +54,26 @@
     dunst
     keepassxc
     ranger
+    webcord-vencord
     xfce.thunar
     xfce.thunar-volman
     xfce.thunar-archive-plugin
     xarchiver
     gvfs
+    swaybg
+    wireguard-tools
+    solaar
+    wpa_supplicant
+    ntfs3g
+    xdg-utils
+    kdePackages.polkit-kde-agent-1
+    networkmanagerapplet
+    blueman
+    htop
+    btop
+    tofi
+    pamixer
+    virt-manager
   ];
 
   # Hyprland & accessories
