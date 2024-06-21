@@ -5,6 +5,11 @@
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    
+    # Nixvim
+    inputs.nixvim = {
+      url = "github:cnsta/cnixvim";
+    };
     # Home manager
     home-manager = {
       url = "github:nix-community/home-manager";

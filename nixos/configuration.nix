@@ -23,7 +23,6 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
-        <kickstart-nix-nvim>.overlays.default
       # If you want to use overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
@@ -61,6 +60,8 @@
   };
 
   # System packages
+  environment.systemPackages = [ inputs.nixvim.packages.${pkgs.system}.default ];
+
   environment.systemPackages = with pkgs; [
     git
     pyright
@@ -74,7 +75,6 @@
     curl
     ripgrep
     nixd
-    nvim-pkg
   ];
 
   # Bootloader
