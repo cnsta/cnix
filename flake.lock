@@ -349,11 +349,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1718899842,
-        "narHash": "sha256-yR+zqGKNb8HKvaa0oVQ4KNftGCgV5rD3+bZzxZvpFyk=",
+        "lastModified": 1718967624,
+        "narHash": "sha256-Qu6w2uxdiRIRMpXbF6ItKeDrZzAelR6e8rnnJQTLtl8=",
         "owner": "cnsta",
         "repo": "cnixvim",
-        "rev": "4ef290b37427499e909d9a7421e1cfb4f3c559a0",
+        "rev": "8e3ce2ad4b703f36e4fc74ef86a4601fc727f71b",
         "type": "github"
       },
       "original": {

@@ -61,20 +61,20 @@
   };
 
   # System packages
-  environment.systemPackages = with pkgs; [
-    inputs.nixvim.packages.${system}.default
-    git
-    pyright
-    python3
-    gcc
-    nodejs_22
-    cargo
-    gnumake
-    stow
-    wget
-    curl
-    ripgrep
-    nixd
+  environment.systemPackages = [
+    inputs.nixvim.packages.${pkgs.system}.default
+    pkgs.git
+    pkgs.pyright
+    pkgs.python3
+    pkgs.gcc
+    pkgs.nodejs_22
+    pkgs.cargo
+    pkgs.gnumake
+    pkgs.stow
+    pkgs.wget
+    pkgs.curl
+    pkgs.ripgrep
+    pkgs.nixd
   ];
 
   # Bootloader
