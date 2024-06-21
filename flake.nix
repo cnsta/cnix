@@ -7,7 +7,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     
     # Nixvim
-    inputs.nixvim = {
+    nixvim = {
       url = "github:cnsta/cnixvim";
     };
     # Home manager
