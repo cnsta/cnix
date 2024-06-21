@@ -46,7 +46,7 @@
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  home.packages = with pkgs; [ 
+  home.packages = with pkgs; [
     # Desktop
     firefox
     alacritty
@@ -74,36 +74,65 @@
     tofi
     pamixer
     virt-manager
+    qbittorrent
+    waybar
+    mullvad-vpn
   ];
 
   # Hyprland & accessories
   # wayland.windowManager.hyprland.enable = true;
   # programs.waybar.enable = true;
 
-  home.file."~/.config/hypr/hyprland.conf".text = ''
-    decoration {
-      shadow_offset = 0 5
-      col.shadow = rgba(00000099)
-    }
+  wayland.windowManager.hyprland = {
+    # Whether to enable Hyprland wayland compositor
+    enable = true;
+    # The hyprland package to use
+    package = pkgs.hyprland;
+    # Whether to enable XWayland
+    xwayland.enable = true;
+    extraConfig = ''
+      ${builtins.readFile ./hypr/hyprland.conf}
+    '';
+    # Optional
+    # Whether to enable hyprland-session.target on hyprland startup
+    systemd.enable = true;
+  };
 
-    $mod = SUPER
-
-    bindm = $mod, mouse:272, movewindow
-    bindm = $mod, mouse:273, resizewindow
-    bindm = $mod ALT, mouse:272, resizewindow
-  '';
-  
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
     QT_QPA_PLATFORM = "wayland";
   };
-  
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-wlr];
-  
-  # Enable home-manager and git
-  programs.home-manager.enable = true;
-  programs.git.enable = true;
 
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-wlr];
+
+  programs = {
+    home-manager.enable = true;
+    git = {
+      enable = true;
+      userName = "cnst";
+      userEmail = "cnst@cana.st";
+    };
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+
+      shellAliases = {
+        ll = "ls -l";
+        update = "sudo nixos-rebuild switch";
+      };
+      history = {
+        size = 10000;
+        path = "${config.xdg.dataHome}/zsh/history";
+      };
+      oh-my-zsh = {
+        enable = true;
+        plugins = ["git" "thefuck"];
+        theme = "robbyrussell";
+      };
+    };
+  };
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
