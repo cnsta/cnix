@@ -61,22 +61,24 @@
   };
 
   # System packages
-  environment.systemPackages = [
-    inputs.nixvim.packages.${pkgs.system}.default
-    pkgs.git
-    pkgs.pyright
-    pkgs.python3
-    pkgs.gcc
-    pkgs.nodejs_22
-    pkgs.cargo
-    pkgs.gnumake
-    pkgs.stow
-    pkgs.wget
-    pkgs.curl
-    pkgs.ripgrep
-    pkgs.nixd
-  ];
-
+  environment = {
+    systemPackages = [
+      inputs.nixvim.packages.${pkgs.system}.default
+      pkgs.git
+      pkgs.pyright
+      pkgs.python3
+      pkgs.gcc
+      pkgs.nodejs_22
+      pkgs.cargo
+      pkgs.gnumake
+      pkgs.stow
+      pkgs.wget
+      pkgs.curl
+      pkgs.ripgrep
+      pkgs.nixd
+    ];
+    localBinInPath = true;
+  };
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk
@@ -94,14 +96,21 @@
   # TODO: Set your hostname
   networking.hostName = "cnix";
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  hardware = {
+    pulseaudio.enable = false;
+    graphics = {
+      enable = true;
+    };
+  };
+
   security.rtkit.enable = true;
 
-  programs.hyprland = {
-    # Install the packages from nixpkgs
-    enable = true;
-    # Whether to enable XWayland
-    xwayland.enable = true;
+  programs = {
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+    zsh.enable = true;
   };
   # Time zone & Locale
   time.timeZone = "Europe/Stockholm";
@@ -127,6 +136,7 @@
   users.users = {
     cnst = {
       isNormalUser = true;
+      shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
@@ -139,6 +149,19 @@
   services = {
     mullvad-vpn.enable = true;
     mullvad-vpn.package = pkgs.mullvad-vpn;
+    greetd = {
+      enable = true;
+      settings = {
+        initial_session = {
+          command = "${pkgs.hyprland}/bin/Hyprland";
+          user = "cnst";
+        };
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r --remember-session";
+          user = "greeter";
+        };
+      };
+    };
     openssh = {
       enable = true;
       settings = {
@@ -151,7 +174,7 @@
     };
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
+      #  displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
       xkb = {
         extraLayouts.hhkbse = {

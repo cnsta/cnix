@@ -75,8 +75,15 @@
     pamixer
     virt-manager
     qbittorrent
+    fastfetch
     waybar
+    nwg-look
+    lxappearance
+    orchis-theme
+    gruvbox-plus-icons
+    gruvbox-gtk-theme
     mullvad-vpn
+    thefuck
   ];
 
   # Hyprland & accessories
@@ -101,6 +108,7 @@
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
     QT_QPA_PLATFORM = "wayland";
+    GTK_THEME = "Orchis-Grey-Dark";
   };
 
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-wlr];
