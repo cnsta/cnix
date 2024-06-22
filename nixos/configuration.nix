@@ -2,6 +2,7 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
+  outputs,
   lib,
   config,
   pkgs,
@@ -10,6 +11,7 @@
 }: {
   # You can import other NixOS modules here
   imports = [
+    inputs.home-manager.nixosModules.home-manager
     # If you want to use modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
@@ -20,6 +22,14 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
+
+  home-manager = {
+    extraSpecialArgs = {inherit inputs outputs;};
+    users = {
+      # Import your home-manager configuration
+      cnst = import ../home-manager/home.nix;
+    };
+  };
 
   nixpkgs = {
     # You can add overlays here
@@ -76,6 +86,9 @@
       pkgs.curl
       pkgs.ripgrep
       pkgs.nixd
+      pkgs.python312Packages.oauth2
+      pkgs.python312Packages.httplib2
+      pkgs.killall
     ];
     localBinInPath = true;
   };
@@ -89,44 +102,61 @@
     jetbrains-mono
     (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Iosevka" "3270" "DroidSansMono"];})
   ]; # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
   # Enable networking
-  networking.networkmanager.enable = true;
-  # TODO: Set your hostname
-  networking.hostName = "cnix";
+  networking = {
+    networkmanager.enable = true;
+    hostName = "cnix";
+  };
   # Enable sound with pipewire.
   hardware = {
     pulseaudio.enable = false;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
     graphics = {
       enable = true;
     };
   };
 
+  zramSwap.enable = true;
+
   security.rtkit.enable = true;
 
   programs = {
+    solaar.enable = true;
     hyprland = {
       enable = true;
       xwayland.enable = true;
+    };
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
     };
     zsh.enable = true;
   };
   # Time zone & Locale
   time.timeZone = "Europe/Stockholm";
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "sv_SE.UTF-8";
-    LC_IDENTIFICATION = "sv_SE.UTF-8";
-    LC_MEASUREMENT = "sv_SE.UTF-8";
-    LC_MONETARY = "sv_SE.UTF-8";
-    LC_NAME = "sv_SE.UTF-8";
-    LC_NUMERIC = "sv_SE.UTF-8";
-    LC_PAPER = "sv_SE.UTF-8";
-    LC_TELEPHONE = "sv_SE.UTF-8";
-    LC_TIME = "sv_SE.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "sv_SE.UTF-8";
+      LC_IDENTIFICATION = "sv_SE.UTF-8";
+      LC_MEASUREMENT = "sv_SE.UTF-8";
+      LC_MONETARY = "sv_SE.UTF-8";
+      LC_NAME = "sv_SE.UTF-8";
+      LC_NUMERIC = "sv_SE.UTF-8";
+      LC_PAPER = "sv_SE.UTF-8";
+      LC_TELEPHONE = "sv_SE.UTF-8";
+      LC_TIME = "sv_SE.UTF-8";
+    };
   };
 
   # Console keymap
@@ -137,18 +167,18 @@
     cnst = {
       isNormalUser = true;
       shell = pkgs.zsh;
-      openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-      ];
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
+      # openssh.authorizedKeys.keys = [];
       extraGroups = ["wheel" "networkmanager" "audio" "video"];
     };
   };
 
   # services
   services = {
-    mullvad-vpn.enable = true;
-    mullvad-vpn.package = pkgs.mullvad-vpn;
+    blueman.enable = true;
+    mullvad-vpn = {
+      enable = true;
+      package = pkgs.mullvad-vpn;
+    };
     greetd = {
       enable = true;
       settings = {
@@ -190,8 +220,10 @@
     };
     pipewire = {
       enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
       pulse.enable = true;
       # If you want to use JACK applications, uncomment this
       #jack.enable = true;

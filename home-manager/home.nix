@@ -62,7 +62,6 @@
     gvfs
     swaybg
     wireguard-tools
-    solaar
     wpa_supplicant
     ntfs3g
     xdg-utils
@@ -84,6 +83,7 @@
     gruvbox-gtk-theme
     mullvad-vpn
     thefuck
+    calcurse
   ];
 
   # Hyprland & accessories
@@ -127,8 +127,10 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
+        nixconfig = "cd /home/cnst/.nix-config/";
         ll = "ls -l";
-        update = "sudo nixos-rebuild switch";
+        nixupdate = "sudo nixos-rebuild switch --flake .#cnix";
+        flakeupdate = "nix flake update";
       };
       history = {
         size = 10000;

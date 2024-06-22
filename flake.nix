@@ -5,10 +5,15 @@
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    
+    # Solaar
+    solaar = {
+      url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Nixvim
     nixvim = {
       url = "github:cnsta/cnixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # Home manager
     home-manager = {
@@ -21,10 +26,11 @@
     nixpkgs,
     home-manager,
     systems,
+    solaar,
     ...
   } @ inputs: let
     inherit (self) outputs;
-        lib = nixpkgs.lib // home-manager.lib;
+    lib = nixpkgs.lib // home-manager.lib;
     forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
     pkgsFor = lib.genAttrs (import systems) (
       system:
@@ -40,18 +46,10 @@
       cnix = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         # > Our main nixos configuration file <
-        modules = [./nixos/configuration.nix];
-      };
-    };
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
-      "cnst@cnix" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        # > Our main home-manager configuration file <
-        modules = [./home-manager/home.nix];
+        modules = [
+          solaar.nixosModules.default
+          ./nixos/configuration.nix
+        ];
       };
     };
   };
