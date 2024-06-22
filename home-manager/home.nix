@@ -9,11 +9,7 @@
 }: {
   # You can import other home-manager modules here
   imports = [
-    # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
+    ./neovim
   ];
 
   nixpkgs = {
@@ -58,7 +54,7 @@
     xfce.thunar
     xfce.thunar-volman
     xfce.thunar-archive-plugin
-    xarchiver
+    gnome.file-roller
     gvfs
     swaybg
     wireguard-tools
@@ -77,10 +73,6 @@
     fastfetch
     waybar
     nwg-look
-    lxappearance
-    orchis-theme
-    gruvbox-plus-icons
-    gruvbox-gtk-theme
     mullvad-vpn
     thefuck
     calcurse
@@ -91,27 +83,40 @@
   # programs.waybar.enable = true;
 
   wayland.windowManager.hyprland = {
-    # Whether to enable Hyprland wayland compositor
     enable = true;
-    # The hyprland package to use
     package = pkgs.hyprland;
-    # Whether to enable XWayland
     xwayland.enable = true;
     extraConfig = ''
       ${builtins.readFile ./hypr/hyprland.conf}
     '';
-    # Optional
-    # Whether to enable hyprland-session.target on hyprland startup
     systemd.enable = true;
   };
+  
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
+    NIXOS_OZONE_WL = 1;
+    SDL_VIDEODRIVER = "wayland";
     QT_QPA_PLATFORM = "wayland";
-    GTK_THEME = "Orchis-Grey-Dark";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
   };
 
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-wlr];
+  gtk = {
+    enable = true;
+    theme = {
+      package = pkgs.orchis-theme;
+      name = "Orchis-Grey-Dark-Compact";
+    };
+    iconTheme = {
+      package = pkgs.gruvbox-plus-icons;
+      name = "Gruvbox-Plus-Dark";
+    };
+    font = {
+      name = "FiraCode Nerd Font Light";
+      size = 11;
+    };
+  };
 
   programs = {
     home-manager.enable = true;

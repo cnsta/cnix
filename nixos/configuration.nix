@@ -89,6 +89,9 @@
       pkgs.python312Packages.oauth2
       pkgs.python312Packages.httplib2
       pkgs.killall
+      pkgs.alejandra
+      pkgs.tree-sitter
+      pkgs.lazygit
     ];
     localBinInPath = true;
   };
@@ -129,6 +132,12 @@
 
   programs = {
     solaar.enable = true;
+    nix-ld.enable = true;
+    adb.enable = true;
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
     hyprland = {
       enable = true;
       xwayland.enable = true;

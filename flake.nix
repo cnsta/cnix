@@ -10,9 +10,9 @@
       url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Nixvim
-    nixvim = {
-      url = "github:cnsta/cnixvim";
+    # Neovim Nightly
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Home manager
