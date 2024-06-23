@@ -14,6 +14,7 @@
     ./git
     ./gtk
     ./shell
+    ./firefox
   ];
 
   nixpkgs = {
@@ -48,13 +49,12 @@
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
     # Desktop
-    firefox
     alacritty
     wl-clipboard
     dunst
     keepassxc
     ranger
-    webcord-vencord
+    webcord
     xfce.thunar
     xfce.thunar-volman
     xfce.thunar-archive-plugin
@@ -64,7 +64,6 @@
     wireguard-tools
     wpa_supplicant
     ntfs3g
-    xdg-utils
     kdePackages.polkit-kde-agent-1
     networkmanagerapplet
     blueman

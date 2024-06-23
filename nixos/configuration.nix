@@ -19,7 +19,6 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
-
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
@@ -121,6 +120,7 @@
       pkgs.unzip
       pkgs.p7zip
       pkgs.unrar
+      pkgs.xdg-utils
     ];
     localBinInPath = true;
   };
