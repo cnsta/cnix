@@ -34,11 +34,6 @@ let
     gotools
   ];
 
-  haskell = [
-    haskell-language-server
-    ghc
-  ];
-
   lua = [
     lua-language-server
     stylua
@@ -69,16 +64,9 @@ let
   ];
 
   rust = [
-    rustToolchain
-    bacon # background code check
-  ];
-  rustToolchain = pkgs.fenix.stable.withComponents [
-    "cargo"
-    "clippy"
-    "rust-src"
-    "rustc"
-    "rustfmt"
-    "rust-analyzer"
+    cargo
+    rustfmt
+    rust-analyzer
   ];
 
   shell = [
@@ -98,18 +86,7 @@ let
   ];
 
   extraPackages =
-    tools
-    ++ c
-    ++ gamedev
-    ++ golang
-    ++ haskell
-    ++ lua
-    ++ markup
-    ++ nix
-    ++ python
-    ++ rust
-    ++ shell
-    ++ web;
+    tools ++ c ++ gamedev ++ golang ++ lua ++ markup ++ nix ++ python ++ rust ++ shell ++ web;
 in
 
 {
@@ -121,11 +98,6 @@ in
     defaultEditor = true;
     package = pkgs.neovim-unwrapped;
     plugins = with pkgs.vimPlugins; [ telescope-cheat-nvim ];
-    inherit extraPackages;
-  };
-
-  programs.helix = {
-    enable = true;
     inherit extraPackages;
   };
 }

@@ -6,10 +6,14 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   # You can import other home-manager modules here
   imports = [
     ./neovim
+    ./git
+    ./gtk
+    ./shell
   ];
 
   nixpkgs = {
@@ -91,9 +95,20 @@
     '';
     systemd.enable = true;
   };
-  
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    config = {
+      common.default = [ "gtk" ];
+      hyprland.default = [
+        "gtk"
+        "hyprland"
+      ];
+    };
+
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
     NIXOS_OZONE_WL = 1;
@@ -102,52 +117,8 @@
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
   };
 
-  gtk = {
-    enable = true;
-    theme = {
-      package = pkgs.orchis-theme;
-      name = "Orchis-Grey-Dark-Compact";
-    };
-    iconTheme = {
-      package = pkgs.gruvbox-plus-icons;
-      name = "Gruvbox-Plus-Dark";
-    };
-    font = {
-      name = "FiraCode Nerd Font Light";
-      size = 11;
-    };
-  };
+  programs.home-manager.enable = true;
 
-  programs = {
-    home-manager.enable = true;
-    git = {
-      enable = true;
-      userName = "cnst";
-      userEmail = "cnst@cana.st";
-    };
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-      autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
-
-      shellAliases = {
-        nixconfig = "cd /home/cnst/.nix-config/";
-        ll = "ls -l";
-        nixupdate = "sudo nixos-rebuild switch --flake .#cnix";
-        flakeupdate = "nix flake update";
-      };
-      history = {
-        size = 10000;
-        path = "${config.xdg.dataHome}/zsh/history";
-      };
-      oh-my-zsh = {
-        enable = true;
-        plugins = ["git" "thefuck"];
-        theme = "robbyrussell";
-      };
-    };
-  };
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 

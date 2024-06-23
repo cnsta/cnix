@@ -8,7 +8,8 @@
   pkgs,
   system,
   ...
-}: {
+}:
+{
   # You can import other NixOS modules here
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -24,7 +25,9 @@
   ];
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs outputs;};
+    extraSpecialArgs = {
+      inherit inputs outputs;
+    };
     users = {
       # Import your home-manager configuration
       cnst = import ../home-manager/home.nix;
@@ -51,47 +54,73 @@
     };
   };
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
-    };
-    # Opinionated: disable channels
-    channel.enable = false;
+  nix =
+    let
+      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      settings = {
+        warn-dirty = false;
+        # Enable flakes and new 'nix' command
+        experimental-features = "nix-command flakes";
+        # Opinionated: disable global registry
+        flake-registry = "";
+        # Workaround for https://github.com/NixOS/nix/issues/9574
+        nix-path = config.nix.nixPath;
+      };
+      # Opinionated: disable channels
+      channel.enable = false;
 
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-  };
+      # Opinionated: make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    };
 
   # System packages
   environment = {
     systemPackages = [
-      inputs.nixvim.packages.${pkgs.system}.default
+      # Dev
       pkgs.git
       pkgs.pyright
       pkgs.python3
       pkgs.gcc
-      pkgs.nodejs_22
+      pkgs.go
+      pkgs.nodePackages_latest.npm
+      pkgs.nodePackages_latest.nodejs
+      pkgs.nodePackages.prettier
+      pkgs.nodePackages.prettier-plugin-toml
+      pkgs.lua-language-server
+      pkgs.stylua
+      pkgs.prettierd
       pkgs.cargo
-      pkgs.gnumake
+      pkgs.hyprlang
+      pkgs.nixd
+      pkgs.nil
+      pkgs.black
+      pkgs.python312Packages.jedi-language-server
+      pkgs.isort
+      pkgs.bacon
+      pkgs.clang
+      pkgs.clang-tools
+      pkgs.alejandra
+
+      # Util
       pkgs.stow
+      pkgs.gnumake
       pkgs.wget
       pkgs.curl
       pkgs.ripgrep
-      pkgs.nixd
       pkgs.python312Packages.oauth2
       pkgs.python312Packages.httplib2
+      pkgs.python312Packages.pip
       pkgs.killall
-      pkgs.alejandra
       pkgs.tree-sitter
       pkgs.lazygit
+      pkgs.tmux
+      pkgs.tmuxifier
+      pkgs.unzip
+      pkgs.p7zip
+      pkgs.unrar
     ];
     localBinInPath = true;
   };
@@ -103,7 +132,15 @@
     fira-code-symbols
     font-awesome
     jetbrains-mono
-    (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Iosevka" "3270" "DroidSansMono"];})
+    (nerdfonts.override {
+      fonts = [
+        "JetBrainsMono"
+        "FiraCode"
+        "Iosevka"
+        "3270"
+        "DroidSansMono"
+      ];
+    })
   ]; # Bootloader
   boot.loader = {
     systemd-boot.enable = true;
@@ -123,6 +160,11 @@
     };
     graphics = {
       enable = true;
+      extraPackages = with pkgs; [
+        libva
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
     };
   };
 
@@ -134,6 +176,12 @@
     solaar.enable = true;
     nix-ld.enable = true;
     adb.enable = true;
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3";
+      flake = "/home/cnst/.nix-config";
+    };
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -177,7 +225,12 @@
       isNormalUser = true;
       shell = pkgs.zsh;
       # openssh.authorizedKeys.keys = [];
-      extraGroups = ["wheel" "networkmanager" "audio" "video"];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "audio"
+        "video"
+      ];
     };
   };
 
@@ -218,7 +271,7 @@
       xkb = {
         extraLayouts.hhkbse = {
           description = "HHKBse by cnst";
-          languages = ["se"];
+          languages = [ "se" ];
           symbolsFile = /home/cnst/.nix-config/nixos/xkb/symbols/hhkbse;
         };
         layout = "hhkbse";

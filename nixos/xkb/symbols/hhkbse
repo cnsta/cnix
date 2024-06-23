@@ -2,8 +2,6 @@
 
 default partial alphanumeric_keys
 xkb_symbols "hhkbse" {
-	include "latin(type2)"
-	include "se(se)"
 
 	name[Group1]="Sweden - HHKBse";
 
@@ -56,5 +54,4 @@ xkb_symbols "hhkbse" {
 	key <AB08> {[     comma,  semicolon                             ]};
 	key <AB09> {[    period,      colon                             ]};
 	key <AB10> {[     minus, underscore,       endash               ]};
-
 };
