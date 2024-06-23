@@ -15,7 +15,6 @@
     ./gtk
     ./shell
     ./firefox
-    ./steam
   ];
 
   nixpkgs = {
