@@ -77,6 +77,16 @@
 
   # System packages
   environment = {
+    etc."xdg/user-dirs.defaults".text = ''
+      DESKTOP=desktop
+      DOWNLOAD=documents/downloads
+      TEMPLATES=documents/templates
+      PUBLICSHARE=documents/share
+      DOCUMENTS=documents
+      MUSIC=media/music
+      PICTURES=media/photos
+      VIDEOS=media/video
+    '';
     systemPackages = [
       # Dev
       pkgs.git
@@ -121,6 +131,7 @@
       pkgs.p7zip
       pkgs.unrar
       pkgs.xdg-utils
+      pkgs.xdg-user-dirs
     ];
     localBinInPath = true;
   };
@@ -164,6 +175,7 @@
         libva
         vaapiVdpau
         libvdpau-va-gl
+        gamescope
       ];
     };
   };
@@ -175,6 +187,7 @@
   programs = {
     solaar.enable = true;
     nix-ld.enable = true;
+    zsh.enable = true;
     adb.enable = true;
     nh = {
       enable = true;
@@ -190,12 +203,6 @@
       enable = true;
       xwayland.enable = true;
     };
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-    };
-    zsh.enable = true;
   };
   # Time zone & Locale
   time.timeZone = "Europe/Stockholm";
@@ -236,6 +243,8 @@
 
   # services
   services = {
+    udisks2.enable = true;
+    gvfs.enable = true;
     blueman.enable = true;
     mullvad-vpn = {
       enable = true;
@@ -267,7 +276,7 @@
     xserver = {
       enable = true;
       #  displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
+      #  desktopManager.gnome.enable = true;
       xkb = {
         extraLayouts.hhkbse = {
           description = "HHKBse by cnst";
