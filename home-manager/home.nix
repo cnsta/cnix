@@ -15,6 +15,7 @@
     ./gtk
     ./shell
     ./firefox
+    ./steam
   ];
 
   nixpkgs = {
@@ -59,7 +60,6 @@
     xfce.thunar-volman
     xfce.thunar-archive-plugin
     gnome.file-roller
-    gvfs
     swaybg
     wireguard-tools
     wpa_supplicant
@@ -95,18 +95,31 @@
     systemd.enable = true;
   };
 
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-    config = {
-      common.default = [ "gtk" ];
-      hyprland.default = [
-        "gtk"
-        "hyprland"
-      ];
+  xdg = {
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+      desktop = "${config.home.homeDirectory}/desktop";
+      documents = "${config.home.homeDirectory}/documents";
+      download = "${config.home.homeDirectory}/downloads";
+      music = "${config.home.homeDirectory}/media/music";
+      pictures = "${config.home.homeDirectory}/media/images";
+      publicShare = "${config.home.homeDirectory}/documents/share";
+      templates = "${config.home.homeDirectory}/documents/templates";
+      videos = "${config.home.homeDirectory}/media/videos";
     };
-
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      config = {
+        common.default = [ "gtk" ];
+        hyprland.default = [
+          "gtk"
+          "hyprland"
+        ];
+      };
+    };
   };
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
