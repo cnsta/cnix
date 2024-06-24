@@ -57,7 +57,10 @@
       nixosConfigurations = {
 
         cnix = lib.nixosSystem {
-          modules = [ ./hosts/cnix ];
+          modules = [
+            ./hosts/cnix
+            solaar.nixosModules.default
+          ];
           specialArgs = {
             inherit inputs outputs;
           };

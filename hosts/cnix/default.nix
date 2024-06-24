@@ -32,7 +32,9 @@ in
     inputs.home-manager.nixosModules.home-manager
     ../pkgs/fonts.nix
     ../common
-    ../extra
+    ../extra/steam
+    ../extra/nix-ld
+    ../extra/solaar
     ../services/cnix.nix
     ../hardware/cnix.nix
     ../locale/cnix.nix
@@ -40,7 +42,6 @@ in
   ];
 
   home-manager.users.cnst = import ../../home/cnst/home.nix;
-
   nix =
     let
       flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;

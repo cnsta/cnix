@@ -9,7 +9,6 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./adb.nix
-    ./hyprland.nix
     ./neovim.nix
     ./zsh.nix
   ];
@@ -25,7 +24,11 @@
       allowUnfree = true;
     };
   };
+
+  console.useXkbConfig = true;
+
   environment = {
+    localBinInPath = true;
     systemPackages = [
       # Dev
       pkgs.git
