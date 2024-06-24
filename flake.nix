@@ -1,10 +1,16 @@
 {
-  description = "Your new nix config";
+  description = "My NixOS";
 
   inputs = {
-    # Nixpkgs
+    # Nix environs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    systems.url = "github:nix-systems/default-linux";
+    hardware.url = "github:nixos/nixos-hardware";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Solaar
     solaar = {
       url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
@@ -21,10 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Home manager
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
   };
   outputs =
     {
@@ -48,18 +51,22 @@
       );
     in
     {
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
+      inherit lib;
+      formatter = forEachSystem (pkgs: pkgs.alejandra);
+
       nixosConfigurations = {
-        cnix = nixpkgs.lib.nixosSystem {
+
+        cnix = lib.nixosSystem {
+          modules = [ ./hosts/cnix ];
           specialArgs = {
             inherit inputs outputs;
           };
-          # > Our main nixos configuration file <
-          modules = [
-            solaar.nixosModules.default
-            ./nixos/configuration.nix
-          ];
+        };
+        cnixpad = lib.nixosSystem {
+          modules = [ ./hosts/cnixpad ];
+          specialArgs = {
+            inherit inputs outputs;
+          };
         };
       };
     };
