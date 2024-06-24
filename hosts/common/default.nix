@@ -13,7 +13,7 @@
     ./zsh.nix
   ];
   home-manager = {
-    useGlobalPkgs = true;
+    # useGlobalPkgs = true;
     extraSpecialArgs = {
       inherit inputs outputs;
     };
@@ -24,6 +24,8 @@
       allowUnfree = true;
     };
   };
+
+  programs.dconf.enable = true;
 
   console.useXkbConfig = true;
 
