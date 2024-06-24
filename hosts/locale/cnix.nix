@@ -1,17 +1,4 @@
 {
-  environment = {
-    etc."xdg/user-dirs.defaults".text = ''
-      DESKTOP=desktop
-      DOWNLOAD=documents/downloads
-      TEMPLATES=documents/templates
-      PUBLICSHARE=documents/share
-      DOCUMENTS=documents
-      MUSIC=media/music
-      PICTURES=media/photos
-      VIDEOS=media/video
-    '';
-  };
-
   time.timeZone = "Europe/Stockholm";
 
   i18n = {

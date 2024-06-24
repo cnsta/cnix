@@ -30,31 +30,16 @@ in
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ../pkgs/cnix.nix
     ../pkgs/fonts.nix
-    ../programs
+    ../common
+    ../extra
     ../services/cnix.nix
     ../hardware/cnix.nix
-    ../generic/cnix.nix
+    ../locale/cnix.nix
     ./hardware-configuration.nix
   ];
 
-  home-manager = {
-    useGlobalPkgs = true;
-    extraSpecialArgs = {
-      inherit inputs outputs;
-    };
-    users = {
-      cnst = import ../../home/cnst/home.nix;
-    };
-  };
-
-  nixpkgs = {
-    overlays = [ ];
-    config = {
-      allowUnfree = true;
-    };
-  };
+  home-manager.users.cnst = import ../../home/cnst/home.nix;
 
   nix =
     let
@@ -82,9 +67,6 @@ in
       nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
     };
 
-  # Add .local/bin to $PATH
-  environment.localBinInPath = true;
-
   # Bootloader
   boot.loader = {
     systemd-boot.enable = true;
@@ -105,10 +87,6 @@ in
       flake = "/home/cnst/.nix-config";
     };
   };
-
-  # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
-  console.useXkbConfig = true;
-  # services
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.05";
