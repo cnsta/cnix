@@ -66,6 +66,7 @@
       pkgs.python312Packages.oauth2
       pkgs.python312Packages.httplib2
       pkgs.python312Packages.pip
+      pkgs.python312Packages.dbus-python
       pkgs.killall
       pkgs.tree-sitter
       pkgs.lazygit

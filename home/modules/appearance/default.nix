@@ -1,5 +1,6 @@
 { pkgs, config, ... }:
 {
+  imports = [ ./gtk.nix ];
   xdg = {
     userDirs = {
       enable = true;
@@ -15,14 +16,13 @@
     };
     portal = {
       enable = true;
-      xdgOpenUsePortal = true;
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-      config = {
-        common.default = [ "gtk" ];
-        hyprland.default = [
-          "gtk"
-          "hyprland"
-        ];
+    };
+  };
+  dconf = {
+    settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
       };
     };
   };
