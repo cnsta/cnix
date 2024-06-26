@@ -18,6 +18,10 @@ in
       enable = true;
       powerOnBoot = true;
     };
+    logitech.wireless = {
+      enable = true;
+      enableGraphical = true;
+    };
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
@@ -26,7 +30,6 @@ in
         libva
         vaapiVdpau
         libvdpau-va-gl
-        gamescope
       ];
     };
   };

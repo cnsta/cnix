@@ -12,10 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Solaar
-    solaar = {
-      url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #solaar = {
+    #  url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
     # Neovim Nightly
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
@@ -59,7 +59,7 @@
         cnix = lib.nixosSystem {
           modules = [
             ./hosts/cnix
-            solaar.nixosModules.default
+            #  solaar.nixosModules.default
           ];
           specialArgs = {
             inherit inputs outputs;

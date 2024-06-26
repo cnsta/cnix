@@ -34,7 +34,6 @@ in
     ../common
     ../extra/steam
     ../extra/nix-ld
-    ../extra/solaar
     ../services/cnix.nix
     ../hardware/cnix.nix
     ../locale/cnix.nix
