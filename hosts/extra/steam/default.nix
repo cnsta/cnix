@@ -17,6 +17,7 @@
           keyutils
           gamescope
           mangohud
+          steam-run
         ];
     };
   };

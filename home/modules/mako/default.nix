@@ -21,6 +21,7 @@
       max-history=50
       outer-margin=25
       icon-location=right
+      max-icon-size=48
     '';
   };
 }

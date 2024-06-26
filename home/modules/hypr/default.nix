@@ -26,6 +26,7 @@
   ];
 
   home.sessionVariables = {
+    BROWSER = "firefox";
     MOZ_ENABLE_WAYLAND = 1;
     NIXOS_OZONE_WL = 1;
     SDL_VIDEODRIVER = "wayland";

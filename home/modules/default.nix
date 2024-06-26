@@ -1,5 +1,6 @@
 {
   imports = [
+    ./zellij
     ./firefox
     ./git
     ./hypr
