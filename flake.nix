@@ -65,8 +65,8 @@
             inherit inputs outputs;
           };
         };
-        cnixpad = lib.nixosSystem {
-          modules = [ ./hosts/cnixpad ];
+        adampad = lib.nixosSystem {
+          modules = [ ./hosts/adampad ];
           specialArgs = {
             inherit inputs outputs;
           };

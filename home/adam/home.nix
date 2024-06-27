@@ -9,7 +9,7 @@
 }:
 {
   # You can import other home-manager modules here
-  imports = [ ../modules/cnst.nix ];
+  imports = [ ../modules/adam.nix ];
 
   nixpkgs = {
     # You can add overlays here
@@ -25,8 +25,8 @@
 
   # TODO: Set your username
   home = {
-    username = "cnst";
-    homeDirectory = "/home/cnst";
+    username = "adam";
+    homeDirectory = "/home/adam";
   };
 
   programs.home-manager.enable = true;

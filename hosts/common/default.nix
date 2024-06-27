@@ -11,7 +11,7 @@
     ./adb.nix
     ./neovim.nix
     ./zsh.nix
-    ./cnix-pkgs.nix
+    ./adampad-pkgs.nix
     ./fonts.nix
   ];
   home-manager = {
