@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 with pkgs;
 let
 
@@ -96,7 +96,7 @@ in
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    package = pkgs.neovim-unwrapped;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     plugins = with pkgs.vimPlugins; [ telescope-cheat-nvim ];
     inherit extraPackages;
   };

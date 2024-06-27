@@ -3,7 +3,6 @@
   environment = {
     systemPackages = [
       # Dev
-      pkgs.git
       pkgs.pyright
       pkgs.python3
       pkgs.gcc
@@ -26,26 +25,12 @@
       pkgs.clang
       pkgs.clang-tools
       pkgs.alejandra
+      pkgs.nixpkgs-fmt
 
       # Util
-      pkgs.stow
-      pkgs.gnumake
-      pkgs.wget
-      pkgs.curl
-      pkgs.ripgrep
-      pkgs.python312Packages.oauth2
-      pkgs.python312Packages.httplib2
       pkgs.python312Packages.pip
-      pkgs.killall
-      pkgs.tree-sitter
-      pkgs.lazygit
       pkgs.tmux
       pkgs.tmuxifier
-      pkgs.unzip
-      pkgs.p7zip
-      pkgs.unrar
-      pkgs.xdg-utils
-      pkgs.xdg-user-dirs
     ];
   };
 }

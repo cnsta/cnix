@@ -23,6 +23,7 @@
     hyprpicker
     swaybg
     tofi
+    gnome.gnome-calculator
   ];
 
   home.sessionVariables = {

@@ -52,7 +52,7 @@
     in
     {
       inherit lib;
-      formatter = forEachSystem (pkgs: pkgs.alejandra);
+      formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
 
       nixosConfigurations = {
 

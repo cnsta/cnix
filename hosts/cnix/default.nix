@@ -30,7 +30,6 @@ in
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ../pkgs/fonts.nix
     ../common
     ../extra/steam
     ../extra/nix-ld
