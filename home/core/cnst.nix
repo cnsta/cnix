@@ -1,11 +1,8 @@
 { pkgs, ... }:
 {
   imports = [
-    ./zellij
-    ./firefox
     ./git
     ./hypr
-    ./neovim
     ./shell/cnst.nix
     ./appearance
   ];

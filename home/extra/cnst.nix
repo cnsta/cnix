@@ -1,13 +1,10 @@
 { pkgs, ... }:
 {
   imports = [
-    ./zellij
     ./firefox
-    ./git
-    ./hypr
+    ./mako
     ./neovim
-    ./shell/adam.nix
-    ./appearance
+    ./zellij
   ];
   home.packages = with pkgs; [
     # Desktop
@@ -28,6 +25,7 @@
     htop
     btop
     pamixer
+    virt-manager
     qbittorrent
     fastfetch
     waybar

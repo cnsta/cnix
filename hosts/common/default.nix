@@ -9,7 +9,6 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./adb.nix
-    ./neovim.nix
     ./zsh.nix
     ./adampad-pkgs.nix
     ./fonts.nix

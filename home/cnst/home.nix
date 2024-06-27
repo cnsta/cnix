@@ -9,7 +9,10 @@
 }:
 {
   # You can import other home-manager modules here
-  imports = [ ../modules/cnst.nix ];
+  imports = [
+    ../core/cnst.nix
+    ../extra/cnst.nix
+  ];
 
   nixpkgs = {
     # You can add overlays here

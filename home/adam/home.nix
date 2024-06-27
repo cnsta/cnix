@@ -9,7 +9,10 @@
 }:
 {
   # You can import other home-manager modules here
-  imports = [ ../modules/adam.nix ];
+  imports = [
+    ../core/adam.nix
+    ../extra/adam.nix
+  ];
 
   nixpkgs = {
     # You can add overlays here
