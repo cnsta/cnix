@@ -10,7 +10,7 @@
   # You can import other home-manager modules here
   imports = [
     ../core/adam.nix
-    ../extra
+    ../extra/adam.nix
   ];
 
   nixpkgs = {
