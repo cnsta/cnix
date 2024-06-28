@@ -1,9 +1,4 @@
 {pkgs, ...}: {
-  imports = [
-    ./zellij
-    ./firefox
-    ./neovim
-  ];
   home.packages = with pkgs; [
     # APPLICATIONS
     alacritty
@@ -20,7 +15,7 @@
     xfce.thunar-archive-plugin
     gnome.file-roller
     pamixer
-    pwvucontrol
+    pavucontrol
     virt-manager
     fastfetch
     waybar

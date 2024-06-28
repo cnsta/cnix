@@ -4,16 +4,13 @@
   config,
   inputs,
   ...
-}:
-let
+}: let
   _nvtop = pkgs.nvtopPackages.amd;
-in
-{
+in {
   zramSwap.enable = true;
 
   security.rtkit.enable = true;
   hardware = {
-    pulseaudio.enable = false;
     bluetooth = {
       enable = true;
       powerOnBoot = true;

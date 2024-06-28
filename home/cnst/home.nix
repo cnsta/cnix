@@ -6,17 +6,16 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
   # You can import other home-manager modules here
   imports = [
     ../core/cnst.nix
-    ../extra/cnst.nix
+    ../extra
   ];
 
   nixpkgs = {
     # You can add overlays here
-    overlays = [ ];
+    overlays = [];
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages

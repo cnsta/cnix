@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   services = {
     dbus.packages = with pkgs; [
       gcr
@@ -38,7 +37,7 @@
       xkb = {
         extraLayouts.hhkbse = {
           description = "HHKBse by cnst";
-          languages = [ "se" ];
+          languages = ["se"];
           symbolsFile = /home/cnst/.nix-config/hosts/cnix/xkb/symbols/hhkbse;
         };
         layout = "hhkbse";
@@ -54,6 +53,7 @@
         support32Bit = true;
       };
       pulse.enable = true;
+      wireplumber.enable = true;
       #jack.enable = true;
       #media-session.enable = true;
     };

@@ -1,36 +1,37 @@
-{ pkgs, ... }:
-{
-  imports = [
-    ./firefox
-    ./neovim
-    ./zellij
-  ];
+{pkgs, ...}: {
   home.packages = with pkgs; [
-    # Desktop
+    # APPLICATIONS
     alacritty
-    wl-clipboard
     keepassxc
+    qbittorrent
     ranger
     webcord
+    calcurse
     xfce.thunar
+
+    # UTILITY
+    wl-clipboard
     xfce.thunar-volman
     xfce.thunar-archive-plugin
     gnome.file-roller
-    wireguard-tools
-    wpa_supplicant
-    ntfs3g
-    kdePackages.polkit-kde-agent-1
-    networkmanagerapplet
-    htop
-    btop
     pamixer
+    pavucontrol
     virt-manager
-    qbittorrent
     fastfetch
     waybar
     nwg-look
     thefuck
-    calcurse
     gnome.adwaita-icon-theme
+
+    # NETWORK
+    wireguard-tools
+    networkmanagerapplet
+    wpa_supplicant
+
+    # SYSTEM
+    kdePackages.polkit-kde-agent-1
+    ntfs3g
+    btop
+    htop
   ];
 }
