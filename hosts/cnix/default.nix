@@ -6,11 +6,9 @@
   pkgs,
   system,
   ...
-}:
-let
+}: let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in
-{
+in {
   users.users.cnst = {
     isNormalUser = true;
     shell = pkgs.zsh;
@@ -30,7 +28,7 @@ in
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ../common
+    ../core
     ../extra/steam
     ../extra/nix-ld
     ../services/cnix.nix
@@ -40,31 +38,29 @@ in
   ];
 
   home-manager.users.cnst = import ../../home/cnst/home.nix;
-  nix =
-    let
-      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-    in
-    {
-      settings = {
-        auto-optimise-store = lib.mkDefault true;
-        warn-dirty = false;
-        # Enable flakes and new 'nix' command
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ];
-        # Opinionated: disable global registry
-        flake-registry = "";
-        # Workaround for https://github.com/NixOS/nix/issues/9574
-        nix-path = config.nix.nixPath;
-      };
-      # Opinionated: disable channels
-      channel.enable = false;
-
-      # Opinionated: make flake registry and nix path match flake inputs
-      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    settings = {
+      auto-optimise-store = lib.mkDefault true;
+      warn-dirty = false;
+      # Enable flakes and new 'nix' command
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      # Opinionated: disable global registry
+      flake-registry = "";
+      # Workaround for https://github.com/NixOS/nix/issues/9574
+      nix-path = config.nix.nixPath;
     };
+    # Opinionated: disable channels
+    channel.enable = false;
+
+    # Opinionated: make flake registry and nix path match flake inputs
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
+    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+  };
 
   # Bootloader
   boot.loader = {

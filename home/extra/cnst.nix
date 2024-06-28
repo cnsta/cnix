@@ -2,7 +2,6 @@
 {
   imports = [
     ./firefox
-    ./mako
     ./neovim
     ./zellij
   ];

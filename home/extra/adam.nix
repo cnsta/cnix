@@ -4,7 +4,6 @@
     ./zellij
     ./firefox
     ./neovim
-    ./mako
   ];
   home.packages = with pkgs; [
     # Desktop

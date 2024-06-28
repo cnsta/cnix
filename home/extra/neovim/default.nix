@@ -1,7 +1,9 @@
-{ pkgs, inputs, ... }:
-with pkgs;
-let
-
+{
+  pkgs,
+  inputs,
+  ...
+}:
+with pkgs; let
   tools = [
     fswatch # File watcher utility, replacing libuv.fs_event for neovim 10.0
     fzf
@@ -50,15 +52,16 @@ let
   nix = [
     alejandra
     nixd
-    nixfmt-rfc-style
+    nil
     nixpkgs-fmt
     statix
   ];
 
   python = [
+    pyright
     black
     isort
-    python311Packages.jedi-language-server
+    python312Packages.jedi-language-server
     ruff
     ruff-lsp
   ];
@@ -79,6 +82,7 @@ let
     deno
     nodePackages.sql-formatter
     nodePackages.typescript-language-server
+    nodePackages.prettier
     nodejs
     prettierd # multi-language formatters
     vscode-langservers-extracted
@@ -87,9 +91,7 @@ let
 
   extraPackages =
     tools ++ c ++ gamedev ++ golang ++ lua ++ markup ++ nix ++ python ++ rust ++ shell ++ web;
-in
-
-{
+in {
   # for quick development
   home.packages = rust;
 
@@ -97,7 +99,7 @@ in
     enable = true;
     defaultEditor = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-    plugins = with pkgs.vimPlugins; [ telescope-cheat-nvim ];
+    plugins = with pkgs.vimPlugins; [telescope-cheat-nvim];
     inherit extraPackages;
   };
 }

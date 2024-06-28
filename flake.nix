@@ -27,50 +27,45 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Home manager
-
   };
-  outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      systems,
-      solaar,
-      ...
-    }@inputs:
-    let
-      inherit (self) outputs;
-      lib = nixpkgs.lib // home-manager.lib;
-      forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
-      pkgsFor = lib.genAttrs (import systems) (
-        system:
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    systems,
+    solaar,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    lib = nixpkgs.lib // home-manager.lib;
+    forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
+    pkgsFor = lib.genAttrs (import systems) (
+      system:
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
         }
-      );
-    in
-    {
-      inherit lib;
-      formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
+    );
+  in {
+    inherit lib;
+    formatter = forEachSystem (pkgs: pkgs.alejandra);
 
-      nixosConfigurations = {
-
-        cnix = lib.nixosSystem {
-          modules = [
-            ./hosts/cnix
-            #  solaar.nixosModules.default
-          ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
+    nixosConfigurations = {
+      cnix = lib.nixosSystem {
+        modules = [
+          ./hosts/cnix
+          #  solaar.nixosModules.default
+        ];
+        specialArgs = {
+          inherit inputs outputs;
         };
-        adampad = lib.nixosSystem {
-          modules = [ ./hosts/adampad ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
+      };
+      adampad = lib.nixosSystem {
+        modules = [./hosts/adampad];
+        specialArgs = {
+          inherit inputs outputs;
         };
       };
     };
+  };
 }

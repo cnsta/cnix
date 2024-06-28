@@ -5,7 +5,7 @@
   ...
 }:
 {
-  imports = [ ../mako ];
+  imports = [ ../../extra/mako ];
 
   xdg.portal =
     let
