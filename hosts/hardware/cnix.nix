@@ -25,8 +25,6 @@
         libva
         vaapiVdpau
         libvdpau-va-gl
-        vkd3d
-        vkd3d-proton
       ];
     };
   };

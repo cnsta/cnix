@@ -3,6 +3,7 @@
     ./zellij
     ./firefox
     ./neovim
+    ./lutris
   ];
   home.packages = with pkgs; [
     # APPLICATIONS

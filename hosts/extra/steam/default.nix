@@ -4,9 +4,7 @@
       enable = true;
       extraCompatPackages = [
         pkgs.proton-ge-bin
-        pkgs.vkd3d-proton
       ];
-      gamescopeSession.enable = true;
       package = pkgs.steam.override {
         extraPkgs = pkgs:
           with pkgs; [
@@ -25,10 +23,6 @@
             SDL2_image
           ];
       };
-    };
-    gamescope = {
-      enable = true;
-      capSysNice = true;
     };
     gamemode = {
       enable = true;

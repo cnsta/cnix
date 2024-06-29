@@ -1,1 +1,0 @@
-{ programs.solaar.enable = true; }
