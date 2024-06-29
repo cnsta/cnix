@@ -4,13 +4,12 @@
   outputs,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./adb.nix
     ./zsh.nix
-    ./adampad-pkgs.nix
+    ./cnix-pkgs.nix
     ./fonts.nix
   ];
   home-manager = {
@@ -20,7 +19,7 @@
     };
   };
   nixpkgs = {
-    overlays = [ ];
+    overlays = [];
     config = {
       allowUnfree = true;
     };
@@ -54,6 +53,7 @@
       pkgs.xdg-utils
       pkgs.xdg-user-dirs
       pkgs.udiskie
+      pkgs.wlroots
     ];
   };
 }

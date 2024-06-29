@@ -4,9 +4,7 @@
   config,
   inputs,
   ...
-}: let
-  _nvtop = pkgs.nvtopPackages.amd;
-in {
+}: {
   zramSwap.enable = true;
 
   security.rtkit.enable = true;
@@ -21,12 +19,14 @@ in {
     };
     graphics = {
       enable = true;
+      enable32Bit = true;
       extraPackages = with pkgs; [
-        _nvtop
         lact
         libva
         vaapiVdpau
         libvdpau-va-gl
+        vkd3d
+        vkd3d-proton
       ];
     };
   };

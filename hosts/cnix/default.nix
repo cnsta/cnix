@@ -23,6 +23,7 @@ in {
       "docker"
       "libvirtd"
       "network"
+      "gamemode"
     ];
   };
 
