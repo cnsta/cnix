@@ -21,7 +21,7 @@
     xfce.thunar-archive-plugin
     gnome.file-roller
     pamixer
-    pwvucontrol
+    pavucontrol
     virt-manager
     fastfetch
     waybar
@@ -35,7 +35,6 @@
     wpa_supplicant
 
     # SYSTEM
-    kdePackages.polkit-kde-agent-1
     ntfs3g
     btop
     htop

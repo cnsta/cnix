@@ -20,14 +20,12 @@
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Home manager
   };
   outputs = {
     self,
     nixpkgs,
     home-manager,
     systems,
-    solaar,
     ...
   } @ inputs: let
     inherit (self) outputs;

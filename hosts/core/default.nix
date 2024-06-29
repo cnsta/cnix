@@ -54,6 +54,7 @@
       pkgs.xdg-user-dirs
       pkgs.udiskie
       pkgs.wlroots
+      pkgs.fzf
     ];
   };
 }

@@ -20,7 +20,7 @@
     xfce.thunar-archive-plugin
     gnome.file-roller
     pamixer
-    pwvucontrol
+    pavucontrol
     virt-manager
     fastfetch
     waybar
