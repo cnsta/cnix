@@ -1,28 +1,4 @@
-{
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
-  imports = [../../../home/extra/mako];
-
-  xdg.portal = let
-    hyprland = config.wayland.windowManager.hyprland.package;
-    xdph = pkgs.xdg-desktop-portal-hyprland.override {inherit hyprland;};
-  in {
-    extraPortals = [xdph];
-    configPackages = [hyprland];
-  };
-
-  environment.systemPackages = with pkgs; [
-    grimblast
-    slurp
-    hyprpicker
-    swaybg
-    tofi
-    gnome.gnome-calculator
-  ];
-
+{pkgs, ...}: {
   environment.variables = {
     BROWSER = "firefox";
     NIXOS_OZONE_WL = 1;
@@ -36,9 +12,6 @@
     enable = true;
     package = pkgs.hyprland;
     xwayland.enable = true;
-    extraConfig = ''
-      ${builtins.readFile ./hyprland.conf}
-    '';
     systemd = {
       enable = true;
       extraCommands = [

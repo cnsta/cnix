@@ -11,7 +11,7 @@
     ./zsh.nix
     ./cnix-pkgs.nix
     ./fonts.nix
-    ./hypr
+    ./hyprland.nix
   ];
   home-manager = {
     # useGlobalPkgs = true;

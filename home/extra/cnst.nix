@@ -4,6 +4,7 @@
     ./firefox
     ./neovim
     ./lutris
+    ./mako
   ];
   home.packages = with pkgs; [
     # APPLICATIONS
