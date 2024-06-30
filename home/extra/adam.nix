@@ -34,7 +34,6 @@
     wpa_supplicant
 
     # SYSTEM
-    kdePackages.polkit-kde-agent-1
     ntfs3g
     btop
     htop

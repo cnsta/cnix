@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-  environment.variables.AMD_VULKAN_ICD = "RADV";
   programs = {
     steam = {
       enable = true;
@@ -19,7 +18,6 @@
             stdenv.cc.cc.lib
             libkrb5
             keyutils
-            mangohud
             SDL2
             SDL2_image
           ];

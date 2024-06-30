@@ -15,10 +15,10 @@
     greetd = {
       enable = true;
       settings = {
-        initial_session = {
-          command = "${pkgs.hyprland}/bin/Hyprland";
-          user = "cnst";
-        };
+        #        initial_session = {
+        #          command = "${pkgs.hyprland}/bin/Hyprland";
+        #          user = "cnst";
+        #        };
         default_session = {
           command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r --remember-session";
           user = "greeter";

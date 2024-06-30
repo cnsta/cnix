@@ -21,7 +21,6 @@
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [
-        lact
         libva
         vaapiVdpau
         libvdpau-va-gl
