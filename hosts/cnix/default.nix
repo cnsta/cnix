@@ -32,7 +32,7 @@ in {
     ../core
     ../extra/steam
     ../extra/nix-ld
-    ../extra/gamescope
+    ../extra/workstation
     ../extra/gamemode
     ../services/cnix.nix
     ../services/pipewire.nix
