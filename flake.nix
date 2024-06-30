@@ -25,8 +25,6 @@
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Zellij Plugins
-    zjstatus.url = "github:dj95/zjstatus";
   };
   outputs = {
     self,

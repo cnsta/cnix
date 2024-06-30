@@ -1,7 +1,7 @@
-{ config, ... }:
-{
+{config, ...}: {
   programs.zsh = {
     enable = true;
+    dotDir = ".config/zsh";
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
@@ -28,8 +28,6 @@
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
       eval $(thefuck --alias)
       eval $(thefuck --alias FUCK)
-
-      eval "$(zellij setup --generate-auto-start zsh)"
     '';
   };
 }

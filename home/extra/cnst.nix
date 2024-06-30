@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ./zellij
+    ./kitty
     ./firefox
     ./neovim
     ./lutris
@@ -22,7 +22,6 @@
 
     # UTILITY
     wl-clipboard
-    inputs.zjstatus.packages.${system}.default
     xfce.thunar-volman
     xfce.thunar-archive-plugin
     gnome.file-roller

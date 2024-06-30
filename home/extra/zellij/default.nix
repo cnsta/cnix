@@ -1,7 +1,7 @@
 {
   programs.zellij = {
     enable = true;
-    enableZshIntegration = true;
+    enableZshIntegration = false;
   };
   home.shellAliases = {
     zr = "zellij run --";
@@ -73,31 +73,5 @@
            orange "#D65D0E"
          }
        }
-  '';
-  xdg.configFile."zellij/layouts/gruvbox.kdl".text = ''
-    layout {
-        pane split_direction="vertical" {
-            pane
-        }
-
-        pane size=1 borderless=true {
-            plugin location="file:/home/cnst/.nix-profile/bin/zjstatus.wasm" {
-                format_left  "#[fg=#FBF1C7,bold] {session} {mode} {tabs}"
-                format_right "#[bg=#8A8A8A,fg=#3C3836] #[bg=#8A8A8A,fg=#3C3836,bold]{swap_layout} #[bg=#3C3836,fg=#8A8A8A]"
-
-                mode_locked "#[fg=#B16286,bold] {name} "
-                mode_normal "#[fg=#98971A,bold] {name} "
-                mode_resize "#[fg=#D75F00,bold] {name} "
-                mode_default_to_mode "resize"
-
-                tab_normal "#[bg=#8A8A8A,fg=#3C3836] #[bg=#8A8A8A,fg=#3C3836,bold]{name} {sync_indicator}{fullscreen_indicator}{floating_indicator} #[bg=#3C3836,fg=#8A8A8A]"
-                tab_active "#[bg=#98971A,fg=#3C3836] #[bg=#98971A,fg=#3C3836,bold]{name} {sync_indicator}{fullscreen_indicator}{floating_indicator} #[bg=#3C3836,fg=#98971A]"
-
-                tab_sync_indicator       " "
-                tab_fullscreen_indicator "□ "
-                tab_floating_indicator   "󰉈 "
-            }
-        }
-    }
   '';
 }
