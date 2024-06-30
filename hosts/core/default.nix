@@ -33,8 +33,10 @@
   environment = {
     localBinInPath = true;
     systemPackages = [
-      # Dev
+      # Core
       pkgs.git
+      pkgs.sbctl
+      pkgs.niv
 
       # Util
       pkgs.stow

@@ -69,8 +69,12 @@ in {
 
   # Bootloader
   boot.loader = {
-    systemd-boot.enable = true;
+    systemd-boot.enable = lib.mkForce false;
     efi.canTouchEfiVariables = true;
+  };
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
   };
   # Enable networking
   networking = {

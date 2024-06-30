@@ -7,6 +7,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     systems.url = "github:nix-systems/default-linux";
     hardware.url = "github:nixos/nixos-hardware";
+    lanzaboote.url = "github:nix-community/lanzaboote/v0.4.1";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +27,7 @@
     nixpkgs,
     home-manager,
     systems,
+    lanzaboote,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -46,6 +48,7 @@
       cnix = lib.nixosSystem {
         modules = [
           ./hosts/cnix
+          lanzaboote.nixosModules.lanzaboote
         ];
         specialArgs = {
           inherit inputs outputs;
