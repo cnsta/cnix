@@ -30,11 +30,13 @@ in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ../core
+    ../extra/gnome
     ../extra/steam
     ../extra/nix-ld
     ../extra/gamescope
     ../extra/gamemode
     ../services/cnix.nix
+    ../services/pipewire.nix
     ../hardware/cnix.nix
     ../locale/cnix.nix
     ./hardware-configuration.nix

@@ -13,7 +13,6 @@
             xorg.libXinerama
             xorg.libXScrnSaver
             libpng
-            libpulseaudio
             libvorbis
             stdenv.cc.cc.lib
             libkrb5
