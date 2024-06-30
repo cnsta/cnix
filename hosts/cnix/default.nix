@@ -30,7 +30,6 @@ in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ../core
-    ../extra/gnome
     ../extra/steam
     ../extra/nix-ld
     ../extra/gamescope
