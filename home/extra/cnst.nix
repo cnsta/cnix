@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./zellij
     ./firefox
@@ -18,6 +22,7 @@
 
     # UTILITY
     wl-clipboard
+    inputs.zjstatus.packages.${system}.default
     xfce.thunar-volman
     xfce.thunar-archive-plugin
     gnome.file-roller
