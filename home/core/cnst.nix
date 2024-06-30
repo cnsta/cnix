@@ -2,7 +2,7 @@
   home.sessionVariables = {
     BROWSER = "firefox";
     EDITOR = "nvim";
-    TERM = "alacritty";
+    TERM = "kitty";
     AMD_VULKAN_ICD = "RADV";
     NIXOS_OZONE_WL = 1;
     SDL_VIDEODRIVER = "wayland";
