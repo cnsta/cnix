@@ -32,6 +32,8 @@ in {
     ../core
     ../extra/steam
     ../extra/nix-ld
+    ../extra/gamescope
+    ../extra/gamemode
     ../services/cnix.nix
     ../hardware/cnix.nix
     ../locale/cnix.nix
