@@ -24,6 +24,12 @@
           ];
       };
     };
+    mangohud = {
+      enable = true;
+      settings = {
+        full = true;
+      };
+    };
     gamemode = {
       enable = true;
       settings = {
