@@ -26,5 +26,12 @@
     extraConfig = ''
       ${builtins.readFile ./hyprland.conf}
     '';
+    systemd = {
+      enable = true;
+      extraCommands = [
+        "systemctl --user stop graphical-session.target"
+        "systemctl --user start hyprland-session.target"
+      ];
+    };
   };
 }

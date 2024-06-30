@@ -5,6 +5,7 @@
     ./neovim
     ./lutris
     ./mako
+    ./mangohud
   ];
   home.packages = with pkgs; [
     # APPLICATIONS
