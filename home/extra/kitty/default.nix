@@ -1,7 +1,7 @@
 {
   programs.kitty = {
     enable = true;
-    theme = "Gruvbox Material Dark Medium";
+    theme = "Gruvbox Material Dark Soft";
     settings = {
       enable_audio_bell = false;
       open_url_with = "firefox-nightly";
@@ -28,7 +28,7 @@
       active_tab_background = "#8bba7f";
       inactive_tab_foreground = "#665C54";
       inactive_tab_background = "#6f8352";
-      tab_bar_background = "#32302f";
+      tab_bar_background = "#504945";
     };
     extraConfig = ''
       kitty_mod ctrl

@@ -31,16 +31,16 @@
       autoload -U colors && colors
     '';
     initExtra = ''
-      ZSH_THEME_GIT_PROMPT_PREFIX="%F{66}(%F{66}"
+      ZSH_THEME_GIT_PROMPT_PREFIX="%F{143}(%F{167}"
       ZSH_THEME_GIT_PROMPT_SUFFIX="%f "
-      ZSH_THEME_GIT_PROMPT_DIRTY="%F{66}) %F{172}%1{✗%}"
-      ZSH_THEME_GIT_PROMPT_CLEAN="%F{66)"
+      ZSH_THEME_GIT_PROMPT_DIRTY="%F{143}) %F{202}%1{✗%}"
+      ZSH_THEME_GIT_PROMPT_CLEAN="%F{143})"
 
-      ZSH_THEME_RUBY_PROMPT_PREFIX="%F{66}‹"
+      ZSH_THEME_RUBY_PROMPT_PREFIX="%F{167}‹"
       ZSH_THEME_RUBY_PROMPT_SUFFIX="›%f"
 
-      PROMPT='%F{66}%c%f $(git_prompt_info)$(virtualenv_prompt_info)
-      %F{66}➜ '
+      PROMPT='%F{143}%c%f $(git_prompt_info)$(virtualenv_prompt_info)
+      %F{143}➜ '
 
       RPROMPT='$(ruby_prompt_info)'
 
