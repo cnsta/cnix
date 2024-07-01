@@ -17,7 +17,7 @@
       background_blur = "32";
       window_padding_width = 3;
       tab_bar_min_tabs = 1;
-      tab_bar_edge = "top";
+      tab_bar_edge = "bottom";
       tab_bar_style = "separator";
       tab_bar_margin_width = "0.0";
       tab_bar_margin_height = "0.0 0.0";
