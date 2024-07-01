@@ -12,7 +12,7 @@
   };
   imports = [
     ./git
-    ./hypr
+    ./gui
     ./shell/cnst.nix
     ./appearance
   ];

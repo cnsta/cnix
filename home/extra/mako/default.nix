@@ -1,14 +1,13 @@
-{ pkgs, ... }:
-{
-  home.packages = [ pkgs.libnotify ];
+{pkgs, ...}: {
+  home.packages = [pkgs.libnotify];
 
   services.mako = {
     enable = true;
     iconPath = "$HOME/.nix-profile/share/icons/Gruvbox-Plus-Dark";
     font = "FiraCode Nerd Font Medium 12";
-    padding = "10";
+    padding = "20";
     margin = "10";
-    anchor = "bottom-right";
+    anchor = "top-right";
     width = 400;
     height = 150;
     borderSize = 2;
@@ -19,9 +18,12 @@
     layer = "overlay";
     extraConfig = ''
       max-history=50
+      max-visible=4
       outer-margin=25
       icon-location=right
       max-icon-size=48
+      [mode=do-not-disturb]
+      invisible=1
     '';
   };
 }
