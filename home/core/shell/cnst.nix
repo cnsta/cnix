@@ -31,21 +31,21 @@
       autoload -U colors && colors
     '';
     initExtra = ''
-      ZSH_THEME_GIT_PROMPT_PREFIX="%F{178}(%F{167}"
+      ZSH_THEME_GIT_PROMPT_PREFIX="%F{66}(%F{66}"
       ZSH_THEME_GIT_PROMPT_SUFFIX="%f "
-      ZSH_THEME_GIT_PROMPT_DIRTY="%F{178}) %F{148}%1{✗%}"
-      ZSH_THEME_GIT_PROMPT_CLEAN="%F{178})"
+      ZSH_THEME_GIT_PROMPT_DIRTY="%F{66}) %F{172}%1{✗%}"
+      ZSH_THEME_GIT_PROMPT_CLEAN="%F{66)"
 
-      ZSH_THEME_RUBY_PROMPT_PREFIX="%F{167}‹"
+      ZSH_THEME_RUBY_PROMPT_PREFIX="%F{66}‹"
       ZSH_THEME_RUBY_PROMPT_SUFFIX="›%f"
 
-      PROMPT='%F{72}%c%f $(git_prompt_info)$(virtualenv_prompt_info)
-      %F{178}➜ '
+      PROMPT='%F{66}%c%f $(git_prompt_info)$(virtualenv_prompt_info)
+      %F{66}➜ '
 
       RPROMPT='$(ruby_prompt_info)'
 
       VIRTUAL_ENV_DISABLE_PROMPT=0
-      ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX=" %F{72}🐍 "
+      ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX=" %F{66}🐍 "
       ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="%f"
       ZSH_THEME_VIRTUALENV_PREFIX=$ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX
       ZSH_THEME_VIRTUALENV_SUFFIX=$ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX
