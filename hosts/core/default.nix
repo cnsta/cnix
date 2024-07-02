@@ -11,6 +11,7 @@
     ./zsh.nix
     ./cnix-pkgs.nix
     ./fonts.nix
+    ./hyprland.nix
   ];
   home-manager = {
     # useGlobalPkgs = true;
@@ -31,32 +32,34 @@
 
   environment = {
     localBinInPath = true;
-    systemPackages = [
+    systemPackages = with pkgs; [
       # Core
-      pkgs.git
-      pkgs.sbctl
-      pkgs.niv
+      git
+      sbctl
+      niv
+      nix-output-monitor
+      nvd
 
       # Util
-      pkgs.stow
-      pkgs.wget
-      pkgs.curl
-      pkgs.ripgrep
-      pkgs.python312Packages.oauth2
-      pkgs.python312Packages.httplib2
-      pkgs.killall
-      pkgs.tree-sitter
-      pkgs.lazygit
-      pkgs.tmux
-      pkgs.tmuxifier
-      pkgs.unzip
-      pkgs.p7zip
-      pkgs.unrar
-      pkgs.xdg-utils
-      pkgs.xdg-user-dirs
-      pkgs.udiskie
-      pkgs.wlroots
-      pkgs.fzf
+      stow
+      wget
+      curl
+      ripgrep
+      python312Packages.oauth2
+      python312Packages.httplib2
+      killall
+      tree-sitter
+      lazygit
+      tmux
+      tmuxifier
+      unzip
+      p7zip
+      unrar
+      xdg-utils
+      xdg-user-dirs
+      udiskie
+      wlroots
+      fzf
     ];
   };
 }

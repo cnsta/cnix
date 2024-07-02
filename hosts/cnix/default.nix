@@ -34,6 +34,8 @@ in {
     ../extra/nix-ld
     ../extra/workstation
     ../extra/gamemode
+    ../extra/gamescope
+    ../extra/bottles
     ../services/cnix.nix
     ../services/pipewire.nix
     ../hardware/cnix.nix

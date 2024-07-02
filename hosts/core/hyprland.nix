@@ -3,13 +3,6 @@
     enable = true;
     package = pkgs.hyprland;
     xwayland.enable = true;
-    systemd = {
-      enable = true;
-      extraCommands = [
-        "systemctl --user stop graphical-session.target"
-        "systemctl --user start hyprland-session.target"
-      ];
-    };
   };
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
