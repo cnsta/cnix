@@ -34,6 +34,7 @@
     };
     xserver = {
       enable = true;
+      videoDrivers = ["amdgpu"];
       xkb = {
         extraLayouts.hhkbse = {
           description = "HHKBse by cnst";

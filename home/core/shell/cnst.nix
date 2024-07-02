@@ -10,7 +10,9 @@
       nixconfig = "cd /home/cnst/.nix-config/";
       ll = "ls -l";
       nixupdate = "sudo nixos-rebuild switch -v --show-trace --flake .#cnix";
+      nixup = "sudo nixos-rebuild switch --flake .#cnix";
       flakeupdate = "nix flake update";
+      flakeup = "nix flake update";
     };
     history = {
       size = 1000;
