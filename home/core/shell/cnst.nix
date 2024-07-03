@@ -9,10 +9,10 @@
     shellAliases = {
       nixconfig = "cd /home/cnst/.nix-config/";
       ll = "ls -l";
-      nixupdate = "sudo nixos-rebuild switch -v --show-trace --flake .#cnix";
-      nixup = "sudo nixos-rebuild switch --flake .#cnix";
-      flakeupdate = "nix flake update";
-      flakeup = "nix flake update";
+      nixupdate = "nh os switch -v -H cnix";
+      nixup = "nh os switch -H cnix";
+      flakeupdate = "nh os switch -u -v -H cnix";
+      flakeup = "nh os switch -u -H cnix";
     };
     history = {
       size = 1000;

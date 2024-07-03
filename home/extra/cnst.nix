@@ -7,7 +7,6 @@
     ./kitty
     ./firefox
     ./neovim
-    ./lutris
     ./mako
   ];
   home.packages = with pkgs; [

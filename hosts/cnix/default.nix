@@ -31,6 +31,7 @@ in {
     inputs.home-manager.nixosModules.home-manager
     ../core
     ../extra/steam
+    ../extra/lutris
     ../extra/nix-ld
     ../extra/workstation
     ../extra/gamemode
@@ -81,6 +82,10 @@ in {
   networking = {
     networkmanager.enable = true;
     hostName = "cnix";
+  };
+
+  environment.sessionVariables = {
+    FLAKE = "/home/cnst/.nix-config";
   };
 
   # Garbage collector / Nix helper
