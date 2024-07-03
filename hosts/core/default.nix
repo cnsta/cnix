@@ -9,7 +9,6 @@
     inputs.home-manager.nixosModules.home-manager
     ./adb.nix
     ./zsh.nix
-    ./cnix-pkgs.nix
     ./fonts.nix
     ./hyprland.nix
   ];

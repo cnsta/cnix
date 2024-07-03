@@ -1,14 +1,18 @@
 {pkgs, ...}: {
+  imports = [
+    ./steam
+    ./lutris
+    ./bottles
+    ./gamemode
+    ./gamescope
+    ./workstation
+  ];
   environment = {
     systemPackages = with pkgs; [
       # Dev
       fd
       python3
       hyprlang
-
-      # Util
-      tmux
-      tmuxifier
 
       # Misc
       protonup
