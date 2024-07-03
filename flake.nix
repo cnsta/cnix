@@ -56,7 +56,7 @@
     nixosConfigurations = {
       cnix = lib.nixosSystem {
         modules = [
-          ./hosts/cnix
+          ./nixos/hosts/cnix
           lanzaboote.nixosModules.lanzaboote
         ];
         specialArgs = {
@@ -64,7 +64,7 @@
         };
       };
       adampad = lib.nixosSystem {
-        modules = [./hosts/adampad];
+        modules = [./nixos/hosts/adampad];
         specialArgs = {
           inherit inputs outputs;
         };

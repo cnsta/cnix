@@ -39,7 +39,6 @@
     wpa_supplicant
 
     # SYSTEM
-    ntfs3g
     btop
     htop
   ];

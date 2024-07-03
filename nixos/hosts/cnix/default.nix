@@ -29,16 +29,16 @@ in {
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ../core
-    ../extra/cnix.nix
-    ../services/cnix.nix
-    ../services/pipewire.nix
-    ../hardware/cnix.nix
-    ../locale/cnix.nix
+    ../../core
+    ../../extra/cnix.nix
+    ../../services/cnix.nix
+    ../../services/pipewire.nix
+    ../../hardware/cnix.nix
+    ../../locale/cnix.nix
     ./hardware-configuration.nix
   ];
 
-  home-manager.users.cnst = import ../../home/cnst/home.nix;
+  home-manager.users.cnst = import ../../../home/users/cnst/home.nix;
   nix = let
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in {

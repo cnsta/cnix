@@ -56,6 +56,7 @@
       unrar
       xdg-utils
       xdg-user-dirs
+      ntfs3g
       udiskie
       wlroots
       fzf
