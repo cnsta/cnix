@@ -5,7 +5,7 @@
     settings = {
       enable_audio_bell = false;
       open_url_with = "firefox-nightly";
-      font_family = "Rec Mono Linear";
+      font_family = "Input Mono Extra Light";
       bold_font = "auto";
       italic_font = "auto";
       bold_italic_font = "auto";

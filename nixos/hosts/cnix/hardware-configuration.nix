@@ -19,7 +19,6 @@
         "usbhid"
         "usb_storage"
         "sd_mod"
-        "amdgpu"
       ];
       kernelModules = [];
     };

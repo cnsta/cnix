@@ -7,14 +7,22 @@
     fira-code-symbols
     font-awesome
     recursive
-    jetbrains-mono
+    input-fonts
     (nerdfonts.override {
       fonts = [
         "JetBrainsMono"
         "FiraCode"
+        "FiraMono"
         "Iosevka"
         "3270"
         "DroidSansMono"
+        "SourceCodePro"
+        "UbuntuMono"
+        "Overpass"
+        "Monoid"
+        "Mononoki"
+        "Hack"
+        "IBMPlexMono"
       ];
     })
   ];

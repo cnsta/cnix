@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.pointerCursor = {
     name = "Adwaita";
     package = pkgs.gnome.adwaita-icon-theme;
@@ -16,8 +15,8 @@
       name = "Gruvbox-Plus-Dark";
     };
     font = {
-      name = "FiraCode Nerd Font Light";
-      size = 11;
+      name = "Monoid Nerd Font Retina Regular";
+      size = 9;
     };
   };
 }

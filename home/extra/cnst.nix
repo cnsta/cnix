@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./kitty
+    ./wezterm
     ./firefox
     ./neovim
     ./mako
