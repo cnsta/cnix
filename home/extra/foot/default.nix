@@ -42,6 +42,12 @@
       # workers=<number of logical CPUs>
       # utmp-helper=/usr/lib/utempter/utempter  # When utmp backend is ‘libutempter’ (Linux)
       # utmp-helper=/usr/libexec/ulog-helper    # When utmp backend is ‘ulog’ (FreeBSD)
+      
+      main = {
+        font = "Input Mono Compressed:size=10";
+        dpi-aware = "yes";
+        pad = "3x1";
+      };
 
       environment = {
         # name=value
@@ -51,7 +57,7 @@
         urgent = "no";
         notify = "no";
         visual = "no";
-        command = "";
+        command = "no";
         command-focused = "no";
       };
 
@@ -89,50 +95,25 @@
       };
 
       colors = {
-        # alpha=1.0
-        # background=242424
-        # foreground=ffffff
-        # flash=7f7f00
-        # flash-alpha=0.5
-
-        ## Normal/regular colors (color palette 0-7)
-        # regular0=242424  # black
-        # regular1=f62b5a  # red
-        # regular2=47b413  # green
-        # regular3=e3c401  # yellow
-        # regular4=24acd4  # blue
-        # regular5=f2affd  # magenta
-        # regular6=13c299  # cyan
-        # regular7=e6e6e6  # white
-
-        ## Bright colors (color palette 8-15)
-        # bright0=616161   # bright black
-        # bright1=ff4d51   # bright red
-        # bright2=35d450   # bright green
-        # bright3=e9e836   # bright yellow
-        # bright4=5dc5f8   # bright blue
-        # bright5=feabf2   # bright magenta
-        # bright6=24dfc4   # bright cyan
-        # bright7=ffffff   # bright white
-
-        ## dimmed colors (see foot.ini(5) man page)
-        # dim0=<not set>
-        # ...
-        # dim7=<not-set>
-
-        ## The remaining 256-color palette
-        # 16 = <256-color palette #16>
-        # ...
-        # 255 = <256-color palette #255>
-
-        ## Misc colors
-        # selection-foreground=<inverse foreground/background>
-        # selection-background=<inverse foreground/background>
-        # jump-labels=<regular0> <regular3>          # black-on-yellow
-        # scrollback-indicator=<regular0> <bright4>  # black-on-bright-blue
-        # search-box-no-match=<regular0> <regular1>  # black-on-red
-        # search-box-match=<regular0> <regular3>     # black-on-yellow
-        # urls=<regular3>
+        alpha = "0.9";
+        background = "282828";
+        foreground = "ebdbb2";
+        regular0 = "282828";
+        regular1 = "cc241d";
+        regular2 = "98971a";
+        regular3 = "d79921";
+        regular4 = "458588";
+        regular5 = "b16286";
+        regular6 = "689d6a";
+        regular7 = "a89984";
+        bright0 = "928374";
+        bright1 = "fb4934";
+        bright2 = "b8bb26";
+        bright3 = "fabd2f";
+        bright4 = "83a598";
+        bright5 = "d3869b";
+        bright6 = "8ec07c";
+        bright7 = "ebdbb2";
       };
 
       csd = {

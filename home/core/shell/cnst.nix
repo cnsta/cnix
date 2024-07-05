@@ -41,8 +41,8 @@
       ZSH_THEME_RUBY_PROMPT_PREFIX="%F{167}‹"
       ZSH_THEME_RUBY_PROMPT_SUFFIX="›%f"
 
-      PROMPT='%F{143}%c%f $(git_prompt_info)$(virtualenv_prompt_info)
-      %F{143}➜ '
+      PROMPT='%F{143}%~%f $(git_prompt_info)$(virtualenv_prompt_info)
+      %F{143}$ '
 
       RPROMPT='$(ruby_prompt_info)'
 

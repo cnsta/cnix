@@ -15,8 +15,8 @@
       name = "Gruvbox-Plus-Dark";
     };
     font = {
-      name = "Monoid Nerd Font Retina Regular";
-      size = 9;
+      name = "Input Sans Narrow Light";
+      size = 10;
     };
   };
 }
