@@ -59,6 +59,7 @@
       xdg-user-dirs
       ntfs3g
       udiskie
+      gnome-disk-utility
       wlroots
       fzf
     ];

@@ -2,6 +2,8 @@
   programs.wezterm = {
     enable = true;
     enableZshIntegration = true;
-    colorSchemes = "Gruvbox Material (Gogh)";
+    #    extraConfig = ''
+    #      config.color_scheme = "Gruvbox Material (Gogh)"
+    #    '';
   };
 }
