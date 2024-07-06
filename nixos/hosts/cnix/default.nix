@@ -36,7 +36,6 @@ in {
     ../../core
     ../../extra/cnix.nix
     ../../services/cnix.nix
-    ../../services/pipewire.nix
     ../../hardware/cnix.nix
     ../../locale/cnix.nix
     ./hardware-configuration.nix
