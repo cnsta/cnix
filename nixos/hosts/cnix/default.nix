@@ -22,8 +22,12 @@ in {
       "mysql"
       "docker"
       "libvirtd"
+      "qemu-libvirtd"
+      "kvm"
       "network"
       "gamemode"
+      "adbusers"
+      "rtkit"
     ];
   };
 
