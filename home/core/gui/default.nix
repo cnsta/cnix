@@ -6,8 +6,9 @@
 }: {
   imports = [
     ../../extra/mako
-    ./rofi.nix
-    ./waybar.nix
+    ./rofi
+    ./waybar
+    ./anyrun
   ];
 
   home.packages = with pkgs; [

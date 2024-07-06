@@ -47,7 +47,6 @@
       niv
       nix-output-monitor
       nvd
-      lxqt.lxqt-policykit
 
       # Util
       stow
@@ -67,7 +66,6 @@
       xdg-utils
       xdg-user-dirs
       ntfs3g
-      udiskie
       gnome-disk-utility
       wlroots
       fzf
