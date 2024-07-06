@@ -20,6 +20,7 @@
       url = "github:nix-community/nixgl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    anyrun.url = "github:anyrun-org/anyrun";
     # Neovim Nightly
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
