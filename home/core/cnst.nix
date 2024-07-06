@@ -5,11 +5,10 @@
     TERM = "foot";
   };
   imports = [
+    ./system/polkit.nix
     ./git
     ./gui
     ./shell/cnst.nix
     ./appearance
-    ./system/polkit.nix
-    ./system/udiskie.nix
   ];
 }

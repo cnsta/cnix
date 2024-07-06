@@ -29,9 +29,6 @@
 
   security = {
     rtkit.enable = true;
-    polkit = {
-      enable = true;
-    };
   };
 
   programs.dconf.enable = true;
@@ -69,6 +66,7 @@
       gnome-disk-utility
       wlroots
       fzf
+      udiskie
     ];
   };
 }
