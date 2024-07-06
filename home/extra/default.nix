@@ -1,0 +1,50 @@
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    ./kitty
+    ./foot
+    ./firefox
+    ./neovim
+    ./mako
+  ];
+  config = {
+    home-manager.users.cnst = {pkgs, ...}: {
+      home.packages = with pkgs; [
+        # APPLICATIONS
+        alacritty
+        keepassxc
+        qbittorrent
+        ranger
+        webcord
+        calcurse
+        xfce.thunar
+
+        # UTILITY
+        wl-clipboard
+        xfce.thunar-volman
+        xfce.thunar-archive-plugin
+        gnome.file-roller
+        pamixer
+        pavucontrol
+        virt-manager
+        fastfetch
+        waybar
+        nwg-look
+        thefuck
+        gnome.adwaita-icon-theme
+
+        # NETWORK
+        wireguard-tools
+        networkmanagerapplet
+        wpa_supplicant
+
+        # SYSTEM
+        btop
+        htop
+      ];
+    };
+  };
+}

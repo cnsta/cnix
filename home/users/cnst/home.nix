@@ -10,7 +10,7 @@
   # You can import other home-manager modules here
   imports = [
     ../../core/cnst.nix
-    ../../extra/cnst.nix
+    ../../extra
   ];
 
   nixpkgs = {
