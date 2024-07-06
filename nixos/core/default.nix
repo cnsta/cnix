@@ -27,6 +27,13 @@
     };
   };
 
+  security = {
+    rtkit.enable = true;
+    polkit = {
+      enable = true;
+    };
+  };
+
   programs.dconf.enable = true;
 
   console.useXkbConfig = true;
@@ -40,6 +47,7 @@
       niv
       nix-output-monitor
       nvd
+      lxqt.lxqt-policykit
 
       # Util
       stow

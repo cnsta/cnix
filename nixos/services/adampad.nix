@@ -2,7 +2,6 @@
   services = {
     dbus.packages = with pkgs; [
       gcr
-      gnome.gnome-settings-daemon
     ];
     udisks2.enable = true;
     gvfs.enable = true;
