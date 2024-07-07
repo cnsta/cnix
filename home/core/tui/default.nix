@@ -1,6 +1,6 @@
 {
   imports = [
-    ./git
-    ./shell
+    ./git/cnst.nix
+    ./shell/cnst.nix
   ];
 }

@@ -1,6 +1,8 @@
-{ pkgs, config, ... }:
 {
-  imports = [ ./gtk.nix ];
+  pkgs,
+  config,
+  ...
+}: {
   xdg = {
     userDirs = {
       enable = true;
@@ -16,7 +18,7 @@
     };
     portal = {
       enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
   };
   dconf = {
