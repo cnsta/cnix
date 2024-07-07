@@ -5,10 +5,10 @@
   ...
 }: {
   imports = [
-    ../../extra/mako
     ./rofi
     ./waybar
     ./anyrun
+    ./mako
     ./gtk
     ./xdg
   ];
