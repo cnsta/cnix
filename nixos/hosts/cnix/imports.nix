@@ -1,10 +1,10 @@
 {pkgs, ...}: {
   imports = [
     # core
-    ../../core/hyprland.nix
     ../../core/adb.nix
-    ../../core/zsh.nix
     ../../core/fonts.nix
+    ../../core/hyprland.nix
+    ../../core/zsh.nix
 
     # hardware
     ../../hardware/cnix.nix
@@ -33,37 +33,37 @@
   environment = {
     systemPackages = with pkgs; [
       # Core
+      fd
       git
-      sbctl
       niv
       nix-output-monitor
       nvd
-      fd
+      sbctl
 
       # Util
-      stow
-      wget
       curl
-      ripgrep
-      python3
+      fzf
+      gnome-disk-utility
       hyprlang
-      python312Packages.oauth2
-      python312Packages.httplib2
       killall
-      tree-sitter
       lazygit
+      ntfs3g
+      p7zip
+      python3
+      python312Packages.httplib2
+      python312Packages.oauth2
+      ripgrep
+      stow
       tmux
       tmuxifier
-      unzip
-      p7zip
-      unrar
-      xdg-utils
-      xdg-user-dirs
-      ntfs3g
-      gnome-disk-utility
-      wlroots
-      fzf
+      tree-sitter
       udiskie
+      unrar
+      unzip
+      wget
+      wlroots
+      xdg-user-dirs
+      xdg-utils
     ];
   };
 }
