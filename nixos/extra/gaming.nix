@@ -5,15 +5,9 @@
     ./bottles
     ./gamemode
     ./gamescope
-    ./workstation
   ];
   environment = {
     systemPackages = with pkgs; [
-      # Dev
-      fd
-      python3
-      hyprlang
-
       # Misc
       protonup
 

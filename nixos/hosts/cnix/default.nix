@@ -28,16 +28,14 @@ in {
       "gamemode"
       "adbusers"
       "rtkit"
+      "users"
     ];
   };
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ../../core
-    ../../extra/cnix.nix
-    ../../services/cnix.nix
-    ../../hardware/cnix.nix
-    ../../locale/cnix.nix
+    ./imports.nix
+    ./system.nix
     ./hardware-configuration.nix
   ];
 
@@ -75,6 +73,7 @@ in {
     enable = true;
     pkiBundle = "/etc/secureboot";
   };
+
   # Enable networking
   networking = {
     networkmanager.enable = true;
@@ -83,16 +82,6 @@ in {
 
   environment.sessionVariables = {
     FLAKE = "/home/cnst/.nix-config";
-  };
-
-  # Garbage collector / Nix helper
-  programs = {
-    nh = {
-      enable = true;
-      clean.enable = true;
-      clean.extraArgs = "--keep-since 4d --keep 3";
-      flake = "/home/cnst/.nix-config";
-    };
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
