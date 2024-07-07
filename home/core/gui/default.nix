@@ -9,6 +9,8 @@
     ./rofi
     ./waybar
     ./anyrun
+    ./gtk
+    ./xdg
   ];
 
   home.packages = with pkgs; [

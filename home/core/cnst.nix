@@ -6,9 +6,7 @@
   };
   imports = [
     ./system/polkit.nix
-    ./git
     ./gui
-    ./shell/cnst.nix
-    ./appearance
+    ./tui
   ];
 }
