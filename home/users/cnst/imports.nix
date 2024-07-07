@@ -1,27 +1,25 @@
 {pkgs, ...}: {
   imports = [
-    # CORE
-    # .gui
+    # core.gui
     ../../core/gui/anyrun
     ../../core/gui/gtk
     ../../core/gui/mako
     ../../core/gui/waybar
     ../../core/gui/xdg
-    # .tui
+    # core.tui
     ../../core/tui/git/cnst.nix
     ../../core/tui/shell/cnst.nix
-    # .system
+    # core.system
     ../../core/system/polkit.nix
 
-    # EXTRA
+    # extra
     ../../extra/foot
     ../../extra/firefox
     ../../extra/neovim
   ];
   home = {
     packages = with pkgs; [
-      # MISCELLANEOUS
-      # .gui
+      # misc.gui
       gnome.file-roller
       gnome.gnome-calculator
       keepassxc
@@ -33,7 +31,7 @@
       webcord
       xfce.thunar
 
-      # .tui
+      # misc.tui
       alacritty
       btop
       calcurse
@@ -41,7 +39,7 @@
       htop
       ranger
 
-      # .system
+      # misc.system
       gnome.adwaita-icon-theme
       grimblast
       hyprpicker
