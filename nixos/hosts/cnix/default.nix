@@ -32,6 +32,8 @@ in {
     ];
   };
 
+  programs.dconf.enable = true;
+
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./imports.nix

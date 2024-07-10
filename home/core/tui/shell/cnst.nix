@@ -22,7 +22,7 @@
       enable = true;
       plugins = [
         "git"
-        "thefuck"
+        #     "thefuck"
       ];
       theme = "robbyrussell";
     };

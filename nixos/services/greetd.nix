@@ -8,7 +8,7 @@
       #   user = "cnst";
       # };
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r --remember-session";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r --remember-session --asterisks";
         user = "greeter";
       };
     };

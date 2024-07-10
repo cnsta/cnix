@@ -22,7 +22,7 @@
           wineWowPackages.staging
           wineWowPackages.waylandFull
           winetricks
-          python312Packages.pygame-sdl2
+          # python312Packages.pygame-sdl2
           libGL
           ffmpeg
         ];

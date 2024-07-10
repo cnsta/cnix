@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   imports = [
     # core.gui
-    ../../core/gui/anyrun
     ../../core/gui/gtk
     ../../core/gui/mako
     ../../core/gui/waybar
@@ -20,8 +19,8 @@
   home = {
     packages = with pkgs; [
       # misc.gui
-      gnome.file-roller
-      gnome.gnome-calculator
+      file-roller
+      gnome-calculator
       keepassxc
       nwg-look
       oculante
@@ -40,7 +39,7 @@
       ranger
 
       # misc.system
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       grimblast
       hyprpicker
       networkmanagerapplet
@@ -49,7 +48,7 @@
       qt6.qtwayland
       slurp
       swaybg
-      thefuck
+      #  thefuck
       wireguard-tools
       wl-clipboard
       wpa_supplicant

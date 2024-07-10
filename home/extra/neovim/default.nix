@@ -64,6 +64,8 @@ with pkgs; let
     python312Packages.jedi-language-server
     ruff
     ruff-lsp
+    openusd
+    materialx
   ];
 
   rust = [

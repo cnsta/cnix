@@ -26,7 +26,7 @@
 
     # extra
     ../../extra/gaming.nix
-    ../../extra/workstation
+    #../../extra/workstation
     # ../../extra/nix-ld
   ];
 
@@ -41,6 +41,7 @@
       sbctl
 
       # Util
+      anyrun
       curl
       fzf
       gnome-disk-utility

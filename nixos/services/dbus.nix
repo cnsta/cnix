@@ -1,6 +1,7 @@
 {pkgs, ...}: {
-  services = {
-    dbus.packages = with pkgs; [
+  services.dbus = {
+    enable = true;
+    packages = with pkgs; [
       gcr
     ];
   };

@@ -8,7 +8,15 @@
 #entry,
 #plugin,
 #main {
-  background: transparent;
+  background: #ffffff;
+}
+
+#window {
+  font-size: 60px;
+  background-image: url("/home/cnst/.config/waybar/images/nixblueflake.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 60px 60px;
 }
 
 #match.activatable {
