@@ -29,6 +29,7 @@ in {
       "adbusers"
       "rtkit"
       "users"
+      "plocate"
     ];
   };
 

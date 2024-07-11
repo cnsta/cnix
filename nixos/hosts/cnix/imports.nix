@@ -23,6 +23,7 @@
     ../../services/pipewire.nix
     ../../services/udisks.nix
     ../../services/xserver.nix
+    ../../services/locate.nix
 
     # extra
     ../../extra/gaming.nix

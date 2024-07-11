@@ -53,8 +53,7 @@
       ZSH_THEME_VIRTUALENV_SUFFIX=$ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX
 
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
-      eval $(thefuck --alias)
-      eval $(thefuck --alias FUCK)
+
     '';
   };
 }
