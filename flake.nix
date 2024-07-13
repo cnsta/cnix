@@ -58,7 +58,7 @@
   in {
     inherit lib;
     packages.x86_64-linux.default = fenix.packages.x86_64-linux.minimal.toolchain;
-    devShells = forEachSystem (pkgs: import ./core/shell/dev.nix {inherit pkgs;});
+    devShells = forEachSystem (pkgs: import ./nixos/core/shells/dev.nix {inherit inputs pkgs;});
     formatter = forEachSystem (pkgs: pkgs.alejandra);
 
     nixosConfigurations = {
