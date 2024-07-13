@@ -31,6 +31,10 @@
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = {
     self,
@@ -38,6 +42,7 @@
     home-manager,
     systems,
     lanzaboote,
+    fenix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -52,6 +57,8 @@
     );
   in {
     inherit lib;
+    packages.x86_64-linux.default = fenix.packages.x86_64-linux.minimal.toolchain;
+    devShells = forEachSystem (pkgs: import ./core/shell/dev.nix {inherit pkgs;});
     formatter = forEachSystem (pkgs: pkgs.alejandra);
 
     nixosConfigurations = {

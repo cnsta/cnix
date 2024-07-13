@@ -9,15 +9,9 @@ with pkgs; let
     fzf
     git
     sqlite
-    tree-sitter
   ];
 
   c = [
-    clang
-    clang-tools
-    cmake
-    gcc
-    gnumake
   ];
 
   gamedev = [
@@ -69,9 +63,9 @@ with pkgs; let
   ];
 
   rust = [
-    cargo
     rustfmt
     rust-analyzer
+    clippy
   ];
 
   shell = [
@@ -95,7 +89,6 @@ with pkgs; let
     tools ++ c ++ gamedev ++ golang ++ lua ++ markup ++ nix ++ python ++ rust ++ shell ++ web;
 in {
   # for quick development
-  home.packages = rust;
 
   programs.neovim = {
     enable = true;

@@ -7,6 +7,7 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
+      nixdev = "nix develop ~/.nix-config -c $SHELL";
       nixconfig = "cd /home/cnst/.nix-config/";
       ll = "ls -l";
       nixupdate = "nh os switch -v -H cnix";

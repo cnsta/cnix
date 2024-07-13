@@ -46,14 +46,10 @@
       curl
       fzf
       gnome-disk-utility
-      hyprlang
       killall
       lazygit
       ntfs3g
       p7zip
-      python3
-      python312Packages.httplib2
-      python312Packages.oauth2
       ripgrep
       stow
       tmux
@@ -66,6 +62,21 @@
       wlroots
       xdg-user-dirs
       xdg-utils
+
+      # Dev
+      binutils
+      clang
+      clang-tools
+      cargo-edit
+      cargo-insta
+      cargo-nextest
+      gcc
+      gnumake
+      cmake
+      hyprlang
+      python3
+      python312Packages.httplib2
+      python312Packages.oauth2
     ];
   };
 }
