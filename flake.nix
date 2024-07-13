@@ -35,7 +35,10 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = {
     self,
@@ -59,7 +62,7 @@
     );
   in {
     inherit lib;
-    devShells = forEachSystem (pkgs: import ./nixos/core/shells/dev.nix {inherit inputs pkgs;});
+    devShells = forEachSystem (pkgs: import ./nixos/core/shells/dev.nix {inherit pkgs;});
     formatter = forEachSystem (pkgs: pkgs.alejandra);
 
     nixosConfigurations = {
