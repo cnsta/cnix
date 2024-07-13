@@ -22,20 +22,26 @@ in {
       "mysql"
       "docker"
       "libvirtd"
+      "qemu-libvirtd"
+      "kvm"
       "network"
+      "adbusers"
+      "rtkit"
+      "users"
+      "plocate"
     ];
   };
 
+  programs.dconf.enable = true;
+
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ../core
-    ../services/adampad.nix
-    ../hardware/adampad.nix
-    ../locale/adampad.nix
+    ./imports.nix
+    ./system.nix
     ./hardware-configuration.nix
   ];
 
-  home-manager.users.adam = import ../../home/adam/home.nix;
+  home-manager.users.adam = import ../../../home/users/adam/home.nix;
   nix = let
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in {
@@ -62,23 +68,18 @@ in {
 
   # Bootloader
   boot.loader = {
-    systemd-boot.enable = true;
+    systemd-boot.enable = lib.mkForce false;
     efi.canTouchEfiVariables = true;
   };
+
   # Enable networking
   networking = {
     networkmanager.enable = true;
     hostName = "adampad";
   };
 
-  # Garbage collector / Nix helper
-  programs = {
-    nh = {
-      enable = true;
-      clean.enable = true;
-      clean.extraArgs = "--keep-since 4d --keep 3";
-      flake = "/home/adam/.nix-config";
-    };
+  environment.sessionVariables = {
+    FLAKE = "/home/adam/.nix-config";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

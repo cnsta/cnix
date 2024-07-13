@@ -22,23 +22,19 @@
     #};
     # anyrun.url = "github:anyrun-org/anyrun";
     # Neovim Nightly
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #neovim-nightly-overlay = {
+    #  url = "github:nix-community/neovim-nightly-overlay";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
     # Firefox Nightly
     firefox-nightly = {
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #fenix = {
+    #  url = "github:nix-community/fenix";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
   };
   outputs = {
     self,
@@ -47,7 +43,6 @@
     systems,
     lanzaboote,
     flake-utils,
-    rust-overlay,
     ...
   } @ inputs: let
     inherit (self) outputs;

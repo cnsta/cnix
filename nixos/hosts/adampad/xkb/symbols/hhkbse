@@ -5,20 +5,20 @@ xkb_symbols "hhkbse" {
 
 	name[Group1]="Sweden - HHKBse";
 
-	key <AE01> {[         1,     exclam,    paragraph,      onehalf ]};
-	key <AE02> {[         2,   quotedbl,           at               ]};
+	key <AE01> {[         1,     exclam,      section,      onehalf ]};
+	key <AE02> {[         2,   quotedbl,           at,    paragraph ]};
 	key <AE03> {[         3, numbersign,     sterling               ]};
 	key <AE04> {[         4,     dollar,     currency               ]};
-	key <AE05> {[         5,    percent,     EuroSign               ]};
+	key <AE05> {[         5,    percent,     EuroSign,     permille ]};
 	key <AE06> {[         6,  ampersand,          yen,      radical ]};
 	key <AE07> {[         7,      slash,    braceleft               ]};
 	key <AE08> {[         8,  parenleft,  bracketleft               ]};
 	key <AE09> {[         9, parenright, bracketright               ]};
 	key <AE10> {[         0,      equal,   braceright               ]};
-	key <AE11> {[      plus,   question,    backslash, questiondown ]};
+	key <AE11> {[      plus,   question,    backslash,    plusminus ]};
 	key <AE12> {[      Next,  braceleft,         Home               ]};
 	key <BKSL> {[     Prior, braceright,          End               ]};
-	key <TLDE> {[    Delete,   asterisk,  asciicircum               ]};
+	key <TLDE> {[    Delete,asciicircum,     asterisk               ]};
 
 	key <AD01> {[         q,          Q                             ]};
 	key <AD02> {[         w,          W                             ]};
@@ -50,8 +50,8 @@ xkb_symbols "hhkbse" {
 	key <AB04> {[         v,          V                             ]};
 	key <AB05> {[         b,          B                             ]};
 	key <AB06> {[         n,          N                             ]};
-	key <AB07> {[         m,          M,           mu               ]};
+	key <AB07> {[         m,          M                             ]};
 	key <AB08> {[     comma,  semicolon                             ]};
-	key <AB09> {[    period,      colon                             ]};
+	key <AB09> {[    period,      colon,     ellipsis               ]};
 	key <AB10> {[     minus, underscore,       endash               ]};
 };

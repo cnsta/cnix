@@ -1,5 +1,3 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
   lib,
@@ -7,10 +5,8 @@
   pkgs,
   ...
 }: {
-  # You can import other home-manager modules here
   imports = [
-    ../../core/adam.nix
-    ../../extra/adam.nix
+    ./imports.nix
   ];
 
   nix = {
@@ -19,7 +15,6 @@
       experimental-features = [
         "nix-command"
         "flakes"
-        "ca-derivations"
       ];
       warn-dirty = false;
     };

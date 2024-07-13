@@ -1,21 +1,16 @@
 {pkgs ? import <nixpkgs> {}, ...}: {
   default = pkgs.mkShell {
+    NIX_CONFIG = "extra-experimental-features = nix-command flakes";
     nativeBuildInputs = with pkgs; [
-      _rustBuild
-    ];
-    buildInputs = with pkgs; [
-      # rust-bin.stable.latest.default
+      rust-analyzer
+      cargo
+      clippy
+      rustc
+      rustfmt
       openssl
       pkg-config
-      ez
-      fd
       gtk3
       gtk4
     ];
-    shellHook = ''
-      alias ls=eza
-      alias find=fd
-    '';
-    RUST_BACKTRACE = 1;
   };
 }
