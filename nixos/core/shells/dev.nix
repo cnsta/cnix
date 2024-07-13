@@ -1,11 +1,24 @@
 {
+  pkgs,
   inputs,
-  pkgs ? import <nixpkgs> {},
   ...
 }: let
+  minimalMkShell = import ./minimal.nix {inherit pkgs;};
+
   # 16 is broken: https://github.com/NixOS/nixpkgs/issues/244609
   # llvmPackages = pkgs.llvmPackages_16;
   llvmPackages = pkgs.llvmPackages_15;
+
+  gstreamerPath =
+    ""
+    + ":"
+    + "${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0"
+    + ":"
+    + "${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0"
+    + ":"
+    + "${pkgs.gst_all_1.gst-plugins-bad}/lib/gstreamer-1.0"
+    + ":"
+    + "${pkgs.gst_all_1.gst-plugins-ugly}/lib/gstreamer-1.0";
 
   _rustBuildFenix = inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.latest.withComponents [
     "cargo"
@@ -17,8 +30,16 @@
   ];
 
   _rustBuild = _rustBuildFenix;
-in {
-  default = pkgs.mkShell {
+in
+  minimalMkShell {
+    name = "cnst-nixcfg-dev";
+    hardeningDisable = ["fortify"];
+
+    LD_LIBRARY_PATH = "${pkgs.libglvnd}/lib";
+    LIBCLANG_PATH = "${llvmPackages.libclang.lib}/lib";
+    RUST_BACKTRACE = 1;
+    GST_PLUGIN_SYSTEM_PATH = gstreamerPath;
+
     nativeBuildInputs = with pkgs; [
       _rustBuild
       llvmPackages.lldb
@@ -127,5 +148,4 @@ in {
       xorg.xcbutilkeysyms
       xorg.xcbutilimage # wezterm
     ];
-  };
-}
+  }

@@ -77,6 +77,8 @@
       python3
       python312Packages.httplib2
       python312Packages.oauth2
+      gtk3
+      gtk4
     ];
   };
 }
