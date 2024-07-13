@@ -35,6 +35,7 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rust-overlay.url = "github:oxalica/rust-overlay";
   };
   outputs = {
     self,
@@ -42,6 +43,8 @@
     home-manager,
     systems,
     lanzaboote,
+    flake-utils,
+    rust-overlay,
     ...
   } @ inputs: let
     inherit (self) outputs;

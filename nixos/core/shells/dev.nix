@@ -1,151 +1,29 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: let
-  minimalMkShell = import ./minimal.nix {inherit pkgs;};
-
-  # 16 is broken: https://github.com/NixOS/nixpkgs/issues/244609
-  # llvmPackages = pkgs.llvmPackages_16;
-  llvmPackages = pkgs.llvmPackages_15;
-
-  gstreamerPath =
-    ""
-    + ":"
-    + "${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0"
-    + ":"
-    + "${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0"
-    + ":"
-    + "${pkgs.gst_all_1.gst-plugins-bad}/lib/gstreamer-1.0"
-    + ":"
-    + "${pkgs.gst_all_1.gst-plugins-ugly}/lib/gstreamer-1.0";
-
-  _rustBuildFenix = inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.latest.withComponents [
-    "cargo"
-    "clippy"
-    "rust-src"
-    "rustc"
-    "rustfmt"
-    "rust-analyzer"
-  ];
-
-  _rustBuild = _rustBuildFenix;
+{nixpkgs ? import <nixpkgs> {}}: let
+  rustOverlay = builtins.fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz";
+  pinnedPkgs = nixpkgs.fetchFromGitHub {
+    owner = "NixOS";
+    repo = "nixpkgs";
+    rev = "1fe6ed37fd9beb92afe90671c0c2a662a03463dd";
+    sha256 = "1daa0y3p17shn9gibr321vx8vija6bfsb5zd7h4pxdbbwjkfq8n2";
+  };
+  pkgs = import pinnedPkgs {
+    overlays = [(import rustOverlay)];
+  };
 in
-  minimalMkShell {
-    name = "cnst-nixcfg-dev";
-    hardeningDisable = ["fortify"];
-
-    LD_LIBRARY_PATH = "${pkgs.libglvnd}/lib";
-    LIBCLANG_PATH = "${llvmPackages.libclang.lib}/lib";
-    RUST_BACKTRACE = 1;
-    GST_PLUGIN_SYSTEM_PATH = gstreamerPath;
-
-    nativeBuildInputs = with pkgs; [
-      _rustBuild
-      llvmPackages.lldb
-
-      # inputs.nix-eval-jobs.outputs.packages.${pkgs.stdenv.hostPlatform.system}.default
-
-      nix
-
-      ## nix lsp
-      # rnix-lsp # pulls in old nix (CVE)
-      nil
-      nixd
-
-      ## nix space usage / visualizers
-      nix-du
-      nix-tree
-
-      # nix formatters
-      nixpkgs-fmt
-      alejandra
-
-      ## nodejs
-      nodejs
-      yarn
-
-      ## golang
-      go
-      go-outline
-      gotools
-      godef
-      gopls
-
-      # generic build essentials
-      pkg-config
-      cmake
-      gnumake
-      nasm
-      perl
-
-      # json tools
-      gron
-
-      gst_all_1.gstreamer
-
-      protobuf
-
-      # not a good sign
-      dos2unix
-    ];
-
+  pkgs.mkShell {
     buildInputs = with pkgs; [
-      llvmPackages.libclang
-      llvmPackages.libclang.lib
-      pipewire
-      freetype
-      ncurses
-      pcsclite
+      rust-bin.stable.latest.default
+      rust-analyzer
       openssl
-      clang
-      libusb1
-      gpgme
-      libgpg-error
-      libgit2
-      git # passrs
-      dbus # passrs libsecret
-      nettle # pass-rust (sequoia->nettle-sys)
-      gst_all_1.gstreamer
-      libnice
-      pango
-      cairo
-      gst_all_1.gst-plugins-base
-      gst_all_1.gst-plugins-good
-      gst_all_1.gst-plugins-bad
-      gst_all_1.gst-plugins-ugly
-      gst_all_1.gst-libav
-
-      crate2nix
-
-      glslang
+      pkg-config
+      ez
+      fd
       gtk3
       gtk4
-
-      atk # sirula
-      gdk-pixbuf # sirula
-      udev
-      mesa
-      libinput # Anodium
-      seatd # Anodium
-      xorg.libXcursor
-      xorg.libXrandr
-      xorg.libXi # Anodium
-      libxkbcommon
-      wayland
-      wayland-protocols # wezterm
-      fontconfig
-      libglvnd
-      opencv
-      ffmpeg
-      egl-wayland # wezterm
-      xorg.libX11
-      xorg.libxcb
-      xorg.xcbutil # wezterm
-      xorg.xcbproto
-      xorg.xcbutil
-      xorg.xcbutilwm # wezterm
-      xorg.xcbutilkeysyms
-      xorg.xcbutilimage # wezterm
     ];
+    shellHook = ''
+      alias ls=eza
+      alias find=fd
+    '';
+    RUST_BACKTRACE = 1;
   }
