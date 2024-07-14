@@ -13,8 +13,7 @@
 
     # extra
     ../../extra/foot
-    ../../extra/browsers/firefox.nix
-    ../../extra/browsers/chromium.nix
+    ../../extra/browsers
     ../../extra/neovim
   ];
   home = {
