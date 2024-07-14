@@ -14,7 +14,7 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons", optional = true },
 		opts = {
 			options = {
-				theme = "dracula",
+				theme = "gruvbox-material",
 			},
 			sections = {
 				lualine_a = { "mode" },

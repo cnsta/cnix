@@ -106,7 +106,7 @@ return {
 			lsp.configure("nil_ls", {
 				settings = {
 					["nil"] = {
-						formatting = { command = { "nixpkgs-fmt" } },
+						formatting = { command = { "alejandra" } },
 					},
 				},
 			})
@@ -118,7 +118,7 @@ return {
 				singe_file_support = true,
 			})
 
-			lsp.configure("volar", {
+			lsp.configure("tsserver", {
 				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
 			})
 
