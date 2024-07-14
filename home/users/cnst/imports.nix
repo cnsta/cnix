@@ -4,6 +4,7 @@
     ../../core/gui/gtk
     ../../core/gui/mako
     ../../core/gui/waybar
+    ../../core/gui/ags
     ../../core/gui/xdg
     # core.tui
     ../../core/tui/git/cnst.nix

@@ -6,6 +6,15 @@
     css
     */
     ''
+      /**
+           * @name Material Gruvbox
+           * @.
+           * @author Costeer
+           * @version 1.5.0
+           * @website https://github.com/Costeer
+           * @source https://github.com/Costeer/Gruvbox-Material-Themes
+          */
+
       @import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/DiscordRecolor/DiscordRecolor.css);
 
       :root {
@@ -19,7 +28,9 @@
         --textdark: 146, 131, 116;
         --textdarker: 146, 131, 116;
         --textdarkest: 80, 80, 80;
-        --font: Input Sans Narrow 10;
+        --font: Input Sans Narrow;
+        --main-font: Input Sans Narrow;
+        --code-font: Input Mono Compressed;
         --backgroundaccent: 80, 73, 69;
         --backgroundprimary: 60, 56, 54;
         --backgroundsecondary: 50, 48, 47;

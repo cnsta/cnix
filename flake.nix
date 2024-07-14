@@ -35,6 +35,7 @@
     #  url = "github:nix-community/fenix";
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
+    ags.url = "github:Aylur/ags";
   };
   outputs = {
     self,
