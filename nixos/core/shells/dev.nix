@@ -11,6 +11,13 @@
       pkg-config
       gtk3
       gtk4
+      libadwaita
+      glib
+      clang
+      gnumake
+      cmake
+      nasm
+      perl
     ];
   };
 }

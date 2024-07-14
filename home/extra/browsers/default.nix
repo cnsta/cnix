@@ -8,9 +8,8 @@
   firefoxFlake = inputs.firefox-nightly.packages.${pkgs.stdenv.hostPlatform.system};
   _firefoxNightly = firefoxFlake.firefox-nightly-bin;
 
-  _chromium = pkgs.chromium;
-
-  _floorp = pkgs.floorp-unwrapped;
+  _chromium = pkgs.ungoogled-chromium;
+  # _mullvad = pkgs.mullvad-browser;
 in {
   home.packages = lib.mkMerge [
     (lib.mkIf (pkgs.hostPlatform.system == "x86_64-linux") (
@@ -19,7 +18,6 @@ in {
         _firefoxNightly
         pkgs.firefox-bin
         _chromium
-        _floorp
       ]
     ))
   ];
