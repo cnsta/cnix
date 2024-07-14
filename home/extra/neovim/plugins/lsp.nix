@@ -23,11 +23,9 @@
         };
 
     # Language server
-    lsp = {
-      enable = true;
       servers = {
         # Average webdev LSPs
-        tsserver.enable = true; # TS/JS
+        tsserver.enable = false; # TS/JS
         cssls.enable = true; # CSS
         tailwindcss.enable = true; # TailwindCSS
         html.enable = true; # HTML
@@ -78,6 +76,5 @@
       };
     };
     };
-};
 };
 }

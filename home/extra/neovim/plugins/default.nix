@@ -16,6 +16,7 @@
     ./treesitter.nix
     ./vimtex.nix
     ./nonels.nix
+    ./conform.nix
   ];
 
   programs.nixvim = {
