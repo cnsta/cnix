@@ -1,3 +1,4 @@
+{pkgs, ...}:
 {
   imports = [
     ./barbar.nix
@@ -8,7 +9,6 @@
     ./lsp.nix
     ./lualine.nix
     ./markdown-preview.nix
-    ./neorg.nix
     ./neo-tree.nix
     ./startify.nix
     ./tagbar.nix
@@ -18,7 +18,9 @@
   ];
 
   programs.nixvim = {
-    colorschemes.gruvbox.enable = true;
+
+    extraPlugins = [pkgs.vimPlugins.gruvbox-material];
+    colorscheme = "gruvbox-material";
 
     plugins = {
       gitsigns = {
