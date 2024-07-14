@@ -1,101 +1,62 @@
-{
-  pkgs,
-  inputs,
-  ...
-}:
-with pkgs; let
-  tools = [
-    fswatch # File watcher utility, replacing libuv.fs_event for neovim 10.0
-    fzf
-    git
-    sqlite
-  ];
+{pkgs, ...}: let
+  treesitterWithGrammars = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
+    p.bash
+    p.comment
+    p.css
+    p.dockerfile
+    p.fish
+    p.gitattributes
+    p.gitignore
+    p.go
+    p.gomod
+    p.gowork
+    p.hcl
+    p.javascript
+    p.jq
+    p.json5
+    p.json
+    p.lua
+    p.make
+    p.markdown
+    p.nix
+    p.python
+    p.rust
+    p.toml
+    p.typescript
+    p.vue
+    p.yaml
+  ]);
 
-  c = [
-  ];
-
-  gamedev = [
-    # parser, linter and formatter for GDScript
-    gdtoolkit_3
-    gdtoolkit_4
-  ];
-
-  golang = [
-    delve # debugger
-    go
-    gofumpt
-    goimports-reviser
-    golines
-    gopls
-    gotools
-  ];
-
-  lua = [
-    lua-language-server
-    stylua
-  ];
-
-  markup = [
-    cbfmt # format codeblocks
-    codespell
-    markdownlint-cli
-    mdformat
-    typst-lsp
-  ];
-
-  nix = [
-    alejandra
-    nixd
-    nil
-    nixpkgs-fmt
-    statix
-  ];
-
-  python = [
-    pyright
-    black
-    isort
-    python312Packages.jedi-language-server
-    ruff
-    ruff-lsp
-    openusd
-    materialx
-  ];
-
-  rust = [
-    rustfmt
-    rust-analyzer
-    clippy
-  ];
-
-  shell = [
-    nodePackages.bash-language-server
-    shellcheck
-    shfmt
-  ];
-
-  web = [
-    deno
-    nodePackages.sql-formatter
-    nodePackages.typescript-language-server
-    nodePackages.prettier
-    nodejs
-    prettierd # multi-language formatters
-    vscode-langservers-extracted
-    yarn
-  ];
-
-  extraPackages =
-    tools ++ c ++ gamedev ++ golang ++ lua ++ markup ++ nix ++ python ++ rust ++ shell ++ web;
+  treesitter-parsers = pkgs.symlinkJoin {
+    name = "treesitter-parsers";
+    paths = treesitterWithGrammars.dependencies;
+  };
 in {
-  # for quick development
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     package = pkgs.neovim-unwrapped;
+    vimAlias = true;
+    coc.enable = false;
+    withNodeJs = true;
     #package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-    plugins = with pkgs.vimPlugins; [telescope-cheat-nvim];
-    inherit extraPackages;
+    plugins = [
+      treesitterWithGrammars
+    ];
+  };
+  home.file."./.config/nvim/" = {
+    source = ./nvim;
+    recursive = true;
+  };
+  home.file."./.config/nvim/lua/cnst/init.lua".text = ''
+    require("cnst.set")
+    require("cnst.remap")
+    vim.opt.runtimepath:append("${treesitter-parsers}")
+  '';
+  # Treesitter is configured as a locally developed module in lazy.nvim
+  # we hardcode a symlink here so that we can refer to it in our lazy config
+  home.file."./.local/share/nvim/nix/nvim-treesitter/" = {
+    recursive = true;
+    source = treesitterWithGrammars;
   };
 }

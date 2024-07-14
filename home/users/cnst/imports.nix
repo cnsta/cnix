@@ -55,6 +55,27 @@
       wpa_supplicant
       xfce.thunar-archive-plugin
       xfce.thunar-volman
+
+      # misc.language_servers
+      typescript-language-server
+      typescript
+      nixd
+      nil
+      statix
+      hyprlang
+      alejandra
+      nixpkgs-fmt
+      pyright
+      isort
+      rustfmt
+      rust-analyzer
+      clippy
+      lua-language-server
+      stylua
+      nodePackages_latest.nodejs
+      nodePackages.prettier
+      prettierd
+      black
     ];
     sessionVariables = {
       BROWSER = "firefox";
