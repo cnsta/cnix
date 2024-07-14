@@ -15,6 +15,7 @@
     ../../extra/foot
     ../../extra/browsers
     ../../extra/neovim
+    ../../extra/discord
   ];
   home = {
     packages = with pkgs; [
@@ -27,7 +28,6 @@
       pavucontrol
       qbittorrent
       virt-manager
-      webcord
       xfce.thunar
 
       # misc.tui
