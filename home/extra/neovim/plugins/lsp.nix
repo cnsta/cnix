@@ -22,73 +22,62 @@
           };
         };
 
-        servers = {
-        clangd = {enable = true;};
+    # Language server
+    lsp = {
+      enable = true;
+      servers = {
+        # Average webdev LSPs
+        tsserver.enable = true; # TS/JS
+        cssls.enable = true; # CSS
+        tailwindcss.enable = true; # TailwindCSS
+        html.enable = true; # HTML
+        astro.enable = true; # AstroJS
+        phpactor.enable = true; # PHP
+        svelte.enable = false; # Svelte
+        vuels.enable = false; # Vue
+
+        # Python
+        pyright.enable = true;
+
+        # Markdown
+        marksman.enable = true;
+
+        # Nix
+        nil-ls.enable = true;
+
+        # Docker
+        dockerls.enable = true;
+
+        # Bash
+        bashls.enable = true;
+
+        # C/C++
+        clangd.enable = true;
+
+        # C#
+        csharp-ls.enable = true;
+
+        # Lua
         lua-ls = {
           enable = true;
-          extraOptions = {
-            settings = {
-              Lua = {
-                completion = {
-                  callSnippet = "Replace";
-                };
-                telemetry = {
-                  enabled = false;
-                };
-                hint = {enable = true;};
-              };
-            };
-          };
+          settings.telemetry.enable = false;
         };
-        nil-ls = {enable = true;};
-        tsserver = {
-          enable = true;
-          filetypes = ["javascript" "javascriptreact" "typescript" "typescriptreact"];
-          cmd = ["./tsserver-wrapper.sh"];
-          extraOptions = {
-            settings = {
-              javascript = {
-                inlayHints = {
-                  includeInlayEnumMemberValueHints = true;
-                  includeInlayFunctionLikeReturnTypeHints = true;
-                  includeInlayFunctionParameterTypeHints = true;
-                  includeInlayParameterNameHints = "all";
-                  includeInlayParameterNameHintsWhenArgumentMatchesName = true;
-                  includeInlayPropertyDeclarationTypeHints = true;
-                  includeInlayVariableTypeHints = true;
-                };
-              };
-              typescript = {
-                inlayHints = {
-                  includeInlayEnumMemberValueHints = true;
-                  includeInlayFunctionLikeReturnTypeHints = true;
-                  includeInlayFunctionParameterTypeHints = true;
-                  includeInlayParameterNameHints = "all";
-                  includeInlayParameterNameHintsWhenArgumentMatchesName = true;
-                  includeInlayPropertyDeclarationTypeHints = true;
-                  includeInlayVariableTypeHints = true;
-                };
-              };
-            };
-          };
-        };
-        eslint = {enable = true;};
-        pyright = {enable = true;};
-        ruff-lsp = {enable = true;};
 
+        # Rust
         rust-analyzer = {
           enable = true;
-          installCargo = true;
           installRustc = true;
+          installCargo = true;
           settings = {
             checkOnSave = true;
             check = {
               command = "clippy";
             };
+          };
         };
       };
     };
-};
+    };
 };
 };
 }

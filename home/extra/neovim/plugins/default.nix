@@ -15,6 +15,7 @@
     ./telescope.nix
     ./treesitter.nix
     ./vimtex.nix
+    ./nonels.nix
   ];
 
   programs.nixvim = {
