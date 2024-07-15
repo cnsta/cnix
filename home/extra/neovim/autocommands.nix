@@ -1,11 +1,5 @@
 {
   programs.nixvim.autoCmd = [
-    # Vertically center document when entering insert mode
-    {
-      event = "InsertEnter";
-      command = "norm zz";
-    }
-
     # Open help in a vertical split
     {
       event = "FileType";
@@ -21,7 +15,7 @@
         "latex"
         "markdown"
       ];
-      command = "setlocal spell spelllang=en,fr";
+      command = "setlocal spell spelllang=en,se";
     }
   ];
 }

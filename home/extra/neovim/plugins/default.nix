@@ -1,5 +1,4 @@
-{pkgs, ...}:
-{
+{pkgs, ...}: {
   imports = [
     ./barbar.nix
     ./comment.nix
@@ -17,10 +16,10 @@
     ./vimtex.nix
     ./nonels.nix
     ./conform.nix
+    ./yanky.nix
   ];
 
   programs.nixvim = {
-
     extraPlugins = [pkgs.vimPlugins.gruvbox-material];
     colorscheme = "gruvbox-material";
 

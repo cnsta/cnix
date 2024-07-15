@@ -17,6 +17,7 @@
           inherit action key;
         })
         {
+          # "<C-c>" = "<cmd> %y+ <CR>";
           "<Space>" = "<NOP>";
 
           # Esc to clear search results
@@ -73,9 +74,18 @@
           "K" = ":m '<-2<CR>gv=gv";
           "J" = ":m '>+1<CR>gv=gv";
         };
+      insert =
+        lib.mapAttrsToList
+        (key: action: {
+          mode = "i";
+          inherit action key;
+        })
+        {
+          "<C-v>" = "<esc>p";
+        };
     in
       config.nixvim.helpers.keymaps.mkKeymaps
       {options.silent = true;}
-      (normal ++ visual);
+      (normal ++ visual ++ insert);
   };
 }

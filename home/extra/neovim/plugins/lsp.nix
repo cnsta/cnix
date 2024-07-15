@@ -22,59 +22,63 @@
           };
         };
 
-    # Language server
-      servers = {
-        # Average webdev LSPs
-        tsserver.enable = false; # TS/JS
-        cssls.enable = true; # CSS
-        tailwindcss.enable = true; # TailwindCSS
-        html.enable = true; # HTML
-        astro.enable = true; # AstroJS
-        phpactor.enable = true; # PHP
-        svelte.enable = false; # Svelte
-        vuels.enable = false; # Vue
+        # Language server
+        servers = {
+          # Average webdev LSPs
+          cssls.enable = true; # CSS
+          tailwindcss.enable = true; # TailwindCSS
+          html.enable = true; # HTML
+          astro.enable = true; # AstroJS
+          phpactor.enable = true; # PHP
+          svelte.enable = false; # Svelte
+          vuels.enable = false; # Vue
 
-        # Python
-        pyright.enable = true;
+          # Python
+          pyright.enable = true;
 
-        # Markdown
-        marksman.enable = true;
+          # Markdown
+          marksman.enable = true;
 
-        # Nix
-        nil-ls.enable = true;
+          # Nix
+          nil-ls.enable = true;
 
-        # Docker
-        dockerls.enable = true;
+          # Docker
+          dockerls.enable = true;
 
-        # Bash
-        bashls.enable = true;
+          # Bash
+          bashls.enable = true;
 
-        # C/C++
-        clangd.enable = true;
+          # C/C++
+          clangd.enable = true;
 
-        # C#
-        csharp-ls.enable = true;
+          # C#
+          csharp-ls.enable = true;
 
-        # Lua
-        lua-ls = {
-          enable = true;
-          settings.telemetry.enable = false;
-        };
-
-        # Rust
-        rust-analyzer = {
-          enable = true;
-          installRustc = true;
-          installCargo = true;
-          settings = {
-            checkOnSave = true;
-            check = {
-              command = "clippy";
+          # Lua
+          lua-ls = {
+            enable = true;
+            settings.telemetry.enable = false;
+            settings.diagnostics = {
+              globals = ["vim"];
+            };
+          };
+          tsserver = {
+            enable = false; # TS/JS
+          };
+          # Rust
+          rust-analyzer = {
+            enable = true;
+            installRustc = true;
+            installCargo = true;
+            settings = {
+              checkOnSave = true;
+              check = {
+                command = "clippy";
+              };
             };
           };
         };
       };
     };
-    };
-};
+  };
 }
