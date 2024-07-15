@@ -19,7 +19,7 @@
         {
           # "<C-c>" = "<cmd> %y+ <CR>";
           "<C-v>" = "p";
-          "<C-a>" = "<cmd>%y<CR>";
+          "<C-a>" = "ggVG";
           "<Space>" = "<NOP>";
 
           # Esc to clear search results
