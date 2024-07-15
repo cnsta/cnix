@@ -18,6 +18,8 @@
         })
         {
           # "<C-c>" = "<cmd> %y+ <CR>";
+          "<C-v>" = "p";
+          "<C-a>" = "<cmd>%y<CR>";
           "<Space>" = "<NOP>";
 
           # Esc to clear search results
@@ -64,6 +66,7 @@
           inherit action key;
         })
         {
+          "<C-c>" = "y";
           # better indenting
           ">" = ">gv";
           "<" = "<gv";

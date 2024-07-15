@@ -46,7 +46,6 @@
       curl
       fzf
       gnome-disk-utility
-      killall
       lazygit
       ntfs3g
       p7zip
@@ -100,6 +99,19 @@
       prettierd
       black
       vimPlugins.nvim-treesitter-parsers.typescript
+
+      # ags_dependencies
+      bash
+      coreutils
+      dart-sass
+      gawk
+      imagemagick
+      procps
+      util-linux
+      gnome.gnome-control-center
+      mission-center
+      overskride
+      wlogout
     ];
   };
 }

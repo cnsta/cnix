@@ -1,22 +1,51 @@
 {
   inputs,
   pkgs,
+  lib,
+  config,
   ...
-}: {
-  # add the home manager module
-  imports = [inputs.ags.homeManagerModules.default];
+}: let
+  requiredDeps = with pkgs; [
+    bash
+    coreutils
+    dart-sass
+    gawk
+    imagemagick
+    procps
+    ripgrep
+    util-linux
+  ];
 
-  programs.ags = {
-    enable = true;
+  guiDeps = with pkgs; [
+    gnome.gnome-control-center
+    mission-center
+    overskride
+    wlogout
+  ];
 
-    # null or path, leave as null if you don't want hm to manage the config
-    configDir = null;
+  dependencies = requiredDeps ++ guiDeps;
 
-    # additional packages to add to gjs's runtime
-    extraPackages = with pkgs; [
-      gtksourceview
-      webkitgtk
-      accountsservice
-    ];
+  cfg = config.programs.ags;
+in {
+  imports = [
+    inputs.ags.homeManagerModules.default
+  ];
+
+  programs.ags.enable = true;
+
+  systemd.user.services.ags = {
+    Unit = {
+      Description = "Aylur's Gtk Shell";
+      PartOf = [
+        "tray.target"
+        "graphical-session.target"
+      ];
+    };
+    Service = {
+      Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
+      ExecStart = "${cfg.package}/bin/ags";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = ["graphical-session.target"];
   };
 }

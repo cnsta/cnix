@@ -1,0 +1,18 @@
+/* Error: expected "{".
+ *   ,
+ * 1 | colors-dark.scss
+ *   |                 ^
+ *   '
+ *   /home/cnst/.config/ags/style/colors.scss 1:17  @import
+ *   /home/cnst/.config/ags/style.scss 5:9          root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: 'Error: expected "{".\a   \2577 \a 1 \2502  colors-dark.scss\a   \2502                  ^\a   \2575 \a   /home/cnst/.config/ags/style/colors.scss 1:17  @import\a   /home/cnst/.config/ags/style.scss 5:9          root stylesheet';
+}
