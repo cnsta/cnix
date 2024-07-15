@@ -14,7 +14,7 @@
     # core.services
     ../../core/services/mako
     ../../core/services/polkit
-    ../../core/services/hypr/paper
+    ../../core/services/hypr
   ];
   home = {
     packages = with pkgs; [
@@ -28,6 +28,7 @@
       qbittorrent
       virt-manager
       xfce.thunar
+      swaybg
 
       # misc.tui
       alacritty

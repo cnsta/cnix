@@ -1,7 +1,9 @@
-{pkgs, ...}: {
+{inputs, ...}: {
+  imports = [
+    inputs.hyprland.nixosModules.default
+  ];
   programs.hyprland = {
     enable = true;
-    package = pkgs.hyprland;
     xwayland.enable = true;
   };
   environment.sessionVariables = {
