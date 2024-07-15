@@ -14,7 +14,7 @@
     # core.services
     ../../core/services/mako
     ../../core/services/polkit
-    ../../core/services/hypr
+    ../../core/services/hypr/paper
   ];
   home = {
     packages = with pkgs; [

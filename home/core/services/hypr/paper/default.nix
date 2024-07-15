@@ -2,14 +2,14 @@
   services.hyprpaper = {
     enable = true;
     settings = {
-      ipc = "on";
+      ipc = "off";
       splash = false;
       splash_offset = 2.0;
 
-      preload = ["./src/nix.png" "./src/wallpaper.png"];
+      preload = ["/src/nix.png" "/src/wallpaper.png"];
 
       wallpaper = [
-        "DP-3,./src/wallpaper.png"
+        "DP-3,/src/wallpaper.png"
         # "DP-1,/share/wallpapers/cat_pacman.png"
       ];
     };

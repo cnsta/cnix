@@ -68,7 +68,7 @@ in {
 
   # Bootloader
   boot.loader = {
-    systemd-boot.enable = lib.mkForce false;
+    systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
 
