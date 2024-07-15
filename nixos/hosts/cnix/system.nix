@@ -11,7 +11,11 @@
       flake = "/home/cnst/.nix-config";
     };
   };
-  security.rtkit.enable = true;
+
+  security = {
+    rtkit.enable = true;
+    pam.services.hyprlock = {};
+  };
 
   environment.localBinInPath = true;
 

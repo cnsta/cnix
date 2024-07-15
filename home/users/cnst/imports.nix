@@ -48,7 +48,6 @@
       qt5.qtwayland
       qt6.qtwayland
       slurp
-      swaybg
       #  thefuck
       wireguard-tools
       wl-clipboard
