@@ -63,7 +63,7 @@
             };
           };
           tsserver = {
-            enable = false; # TS/JS
+            enable = true; # TS/JS
           };
           # Rust
           rust-analyzer = {
