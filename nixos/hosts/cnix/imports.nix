@@ -73,12 +73,33 @@
       gcc
       gnumake
       cmake
-      hyprlang
       python3
       python312Packages.httplib2
       python312Packages.oauth2
       gtk3
       gtk4
+
+      # misc.language_servers
+      typescript-language-server
+      typescript
+      nixd
+      nil
+      statix
+      hyprlang
+      alejandra
+      nixpkgs-fmt
+      pyright
+      isort
+      rustfmt
+      rust-analyzer
+      clippy
+      lua-language-server
+      stylua
+      nodePackages_latest.nodejs
+      nodePackages.prettier
+      prettierd
+      black
+      vimPlugins.nvim-treesitter-parsers.typescript
     ];
   };
 }

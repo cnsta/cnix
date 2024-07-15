@@ -18,5 +18,10 @@
       name = "Input Sans Narrow Light";
       size = 10;
     };
+    cursorTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+      size = 24;
+    };
   };
 }
