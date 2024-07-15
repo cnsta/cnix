@@ -2,19 +2,19 @@
   imports = [
     # core.gui
     ../../core/gui/gtk
-    ../../core/gui/mako
     ../../core/gui/waybar
+    ../../core/gui/browsers
     ../../core/gui/xdg
+    ../../core/gui/discord
     # core.tui
     ../../core/tui/git/adam.nix
     ../../core/tui/shell/adam.nix
-    # core.system
-    ../../core/system/polkit.nix
-
-    # extra
-    ../../extra/foot
-    ../../extra/browsers
-    ../../extra/neovim
+    ../../core/tui/foot
+    ../../core/tui/neovim
+    # core.services
+    ../../core/services/mako
+    ../../core/services/polkit
+    ../../core/services/hypr
   ];
   home = {
     packages = with pkgs; [
@@ -27,7 +27,6 @@
       pavucontrol
       qbittorrent
       virt-manager
-      webcord
       xfce.thunar
 
       # misc.tui
@@ -47,7 +46,6 @@
       qt5.qtwayland
       qt6.qtwayland
       slurp
-      swaybg
       #  thefuck
       wireguard-tools
       wl-clipboard

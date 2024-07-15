@@ -2,21 +2,19 @@
   imports = [
     # core.gui
     ../../core/gui/gtk
-    ../../core/gui/mako
     ../../core/gui/waybar
-    ../../core/gui/ags
+    ../../core/gui/browsers
     ../../core/gui/xdg
+    ../../core/gui/discord
     # core.tui
     ../../core/tui/git/cnst.nix
     ../../core/tui/shell/cnst.nix
-    # core.system
-    ../../core/system/polkit.nix
-
-    # extra
-    ../../extra/foot
-    ../../extra/browsers
-    ../../extra/neovim
-    ../../extra/discord
+    ../../core/tui/foot
+    ../../core/tui/neovim
+    # core.services
+    ../../core/services/mako
+    ../../core/services/polkit
+    ../../core/services/hypr
   ];
   home = {
     packages = with pkgs; [

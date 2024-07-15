@@ -1,0 +1,7 @@
+{
+  imports = [
+    ./idle
+    ./lock
+    ./paper
+  ];
+}
