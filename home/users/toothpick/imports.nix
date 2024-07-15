@@ -6,6 +6,7 @@
     ../../core/gui/browsers
     ../../core/gui/xdg
     ../../core/gui/discord
+    ../../core/gui/vscode
     # core.tui
     ../../core/tui/git/toothpick.nix
     ../../core/tui/shell/toothpick.nix

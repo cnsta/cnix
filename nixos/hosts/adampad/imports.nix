@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   imports = [
     # core
-    ../../core/adb.nix
     ../../core/fonts.nix
     ../../core/hyprland.nix
     ../../core/zsh.nix
@@ -27,6 +26,7 @@
     ../../services/fwupd.nix
 
     # extra
+    ../../extra/android
     #../../extra/gaming.nix
     #../../extra/workstation
     # ../../extra/nix-ld
