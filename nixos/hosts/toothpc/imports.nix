@@ -7,7 +7,7 @@
     ../../core/zsh.nix
 
     # hardware
-    ../../hardware/adampad.nix
+    ../../hardware/toothpc.nix
 
     # locale
     ../../locale
@@ -24,10 +24,9 @@
     ../../services/udisks.nix
     ../../services/xserver.nix
     ../../services/locate.nix
-    ../../services/fwupd.nix
 
     # extra
-    #../../extra/gaming.nix
+    ../../extra/gaming.nix
     #../../extra/workstation
     # ../../extra/nix-ld
   ];
@@ -47,7 +46,6 @@
       curl
       fzf
       gnome-disk-utility
-      killall
       lazygit
       ntfs3g
       p7zip
@@ -74,12 +72,46 @@
       gcc
       gnumake
       cmake
-      hyprlang
       python3
       python312Packages.httplib2
       python312Packages.oauth2
       gtk3
       gtk4
+
+      # misc.language_servers
+      typescript-language-server
+      typescript
+      nixd
+      nil
+      statix
+      hyprlang
+      alejandra
+      nixpkgs-fmt
+      pyright
+      isort
+      rustfmt
+      rust-analyzer
+      clippy
+      lua-language-server
+      stylua
+      nodePackages_latest.nodejs
+      nodePackages.prettier
+      prettierd
+      black
+      vimPlugins.nvim-treesitter-parsers.typescript
+
+      # ags_dependencies
+      bash
+      coreutils
+      dart-sass
+      gawk
+      imagemagick
+      procps
+      util-linux
+      gnome.gnome-control-center
+      mission-center
+      overskride
+      wlogout
     ];
   };
 }

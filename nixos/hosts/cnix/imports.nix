@@ -10,7 +10,7 @@
     ../../hardware/cnix.nix
 
     # locale
-    ../../locale/cnix.nix
+    ../../locale
 
     # services
     ../../services/blueman.nix

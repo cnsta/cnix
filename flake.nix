@@ -101,6 +101,15 @@
           inherit inputs outputs;
         };
       };
+      toothpc = lib.nixosSystem {
+        modules = [
+          ./nixos/hosts/toothpc
+          lanzaboote.nixosModules.lanzaboote
+        ];
+        specialArgs = {
+          inherit inputs outputs;
+        };
+      };
     };
   };
 }
