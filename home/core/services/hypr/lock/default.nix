@@ -5,11 +5,13 @@
       general = {
         disable_loading_bar = true;
         hide_cursor = false;
-        no_fade_in = true;
+        no_fade_in = false;
       };
       background = [
         {
-          path = "/src/wallpaper.png";
+          color = "rgba(000000FF)";
+          monitor = "";
+          path = "~/media/images/wallpaper.png";
           blur_size = 3;
           blur_passes = 2;
         }
@@ -32,7 +34,7 @@
           hide_input = false;
           rounding = -1;
           check_color = "rgb(204, 136, 34)";
-          failed_color = "rgb(204, 34, 34)";
+          fail_color = "rgb(204, 34, 34)";
         }
       ];
       label = [
@@ -49,20 +51,20 @@
           halign = "center";
           valign = "center";
         }
-        {
-          # Date
-          monitor = "";
-          text = "cmd[update:1000] echo '$(date -I)'";
-          shadow_passes = 1;
-          shadow_boost = 0.5;
-          color = "rgba(FFFFFFFF)";
-          font_size = 25;
-          font_family = "Input Mono Compressed";
-
-          position = "0, 280";
-          halign = "center";
-          valign = "center";
-        }
+        # {
+        #   # Date
+        #   monitor = "";
+        #   text = "cmd[update:1000] echo '$(date -I)'";
+        #   shadow_passes = 1;
+        #   shadow_boost = 0.5;
+        #   color = "rgba(FFFFFFFF)";
+        #   font_size = 25;
+        #   font_family = "Input Mono Compressed";
+        #
+        #   position = "0, 280";
+        #   halign = "center";
+        #   valign = "center";
+        # }
       ];
     };
   };

@@ -5,6 +5,7 @@
     ./bottles
     ./gamemode
     ./gamescope
+    ./corectrl
   ];
   environment = {
     systemPackages = with pkgs; [
