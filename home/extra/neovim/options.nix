@@ -21,10 +21,19 @@
       relativenumber = false; # Relative line numbers
       number = true; # Display the absolute line number of the current line
       hidden = true; # Keep closed buffer open in the background
+      showmode = false;
       mouse = "a"; # Enable mouse control
       mousemodel = "popup"; # Mouse right-click extends the current selection
       splitbelow = true; # A new window is put below the current one
       splitright = true; # A new window is put right of the current one
+      list = true;
+      listchars = {
+        tab = "▷ ";
+        trail = "·";
+        nbsp = "○";
+        extends = "◣";
+        precedes = "◢";
+      };
 
       swapfile = false; # Disable the swap file
       modeline = true; # Tags such as 'vim:ft=sh'
@@ -36,14 +45,14 @@
       #   patterns
       smartcase = true; # Override the 'ignorecase' option if the search pattern contains upper
       #   case characters
-      scrolloff = 8; # Number of screen lines to show around the cursor
+      scrolloff = 4; # Number of screen lines to show around the cursor
       cursorline = true; # Highlight the screen line of the cursor
       cursorcolumn = false; # Highlight the screen column of the cursor
       signcolumn = "yes"; # Whether to show the signcolumn
       colorcolumn = ""; # Columns to highlight
       laststatus = 3; # When to use a status line for the last window
       fileencoding = "utf-8"; # File-content encoding for the current buffer
-      termguicolors = true; # Enables 24-bit RGB color in the |TUI|
+      # termguicolors = true; # Enables 24-bit RGB color in the |TUI|
       spell = false; # Highlight spelling mistakes (local to window)
       wrap = false; # Prevent text from wrapping
 

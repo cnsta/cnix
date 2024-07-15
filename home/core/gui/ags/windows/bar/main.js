@@ -49,7 +49,7 @@ export default () =>
   Widget.Window({
     monitor: 0,
     name: `bar`,
-    anchor: ["bottom", "left", "right"],
+    anchor: ["top", "left", "right"],
     exclusivity: "exclusive",
 
     child: Widget.CenterBox({

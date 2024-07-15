@@ -3,8 +3,8 @@
     ./barbar.nix
     ./comment.nix
     ./efm.nix
-    ./floaterm.nix
-    ./harpoon.nix
+    # ./floaterm.nix
+    # ./harpoon.nix
     ./lsp.nix
     ./lualine.nix
     ./markdown-preview.nix
@@ -13,10 +13,10 @@
     ./tagbar.nix
     ./telescope.nix
     ./treesitter.nix
-    ./vimtex.nix
+    # ./vimtex.nix
     ./nonels.nix
     ./conform.nix
-    ./yanky.nix
+    # ./yanky.nix
   ];
 
   programs.nixvim = {
@@ -44,7 +44,7 @@
       trim = {
         enable = true;
         settings = {
-          highlight = true;
+          highlight = false;
           ft_blocklist = [
             "checkhealth"
             "floaterm"
