@@ -11,7 +11,7 @@
         {
           color = "rgba(000000FF)";
           monitor = "";
-          path = "~/media/images/wallpaper.png";
+          path = "~/media/images/galaxy.png";
           blur_size = 3;
           blur_passes = 2;
         }

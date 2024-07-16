@@ -40,6 +40,7 @@
       nix-output-monitor
       nvd
       sbctl
+      rocmPackages.rocm-smi
 
       # Util
       anyrun

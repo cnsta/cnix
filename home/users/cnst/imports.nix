@@ -7,10 +7,12 @@
     ../../core/gui/xdg
     ../../core/gui/discord
     ../../core/gui/hypr
+    ../../core/gui/utility
     # core.tui
     ../../core/tui/git/cnst.nix
     ../../core/tui/shell/cnst.nix
     ../../core/tui/foot
+    ../../core/tui/alacritty
     ../../core/tui/neovim
     # core.services
     ../../core/services/mako
@@ -20,34 +22,16 @@
   home = {
     packages = with pkgs; [
       # misc.gui
-      file-roller
-      gnome-calculator
-      keepassxc
-      nwg-look
-      oculante
-      pavucontrol
-      qbittorrent
       virt-manager
       xfce.thunar
-      swaybg
 
       # misc.tui
-      alacritty
-      btop
-      calcurse
-      fastfetch
-      htop
       ranger
 
       # misc.system
       adwaita-icon-theme
-      grimblast
-      hyprpicker
-      networkmanagerapplet
-      pamixer
       qt5.qtwayland
       qt6.qtwayland
-      slurp
       #  thefuck
       wireguard-tools
       wl-clipboard

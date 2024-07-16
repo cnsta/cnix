@@ -1,0 +1,36 @@
+{pkgs, ...}: {
+  programs = {
+    # image viewer
+    feh = {
+      enable = true;
+    };
+    # archiver
+    file-roller = {
+      enable = true;
+    };
+    # system information
+    fastfetch = {
+      enable = true;
+    };
+    # a monitor of resources
+    btop = {
+      enable = true;
+      settings = {
+        color_theme = "gruvbox_material_dark";
+      };
+    };
+  };
+  home.packages = with pkgs; [
+    gnome-calculator
+    nwg-look # GTK settings
+    hyprpicker # Color picker
+    pavucontrol # GUI sound control
+    pamixer # TUI sound control
+    keepassxc
+    calcurse # calendar
+    grimblast # screenshot
+    slurp # select region for screenshot
+    qbittorrent
+    networkmanagerapplet # tray icon for NetworkManager
+  ];
+}

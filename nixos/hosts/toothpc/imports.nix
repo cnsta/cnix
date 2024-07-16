@@ -40,6 +40,7 @@
       nix-output-monitor
       nvd
       sbctl
+      python312Packages.nvidia-ml-py
 
       # Util
       anyrun
