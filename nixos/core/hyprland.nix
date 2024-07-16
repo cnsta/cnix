@@ -1,13 +1,10 @@
-{inputs, ...}: {
-  imports = [
-    inputs.hyprland.nixosModules.default
-  ];
+{
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true;
+    # xwayland.enable = true;
   };
-  environment.sessionVariables = {
-    MOZ_ENABLE_WAYLAND = 1;
+  environment.variables = {
+    # MOZ_ENABLE_WAYLAND = 1;
     NIXOS_OZONE_WL = "1";
     # AMD_VULKAN_ICD = "RADV";
     # SDL_VIDEODRIVER = "wayland";

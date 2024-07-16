@@ -40,26 +40,6 @@
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
     # ags.url = "github:Aylur/ags";
-
-    # HYPRLAND ECOSYSTEM
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-
-    hypridle = {
-      url = "github:hyprwm/hypridle";
-      inputs = {
-        hyprlang.follows = "hyprland/hyprlang";
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
-      };
-    };
-    hyprlock = {
-      url = "github:hyprwm/hyprlock";
-      inputs = {
-        hyprlang.follows = "hyprland/hyprlang";
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
-      };
-    };
   };
   outputs = {
     self,

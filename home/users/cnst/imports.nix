@@ -6,6 +6,7 @@
     ../../core/gui/browsers
     ../../core/gui/xdg
     ../../core/gui/discord
+    ../../core/gui/hypr
     # core.tui
     ../../core/tui/git/cnst.nix
     ../../core/tui/shell/cnst.nix
