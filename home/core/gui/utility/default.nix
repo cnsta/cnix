@@ -4,10 +4,6 @@
     feh = {
       enable = true;
     };
-    # archiver
-    file-roller = {
-      enable = true;
-    };
     # system information
     fastfetch = {
       enable = true;
@@ -21,6 +17,7 @@
     };
   };
   home.packages = with pkgs; [
+    file-roller # archiver
     gnome-calculator
     nwg-look # GTK settings
     hyprpicker # Color picker

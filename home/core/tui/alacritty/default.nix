@@ -61,7 +61,10 @@
       window = {
         dynamic_title = true;
         opacity = 0.9;
-        padding = "{ x = 5, y = 5 }";
+        padding = {
+          x = 5;
+          y = 5;
+        };
         dimensions = {
           columns = 120;
           lines = 35;

@@ -42,9 +42,10 @@
       # workers=<number of logical CPUs>
       # utmp-helper=/usr/lib/utempter/utempter  # When utmp backend is ‘libutempter’ (Linux)
       # utmp-helper=/usr/libexec/ulog-helper    # When utmp backend is ‘ulog’ (FreeBSD)
-      
+
       main = {
         font = "Input Mono Compressed:size=10";
+        box-drawings-uses-font-glyphs = "yes";
         dpi-aware = "yes";
         pad = "3x1";
       };
