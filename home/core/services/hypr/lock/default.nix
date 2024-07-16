@@ -51,20 +51,20 @@
           halign = "center";
           valign = "center";
         }
-        # {
-        #   # Date
-        #   monitor = "";
-        #   text = "cmd[update:1000] echo '$(date -I)'";
-        #   shadow_passes = 1;
-        #   shadow_boost = 0.5;
-        #   color = "rgba(FFFFFFFF)";
-        #   font_size = 25;
-        #   font_family = "Input Mono Compressed";
-        #
-        #   position = "0, 280";
-        #   halign = "center";
-        #   valign = "center";
-        # }
+        {
+          # Date
+          monitor = "";
+          text = "cmd[update:3600000] date +'%a %b %d'";
+          shadow_passes = 1;
+          shadow_boost = 0.5;
+          color = "rgba(FFFFFFFF)";
+          font_size = 25;
+          font_family = "Input Mono Compressed";
+
+          position = "0, 230";
+          halign = "center";
+          valign = "center";
+        }
       ];
     };
   };

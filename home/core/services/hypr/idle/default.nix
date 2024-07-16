@@ -1,20 +1,17 @@
 {
   services.hypridle = {
     enable = true;
-    importantPrefixes = [
-      "$lock_cmd = pidof hyprlock || hyprlock"
-      "$suspend_cmd = pidof steam || systemctl suspend || loginctl suspend"
-    ];
     settings = {
       general = {
-        lock_cmd = "$lock_cmd";
+        lock_cmd = "hyprlock";
         before_sleep_cmd = "$lock_cmd";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
       };
 
       listener = [
         {
           timeout = 900; # 15mins
-          on-timeout = "$lock_cmd";
+          on-timeout = "hyprlock";
         }
         {
           timeout = 1200; # 20mins

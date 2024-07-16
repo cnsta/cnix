@@ -2,5 +2,6 @@
   imports = [
     ./idle
     ./lock
+    ./paper
   ];
 }
