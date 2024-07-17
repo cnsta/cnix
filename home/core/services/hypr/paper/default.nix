@@ -20,7 +20,12 @@
       ];
 
       wallpaper = [
+        # cnix
         "DP-3,~/media/images/dunes.png"
+        # adampad
+        "eDP-1,~/media/images/dunes.png"
+        # toothpc
+        "DVI-D-1,~/media/images/dunes.png"
         # "DP-1,/share/wallpapers/cat_pacman.png"
       ];
     };
