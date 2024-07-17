@@ -29,5 +29,6 @@
     slurp # select region for screenshot
     qbittorrent
     networkmanagerapplet # tray icon for NetworkManager
+    usbimager
   ];
 }

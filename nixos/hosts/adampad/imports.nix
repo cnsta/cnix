@@ -21,7 +21,7 @@
     ../../services/openssh.nix
     ../../services/pipewire.nix
     ../../services/udisks.nix
-    ../../services/xserver.nix
+    ../../services/xserver-adampad.nix
     ../../services/locate.nix
     ../../services/fwupd.nix
 

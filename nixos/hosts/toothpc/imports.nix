@@ -21,7 +21,7 @@
     ../../services/openssh.nix
     ../../services/pipewire.nix
     ../../services/udisks.nix
-    ../../services/xserver.nix
+    ../../services/xserver-toothpc.nix
     ../../services/locate.nix
 
     # extra
