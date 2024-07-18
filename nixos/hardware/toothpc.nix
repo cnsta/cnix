@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   zramSwap.enable = true;
 
   hardware = {
@@ -17,9 +21,13 @@
         libva
         vaapiVdpau
         libvdpau-va-gl
+        intel-media-driver
+        nvidia-vaapi-driver
       ];
     };
     nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      # package = config.boot.kernelPackages.nvidiaPackages.stable;
       modesetting.enable = true;
       powerManagement = {
         enable = false;
