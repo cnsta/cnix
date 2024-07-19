@@ -6,10 +6,6 @@
   zramSwap.enable = true;
 
   hardware = {
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
     logitech.wireless = {
       enable = true;
       enableGraphical = true;

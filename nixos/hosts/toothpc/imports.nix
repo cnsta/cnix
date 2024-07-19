@@ -12,7 +12,7 @@
     ../../locale
 
     # services
-    ../../services/blueman.nix
+    #../../services/blueman.nix
     ../../services/dbus.nix
     ../../services/gnome-keyring.nix
     ../../services/greetd.nix
@@ -28,7 +28,7 @@
     ../../extra/gaming.nix
     ../../extra/android
     #../../extra/workstation
-    # ../../extra/nix-ld
+    #../../extra/nix-ld
   ];
 
   environment = {

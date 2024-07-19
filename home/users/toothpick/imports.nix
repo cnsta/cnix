@@ -32,6 +32,7 @@
       adwaita-icon-theme
       qt5.qtwayland
       qt6.qtwayland
+      egl-wayland
       #  thefuck
       wireguard-tools
       wl-clipboard
@@ -43,6 +44,9 @@
       BROWSER = "firefox";
       EDITOR = "nvim";
       TERM = "foot";
+      QT_QPA_PLATFORM = "wayland-egl";
+      SDL_VIDEODRIVER = "wayland";
+      XDG_SESSION_TYPE = "wayland";
     };
   };
 }
