@@ -3,7 +3,7 @@
     # core.gui
     ../../core/gui/gtk
     ../../core/gui/waybar
-    ../../core/gui/ags
+    # ../../core/gui/ags
     ../../core/gui/browsers
     ../../core/gui/xdg
     ../../core/gui/discord
@@ -19,7 +19,7 @@
     ../../core/services/mako
     ../../core/services/polkit
     ../../core/services/hypr
-    ../../core/services/power-monitor
+    # ../../core/services/power-monitor
   ];
   home = {
     packages = with pkgs; [
