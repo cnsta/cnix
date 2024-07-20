@@ -31,6 +31,7 @@
       ranger
 
       # misc.system
+      bun
       adwaita-icon-theme
       qt5.qtwayland
       qt6.qtwayland

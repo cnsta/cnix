@@ -7,6 +7,7 @@
 }: let
   requiredDeps = with pkgs; [
     bash
+    bun
     coreutils
     dart-sass
     gawk
