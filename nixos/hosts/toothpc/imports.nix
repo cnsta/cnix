@@ -43,6 +43,7 @@
       python312Packages.nvidia-ml-py
 
       # Util
+      samba4Full
       anyrun
       curl
       fzf

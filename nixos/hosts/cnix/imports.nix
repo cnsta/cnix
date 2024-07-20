@@ -24,6 +24,7 @@
     ../../services/xserver-cnix.nix
     ../../services/locate.nix
     ../../services/power.nix
+    ../../services/samba.nix
 
     # extra
     ../../extra/gaming.nix
