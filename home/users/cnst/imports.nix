@@ -19,6 +19,7 @@
     ../../core/services/mako
     ../../core/services/polkit
     ../../core/services/hypr
+    ../../core/services/power-monitor
   ];
   home = {
     packages = with pkgs; [
