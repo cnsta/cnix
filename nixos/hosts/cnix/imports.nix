@@ -23,6 +23,7 @@
     ../../services/udisks.nix
     ../../services/xserver-cnix.nix
     ../../services/locate.nix
+    ../../services/power.nix
 
     # extra
     ../../extra/gaming.nix
@@ -62,6 +63,7 @@
       wlroots
       xdg-user-dirs
       xdg-utils
+      zed-editor
 
       # Dev
       binutils

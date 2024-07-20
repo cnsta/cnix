@@ -1,45 +1,92 @@
-import { App, Audio, Notifications, Utils } from "./imports.js";
-import Bar from "./windows/bar/main.js";
-import Music from "./windows/music/main.js";
-import NotificationPopup from "./windows/notifications/popups.js";
-import Osd from "./windows/osd/main.js";
-import SystemMenu from "./windows/system-menu/main.js";
+"use strict";
+// Import
+import Gdk from "gi://Gdk";
+import GLib from "gi://GLib";
+import App from "resource:///com/github/Aylur/ags/app.js";
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+// Stuff
+import userOptions from "./modules/.configuration/user_options.js";
+import {
+  firstRunWelcome,
+  startBatteryWarningService,
+} from "./services/messages.js";
+import { startAutoDarkModeService } from "./services/darkmode.js";
+// Widgets
+import {
+  Bar,
+  BarCornerTopleft,
+  BarCornerTopright,
+} from "./modules/bar/main.js";
+import Cheatsheet from "./modules/cheatsheet/main.js";
+// import DesktopBackground from './modules/desktopbackground/main.js';
+import Dock from "./modules/dock/main.js";
+import Corner from "./modules/screencorners/main.js";
+import Crosshair from "./modules/crosshair/main.js";
+import Indicator from "./modules/indicators/main.js";
+import Osk from "./modules/onscreenkeyboard/main.js";
+import Overview from "./modules/overview/main.js";
+import Session from "./modules/session/main.js";
+import SideLeft from "./modules/sideleft/main.js";
+import SideRight from "./modules/sideright/main.js";
+import { COMPILED_STYLE_DIR } from "./init.js";
 
-const scss = App.configDir + "/style.scss";
-const css = App.configDir + "/style.css";
+const range = (length, start = 1) =>
+  Array.from({ length }, (_, i) => i + start);
+function forMonitors(widget) {
+  const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
+  return range(n, 0).map(widget).flat(1);
+}
+function forMonitorsAsync(widget) {
+  const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
+  return range(n, 0).forEach((n) => widget(n).catch(print));
+}
 
-Utils.exec(`sass ${scss} ${css}`);
+// Start stuff
+handleStyles(true);
+startAutoDarkModeService().catch(print);
+firstRunWelcome().catch(print);
+startBatteryWarningService().catch(print);
 
-App.connect("config-parsed", () => print("config parsed"));
+const Windows = () => [
+  // forMonitors(DesktopBackground),
+  forMonitors(Crosshair),
+  Overview(),
+  forMonitors(Indicator),
+  forMonitors(Cheatsheet),
+  SideLeft(),
+  SideRight(),
+  forMonitors(Osk),
+  forMonitors(Session),
+  ...(userOptions.dock.enabled ? [forMonitors(Dock)] : []),
+  ...(userOptions.appearance.fakeScreenRounding !== 0
+    ? [
+        forMonitors((id) => Corner(id, "top left", true)),
+        forMonitors((id) => Corner(id, "top right", true)),
+      ]
+    : []),
+  forMonitors((id) =>
+    Corner(id, "bottom left", userOptions.appearance.fakeScreenRounding !== 0),
+  ),
+  forMonitors((id) =>
+    Corner(id, "bottom right", userOptions.appearance.fakeScreenRounding !== 0),
+  ),
+  forMonitors(BarCornerTopleft),
+  forMonitors(BarCornerTopright),
+];
+
+const CLOSE_ANIM_TIME = 210; // Longer than actual anim time to make sure widgets animate fully
+const closeWindowDelays = {}; // For animations
+for (let i = 0; i < (Gdk.Display.get_default()?.get_n_monitors() || 1); i++) {
+  closeWindowDelays[`osk${i}`] = CLOSE_ANIM_TIME;
+}
 
 App.config({
-  style: css,
-  closeWindowDelay: {
-    "system-menu": 200,
-  },
+  css: `${COMPILED_STYLE_DIR}/style.css`,
+  stackTraceOnError: true,
+  closeWindowDelay: closeWindowDelays,
+  windows: Windows().flat(1),
 });
 
-Notifications.popupTimeout = 5000;
-Notifications.forceTimeout = false;
-Notifications.cacheActions = true;
-Audio.maxStreamVolume = 1;
-
-function reloadCss() {
-  console.log("scss change detected");
-  Utils.exec(`sass ${scss} ${css}`);
-  App.resetCss();
-  App.applyCss(css);
-}
-
-Utils.monitorFile(`${App.configDir}/style`, reloadCss);
-
-/**
- * @param {import("types/widgets/window.js").Window[]} windows
- */
-function addWindows(windows) {
-  windows.forEach((win) => App.addWindow(win));
-}
-
-addWindows([Bar(), Music(), Osd(), SystemMenu(), NotificationPopup()]);
-
-export {};
+// Stuff that don't need to be toggled. And they're async so ugh...
+forMonitorsAsync(Bar);
+// Bar().catch(print); // Use this to debug the bar. Single monitor only.
