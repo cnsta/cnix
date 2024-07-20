@@ -3,6 +3,7 @@
     # core
     ../../core/fonts.nix
     ../../core/hyprland.nix
+    ../../core/networking.nix
     ../../core/zsh.nix
 
     # hardware
@@ -17,14 +18,14 @@
     ../../services/gnome-keyring.nix
     ../../services/greetd.nix
     ../../services/gvfs.nix
+    ../../services/locate.nix
     ../../services/mullvad.nix
     ../../services/openssh.nix
     ../../services/pipewire.nix
-    ../../services/udisks.nix
-    ../../services/xserver-cnix.nix
-    ../../services/locate.nix
     ../../services/power.nix
     ../../services/samba.nix
+    ../../services/udisks.nix
+    ../../services/xserver-cnix.nix
 
     # extra
     ../../extra/gaming.nix
