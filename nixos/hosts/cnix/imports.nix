@@ -13,19 +13,19 @@
     ../../locale
 
     # services
-    ../../services/blueman.nix
-    ../../services/dbus.nix
-    ../../services/gnome-keyring.nix
-    ../../services/greetd.nix
-    ../../services/gvfs.nix
-    ../../services/locate.nix
-    ../../services/mullvad.nix
-    ../../services/openssh.nix
-    ../../services/pipewire.nix
-    ../../services/power.nix
-    ../../services/samba.nix
-    ../../services/udisks.nix
-    ../../services/xserver-cnix.nix
+    ../../services/blueman
+    ../../services/dbus
+    ../../services/gnome-keyring
+    ../../services/greetd
+    ../../services/gvfs
+    ../../services/locate
+    ../../services/mullvad
+    ../../services/openssh
+    ../../services/audio
+    ../../services/power
+    ../../services/samba
+    ../../services/udisks
+    ../../services/xserver/cnix.nix
 
     # extra
     ../../extra/gaming.nix
