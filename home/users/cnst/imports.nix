@@ -26,9 +26,11 @@
       # misc.gui
       virt-manager
       xfce.thunar
+      nautilus
 
       # misc.tui
       ranger
+      xcur2png
 
       # misc.system
       bun

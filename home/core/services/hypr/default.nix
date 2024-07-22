@@ -3,5 +3,6 @@
     ./idle
     ./lock
     ./paper
+    ./cursor
   ];
 }

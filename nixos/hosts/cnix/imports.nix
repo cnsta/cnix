@@ -30,7 +30,7 @@
     # extra
     ../../extra/gaming.nix
     ../../extra/android
-    #../../extra/workstation
+    ../../extra/workstation
     # ../../extra/nix-ld
   ];
 
