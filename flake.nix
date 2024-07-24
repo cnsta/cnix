@@ -40,6 +40,7 @@
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
     ags.url = "github:Aylur/ags";
+    yazi.url = "github:sxyazi/yazi";
   };
   outputs = {
     self,

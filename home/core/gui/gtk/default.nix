@@ -1,8 +1,10 @@
 {pkgs, ...}: {
   home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
     name = "Adwaita";
     package = pkgs.adwaita-icon-theme;
-    size = 24;
+    size = 28;
   };
   gtk = {
     enable = true;
@@ -21,7 +23,7 @@
     cursorTheme = {
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
-      size = 24;
+      size = 28;
     };
   };
 }
