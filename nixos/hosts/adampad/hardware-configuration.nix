@@ -28,7 +28,6 @@
     kernelParams = [
       "quiet"
       "splash"
-      "amdgpu.ppfeaturemask=0xffffffff"
     ];
     extraModulePackages = [];
   };

@@ -15,6 +15,7 @@
     ../../core/tui/foot
     ../../core/tui/alacritty
     ../../core/tui/neovim
+    ../../core/tui/yazi
     # core.services
     ../../core/services/mako
     ../../core/services/polkit

@@ -9,7 +9,7 @@
 }: let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
-  users.users.adam = {
+  users.users.cnst = {
     isNormalUser = true;
     shell = pkgs.zsh;
     # openssh.authorizedKeys.keys = [];
@@ -25,6 +25,7 @@ in {
       "qemu-libvirtd"
       "kvm"
       "network"
+      "gamemode"
       "adbusers"
       "rtkit"
       "users"
@@ -70,12 +71,6 @@ in {
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
-  };
-
-  # Enable networking
-  networking = {
-    networkmanager.enable = true;
-    hostName = "adampad";
   };
 
   environment.sessionVariables = {

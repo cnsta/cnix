@@ -3,32 +3,35 @@
     # core
     ../../core/fonts.nix
     ../../core/hyprland.nix
+    ../../core/networking.nix
     ../../core/zsh.nix
 
     # hardware
-    ../../hardware/adampad.nix
+    ../../hardware/cnix.nix
 
     # locale
     ../../locale
 
     # services
-    ../../services/blueman.nix
-    ../../services/dbus.nix
-    ../../services/gnome-keyring.nix
-    ../../services/greetd.nix
-    ../../services/gvfs.nix
-    ../../services/mullvad.nix
-    ../../services/openssh.nix
-    ../../services/pipewire.nix
-    ../../services/udisks.nix
-    ../../services/xserver-adampad.nix
-    ../../services/locate.nix
-    ../../services/fwupd.nix
+    ../../services/blueman
+    ../../services/dbus
+    ../../services/gnome-keyring
+    ../../services/greetd
+    ../../services/gvfs
+    ../../services/locate
+    ../../services/mullvad
+    ../../services/openssh
+    ../../services/audio
+    ../../services/power
+    ../../services/samba
+    ../../services/udisks
+    ../../services/fwupd
+    ../../services/xserver/adampad.nix
 
     # extra
+    # ../../extra/gaming.nix
     ../../extra/android
-    #../../extra/gaming.nix
-    #../../extra/workstation
+    # ../../extra/workstation
     # ../../extra/nix-ld
   ];
 
@@ -41,13 +44,13 @@
       nix-output-monitor
       nvd
       sbctl
+      rocmPackages.rocm-smi
 
       # Util
       anyrun
       curl
       fzf
       gnome-disk-utility
-      killall
       lazygit
       ntfs3g
       p7zip
@@ -74,12 +77,33 @@
       gcc
       gnumake
       cmake
-      hyprlang
       python3
       python312Packages.httplib2
       python312Packages.oauth2
       gtk3
       gtk4
+
+      # misc.language_servers
+      typescript-language-server
+      typescript
+      nixd
+      nil
+      statix
+      hyprlang
+      alejandra
+      nixpkgs-fmt
+      pyright
+      isort
+      rustfmt
+      rust-analyzer
+      clippy
+      lua-language-server
+      stylua
+      nodePackages_latest.nodejs
+      nodePackages.prettier
+      prettierd
+      black
+      vimPlugins.nvim-treesitter-parsers.typescript
     ];
   };
 }

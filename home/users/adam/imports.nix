@@ -3,49 +3,41 @@
     # core.gui
     ../../core/gui/gtk
     ../../core/gui/waybar
+    # ../../core/gui/ags
     ../../core/gui/browsers
     ../../core/gui/xdg
     ../../core/gui/discord
+    ../../core/gui/hypr
+    ../../core/gui/utility
     # core.tui
-    ../../core/tui/git/adam.nix
+    ../../core/tui/git/cnst.nix
     ../../core/tui/shell/adam.nix
     ../../core/tui/foot
+    ../../core/tui/alacritty
     ../../core/tui/neovim
+    # ../../core/tui/yazi
     # core.services
     ../../core/services/mako
     ../../core/services/polkit
     ../../core/services/hypr
+    # ../../core/services/power-monitor
   ];
   home = {
     packages = with pkgs; [
       # misc.gui
-      file-roller
-      gnome-calculator
-      keepassxc
-      nwg-look
-      oculante
-      pavucontrol
-      qbittorrent
       virt-manager
       xfce.thunar
+      nautilus
 
       # misc.tui
-      alacritty
-      btop
-      calcurse
-      fastfetch
-      htop
       ranger
+      xcur2png
 
       # misc.system
+      bun
       adwaita-icon-theme
-      grimblast
-      hyprpicker
-      networkmanagerapplet
-      pamixer
       qt5.qtwayland
       qt6.qtwayland
-      slurp
       #  thefuck
       wireguard-tools
       wl-clipboard
@@ -57,6 +49,9 @@
       BROWSER = "firefox";
       EDITOR = "nvim";
       TERM = "foot";
+      QT_QPA_PLATFORM = "wayland";
+      SDL_VIDEODRIVER = "wayland";
+      XDG_SESSION_TYPE = "wayland";
     };
   };
 }

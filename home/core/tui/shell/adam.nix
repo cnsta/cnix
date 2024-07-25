@@ -10,10 +10,10 @@
       nixdev = "nix develop ~/.nix-config -c $SHELL";
       nixconfig = "cd /home/adam/.nix-config/";
       ll = "ls -l";
-      nixupdate = "nh os switch -v -H cnix";
-      nixup = "nh os switch -H cnix";
-      flakeupdate = "nh os switch -u -v -H cnix";
-      flakeup = "nh os switch -u -H cnix";
+      nixupdate = "nh os switch -v -H adampad";
+      nixup = "nh os switch -H adampad";
+      flakeupdate = "nh os switch -u -v -H adampad";
+      flakeup = "nh os switch -u -H adampad";
     };
     history = {
       size = 1000;
