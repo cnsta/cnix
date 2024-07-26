@@ -39,8 +39,10 @@
     #  url = "github:nix-community/fenix";
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
-    ags.url = "github:Aylur/ags";
-    yazi.url = "github:sxyazi/yazi";
+    # ags.url = "github:Aylur/ags";
+    wezterm = {
+      url = "github:wez/wezterm?dir=nix";
+    };
   };
   outputs = {
     self,

@@ -14,6 +14,7 @@
     ../../core/tui/shell/cnst.nix
     ../../core/tui/foot
     ../../core/tui/alacritty
+    ../../core/tui/wezterm
     ../../core/tui/neovim
     ../../core/tui/yazi
     # core.services

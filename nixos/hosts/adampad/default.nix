@@ -9,7 +9,7 @@
 }: let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
-  users.users.cnst = {
+  users.users.adam = {
     isNormalUser = true;
     shell = pkgs.zsh;
     # openssh.authorizedKeys.keys = [];
