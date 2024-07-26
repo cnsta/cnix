@@ -12,7 +12,7 @@
     # core.tui
     ../../core/tui/git/cnst.nix
     ../../core/tui/shell/adam.nix
-    ../../core/tui/foot
+    ../../core/tui/wezterm
     ../../core/tui/alacritty
     ../../core/tui/neovim
     # ../../core/tui/yazi
