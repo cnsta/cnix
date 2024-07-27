@@ -63,7 +63,6 @@
       unrar
       unzip
       wget
-      wlroots
       xdg-user-dirs
       xdg-utils
 
