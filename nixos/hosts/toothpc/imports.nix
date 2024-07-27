@@ -4,6 +4,7 @@
     ../../core/fonts.nix
     ../../core/hyprland.nix
     ../../core/zsh.nix
+    ../../core/network/toothpc.nix
 
     # hardware
     ../../hardware/toothpc.nix

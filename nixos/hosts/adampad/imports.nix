@@ -3,8 +3,8 @@
     # core
     ../../core/fonts.nix
     ../../core/hyprland.nix
-    ../../core/networking.nix
     ../../core/zsh.nix
+    ../../core/network/adampad.nix
 
     # hardware
     ../../hardware/cnix.nix

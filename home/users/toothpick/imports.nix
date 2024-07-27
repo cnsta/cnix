@@ -13,6 +13,7 @@
     ../../core/tui/shell/toothpick.nix
     ../../core/tui/alacritty
     ../../core/tui/foot
+    ../../core/tui/wezterm
     ../../core/tui/neovim
     # core.services
     ../../core/services/mako
@@ -24,6 +25,7 @@
       # misc.gui
       virt-manager
       xfce.thunar
+      filezilla
 
       # misc.tui
       ranger

@@ -3,7 +3,7 @@
     # core
     ../../core/fonts.nix
     ../../core/hyprland.nix
-    ../../core/networking.nix
+    ../../core/network/cnix.nix
     ../../core/zsh.nix
 
     # hardware

@@ -77,12 +77,6 @@ in {
     pkiBundle = "/etc/secureboot";
   };
 
-  # Enable networking
-  networking = {
-    networkmanager.enable = true;
-    hostName = "toothpc";
-  };
-
   environment.sessionVariables = {
     FLAKE = "/home/toothpick/.nix-config";
   };
