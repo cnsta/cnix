@@ -8,6 +8,7 @@
     ../../core/gui/discord
     ../../core/gui/vscode
     ../../core/gui/utility
+    ../../core/gui/hypr
     # core.tui
     ../../core/tui/git/toothpick.nix
     ../../core/tui/shell/toothpick.nix

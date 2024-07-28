@@ -21,6 +21,7 @@
     ../../core/services/mako
     ../../core/services/polkit
     ../../core/services/hypr
+    ../../core/services/copyq
     # ../../core/services/power-monitor
   ];
   home = {
@@ -47,9 +48,10 @@
       xfce.thunar-volman
     ];
     sessionVariables = {
-      BROWSER = "firefox";
+      BROWSER = "chromium";
       EDITOR = "nvim";
-      TERM = "foot";
+      TERM = "wezterm";
+
       QT_QPA_PLATFORM = "wayland";
       SDL_VIDEODRIVER = "wayland";
       XDG_SESSION_TYPE = "wayland";

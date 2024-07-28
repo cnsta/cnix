@@ -18,7 +18,6 @@
           SDL2
           SDL2_image
           glib
-          egl-wayland
           wineWowPackages.stable
           wineWowPackages.staging
           wineWowPackages.waylandFull

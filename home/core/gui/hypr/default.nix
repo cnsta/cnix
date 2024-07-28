@@ -1,6 +1,7 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
+    xwayland.enable = true;
     settings = {
       source = [
         "./land/appearance.conf"
