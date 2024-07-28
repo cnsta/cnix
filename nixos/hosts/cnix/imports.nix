@@ -37,6 +37,7 @@
   environment = {
     systemPackages = with pkgs; [
       # Core
+      scx
       fd
       git
       niv

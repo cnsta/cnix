@@ -16,6 +16,18 @@
       templates = "${config.home.homeDirectory}/documents/templates";
       videos = "${config.home.homeDirectory}/media/videos";
     };
+    portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      config = {
+        common.default = ["gtk"];
+        hyprland.default = ["gtk" "hyprland"];
+      };
+
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+      ];
+    };
   };
   dconf = {
     settings = {

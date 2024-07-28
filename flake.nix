@@ -20,6 +20,8 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # cachyos
+    chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
     #nix-gl = {
     #  url = "github:nix-community/nixgl";
     #  inputs.nixpkgs.follows = "nixpkgs";
@@ -73,6 +75,7 @@
         modules = [
           ./nixos/hosts/cnix
           lanzaboote.nixosModules.lanzaboote
+          inputs.chaotic.nixosModules.default
         ];
         specialArgs = {
           inherit inputs outputs;

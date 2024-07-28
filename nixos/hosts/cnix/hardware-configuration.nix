@@ -9,7 +9,6 @@
   ...
 }: {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
-
   boot = {
     initrd = {
       availableKernelModules = [
@@ -23,9 +22,10 @@
       kernelModules = ["amdgpu"];
     };
     kernelModules = ["kvm-amd"];
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
     consoleLogLevel = 3;
     kernelParams = [
+      "amd_pstate=active"
       "quiet"
       "splash"
     ];
