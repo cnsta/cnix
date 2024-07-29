@@ -77,6 +77,10 @@ in {
     pkiBundle = "/etc/secureboot";
   };
 
+  users.users.cnst.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGe3s7WbaM0aZTYHCE1ugiG/SxFXLSbWcLAWceFotpuh toothpick@nixos"
+  ];
+
   environment.sessionVariables = {
     FLAKE = "/home/cnst/.nix-config";
   };
