@@ -1,14 +1,15 @@
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  system,
-  ...
-}: let
+{ inputs
+, outputs
+, lib
+, config
+, pkgs
+, system
+, ...
+}:
+let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in {
+in
+{
   users.users.cnst = {
     isNormalUser = true;
     shell = pkgs.zsh;
@@ -40,51 +41,50 @@ in {
     ./imports.nix
     ./system.nix
     ./hardware-configuration.nix
+    ./substituters.nix
   ];
 
   home-manager.users.cnst = import ../../../home/users/cnst/home.nix;
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
+
+  nix = {
+    # pin the registry to avoid downloading and evaling a new nixpkgs version every time
+    registry = lib.mapAttrs (_: v: { flake = v; }) inputs;
+
+    # set the path for channels compat
+    nixPath = lib.mapAttrsToList (key: _: "${key}=flake:${key}") config.nix.registry;
+
     settings = {
-      auto-optimise-store = lib.mkDefault true;
+      auto-optimise-store = true;
+      builders-use-substitutes = true;
       warn-dirty = false;
-      # Enable flakes and new 'nix' command
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
+      experimental-features = [ "nix-command" "flakes" ];
+      flake-registry = "/etc/nix/registry.json";
+
+      # for direnv GC roots
+      keep-derivations = true;
+      keep-outputs = true;
+
+      trusted-users = [ "root" "@wheel" ];
     };
-    # Opinionated: disable channels
-    channel.enable = false;
 
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-  };
+    # Bootloader
+    boot.loader = {
+      systemd-boot.enable = lib.mkForce false;
+      efi.canTouchEfiVariables = true;
+    };
+    boot.lanzaboote = {
+      enable = true;
+      pkiBundle = "/etc/secureboot";
+    };
 
-  # Bootloader
-  boot.loader = {
-    systemd-boot.enable = lib.mkForce false;
-    efi.canTouchEfiVariables = true;
-  };
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/etc/secureboot";
-  };
+    users.users.cnst.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGe3s7WbaM0aZTYHCE1ugiG/SxFXLSbWcLAWceFotpuh toothpick@nixos"
+    ];
 
-  users.users.cnst.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGe3s7WbaM0aZTYHCE1ugiG/SxFXLSbWcLAWceFotpuh toothpick@nixos"
-  ];
+    environment.sessionVariables = {
+      FLAKE = "/home/cnst/.nix-config";
+    };
 
-  environment.sessionVariables = {
-    FLAKE = "/home/cnst/.nix-config";
-  };
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "24.05";
-}
+    # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+    system.stateVersion = lib.mkDefault "23.11";
+  }

@@ -9,7 +9,6 @@
     # env = HYPRCURSOR_SIZE,28
     # env = XCURSOR_THEME,macOS
     # env = XCURSOR_SIZE,28
-
     # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
     input = {
       follow_mouse = 1;

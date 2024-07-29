@@ -12,7 +12,6 @@
       allow_tearing = false;
       resize_on_border = true;
     };
-
     decoration = {
       rounding = 0;
       blur = {
@@ -21,13 +20,11 @@
         passes = 1;
         vibrancy = 0.1696;
       };
-
       drop_shadow = false;
       shadow_range = 4;
       shadow_render_power = 3;
       #    col.shadow = rgba(1a1a1aee)
     };
-
     animations = {
       enabled = true;
       bezier = [
@@ -42,7 +39,6 @@
         "workspaces, 1, 3, default"
       ];
     };
-
     dwindle = {
       # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
       pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below

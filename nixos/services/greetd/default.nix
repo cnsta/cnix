@@ -1,16 +1,19 @@
 {pkgs, ...}: {
-  services.greetd = {
+  # greetd display manager
+  services.greetd = let
+    session = {
+      command = "${pkgs.hyprland}/bin/Hyprland";
+      user = "cnst";
+    };
+  in {
     enable = true;
     settings = {
-      # AUTOLOGIN
-      # initial_session = {
-      #   command = "${pkgs.hyprland}/bin/Hyprland";
-      #   user = "cnst";
-      # };
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r --remember-session --asterisks";
-        user = "greeter";
-      };
+      terminal.vt = 1;
+      default_session = session;
+      initial_session = session;
     };
   };
+
+  # unlock GPG keyring on login
+  security.pam.services.greetd.enableGnomeKeyring = true;
 }
