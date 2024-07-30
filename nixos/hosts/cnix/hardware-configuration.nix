@@ -9,28 +9,17 @@
   ...
 }: {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
-  boot = {
-    initrd = {
-      availableKernelModules = [
-        "nvme"
-        "xhci_pci"
-        "ahci"
-        "usbhid"
-        "usb_storage"
-        "sd_mod"
-      ];
-      kernelModules = ["amdgpu"];
-    };
-    kernelModules = ["kvm-amd"];
-    kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
-    consoleLogLevel = 3;
-    kernelParams = [
-      "amd_pstate=active"
-      "quiet"
-      "splash"
-    ];
-    extraModulePackages = [];
-  };
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = ["amdgpu"];
+  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/de372c64-89a2-4bbe-ad57-926cdd98e97d";

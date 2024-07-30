@@ -37,44 +37,19 @@ in {
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ./imports.nix
     ./system.nix
     ./hardware-configuration.nix
     ./substituters.nix
   ];
 
-  home-manager.users.cnst = import ../../../home/users/cnst/home.nix;
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
+  environment.systemPackages = [pkgs.scx];
 
-  nix = {
-    # pin the registry to avoid downloading and evaling a new nixpkgs version every time
-    registry = lib.mapAttrs (_: v: {flake = v;}) inputs;
-
-    # set the path for channels compat
-    nixPath = lib.mapAttrsToList (key: _: "${key}=flake:${key}") config.nix.registry;
-
-    settings = {
-      auto-optimise-store = true;
-      builders-use-substitutes = true;
-      warn-dirty = false;
-      experimental-features = ["nix-command" "flakes"];
-      flake-registry = "/etc/nix/registry.json";
-
-      # for direnv GC roots
-      keep-derivations = true;
-      keep-outputs = true;
-
-      trusted-users = ["root" "@wheel"];
-    };
-  };
-  # Bootloader
-  boot.loader = {
-    systemd-boot.enable = lib.mkForce false;
-    efi.canTouchEfiVariables = true;
-  };
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/etc/secureboot";
-  };
+  boot.kernelParams = [
+    "amd_pstate=active"
+    "quiet"
+    "splash"
+  ];
 
   environment.sessionVariables = {
     FLAKE = "/home/cnst/.nix-config";
