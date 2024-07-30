@@ -1,27 +1,12 @@
 {pkgs, ...}: {
   imports = [
     # core.gui
-    ../../core/gui/gtk
-    ../../core/gui/waybar
     # ../../core/gui/ags
-    ../../core/gui/browsers
-    ../../core/gui/xdg
-    ../../core/gui/discord
     ../../core/gui/hypr/cnst.nix
-    ../../core/gui/utility
     # core.tui
     ../../core/tui/git/cnst.nix
     ../../core/tui/shell/cnst.nix
-    ../../core/tui/foot
-    ../../core/tui/alacritty
-    ../../core/tui/wezterm
-    ../../core/tui/neovim
-    ../../core/tui/yazi
     # core.services
-    ../../core/services/mako
-    ../../core/services/polkit
-    ../../core/services/hypr
-    ../../core/services/copyq
     # ../../core/services/power-monitor
   ];
   home = {

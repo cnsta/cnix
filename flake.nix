@@ -72,6 +72,7 @@
     wezterm = {
       url = "github:wez/wezterm?dir=nix";
     };
+    anyrun.url = "github:anyrun-org/anyrun";
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";

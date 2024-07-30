@@ -8,14 +8,17 @@
 
   homeImports = {
     "cnst@cnix" = [
+      ../core
       ../cnst.nix
       ./cnst
     ];
     "adam@adampad" = [
+      ../core
       ../adam.nix
       ./adam
     ];
     "toothpick@toothpc" = [
+      ../core
       ../toothpick.nix
       ./toothpick
     ];
