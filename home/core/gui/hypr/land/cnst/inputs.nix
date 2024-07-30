@@ -51,19 +51,21 @@
     };
     misc = {
       vrr = 1;
+      no_direct_scanout = false;
       mouse_move_enables_dpms = 1;
       key_press_enables_dpms = 0;
       force_default_wallpaper = 0;
       disable_hyprland_logo = true;
       disable_splash_rendering = true;
+      disable_autoreload = true;
     };
-    # xwayland {
-    #     force_zero_scaling = true
-    # }
-    # cursor {
-    #     no_hardware_cursors = true
-    #     no_break_fs_vrr = true
-    #     min_refresh_rate = 60
-    # }
+    xwayland = {
+      force_zero_scaling = true;
+    };
+    cursor = {
+      no_hardware_cursors = true;
+      no_break_fs_vrr = true;
+      min_refresh_rate = 24;
+    };
   };
 }
