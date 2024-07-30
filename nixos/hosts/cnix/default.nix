@@ -36,7 +36,6 @@ in {
   programs.dconf.enable = true;
 
   imports = [
-    inputs.home-manager.nixosModules.home-manager
     ./system.nix
     ./hardware-configuration.nix
     ./substituters.nix

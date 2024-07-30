@@ -45,7 +45,7 @@
       inputs.systems.follows = "systems";
     };
     flake-compat.url = "github:edolstra/flake-compat";
-    home-manager = {
+    hm = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };

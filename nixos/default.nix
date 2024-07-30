@@ -3,6 +3,7 @@ let
     ./core/hyprland.nix
     ./core/zsh.nix
     ./core/fonts.nix
+    ./core/home-manager.nix
 
     ./locale
 
