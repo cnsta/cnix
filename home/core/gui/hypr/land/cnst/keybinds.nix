@@ -1,7 +1,7 @@
 # KEYBINDS
 {
   wayland.windowManager.hyprland.settings = {
-    "$terminal" = "wezterm";
+    "$terminal" = "foot";
     "$fileManager" = "thunar";
     "$passwordManager" = "keepassxc";
     "$menu" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";

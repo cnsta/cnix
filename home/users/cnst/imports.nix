@@ -7,7 +7,7 @@
     ../../core/gui/browsers
     ../../core/gui/xdg
     ../../core/gui/discord
-    ../../core/gui/hypr
+    ../../core/gui/hypr/cnst.nix
     ../../core/gui/utility
     # core.tui
     ../../core/tui/git/cnst.nix
@@ -48,9 +48,9 @@
       xfce.thunar-volman
     ];
     sessionVariables = {
-      BROWSER = "chromium";
+      BROWSER = "firefox";
       EDITOR = "nvim";
-      TERM = "wezterm";
+      TERM = "foot";
 
       QT_QPA_PLATFORM = "wayland";
       SDL_VIDEODRIVER = "wayland";

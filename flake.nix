@@ -22,6 +22,7 @@
     };
     # cachyos
     chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     #nix-gl = {
     #  url = "github:nix-community/nixgl";
     #  inputs.nixpkgs.follows = "nixpkgs";

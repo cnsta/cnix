@@ -4,12 +4,10 @@
       "DP-3, 2560x1440@143.86, auto, auto"
       "eDP-1,1920x1200@60.02,auto,1"
     ];
-    # Some default env vars.
-    # env = HYPRCURSOR_THEME,macOS
-    # env = HYPRCURSOR_SIZE,28
-    # env = XCURSOR_THEME,macOS
-    # env = XCURSOR_SIZE,28
-    # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
+    env = [
+      "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+    ];
+
     input = {
       follow_mouse = 1;
       accel_profile = "flat";

@@ -48,75 +48,75 @@
 
       # Util
       anyrun
-      curl
-      fzf
-      gnome-disk-utility
-      lazygit
-      ntfs3g
-      p7zip
-      ripgrep
+      # curl
+      # fzf
+      # gnome-disk-utility
+      # lazygit
+      # ntfs3g
+      # p7zip
+      # ripgrep
       stow
-      tmux
-      tmuxifier
-      tree-sitter
-      udiskie
-      unrar
-      unzip
-      wget
-      xdg-user-dirs
-      xdg-utils
-      zed-editor
+      # tmux
+      # tmuxifier
+      # tree-sitter
+      # udiskie
+      # unrar
+      # unzip
+      # wget
+      # xdg-user-dirs
+      # xdg-utils
+      # zed-editor
 
       # Dev
-      binutils
-      clang
-      clang-tools
-      cargo-edit
-      cargo-insta
-      cargo-nextest
-      gcc
-      gnumake
-      cmake
-      python3
-      python312Packages.httplib2
-      python312Packages.oauth2
-      gtk3
-      gtk4
+      # binutils
+      # clang
+      # clang-tools
+      # cargo-edit
+      # cargo-insta
+      # cargo-nextest
+      # gcc
+      # gnumake
+      # cmake
+      # python3
+      # python312Packages.httplib2
+      # python312Packages.oauth2
+      # gtk3
+      # gtk4
 
       # misc.language_servers
-      typescript-language-server
-      typescript
-      nixd
-      nil
-      statix
-      hyprlang
-      alejandra
-      nixpkgs-fmt
-      pyright
-      isort
-      rustfmt
-      rust-analyzer
-      clippy
-      lua-language-server
-      stylua
-      nodePackages_latest.nodejs
-      nodePackages.prettier
-      prettierd
-      black
-      vimPlugins.nvim-treesitter-parsers.typescript
+      # typescript-language-server
+      # typescript
+      # nixd
+      # nil
+      # statix
+      # hyprlang
+      # alejandra
+      # nixpkgs-fmt
+      # pyright
+      # isort
+      # rustfmt
+      # rust-analyzer
+      # clippy
+      # lua-language-server
+      # stylua
+      # nodePackages_latest.nodejs
+      # nodePackages.prettier
+      # prettierd
+      # black
+      # vimPlugins.nvim-treesitter-parsers.typescript
 
       # ags_dependencies
-      bash
-      coreutils
-      dart-sass
-      gawk
-      imagemagick
-      procps
-      util-linux
-      gnome.gnome-control-center
-      mission-center
-      overskride
-      wlogout
+      # bash
+      # coreutils
+      # dart-sass
+      # gawk
+      # imagemagick
+      # procps
+      # util-linux
+      # gnome.gnome-control-center
+      # mission-center
+      # overskride
+      # wlogout
     ];
   };
 }

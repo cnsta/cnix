@@ -1,10 +1,7 @@
-{
+{inputs, ...}: {
   imports = [
-    ./land/appearance.nix
-    ./land/inputs.nix
-    ./land/keybinds.nix
-    ./land/rules.nix
-    ./land/startup.nix
+    inputs.hyprland.homeManagerModules.default
+    ./land/cnst
   ];
   wayland.windowManager.hyprland = {
     enable = true;
