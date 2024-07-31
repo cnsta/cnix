@@ -10,7 +10,7 @@
     mod = "${self}/nixos";
 
     # get the basic config to build on top of
-    inherit (import "${self}/nixos") desktop laptop;
+    inherit (import "${self}/nixos") laptop cnix toothpc;
 
     # get these into the module system
     specialArgs = {inherit inputs self;};
@@ -18,7 +18,7 @@
     cnix = nixosSystem {
       inherit specialArgs;
       modules =
-        desktop
+        cnix
         ++ [
           ./cnix
           "${mod}/core/lanzaboote.nix"
@@ -46,7 +46,7 @@
     toothpc = nixosSystem {
       inherit specialArgs;
       modules =
-        desktop
+        toothpc
         ++ [
           ./toothpc
           "${mod}/core"

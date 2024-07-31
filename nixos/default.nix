@@ -1,5 +1,5 @@
 let
-  desktop = [
+  shared = [
     ./core
 
     ./locale
@@ -17,10 +17,20 @@ let
   ];
 
   laptop =
-    desktop
+    shared
     ++ [
       ./services/fwupd
     ];
+  cnix =
+    shared
+    ++ [
+      ./core/system/cnix-nh.nix
+    ];
+  toothpc =
+    shared
+    ++ [
+      ./core/system/toothpc-nh.nix
+    ];
 in {
-  inherit desktop laptop;
+  inherit shared laptop cnix toothpc;
 }

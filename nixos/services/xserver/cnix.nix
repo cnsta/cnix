@@ -1,6 +1,4 @@
-let
-  homeDir = builtins.getEnv "HOME";
-in {
+{config, ...}: {
   services.xserver = {
     enable = true;
     videoDrivers = ["amdgpu"];
@@ -8,7 +6,7 @@ in {
       extraLayouts.hhkbse = {
         description = "HHKBse by cnst";
         languages = ["se"];
-        symbolsFile = "${homeDir}/.nix-config/nixos/hosts/cnix/xkb/symbols/hhkbse";
+        symbolsFile = /home/cnst/.nix-config/nixos/hosts/cnix/xkb/symbols/hhkbse;
       };
       layout = "hhkbse";
       # dir = "/home/cnst/.nix-config/nixos/xkb";
