@@ -1,6 +1,7 @@
 let
   desktop = [
     ./core/hyprland.nix
+    ./core/xdg.nix
     ./core/zsh.nix
     ./core/fonts.nix
     ./core/home-manager.nix
