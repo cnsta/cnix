@@ -60,6 +60,10 @@
     # cachyos
     chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "hyprland/nixpkgs";
+    };
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs.nixpkgs.follows = "nixpkgs";

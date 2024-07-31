@@ -629,11 +629,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1722375236,
-        "narHash": "sha256-8yrkwPN3TbCrtZSD/7GSV2kW9hruIZUQymnpyV15TI4=",
+        "lastModified": 1722441247,
+        "narHash": "sha256-YHVgiYZoaemwEI1/T0r8Q3iTGY1LPFJkBmLDVoqqea0=",
         "ref": "refs/heads/main",
-        "rev": "3b9b5346b830554aa7470ccf1202a7f3be72d1b4",
-        "revCount": 5029,
+        "rev": "8a5f9bbb394ddeb4be9a9df6248b41b07d84ea66",
+        "revCount": 5030,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -642,6 +642,27 @@
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
+      }
+    },
+    "hyprland-contrib": {
+      "inputs": {
+        "nixpkgs": [
+          "hyprland",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1720709712,
+        "narHash": "sha256-78j/cY+AXoMIqqiNc1vWx237EPfpERAcYsb57ABUbwQ=",
+        "owner": "hyprwm",
+        "repo": "contrib",
+        "rev": "65d42dcbfde2229a75ccdb195c318dfe241f9ade",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hyprwm",
+        "repo": "contrib",
+        "type": "github"
       }
     },
     "hyprland-protocols": {
@@ -1057,11 +1078,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1722425500,
-        "narHash": "sha256-nAVezKR8I1ny1dE7qbSdC1Z5uhFVmn6HnOC7eGBiutY=",
+        "lastModified": 1722431209,
+        "narHash": "sha256-qBxvnoQuzhCHTej5JMw1EpjavufRgpMNP9klpO7mbI4=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "9314cd46f0f1ff756bae1ae1718c116be894930d",
+        "rev": "8945b3b5e336a42972448e2f07ed5bc465a40c83",
         "type": "github"
       },
       "original": {
@@ -1130,6 +1151,7 @@
         "hardware": "hardware",
         "hm": "hm",
         "hyprland": "hyprland",
+        "hyprland-contrib": "hyprland-contrib",
         "lanzaboote": "lanzaboote",
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs_5",

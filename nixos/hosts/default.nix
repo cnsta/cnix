@@ -44,32 +44,59 @@
           inputs.chaotic.nixosModules.default
         ];
     };
+    toothpc = nixosSystem {
+      inherit specialArgs;
+      modules =
+        desktop
+        ++ [
+          ./toothpc
+          "${mod}/core"
+          "${mod}/core/lanzaboote.nix"
+          "${mod}/core/network/toothpc.nix"
 
-    # rog = nixosSystem {
-    #   inherit specialArgs;
-    #   modules =
-    #     laptop
-    #     ++ [
-    #       ./rog
-    #       "${mod}/core/lanzaboote.nix"
+          "${mod}/hardware/toothpc.nix"
 
-    #       "${mod}/programs/gamemode.nix"
-    #       "${mod}/programs/hyprland.nix"
-    #       "${mod}/programs/games.nix"
+          "${mod}/services/xserver/toothpc.nix"
 
-    #       "${mod}/services/kanata"
-    #       {home-manager.users.mihai.imports = homeImports."mihai@rog";}
-    #     ];
-    # };
+          "${mod}/extra/gaming.nix"
+          "${mod}/extra/android"
+          "${mod}/extra/workstation"
+          {
+            home-manager = {
+              users.toothpick.imports = homeImports."toothpick@toothpc";
+              extraSpecialArgs = specialArgs;
+            };
+          }
 
-    # kiiro = nixosSystem {
-    #   inherit specialArgs;
-    #   modules =
-    #     desktop
-    #     ++ [
-    #       ./kiiro
-    #       {home-manager.users.mihai.imports = homeImports.server;}
-    #     ];
-    # };
+          # inputs.agenix.nixosModules.default
+          inputs.chaotic.nixosModules.default
+        ];
+    };
+    adampad = nixosSystem {
+      inherit specialArgs;
+      modules =
+        laptop
+        ++ [
+          ./adampad
+          "${mod}/core"
+          "${mod}/core/network/adampad.nix"
+
+          "${mod}/hardware/adampad.nix"
+
+          "${mod}/services/xserver/adampad.nix"
+          "${mod}/services/blueman"
+
+          "${mod}/extra/android"
+          {
+            home-manager = {
+              users.adam.imports = homeImports."adam@adampad";
+              extraSpecialArgs = specialArgs;
+            };
+          }
+
+          # inputs.agenix.nixosModules.default
+          inputs.chaotic.nixosModules.default
+        ];
+    };
   };
 }

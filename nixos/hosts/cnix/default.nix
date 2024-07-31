@@ -7,6 +7,7 @@
   system,
   ...
 }: let
+  homeDir = builtins.getEnv "HOME";
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
   users.users.cnst = {
@@ -33,12 +34,8 @@ in {
     ];
   };
 
-  programs.dconf.enable = true;
-
   imports = [
-    ./system.nix
     ./hardware-configuration.nix
-    ./substituters.nix
   ];
 
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
@@ -49,10 +46,6 @@ in {
     "quiet"
     "splash"
   ];
-
-  environment.sessionVariables = {
-    FLAKE = "/home/cnst/.nix-config";
-  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = lib.mkDefault "23.11";
