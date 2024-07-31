@@ -1,13 +1,9 @@
 {
-  inputs,
-  outputs,
   lib,
   config,
   pkgs,
-  system,
   ...
 }: let
-  homeDir = builtins.getEnv "HOME";
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
   users.users.cnst = {
@@ -39,7 +35,6 @@ in {
   ];
 
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
-  environment.systemPackages = [pkgs.scx];
 
   boot.kernelParams = [
     "amd_pstate=active"

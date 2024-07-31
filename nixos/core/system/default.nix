@@ -8,9 +8,17 @@
   imports = [
     ./substituters.nix
     ./nixpkgs.nix
+    ./security.nix
   ];
 
-  environment.systemPackages = [pkgs.git];
+  environment = {
+    systemPackages = [
+      pkgs.git
+      pkgs.scx
+      pkgs.stow
+    ];
+    localBinInPath = true;
+  };
 
   nix = {
     # pin the registry to avoid downloading and evaling a new nixpkgs version every time
