@@ -21,7 +21,6 @@
         desktop
         ++ [
           ./cnix
-          "${mod}/core"
           "${mod}/core/lanzaboote.nix"
           "${mod}/core/network/cnix.nix"
 
