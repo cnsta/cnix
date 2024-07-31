@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./nix
+    ./system
     ./xdg.nix
     ./zsh.nix
     ./fonts.nix
