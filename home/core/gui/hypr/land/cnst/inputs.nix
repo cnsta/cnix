@@ -6,6 +6,12 @@
     ];
     env = [
       "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+
+      "XDG_SESSION_DESKTOP, Hyprland"
+
+      "GDK_BACKEND, wayland"
+      "SDL_VIDEODRIVER, wayland"
+      "QT_QPA_PLATFORM, wayland;xcb"
     ];
 
     input = {

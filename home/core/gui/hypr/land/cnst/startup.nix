@@ -3,7 +3,7 @@
     exec-once = [
       # STARTUP
       # exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-      "systemctl --user start polkit-gnome-authentication-agent-1"
+      # "systemctl --user start polkit-gnome-authentication-agent-1"
       # exec-once = lxqt-policykit-agent &
       "waybar"
       "pamixer --set-volume 50"

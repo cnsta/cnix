@@ -37,6 +37,7 @@
       "center, ^(xarchiver)$"
       "float, ^(xarchiver)$"
       "float, ^(org.gnome.FileRoller)$"
+      "float, ^(org.freedesktop.impl.portal.desktop.kde)$"
     ];
   };
 }
