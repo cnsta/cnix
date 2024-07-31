@@ -3,10 +3,10 @@
     # ./gui/anyrun
     ./gui/browsers
     ./gui/discord
-    ./gui/gtk
     ./gui/utility
     ./gui/waybar
     ./gui/xdg
+    ./gui/style
 
     ./tui/alacritty
     ./tui/foot

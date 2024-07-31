@@ -13,11 +13,4 @@
       videos = "${config.home.homeDirectory}/media/videos";
     };
   };
-  dconf = {
-    settings = {
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
-    };
-  };
 }

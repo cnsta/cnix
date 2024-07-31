@@ -9,7 +9,7 @@
         ./home/users
         ./nixos/hosts
         ./nixos/pkgs
-        ./pre-commit-hooks.nix
+        # ./pre-commit-hooks.nix
       ];
 
       perSystem = {
@@ -25,9 +25,9 @@
           ];
           name = "dots";
           DIRENV_LOG_FORMAT = "";
-          shellHook = ''
-            ${config.pre-commit.installationScript}
-          '';
+          # shellHook = ''
+          #   ${config.pre-commit.installationScript}
+          # '';
         };
 
         formatter = pkgs.alejandra;
@@ -73,10 +73,10 @@
       url = "github:wez/wezterm?dir=nix";
     };
     anyrun.url = "github:anyrun-org/anyrun";
-    pre-commit-hooks = {
-      url = "github:cachix/pre-commit-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-compat.follows = "flake-compat";
-    };
+    # pre-commit-hooks = {
+    #   url = "github:cachix/pre-commit-hooks.nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.flake-compat.follows = "flake-compat";
+    # };
   };
 }

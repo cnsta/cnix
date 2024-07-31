@@ -50,7 +50,7 @@
       workspace_swipe_create_new = true;
     };
     misc = {
-      vrr = 1;
+      vrr = 2;
       no_direct_scanout = false;
       mouse_move_enables_dpms = 1;
       key_press_enables_dpms = 0;
@@ -62,10 +62,10 @@
     xwayland = {
       force_zero_scaling = true;
     };
-    cursor = {
-      no_hardware_cursors = true;
-      no_break_fs_vrr = true;
-      min_refresh_rate = 24;
-    };
+    # cursor = {
+    #   no_hardware_cursors = true;
+    #   no_break_fs_vrr = true;
+    #   min_refresh_rate = 24;
+    # };
   };
 }

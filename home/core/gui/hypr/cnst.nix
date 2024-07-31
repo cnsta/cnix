@@ -3,8 +3,10 @@
     inputs.hyprland.homeManagerModules.default
     ./land/cnst
   ];
+
   wayland.windowManager.hyprland = {
     enable = true;
+    xwayland.enable = true;
 
     systemd = {
       variables = ["--all"];
