@@ -1,41 +1,24 @@
 {pkgs, ...}: {
-  imports = [
-    # core.gui
-    ../../core/gui/gtk
-    ../../core/gui/waybar
-    ../../core/gui/browsers
-    ../../core/gui/xdg
-    ../../core/gui/discord
-    ../../core/gui/vscode
-    ../../core/gui/utility
-    ../../core/gui/hypr/toothpick.nix
-    # core.tui
-    ../../core/tui/git/toothpick.nix
-    ../../core/tui/shell/toothpick.nix
-    ../../core/tui/alacritty
-    ../../core/tui/foot
-    ../../core/tui/wezterm
-    ../../core/tui/neovim
-    # core.services
-    ../../core/services/mako
-    ../../core/services/polkit
-    ../../core/services/hypr
-  ];
   home = {
+    username = "toothpick";
+    homeDirectory = "/home/toothpick";
+    stateVersion = "23.11";
+    extraOutputsToInstall = ["doc" "devdoc"];
+
     packages = with pkgs; [
       # misc.gui
       virt-manager
       xfce.thunar
-      filezilla
 
       # misc.tui
       ranger
+      xcur2png
 
       # misc.system
       adwaita-icon-theme
+      egl-wayland
       qt5.qtwayland
       qt6.qtwayland
-      egl-wayland
       #  thefuck
       wireguard-tools
       wl-clipboard
@@ -47,10 +30,20 @@
       BROWSER = "firefox";
       EDITOR = "nvim";
       TERM = "foot";
+
       QT_QPA_PLATFORM = "wayland-egl";
       SDL_VIDEODRIVER = "wayland";
       XDG_SESSION_TYPE = "wayland";
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
     };
   };
+  # disable manuals as nmd fails to build often
+  manual = {
+    html.enable = false;
+    json.enable = false;
+    manpages.enable = false;
+  };
+
+  # let HM manage itself when in standalone mode
+  programs.home-manager.enable = true;
 }
