@@ -1,14 +1,4 @@
 {pkgs, ...}: {
-  imports = [
-    # core.gui
-    # ../../core/gui/ags
-    ../../core/gui/hypr/cnst.nix
-    # core.tui
-    ../../core/tui/git/cnst.nix
-    ../../core/tui/shell/cnst.nix
-    # core.services
-    # ../../core/services/power-monitor
-  ];
   home = {
     username = "cnst";
     homeDirectory = "/home/cnst";

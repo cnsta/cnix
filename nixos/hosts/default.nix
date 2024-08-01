@@ -10,7 +10,7 @@
     mod = "${self}/nixos";
 
     # get the basic config to build on top of
-    inherit (import "${self}/nixos") laptop cnix toothpc;
+    inherit (import "${self}/nixos") adampad cnix toothpc;
 
     # get these into the module system
     specialArgs = {inherit inputs self;};
@@ -49,7 +49,6 @@
         toothpc
         ++ [
           ./toothpc
-          "${mod}/core"
           "${mod}/core/lanzaboote.nix"
           "${mod}/core/network/toothpc.nix"
 
@@ -58,8 +57,6 @@
           "${mod}/services/xserver/toothpc.nix"
 
           "${mod}/extra/gaming.nix"
-          "${mod}/extra/android"
-          "${mod}/extra/workstation"
           {
             home-manager = {
               users.toothpick.imports = homeImports."toothpick@toothpc";
@@ -74,10 +71,9 @@
     adampad = nixosSystem {
       inherit specialArgs;
       modules =
-        laptop
+        adampad
         ++ [
           ./adampad
-          "${mod}/core"
           "${mod}/core/network/adampad.nix"
 
           "${mod}/hardware/adampad.nix"

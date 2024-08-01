@@ -34,13 +34,15 @@ in {
     ./hardware-configuration.nix
   ];
 
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
-
-  boot.kernelParams = [
-    "amd_pstate=active"
-    "quiet"
-    "splash"
-  ];
+  boot = {
+    consoleLogLevel = 3;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
+    kernelParams = [
+      "amd_pstate=active"
+      "quiet"
+      "splash"
+    ];
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = lib.mkDefault "23.11";

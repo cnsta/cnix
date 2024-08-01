@@ -6,8 +6,10 @@
   home = {
     packages = [pkgs.glib]; # gsettings
     pointerCursor = {
-      package = pkgs.catppuccin-cursors.latteDark;
-      name = "catppuccin-latte-dark-cursors";
+      # package = pkgs.catppuccin-cursors.latteDark;
+      # name = "catppuccin-latte-dark-cursors";
+      package = pkgs.adwaita-icon-theme;
+      name = "Adwaita";
       size = 28;
       gtk.enable = true;
       x11.enable = true;
@@ -20,16 +22,18 @@
       name = "Orchis-Grey-Dark-Compact";
     };
     iconTheme = {
-      package = pkgs.gruvbox-plus-icons;
-      name = "Gruvbox-Plus-Dark";
+      package = pkgs.adwaita-icon-theme;
+      name = "Adwaita";
     };
     font = {
       name = "Input Sans Narrow Light";
       size = 10;
     };
     cursorTheme = {
-      package = pkgs.catppuccin-cursors.latteDark;
-      name = "catppuccin-latte-dark-cursors";
+      # package = pkgs.catppuccin-cursors.latteDark;
+      # name = "catppuccin-latte-dark-cursors";
+      package = pkgs.adwaita-icon-theme;
+      name = "Adwaita";
       size = 28;
     };
 

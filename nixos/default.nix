@@ -14,12 +14,13 @@ let
     ./services/power
     ./services/samba
     ./services/udisks
+    ./services/fwupd
   ];
 
-  laptop =
+  adampad =
     shared
     ++ [
-      ./services/fwupd
+      ./core/system/adampad-nh.nix
     ];
   cnix =
     shared
@@ -32,5 +33,5 @@ let
       ./core/system/toothpc-nh.nix
     ];
 in {
-  inherit shared laptop cnix toothpc;
+  inherit shared adampad cnix toothpc;
 }

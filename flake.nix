@@ -6,7 +6,7 @@
       systems = ["x86_64-linux"];
 
       imports = [
-        ./home/users
+        ./home
         ./nixos/hosts
         ./nixos/pkgs
         # ./pre-commit-hooks.nix

@@ -20,15 +20,9 @@
         "usb_storage"
         "sd_mod"
       ];
-      kernelModules = [];
+      kernelModules = ["nvidia"];
     };
     kernelModules = ["kvm-intel"];
-    kernelPackages = pkgs.linuxPackages_zen;
-    consoleLogLevel = 3;
-    kernelParams = [
-      "quiet"
-      "splash"
-    ];
     extraModulePackages = [];
   };
 
