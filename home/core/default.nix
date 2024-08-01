@@ -11,7 +11,7 @@
     ./tui/alacritty
     ./tui/foot
     ./tui/neovim
-    # ./tui/wezterm
+    ./tui/kitty
     ./tui/yazi
 
     ./services/copyq

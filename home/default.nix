@@ -17,7 +17,7 @@
     "adam@adampad" = [
       ./core/gui/hypr/cnst.nix
       ./core/tui/git/cnst.nix
-      ./core/tui/shell/cnst.nix
+      ./core/tui/shell/adam.nix
       ./core
       ./users/adam
     ];

@@ -5,14 +5,13 @@
     settings = {
       enable_audio_bell = false;
       open_url_with = "firefox-nightly";
-      font_family = "Input Mono Extra Light";
+      font_family = "Input Mono Compressed Extra Light";
       bold_font = "auto";
       italic_font = "auto";
       bold_italic_font = "auto";
       font_size = "11.0";
       cursor_blink_interval = 0;
-      cursor_beam_thickness = 3;
-      copy_on_select = true;
+      copy_on_select = "clipboard";
       background_opacity = "0.95";
       background_blur = "32";
       window_padding_width = 3;
@@ -25,13 +24,13 @@
       tab_title_max_length = 30;
       # colors
       active_tab_foreground = "#32302f";
-      active_tab_background = "#8bba7f";
+      active_tab_background = "#A89984";
       inactive_tab_foreground = "#665C54";
-      inactive_tab_background = "#6f8352";
+      inactive_tab_background = "#373432";
       tab_bar_background = "#504945";
     };
     extraConfig = ''
-      kitty_mod ctrl
+      kitty_mod shift+ctrl
       map kitty_mod+q close_tab
       map ctrl+shift+c copy_to_clipboard
       map ctrl+shift+v paste_from_clipboard
