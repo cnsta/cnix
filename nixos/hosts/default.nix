@@ -21,25 +21,25 @@
         cnix
         ++ [
           ./cnix
-          "${mod}/core/lanzaboote.nix"
-          "${mod}/core/network/cnix.nix"
+          "${mod}/system/boot/lanzaboote.nix"
+          "${mod}/system/var/network/cnix.nix"
 
           "${mod}/hardware/cnix.nix"
 
-          "${mod}/services/blueman"
-          "${mod}/services/xserver/cnix.nix"
+          "${mod}/srv/blueman"
+          "${mod}/srv/xserver/cnix.nix"
 
-          "${mod}/extra/gaming.nix"
-          "${mod}/extra/android"
-          "${mod}/extra/workstation"
+          "${mod}/opt/gaming.nix"
+          "${mod}/opt/android"
+          "${mod}/opt/workstation"
           {
             home-manager = {
               users.cnst.imports = homeImports."cnst@cnix";
-              extraSpecialArgs = specialArgs;
+              optSpecialArgs = specialArgs;
             };
           }
 
-          # inputs.agenix.nixosModules.default
+          inputs.agenix.nixosModules.default
           inputs.chaotic.nixosModules.default
         ];
     };
@@ -49,18 +49,18 @@
         toothpc
         ++ [
           ./toothpc
-          "${mod}/core/lanzaboote.nix"
-          "${mod}/core/network/toothpc.nix"
+          "${mod}/system/boot/lanzaboote.nix"
+          "${mod}/system/var/network/toothpc.nix"
 
           "${mod}/hardware/toothpc.nix"
 
-          "${mod}/services/xserver/toothpc.nix"
+          "${mod}/srv/xserver/toothpc.nix"
 
-          "${mod}/extra/gaming.nix"
+          "${mod}/opt/gaming.nix"
           {
             home-manager = {
               users.toothpick.imports = homeImports."toothpick@toothpc";
-              extraSpecialArgs = specialArgs;
+              optSpecialArgs = specialArgs;
             };
           }
 
@@ -74,19 +74,19 @@
         adampad
         ++ [
           ./adampad
-          "${mod}/core/boot.nix"
-          "${mod}/core/network/adampad.nix"
+          "${mod}/system/boot/boot.nix"
+          "${mod}/system/var/network/adampad.nix"
 
           "${mod}/hardware/adampad.nix"
 
-          "${mod}/services/xserver/adampad.nix"
-          "${mod}/services/blueman"
+          "${mod}/srv/xserver/adampad.nix"
+          "${mod}/srv/blueman"
 
-          "${mod}/extra/android"
+          "${mod}/opt/android"
           {
             home-manager = {
               users.adam.imports = homeImports."adam@adampad";
-              extraSpecialArgs = specialArgs;
+              optSpecialArgs = specialArgs;
             };
           }
 
