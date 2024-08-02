@@ -74,6 +74,7 @@
         adampad
         ++ [
           ./adampad
+          "${mod}/core/boot.nix"
           "${mod}/core/network/adampad.nix"
 
           "${mod}/hardware/adampad.nix"
