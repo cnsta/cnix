@@ -68,14 +68,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     anyrun.url = "github:anyrun-org/anyrun";
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "hm";
-        systems.follows = "systems";
-        # darwin.follows = "";
-      };
-    };
+    # agenix = {
+    #   url = "github:ryantm/agenix";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     home-manager.follows = "hm";
+    #     systems.follows = "systems";
+    #     darwin.follows = "";
+    #   };
+    # };
   };
 }
