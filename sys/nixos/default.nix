@@ -6,14 +6,9 @@
   ...
 }: {
   imports = [
-    ./dconf
-    ./fonts
-    ./hyprland
     ./nixpkgs
-    ./security
     ./home-manager
     ./substituters
-    ./xdg
   ];
 
   environment = {
