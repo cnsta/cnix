@@ -40,7 +40,7 @@
           marksman.enable = true;
 
           # Nix
-          nil-ls.enable = true;
+          nixd.enable = true;
 
           # Docker
           dockerls.enable = true;
