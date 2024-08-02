@@ -1,39 +1,21 @@
 {pkgs, ...}: {
-  imports = [
-    # core.gui
-    ../../core/gui/gtk
-    ../../core/gui/waybar
-    # ../../core/gui/ags
-    ../../core/gui/browsers
-    ../../core/gui/xdg
-    ../../core/gui/discord
-    ../../core/gui/hypr/cnst.nix
-    ../../core/gui/utility
-    # core.tui
-    ../../core/tui/git/cnst.nix
-    ../../core/tui/shell/adam.nix
-    ../../core/tui/wezterm
-    ../../core/tui/alacritty
-    ../../core/tui/neovim
-    # ../../core/tui/yazi
-    # core.services
-    ../../core/services/mako
-    ../../core/services/polkit
-    ../../core/services/hypr
-    # ../../core/services/power-monitor
-  ];
   home = {
+    username = "adam";
+    homeDirectory = "/home/adam";
+    stateVersion = "23.11";
+    extraOutputsToInstall = ["doc" "devdoc"];
+
     packages = with pkgs; [
       # misc.gui
       virt-manager
       xfce.thunar
-      nautilus
 
       # misc.tui
       ranger
       xcur2png
 
       # misc.system
+      brightnessctl
       bun
       adwaita-icon-theme
       qt5.qtwayland
@@ -49,9 +31,19 @@
       BROWSER = "firefox";
       EDITOR = "nvim";
       TERM = "foot";
+
       QT_QPA_PLATFORM = "wayland";
       SDL_VIDEODRIVER = "wayland";
       XDG_SESSION_TYPE = "wayland";
     };
   };
+  # disable manuals as nmd fails to build often
+  manual = {
+    html.enable = false;
+    json.enable = false;
+    manpages.enable = false;
+  };
+
+  # let HM manage itself when in standalone mode
+  programs.home-manager.enable = true;
 }
