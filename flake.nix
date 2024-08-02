@@ -17,9 +17,6 @@
             pkgs.alejandra
             pkgs.git
             pkgs.nodePackages.prettier
-            pkgs.ssh-to-age
-            pkgs.sops
-            pkgs.age
           ];
         };
         formatter = pkgs.alejandra;

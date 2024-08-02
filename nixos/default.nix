@@ -21,16 +21,22 @@ let
     shared
     ++ [
       ./system/var/nh/adampad.nix
+      ./srv/xserver/adampad.nix
+      ./hardware/adampad.nix
     ];
   cnix =
     shared
     ++ [
       ./system/var/nh/cnix.nix
+      ./srv/xserver/cnix.nix
+      ./hardware/cnix.nix
     ];
   toothpc =
     shared
     ++ [
-      ./system/var/nh/toothpc-nh.nix
+      ./system/var/nh/toothpc.nix
+      ./srv/xserver/toothpc.nix
+      ./hardware/toothpc.nix
     ];
 in {
   inherit shared adampad cnix toothpc;
