@@ -9,34 +9,26 @@
         ./home
         ./nixos/hosts
         ./nixos/pkgs
-        # ./pre-commit-hooks.nix
       ];
 
-      perSystem = {
-        config,
-        pkgs,
-        ...
-      }: {
+      perSystem = {pkgs, ...}: {
         devShells.default = pkgs.mkShell {
           packages = [
             pkgs.alejandra
             pkgs.git
             pkgs.nodePackages.prettier
+            pkgs.ssh-to-age
+            pkgs.sops
+            pkgs.age
           ];
-          name = "dots";
-          DIRENV_LOG_FORMAT = "";
-          # shellHook = ''
-          #   ${config.pre-commit.installationScript}
-          # '';
         };
-
         formatter = pkgs.alejandra;
       };
     };
+
   inputs = {
     # Nix environs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     systems.url = "github:nix-systems/default-linux";
     hardware.url = "github:nixos/nixos-hardware";
     lanzaboote.url = "github:nix-community/lanzaboote";
@@ -66,21 +58,24 @@
     };
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
     };
     firefox-nightly = {
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    wezterm = {
-      url = "github:wez/wezterm?dir=nix";
-    };
     anyrun.url = "github:anyrun-org/anyrun";
-    # pre-commit-hooks = {
-    #   url = "github:cachix/pre-commit-hooks.nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.flake-compat.follows = "flake-compat";
-    # };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "hm";
+        systems.follows = "systems";
+        # darwin.follows = "";
+      };
+    };
   };
 }

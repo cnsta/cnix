@@ -1,36 +1,36 @@
 let
   shared = [
-    ./core
+    ./system
 
     ./locale
 
-    ./services/audio
-    ./services/greetd
-    ./services/gnome-keyring
-    ./services/gvfs
-    ./services/locate
-    ./services/mullvad
-    ./services/openssh
-    ./services/power
-    ./services/samba
-    ./services/udisks
-    ./services/fwupd
+    ./srv/audio
+    ./srv/greetd
+    ./srv/gnome-keyring
+    ./srv/gvfs
+    ./srv/locate
+    ./srv/mullvad
+    ./srv/openssh
+    ./srv/power
+    ./srv/samba
+    ./srv/udisks
+    ./srv/fwupd
   ];
 
   adampad =
     shared
     ++ [
-      ./core/system/adampad-nh.nix
+      ./system/var/nh/adampad.nix
     ];
   cnix =
     shared
     ++ [
-      ./core/system/cnix-nh.nix
+      ./system/var/nh/cnix.nix
     ];
   toothpc =
     shared
     ++ [
-      ./core/system/toothpc-nh.nix
+      ./system/var/nh/toothpc-nh.nix
     ];
 in {
   inherit shared adampad cnix toothpc;
