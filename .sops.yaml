@@ -1,7 +1,0 @@
-keys:
-  - &cnix age1aj6tdyjcxjc3fqda3uvnzy6m49yj4ankvzdstnj3w9dr8hmsccts5vsgd8
-creation_rules:
-  - path_regex: secrets/secrets.yaml$
-    key_groups:
-      - age:
-          - *cnix
