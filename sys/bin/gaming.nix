@@ -2,7 +2,7 @@
   imports = [
     ./steam
     ./lutris
-    ./bottles
+    # ./bottles
     ./gamemode
     ./gamescope
     ./corectrl
