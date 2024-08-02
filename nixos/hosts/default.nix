@@ -24,10 +24,7 @@
           "${mod}/system/boot/lanzaboote.nix"
           "${mod}/system/var/network/cnix.nix"
 
-          "${mod}/hardware/cnix.nix"
-
           "${mod}/srv/blueman"
-          "${mod}/srv/xserver/cnix.nix"
 
           "${mod}/opt/gaming.nix"
           "${mod}/opt/android"
@@ -52,10 +49,6 @@
           "${mod}/system/boot/lanzaboote.nix"
           "${mod}/system/var/network/toothpc.nix"
 
-          "${mod}/hardware/toothpc.nix"
-
-          "${mod}/srv/xserver/toothpc.nix"
-
           "${mod}/opt/gaming.nix"
           {
             home-manager = {
@@ -77,9 +70,6 @@
           "${mod}/system/boot/boot.nix"
           "${mod}/system/var/network/adampad.nix"
 
-          "${mod}/hardware/adampad.nix"
-
-          "${mod}/srv/xserver/adampad.nix"
           "${mod}/srv/blueman"
 
           "${mod}/opt/android"
