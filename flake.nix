@@ -7,8 +7,8 @@
 
       imports = [
         ./home
-        ./nixos/hosts
-        ./nixos/pkgs
+        ./hosts
+        # ./nixos/pkgs
       ];
 
       perSystem = {pkgs, ...}: {
