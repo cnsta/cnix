@@ -1,8 +1,7 @@
 {
   wayland.windowManager.hyprland.settings = {
     monitor = [
-      "DP-3, 2560x1440@143.86, auto, auto"
-      "eDP-1,1920x1200@60.02,auto,1"
+      "monitor=DVI-D-1,1920x1080@144,auto,1"
     ];
     env = [
       "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
@@ -23,20 +22,8 @@
     # Desktop keyboard
     device = [
       {
-        name = "pfu-limited-hhkb-hybrid";
-        kb_layout = "hhkbse";
-        kb_options = "lv3:rwin_switch";
-      }
-      {
-        name = "hhkb-hybrid_1-keyboard";
-        kb_layout = "hhkbse";
-        kb_options = "lv3:rwin_switch";
-      }
-      # Laptop keyboard
-      {
-        name = "at-translated-set-2-keyboard";
+        name = "usb-hid-keyboard";
         kb_layout = "se";
-        kb_options = "ctrl:swapcaps";
       }
     ];
     gestures = {
