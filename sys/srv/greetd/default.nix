@@ -5,11 +5,11 @@
       # AUTOLOGIN
       # initial_session = {
       #   command = "${pkgs.hyprland}/bin/Hyprland";
-      #   user = "adam";
+      #   user = "cnst"; # <- select which user to auto-login
       # };
       default_session = {
         command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r --remember-session --asterisks";
-        user = "adam";
+        user = "greeter";
       };
     };
   };
