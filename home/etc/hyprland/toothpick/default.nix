@@ -1,16 +1,10 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     inputs.hyprland.homeManagerModules.default
-    ./land/cnst
+    ./cfg
   ];
-
   wayland.windowManager.hyprland = {
     enable = true;
-    xwayland.enable = true;
 
     systemd = {
       variables = ["--all"];

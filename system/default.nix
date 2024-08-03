@@ -16,16 +16,16 @@ let
   cnix =
     shared
     ++ [
-      ./usr/bin/gaming.nix
-      ./usr/bin/android
-      ./usr/bin/gimp
-      ./usr/bin/inkscape
+      ./opt/gaming.nix
+      ./opt/android
+      ./opt/gimp
+      ./opt/inkscape
       ./srv/blueman
     ];
   toothpc =
     shared
     ++ [
-      ./usr/bin/gaming.nix
+      ./opt/gaming.nix
     ];
 in {
   inherit shared adampad cnix toothpc;

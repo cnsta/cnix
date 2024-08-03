@@ -1,10 +1,16 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.hyprland.homeManagerModules.default
-    ./land/toothpick
+    ./cfg
   ];
+
   wayland.windowManager.hyprland = {
     enable = true;
+    xwayland.enable = true;
 
     systemd = {
       variables = ["--all"];
