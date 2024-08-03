@@ -8,7 +8,7 @@
     "$menuw" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
     "$browser" = "firefox-nightly";
     "$browserinc" = "firefox-nightly --private-window";
-    "$ranger" = "rangerscript";
+    "$yazi" = "alacritty -e yazi";
 
     # See https://wiki.hyprland.org/Configuring/Keywords/ for more
     "$mod" = "SUPER";
@@ -27,7 +27,7 @@
       #bind = $mod, M, exec, hyprctl dispatch exit
       #bind = $mod, E, exec, $fileManager
       "$mod, E, exec, $fileManager"
-      "$mod SHIFT, E, exec, $ranger"
+      "$mod SHIFT, E, exec, $yazi"
       "$mod, F, fullscreen,"
       "$mod SHIFT, F, togglefloating,"
       "$mod, SPACE, exec, $menu"
