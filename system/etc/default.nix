@@ -1,11 +1,10 @@
 {
   imports = [
+    # shared imports
     ./dconf
-    ./fonts
-    ./locale
-    # ./nix-ld
     ./security
     ./xdg
+    ./zram
     ./zsh
   ];
 }

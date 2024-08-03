@@ -1,9 +1,10 @@
 let
   shared = [
-    ./nixos
-    ./etc
     ./bin
+    ./etc
+    ./nix
     ./srv
+    ./usr/share
   ];
 
   adampad =
@@ -15,16 +16,16 @@ let
   cnix =
     shared
     ++ [
-      ./bin/gaming.nix
-      ./bin/android
-      ./bin/gimp
-      ./bin/inkscape
+      ./usr/bin/gaming.nix
+      ./usr/bin/android
+      ./usr/bin/gimp
+      ./usr/bin/inkscape
       ./srv/blueman
     ];
   toothpc =
     shared
     ++ [
-      ./bin/gaming.nix
+      ./usr/bin/gaming.nix
     ];
 in {
   inherit shared adampad cnix toothpc;

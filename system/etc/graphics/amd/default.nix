@@ -1,15 +1,5 @@
 {pkgs, ...}: {
-  zramSwap.enable = true;
-
   hardware = {
-    bluetooth = {
-      enable = true;
-      powerOnBoot = false;
-    };
-    logitech.wireless = {
-      enable = true;
-      enableGraphical = true;
-    };
     graphics = {
       enable = true;
       enable32Bit = true;

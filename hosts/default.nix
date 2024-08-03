@@ -7,10 +7,10 @@
   flake.nixosConfigurations = let
     # shorten paths
     inherit (inputs.nixpkgs.lib) nixosSystem;
-    mod = "${self}/sys";
+    mod = "${self}/system";
 
     # get the basic config to build on top of
-    inherit (import "${self}/sys") adampad cnix toothpc;
+    inherit (import "${self}/system") adampad cnix toothpc;
 
     # get these into the module system
     specialArgs = {inherit inputs self;};
@@ -21,11 +21,13 @@
         cnix
         ++ [
           ./cnix
-          "${mod}/opt/boot/lanzaboote.nix"
-          "${mod}/opt/hardware/cnix.nix"
-          "${mod}/opt/network/cnix.nix"
-          "${mod}/opt/nh/cnix.nix"
-          "${mod}/opt/xserver/cnix.nix"
+          "${mod}/boot/lanzaboote"
+          "${mod}/etc/bluetooth"
+          "${mod}/etc/graphics/amd"
+          "${mod}/etc/logitech"
+          "${mod}/etc/network/cnix"
+          "${mod}/etc/xserver/amd"
+          "${mod}/nix/nh/cnix"
           {
             home-manager = {
               users.cnst.imports = homeImports."cnst@cnix";
@@ -43,11 +45,12 @@
         toothpc
         ++ [
           ./toothpc
-          "${mod}/opt/boot/lanzaboote.nix"
-          "${mod}/opt/hardware/toothpc.nix"
-          "${mod}/opt/network/toothpc.nix"
-          "${mod}/opt/nh/toothpc.nix"
-          "${mod}/opt/xserver/toothpc.nix"
+          "${mod}/boot/lanzaboote"
+          "${mod}/etc/graphics/nvidia"
+          "${mod}/etc/logitech"
+          "${mod}/etc/network/toothpc"
+          "${mod}/etc/xserver/nvidia"
+          "${mod}/nix/nh/toothpc"
           {
             home-manager = {
               users.toothpick.imports = homeImports."toothpick@toothpc";
@@ -65,11 +68,12 @@
         adampad
         ++ [
           ./adampad
-          "${mod}/opt/boot/boot.nix"
-          "${mod}/opt/hardware/adampad.nix"
-          "${mod}/opt/network/adampad.nix"
-          "${mod}/opt/nh/adampad.nix"
-          "${mod}/opt/xserver/adampad.nix"
+          "${mod}/boot"
+          "${mod}/etc/bluetooth"
+          "${mod}/etc/graphics/amd"
+          "${mod}/etc/network/adampad"
+          "${mod}/etc/xserver/amd"
+          "${mod}/nix/nh/adampad"
           {
             home-manager = {
               users.adam.imports = homeImports."adam@adampad";
