@@ -8,25 +8,31 @@
 
   homeImports = {
     "cnst@cnix" = [
-      ./core/gui/hypr/cnst.nix
-      ./core/tui/git/cnst.nix
-      ./core/tui/shell/cnst.nix
-      ./core
-      ./users/cnst
+      ./usr/share/git/cnst
+      ./usr/share/shell/cnst
+      ./etc/hyprland/cnst
+      ./etc
+      ./bin
+      ./srv
+      ./profiles/cnst
     ];
     "adam@adampad" = [
-      ./core/gui/hypr/cnst.nix
-      ./core/tui/git/cnst.nix
-      ./core/tui/shell/adam.nix
-      ./core
-      ./users/adam
+      ./usr/share/git/cnst
+      ./usr/share/shell/adam
+      ./etc/hyprland/cnst
+      ./etc
+      ./bin
+      ./srv
+      ./profiles/adam
     ];
     "toothpick@toothpc" = [
-      ./core/gui/hypr/toothpick.nix
-      ./core/tui/git/toothpick.nix
-      ./core/tui/shell/toothpick.nix
-      ./core
-      ./users/toothpick
+      ./usr/share/git/toothpick
+      ./usr/share/shell/toothpick
+      ./etc/hyprland/toothpick
+      ./etc
+      ./bin
+      ./srv
+      ./profiles/toothpick
     ];
   };
 
