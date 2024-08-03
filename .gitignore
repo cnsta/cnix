@@ -1,5 +1,1 @@
-nix/
-nix/sources.json
-nix/sources.nix
 .direnv
-.pre-commit-config.yaml
