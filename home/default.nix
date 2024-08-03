@@ -10,9 +10,10 @@
     "cnst@cnix" = [
       ./usr/share/git/cnst
       ./usr/share/shell/cnst
-      ./etc/hyprland/cnst
+      ./bin/hyprland/cnst
       ./etc
       ./bin
+      ./opt
       ./srv
       ./profiles/cnst
     ];
@@ -22,15 +23,17 @@
       ./etc/hyprland/cnst
       ./etc
       ./bin
+      ./opt
       ./srv
       ./profiles/adam
     ];
     "toothpick@toothpc" = [
       ./usr/share/git/toothpick
       ./usr/share/shell/toothpick
-      ./etc/hyprland/toothpick
+      ./bin/hyprland/toothpick
       ./etc
       ./bin
+      ./opt
       ./srv
       ./profiles/toothpick
     ];
