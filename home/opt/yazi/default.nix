@@ -4,10 +4,7 @@
   ...
 }: {
   imports = [
-    ./theme/filetype.nix
-    ./theme/icons.nix
-    ./theme/manager.nix
-    ./theme/status.nix
+    ./theme
   ];
 
   # general file info

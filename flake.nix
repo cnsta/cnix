@@ -1,5 +1,5 @@
 {
-  description = "My NixOS";
+  description = "My (i.e. fufexan's) NixOS flake configuration";
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
@@ -26,9 +26,18 @@
   inputs = {
     # Nix environs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     systems.url = "github:nix-systems/default-linux";
     hardware.url = "github:nixos/nixos-hardware";
     lanzaboote.url = "github:nix-community/lanzaboote";
+    # Sandbox wrappers for programs
+    # nixpak = {
+    #   url = "github:nixpak/nixpak";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs-small";
+    #     flake-parts.follows = "flake-parts";
+    #   };
+    # };
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
@@ -64,6 +73,15 @@
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Schizophrenic Firefox configuration
+    # schizofox = {
+    #   url = "github:schizofox/schizofox";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs-small";
+    #     flake-parts.follows = "flake-parts";
+    #     nixpak.follows = "nixpak";
+    #   };
+    # };
     anyrun.url = "github:anyrun-org/anyrun";
     # agenix = {
     #   url = "github:ryantm/agenix";
