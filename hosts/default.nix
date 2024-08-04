@@ -27,7 +27,7 @@
           "${mod}/etc/graphics/amd"
           "${mod}/etc/logitech"
           "${mod}/etc/network/cnix"
-          "${mod}/etc/xserver/amd"
+          "${mod}/etc/xserver/amd/hhkbse"
           "${mod}/nix/nh/cnix"
           {
             home-manager = {
