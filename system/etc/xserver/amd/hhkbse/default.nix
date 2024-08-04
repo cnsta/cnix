@@ -1,4 +1,6 @@
-{
+{self, ...}: let
+  path = "${self}/hosts/cnix/xkb/symbols";
+in {
   services.xserver = {
     enable = true;
     videoDrivers = ["amdgpu"];
@@ -6,10 +8,9 @@
       extraLayouts.hhkbse = {
         description = "HHKBse by cnst";
         languages = ["se"];
-        symbolsFile = /home/cnst/.nix-config/hosts/cnix/xkb/symbols/hhkbse;
+        symbolsFile = "${path}/hhkbse";
       };
       layout = "hhkbse";
-      # dir = "/home/cnst/.nix-config/nixos/xkb";
       variant = "";
       options = "lv3:rwin_switch";
     };

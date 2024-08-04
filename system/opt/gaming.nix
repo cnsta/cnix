@@ -13,8 +13,5 @@
       protonup
       winetricks
     ];
-    sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/cnst/.steam/root/compatibilitytools.d";
-    };
   };
 }
