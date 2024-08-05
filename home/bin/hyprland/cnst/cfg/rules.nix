@@ -32,6 +32,7 @@
       "float,class:^(cnst.test)$"
       "float,class:^(org.corectrl.CoreCtrl)$"
       "float,class:^(feh)$"
+      "float,class:^(com.example.gtk-adieux)$"
     ];
     windowrule = [
       "center, ^(xarchiver)$"

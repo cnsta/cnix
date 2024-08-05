@@ -208,11 +208,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1722777453,
-        "narHash": "sha256-HaVYqwfPuMqb1k8WHLH/0YGRr4P281jTD2vemjOWQNQ=",
+        "lastModified": 1722860994,
+        "narHash": "sha256-k2IT4qXy3E/mB2yPtWcj981knzLkM5pg+QhpbAB3XtE=",
         "owner": "nix-community",
         "repo": "flake-firefox-nightly",
-        "rev": "3e3c59e1bf88fb018a468fc59920d12bc1daa626",
+        "rev": "f31f964e8c20dccda2095ff073a0afc06b34a52d",
         "type": "github"
       },
       "original": {
@@ -626,11 +626,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1722773977,
-        "narHash": "sha256-AqSmHptledo4Tp+hrHWovGR+e//bejR458sRmhq+jT4=",
+        "lastModified": 1722800434,
+        "narHash": "sha256-0lvzOT3dQWlQ+zyOAhKTxFd9BWZw380ILDNpoGdtekA=",
         "ref": "refs/heads/main",
-        "rev": "5dd2c27b631f16e49a2c6e6cbbefba9fa50bf543",
-        "revCount": 5050,
+        "rev": "2b520571e897be2a0e88c8692da607b062000038",
+        "revCount": 5051,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -837,11 +837,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1722781268,
-        "narHash": "sha256-uJQUMZtnowYH6ZbizNhGH/t6H7N5Q3m5pG4hf/0WMh8=",
+        "lastModified": 1722846822,
+        "narHash": "sha256-/6q7oH3ahod5BVW93s6ABZTrPC/mUjjjMJAxcqam1gs=",
         "owner": "NotAShelf",
         "repo": "microfetch",
-        "rev": "482ffe96cd92c14304723f91f723a9fa6670fe71",
+        "rev": "927f6077b4b78cd112bc6932aab5287edc413ce8",
         "type": "github"
       },
       "original": {
@@ -1075,11 +1075,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1722763580,
-        "narHash": "sha256-LgYIYkNYzqCldWJ/xJRQ156WDp6P9hHb4EsIXsRa+u4=",
+        "lastModified": 1722857280,
+        "narHash": "sha256-b5Bal3cElLrS9UtDN81ljQpOsbqBe/7CdWlTKhlswus=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "6f7cf23b226ceaee0a2d479c505652065dfe526f",
+        "rev": "5922a48008e5759acb63a12b2de8348ec512760f",
         "type": "github"
       },
       "original": {
