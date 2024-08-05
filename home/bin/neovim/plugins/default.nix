@@ -13,6 +13,7 @@
     ./tagbar.nix
     ./telescope.nix
     ./treesitter.nix
+    # ./chatgpt.nix
     # ./vimtex.nix
     ./nonels.nix
     ./conform.nix

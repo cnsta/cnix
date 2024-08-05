@@ -20,7 +20,7 @@
         "usb_storage"
         "sd_mod"
       ];
-      kernelModules = ["nvidia"];
+      kernelModules = ["kvm-intel"];
     };
     kernelModules = ["kvm-intel"];
     extraModulePackages = [];

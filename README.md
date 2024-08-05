@@ -6,5 +6,7 @@ Inspired by _(stolen from)_ the following:
 - [colemickens](https://github.com/colemickens/nixcfg.git)
 - [Misterio77](https://github.com/Misterio77/nix-config.git)
 
-To whoever stumbles across this repo, go to the ones above for answers.
-And give the real authors credit where it's due :-)
+> [!CAUTION]
+> This repository is a hodgepodge and bastardisation of the repos above.
+> My advice is to NOT copy anything of _mine_ and instead look at the sources.
+> And don't forget to give them credit. :-)

@@ -16,9 +16,12 @@
       pkgs.git
       pkgs.scx
       pkgs.stow
+      pkgs.age
     ];
     localBinInPath = true;
   };
+
+  console.useXkbConfig = true;
 
   nix = {
     # pin the registry to avoid downloading and evaling a new nixpkgs version every time
