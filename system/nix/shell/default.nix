@@ -1,6 +1,7 @@
 {pkgs ? import <nixpkgs> {}, ...}: {
   default = pkgs.mkShell {
     NIX_CONFIG = "extra-experimental-features = nix-command flakes";
+    RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     nativeBuildInputs = with pkgs; [
       rust-analyzer
       cargo

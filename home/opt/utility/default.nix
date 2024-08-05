@@ -30,5 +30,6 @@
     qbittorrent
     networkmanagerapplet # tray icon for NetworkManager
     usbimager # write bootable usb images!
+    chatgpt-cli
   ];
 }

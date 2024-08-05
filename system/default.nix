@@ -19,6 +19,8 @@ let
     ++ [
       ./opt/gaming.nix
       ./opt/android
+      ./opt/agenix
+      ./opt/microfetch
       ./opt/gimp
       ./opt/inkscape
       ./srv/blueman

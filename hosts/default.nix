@@ -36,8 +36,8 @@
             };
           }
 
-          # inputs.agenix.nixosModules.default
           inputs.chaotic.nixosModules.default
+          inputs.agenix.nixosModules.default
         ];
     };
     toothpc = nixosSystem {

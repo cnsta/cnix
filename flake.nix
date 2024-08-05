@@ -8,17 +8,10 @@
       imports = [
         ./home
         ./hosts
-        # ./nixos/pkgs
       ];
 
       perSystem = {pkgs, ...}: {
-        devShells.default = pkgs.mkShell {
-          packages = [
-            pkgs.alejandra
-            pkgs.git
-            pkgs.nodePackages.prettier
-          ];
-        };
+        devShells = import ./system/nix/shell {inherit pkgs;};
         formatter = pkgs.alejandra;
       };
     };
@@ -83,14 +76,14 @@
     #   };
     # };
     anyrun.url = "github:anyrun-org/anyrun";
-    # agenix = {
-    #   url = "github:ryantm/agenix";
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs";
-    #     home-manager.follows = "hm";
-    #     systems.follows = "systems";
-    #     darwin.follows = "";
-    #   };
-    # };
+    microfetch.url = "github:NotAShelf/microfetch";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "hm";
+        systems.follows = "systems";
+      };
+    };
   };
 }

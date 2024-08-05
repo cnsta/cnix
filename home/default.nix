@@ -1,4 +1,3 @@
-# Yanked from fufexan
 {
   self,
   inputs,
@@ -43,26 +42,22 @@
   inherit (inputs.hm.lib) homeManagerConfiguration;
 
   pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+
+  # Function to create home configuration
+  makeHomeConfiguration = modules:
+    homeManagerConfiguration {
+      inherit pkgs extraSpecialArgs modules;
+    };
 in {
   # we need to pass this to NixOS' HM module
   _module.args = {inherit homeImports;};
 
   flake = {
-    homeConfigurations = {
-      "cnst_cnix" = homeManagerConfiguration {
-        modules = homeImports."cnst@cnix";
-        inherit pkgs extraSpecialArgs;
-      };
-
-      "adam_adampad" = homeManagerConfiguration {
-        modules = homeImports."adam@adampad";
-        inherit pkgs extraSpecialArgs;
-      };
-
-      "toothpick_toothpc" = homeManagerConfiguration {
-        modules = homeImports."toothpick@toothpc";
-        inherit pkgs extraSpecialArgs;
-      };
-    };
+    homeConfigurations = builtins.listToAttrs (map
+      (name: {
+        name = builtins.replaceStrings ["@"] ["_"] name;
+        value = makeHomeConfiguration homeImports.${name};
+      })
+      (builtins.attrNames homeImports));
   };
 }
