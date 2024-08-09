@@ -11,6 +11,8 @@
       ./usr/share/git/cnst
       ./usr/share/shell/cnst
       ./bin/hyprland/cnst
+      ./opt/browsers/firefox
+      ./opt/sops
       ./etc
       ./bin
       ./opt

@@ -6,7 +6,7 @@ xkb_symbols "hhkbse" {
 	name[Group1]="Sweden - HHKBse";
 
 	key <AE01> {[         1,     exclam,      section,      onehalf ]};
-	key <AE02> {[         2,   quotedbl,           at,    paragraph ]};
+	key <AE02> {[         2,   quotedbl,           at               ]};
 	key <AE03> {[         3, numbersign,     sterling               ]};
 	key <AE04> {[         4,     dollar,     currency               ]};
 	key <AE05> {[         5,    percent,     EuroSign,     permille ]};
@@ -18,7 +18,7 @@ xkb_symbols "hhkbse" {
 	key <AE11> {[      plus,   question,    backslash,    plusminus ]};
 	key <AE12> {[      Next,  braceleft,         Home               ]};
 	key <BKSL> {[     Prior, braceright,          End               ]};
-	key <TLDE> {[    Delete,asciicircum,     asterisk               ]};
+	key <TLDE> {[    Delete,        bar,     asterisk,    brokenbar ]};
 
 	key <AD01> {[         q,          Q                             ]};
 	key <AD02> {[         w,          W                             ]};
@@ -31,7 +31,7 @@ xkb_symbols "hhkbse" {
 	key <AD09> {[         o,          O                             ]};
 	key <AD10> {[         p,          P,           Up,     Greek_pi ]};
 	key <AD11> {[     aring,      Aring                             ]};
-	key <AD12> {[apostrophe,        bar,   asciitilde,    brokenbar ]};
+	key <AD12> {[apostrophe,asciicircum,   asciitilde               ]};
 	key <AC01> {[         a,          A                             ]};
 	key <AC02> {[         s,          S                             ]};
 	key <AC03> {[         d,          D                             ]};
