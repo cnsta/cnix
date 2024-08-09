@@ -59,7 +59,12 @@
       disable_autoreload = true;
     };
     xwayland = {
-      force_zero_scaling = true;
+      force_zero_scaling = false;
+    };
+    render = {
+      explicit_sync = 2;
+      explicit_sync_kms = 2;
+      direct_scanout = false;
     };
     # cursor = {
     #   no_hardware_cursors = true;
