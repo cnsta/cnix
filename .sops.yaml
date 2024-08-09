@@ -1,12 +1,12 @@
 keys:
   # Users
   - &cnst age1aj6tdyjcxjc3fqda3uvnzy6m49yj4ankvzdstnj3w9dr8hmsccts5vsgd8
-  - &adam
-  - &toothpick # Hosts
-
+  - &adam placeholderkey
+  - &toothpick placeholderkey
+  # Hosts
   - &cnix age1rzee3wxh7773p7ytaq3zcl8q4tpsz3l43rdv2wezetgk0dlz0vws9jcpu2
-  - &adampad
-  - &toothpc
+  - &adampad placeholderkey
+  - &toothpc placeholderkey
 creation_rules:
   - path_regex: secrets/cnix-secrets.(yaml|json|env|ini)$
     key_groups:
