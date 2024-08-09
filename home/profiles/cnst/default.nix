@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  self,
+  ...
+}: {
   home = {
     username = "cnst";
     homeDirectory = "/home/cnst";
@@ -43,6 +47,7 @@
     json.enable = false;
     manpages.enable = false;
   };
+  # age.secrets.secret1.file = "${self}/secrets/openai.age";
 
   # let HM manage itself when in standalone mode
   programs.home-manager.enable = true;

@@ -16,7 +16,6 @@
       pkgs.git
       pkgs.scx
       pkgs.stow
-      pkgs.age
     ];
     localBinInPath = true;
   };
@@ -24,6 +23,7 @@
   console.useXkbConfig = true;
 
   nix = {
+    package = pkgs.lix;
     # pin the registry to avoid downloading and evaling a new nixpkgs version every time
     registry = lib.mapAttrs (_: v: {flake = v;}) inputs;
 
@@ -37,11 +37,17 @@
       experimental-features = ["nix-command" "flakes"];
       flake-registry = "/etc/nix/registry.json";
 
-      # for direnv GC roots
-      keep-derivations = true;
-      keep-outputs = true;
+      # # for direnv GC roots
+      # keep-derivations = true;
+      # keep-outputs = true;
 
       trusted-users = ["root" "@wheel"];
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      # Keep the last 3 generations
+      options = "--delete-older-than +3";
     };
   };
 }
