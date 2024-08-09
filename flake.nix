@@ -9,28 +9,32 @@
         ./home
         ./hosts
       ];
-
       perSystem = {pkgs, ...}: {
         devShells = import ./system/nix/shell {inherit pkgs;};
         formatter = pkgs.alejandra;
+
+        packages.cleanup-boot = pkgs.buildFHSUserEnv {
+          name = "cleanup-boot";
+          targetPkgs = pkgs: [pkgs.bash];
+          runScript = ./.cleanup-boot.sh;
+        };
       };
     };
 
   inputs = {
-    # Nix environs
+    # nix environs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     systems.url = "github:nix-systems/default-linux";
     hardware.url = "github:nixos/nixos-hardware";
     lanzaboote.url = "github:nix-community/lanzaboote";
-    # Sandbox wrappers for programs
-    # nixpak = {
-    #   url = "github:nixpak/nixpak";
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs-small";
-    #     flake-parts.follows = "flake-parts";
-    #   };
-    # };
+    nixpak = {
+      url = "github:nixpak/nixpak";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-small";
+        flake-parts.follows = "flake-parts";
+      };
+    };
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
@@ -50,10 +54,21 @@
     };
     # cachyos
     chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
+
+    # hyprland environ
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "hyprland/nixpkgs";
+    };
+    hyprlock = {
+      url = "github:hyprwm/hyprlock";
+      inputs = {
+        hyprlang.follows = "hyprland/hyprlang";
+        hyprutils.follows = "hyprland/hyprutils";
+        nixpkgs.follows = "hyprland/nixpkgs";
+        systems.follows = "hyprland/systems";
+      };
     };
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
@@ -66,24 +81,16 @@
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Schizophrenic Firefox configuration
-    # schizofox = {
-    #   url = "github:schizofox/schizofox";
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs-small";
-    #     flake-parts.follows = "flake-parts";
-    #     nixpak.follows = "nixpak";
-    #   };
-    # };
+    # Third party programs, packaged with nix
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     anyrun.url = "github:anyrun-org/anyrun";
     microfetch.url = "github:NotAShelf/microfetch";
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "hm";
-        systems.follows = "systems";
-      };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }

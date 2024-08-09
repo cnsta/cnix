@@ -35,9 +35,8 @@
               extraSpecialArgs = specialArgs;
             };
           }
-
           inputs.chaotic.nixosModules.default
-          inputs.agenix.nixosModules.default
+          inputs.sops-nix.nixosModules.sops
         ];
     };
     toothpc = nixosSystem {

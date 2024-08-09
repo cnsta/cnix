@@ -51,7 +51,6 @@
     };
     misc = {
       vrr = 2;
-      no_direct_scanout = false;
       mouse_move_enables_dpms = 1;
       key_press_enables_dpms = 0;
       force_default_wallpaper = 0;

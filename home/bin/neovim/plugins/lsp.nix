@@ -54,6 +54,9 @@
           # C#
           csharp-ls.enable = true;
 
+          # Yaml
+          yamlls.enable = true;
+
           # Lua
           lua-ls = {
             enable = true;

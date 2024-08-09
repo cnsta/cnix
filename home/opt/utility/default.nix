@@ -1,5 +1,8 @@
 {pkgs, ...}: {
   programs = {
+    ssh = {
+      enable = true;
+    };
     # image viewer
     feh = {
       enable = true;
