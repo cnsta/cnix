@@ -12,8 +12,8 @@
       ll = "ls -l";
       nixupdate = "nh os switch -v -H cnix";
       nixup = "nh os switch -H cnix";
-      flakeupdate = "nh os switch -u -v -H cnix";
-      flakeup = "nh os switch -u -H cnix";
+      flakeupdate = "nh os switch -u -v -H cnix && sudo nix run .#cleanup-boot";
+      flakeup = "nh os switch -u -H cnix && sudo nix run .#cleanup-boot";
     };
     history = {
       size = 1000;

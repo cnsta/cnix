@@ -20,9 +20,9 @@ let
     ++ [
       ./opt/gaming.nix
       ./opt/android
-      ./opt/agenix
       ./opt/gimp
       ./opt/inkscape
+      ./opt/sops
       ./srv/blueman
     ];
   toothpc =

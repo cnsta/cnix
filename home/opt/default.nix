@@ -1,7 +1,6 @@
 {
   imports = [
     # shared apps
-    ./browsers
     ./discord
     ./utility
     ./alacritty
