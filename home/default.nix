@@ -23,6 +23,8 @@
       ./usr/share/git/cnst
       ./usr/share/shell/adam
       ./etc/hyprland/cnst
+      ./opt/browsers/firefox
+      ./opt/sops
       ./etc
       ./bin
       ./opt
@@ -33,6 +35,8 @@
       ./usr/share/git/toothpick
       ./usr/share/shell/toothpick
       ./bin/hyprland/toothpick
+      ./opt/browsers/firefox
+      ./opt/sops
       ./etc
       ./bin
       ./opt
