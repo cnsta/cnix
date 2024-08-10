@@ -28,7 +28,7 @@
           cssls.enable = true; # CSS
           tailwindcss.enable = true; # TailwindCSS
           html.enable = true; # HTML
-          astro.enable = true; # AstroJS
+          astro.enable = false; # AstroJS
           phpactor.enable = true; # PHP
           svelte.enable = false; # Svelte
           vuels.enable = false; # Vue

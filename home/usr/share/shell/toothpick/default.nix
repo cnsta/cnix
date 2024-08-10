@@ -12,8 +12,8 @@
       ll = "ls -l";
       nixupdate = "nh os switch -v -H toothpc";
       nixup = "nh os switch -H toothpc";
-      flakeupdate = "nh os switch -u -v -H toothpc";
-      flakeup = "nh os switch -u -H toothpc";
+      flakeupdate = "nh os switch -u -v -H toothpc && sudo nix run .#cleanup-boot";
+      flakeup = "nh os switch -u -H toothpc && sudo nix run .#cleanup-boot";
     };
     history = {
       size = 1000;
