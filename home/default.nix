@@ -3,46 +3,45 @@
   inputs,
   ...
 }: let
-  # get these into the module system
+  # Get these into the module system
   extraSpecialArgs = {inherit inputs self;};
 
+  # Define the shared imports
+  sharedImports = [
+    ./opt/browsers/firefox
+    ./etc
+    ./bin
+    ./opt
+    ./srv
+  ];
+
+  # Define homeImports for each profile, including sharedImports
   homeImports = {
-    "cnst@cnix" = [
-      ./usr/share/git/cnst
-      ./usr/share/shell/cnst
-      ./bin/hyprland/cnst
-      ./opt/browsers/firefox
-      ./opt/sops
-      ./etc
-      ./bin
-      ./opt
-      ./srv
-      ./profiles/cnst
-    ];
-    "adam@adampad" = [
-      ./usr/share/git/cnst
-      ./usr/share/shell/adam
-      ./etc/hyprland/cnst
-      ./opt/browsers/firefox
-      ./opt/sops
-      ./etc
-      ./bin
-      ./opt
-      ./srv
-      ./profiles/adam
-    ];
-    "toothpick@toothpc" = [
-      ./usr/share/git/toothpick
-      ./usr/share/shell/toothpick
-      ./bin/hyprland/toothpick
-      ./opt/browsers/firefox
-      ./opt/sops
-      ./etc
-      ./bin
-      ./opt
-      ./srv
-      ./profiles/toothpick
-    ];
+    "cnst@cnix" =
+      sharedImports
+      ++ [
+        ./bin/hyprland/cnst
+        ./usr/share/shell/cnst
+        ./usr/share/git/cnst
+        ./opt/sops
+        ./profiles/cnst
+      ];
+    "adam@adampad" =
+      sharedImports
+      ++ [
+        ./bin/hyprland/adam
+        ./usr/share/shell/adam
+        ./usr/share/git/cnst
+        ./profiles/adam
+      ];
+    "toothpick@toothpc" =
+      sharedImports
+      ++ [
+        ./bin/hyprland/toothpick
+        ./usr/share/git/toothpick
+        ./usr/share/shell/toothpick
+        ./profiles/toothpick
+      ];
   };
 
   inherit (inputs.hm.lib) homeManagerConfiguration;
