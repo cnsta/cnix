@@ -12,7 +12,7 @@ let
   adampad =
     shared
     ++ [
-      ./bin/android
+      ./opt/android
       ./srv/blueman
     ];
   cnix =
