@@ -39,6 +39,7 @@
       rofi.enable = false;
       waybar.enable = true;
       yazi.enable = true;
+      misc.enable = true;
     };
     userd = {
       sops.enable = true;

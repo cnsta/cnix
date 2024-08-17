@@ -7,6 +7,7 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
+      nixmodules = "nvim /home/cnst/.nix-config/home/profiles/cnst/modules.nix";
       nixclean = "sudo nix run .#cleanup-boot";
       nixdev = "nix develop ~/.nix-config -c $SHELL";
       nixconfig = "cd /home/cnst/.nix-config/";

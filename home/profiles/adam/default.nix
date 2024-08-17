@@ -11,26 +11,9 @@
     extraOutputsToInstall = ["doc" "devdoc"];
 
     packages = with pkgs; [
-      # misc.gui
-      virt-manager
-      xfce.thunar
-
-      # misc.tui
-      ranger
-      xcur2png
-
       # misc.system
       brightnessctl
       bun
-      adwaita-icon-theme
-      qt5.qtwayland
-      qt6.qtwayland
-      #  thefuck
-      wireguard-tools
-      wl-clipboard
-      wpa_supplicant
-      xfce.thunar-archive-plugin
-      xfce.thunar-volman
     ];
     sessionVariables = {
       BROWSER = "firefox";
