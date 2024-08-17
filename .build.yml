@@ -1,6 +1,6 @@
 image: alpine/edge
 secrets:
-  - "cat ${config.sops.secrets.ssh_user.path}"
+  - 3f6a4bb6-d012-403b-9c70-fd6ba554dc4a
 sources:
   - git@git.sr.ht:~canasta/cnix
 environment:

@@ -1,5 +1,5 @@
 {
-  description = "My (i.e. fufexan's) NixOS flake configuration test";
+  description = "My (i.e. fufexan's) NixOS flake configuration";
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
