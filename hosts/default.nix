@@ -1,20 +1,32 @@
 # Yanked from fufexan!
 {
-  self,
   inputs,
   homeImports,
+  self,
   ...
 }: {
   flake.nixosConfigurations = let
+    # custom paths
+    userConfig = "${self}/home";
+    systemConfig = "${self}/system";
+    hostConfig = "${self}/hosts";
+
+    cnstConfig = "${self}/home/profiles/cnst";
+    toothpickConfig = "${self}/home/profiles/toothpick";
+    adamConfig = "${self}/home/profiles/adam";
+
+    userModules = "${self}/home/modules";
+    systemModules = "${self}/system/modules";
+
     # shorten paths
     inherit (inputs.nixpkgs.lib) nixosSystem;
-    mod = "${self}/system";
+    mod = "${systemConfig}";
 
     # get the basic config to build on top of
-    inherit (import "${self}/system") adampad cnix toothpc;
+    inherit (import "${systemConfig}") adampad cnix toothpc;
 
     # get these into the module system
-    specialArgs = {inherit inputs self;};
+    specialArgs = {inherit inputs self userConfig systemConfig hostConfig cnstConfig toothpickConfig adamConfig userModules systemModules;};
   in {
     cnix = nixosSystem {
       inherit specialArgs;

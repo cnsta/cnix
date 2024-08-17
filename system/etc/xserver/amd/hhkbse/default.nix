@@ -1,5 +1,5 @@
-{self, ...}: let
-  path = "${self}/hosts/cnix/xkb/symbols";
+{hostConfig, ...}: let
+  path = "${hostConfig}/cnix/xkb/symbols";
 in {
   services.xserver = {
     enable = true;
