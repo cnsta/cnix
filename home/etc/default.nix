@@ -4,7 +4,6 @@
     ./dconf
     ./polkit
     ./gtk
-    ./utility
     ./xdg
   ];
 }

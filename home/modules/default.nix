@@ -30,6 +30,7 @@
     "${userModules}/utils/rofi"
     "${userModules}/utils/waybar"
     "${userModules}/utils/yazi"
+    "${userModules}/utils/misc"
     # "${userModules}/wm"
   ];
 }
