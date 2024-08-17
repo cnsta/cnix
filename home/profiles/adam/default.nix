@@ -1,4 +1,9 @@
 {pkgs, ...}: {
+  imports = [
+    ./modules.nix
+    ./git.nix
+    ./shell.nix
+  ];
   home = {
     username = "adam";
     homeDirectory = "/home/adam";
