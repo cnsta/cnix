@@ -11,25 +11,9 @@
     extraOutputsToInstall = ["doc" "devdoc"];
 
     packages = with pkgs; [
-      # misc.gui
-      virt-manager
-      xfce.thunar
-
-      # misc.tui
-      ranger
-      xcur2png
-
-      # misc.system
-      adwaita-icon-theme
+      # user specific pkgs
+      filezilla
       egl-wayland
-      qt5.qtwayland
-      qt6.qtwayland
-      #  thefuck
-      wireguard-tools
-      wl-clipboard
-      wpa_supplicant
-      xfce.thunar-archive-plugin
-      xfce.thunar-volman
     ];
     sessionVariables = {
       BROWSER = "firefox";
@@ -37,10 +21,14 @@
       TERM = "foot";
 
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/toothpick/.steam/root/compatibilitytools.d"; # proton and steam compat
-      QT_QPA_PLATFORM = "wayland-egl";
-      SDL_VIDEODRIVER = "wayland";
       XDG_SESSION_TYPE = "wayland";
-      ELECTRON_OZONE_PLATFORM_HINT = "auto";
+      NIXOS_OZONE_WL = "1";
+      MOZ_ENABLE_WAYLAND = "1";
+      MOZ_DISABLE_RDD_SANDBOX = "1";
+      WLR_DRM_NO_ATOMIC = "1";
+      WLR_NO_HARDWARE_CURSORS = "1";
+      LIBVA_DRIVER_NAME = "nvidia";
+      EGL_PLATFORM = "wayland";
     };
   };
   # disable manuals as nmd fails to build often
