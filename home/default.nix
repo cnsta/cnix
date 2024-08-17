@@ -8,11 +8,8 @@
 
   # Define the shared imports
   sharedImports = [
-    ./opt/browsers/firefox
+    ./modules
     ./etc
-    ./bin
-    ./opt
-    ./srv
   ];
 
   # Define homeImports for each profile, including sharedImports
@@ -20,26 +17,16 @@
     "cnst@cnix" =
       sharedImports
       ++ [
-        ./bin/hyprland/cnst
-        ./usr/share/shell/cnst
-        ./usr/share/git/cnst
-        ./opt/sops
         ./profiles/cnst
       ];
     "adam@adampad" =
       sharedImports
       ++ [
-        ./bin/hyprland/adam
-        ./usr/share/shell/adam
-        ./usr/share/git/cnst
         ./profiles/adam
       ];
     "toothpick@toothpc" =
       sharedImports
       ++ [
-        ./bin/hyprland/toothpick
-        ./usr/share/git/toothpick
-        ./usr/share/shell/toothpick
         ./profiles/toothpick
       ];
   };

@@ -13,10 +13,10 @@
         mesa
 
         # vulkan
-        vulkan-tools
-        vulkan-loader
-        vulkan-validation-layers
-        vulkan-extension-layer
+        # vulkan-tools
+        # vulkan-loader
+        # vulkan-validation-layers
+        # vulkan-extension-layer
       ];
       extraPackages32 = with pkgs.pkgsi686Linux; [
         vaapiVdpau
