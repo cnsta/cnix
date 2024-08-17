@@ -32,6 +32,7 @@ in {
       "rtkit"
       "users"
       "plocate"
+      "fuse"
     ];
   };
 

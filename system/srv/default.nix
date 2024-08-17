@@ -10,7 +10,7 @@
     ./mullvad
     ./openssh
     ./power
-    ./samba
+    # ./samba
     ./udisks
   ];
 }

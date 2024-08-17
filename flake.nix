@@ -9,6 +9,7 @@
         ./home
         ./hosts
       ];
+
       perSystem = {pkgs, ...}: {
         devShells = import ./system/nix/shell {inherit pkgs;};
         formatter = pkgs.alejandra;
@@ -16,7 +17,7 @@
         packages.cleanup-boot = pkgs.buildFHSUserEnv {
           name = "cleanup-boot";
           targetPkgs = pkgs: [pkgs.bash];
-          runScript = ./.cleanup-boot.sh;
+          runScript = ./.scripts/cleanup-boot.sh;
         };
       };
     };
@@ -90,6 +91,10 @@
     microfetch.url = "github:NotAShelf/microfetch";
     sops-nix = {
       url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ags = {
+      url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
