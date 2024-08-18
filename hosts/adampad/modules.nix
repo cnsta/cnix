@@ -1,14 +1,5 @@
 {
   modules = {
-    network = {
-      enable = true;
-      hostName = "adampad";
-      interfaces = {
-        "enp7s0" = {
-          allowedTCPPorts = [22 80 443];
-        };
-      };
-    };
     gaming = {
       steam.enable = false;
       gamescope.enable = false;
@@ -22,12 +13,30 @@
       gnome.enable = false;
       hyprland.enable = true;
     };
-    utils = {
-      android.enable = true;
-      anyrun.enable = true;
-      corectrl.enable = false;
-      microfetch.enable = true;
-      nix-ld.enable = false;
+    hardware = {
+      bluetooth.enable = true;
+      logitech.enable = false;
+      graphics = {
+        amd.enable = true;
+        nvidia.enable = false;
+      };
+    };
+    network = {
+      enable = true;
+      hostName = "adampad";
+      interfaces = {
+        "enp7s0" = {
+          allowedTCPPorts = [22 80 443];
+        };
+      };
+    };
+    studio = {
+      blender = {
+        enable = false;
+        hip = false;
+      };
+      gimp.enable = false;
+      inkscape.enable = false;
     };
     sysd = {
       blueman.enable = true;
@@ -46,21 +55,12 @@
       udisks.enable = true;
       xserver.amd.enable = true;
     };
-    hardware = {
-      bluetooth.enable = true;
-      logitech.enable = false;
-      graphics = {
-        amd.enable = true;
-        nvidia.enable = false;
-      };
-    };
-    studio = {
-      blender = {
-        enable = false;
-        hip = false;
-      };
-      gimp.enable = false;
-      inkscape.enable = false;
+    utils = {
+      android.enable = true;
+      anyrun.enable = true;
+      corectrl.enable = false;
+      microfetch.enable = true;
+      nix-ld.enable = false;
     };
   };
 }

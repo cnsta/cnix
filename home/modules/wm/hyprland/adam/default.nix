@@ -1,16 +1,37 @@
-{inputs, ...}: {
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  userModules,
+  ...
+}: let
+  inherit (lib) mkIf mkEnableOption mkDefault;
+  cfg = config.modules.wm.hyprland.adam;
+in {
   imports = [
-    inputs.hyprland.homeManagerModules.default
-    ./appearance.nix
-    ./inputs.nix
-    ./keybinds.nix
-    ./rules.nix
-    ./startup.nix
+    "${userModules}/wm/hyprland/adam/appearance.nix"
+    "${userModules}/wm/hyprland/adam/inputs.nix"
+    "${userModules}/wm/hyprland/adam/keybinds.nix"
+    "${userModules}/wm/hyprland/adam/rules.nix"
+    "${userModules}/wm/hyprland/adam/startup.nix"
   ];
-  config = {
+
+  options = {
+    modules.wm.hyprland.adam.enable = mkEnableOption "Enable Hyprland";
+  };
+
+  config = mkIf cfg.enable {
+    modules.wm.hyprland.adam = {
+      appearance.enable = mkDefault cfg.enable;
+      inputs.enable = mkDefault cfg.enable;
+      keybinds.enable = mkDefault cfg.enable;
+      rules.enable = mkDefault cfg.enable;
+      startup.enable = mkDefault cfg.enable;
+    };
     wayland.windowManager.hyprland = {
       enable = true;
-      xwayland.enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.default;
       systemd = {
         variables = ["--all"];
         extraCommands = [
