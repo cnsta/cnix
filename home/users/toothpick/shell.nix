@@ -11,14 +11,14 @@
       umod = "nvim /home/toothpick/.nix-config/home/users/toothpick/modules.nix";
       systemmodules = "nvim /home/toothpick/.nix-config/hosts/toothpc/modules.nix";
       smod = "nvim /home/toothpick/.nix-config/hosts/toothpc/modules.nix";
-      nixclean = "sudo nix run .#cleanup-boot";
+      nixclean = "sudo nix run /home/toothpick/.nix-config#cleanup-boot";
       nixdev = "nix develop ~/.nix-config -c $SHELL";
       nixconfig = "cd /home/toothpick/.nix-config/";
       ll = "ls -l";
-      nixupdate = "nh os switch -v -H toothpc && sudo nix run .#cleanup-boot";
-      nixup = "nh os switch -H toothpc && sudo nix run .#cleanup-boot";
-      flakeupdate = "nh os switch -u -v -H toothpc && sudo nix run .#cleanup-boot";
-      flakeup = "nh os switch -u -H toothpc && sudo nix run .#cleanup-boot";
+      nixupdate = "nh os switch -v -H toothpc && sudo nix run /home/toothpick/.nix-config#cleanup-boot";
+      nixup = "nh os switch -H toothpc && sudo nix run /home/toothpick/.nix-config#cleanup-boot";
+      flakeupdate = "nh os switch -u -v -H toothpc && sudo nix run /home/toothpick/.nix-config#cleanup-boot";
+      flakeup = "nh os switch -u -H toothpc && sudo nix run /home/toothpick/.nix-config#cleanup-boot";
     };
     history = {
       size = 1000;
