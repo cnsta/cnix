@@ -29,6 +29,7 @@ in {
           libvdpau-va-gl
           intel-media-driver
           nvidia-vaapi-driver
+          egl-wayland
         ];
       };
       nvidia = {
