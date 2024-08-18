@@ -11,14 +11,14 @@
       umod = "nvim /home/adam/.nix-config/home/users/adam/modules.nix";
       systemmodules = "nvim /home/adam/.nix-config/hosts/adampad/modules.nix";
       smod = "nvim /home/adam/.nix-config/hosts/adampad/modules.nix";
-      nixclean = "sudo nix run .#cleanup-boot";
+      nixclean = "sudo nix run /home/adam/.nix-config#cleanup-boot";
       nixdev = "nix develop ~/.nix-config -c $SHELL";
       nixconfig = "cd /home/adam/.nix-config/";
       ll = "ls -l";
-      nixupdate = "nh os switch -v -H adampad && sudo nix run .#cleanup-boot";
-      nixup = "nh os switch -H adampad && sudo nix run .#cleanup-boot";
-      flakeupdate = "nh os switch -u -v -H adampad && sudo nix run .#cleanup-boot";
-      flakeup = "nh os switch -u -H adampad && sudo nix run .#cleanup-boot";
+      nixupdate = "nh os switch -v -H adampad && sudo nix run /home/adam/.nix-config#cleanup-boot";
+      nixup = "nh os switch -H adampad && sudo nix run /home/adam/.nix-config#cleanup-boot";
+      flakeupdate = "nh os switch -u -v -H adampad && sudo nix run /home/adam/.nix-config#cleanup-boot";
+      flakeup = "nh os switch -u -H adampad && sudo nix run /home/adam/.nix-config#cleanup-boot";
     };
     history = {
       size = 1000;

@@ -11,14 +11,14 @@
       umod = "nvim /home/cnst/.nix-config/home/users/cnst/modules.nix";
       systemmodules = "nvim /home/cnst/.nix-config/hosts/cnix/modules.nix";
       smod = "nvim /home/cnst/.nix-config/hosts/cnix/modules.nix";
-      nixclean = "sudo nix run .#cleanup-boot";
+      nixclean = "sudo nix run /home/cnst/.nix-config#cleanup-boot";
       nixdev = "nix develop ~/.nix-config -c $SHELL";
       nixconfig = "cd /home/cnst/.nix-config/";
       ll = "ls -l";
-      nixupdate = "nh os switch -v -H cnix && sudo nix run .#cleanup-boot";
-      nixup = "nh os switch -H cnix && sudo nix run .#cleanup-boot";
-      flakeupdate = "nh os switch -u -v -H cnix && sudo nix run .#cleanup-boot";
-      flakeup = "nh os switch -u -H cnix && sudo nix run .#cleanup-boot";
+      nixupdate = "nh os switch -v -H cnix && sudo nix run /home/cnst/.nix-config#cleanup-boot";
+      nixup = "nh os switch -H cnix && sudo nix run /home/cnst/.nix-config#cleanup-boot";
+      flakeupdate = "nh os switch -u -v -H cnix && sudo nix run /home/cnst/.nix-config#cleanup-boot";
+      flakeup = "nh os switch -u -H cnix && sudo nix run /home/cnst/.nix-config#cleanup-boot";
     };
     history = {
       size = 1000;

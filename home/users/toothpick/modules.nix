@@ -22,7 +22,10 @@
       zellij.enable = false;
     };
     userd = {
-      sops.enable = false;
+      sops = {
+        enable = false;
+        toothpick = false;
+      };
       copyq.enable = true;
       mako.enable = true;
       udiskie.enable = true;
