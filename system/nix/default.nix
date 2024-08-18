@@ -12,10 +12,12 @@
   ];
 
   environment = {
-    systemPackages = [
-      pkgs.git
-      pkgs.scx
-      pkgs.stow
+    systemPackages = with pkgs; [
+      git
+      scx
+      stow
+      winetricks
+      protonup
     ];
     localBinInPath = true;
   };

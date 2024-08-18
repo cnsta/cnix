@@ -12,22 +12,22 @@
     ./etc
   ];
 
-  # Define homeImports for each profile, including sharedImports
+  # Define homeImports for each user, including sharedImports
   homeImports = {
     "cnst@cnix" =
       sharedImports
       ++ [
-        ./profiles/cnst
+        ./users/cnst
       ];
     "adam@adampad" =
       sharedImports
       ++ [
-        ./profiles/adam
+        ./users/adam
       ];
     "toothpick@toothpc" =
       sharedImports
       ++ [
-        ./profiles/toothpick
+        ./users/toothpick
       ];
   };
 

@@ -38,6 +38,7 @@ in {
 
   imports = [
     ./hardware-configuration.nix
+    ./modules.nix
   ];
 
   boot = {
