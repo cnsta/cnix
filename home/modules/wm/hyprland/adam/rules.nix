@@ -7,7 +7,7 @@
   cfg = config.modules.wm.hyprland.adam.rules;
 in {
   options = {
-    modules.wm.hyprland.toothpick.adam.enable = mkEnableOption "Enables window rule settings in Hyprland";
+    modules.wm.hyprland.adam.rules.enable = mkEnableOption "Enables window rule settings in Hyprland";
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
