@@ -2,7 +2,8 @@
   imports = [
     # shared imports
     ./dconf
-    ./fuse
+    ./locale
+    ./fonts
     ./security
     ./xdg
     ./zram
