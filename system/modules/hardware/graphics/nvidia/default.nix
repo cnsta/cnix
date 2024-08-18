@@ -4,12 +4,20 @@
   lib,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption;
+  inherit (lib) types mkIf mkEnableOption mkOption;
   cfg = config.modules.hardware.graphics.nvidia;
 in {
   options = {
-    modules.hardware.graphics.nvidia.enable = mkEnableOption "Enables NVidia graphics";
+    modules.hardware.graphics.nvidia = {
+      enable = mkEnableOption "Enables NVidia graphics";
+      package = mkOption {
+        type = types.enum ["stable" "beta"];
+        default = "stable";
+        description = "Choose between the stable or beta NVidia driver package";
+      };
+    };
   };
+
   config = mkIf cfg.enable {
     hardware = {
       graphics = {
@@ -24,8 +32,10 @@ in {
         ];
       };
       nvidia = {
-        package = config.boot.kernelPackages.nvidiaPackages.beta;
-        # package = config.boot.kernelPackages.nvidiaPackages.stable;
+        package =
+          if cfg.package == "beta"
+          then config.boot.kernelPackages.nvidiaPackages.beta
+          else config.boot.kernelPackages.nvidiaPackages.stable;
         modesetting.enable = true;
         powerManagement = {
           enable = false;
