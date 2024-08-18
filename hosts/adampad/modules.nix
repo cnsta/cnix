@@ -25,7 +25,7 @@
       enable = true;
       hostName = "adampad";
       interfaces = {
-        "enp7s0" = {
+        "wlp6s0" = {
           allowedTCPPorts = [22 80 443];
         };
       };
