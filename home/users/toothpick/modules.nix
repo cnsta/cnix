@@ -1,27 +1,15 @@
 {
   modules = {
-    wm = {
-      hyprland = {
-        cnst.enable = false;
-        toothpick.enable = true;
-        # adam.enable = false;
-      };
-      utils = {
-        hypridle.enable = true;
-        hyprlock.enable = true;
-        hyprpaper.enable = true;
-      };
-    };
     browsers = {
       firefox.enable = true;
       chromium.enable = false;
     };
+    comm = {
+      discord.enable = true;
+    };
     devtools = {
       neovim.enable = true;
       vscode.enable = true;
-    };
-    comm = {
-      discord.enable = true;
     };
     gaming = {
       lutris.enable = false;
@@ -33,6 +21,12 @@
       kitty.enable = true;
       zellij.enable = false;
     };
+    userd = {
+      sops.enable = false;
+      copyq.enable = true;
+      mako.enable = true;
+      udiskie.enable = true;
+    };
     utils = {
       ags.enable = false;
       anyrun.enable = false;
@@ -41,11 +35,17 @@
       yazi.enable = true;
       misc.enable = true;
     };
-    userd = {
-      sops.enable = false;
-      copyq.enable = true;
-      mako.enable = true;
-      udiskie.enable = true;
+    wm = {
+      hyprland = {
+        cnst.enable = false;
+        toothpick.enable = true;
+        adam.enable = false;
+      };
+      utils = {
+        hypridle.enable = true;
+        hyprlock.enable = true;
+        hyprpaper.enable = true;
+      };
     };
   };
 }
