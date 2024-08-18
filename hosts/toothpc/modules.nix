@@ -50,7 +50,10 @@
       pipewire.enable = true;
       powerd.enable = true;
       samba.enable = false;
-      sops.enable = false;
+      sops = {
+        enable = false;
+        toothpc = false;
+      };
       ssh.enable = true;
       udisks.enable = true;
       xserver.nvidia.enable = true;

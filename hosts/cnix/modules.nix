@@ -50,7 +50,10 @@
       pipewire.enable = true;
       powerd.enable = true;
       samba.enable = false;
-      sops.enable = true;
+      sops = {
+        enable = true;
+        cnix = true;
+      };
       ssh.enable = true;
       udisks.enable = true;
       xserver.amd.hhkbse.enable = true;
