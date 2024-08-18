@@ -1,14 +1,5 @@
 {
   modules = {
-    network = {
-      enable = true;
-      hostName = "toothpc";
-      interfaces = {
-        "enp4s0" = {
-          allowedTCPPorts = [22 80 443];
-        };
-      };
-    };
     gaming = {
       steam.enable = true;
       gamescope.enable = true;
@@ -22,12 +13,30 @@
       gnome.enable = false;
       hyprland.enable = true;
     };
-    utils = {
-      android.enable = false;
-      anyrun.enable = true;
-      corectrl.enable = true;
-      microfetch.enable = true;
-      nix-ld.enable = false;
+    hardware = {
+      bluetooth.enable = false;
+      logitech.enable = true;
+      graphics = {
+        amd.enable = false;
+        nvidia.enable = true;
+      };
+    };
+    network = {
+      enable = true;
+      hostName = "toothpc";
+      interfaces = {
+        "enp4s0" = {
+          allowedTCPPorts = [22 80 443];
+        };
+      };
+    };
+    studio = {
+      blender = {
+        enable = false;
+        hip = false;
+      };
+      gimp.enable = true;
+      inkscape.enable = true;
     };
     sysd = {
       blueman.enable = false;
@@ -46,21 +55,12 @@
       udisks.enable = true;
       xserver.nvidia.enable = true;
     };
-    hardware = {
-      bluetooth.enable = false;
-      logitech.enable = true;
-      graphics = {
-        amd.enable = false;
-        nvidia.enable = true;
-      };
-    };
-    studio = {
-      blender = {
-        enable = false;
-        hip = false;
-      };
-      gimp.enable = true;
-      inkscape.enable = true;
+    utils = {
+      android.enable = true;
+      anyrun.enable = true;
+      corectrl.enable = true;
+      microfetch.enable = true;
+      nix-ld.enable = false;
     };
   };
 }
