@@ -18,7 +18,10 @@
       logitech.enable = true;
       graphics = {
         amd.enable = false;
-        nvidia.enable = true;
+        nvidia = {
+          enable = true;
+          package = "stable"; # set to stable or beta depending on preference
+        };
       };
     };
     network = {
@@ -61,7 +64,7 @@
     utils = {
       android.enable = true;
       anyrun.enable = true;
-      corectrl.enable = true;
+      corectrl.enable = false;
       microfetch.enable = true;
       nix-ld.enable = false;
     };
