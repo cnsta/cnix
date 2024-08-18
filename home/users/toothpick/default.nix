@@ -13,7 +13,6 @@
     packages = with pkgs; [
       # user specific pkgs
       filezilla
-      egl-wayland
     ];
     sessionVariables = {
       BROWSER = "firefox";
@@ -23,7 +22,7 @@
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/toothpick/.steam/root/compatibilitytools.d"; # proton and steam compat
       LIBVA_DRIVER_NAME = "nvidia";
       XDG_SESSION_TYPE = "wayland";
-      # GBM_BACKEND = "nvidia-drm";
+      GBM_BACKEND = "nvidia-drm";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       NVD_BACKEND = "direct";
     };
