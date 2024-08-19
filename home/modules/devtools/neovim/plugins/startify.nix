@@ -1,32 +1,37 @@
+{ lib
+, config
+, ...
+}:
+let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.neovim.plugins.startify;
+in
 {
-  programs.nixvim.plugins.startify = {
-    enable = true;
+  options = {
+    modules.devtools.neovim.plugins.startify.enable = mkEnableOption "Enables Startify plugin for Neovim";
+  };
 
-    settings = {
-      custom_header = [
-        ""
-        "     ███╗   ██╗██╗██╗  ██╗██╗   ██╗██╗███╗   ███╗"
-        "     ████╗  ██║██║╚██╗██╔╝██║   ██║██║████╗ ████║"
-        "     ██╔██╗ ██║██║ ╚███╔╝ ██║   ██║██║██╔████╔██║"
-        "     ██║╚██╗██║██║ ██╔██╗ ╚██╗ ██╔╝██║██║╚██╔╝██║"
-        "     ██║ ╚████║██║██╔╝ ██╗ ╚████╔╝ ██║██║ ╚═╝ ██║"
-        "     ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝"
-      ];
+  config = mkIf cfg.enable {
+    programs.nixvim.plugins.startify = {
+      enable = true;
 
-      # When opening a file or bookmark, change to its directory.
-      change_to_dir = false;
+      settings = {
+        custom_header = [
+          ""
+          "     ███╗   ██╗██╗██╗  ██╗██╗   ██╗██╗███╗   ███╗"
+          "     ████╗  ██║██║╚██╗██╔╝██║   ██║██║████╗ ████║"
+          "     ██╔██╗ ██║██║ ╚███╔╝ ██║   ██║██║██╔████╔██║"
+          "     ██║╚██╗██║██║ ██╔██╗ ╚██╗ ██╔╝██║██║╚██╔╝██║"
+          "     ██║ ╚████║██║██╔╝ ██╗ ╚████╔╝ ██║██║ ╚═╝ ██║"
+          "     ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝"
+        ];
 
-      # By default, the fortune header uses ASCII characters, because they work for everyone.
-      # If you set this option to 1 and your 'encoding' is "utf-8", Unicode box-drawing characters will
-      # be used instead.
-      use_unicode = true;
-
-      lists = [{type = "dir";}];
-      files_number = 30;
-
-      skiplist = [
-        "flake.lock"
-      ];
+        change_to_dir = false;
+        use_unicode = true;
+        lists = [{ type = "dir"; }];
+        files_number = 30;
+        skiplist = [ "flake.lock" ];
+      };
     };
   };
 }
