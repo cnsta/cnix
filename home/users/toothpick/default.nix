@@ -17,7 +17,7 @@
     sessionVariables = {
       BROWSER = "firefox";
       EDITOR = "nvim";
-      TERM = "foot";
+      TERM = "xterm-256color";
 
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/toothpick/.steam/root/compatibilitytools.d"; # proton and steam compat
       LIBVA_DRIVER_NAME = "nvidia";
