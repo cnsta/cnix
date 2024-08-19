@@ -16,7 +16,7 @@
     sessionVariables = {
       BROWSER = "firefox";
       EDITOR = "nvim";
-      TERM = "kitty";
+      TERM = "xterm-256color";
 
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/cnst/.steam/root/compatibilitytools.d"; # proton and steam compat
       QT_QPA_PLATFORM = "wayland";

@@ -1,11 +1,12 @@
-{
-  lib,
-  config,
-  ...
-}: let
+{ lib
+, config
+, ...
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.modules.wm.hyprland.toothpick.inputs;
-in {
+in
+{
   options = {
     modules.wm.hyprland.toothpick.inputs.enable = mkEnableOption "Enables input settings in Hyprland";
   };
@@ -48,7 +49,7 @@ in {
         workspace_swipe_create_new = true;
       };
       misc = {
-        vrr = 2;
+        vrr = 0;
         mouse_move_enables_dpms = 1;
         key_press_enables_dpms = 0;
         force_default_wallpaper = 0;
@@ -59,8 +60,8 @@ in {
         force_zero_scaling = false;
       };
       render = {
-        explicit_sync = 2;
-        explicit_sync_kms = 2;
+        explicit_sync = 0;
+        explicit_sync_kms = 0;
         direct_scanout = false;
       };
       cursor = {

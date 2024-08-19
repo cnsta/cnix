@@ -1,6 +1,18 @@
+{ lib
+, config
+, ...
+}:
+let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.neovim.plugins.harpoon;
+in
 {
-  programs.nixvim = {
-    plugins.harpoon = {
+  options = {
+    modules.devtools.neovim.plugins.harpoon.enable = mkEnableOption "Enables Harpoon plugin for Neovim";
+  };
+
+  config = mkIf cfg.enable {
+    programs.nixvim.plugins.harpoon = {
       enable = true;
 
       keymapsSilent = true;

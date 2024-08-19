@@ -64,6 +64,8 @@
       corectrl.enable = true;
       microfetch.enable = true;
       nix-ld.enable = false;
+      misc.enable = true;
+      npm.enable = true;
     };
   };
 }
