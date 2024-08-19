@@ -1,27 +1,17 @@
-{ lib
-, config
-, ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.telescope;
-in
 {
-  options = {
-    modules.devtools.neovim.plugins.telescope.enable = mkEnableOption "Enables Telescope plugin for Neovim";
-  };
-
-  config = mkIf cfg.enable {
-    programs.nixvim.plugins.telescope = {
+  programs.nixvim = {
+    plugins.telescope = {
       enable = true;
 
       keymaps = {
+        # Find files using Telescope command-line sugar.
         "<leader>ff" = "find_files";
         "<leader>fg" = "live_grep";
         "<leader>b" = "buffers";
         "<leader>fh" = "help_tags";
         "<leader>fd" = "diagnostics";
 
+        # FZF like bindings
         "<C-p>" = "git_files";
         "<leader>p" = "oldfiles";
         "<C-f>" = "live_grep";

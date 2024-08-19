@@ -18,7 +18,7 @@
     sessionVariables = {
       BROWSER = "firefox";
       EDITOR = "nvim";
-      TERM = "foot";
+      TERM = "xterm-256color";
 
       QT_QPA_PLATFORM = "wayland";
       SDL_VIDEODRIVER = "wayland";

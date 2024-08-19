@@ -36,5 +36,7 @@
     "${systemModules}/utils/corectrl"
     "${systemModules}/utils/microfetch"
     "${systemModules}/utils/nix-ld"
+    "${systemModules}/utils/misc"
+    "${systemModules}/utils/npm"
   ];
 }
