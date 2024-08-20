@@ -20,7 +20,7 @@
         amd.enable = false;
         nvidia = {
           enable = true;
-          package = "beta"; # set to stable or beta depending on preference
+          package = "stable"; # set to stable or beta depending on preference
         };
       };
     };

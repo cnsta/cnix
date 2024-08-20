@@ -54,7 +54,7 @@ in {
         package =
           if cfg.package == "beta"
           then config.boot.kernelPackages.nvidiaPackages.beta
-          else config.boot.kernelPackages.nvidiaPackages.stable;
+          else config.boot.kernelPackages.nvidiaPackages.production;
         modesetting.enable = true;
         powerManagement = {
           enable = false;
