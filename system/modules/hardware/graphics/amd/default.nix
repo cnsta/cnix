@@ -24,8 +24,8 @@ in {
           # mesa
           mesa
 
-          vulkan
-          # vulkan-tools
+          # vulkan
+          vulkan-tools
           # vulkan-loader
           # vulkan-validation-layers
           # vulkan-extension-layer
