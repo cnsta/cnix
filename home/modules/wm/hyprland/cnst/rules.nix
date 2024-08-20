@@ -17,6 +17,9 @@ in {
         "size 843 650,initialTitle:(floatcal)"
         "move 100%-w-20 40,initialTitle:(floatcal)"
         #windowrulev2 = move 1708 32,class:(floatcal)
+        "float,class:(org.keepassxc.KeePassXC)"
+        "size 843 500,class:(org.keepassxc.KeePassXC)"
+        "move 100%-w-20 40,class:(org.keepassxc.KeePassXC)"
 
         # RANGER/NNN SETTINGS
         "float,class:(floatranger)"
@@ -27,8 +30,6 @@ in {
         # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
         "suppressevent maximize, class:.* # You'll probably like this."
         #windowrulev2 = noshadow, floating:0
-        "float,class:^(org.keepassxc.KeePassXC)$"
-        "center,class:^(org.keepassxc.KeePassXC)$"
         "float,class:^(imv)$"
         "float,class:^(com.github.hluk.copyq)$"
         "float,class:^(blueman-manager)$"
