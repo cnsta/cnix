@@ -15,6 +15,7 @@ in {
       nodejs_22
       ripgrep
       fd
+      beekeeper-studio
     ];
   };
 }
