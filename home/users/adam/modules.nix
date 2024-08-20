@@ -11,7 +11,7 @@
       neovim = {
         enable = true;
         plugins = {
-          ai.enable = true;
+          ai.enable = false;
           barbar.enable = true;
           comment.enable = true;
           conform-nvim.enable = true;
