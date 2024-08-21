@@ -47,8 +47,14 @@
       ZSH_THEME_RUBY_PROMPT_PREFIX="%F{167}‹"
       ZSH_THEME_RUBY_PROMPT_SUFFIX="›%f"
 
+      # Check if we're in a nix-shell or nix develop environment
+      if [[ -n "$IN_NIX_SHELL" ]]; then
+      PROMPT='%F{143}%~%f $(git_prompt_info)$(virtualenv_prompt_info)
+      %F{red}󰫱󰫲󰬃%f %F{143}$ '
+      else
       PROMPT='%F{143}%~%f $(git_prompt_info)$(virtualenv_prompt_info)
       %F{143}$ '
+      fi
 
       RPROMPT='$(ruby_prompt_info)'
 
