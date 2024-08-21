@@ -1,14 +1,13 @@
-{ lib
-, config
-, ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.lualine;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.nixvim.plugins.lualine;
+in {
   options = {
-    modules.devtools.neovim.plugins.lualine.enable = mkEnableOption "Enables Lualine plugin for Neovim";
+    modules.devtools.nixvim.plugins.lualine.enable = mkEnableOption "Enables Lualine plugin for nixvim";
   };
 
   config = mkIf cfg.enable {
@@ -18,9 +17,9 @@ in
       globalstatus = true;
 
       sections = {
-        lualine_a = [ "mode" ];
-        lualine_b = [ "branch" ];
-        lualine_c = [ "filename" "diff" ];
+        lualine_a = ["mode"];
+        lualine_b = ["branch"];
+        lualine_c = ["filename" "diff"];
 
         lualine_x = [
           "diagnostics"

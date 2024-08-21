@@ -1,14 +1,13 @@
-{ lib
-, config
-, ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.harpoon;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.nixvim.plugins.harpoon;
+in {
   options = {
-    modules.devtools.neovim.plugins.harpoon.enable = mkEnableOption "Enables Harpoon plugin for Neovim";
+    modules.devtools.nixvim.plugins.harpoon.enable = mkEnableOption "Enables Harpoon plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

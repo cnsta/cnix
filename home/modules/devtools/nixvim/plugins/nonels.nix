@@ -1,21 +1,20 @@
-{ lib
-, config
-, ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.none-ls;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.nixvim.plugins.none-ls;
+in {
   options = {
-    modules.devtools.neovim.plugins.none-ls.enable = mkEnableOption "Enables None-LS plugin for Neovim";
+    modules.devtools.nixvim.plugins.none-ls.enable = mkEnableOption "Enables None-LS plugin for nixvim";
   };
 
   config = mkIf cfg.enable {
     programs.nixvim.plugins.none-ls = {
       enable = true;
       settings = {
-        cmd = [ "bash -c nvim" ];
+        cmd = ["bash -c nvim"];
         debug = true;
       };
       sources = {

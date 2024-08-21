@@ -4,11 +4,11 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.lsp;
+  cfg = config.modules.devtools.nixvim.plugins.lsp;
 in {
   options = {
-    modules.devtools.neovim.plugins.lsp = {
-      enable = mkEnableOption "Enables LSP support for Neovim";
+    modules.devtools.nixvim.plugins.lsp = {
+      enable = mkEnableOption "Enables LSP support for nixvim";
       servers = {
         cssls.enable = mkEnableOption "Enable CSS LSP";
         tailwindcss.enable = mkEnableOption "Enable TailwindCSS LSP";

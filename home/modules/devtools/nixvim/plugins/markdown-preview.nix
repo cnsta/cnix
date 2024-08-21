@@ -1,14 +1,13 @@
-{ lib
-, config
-, ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.markdown-preview;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.nixvim.plugins.markdown-preview;
+in {
   options = {
-    modules.devtools.neovim.plugins.markdown-preview.enable = mkEnableOption "Enables Markdown Preview plugin for Neovim";
+    modules.devtools.nixvim.plugins.markdown-preview.enable = mkEnableOption "Enables Markdown Preview plugin for nixvim";
   };
 
   config = mkIf cfg.enable {
