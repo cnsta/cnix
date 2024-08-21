@@ -1,14 +1,13 @@
-{ lib
-, config
-, ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.efm;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.nixvim.plugins.efm;
+in {
   options = {
-    modules.devtools.neovim.plugins.efm.enable = mkEnableOption "Enables EFM LSP support for Neovim";
+    modules.devtools.nixvim.plugins.efm.enable = mkEnableOption "Enables EFM LSP support for nixvim";
   };
 
   config = mkIf cfg.enable {
@@ -27,7 +26,7 @@ in
 
       lsp-format = {
         enable = true;
-        lspServersToEnable = [ "efm" ];
+        lspServersToEnable = ["efm"];
       };
 
       efmls-configs.enable = true;

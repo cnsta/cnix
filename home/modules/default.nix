@@ -3,7 +3,7 @@
     "${userModules}/browsers/chromium"
     "${userModules}/browsers/firefox"
     "${userModules}/comm/discord"
-    "${userModules}/devtools/neovim"
+    "${userModules}/devtools/nixvim"
     "${userModules}/devtools/vscode"
     "${userModules}/gaming/lutris"
     "${userModules}/gaming/mangohud"

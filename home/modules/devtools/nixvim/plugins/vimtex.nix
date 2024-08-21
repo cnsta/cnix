@@ -1,14 +1,13 @@
-{ lib
-, config
-, ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.vimtex;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.nixvim.plugins.vimtex;
+in {
   options = {
-    modules.devtools.neovim.plugins.vimtex.enable = mkEnableOption "Enables VimTeX plugin for Neovim";
+    modules.devtools.nixvim.plugins.vimtex.enable = mkEnableOption "Enables VimTeX plugin for nixvim";
   };
 
   config = mkIf cfg.enable {
@@ -27,7 +26,7 @@ in
           ];
           toc_config = {
             name = "TOC";
-            layers = [ "content" "todo" ];
+            layers = ["content" "todo"];
             resize = true;
             split_width = 50;
             todo_sorted = false;
@@ -48,13 +47,13 @@ in
 
       autoCmd = [
         {
-          event = [ "BufEnter" "BufWinEnter" ];
+          event = ["BufEnter" "BufWinEnter"];
           pattern = "*.tex";
           command = "set filetype=tex \"| VimtexTocOpen";
         }
         {
           event = "FileType";
-          pattern = [ "tex" "latex" ];
+          pattern = ["tex" "latex"];
           callback = ''
             function ()
               vim.o.foldmethod = 'expr'
