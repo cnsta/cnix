@@ -9,26 +9,6 @@ in {
   options = {
     modules.devtools.nixvim.plugins.lsp = {
       enable = mkEnableOption "Enables LSP support for nixvim";
-      servers = {
-        cssls.enable = mkEnableOption "Enable CSS LSP";
-        tailwindcss.enable = mkEnableOption "Enable TailwindCSS LSP";
-        html.enable = mkEnableOption "Enable HTML LSP";
-        astro.enable = mkEnableOption "Enable AstroJS LSP";
-        phpactor.enable = mkEnableOption "Enable PHP LSP";
-        svelte.enable = mkEnableOption "Enable Svelte LSP";
-        vuels.enable = mkEnableOption "Enable Vue LSP";
-        pyright.enable = mkEnableOption "Enable Python LSP";
-        marksman.enable = mkEnableOption "Enable Markdown LSP";
-        nixd.enable = mkEnableOption "Enable Nix LSP";
-        dockerls.enable = mkEnableOption "Enable Docker LSP";
-        bashls.enable = mkEnableOption "Enable Bash LSP";
-        clangd.enable = mkEnableOption "Enable C/C++ LSP";
-        csharp-ls.enable = mkEnableOption "Enable C# LSP";
-        yamlls.enable = mkEnableOption "Enable YAML LSP";
-        lua-ls.enable = mkEnableOption "Enable Lua LSP";
-        tsserver.enable = mkEnableOption "Enable TypeScript/JavaScript LSP";
-        rust-analyzer.enable = mkEnableOption "Enable Rust LSP";
-      };
     };
   };
 
@@ -54,33 +34,31 @@ in {
       };
 
       servers = {
-        cssls = mkIf cfg.servers.cssls.enable {};
-        tailwindcss = mkIf cfg.servers.tailwindcss.enable {};
-        html = mkIf cfg.servers.html.enable {};
-        astro = mkIf cfg.servers.astro.enable {};
-        phpactor = mkIf cfg.servers.phpactor.enable {};
-        svelte = mkIf cfg.servers.svelte.enable {};
-        vuels = mkIf cfg.servers.vuels.enable {};
-        pyright = mkIf cfg.servers.pyright.enable {};
-        marksman = mkIf cfg.servers.marksman.enable {};
-        nixd = mkIf cfg.servers.nixd.enable {};
-        dockerls = mkIf cfg.servers.dockerls.enable {};
-        bashls = mkIf cfg.servers.bashls.enable {};
-        clangd = mkIf cfg.servers.clangd.enable {};
-        csharp-ls = mkIf cfg.servers.csharp-ls.enable {};
-        yamlls = mkIf cfg.servers.yamlls.enable {};
-        lua-ls = mkIf cfg.servers.lua-ls.enable {
+        # Average webdev LSPs
+        cssls.enable = true; # CSS
+        tailwindcss.enable = true; # TailwindCSS
+        html.enable = true; # HTML
+        astro.enable = true; # AstroJS
+        phpactor.enable = true; # PHP
+        svelte.enable = false; # Svelte
+        vuels.enable = false; # Vue
+        pyright.enable = true;
+        marksman.enable = true;
+        nixd.enable = true;
+        dockerls.enable = true;
+        bashls.enable = true;
+        clangd.enable = true;
+        csharp-ls.enable = true;
+        yamlls.enable = true;
+        lua-ls = {
+          enable = true;
           settings.telemetry.enable = false;
-          settings.diagnostics.globals = ["vim"];
-        };
-        tsserver = mkIf cfg.servers.tsserver.enable {};
-        rust-analyzer = mkIf cfg.servers.rust-analyzer.enable {
-          installRustc = true;
-          installCargo = true;
-          settings = {
-            checkOnSave = true;
-            check.command = "clippy";
+          settings.diagnostics = {
+            globals = ["vim"];
           };
+        };
+        tsserver = {
+          enable = false; # TS/JS
         };
       };
     };
