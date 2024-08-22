@@ -57,12 +57,10 @@
           "${mod}/nix/nh/toothpc"
           {
             home-manager = {
-              users.toothpick.imports = homeImports."
-            toothpick@toothpc";
+              users.toothpick.imports = homeImports."toothpick@toothpc";
               extraSpecialArgs = specialArgs;
             };
           }
-
           inputs.chaotic.nixosModules.default
           inputs.sops-nix.nixosModules.sops
           (import "${mod}/dev")
