@@ -53,10 +53,8 @@
         shared
         ++ [
           ./toothpc
-          "${mod}/boot/lanzaboote
-            "
-          "${mod}/nix/nh/toothpc
-            "
+          "${mod}/boot/lanzaboote"
+          "${mod}/nix/nh/toothpc"
           {
             home-manager = {
               users.toothpick.imports = homeImports."
