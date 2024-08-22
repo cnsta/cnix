@@ -1,14 +1,13 @@
-{ lib
-, config
-, ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.startify;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.nixvim.plugins.startify;
+in {
   options = {
-    modules.devtools.neovim.plugins.startify.enable = mkEnableOption "Enables Startify plugin for Neovim";
+    modules.devtools.nixvim.plugins.startify.enable = mkEnableOption "Enables Startify plugin for nixvim";
   };
 
   config = mkIf cfg.enable {
@@ -28,9 +27,9 @@ in
 
         change_to_dir = false;
         use_unicode = true;
-        lists = [{ type = "dir"; }];
+        lists = [{type = "dir";}];
         files_number = 30;
-        skiplist = [ "flake.lock" ];
+        skiplist = ["flake.lock"];
       };
     };
   };

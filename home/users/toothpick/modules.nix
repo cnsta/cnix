@@ -8,7 +8,7 @@
       discord.enable = true;
     };
     devtools = {
-      neovim = {
+      nixvim = {
         enable = true;
         plugins = {
           ai.enable = false;
@@ -28,6 +28,7 @@
           tagbar.enable = false;
           vimtex.enable = false;
           yanky.enable = false;
+          rustaceanvim.enable = true;
           lsp = {
             enable = true;
             servers = {
@@ -48,7 +49,6 @@
               yamlls.enable = true;
               lua-ls.enable = true;
               tsserver.enable = false;
-              rust-analyzer.enable = true;
             };
           };
         };

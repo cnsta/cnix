@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.devtools.neovim;
+  cfg = config.modules.devtools.nixvim;
 in {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
@@ -19,7 +19,7 @@ in {
   ];
 
   options = {
-    modules.devtools.neovim.enable = mkEnableOption "Enable Neovim";
+    modules.devtools.nixvim.enable = mkEnableOption "Enable nixvim";
   };
 
   config = mkIf cfg.enable {

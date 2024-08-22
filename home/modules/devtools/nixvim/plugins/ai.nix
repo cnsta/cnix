@@ -1,14 +1,13 @@
-{ lib
-, config
-, ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.ai;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.nixvim.plugins.ai;
+in {
   options = {
-    modules.devtools.neovim.plugins.ai.enable = mkEnableOption "Enables AI tools for Neovim";
+    modules.devtools.nixvim.plugins.ai.enable = mkEnableOption "Enables AI tools for nixvim";
   };
 
   config = mkIf cfg.enable {

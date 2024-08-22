@@ -44,6 +44,7 @@
           }
           inputs.chaotic.nixosModules.default
           inputs.sops-nix.nixosModules.sops
+          (import "${mod}/dev")
         ];
     };
     toothpc = nixosSystem {
@@ -52,17 +53,21 @@
         shared
         ++ [
           ./toothpc
-          "${mod}/boot/lanzaboote"
-          "${mod}/nix/nh/toothpc"
+          "${mod}/boot/lanzaboote
+            "
+          "${mod}/nix/nh/toothpc
+            "
           {
             home-manager = {
-              users.toothpick.imports = homeImports."toothpick@toothpc";
+              users.toothpick.imports = homeImports."
+            toothpick@toothpc";
               extraSpecialArgs = specialArgs;
             };
           }
 
           inputs.chaotic.nixosModules.default
           inputs.sops-nix.nixosModules.sops
+          (import "${mod}/dev")
         ];
     };
     adampad = nixosSystem {
