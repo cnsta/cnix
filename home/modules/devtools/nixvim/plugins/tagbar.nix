@@ -1,14 +1,13 @@
-{ lib
-, config
-, ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.tagbar;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.nixvim.plugins.tagbar;
+in {
   options = {
-    modules.devtools.neovim.plugins.tagbar.enable = mkEnableOption "Enables Tagbar plugin for Neovim";
+    modules.devtools.nixvim.plugins.tagbar.enable = mkEnableOption "Enables Tagbar plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

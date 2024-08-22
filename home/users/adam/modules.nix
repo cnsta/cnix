@@ -8,7 +8,7 @@
       discord.enable = true;
     };
     devtools = {
-      neovim = {
+      nixvim = {
         enable = true;
         plugins = {
           ai.enable = false;

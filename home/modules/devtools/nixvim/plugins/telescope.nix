@@ -1,14 +1,13 @@
-{ lib
-, config
-, ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.telescope;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.nixvim.plugins.telescope;
+in {
   options = {
-    modules.devtools.neovim.plugins.telescope.enable = mkEnableOption "Enables Telescope plugin for Neovim";
+    modules.devtools.nixvim.plugins.telescope.enable = mkEnableOption "Enables Telescope plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

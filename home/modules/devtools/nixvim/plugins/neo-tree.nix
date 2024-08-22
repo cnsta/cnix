@@ -1,14 +1,13 @@
-{ lib
-, config
-, ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.neovim.plugins.neo-tree;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.modules.devtools.nixvim.plugins.neo-tree;
+in {
   options = {
-    modules.devtools.neovim.plugins.neo-tree.enable = mkEnableOption "Enables Neo-tree plugin for Neovim";
+    modules.devtools.nixvim.plugins.neo-tree.enable = mkEnableOption "Enables nix-tree plugin for nixvim";
   };
 
   config = mkIf cfg.enable {
@@ -27,7 +26,7 @@ in
         {
           mode = "n";
           key = "<leader>n";
-          action = ":Neotree action=focus reveal toggle<CR>";
+          action = ":neotree action=focus reveal toggle<CR>";
           options.silent = true;
         }
       ];
