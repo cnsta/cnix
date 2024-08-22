@@ -24,5 +24,10 @@
 
     # Other utilities and tools
     openssl # Required for some crates that involve networking or encryption
+    alejandra
+    nixd
+    pyright
+    yaml-language-server
+    lua-language-server
   ];
 }

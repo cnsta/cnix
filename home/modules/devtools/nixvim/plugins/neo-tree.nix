@@ -26,7 +26,7 @@ in {
         {
           mode = "n";
           key = "<leader>n";
-          action = ":nixtree action=focus reveal toggle<CR>";
+          action = ":neotree action=focus reveal toggle<CR>";
           options.silent = true;
         }
       ];
