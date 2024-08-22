@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
@@ -29,7 +30,70 @@ in {
         lspServersToEnable = ["efm"];
       };
 
-      efmls-configs.enable = true;
+      efmls-configs = {
+        enable = true;
+
+        toolPackages.mdformat = pkgs.mdformat.withPlugins (
+          ps:
+            with ps; [
+              # TODO: broken with update of mdformat
+              # mdformat-gfm
+              mdformat-frontmatter
+              mdformat-footnote
+              mdformat-tables
+              mdit-py-plugins
+            ]
+        );
+
+        setup = {
+          sh = {
+            #linter = "shellcheck";
+            formatter = "shfmt";
+          };
+          bash = {
+            #linter = "shellcheck";
+            formatter = "shfmt";
+          };
+          c = {
+            linter = "cppcheck";
+          };
+          markdown = {
+            formatter = [
+              "cbfmt"
+              "mdformat"
+            ];
+          };
+          python = {
+            formatter = "black";
+          };
+          nix = {
+            linter = "statix";
+          };
+          lua = {
+            formatter = "stylua";
+          };
+          html = {
+            formatter = [
+              "prettier"
+            ];
+          };
+          htmldjango = {
+            linter = "djlint";
+          };
+          json = {
+            formatter = "prettier";
+          };
+          css = {
+            formatter = "prettier";
+          };
+          ts = {
+            formatter = "prettier";
+          };
+          gitcommit = {
+            linter = "gitlint";
+          };
+        };
+      };
     };
   };
 }
