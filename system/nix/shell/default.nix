@@ -3,12 +3,6 @@
     NIX_CONFIG = "extra-experimental-features = nix-command flakes";
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     nativeBuildInputs = with pkgs; [
-      rust-analyzer # Rust language server for code completion and analysis
-      cargo # Rust package manager and build tool
-      rustc # Rust compiler
-      clippy # Linter to catch common mistakes in Rust code
-      rustfmt # Tool to format Rust code according to style guidelines
-
       # Wayland-specific dependencies
       wayland # Wayland client library
       wayland-protocols # Wayland protocols (essential for building against Wayland)

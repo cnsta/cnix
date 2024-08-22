@@ -29,28 +29,7 @@
           vimtex.enable = false;
           yanky.enable = false;
           rustaceanvim.enable = true;
-          lsp = {
-            enable = true;
-            servers = {
-              cssls.enable = true;
-              tailwindcss.enable = true;
-              html.enable = true;
-              astro.enable = false;
-              phpactor.enable = true;
-              svelte.enable = false;
-              vuels.enable = false;
-              pyright.enable = true;
-              marksman.enable = true;
-              nixd.enable = true;
-              dockerls.enable = true;
-              bashls.enable = true;
-              clangd.enable = true;
-              csharp-ls.enable = true;
-              yamlls.enable = true;
-              lua-ls.enable = true;
-              tsserver.enable = false;
-            };
-          };
+          lsp.enable = true;
         };
       };
       vscode.enable = true;
