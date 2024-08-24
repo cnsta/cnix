@@ -15,17 +15,17 @@ in {
   options = {
     modules.userd.sops = {
       enable = mkEnableOption "Enables sops home environment";
-      cnst = mkOption {
+      cnst.enable = mkOption {
         type = lib.types.bool;
         default = false;
         description = "Apply cnst sops settings";
       };
-      toothpick = mkOption {
+      toothpick.enable = mkOption {
         type = lib.types.bool;
         default = false;
         description = "Apply toothpick sops settings";
       };
-      adam = mkOption {
+      adam.enable = mkOption {
         type = lib.types.bool;
         default = false;
         description = "Apply adam sops settings";
@@ -41,7 +41,7 @@ in {
           sshKeyPaths = [];
         };
       }
-      (mkIf cfg.cnst {
+      (mkIf cfg.cnst.enable {
         age = {sshKeyPaths = ["/home/cnst/.ssh/id_ed25519"];};
         secrets = {
           openai_api_key = {
@@ -54,7 +54,7 @@ in {
           };
         };
       })
-      (mkIf cfg.toothpick {
+      (mkIf cfg.toothpick.enable {
         age = {sshKeyPaths = ["/home/toothpick/.ssh/id_ed25519"];};
         secrets = {
           openai_api_key = {
@@ -67,7 +67,7 @@ in {
           };
         };
       })
-      (mkIf cfg.adam {
+      (mkIf cfg.adam.enable {
         age = {sshKeyPaths = ["/home/adam/.ssh/id_ed25519"];};
         secrets = {
           openai_api_key = {
