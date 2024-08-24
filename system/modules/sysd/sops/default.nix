@@ -11,17 +11,17 @@ in {
   options = {
     modules.sysd.sops = {
       enable = mkEnableOption "Enables sops system environment";
-      cnix = mkOption {
+      cnix.enable = mkOption {
         type = lib.types.bool;
         default = false;
         description = "Apply cnix sops settings";
       };
-      toothpc = mkOption {
+      toothpc.enable = mkOption {
         type = lib.types.bool;
         default = false;
         description = "Apply toothpc sops settings";
       };
-      adampad = mkOption {
+      adampad.enable = mkOption {
         type = lib.types.bool;
         default = false;
         description = "Apply adampad sops settings";
@@ -38,7 +38,7 @@ in {
           sshKeyPaths = [];
         };
       }
-      (mkIf cfg.cnix {
+      (mkIf cfg.cnix.enable {
         secrets = {
           openai_api_key = {
             format = "yaml";
@@ -50,7 +50,7 @@ in {
           };
         };
       })
-      (mkIf cfg.toothpc {
+      (mkIf cfg.toothpc.enable {
         secrets = {
           openai_api_key = {
             format = "yaml";
@@ -62,7 +62,7 @@ in {
           };
         };
       })
-      (mkIf cfg.adampad {
+      (mkIf cfg.adampad.enable {
         secrets = {
           openai_api_key = {
             format = "yaml";
