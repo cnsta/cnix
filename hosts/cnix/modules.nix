@@ -52,7 +52,7 @@
       samba.enable = false;
       sops = {
         enable = true;
-        cnix = true;
+        cnix.enable = true;
       };
       ssh.enable = true;
       udisks.enable = true;
