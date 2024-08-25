@@ -52,10 +52,6 @@ in {
       })
       (mkIf cfg.toothpc.enable {
         secrets = {
-          openai_api_key = {
-            format = "yaml";
-            sopsFile = "${self}/secrets/toothpc-secrets.yaml";
-          };
           ssh_host = {
             format = "yaml";
             sopsFile = "${self}/secrets/toothpc-secrets.yaml";
@@ -64,10 +60,6 @@ in {
       })
       (mkIf cfg.adampad.enable {
         secrets = {
-          openai_api_key = {
-            format = "yaml";
-            sopsFile = "${self}/secrets/adampad-secrets.yaml";
-          };
           ssh_host = {
             format = "yaml";
             sopsFile = "${self}/secrets/adampad-secrets.yaml";
