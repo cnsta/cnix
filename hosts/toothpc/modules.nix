@@ -54,8 +54,8 @@
       powerd.enable = true;
       samba.enable = false;
       sops = {
-        enable = false;
-        toothpc = false;
+        enable = true;
+        toothpc = true;
       };
       ssh.enable = true;
       udisks.enable = true;
