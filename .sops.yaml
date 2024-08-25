@@ -2,11 +2,11 @@ keys:
   # Users
   - &cnst age1aj6tdyjcxjc3fqda3uvnzy6m49yj4ankvzdstnj3w9dr8hmsccts5vsgd8
   - &adam placeholderkey
-  - &toothpick placeholderkey
+  - &toothpick age1x6zshjaxnjt76pwqspulc9pqp33lsytwvvwvx6ukqlh7xjqv4p3qcqzlyx
   # Hosts
   - &cnix age1rzee3wxh7773p7ytaq3zcl8q4tpsz3l43rdv2wezetgk0dlz0vws9jcpu2
   - &adampad placeholderkey
-  - &toothpc placeholderkey
+  - &toothpc age1un3d9mnxack229gycahuuw0lngjutfwtc4pned9as085mtynm5nqyyxaak
 creation_rules:
   - path_regex: secrets/cnix-secrets.(yaml|json|env|ini)$
     key_groups:

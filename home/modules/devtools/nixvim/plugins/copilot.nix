@@ -4,23 +4,18 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.ai;
+  cfg = config.modules.devtools.nixvim.plugins.copilot;
 in {
   options = {
-    modules.devtools.nixvim.plugins.ai.enable = mkEnableOption "Enables AI tools for nixvim";
+    modules.devtools.nixvim.plugins.copilot.enable = mkEnableOption "Enables AI tools for nixvim";
   };
 
   config = mkIf cfg.enable {
     programs.nixvim = {
       plugins = {
-        chatgpt = {
+        copilot-chat = {
           enable = true;
-          settings = {
-            api_key_cmd = "cat ${config.sops.secrets.openai_api_key.path}";
-          };
         };
-        copilot-chat.enable = true;
-
         copilot-lua = {
           enable = true;
           suggestion = {
@@ -28,25 +23,25 @@ in {
             autoTrigger = true;
             keymap.accept = "<C-CR>";
           };
-          panel.enabled = false;
+          panel.enabled = true;
         };
       };
       keymaps = [
         {
-          action = "<cmd>CopilotChatToggle<CR>";
-          key = "<leader>ac";
+          action = "<cmd>lua local input = vim.fn.input('Quick Chat: '); if input ~= '' then require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer }) end<CR>";
+          key = "<leader>qc";
           options = {
-            desc = "Toggle Coilot chat";
+            desc = "CopilotChat - Quick chat";
           };
           mode = [
             "n"
           ];
         }
         {
-          action = "<cmd>ChatGPT<CR>";
-          key = "<leader>ag";
+          action = "<cmd>CopilotChatToggle<CR>";
+          key = "<leader>ac";
           options = {
-            desc = "Toggle ChatGPT";
+            desc = "Toggle Coilot chat";
           };
           mode = [
             "n"
