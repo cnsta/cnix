@@ -54,7 +54,7 @@ in {
         secrets = {
           ssh_host = {
             format = "yaml";
-            sopsFile = "${self}/secrets/toothpc-secrets.yaml";
+            # sopsFile = "${self}/secrets/toothpc-secrets.yaml";
           };
         };
       })
