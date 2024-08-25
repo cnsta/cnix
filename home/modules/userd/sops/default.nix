@@ -57,10 +57,6 @@ in {
       (mkIf cfg.toothpick.enable {
         age = {sshKeyPaths = ["/home/toothpick/.ssh/id_ed25519"];};
         secrets = {
-          openai_api_key = {
-            format = "yaml";
-            sopsFile = "${self}/secrets/toothpick-secrets.yaml";
-          };
           ssh_user = {
             format = "yaml";
             sopsFile = "${self}/secrets/toothpick-secrets.yaml";
@@ -70,10 +66,6 @@ in {
       (mkIf cfg.adam.enable {
         age = {sshKeyPaths = ["/home/adam/.ssh/id_ed25519"];};
         secrets = {
-          openai_api_key = {
-            format = "yaml";
-            sopsFile = "${self}/secrets/adam-secrets.yaml";
-          };
           ssh_user = {
             format = "yaml";
             sopsFile = "${self}/secrets/adam-secrets.yaml";
