@@ -80,7 +80,6 @@
               extraSpecialArgs = specialArgs;
             };
           }
-
           inputs.chaotic.nixosModules.default
           inputs.sops-nix.nixosModules.sops
         ];

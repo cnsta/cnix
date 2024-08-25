@@ -11,10 +11,10 @@
       nixvim = {
         enable = true;
         plugins = {
-          ai.enable = true;
           barbar.enable = true;
           comment.enable = true;
           conform-nvim.enable = true;
+          copilot.enable = true;
           efm.enable = true;
           floaterm.enable = false;
           harpoon.enable = false;

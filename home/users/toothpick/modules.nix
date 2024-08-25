@@ -11,25 +11,25 @@
       nixvim = {
         enable = true;
         plugins = {
-          ai.enable = false;
           barbar.enable = true;
           comment.enable = true;
           conform-nvim.enable = true;
+          copilot.enable = false;
           efm.enable = true;
+          floaterm.enable = false;
+          harpoon.enable = false;
+          lsp.enable = true;
           lualine.enable = true;
           markdown-preview.enable = true;
           neo-tree.enable = true;
           none-ls.enable = true;
+          rustaceanvim.enable = true;
           startify.enable = true;
+          tagbar.enable = false;
           telescope.enable = true;
           treesitter.enable = true;
-          floaterm.enable = false;
-          harpoon.enable = false;
-          tagbar.enable = false;
           vimtex.enable = false;
           yanky.enable = false;
-          rustaceanvim.enable = true;
-          lsp.enable = true;
         };
       };
       vscode.enable = true;
