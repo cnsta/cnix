@@ -28,13 +28,13 @@ creation_rules:
       - age:
           - *adam
           - *adampad
-  - path_regex: secrets/toothpc-secrets.(yaml|json|env|ini)$
-    key_groups:
-      - age:
-          - *toothpick
-          - *toothpc
-  - path_regex: secrets/toothpick-secrets.(yaml|json|env|ini)$
-    key_groups:
-      - age:
-          - *toothpick
-          - *toothpc
+  # - path_regex: secrets/toothpc-secrets.(yaml|json|env|ini)$
+  #   key_groups:
+  #     - age:
+  #         - *toothpick
+  #         - *toothpc
+  # - path_regex: secrets/toothpick-secrets.(yaml|json|env|ini)$
+  #   key_groups:
+  #     - age:
+  #         - *toothpick
+  #         - *toothpc
