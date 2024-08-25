@@ -59,7 +59,7 @@ in {
         secrets = {
           ssh_user = {
             format = "yaml";
-            sopsFile = "${self}/secrets/toothpick-secrets.yaml";
+            # sopsFile = "${self}/secrets/toothpick-secrets.yaml";
           };
         };
       })
