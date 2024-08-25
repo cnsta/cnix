@@ -47,7 +47,7 @@
     userd = {
       sops = {
         enable = true;
-        toothpick = true;
+        toothpick.enable = true;
       };
       copyq.enable = true;
       mako.enable = true;
