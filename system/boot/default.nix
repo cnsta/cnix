@@ -1,6 +1,7 @@
 {
   boot.loader = {
     systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+    systemd-boot.graceful = true;
+    efi.canTouchEfiVariables = false;
   };
 }

@@ -46,8 +46,8 @@
     };
     userd = {
       sops = {
-        enable = true;
-        cnst.enable = true;
+        enable = false;
+        cnst.enable = false;
       };
       copyq.enable = true;
       mako.enable = true;
