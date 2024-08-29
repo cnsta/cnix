@@ -32,7 +32,7 @@ in {
           alejandra.enable = true;
           stylua.enable = true;
           shfmt.enable = true;
-          nixpkgs_fmt.enable = true;
+          nixpkgs_fmt.enable = false;
           google_java_format.enable = false;
           prettier = {
             enable = true;
