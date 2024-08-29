@@ -51,8 +51,8 @@
       powerd.enable = true;
       samba.enable = false;
       sops = {
-        enable = true;
-        cnix.enable = true;
+        enable = false;
+        cnix.enable = false;
       };
       ssh.enable = true;
       udisks.enable = true;
