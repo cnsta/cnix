@@ -52,9 +52,11 @@ in {
         yamlls.enable = true;
         lua-ls = {
           enable = true;
-          settings.telemetry.enable = false;
-          settings.diagnostics = {
-            globals = ["vim"];
+          settings = {
+            telemetry.enable = false;
+            diagnostics = {
+              globals = ["vim"];
+            };
           };
         };
         tsserver = {
