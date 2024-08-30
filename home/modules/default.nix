@@ -13,7 +13,6 @@
     "${userModules}/terminal/zellij"
     "${userModules}/userd/copyq"
     "${userModules}/userd/mako"
-    "${userModules}/userd/sops"
     "${userModules}/userd/udiskie"
     "${userModules}/utils/ags"
     "${userModules}/utils/anyrun"

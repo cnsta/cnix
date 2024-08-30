@@ -11,11 +11,11 @@ in {
     modules.utils.misc.enable = mkEnableOption "Enables miscellaneous pacakges";
   };
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      nodejs_22
-      ripgrep
-      fd
-      beekeeper-studio
+    environment.systemPackages = [
+      pkgs.nodejs_22
+      pkgs.ripgrep
+      pkgs.fd
+      pkgs.beekeeper-studio
     ];
   };
 }
