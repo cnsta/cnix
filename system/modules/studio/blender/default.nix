@@ -10,7 +10,7 @@ in {
   options = {
     modules.studio.blender = {
       enable = mkEnableOption "Enables Blender";
-      hip = mkOption {
+      hip.enable = mkOption {
         type = lib.types.bool;
         default = false;
         description = "Use the HIP-enabled version of Blender (for AMD GPUs).";
@@ -20,7 +20,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = [
       (
-        if cfg.hip
+        if cfg.hip.enable
         then pkgs.blender-hip
         else pkgs.blender
       )

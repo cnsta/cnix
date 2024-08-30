@@ -15,7 +15,7 @@ in {
   options = {
     modules.gaming.gamemode = {
       enable = mkEnableOption "Enables gamemode";
-      optimizeGpu = mkOption {
+      optimizeGpu.enable = mkOption {
         type = lib.types.bool;
         default = false;
         description = "Whether to apply GPU optimizations.";
@@ -31,7 +31,7 @@ in {
           softrealtime = "auto";
           renice = 15;
         };
-        gpu = mkIf cfg.optimizeGpu {
+        gpu = mkIf cfg.optimizeGpu.enable {
           apply_gpu_optimisations = "accept-responsibility";
           gpu_device = 0;
           amd_performance_level = "high";
