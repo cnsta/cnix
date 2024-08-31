@@ -25,6 +25,7 @@
     # Other utilities and tools
     openssl # Required for some crates that involve networking or encryption
     alejandra
+    php84Packages.php-cs-fixer
     # nixd
     # pyright
     # yaml-language-server

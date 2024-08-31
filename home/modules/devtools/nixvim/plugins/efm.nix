@@ -67,6 +67,7 @@ in {
             formatter = "black";
           };
           nix = {
+            formatter = "alejandra";
             linter = "statix";
           };
           lua = {
@@ -86,11 +87,23 @@ in {
           css = {
             formatter = "prettier";
           };
+          scss = {
+            formatter = "prettier";
+          };
           ts = {
             formatter = "prettier";
           };
           gitcommit = {
             linter = "gitlint";
+          };
+          php = {
+            formatter = "php_cs_fixer";
+          };
+          rust = {
+            formatter = "rustfmt";
+          };
+          sql = {
+            formatter = "sql-formatter";
           };
         };
       };
