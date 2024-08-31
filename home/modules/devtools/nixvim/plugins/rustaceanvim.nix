@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }:
@@ -13,8 +12,17 @@ in {
 
   config = mkIf cfg.enable {
     programs.nixvim = {
-      plugins = {
-        rustaceanvim.enable = true;
+      plugins.rustaceanvim = {
+        enable = true;
+
+        settings.server = {
+          default_settings.rust-analyzer = {
+            cargo.features = "all";
+            checkOnSave = true;
+            check.command = "clippy";
+            rustc.source = "discover";
+          };
+        };
       };
     };
   };

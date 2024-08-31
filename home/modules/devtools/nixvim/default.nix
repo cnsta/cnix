@@ -12,7 +12,6 @@ in {
     inputs.nixvim.homeManagerModules.nixvim
     ./plugins
     ./autocmd.nix
-    ./completion.nix
     ./keymap.nix
     ./options.nix
     ./todo.nix
@@ -24,7 +23,7 @@ in {
 
   config = mkIf cfg.enable {
     programs.nixvim = {
-      extraPlugins = [pkgs.vimPlugins.gruvbox-material];
+      extraPlugins = with pkgs.vimPlugins; [gruvbox-material-nvim nvim-web-devicons];
       colorscheme = "gruvbox-material";
       enable = true;
       defaultEditor = true;
@@ -32,13 +31,8 @@ in {
       vimAlias = true;
       luaLoader.enable = true;
       plugins = {
-        gitsigns = {
-          enable = true;
-          settings.signs = {
-            add.text = "+";
-            change.text = "~";
-          };
-        };
+        gitsigns.enable = true;
+        statuscol.enable = true;
         nvim-autopairs.enable = true;
         nvim-colorizer = {
           enable = true;

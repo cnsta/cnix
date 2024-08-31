@@ -7,7 +7,7 @@
   cfg = config.modules.devtools.nixvim.plugins.neo-tree;
 in {
   options = {
-    modules.devtools.nixvim.plugins.neo-tree.enable = mkEnableOption "Enables nix-tree plugin for nixvim";
+    modules.devtools.nixvim.plugins.neo-tree.enable = mkEnableOption "Enables neo-tree plugin for nixvim";
   };
 
   config = mkIf cfg.enable {
@@ -18,7 +18,7 @@ in {
         closeIfLastWindow = true;
         window = {
           width = 30;
-          autoExpandWidth = true;
+          # autoExpandWidth = true;
         };
       };
 
@@ -26,7 +26,7 @@ in {
         {
           mode = "n";
           key = "<leader>n";
-          action = ":neotree action=focus reveal toggle<CR>";
+          action = ":Neotree focus toggle<CR>";
           options.silent = true;
         }
       ];

@@ -31,22 +31,35 @@ in {
                   local msg = ""
                   local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
                   local clients = vim.lsp.get_active_clients()
-                  if next(clients) == nil then
-                      return msg
-                  end
+                  local non_null_ls_clients = {}
+
                   for _, client in ipairs(clients) do
-                      local filetypes = client.config.filetypes
-                      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                          return client.name
+                      if client.name ~= "null-ls" then
+                          table.insert(non_null_ls_clients, client)
                       end
                   end
+
+                  if #non_null_ls_clients > 0 then
+                      for _, client in ipairs(non_null_ls_clients) do
+                          local filetypes = client.config.filetypes
+                          if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                              return client.name
+                          end
+                      end
+                  else
+                      for _, client in ipairs(clients) do
+                          if client.name == "null-ls" then
+                              return client.name
+                          end
+                      end
+                  end
+
                   return msg
               end
             '';
             icon = "";
-            color.fg = "#ffffff";
+            color.fg = "#A89984";
           }
-          "encoding"
           "fileformat"
           "filetype"
         ];

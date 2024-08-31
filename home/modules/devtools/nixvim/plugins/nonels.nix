@@ -32,12 +32,15 @@ in {
           alejandra.enable = true;
           stylua.enable = true;
           shfmt.enable = true;
-          nixpkgs_fmt.enable = false;
           google_java_format.enable = false;
           prettier = {
             enable = true;
             disableTsServerFormatter = true;
           };
+          prettierd.enable = true;
+          phpcsfixer.enable = true;
+          xmllint.enable = true;
+          yamlfmt.enable = true;
           black = {
             enable = true;
             settings = ''
