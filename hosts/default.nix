@@ -36,6 +36,7 @@
           ./cnix
           "${mod}/boot/lanzaboote"
           "${mod}/nix/nh/cnix"
+          "${mod}/dev"
           {
             home-manager = {
               users.cnst.imports = homeImports."cnst@cnix";
@@ -44,7 +45,6 @@
           }
           inputs.chaotic.nixosModules.default
           inputs.agenix.nixosModules.default
-          (import "${mod}/dev")
         ];
     };
     toothpc = nixosSystem {
