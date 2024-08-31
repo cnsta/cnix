@@ -5,7 +5,7 @@
         enable = true;
       };
       chromium = {
-        enable = false;
+        enable = true;
       };
     };
     comm = {
@@ -18,12 +18,15 @@
         enable = true;
         plugins = {
           barbar = {
-            enable = true;
+            enable = false;
           };
           comment = {
             enable = true;
           };
-          conform-nvim = {
+          conform = {
+            enable = false;
+          };
+          cmp = {
             enable = true;
           };
           copilot = {
@@ -41,6 +44,9 @@
           lsp = {
             enable = true;
           };
+          lightline = {
+            enable = false;
+          };
           lualine = {
             enable = true;
           };
@@ -51,7 +57,7 @@
             enable = true;
           };
           none-ls = {
-            enable = true;
+            enable = false;
           };
           rustaceanvim = {
             enable = true;

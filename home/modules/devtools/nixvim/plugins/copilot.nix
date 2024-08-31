@@ -19,11 +19,11 @@ in {
         copilot-lua = {
           enable = true;
           suggestion = {
-            enabled = true;
+            enabled = false;
             autoTrigger = true;
             keymap.accept = "<C-CR>";
           };
-          panel.enabled = true;
+          panel.enabled = false;
         };
       };
       keymaps = [
