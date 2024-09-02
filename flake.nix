@@ -45,10 +45,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -64,6 +60,24 @@
     };
     hyprlock = {
       url = "github:hyprwm/hyprlock";
+      inputs = {
+        hyprlang.follows = "hyprland/hyprlang";
+        hyprutils.follows = "hyprland/hyprutils";
+        nixpkgs.follows = "hyprland/nixpkgs";
+        systems.follows = "hyprland/systems";
+      };
+    };
+    hypridle = {
+      url = "github:hyprwm/hypridle";
+      inputs = {
+        hyprlang.follows = "hyprland/hyprlang";
+        hyprutils.follows = "hyprland/hyprutils";
+        nixpkgs.follows = "hyprland/nixpkgs";
+        systems.follows = "hyprland/systems";
+      };
+    };
+    hyprpaper = {
+      url = "github:hyprwm/hyprpaper";
       inputs = {
         hyprlang.follows = "hyprland/hyprlang";
         hyprutils.follows = "hyprland/hyprutils";
@@ -99,5 +113,9 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # naersk = {
+    #   url = "github:nix-community/naersk";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 }

@@ -1,10 +1,15 @@
 {
   config,
   lib,
+  pkgs,
+  inputs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.modules.wm.utils.hyprpaper;
+
+  hyprpaperFlake = inputs.hyprpaper.packages.${pkgs.system}.default;
+  # hyprpaperPkg = pkgs.hyprpaper;
 in {
   options = {
     modules.wm.utils.hyprpaper.enable = mkEnableOption "Enables hyprpaper";
@@ -12,6 +17,7 @@ in {
   config = mkIf cfg.enable {
     services.hyprpaper = {
       enable = true;
+      package = hyprpaperFlake;
       settings = {
         ipc = "on";
         splash = false;

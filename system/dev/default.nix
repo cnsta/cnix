@@ -22,13 +22,23 @@
     # Aquamarine: Hyprland's new compositor library
     aquamarine # Aquamarine compositor library for Wayland
 
-    # Other utilities and tools
-    openssl # Required for some crates that involve networking or encryption
-    alejandra
+    # Language servers, other utilities and tools
+    gcc
+    lua-language-server
+    nixd
+    openssl
+    php
     php84Packages.php-cs-fixer
-    # nixd
-    # pyright
-    # yaml-language-server
-    # lua-language-server
+    phpactor
+    python312Packages.python-lsp-server
+
+    # Formatters
+    alejandra
+    stylua
+    nodePackages_latest.fixjson
+    nodePackages_latest.sql-formatter
+    prettierd
+    shfmt
+    black
   ];
 }
