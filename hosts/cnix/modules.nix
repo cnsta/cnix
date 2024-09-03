@@ -104,6 +104,9 @@
       udisks = {
         enable = true;
       };
+      pcscd = {
+        enable = true;
+      };
       xserver = {
         amd = {
           hhkbse = {
@@ -138,6 +141,9 @@
         enable = true;
       };
       npm = {
+        enable = true;
+      };
+      yubikey = {
         enable = true;
       };
     };

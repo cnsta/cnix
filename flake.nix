@@ -52,6 +52,9 @@
     # cachyos
     chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
 
+    #hmm
+    helix.url = "github:SoraTenshi/helix/new-daily-driver";
+
     # hyprland environ
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland-contrib = {
@@ -111,6 +114,10 @@
     # rust toolchain
     fenix = {
       url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    wezterm = {
+      url = "github:wez/wezterm/main?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # naersk = {

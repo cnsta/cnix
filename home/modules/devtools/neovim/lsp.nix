@@ -27,19 +27,6 @@
           	end
           end
 
-          -- Add LSPs with lsp-format attached
-          add_lsp(lspconfig.lua_ls, {})
-
-          add_lsp(lspconfig.nixd, {
-          	settings = {
-          		nixd = {
-          			formatting = {
-          				command = { "alejandra" },
-          			},
-          		},
-          	},
-          })
-
           -- Other LSPs
           add_lsp(lspconfig.bashls, {})
           add_lsp(lspconfig.clangd, {})
@@ -51,6 +38,8 @@
           add_lsp(lspconfig.kotlin_language_server, {})
           add_lsp(lspconfig.phpactor, { init_options = { ["language_server_php_cs_fixer.enabled"] = true } })
           add_lsp(lspconfig.rust_analyzer, {})
+          add_lsp(lspconfig.nixd, {})
+          add_lsp(lspconfig.lua_ls, {})
           add_lsp(lspconfig.pylsp, {})
           add_lsp(lspconfig.solargraph, {})
           add_lsp(lspconfig.terraformls, {})

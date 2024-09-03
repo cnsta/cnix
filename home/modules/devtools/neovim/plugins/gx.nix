@@ -18,9 +18,9 @@ in {
         lua
         */
         ''
-          require('gx').setup{}
-          vim.keymap.set({"n", "x"}, "gx", ":Browse<CR>", {
-            desc = "Open the file under cursor with system app"
+          require("gx").setup({})
+          vim.keymap.set({ "n", "x" }, "gx", ":Browse<CR>", {
+          	desc = "Open the file under cursor with system app",
           })
         '';
     }

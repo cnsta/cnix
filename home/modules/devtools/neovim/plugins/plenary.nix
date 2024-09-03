@@ -1,14 +1,14 @@
 {pkgs, ...}: {
   programs.neovim.plugins = with pkgs.vimPlugins; [
     {
-      plugin = nvim-web-devicons;
+      plugin = plenary-nvim;
       type = "lua";
       config =
         /*
         lua
         */
         ''
-          require('nvim-web-devicons').setup{}
+          require("plenary").setup({})
         '';
     }
   ];

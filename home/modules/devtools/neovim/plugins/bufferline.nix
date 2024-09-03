@@ -1,14 +1,14 @@
 {pkgs, ...}: {
   programs.neovim.plugins = with pkgs.vimPlugins; [
     {
-      plugin = which-key-nvim;
+      plugin = bufferline-nvim;
       type = "lua";
       config =
         /*
         lua
         */
         ''
-          require("which-key").setup({})
+          require("bufferline").setup({})
         '';
     }
   ];

@@ -1,14 +1,14 @@
 {pkgs, ...}: {
   programs.neovim.plugins = with pkgs.vimPlugins; [
     {
-      plugin = nvim-colorizer-lua;
+      plugin = nvim-autopairs;
       type = "lua";
       config =
         /*
         lua
         */
         ''
-          require('colorizer').setup{}
+          require("nvim-autopairs").setup({})
         '';
     }
   ];

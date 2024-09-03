@@ -20,6 +20,9 @@
       vscode = {
         enable = false;
       };
+      helix = {
+        enable = true;
+      };
     };
     gaming = {
       lutris = {
@@ -40,7 +43,7 @@
         enable = true;
       };
       wezterm = {
-        enable = false;
+        enable = true;
       };
       zellij = {
         enable = false;

@@ -8,14 +8,14 @@
         lua
         */
         ''
-          require('Comment').setup{
-            opleader = {
-              line = '<C-b>'
-            },
-            toggler = {
-              line = '<C-b>'
-            },
-          }
+          require("Comment").setup({
+          	opleader = {
+          		line = "<C-b>",
+          	},
+          	toggler = {
+          		line = "<C-b>",
+          	},
+          })
         '';
     }
   ];
