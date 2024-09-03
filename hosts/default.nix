@@ -55,6 +55,7 @@
           ./toothpc
           "${mod}/boot/lanzaboote"
           "${mod}/nix/nh/toothpc"
+          "${mod}/dev"
           {
             home-manager = {
               users.toothpick.imports = homeImports."toothpick@toothpc";
@@ -63,7 +64,6 @@
           }
           inputs.chaotic.nixosModules.default
           inputs.agenix.nixosModules.default
-          (import "${mod}/dev")
         ];
     };
     adampad = nixosSystem {
@@ -74,6 +74,7 @@
           ./adampad
           "${mod}/boot"
           "${mod}/nix/nh/adampad"
+          "${mod}/dev"
           {
             home-manager = {
               users.adam.imports = homeImports."adam@adampad";

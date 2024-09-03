@@ -14,76 +14,14 @@
       };
     };
     devtools = {
-      nixvim = {
+      neovim = {
         enable = true;
-        plugins = {
-          barbar = {
-            enable = false;
-          };
-          comment = {
-            enable = true;
-          };
-          conform = {
-            enable = false;
-          };
-          cmp = {
-            enable = true;
-          };
-          copilot = {
-            enable = true;
-          };
-          efm = {
-            enable = true;
-          };
-          floaterm = {
-            enable = false;
-          };
-          harpoon = {
-            enable = false;
-          };
-          lsp = {
-            enable = true;
-          };
-          lightline = {
-            enable = false;
-          };
-          lualine = {
-            enable = true;
-          };
-          markdown-preview = {
-            enable = true;
-          };
-          neo-tree = {
-            enable = true;
-          };
-          none-ls = {
-            enable = false;
-          };
-          rustaceanvim = {
-            enable = true;
-          };
-          startify = {
-            enable = true;
-          };
-          tagbar = {
-            enable = false;
-          };
-          telescope = {
-            enable = true;
-          };
-          treesitter = {
-            enable = true;
-          };
-          vimtex = {
-            enable = false;
-          };
-          yanky = {
-            enable = false;
-          };
-        };
       };
       vscode = {
         enable = false;
+      };
+      helix = {
+        enable = true;
       };
     };
     gaming = {
@@ -102,6 +40,9 @@
         enable = true;
       };
       kitty = {
+        enable = true;
+      };
+      wezterm = {
         enable = true;
       };
       zellij = {
@@ -133,6 +74,9 @@
         enable = true;
       };
       yazi = {
+        enable = true;
+      };
+      zathura = {
         enable = true;
       };
       misc = {

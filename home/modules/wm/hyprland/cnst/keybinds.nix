@@ -12,14 +12,14 @@ in {
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
-      "$terminal" = "kitty";
+      "$terminal" = "wezterm";
       "$fileManager" = "thunar";
       "$passwordManager" = "keepassxc";
       "$menu" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
       "$menuw" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
       "$browser" = "firefox";
       "$browserinc" = "firefox --private-window";
-      "$yazi" = "alacritty -e yazi";
+      "$yazi" = "wezterm -e yazi";
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       "$mod" = "SUPER";
