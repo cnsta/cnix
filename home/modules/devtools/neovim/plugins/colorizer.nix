@@ -1,14 +1,14 @@
 {pkgs, ...}: {
   programs.neovim.plugins = with pkgs.vimPlugins; [
     {
-      plugin = bufferline-nvim;
+      plugin = nvim-colorizer-lua;
       type = "lua";
       config =
         /*
         lua
         */
         ''
-          require('bufferline').setup{}
+          require("colorizer").setup({})
         '';
     }
   ];

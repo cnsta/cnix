@@ -1,14 +1,14 @@
 {pkgs, ...}: {
   programs.neovim.plugins = with pkgs.vimPlugins; [
     {
-      plugin = which-key-nvim;
+      plugin = range-highlight-nvim;
       type = "lua";
       config =
         /*
         lua
         */
         ''
-          require("which-key").setup({})
+          require("range-highlight").setup({})
         '';
     }
   ];

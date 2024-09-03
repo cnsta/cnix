@@ -1,14 +1,14 @@
 {pkgs, ...}: {
   programs.neovim.plugins = with pkgs.vimPlugins; [
     {
-      plugin = range-highlight-nvim;
+      plugin = nvim-web-devicons;
       type = "lua";
       config =
         /*
         lua
         */
         ''
-          require('range-highlight').setup{}
+          require("nvim-web-devicons").setup({})
         '';
     }
   ];

@@ -1,4 +1,3 @@
-# Yanked from Misterio77's great config: https://github.com/Misterio77/nix-config
 {
   pkgs,
   config,
@@ -12,7 +11,9 @@ in {
     ./plugins
     ./lsp.nix
     ./syntaxes.nix
+    ./keybindings.nix
   ];
+
   options = {
     modules.devtools.neovim.enable = mkEnableOption "Enable neovim";
   };
@@ -20,144 +21,74 @@ in {
   config = mkIf cfg.enable {
     programs.neovim = {
       enable = true;
-
-      extraConfig =
-        /*
-        vim
-        */
-        ''
-          "Use system clipboard
-          set clipboard=unnamedplus
-          "colorscheme
-          colorscheme gruvbox-material
-
-          set number
-
-          "Lets us easily trigger completion from binds
-          set wildcharm=<tab>
-
-          "Folding
-          set foldmethod=manual
-          "Should be expr, but it's slow. So just use ':set fdm=expr' when it's needed.
-
-          "Tabs
-          set tabstop=4 "4 char-wide tab
-          set expandtab "Use spaces
-          set softtabstop=0 "Use same length as 'tabstop'
-          set shiftwidth=0 "Use same length as 'tabstop'
-          "2 char-wide overrides
-          augroup two_space_tab
-            autocmd!
-            autocmd FileType json,html,htmldjango,hamlet,nix,scss,typescript,php,haskell,terraform setlocal tabstop=2
-          augroup END
-
-          "Set tera to use htmldjango syntax
-          augroup tera_htmldjango
-            autocmd!
-            autocmd BufRead,BufNewFile *.tera setfiletype htmldjango
-          augroup END
-
-          "Options when composing mutt mail
-          augroup mail_settings
-            autocmd FileType mail set noautoindent wrapmargin=0 textwidth=0 linebreak wrap formatoptions +=w
-          augroup END
-
-          "Fix nvim size according to terminal
-          "(https://github.com/neovim/neovim/issues/11330)
-          augroup fix_size
-            autocmd VimEnter * silent exec "!kill -s SIGWINCH" getpid()
-          augroup END
-
-          "Scroll up and down
-          nmap <C-j> <C-e>
-          nmap <C-k> <C-y>
-
-          "Buffers
-          nmap <space>b :buffers<CR>
-             nmap <C-l> :bnext<CR>
-          nmap <C-h> :bprev<CR>
-          nmap <C-q> :bdel<CR>
-
-          "Navigate
-          nmap <space>e :e<space>
-          nmap <space>e :e %:h<tab>
-          "CD to current dir
-          nmap <space>c :cd<space>
-          nmap <space>C :cd %:h<tab>
-
-          "Loclist
-          nmap <space>l :lwindow<cr>
-          nmap [l :lprev<cr>
-          nmap ]l :lnext<cr>
-
-          nmap <space>L :lhistory<cr>
-          nmap [L :lolder<cr>
-          nmap ]L :lnewer<cr>
-
-          "Quickfix
-          nmap <space>q :cwindow<cr>
-          nmap [q :cprev<cr>
-          nmap ]q :cnext<cr>
-
-          nmap <space>Q :chistory<cr>
-          nmap [Q :colder<cr>
-          nmap ]Q :cnewer<cr>
-
-          "Make
-          nmap <space>m :make<cr>
-
-          "Grep (replace with ripgrep)
-          nmap <space>g :grep<space>
-          if executable('rg')
-              set grepprg=rg\ --vimgrep
-              set grepformat=%f:%l:%c:%m
-          endif
-
-          "Close other splits
-          nmap <space>o :only<cr>
-
-          "Sudo save
-          cmap w!! w !sudo tee > /dev/null %
-        '';
       extraLuaConfig =
         /*
         lua
         */
         ''
-          vim.g.have_nerd_font = true
-          vim.wo.relativenumber = false
+          -- Use system clipboard
+          vim.opt.clipboard = "unnamedplus"
+
+          -- Colorscheme
+          vim.cmd("colorscheme gruvbox-material")
+
+          -- Line Numbers and Cursorline
+          vim.opt.number = true
           vim.opt.cursorline = true
+          vim.wo.relativenumber = false
 
-          vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select all" })
-          vim.keymap.set("n", "<C-v>", "p", { desc = "Paste" })
-          vim.keymap.set("i", "<C-v>", "<esc>p", { desc = "Paste" })
-          vim.keymap.set("v", "<C-c>", "y", { desc = "Yank" })
+          -- Nerd Font
+          vim.g.have_nerd_font = true
 
-          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-          vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-          vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
-          vim.keymap.set("n", "<space>a", vim.lsp.buf.code_action, { desc = "Code action" })
+          -- Enable persistent undo
+          vim.opt.undofile = true
+          vim.opt.undodir = vim.fn.expand("~/.config/nvim/undo")
 
-          -- Diagnostic
-          vim.keymap.set("n", "<space>d", vim.diagnostic.open_float, { desc = "Floating diagnostic" })
-          vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
-          vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-          vim.keymap.set("n", "gl", vim.diagnostic.setloclist, { desc = "Diagnostics on loclist" })
-          vim.keymap.set("n", "gq", vim.diagnostic.setqflist, { desc = "Diagnostics on quickfix" })
+          -- Set wildcharm to tab for triggering completion
+          vim.opt.wildcharm = vim.fn.char2nr(vim.api.nvim_replace_termcodes("<Tab>", true, true, true))
 
-          function add_sign(name, text)
-          	vim.fn.sign_define(name, { text = text, texthl = name, numhl = name })
-          end
-
-          add_sign("DiagnosticSignError", "󰅚 ")
-          add_sign("DiagnosticSignWarn", " ")
-          add_sign("DiagnosticSignHint", "󰌶 ")
-          add_sign("DiagnosticSignInfo", " ")
-
+          -- Folding
+          vim.opt.foldmethod = "manual"
           vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-          -- When it releases
           -- vim.opt.foldexpr = "v:lua.vim.treesitter.foldtext()"
+
+          -- Tabs
+          vim.opt.tabstop = 4
+          vim.opt.expandtab = true
+          vim.opt.softtabstop = 0
+          vim.opt.shiftwidth = 0
+
+          -- 2 char-wide overrides for specific file types
+          vim.api.nvim_create_augroup("two_space_tab", { clear = true })
+          vim.api.nvim_create_autocmd("FileType", {
+          	pattern = { "json", "html", "htmldjango", "hamlet", "nix", "scss", "typescript", "php", "haskell", "terraform" },
+          	command = "setlocal tabstop=2",
+          	group = "two_space_tab",
+          })
+
+          -- Set tera to use htmldjango syntax
+          vim.api.nvim_create_augroup("tera_htmldjango", { clear = true })
+          vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+          	pattern = "*.tera",
+          	command = "setfiletype htmldjango",
+          	group = "tera_htmldjango",
+          })
+
+          -- Options when composing mutt mail
+          vim.api.nvim_create_augroup("mail_settings", { clear = true })
+          vim.api.nvim_create_autocmd("FileType", {
+          	pattern = "mail",
+          	command = "set noautoindent wrapmargin=0 textwidth=0 linebreak wrap formatoptions+=w",
+          	group = "mail_settings",
+          })
+
+          -- Fix nvim size according to terminal
+          vim.api.nvim_create_augroup("fix_size", { clear = true })
+          vim.api.nvim_create_autocmd("VimEnter", {
+          	pattern = "*",
+          	command = "silent exec '!kill -s SIGWINCH' getpid()",
+          	group = "fix_size",
+          })
 
           -- Highlight when yanking (copying) text
           vim.api.nvim_create_autocmd("TextYankPost", {
@@ -167,24 +98,24 @@ in {
           		vim.highlight.on_yank()
           	end,
           })
-        '';
+
+          -- Diagnostic signs
+          function add_sign(name, text)
+          	vim.fn.sign_define(name, { text = text, texthl = name, numhl = name })
+          end
+
+          add_sign("DiagnosticSignError", "󰅚 ")
+          add_sign("DiagnosticSignWarn", " ")
+          add_sign("DiagnosticSignHint", "󰌶 ")
+          add_sign("DiagnosticSignInfo", " ")
+        
+'';
 
       plugins = with pkgs.vimPlugins; [
         vim-table-mode
         editorconfig-nvim
         vim-surround
         gruvbox-material-nvim
-        {
-          plugin = nvim-autopairs;
-          type = "lua";
-          config =
-            /*
-            lua
-            */
-            ''
-              require("nvim-autopairs").setup({})
-            '';
-        }
       ];
     };
 

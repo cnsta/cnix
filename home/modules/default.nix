@@ -5,6 +5,7 @@
     "${userModules}/comm/discord"
     "${userModules}/devtools/neovim"
     "${userModules}/devtools/vscode"
+    "${userModules}/devtools/helix"
     "${userModules}/gaming/lutris"
     "${userModules}/gaming/mangohud"
     "${userModules}/terminal/alacritty"

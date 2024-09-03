@@ -31,6 +31,12 @@
     php84Packages.php-cs-fixer
     phpactor
     python312Packages.python-lsp-server
+    bash-language-server
+    nil
+    nodePackages.vscode-langservers-extracted
+    clang-tools
+    marksman
+    pyright
 
     # Formatters
     alejandra
@@ -39,6 +45,7 @@
     nodePackages_latest.sql-formatter
     prettierd
     shfmt
+    luaformatter
     black
   ];
 }

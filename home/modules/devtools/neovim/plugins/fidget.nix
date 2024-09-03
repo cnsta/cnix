@@ -8,13 +8,13 @@
         lua
         */
         ''
-          require('fidget').setup{
-            progress = {
-              display = {
-                progress_icon = { pattern = "dots", period = 1 },
-              },
-          },
-          }
+          require("fidget").setup({
+          	progress = {
+          		display = {
+          			progress_icon = { pattern = "dots", period = 1 },
+          		},
+          	},
+          })
         '';
     }
   ];

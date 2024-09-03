@@ -3,22 +3,23 @@
     vim-illuminate
   ];
   imports = [
-    ./alpha-nvim.nix
-    ./bufferline-nvim.nix
-    ./comment-nvim.nix
-    ./copilot-lua.nix
-    ./fidget-nvim.nix
-    ./gitsigns-nvim.nix
+    ./alpha.nix
+    ./bufferline.nix
+    ./comment.nix
+    ./copilot.nix
+    ./fidget.nix
+    ./gitsigns.nix
     ./treesitter.nix
-    ./conform-nvim.nix
-    ./gx-nvim.nix
-    ./nvim-bqf.nix
-    ./nvim-colorizer-lua.nix
-    ./nvim-web-devicons.nix
+    ./conform.nix
+    ./gx.nix
+    ./bqf.nix
+    ./colorizer.nix
+    ./web-devicons.nix
     ./oil.nix
     ./lualine.nix
-    ./range-highlight-nvim.nix
-    ./vim-fugitive.nix
+    ./range-highlight.nix
+    ./fugitive.nix
     ./which-key.nix
+    ./autopairs.nix
   ];
 }
