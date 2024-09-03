@@ -7,6 +7,9 @@
 }: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.modules.wm.utils.hyprlock;
+
+  hyprlockFlake = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
+  # hyprlockPkg = pkgs.hyprlock;
 in {
   options = {
     modules.wm.utils.hyprlock.enable = mkEnableOption "Enables hyprlock";
@@ -14,8 +17,8 @@ in {
   config = mkIf cfg.enable {
     programs.hyprlock = {
       enable = true;
-      package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
-      settings = {
+      package = hyprlockFlake;
+        settings = {
         general = {
           disable_loading_bar = true;
           hide_cursor = true;

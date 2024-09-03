@@ -26,6 +26,7 @@
     "${systemModules}/sysd/powerd"
     "${systemModules}/sysd/samba"
     "${systemModules}/sysd/ssh"
+    "${systemModules}/sysd/pcscd"
     "${systemModules}/sysd/udisks"
     "${systemModules}/sysd/xserver/amd"
     "${systemModules}/sysd/xserver/amd/hhkbse"
@@ -35,8 +36,9 @@
     "${systemModules}/utils/anyrun"
     "${systemModules}/utils/corectrl"
     "${systemModules}/utils/microfetch"
-    "${systemModules}/utils/nix-ld"
     "${systemModules}/utils/misc"
+    "${systemModules}/utils/nix-ld"
     "${systemModules}/utils/npm"
+    "${systemModules}/utils/yubikey"
   ];
 }
