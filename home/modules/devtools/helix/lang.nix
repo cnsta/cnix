@@ -78,6 +78,24 @@
           auto-format = true;
           language-servers = ["dprint" "typescript-language-server"];
         }
+        {
+          name = "php";
+          auto-format = true;
+        }
+        {
+          name = "css";
+          auto-format = true;
+          language-servers = ["vscode-css-language-server"];
+        }
+        {
+          name = "rust";
+          auto-format = true;
+          file-types = ["rs"];
+          language-servers = ["rust-analyzer"];
+          formatter = {
+            command = lib.getExe pkgs.rustfmt;
+          };
+        }
       ]
       ++ prettierLangs langs;
 
@@ -95,7 +113,7 @@
       cmake-language-server = {
         command = lib.getExe pkgs.cmake-language-server;
       };
-      
+
       lua-language-server = {
         command = lib.getExe pkgs.lua-language-server;
       };
@@ -175,7 +193,7 @@
       };
 
       vscode-css-language-server = {
-        command = "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-css-languageserver";
+        command = "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-css-language-server";
         args = ["--stdio"];
         config = {
           provideFormatter = true;

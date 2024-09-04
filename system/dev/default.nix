@@ -37,6 +37,7 @@
     clang-tools
     marksman
     pyright
+    nodePackages_latest.intelephense
 
     # Formatters
     alejandra

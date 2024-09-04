@@ -16,6 +16,7 @@ in {
       pkgs.ripgrep
       pkgs.fd
       pkgs.beekeeper-studio
+      pkgs.gnused
     ];
   };
 }

@@ -13,7 +13,6 @@
 
     cnstConfig = "${self}/home/users/cnst";
     toothpickConfig = "${self}/home/users/toothpick";
-    adamConfig = "${self}/home/users/adam";
 
     userModules = "${self}/home/modules";
     systemModules = "${self}/system/modules";
@@ -26,7 +25,7 @@
     inherit (import "${systemConfig}") shared;
 
     # get these into the module system
-    specialArgs = {inherit inputs self userConfig systemConfig hostConfig cnstConfig toothpickConfig adamConfig userModules systemModules;};
+    specialArgs = {inherit inputs self userConfig systemConfig hostConfig cnstConfig toothpickConfig userModules systemModules;};
   in {
     cnix = nixosSystem {
       inherit specialArgs;
@@ -35,7 +34,7 @@
         ++ [
           ./cnix
           "${mod}/boot/lanzaboote"
-          "${mod}/nix/nh/cnix"
+          "${mod}/nix/nh/cnst"
           "${mod}/dev"
           {
             home-manager = {
@@ -54,7 +53,7 @@
         ++ [
           ./toothpc
           "${mod}/boot/lanzaboote"
-          "${mod}/nix/nh/toothpc"
+          "${mod}/nix/nh/toothpick"
           "${mod}/dev"
           {
             home-manager = {
@@ -66,18 +65,18 @@
           inputs.agenix.nixosModules.default
         ];
     };
-    adampad = nixosSystem {
+    cnixpad = nixosSystem {
       inherit specialArgs;
       modules =
         shared
         ++ [
-          ./adampad
+          ./cnixpad
           "${mod}/boot"
-          "${mod}/nix/nh/adampad"
+          "${mod}/nix/nh/cnst"
           "${mod}/dev"
           {
             home-manager = {
-              users.adam.imports = homeImports."adam@adampad";
+              users.cnst.imports = homeImports."cnst@cnixpad";
               extraSpecialArgs = specialArgs;
             };
           }
