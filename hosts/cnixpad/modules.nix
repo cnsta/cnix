@@ -42,7 +42,7 @@
       };
       network = {
         enable = true;
-        hostName = "adampad";
+        hostName = "cnixpad";
         interfaces = {
           "wlp6s0" = {
             allowedTCPPorts = [22 80 443];
@@ -113,7 +113,7 @@
     utils = {
       agenix = {
         enable = true;
-        adampad = {
+        cnixpad = {
           enable = true;
         };
       };

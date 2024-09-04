@@ -7,18 +7,18 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      usermodules = "nvim /home/cnst/.nix-config/home/users/cnst/modules.nix";
-      umod = "nvim /home/cnst/.nix-config/home/users/cnst/modules.nix";
-      systemmodules = "nvim /home/cnst/.nix-config/hosts/cnix/modules.nix";
-      smod = "nvim /home/cnst/.nix-config/hosts/cnix/modules.nix";
-      nixclean = "sudo nix run /home/cnst/.nix-config#cleanup-boot";
+      usermodules = "$EDITOR /home/$USER/.nix-config/home/users/$USER/modules.nix";
+      umod = "$EDITOR /home/$USER/.nix-config/home/users/$USER/modules.nix";
+      systemmodules = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
+      smod = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
+      nixclean = "sudo nix run /home/$USER/.nix-config#cleanup-boot";
       nixdev = "nix develop ~/.nix-config -c $SHELL";
-      nixconfig = "cd /home/cnst/.nix-config/";
+      nixconfig = "cd /home/$USER/.nix-config/";
       ll = "ls -l";
-      nixupdate = "nh os switch -v -H cnix && sudo nix run /home/cnst/.nix-config#cleanup-boot";
-      nixup = "nh os switch -H cnix && sudo nix run /home/cnst/.nix-config#cleanup-boot";
-      flakeupdate = "nh os switch -u -v -H cnix && sudo nix run /home/cnst/.nix-config#cleanup-boot";
-      flakeup = "nh os switch -u -H cnix && sudo nix run /home/cnst/.nix-config#cleanup-boot";
+      nixupdate = "nh os switch -v -H $HOST && sudo nix run /home/$USER/.nix-config#cleanup-boot";
+      nixup = "nh os switch -H $HOST && sudo nix run /home/$USER/.nix-config#cleanup-boot";
+      flakeupdate = "nh os switch -u -v -H $HOST && sudo nix run /home/$USER/.nix-config#cleanup-boot";
+      flakeup = "nh os switch -u -H $HOST && sudo nix run /home/$USER/.nix-config#cleanup-boot";
     };
     history = {
       size = 1000;
@@ -28,7 +28,6 @@
       enable = true;
       plugins = [
         "git"
-        #     "thefuck"
       ];
       theme = "robbyrussell";
     };
