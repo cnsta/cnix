@@ -2,9 +2,11 @@
   lib,
   config,
   pkgs,
+  osConfig,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
+  modKey = if osConfig.networking.hostName == "cnixpad" then "ALT_L" else "SUPER";
   cfg = config.modules.wm.hyprland.cnst.keybinds;
 in {
   options = {
@@ -22,7 +24,7 @@ in {
       "$yazi" = "wezterm -e yazi";
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
-      "$mod" = "SUPER";
+      "$mod" = modKey;
 
       bind = let
         grimblast = lib.getExe pkgs.grimblast;
