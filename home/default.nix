@@ -19,10 +19,10 @@
       ++ [
         ./users/cnst
       ];
-    "adam@adampad" =
+    "cnst@cnixpad" =
       sharedImports
       ++ [
-        ./users/adam
+        ./users/cnst
       ];
     "toothpick@toothpc" =
       sharedImports

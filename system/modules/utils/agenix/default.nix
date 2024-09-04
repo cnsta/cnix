@@ -22,10 +22,10 @@ in {
         default = false;
         description = "Apply toothpc agenix settings";
       };
-      adampad.enable = mkOption {
+      cnixpad.enable = mkOption {
         type = lib.types.bool;
         default = false;
-        description = "Apply adampad agenix settings";
+        description = "Apply cnixpad agenix settings";
       };
     };
   };
@@ -43,7 +43,7 @@ in {
           # Add toothpc specific secrets here
         };
       })
-      (mkIf cfg.adampad.enable {
+      (mkIf cfg.cnixpad.enable {
         secrets = {
           # Add adampad specific secrets here
         };
