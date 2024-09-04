@@ -61,9 +61,6 @@
       };
     };
     utils = {
-      ags = {
-        enable = false;
-      };
       anyrun = {
         enable = false;
       };
@@ -89,9 +86,6 @@
           enable = true;
         };
         toothpick = {
-          enable = false;
-        };
-        adam = {
           enable = false;
         };
       };

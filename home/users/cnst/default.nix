@@ -1,9 +1,17 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}: let
+  isCnixpad = osConfig.networking.hostName == "cnixpad";
+ in {
   imports = [
-    ./modules.nix
-    ./git.nix
-    ./shell.nix
-  ];
+      ./modules.nix
+      ./git.nix
+      ./shell.nix
+    ]
+    ++ lib.optionals isCnixpad [ ./cpmodules.nix ];
   home = {
     username = "cnst";
     homeDirectory = "/home/cnst";
@@ -15,7 +23,7 @@
     ];
     sessionVariables = {
       BROWSER = "firefox";
-      EDITOR = "nvim";
+      EDITOR = "hx";
       TERM = "xterm-256color";
 
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/cnst/.steam/root/compatibilitytools.d"; # proton and steam compat
