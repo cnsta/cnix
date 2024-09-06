@@ -66,58 +66,75 @@
       };
     };
     sysd = {
-      blueman = {
-        enable = false;
+      network = {
+        blueman = {
+          enable = false;
+        };
+        mullvad = {
+          enable = true;
+        };
+        samba = {
+          enable = false;
+        };
+        ssh = {
+          enable = true;
+        };
       };
-      dbus = {
-        enable = true;
+      security = {
+        agenix = {
+          enable = true;
+          toothpc = {
+            enable = true;
+          };
+        };
+        gnome-keyring = {
+          enable = true;
+        };
       };
-      fwupd = {
-        enable = true;
+      session = {
+        dbus = {
+          enable = true;
+        };
+        dconf = {
+          enable = true;
+        };
+        xserver = {
+          nvidia = {
+            enable = true;
+          };
+        };
       };
-      gnome-keyring = {
-        enable = true;
-      };
-      greetd = {
-        enable = true;
-      };
-      gvfs = {
-        enable = true;
-      };
-      locate = {
-        enable = true;
-      };
-      mullvad = {
-        enable = true;
-      };
-      pipewire = {
-        enable = true;
-      };
-      powerd = {
-        enable = true;
-      };
-      samba = {
-        enable = false;
-      };
-      ssh = {
-        enable = true;
-      };
-      udisks = {
-        enable = true;
-      };
-      xserver = {
-        nvidia = {
+      system = {
+        fwupd = {
+          enable = true;
+        };
+        greetd = {
+          enable = true;
+        };
+        gvfs = {
+          enable = true;
+        };
+        locate = {
+          enable = true;
+        };
+        nix-ld = {
+          enable = false;
+        };
+        pipewire = {
+          enable = true;
+        };
+        powerd = {
+          enable = true;
+        };
+        udisks = {
+          enable = true;
+        };
+        zram = {
           enable = true;
         };
       };
     };
     utils = {
-      agenix = {
-        enable = true;
-        toothpc = {
-          enable = true;
-        };
-      };
       android = {
         enable = false;
       };
@@ -138,6 +155,9 @@
       };
       npm = {
         enable = true;
+      };
+      yubikey = {
+        enable = false;
       };
     };
   };

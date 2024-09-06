@@ -65,48 +65,62 @@
       };
     };
     sysd = {
-      blueman = {
-        enable = true;
-      };
-      dbus = {
-        enable = true;
-      };
-      fwupd = {
-        enable = true;
-      };
-      gnome-keyring = {
-        enable = true;
-      };
-      greetd = {
-        enable = true;
-      };
-      gvfs = {
-        enable = true;
-      };
-      locate = {
-        enable = true;
-      };
-      mullvad = {
-        enable = true;
-      };
-      pipewire = {
-        enable = true;
-      };
-      powerd = {
-        enable = true;
-      };
-      samba = {
-        enable = false;
-      };
-      ssh = {
-        enable = true;
-      };
-      udisks = {
-        enable = true;
-      };
-      xserver = {
-        amd = {
+      network = {
+        blueman = {
           enable = true;
+        };
+        mullvad = {
+          enable = true;
+        };
+        samba = {
+          enable = false;
+        };
+        ssh = {
+          enable = true;
+        };
+      };
+      security = {
+        gnome-keyring = {
+          enable = true;
+        };
+      };
+      session = {
+        dbus = {
+          enable = true;
+        };
+        dconf = {
+          enable = true;
+        };
+        xserver = {
+          amd = {
+            enable = true;
+          };
+        };
+      };
+      system = {
+        fwupd = {
+          enable = true;
+        };
+        greetd = {
+          enable = true;
+        };
+        gvfs = {
+          enable = true;
+        };
+        locate = {
+          enable = true;
+        };
+        pipewire = {
+          enable = true;
+        };
+        powerd = {
+          enable = true;
+        };
+        udisks = {
+          enable = true;
+        };
+        zram = {
+          enable = false;
         };
       };
     };

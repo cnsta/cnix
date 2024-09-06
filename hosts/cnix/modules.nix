@@ -65,63 +65,83 @@
       };
     };
     sysd = {
-      blueman = {
-        enable = true;
+      network = {
+        blueman = {
+          enable = true;
+        };
+        mullvad = {
+          enable = true;
+        };
+        samba = {
+          enable = false;
+        };
+        ssh = {
+          enable = true;
+        };
       };
-      dbus = {
-        enable = true;
-      };
-      fwupd = {
-        enable = true;
-      };
-      gnome-keyring = {
-        enable = true;
-      };
-      greetd = {
-        enable = true;
-      };
-      gvfs = {
-        enable = true;
-      };
-      locate = {
-        enable = true;
-      };
-      mullvad = {
-        enable = true;
-      };
-      pipewire = {
-        enable = true;
-      };
-      powerd = {
-        enable = true;
-      };
-      samba = {
-        enable = false;
-      };
-      ssh = {
-        enable = true;
-      };
-      udisks = {
-        enable = true;
-      };
-      pcscd = {
-        enable = true;
-      };
-      xserver = {
-        amd = {
-          hhkbse = {
+      security = {
+        agenix = {
+          enable = true;
+          cnix = {
             enable = true;
           };
+        };
+        gnome-keyring = {
+          enable = true;
+        };
+      };
+      session = {
+        dbus = {
+          enable = true;
+        };
+        dconf = {
+          enable = true;
+        };
+        xserver = {
+          amd = {
+            hhkbse = {
+              enable = true;
+            };
+          };
+          nvidia = {
+            enable = false;
+          };
+        };
+      };
+      system = {
+        fwupd = {
+          enable = true;
+        };
+        greetd = {
+          enable = true;
+        };
+        gvfs = {
+          enable = true;
+        };
+        locate = {
+          enable = true;
+        };
+        nix-ld = {
+          enable = false;
+        };
+        pcscd = {
+          enable = true;
+        };
+        pipewire = {
+          enable = true;
+        };
+        powerd = {
+          enable = true;
+        };
+        udisks = {
+          enable = true;
+        };
+        zram = {
+          enable = true;
         };
       };
     };
     utils = {
-      agenix = {
-        enable = true;
-        cnix = {
-          enable = true;
-        };
-      };
       android = {
         enable = true;
       };
@@ -133,9 +153,6 @@
       };
       microfetch = {
         enable = true;
-      };
-      nix-ld = {
-        enable = false;
       };
       misc = {
         enable = true;
