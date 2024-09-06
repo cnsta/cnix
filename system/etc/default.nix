@@ -6,7 +6,6 @@
     ./fonts
     ./security
     ./xdg
-    ./zram
     ./zsh
   ];
 }
