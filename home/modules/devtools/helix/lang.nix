@@ -57,6 +57,16 @@
           language-servers = ["dprint" "typescript-language-server"];
         }
         {
+          name = "nix";
+          auto-format = true;
+          file-types = ["nix"];
+          language-servers = ["nil"];
+          formatter = {
+            command = lib.getExe pkgs.alejandra;
+            args = ["-q"];
+          };
+        }
+        {
           name = "json";
           formatter = deno "json";
         }
@@ -67,7 +77,7 @@
         }
         {
           name = "python";
-          language-servers = ["pyright"];
+          language-servers = ["pylsp"];
           formatter = {
             command = lib.getExe pkgs.black;
             args = ["-" "--quiet" "--line-length 100"];
@@ -100,6 +110,11 @@
       ++ prettierLangs langs;
 
     language-server = {
+      gpt = {
+        command = "helix-gpt";
+        args = ["--copilotApiKey" "cat /run/agenix/helix-gpt"];
+      };
+
       bash-language-server = {
         command = lib.getExe pkgs.bash-language-server;
         args = ["start"];
@@ -148,7 +163,6 @@
 
       nil = {
         command = lib.getExe pkgs.nil;
-        config.nil.formatting.command = ["${lib.getExe pkgs.alejandra}" "-q"];
       };
 
       pyright = {

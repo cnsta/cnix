@@ -36,6 +36,11 @@ in {
         secrets = {
           cnstssh.file = "${self}/secrets/cnstssh.age";
           cnixssh.file = "${self}/secrets/cnixssh.age";
+          helix-gpt = {
+            file = "${self}/secrets/helix-gpt.age";
+            owner = "cnst";
+            group = "users";
+          };
         };
       })
       (mkIf cfg.toothpc.enable {
