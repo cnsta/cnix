@@ -45,6 +45,13 @@ in {
     ];
   };
 
+  swapDevices = [
+    {
+      device = "var/lib/swapfile";
+      size = 32 * 1024;
+    }
+  ];
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = lib.mkDefault "23.11";
 }
