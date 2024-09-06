@@ -38,6 +38,7 @@
     marksman
     pyright
     nodePackages_latest.intelephense
+    helix-gpt
 
     # Formatters
     alejandra
