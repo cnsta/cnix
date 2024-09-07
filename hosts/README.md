@@ -1,6 +1,6 @@
 ```
-├── hosts
-│   ├── adampad
-│   ├── cnix
-│   └── toothpc
+hosts
+├── adampad
+├── cnix
+└── toothpc
 ```
