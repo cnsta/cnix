@@ -17,6 +17,7 @@ in {
       pkgs.fd
       pkgs.beekeeper-studio
       pkgs.gnused
+      pkgs.tree
     ];
   };
 }
