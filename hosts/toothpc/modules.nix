@@ -147,9 +147,6 @@
       microfetch = {
         enable = true;
       };
-      nix-ld = {
-        enable = false;
-      };
       misc = {
         enable = true;
       };

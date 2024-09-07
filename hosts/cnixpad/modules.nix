@@ -80,6 +80,12 @@
         };
       };
       security = {
+        agenix = {
+          enable = true;
+          cnixpad = {
+            enable = true;
+          };
+        };
         gnome-keyring = {
           enable = true;
         };
@@ -110,6 +116,9 @@
         locate = {
           enable = true;
         };
+        nix-ld = {
+          enable = false;
+        };
         pipewire = {
           enable = true;
         };
@@ -125,12 +134,6 @@
       };
     };
     utils = {
-      agenix = {
-        enable = true;
-        cnixpad = {
-          enable = true;
-        };
-      };
       android = {
         enable = true;
       };
@@ -142,9 +145,6 @@
       };
       microfetch = {
         enable = true;
-      };
-      nix-ld = {
-        enable = false;
       };
       misc = {
         enable = true;
