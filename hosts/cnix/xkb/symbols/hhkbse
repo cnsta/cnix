@@ -31,7 +31,7 @@ xkb_symbols "hhkbse" {
 	key <AD09> {[         o,          O                             ]};
 	key <AD10> {[         p,          P,           Up,     Greek_pi ]};
 	key <AD11> {[     aring,      Aring                             ]};
-	key <AD12> {[apostrophe,asciicircum,   asciitilde               ]};
+	key <AD12> {[apostrophe,asciicircum,   asciitilde,        grave ]};
 	key <AC01> {[         a,          A                             ]};
 	key <AC02> {[         s,          S                             ]};
 	key <AC03> {[         d,          D                             ]};
