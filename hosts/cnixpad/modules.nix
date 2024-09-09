@@ -140,6 +140,9 @@
       anyrun = {
         enable = true;
       };
+      brightnessctl = {
+        enable = true;
+      };
       corectrl = {
         enable = false;
       };
