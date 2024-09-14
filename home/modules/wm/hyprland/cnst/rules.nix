@@ -16,6 +16,10 @@ in {
         "float,initialTitle:(floatcal)"
         "size 843 650,initialTitle:(floatcal)"
         "move 100%-w-20 40,initialTitle:(floatcal)"
+        "float,initialTitle:(runix)"
+        "size 600 400,initialTitle:(runix)"
+        "center,initialTitle:(runix)"
+        "workspace special:runix,initialTitle:(runix)"
         #windowrulev2 = move 1708 32,class:(floatcal)
         "float,class:(org.keepassxc.KeePassXC)"
         "size 843 500,class:(org.keepassxc.KeePassXC)"

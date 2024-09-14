@@ -6,7 +6,14 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  modKey = if osConfig.networking.hostName == "cnixpad" then "ALT_L" else "SUPER";
+  modKey =
+    if osConfig.networking.hostName == "cnixpad"
+    then "ALT_L"
+    else "SUPER";
+  term =
+    if osConfig.networking.hostName == "cnixpad"
+    then "alacritty"
+    else "wezterm";
   cfg = config.modules.wm.hyprland.cnst.keybinds;
 in {
   options = {
@@ -14,7 +21,7 @@ in {
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
-      "$terminal" = "wezterm";
+      "$terminal" = term;
       "$fileManager" = "thunar";
       "$passwordManager" = "keepassxc";
       "$menu" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
@@ -22,6 +29,7 @@ in {
       "$browser" = "firefox";
       "$browserinc" = "firefox --private-window";
       "$yazi" = "wezterm -e yazi";
+      "$runix" = "runix.sh";
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       "$mod" = modKey;
@@ -44,6 +52,7 @@ in {
         #bind = $mod, M, exec, hyprctl dispatch exit
         #bind = $mod, E, exec, $fileManager
         "$mod, E, exec, $fileManager"
+        "$mod, r, exec, $runix"
         "$mod SHIFT, E, exec, $yazi"
         "$mod, F, fullscreen,"
         "$mod SHIFT, F, togglefloating,"
