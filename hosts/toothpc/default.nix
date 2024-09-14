@@ -41,7 +41,7 @@ in {
       "i2c_nvidia_gpu"
     ];
     consoleLogLevel = 3;
-    kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
     kernelParams = [
       "quiet"
       "splash"
