@@ -2,14 +2,14 @@
   inherit (lib) mkForce;
 in {
   modules = {
-    # browsers = {
-    #   firefox = {
-    #     enable = mkForce true;
-    #   };
-    #   chromium = {
-    #     enable = mkForce true;
-    #   };
-    # };
+    browsers = {
+      #   firefox = {
+      #     enable = mkForce true;
+      #   };
+      chromium = {
+        enable = mkForce false;
+      };
+    };
     # comm = {
     #   discord = {
     #     enable = mkForce true;
@@ -34,23 +34,23 @@ in {
     #     enable = mkForce false;
     #   };
     # };
-    # terminal = {
-    #   alacritty = {
-    #     enable = mkForce true;
-    #   };
-    #   foot = {
-    #     enable = mkForce true;
-    #   };
-    #   kitty = {
-    #     enable = mkForce true;
-    #   };
-    #   wezterm = {
-    #     enable = mkForce true;
-    #   };
-    #   zellij = {
-    #     enable = mkForce false;
-    #   };
-    # };
+    terminal = {
+      #   alacritty = {
+      #     enable = mkForce true;
+      #   };
+      #   foot = {
+      #     enable = mkForce true;
+      #   };
+      #   kitty = {
+      #     enable = mkForce true;
+      #   };
+      wezterm = {
+        enable = mkForce false;
+      };
+      #   zellij = {
+      #     enable = mkForce false;
+      #   };
+    };
     # userd = {
     #   copyq = {
     #     enable = mkForce true;

@@ -37,7 +37,7 @@ in {
 
   boot = {
     consoleLogLevel = 3;
-    kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
     kernelParams = [
       "amd_pstate=active"
       "quiet"
