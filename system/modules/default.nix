@@ -37,6 +37,7 @@
     "${systemModules}/sysd/system/zram"
     "${systemModules}/utils/android"
     "${systemModules}/utils/anyrun"
+    "${systemModules}/utils/brightnessctl"
     "${systemModules}/utils/corectrl"
     "${systemModules}/utils/microfetch"
     "${systemModules}/utils/misc"

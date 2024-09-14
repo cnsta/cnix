@@ -5,7 +5,6 @@
   imports = [
     ./alpha.nix
     ./bufferline.nix
-    ./comment.nix
     ./copilot.nix
     ./fidget.nix
     ./gitsigns.nix
