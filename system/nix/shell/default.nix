@@ -2,23 +2,41 @@
   default = pkgs.mkShell {
     NIX_CONFIG = "extra-experimental-features = nix-command flakes";
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+
     nativeBuildInputs = with pkgs; [
-      # Wayland-specific dependencies
-      wayland # Wayland client library
-      wayland-protocols # Wayland protocols (essential for building against Wayland)
-      pkg-config # Helps to manage libraries during compilation
+      # Build tools
+      cmake # Build system generator
+      gnumake # GNU Make
+      pkg-config # Manages library paths during compilation
+      perl # Scripting language, sometimes needed during builds
 
-      # Aquamarine: Hyprland's new compositor library
-      aquamarine # Aquamarine compositor library for Wayland
+      # Version control
+      git # Version control system
 
-      # Other utilities and tools
-      openssl # Required for some crates that involve networking or encryption
-      git # Version control system, useful for development
+      # Auto-patching (include if needed)
+      autoPatchelfHook # Automatically patches ELF binaries
+
+      # Scripting languages (include if needed)
+      # nodejs       # JavaScript runtime environment
     ];
+
+    buildInputs = with pkgs; [
+      # Graphics and UI libraries
+      aquamarine # Aquamarine compositor library for Wayland
+      egl-wayland # EGLStream-based Wayland platform
+      wayland # Wayland client library
+      wayland-protocols # Wayland protocols for Wayland applications
+
+      # Cryptography
+      openssl # TLS/SSL library for networking and encryption
+    ];
+
     shellHook = ''
+      # Set LD_LIBRARY_PATH if needed (temporary fix)
+      # export LD_LIBRARY_PATH="${pkgs.openssl.out}/lib:$LD_LIBRARY_PATH"
+
       # Set SHELL to zsh if available
       export SHELL=$(which zsh)
-      # Optionally, start zsh directly if it's not the current shell
       if [ "$SHELL" != "$(which zsh)" ]; then
         exec $SHELL
       fi
