@@ -20,7 +20,8 @@ in {
   config = mkIf cfg.enable {
     programs.helix = {
       enable = true;
-      package = inputs.helix.packages.${pkgs.system}.default;
+      # package = inputs.helix.packages.${pkgs.system}.default;
+      package = inputs.helix-flake.packages.${pkgs.system}.default;
 
       settings = {
         theme = "gruvbox_custom";

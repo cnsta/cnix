@@ -96,6 +96,8 @@
 
     # Miscellaneous
     helix.url = "github:SoraTenshi/helix/new-daily-driver";
+    helix-flake.url = "github:helix-editor/helix";
+
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs = {
