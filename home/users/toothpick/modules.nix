@@ -55,9 +55,6 @@
       };
     };
     utils = {
-      ags = {
-        enable = false;
-      };
       anyrun = {
         enable = false;
       };

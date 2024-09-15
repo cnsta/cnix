@@ -1502,11 +1502,11 @@
         "systems": "systems_7"
       },
       "locked": {
-        "lastModified": 1726403814,
-        "narHash": "sha256-by72+sV6Q3h2c9jjqqEQFGuOhZy8G29qF6HKDomoWWs=",
+        "lastModified": 1726413442,
+        "narHash": "sha256-vnuV8eKEO2/MgcxR1G8D3iIEa83SKlbrQpsEAKUYRpc=",
         "ref": "refs/heads/main",
-        "rev": "a8fce63c468fc4689a83c06d2f7eb8d5e8900f2f",
-        "revCount": 4,
+        "rev": "ac4002abb28571f367264b176cf13b11e7aa406a",
+        "revCount": 5,
         "type": "git",
         "url": "https://git.sr.ht/~canasta/runix"
       },
@@ -1815,11 +1815,11 @@
       },
       "locked": {
         "dir": "nix",
-        "lastModified": 1726359931,
-        "narHash": "sha256-yGcSRN6T7YgRI2k0LpcKwuJQ+QO/YvzBVeUaWtlMN3U=",
+        "lastModified": 1726405016,
+        "narHash": "sha256-U0hJ4RqzyIi8EqTTA7twkvnyXVgoKnvpIfBoIAdH0FE=",
         "owner": "wez",
         "repo": "wezterm",
-        "rev": "1eddc9157f51577d7984dd6aec3b780ecec1d4a0",
+        "rev": "09ac8c53777ac6de61b757292f5dc4da80322bbd",
         "type": "github"
       },
       "original": {
