@@ -15,6 +15,7 @@ in {
       "$terminal" = "foot";
       "$fileManager" = "thunar";
       "$passwordManager" = "keepassxc";
+      "$runix" = "runix.sh";
       "$menu" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
       "$menuw" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
       "$browser" = "firefox";
@@ -45,7 +46,7 @@ in {
         "$mod SHIFT, E, exec, $ranger"
         "$mod, F, fullscreen,"
         "$mod SHIFT, F, togglefloating,"
-        "$mod, SPACE, exec, $menu"
+        "$mod, SPACE, exec, $runix"
         "$mod, P, pseudo," # dwindle
         "$mod, J, togglesplit," # dwindle
         "$mod, C, exec, hyprctl dispatch exec copyq toggle"
