@@ -1,15 +1,6 @@
 #!/usr/bin/env bash
 
 # Script to clean up old initrd and kernel files in /boot/EFI/nixos
-#
-# Build the script with:
-#   nix build .#packages.x86_64-linux.cleanup-boot
-# Run the script with:
-#   nix run .#cleanup-boot -- --dry-run
-# The '--' is required to pass arguments to the script.
-#
-# This script keeps the latest N versions and allows you to specify how many
-# kernel/initrd files to keep per version.
 
 # Exit on any error, undefined variable, or pipeline failure
 set -euo pipefail
@@ -20,11 +11,9 @@ if ((BASH_VERSINFO[0] < 4)); then
   exit 1
 fi
 
-# Default number of versions to keep
-KEEP_VERSIONS=4
-
-# Default number of files to keep per version (0 means keep all)
-KEEP_FILES_PER_VERSION=0
+# Default number of versions and files to keep
+KEEP_KERNEL=4
+KEEP_INITRD=6
 
 # Log file for cleanup actions
 LOG_FILE="/var/log/cleanup-boot.log"
@@ -34,19 +23,17 @@ DRY_RUN=false
 
 # Function to display usage information
 usage() {
-  echo "Usage: $0 [--dry-run] [--keep N] [--keep-per-version M] [--help]"
-  echo
-  echo "Note: When running with 'nix run', use '--' before script arguments."
+  echo "Usage: $0 [--dry-run] [--keep-kernel N] [--keep-initrd N] [--help]"
   echo
   echo "Options:"
-  echo "  --dry-run             Perform a trial run with no changes made."
-  echo "  --keep N              Keep the latest N versions (default: 4)."
-  echo "  --keep-per-version M  Keep the latest M files per version (default: keep all)."
-  echo "  --help, -h            Show this help message."
+  echo "  --dry-run         Perform a trial run with no changes made."
+  echo "  --keep-kernel N   Keep the latest N kernel files (default: 4)."
+  echo "  --keep-initrd N   Keep the latest N initrd files (default: 6)."
+  echo "  --help, -h        Show this help message."
   echo
   echo "Examples:"
-  echo "  nix run .#cleanup-boot -- --dry-run"
-  echo "  ./result --keep 5 --keep-per-version 2"
+  echo "  ./cleanup-boot.sh --dry-run"
+  echo "  ./cleanup-boot.sh --keep-kernel 3 --keep-initrd 5"
   exit 1
 }
 
@@ -56,21 +43,21 @@ while [[ "$#" -gt 0 ]]; do
   --dry-run)
     DRY_RUN=true
     ;;
-  --keep)
+  --keep-kernel)
     if [[ -n "${2:-}" && "$2" =~ ^[1-9][0-9]*$ ]]; then
-      KEEP_VERSIONS="$2"
+      KEEP_KERNEL="$2"
       shift
     else
-      echo "Error: --keep requires a positive integer."
+      echo "Error: --keep-kernel requires a positive integer."
       usage
     fi
     ;;
-  --keep-per-version)
-    if [[ -n "${2:-}" && "$2" =~ ^[0-9]+$ ]]; then
-      KEEP_FILES_PER_VERSION="$2"
+  --keep-initrd)
+    if [[ -n "${2:-}" && "$2" =~ ^[1-9][0-9]*$ ]]; then
+      KEEP_INITRD="$2"
       shift
     else
-      echo "Error: --keep-per-version requires a non-negative integer."
+      echo "Error: --keep-initrd requires a positive integer."
       usage
     fi
     ;;
@@ -105,12 +92,7 @@ log() {
   logger -t cleanup-boot "$message"
 }
 
-log "Starting cleanup script. Keeping the latest $KEEP_VERSIONS versions."
-if [ "$KEEP_FILES_PER_VERSION" -gt 0 ]; then
-  log "Keeping the latest $KEEP_FILES_PER_VERSION files per version."
-else
-  log "Keeping all files per version."
-fi
+log "Starting cleanup script. Keeping $KEEP_KERNEL kernel files and $KEEP_INITRD initrd files."
 
 # Collect all .efi files in /boot/EFI/nixos
 mapfile -d '' -t efi_files < <(find /boot/EFI/nixos -type f -name '*.efi' -print0)
@@ -183,13 +165,10 @@ version_count=${#sorted_versions[@]}
 
 log "Found $version_count versions."
 
-if [ "$version_count" -le "$KEEP_VERSIONS" ]; then
-  log "Fewer than or equal to $KEEP_VERSIONS versions found. No files will be deleted."
+if [ "$version_count" -eq 0 ]; then
+  log "No versions found."
   exit 0
 fi
-
-# Determine versions to delete
-versions_to_delete=("${sorted_versions[@]:$KEEP_VERSIONS}")
 
 # Initialize delete_files array
 delete_files=()
@@ -197,32 +176,20 @@ delete_files=()
 # Log the files identified for deletion
 log "Files identified for deletion:"
 
-# Process versions to delete
-for version in "${versions_to_delete[@]}"; do
-  kernel_files="${kernels_files_by_version["$version"]:-}"
+# Process initrd files
+for version in "${sorted_versions[@]}"; do
   initrd_files="${initrds_files_by_version["$version"]:-}"
 
-  # Delete all kernel files
-  if [ -n "$kernel_files" ]; then
-    IFS=''
-    mapfile -t kernel_files_array <<<"$kernel_files"
-    unset IFS
-    if [ "${#kernel_files_array[@]}" -gt 0 ]; then
-      for entry in "${kernel_files_array[@]}"; do
-        file="${entry#*|}"
-        delete_files+=("$file")
-        log "$file"
-      done
-    fi
-  fi
-
-  # Delete all initrd files
   if [ -n "$initrd_files" ]; then
     IFS=''
     mapfile -t initrd_files_array <<<"$initrd_files"
     unset IFS
-    if [ "${#initrd_files_array[@]}" -gt 0 ]; then
-      for entry in "${initrd_files_array[@]}"; do
+    # Sort initrd files by mtime and filename (newest first)
+    mapfile -t sorted_initrd_files < <(printf '%s\n' "${initrd_files_array[@]}" | sort -rn -k1,1 -k2,2)
+    initrd_file_count=${#sorted_initrd_files[@]}
+    if [ "$KEEP_INITRD" -gt 0 ] && [ "$initrd_file_count" -gt "$KEEP_INITRD" ]; then
+      files_to_delete=("${sorted_initrd_files[@]:$KEEP_INITRD}")
+      for entry in "${files_to_delete[@]}"; do
         file="${entry#*|}"
         delete_files+=("$file")
         log "$file"
@@ -231,10 +198,10 @@ for version in "${versions_to_delete[@]}"; do
   fi
 done
 
-# Process versions to keep
-for version in "${sorted_versions[@]:0:$KEEP_VERSIONS}"; do
-  # Process kernel files
+# Process kernel files
+for version in "${sorted_versions[@]}"; do
   kernel_files="${kernels_files_by_version["$version"]:-}"
+
   if [ -n "$kernel_files" ]; then
     IFS=''
     mapfile -t kernel_files_array <<<"$kernel_files"
@@ -242,27 +209,8 @@ for version in "${sorted_versions[@]:0:$KEEP_VERSIONS}"; do
     # Sort kernel files by mtime and filename (newest first)
     mapfile -t sorted_kernel_files < <(printf '%s\n' "${kernel_files_array[@]}" | sort -rn -k1,1 -k2,2)
     kernel_file_count=${#sorted_kernel_files[@]}
-    if [ "$KEEP_FILES_PER_VERSION" -gt 0 ] && [ "$kernel_file_count" -gt "$KEEP_FILES_PER_VERSION" ]; then
-      files_to_delete=("${sorted_kernel_files[@]:$KEEP_FILES_PER_VERSION}")
-      for entry in "${files_to_delete[@]}"; do
-        file="${entry#*|}"
-        delete_files+=("$file")
-        log "$file"
-      done
-    fi
-  fi
-
-  # Process initrd files
-  initrd_files="${initrds_files_by_version["$version"]:-}"
-  if [ -n "$initrd_files" ]; then
-    IFS=''
-    mapfile -t initrd_files_array <<<"$initrd_files"
-    unset IFS
-    # Sort initrd files by mtime and filename (newest first)
-    mapfile -t sorted_initrd_files < <(printf '%s\n' "${initrd_files_array[@]}" | sort -rn -k1,1 -k2,2)
-    initrd_file_count=${#sorted_initrd_files[@]}
-    if [ "$KEEP_FILES_PER_VERSION" -gt 0 ] && [ "$initrd_file_count" -gt "$KEEP_FILES_PER_VERSION" ]; then
-      files_to_delete=("${sorted_initrd_files[@]:$KEEP_FILES_PER_VERSION}")
+    if [ "$KEEP_KERNEL" -gt 0 ] && [ "$kernel_file_count" -gt "$KEEP_KERNEL" ]; then
+      files_to_delete=("${sorted_kernel_files[@]:$KEEP_KERNEL}")
       for entry in "${files_to_delete[@]}"; do
         file="${entry#*|}"
         delete_files+=("$file")
@@ -284,8 +232,14 @@ fi
 
 # Remove old files
 for file in "${delete_files[@]}"; do
+  # Skip empty entries
+  if [[ -z "$file" ]]; then
+    continue
+  fi
+
   # Resolve absolute path
   resolved_file=$(realpath "$file")
+
   # Security check: Ensure the file is within /boot/EFI/nixos
   if [[ "$resolved_file" != /boot/EFI/nixos/* ]]; then
     log "Warning: Attempted to delete file outside of /boot/EFI/nixos: $resolved_file"
