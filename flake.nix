@@ -130,5 +130,8 @@
       url = "github:wez/wezterm/main?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Custom apps
+    runix.url = "git+https://git.sr.ht/~canasta/runix";
   };
 }
