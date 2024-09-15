@@ -4,8 +4,6 @@ let
     ./nix
     ./modules
   ];
-  desktop = [
-  ];
 in {
-  inherit shared desktop;
+  inherit shared;
 }
