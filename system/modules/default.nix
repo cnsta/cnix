@@ -14,6 +14,8 @@
     "${systemModules}/studio/blender"
     "${systemModules}/studio/gimp"
     "${systemModules}/studio/inkscape"
+    "${systemModules}/studio/beekeeper"
+    "${systemModules}/studio/mysql-workbench"
     "${systemModules}/sysd/network/blueman"
     "${systemModules}/sysd/network/mullvad"
     "${systemModules}/sysd/network/samba"
