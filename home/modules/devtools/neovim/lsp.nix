@@ -47,7 +47,7 @@
           	onEdit = true,
           	onOpenAndSave = true,
           } })
-          add_lsp(lspconfig.tsserver, {})
+          add_lsp(lspconfig.ts_ls, {})
           add_lsp(lspconfig.typst_lsp, {})
           add_lsp(lspconfig.elixirls, { cmd = { "elixir-ls" } })
         '';
