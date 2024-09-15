@@ -16,8 +16,6 @@
       git
       scx
       stow
-      winetricks
-      protonup
     ];
     localBinInPath = true;
   };
@@ -49,7 +47,7 @@
       automatic = true;
       dates = "weekly";
       # Keep the last 3 generations
-      options = "--delete-older-than +3";
+      options = "--delete-older-than 30d";
     };
   };
 }
