@@ -90,6 +90,14 @@ in {
           	group = "fix_size",
           })
 
+          -- Optionally, set up a command or auto-command to format on save
+          vim.api.nvim_create_autocmd("BufWritePre", {
+          	pattern = "*",
+          	callback = function()
+          		require("conform").format()
+          	end,
+          })
+
           -- Highlight when yanking (copying) text
           vim.api.nvim_create_autocmd("TextYankPost", {
           	desc = "Highlight when yanking (copying) text",
@@ -108,8 +116,8 @@ in {
           add_sign("DiagnosticSignWarn", " ")
           add_sign("DiagnosticSignHint", "󰌶 ")
           add_sign("DiagnosticSignInfo", " ")
-        
-'';
+
+        '';
 
       plugins = with pkgs.vimPlugins; [
         vim-table-mode

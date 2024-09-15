@@ -6,8 +6,8 @@
   ...
 }: let
   enable_wayland = "true";
-  # weztermPkg = pkgs.wezterm;
-  weztermFlake = inputs.wezterm.packages.${pkgs.system}.default;
+  weztermPkg = pkgs.wezterm;
+  # weztermFlake = inputs.wezterm.packages.${pkgs.system}.default;
   inherit (lib) mkIf mkEnableOption;
   cfg = config.modules.terminal.wezterm;
 in {
@@ -17,7 +17,7 @@ in {
   config = mkIf cfg.enable {
     programs.wezterm = {
       enable = true;
-      package = weztermFlake;
+      package = weztermPkg;
       extraConfig =
         /*
         lua
