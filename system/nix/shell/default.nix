@@ -1,7 +1,19 @@
-{pkgs ? import <nixpkgs> {}, ...}: {
+{
+  inputs,
+  pkgs ? import <nixpkgs> {},
+  ...
+}: {
   default = pkgs.mkShell {
-    NIX_CONFIG = "extra-experimental-features = nix-command flakes";
-    RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+    # Add Rust toolchain from Fenix and rust-analyzer-nightly
+    packages = [
+      (inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.withComponents [
+        "cargo"
+        "clippy"
+        "rust-src"
+        "rustc"
+        "rustfmt"
+      ])
+    ];
 
     nativeBuildInputs = with pkgs; [
       # Build tools
