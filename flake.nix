@@ -11,7 +11,7 @@
       ];
 
       perSystem = {pkgs, ...}: {
-        devShells = import ./system/nix/shell {inherit pkgs;};
+        devShells = import ./system/nix/shell {inherit pkgs inputs;};
         formatter = pkgs.alejandra;
 
         packages.cleanup-boot = pkgs.buildFHSUserEnv {
