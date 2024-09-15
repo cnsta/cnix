@@ -63,6 +63,12 @@
       inkscape = {
         enable = true;
       };
+      beekeeper = {
+        enable = true;
+      };
+      mysql-workbench = {
+        enable = true;
+      };
     };
     sysd = {
       network = {
@@ -156,6 +162,7 @@
       };
       misc = {
         enable = true;
+        desktop.enable = true;
       };
       npm = {
         enable = true;
