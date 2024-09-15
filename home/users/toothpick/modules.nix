@@ -70,6 +70,9 @@
       yazi = {
         enable = true;
       };
+      runix = {
+        enable = true;
+      };
       misc = {
         enable = true;
       };
