@@ -22,6 +22,7 @@
     "${userModules}/utils/waybar"
     "${userModules}/utils/yazi"
     "${userModules}/utils/zathura"
+    "${userModules}/utils/runix"
     "${userModules}/wm/hyprland"
     "${userModules}/wm/utils/hypridle"
     "${userModules}/wm/utils/hyprlock"
