@@ -64,10 +64,10 @@
         enable = true;
       };
       beekeeper = {
-        enable = true;
+        enable = false;
       };
       mysql-workbench = {
-        enable = true;
+        enable = false;
       };
     };
     sysd = {

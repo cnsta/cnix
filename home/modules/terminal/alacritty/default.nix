@@ -43,7 +43,7 @@ in {
           };
         };
         font = {
-          size = 10;
+          size = 12;
           normal = {
             family = "Input Mono Compressed";
             style = "Light";

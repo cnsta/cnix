@@ -10,6 +10,7 @@
   sharedImports = [
     ./modules
     ./etc
+    "${self}/.scripts"
   ];
 
   # Define homeImports for each user, including sharedImports
