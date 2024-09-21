@@ -38,6 +38,7 @@
       egl-wayland # EGLStream-based Wayland platform
       wayland # Wayland client library
       wayland-protocols # Wayland protocols for Wayland applications
+      gtk3
 
       # Cryptography
       openssl # TLS/SSL library for networking and encryption

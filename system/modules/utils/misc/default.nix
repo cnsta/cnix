@@ -22,9 +22,6 @@ in {
     environment.systemPackages = mkMerge [
       [
         pkgs.nodejs_22
-        pkgs.ripgrep
-        pkgs.fd
-        pkgs.gnused
         pkgs.tree
       ]
       (mkIf cfg.desktop.enable [

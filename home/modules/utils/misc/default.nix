@@ -43,6 +43,7 @@ in {
       pavucontrol # GUI sound control
       qbittorrent
       usbimager # write bootable usb images!
+      slurp # select region for screenshot
       # misc.tui
       ranger
       xcur2png
@@ -52,7 +53,11 @@ in {
       hyprpicker # Color picker
       libnotify
       pamixer # TUI sound control
-      slurp # select region for screenshot
+      ripgrep
+      file
+      fd
+      gnused
+      nix-tree
       # misc.system
       adwaita-icon-theme
       qt5.qtwayland
@@ -62,6 +67,10 @@ in {
       wpa_supplicant
       xfce.thunar-archive-plugin
       xfce.thunar-volman
+      unzip
+      zip
+      gnutar
+      p7zip
     ];
   };
 }
