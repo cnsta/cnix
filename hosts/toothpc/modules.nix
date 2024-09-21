@@ -38,7 +38,7 @@
         };
         nvidia = {
           enable = true;
-          package = "production"; # set to beta/stable/production depending on your needs
+          package = "beta"; # set to beta/stable/production depending on your needs
         };
       };
       network = {

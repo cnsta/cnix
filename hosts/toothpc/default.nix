@@ -45,6 +45,7 @@ in {
     kernelParams = [
       "quiet"
       "splash"
+      "nvidia_drm.fbdev=1"
       "nvidia-drm.modeset=1"
     ];
   };
