@@ -4,23 +4,17 @@
   lib,
   ...
 }: let
-  vulkanDriverFiles = [
-    "${config.hardware.nvidia.package}/share/vulkan/icd.d/nvidia_icd.x86_64.json"
-    "${config.hardware.nvidia.package.lib32}/share/vulkan/icd.d/nvidia_icd.i686.json"
-  ];
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-    export __GL_VRR_ALLOWED=1
     export __GLX_VENDOR_LIBRARY_NAME=nvidia
     export __VK_LAYER_NV_optimus=NVIDIA_only
-    export VK_DRIVER_FILES="${builtins.concatStringsSep ":" vulkanDriverFiles}"
     exec "$@"
   '';
-
   inherit (lib) types mkIf mkEnableOption mkOption;
   cfg = config.modules.hardware.graphics.nvidia;
 in {
+  environment.systemPackages = [nvidia-offload];
   options = {
     modules.hardware.graphics.nvidia = {
       enable = mkEnableOption "Enables NVidia graphics";
