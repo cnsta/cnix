@@ -14,7 +14,6 @@
   inherit (lib) types mkIf mkEnableOption mkOption;
   cfg = config.modules.hardware.graphics.nvidia;
 in {
-  environment.systemPackages = [nvidia-offload];
   options = {
     modules.hardware.graphics.nvidia = {
       enable = mkEnableOption "Enables NVidia graphics";
@@ -32,6 +31,7 @@ in {
         enable = true;
         enable32Bit = true;
         extraPackages = with pkgs; [
+          nvidia-offload
           libva
           vaapiVdpau
           libvdpau-va-gl
