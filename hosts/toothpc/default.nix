@@ -37,16 +37,10 @@ in {
 
   boot = {
     blacklistedKernelModules = [
-      "ucsi_ccg"
-      "i2c_nvidia_gpu"
     ];
     consoleLogLevel = 3;
     kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
     kernelParams = [
-      "quiet"
-      "splash"
-      "nvidia_drm.fbdev=1"
-      "nvidia-drm.modeset=1"
     ];
   };
 
