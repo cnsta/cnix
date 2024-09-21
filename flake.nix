@@ -111,10 +111,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nur.url = "github:nix-community/NUR";
 
     anyrun.url = "github:anyrun-org/anyrun";
     microfetch.url = "github:NotAShelf/microfetch";
@@ -132,6 +129,6 @@
     };
 
     # Custom apps
-    runix.url = "git+https://git.sr.ht/~canasta/runix";
+    tuirun.url = "git+https://git.sr.ht/~canasta/tuirun";
   };
 }

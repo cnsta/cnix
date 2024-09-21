@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 # Script to clean up old initrd and kernel files in /boot/EFI/nixos
+# Make sure it's added to flake.nix, then run:
+# "nix build .#packages.x86_64-linux.cleanup-boot".
 
 # Exit on any error, undefined variable, or pipeline failure
 set -euo pipefail
@@ -96,19 +98,19 @@ for file in "${efi_files[@]}"; do
   basename=$(basename "$file")
 
   # Pattern: <hash>-linux-<version>-bzImage.efi (kernel)
-  if [[ "$basename" =~ ^(.*)-linux-([0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9\.\+]+)?)-bzImage\.efi$ ]]; then
+  if [[ "$basename" =~ ^(.*)-linux-([0-9]+\.[0-9]+(\.[0-9]+)?)\-bzImage\.efi$ ]]; then
     kernel_files+=("$file")
 
   # Pattern: <hash>-initrd-linux-<version>-initrd.efi (initrd)
-  elif [[ "$basename" =~ ^(.*)-initrd-linux-([0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9\.\+]+)?)-initrd\.efi$ ]]; then
+  elif [[ "$basename" =~ ^(.*)-initrd-linux-([0-9]+\.[0-9]+(\.[0-9]+)?)\-initrd\.efi$ ]]; then
     initrd_files+=("$file")
 
   # Pattern: kernel-<version>-<hash>.efi (kernel)
-  elif [[ "$basename" =~ ^kernel-([0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9\.\+]+)?)-([a-zA-Z0-9]+)\.efi$ ]]; then
+  elif [[ "$basename" =~ ^kernel-([0-9]+\.[0-9]+(\.[0-9]+)?)\-([a-zA-Z0-9\-]+)\.efi$ ]]; then
     kernel_files+=("$file")
 
   # Pattern: initrd-<version>-<hash>.efi (initrd)
-  elif [[ "$basename" =~ ^initrd-([0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9\.\+]+)?)-([a-zA-Z0-9]+)\.efi$ ]]; then
+  elif [[ "$basename" =~ ^initrd-([0-9]+\.[0-9]+(\.[0-9]+)?)\-([a-zA-Z0-9\-]+)\.efi$ ]]; then
     initrd_files+=("$file")
 
   else
@@ -126,10 +128,10 @@ process_files() {
   log "Processing $file_type files..."
 
   if [ "${#files[@]}" -gt "$keep_count" ]; then
-    # Sort files by modification time and keep the latest N files
+    # Sort files by modification time (newest first)
     sorted_files=$(for f in "${files[@]}"; do echo "$(stat -c '%Y' "$f"):$f"; done | sort -rn -k1,1)
 
-    # Collect files to delete
+    # Collect files to delete (older than the top N)
     mapfile -t files_to_delete < <(echo "$sorted_files" | tail -n +"$((keep_count + 1))" | cut -d: -f2)
 
     for file in "${files_to_delete[@]}"; do
@@ -145,7 +147,7 @@ process_files() {
   fi
 }
 
-# Process initrd and kernel files
+# Process kernel and initrd files
 process_files kernel_files "$KEEP_KERNEL" "kernel"
 process_files initrd_files "$KEEP_INITRD" "initrd"
 

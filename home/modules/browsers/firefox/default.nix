@@ -8,6 +8,9 @@
   inherit (lib) mkIf mkEnableOption;
   cfg = config.modules.browsers.firefox;
 in {
+  imports = [
+    inputs.nur.hmModules.nur
+  ];
   options = {
     modules.browsers.firefox.enable = mkEnableOption "Enables firefox";
   };
@@ -24,10 +27,12 @@ in {
             order = ["DuckDuckGo" "Google"];
           };
           bookmarks = {};
-          extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+          extensions = with config.nur.repos.rycee.firefox-addons; [
             ublock-origin
             sponsorblock
             clearurls
+            swedish-dictionary
+            reddit-enhancement-suite
             return-youtube-dislikes
             # enhancer-for-youtube # unfree
           ];

@@ -67,10 +67,13 @@
       yazi = {
         enable = true;
       };
-      runix = {
+      tuirun = {
         enable = true;
       };
       misc = {
+        enable = true;
+      };
+      eza = {
         enable = true;
       };
     };
