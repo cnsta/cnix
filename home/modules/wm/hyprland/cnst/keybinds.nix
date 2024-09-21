@@ -13,7 +13,7 @@
   term =
     if osConfig.networking.hostName == "cnixpad"
     then "alacritty"
-    else "wezterm";
+    else "alacritty";
   cfg = config.modules.wm.hyprland.cnst.keybinds;
 in {
   options = {
@@ -29,7 +29,7 @@ in {
       "$browser" = "firefox";
       "$browserinc" = "firefox --private-window";
       "$yazi" = "wezterm -e yazi";
-      "$runix" = "runix.sh";
+      "$tuirun" = "tuirun-toggle.sh";
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
       "$mod" = modKey;
@@ -52,7 +52,7 @@ in {
         #bind = $mod, M, exec, hyprctl dispatch exit
         #bind = $mod, E, exec, $fileManager
         "$mod, E, exec, $fileManager"
-        "$mod, r, exec, $runix"
+        "$mod, r, exec, $tuirun"
         "$mod SHIFT, E, exec, $yazi"
         "$mod, F, fullscreen,"
         "$mod SHIFT, F, togglefloating,"

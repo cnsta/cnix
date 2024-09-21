@@ -5,13 +5,14 @@
   ...
 }: let
   isCnixpad = osConfig.networking.hostName == "cnixpad";
- in {
-  imports = [
+in {
+  imports =
+    [
       ./modules.nix
       ./git.nix
       ./shell.nix
     ]
-    ++ lib.optionals isCnixpad [ ./cpmodules.nix ];
+    ++ lib.optionals isCnixpad [./cpmodules.nix];
   home = {
     username = "cnst";
     homeDirectory = "/home/cnst";
@@ -21,6 +22,7 @@
       # misc.system
       bun
     ];
+
     sessionVariables = {
       BROWSER = "firefox";
       EDITOR = "hx";

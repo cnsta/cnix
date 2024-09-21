@@ -1,4 +1,12 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  inherit (lib.meta) getExe;
+  inherit (pkgs) eza bat;
+in {
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
@@ -7,11 +15,17 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
+      cat = "${getExe bat} --style=plain";
+      ls = "${getExe eza} -h --git --icons --color=auto --group-directories-first -s extension";
+      la = "${getExe eza} -lah --tree";
+      tree = "${getExe eza} --tree --icons=always";
+      extract = "extract.sh";
       usermodules = "$EDITOR /home/$USER/.nix-config/home/users/$USER/modules.nix";
       umod = "$EDITOR /home/$USER/.nix-config/home/users/$USER/modules.nix";
       systemmodules = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
       smod = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
-      nixclean = "sudo nix run /home/$USER/.nix-config#cleanup-boot";
+      nixcleanboot = "sudo nix run /home/$USER/.nix-config#cleanup-boot";
+      nixclean = "sudo nix-collect-garbage --delete-older-than 3d && nix-collect-garbage -d";
       nixdev = "nix develop ~/.nix-config -c $SHELL";
       nixconfig = "cd /home/$USER/.nix-config/";
       ll = "ls -l";
@@ -19,6 +33,11 @@
       nixup = "nh os switch -H $HOST && sudo nix run /home/$USER/.nix-config#cleanup-boot";
       flakeupdate = "nh os switch -u -v -H $HOST && sudo nix run /home/$USER/.nix-config#cleanup-boot";
       flakeup = "nh os switch -u -H $HOST && sudo nix run /home/$USER/.nix-config#cleanup-boot";
+      ".." = "cd ..";
+      "..." = "cd ../../";
+      "...." = "cd ../../../";
+      "....." = "cd ../../../../";
+      "......" = "cd ../../../../../";
     };
     history = {
       size = 1000;

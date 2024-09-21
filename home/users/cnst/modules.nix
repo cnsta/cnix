@@ -43,7 +43,7 @@
         enable = true;
       };
       wezterm = {
-        enable = true;
+        enable = false;
       };
       zellij = {
         enable = false;
@@ -76,10 +76,13 @@
       zathura = {
         enable = true;
       };
-      runix = {
+      tuirun = {
         enable = true;
       };
       misc = {
+        enable = true;
+      };
+      eza = {
         enable = true;
       };
     };
