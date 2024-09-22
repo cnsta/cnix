@@ -163,7 +163,7 @@
         enable = false;
       };
       chaotic = {
-        enable = true;
+        enable = false;
         amd = {
           enable = false;
         };
