@@ -6,7 +6,7 @@
         lanzaboote.enable = true;
       };
       kernel = {
-        variant = "cachyos";
+        variant = "stable";
         hardware = "nvidia";
         extraKernelParams = [];
         extraBlacklistedModules = [];

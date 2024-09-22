@@ -10,7 +10,7 @@ in {
   options = {
     modules.boot.kernel = {
       variant = mkOption {
-        type = lib.types.enum ["latest" "cachyos"];
+        type = lib.types.enum ["stable" "latest" "cachyos"];
         default = "latest";
         description = "Kernel variant to use.";
       };
@@ -39,13 +39,16 @@ in {
     boot = {
       consoleLogLevel = 3;
 
-      kernelPackages = (
-        if cfg.variant == "latest"
+      kernelPackages = let
+        variant = cfg.variant or "latest"; # Ensure a default value
+      in
+        if variant == "stable"
+        then pkgs.linuxPackages
+        else if variant == "latest"
         then pkgs.linuxPackages_latest
-        else if cfg.variant == "cachyos"
+        else if variant == "cachyos"
         then pkgs.linuxPackages_cachyos
-        else pkgs.linuxPackages
-      );
+        else throw "Unknown kernel variant: ${variant}";
 
       kernelParams =
         [
@@ -55,8 +58,6 @@ in {
         ++ (
           if cfg.hardware == "amd"
           then ["amd_pstate=active"]
-          # else if cfg.hardware == "nvidia"
-          # then []
           else []
         )
         ++ cfg.extraKernelParams;
