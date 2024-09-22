@@ -14,7 +14,6 @@
   environment = {
     systemPackages = with pkgs; [
       git
-      scx
       stow
     ];
     localBinInPath = true;

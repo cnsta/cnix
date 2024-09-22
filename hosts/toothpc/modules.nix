@@ -1,5 +1,17 @@
 {
   modules = {
+    boot = {
+      loader = {
+        default.enable = false;
+        lanzaboote.enable = true;
+      };
+      kernel = {
+        variant = "cachyos";
+        hardware = "nvidia";
+        extraKernelParams = [];
+        extraBlacklistedModules = [];
+      };
+    };
     gaming = {
       steam = {
         enable = true;
@@ -38,7 +50,7 @@
         };
         nvidia = {
           enable = true;
-          package = "beta"; # set to beta/stable/production depending on your needs
+          package = "latest"; # set to beta/latest/stable/production depending on your needs
         };
       };
       network = {
@@ -149,6 +161,12 @@
       };
       corectrl = {
         enable = false;
+      };
+      chaotic = {
+        enable = true;
+        amd = {
+          enable = false;
+        };
       };
       microfetch = {
         enable = true;

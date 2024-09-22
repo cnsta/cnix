@@ -1,5 +1,17 @@
 {
   modules = {
+    boot = {
+      loader = {
+        default.enable = false;
+        lanzaboote.enable = true;
+      };
+      kernel = {
+        variant = "cachyos";
+        hardware = "amd";
+        extraKernelParams = [];
+        extraBlacklistedModules = [];
+      };
+    };
     gaming = {
       steam = {
         enable = true;
@@ -153,6 +165,12 @@
       };
       anyrun = {
         enable = true;
+      };
+      chaotic = {
+        enable = true;
+        amd = {
+          enable = true;
+        };
       };
       corectrl = {
         enable = true;
