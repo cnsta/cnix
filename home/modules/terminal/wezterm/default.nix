@@ -15,6 +15,7 @@ in {
     modules.terminal.wezterm.enable = mkEnableOption "Enables wezterm terminal";
   };
   config = mkIf cfg.enable {
+    home.sessionVariables.TERMINAL = "wezterm";
     programs.wezterm = {
       enable = true;
       package = weztermPkg;

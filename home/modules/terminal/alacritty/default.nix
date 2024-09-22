@@ -10,6 +10,7 @@ in {
     modules.terminal.alacritty.enable = mkEnableOption "Enables firefox";
   };
   config = mkIf cfg.enable {
+    home.sessionVariables.TERMINAL = "alacritty";
     programs.alacritty = {
       enable = true;
       settings = {
