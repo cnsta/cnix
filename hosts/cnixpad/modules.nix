@@ -1,5 +1,17 @@
 {
   modules = {
+    boot = {
+      loader = {
+        default.enable = true;
+        lanzaboote.enable = false;
+      };
+      kernel = {
+        variant = "latest";
+        hardware = "amd";
+        extraKernelParams = [];
+        extraBlacklistedModules = [];
+      };
+    };
     gaming = {
       steam = {
         enable = false;
@@ -148,6 +160,12 @@
       };
       brightnessctl = {
         enable = true;
+      };
+      chaotic = {
+        enable = false;
+        amd = {
+          enable = false;
+        };
       };
       corectrl = {
         enable = false;

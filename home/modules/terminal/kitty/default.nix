@@ -10,7 +10,6 @@ in {
     modules.terminal.kitty.enable = mkEnableOption "Enables kitty terminal";
   };
   config = mkIf cfg.enable {
-    home.sessionVariables.TERMINAL = "kitty";
     programs.kitty = {
       enable = true;
       settings = {

@@ -36,15 +36,15 @@ in {
     ./modules.nix
   ];
 
-  boot = {
-    consoleLogLevel = 3;
-    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
-    kernelParams = [
-      "amd_pstate=active"
-      "quiet"
-      "splash"
-    ];
-  };
+  # boot = {
+  #   consoleLogLevel = 3;
+  #   kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+  #   kernelParams = [
+  #     "amd_pstate=active"
+  #     "quiet"
+  #     "splash"
+  #   ];
+  # };
 
   # environment.variables.COPILOT_API_KEY = config.age.secrets.cnstcopilot.path;
 

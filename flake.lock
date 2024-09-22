@@ -773,11 +773,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1726918033,
-        "narHash": "sha256-I0U4OLssUlNd6/KXHwErmgmYZURTJYJNHbeoKaMH4iI=",
+        "lastModified": 1726995313,
+        "narHash": "sha256-HTbsXJDFugdQ794d1Bnh8eRSY7AlunIxd7jFW9kkKNM=",
         "ref": "refs/heads/main",
-        "rev": "8579066c7a1ceb745499ea4e11d5d420b1387ec0",
-        "revCount": 5246,
+        "rev": "e5ff19ac0f2c8d53a0c847d06a17676e636d6447",
+        "revCount": 5247,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -1401,11 +1401,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1726990799,
-        "narHash": "sha256-UhRcg+b/WlTmxF0NuaHhcwRafsjgLvgQCLkAAAH7/oU=",
+        "lastModified": 1726995785,
+        "narHash": "sha256-qpY9TCjtyhAeHa64NCyo3SoaHslxrrxQiMOPPY5lXEM=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "ea5bcd8bbc996195b556e51e9be9cef204b85ce3",
+        "rev": "474ea929fade537a0ba4f1e5b73abc0d157a293f",
         "type": "github"
       },
       "original": {
@@ -1740,11 +1740,11 @@
         "systems": "systems_8"
       },
       "locked": {
-        "lastModified": 1726992296,
-        "narHash": "sha256-ra2guef5o6SytQdsWMfXZZgpk6tF2YObx8JnGP7TYXg=",
+        "lastModified": 1726998061,
+        "narHash": "sha256-VgTXpSQuHQkSLvx3/lR8spnZK/iNniVoR3dcsQbEyQo=",
         "ref": "refs/heads/main",
-        "rev": "1888a9a17f253492d8db41720d481c2051987e0f",
-        "revCount": 22,
+        "rev": "05f2efc7135167613ef4b190efd7ba4e01c424d6",
+        "revCount": 24,
         "type": "git",
         "url": "https://git.sr.ht/~canasta/tuirun"
       },
@@ -1832,11 +1832,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1726851729,
-        "narHash": "sha256-1z0esr5lBeUMlrPZ9gZmqZT8oTQekxJi53HAW4cH0Ms=",
+        "lastModified": 1726933538,
+        "narHash": "sha256-xTqnMoJsEojuvqJLuM+U7EZ7q71efaj3pbvjutq4TXc=",
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
-        "rev": "73b8c4f1150040644cf678aa8bbf2cec48a433cf",
+        "rev": "4880c50146d0c2a3152d2b02f79253810c330c11",
         "type": "github"
       },
       "original": {

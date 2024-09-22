@@ -11,7 +11,6 @@ in {
     modules.terminal.foot.enable = mkEnableOption "Enables foot terminal";
   };
   config = mkIf cfg.enable {
-    home.sessionVariables.TERMINAL = "foot";
     programs.foot = {
       enable = true;
       package = pkgs.foot;
