@@ -29,6 +29,14 @@ in {
         });
       };
 
+      ".local/bin/tuirun-debug.sh" = {
+        source = getExe (pkgs.writeShellApplication {
+          name = "tuirun-debug";
+          runtimeInputs = with pkgs; [hyprland]; # Add any required runtime dependencies here
+          text = readFile ./bin/tuirun-debug.sh; # Path to your tuirun-toggle.sh script
+        });
+      };
+
       ".local/bin/calcurse-toggle.sh" = {
         source = getExe (pkgs.writeShellApplication {
           name = "calcurse-toggle";
