@@ -1,5 +1,5 @@
 # Log file location
-LOGFILE="/.cache/tuirun/tuirun-toggle.log"
+LOGFILE="/home/$USER/.cache/tuirun/tuirun-toggle.log"
 # Redirect all output and errors to the log file
 exec >>"$LOGFILE" 2>&1
 # Enable command tracing
