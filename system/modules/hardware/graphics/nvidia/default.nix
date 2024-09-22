@@ -9,6 +9,7 @@
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
     export __GLX_VENDOR_LIBRARY_NAME=nvidia
     export __VK_LAYER_NV_optimus=NVIDIA_only
+    export __ELECTRON_OZONE_PLATFORM_HINT=auto
     exec "$@"
   '';
   inherit (lib) types mkIf mkEnableOption mkOption;
@@ -39,6 +40,7 @@ in {
           nvidia-vaapi-driver
           nvidia-offload
           vulkan-tools
+          egl-wayland
         ];
         extraPackages32 = with pkgs.pkgsi686Linux; [
           vaapiVdpau
