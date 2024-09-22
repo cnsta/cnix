@@ -1,17 +1,17 @@
-{ pkgs
-, config
-, lib
-, ...
-}:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.modules.terminal.foot;
-in
-{
+in {
   options = {
     modules.terminal.foot.enable = mkEnableOption "Enables foot terminal";
   };
   config = mkIf cfg.enable {
+    home.sessionVariables.TERMINAL = "foot";
     programs.foot = {
       enable = true;
       package = pkgs.foot;

@@ -1,16 +1,16 @@
-{ config
-, lib
-, ...
-}:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.modules.terminal.kitty;
-in
-{
+in {
   options = {
     modules.terminal.kitty.enable = mkEnableOption "Enables kitty terminal";
   };
   config = mkIf cfg.enable {
+    home.sessionVariables.TERMINAL = "kitty";
     programs.kitty = {
       enable = true;
       settings = {
