@@ -19,7 +19,7 @@ in {
         "float,initialTitle:(tuirun)"
         "size 600 300,initialTitle:(tuirun)"
         "center,initialTitle:(tuirun)"
-        # "workspace special:tuirun,initialTitle:(tuirun)"
+        "workspace special:tuirun,initialTitle:(tuirun)"
         "noborder,initialTitle:(tuirun)"
         #windowrulev2 = move 1708 32,class:(floatcal)
         "float,class:(org.keepassxc.KeePassXC)"
