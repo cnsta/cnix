@@ -1,5 +1,7 @@
 {systemModules, ...}: {
   imports = [
+    "${systemModules}/boot/loader"
+    "${systemModules}/boot/kernel"
     "${systemModules}/gaming/gamemode"
     "${systemModules}/gaming/gamescope"
     "${systemModules}/gaming/lutris"
@@ -40,6 +42,7 @@
     "${systemModules}/utils/android"
     "${systemModules}/utils/anyrun"
     "${systemModules}/utils/brightnessctl"
+    "${systemModules}/utils/chaotic"
     "${systemModules}/utils/corectrl"
     "${systemModules}/utils/microfetch"
     "${systemModules}/utils/misc"

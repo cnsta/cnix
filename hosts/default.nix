@@ -34,7 +34,6 @@
         shared
         ++ [
           ./cnix
-          "${mod}/boot/lanzaboote"
           "${mod}/nix/nh/cnst"
           "${mod}/dev"
           {
@@ -53,7 +52,6 @@
         shared
         ++ [
           ./toothpc
-          "${mod}/boot/lanzaboote"
           "${mod}/nix/nh/toothpick"
           "${mod}/dev"
           {
@@ -72,7 +70,6 @@
         shared
         ++ [
           ./cnixpad
-          "${mod}/boot"
           "${mod}/nix/nh/cnst"
           "${mod}/dev"
           {

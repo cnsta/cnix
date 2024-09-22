@@ -35,15 +35,6 @@ in {
     ./modules.nix
   ];
 
-  boot = {
-    blacklistedKernelModules = [
-    ];
-    consoleLogLevel = 3;
-    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
-    kernelParams = [
-    ];
-  };
-
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = lib.mkDefault "23.11";
 }

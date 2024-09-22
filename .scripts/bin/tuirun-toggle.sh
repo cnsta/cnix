@@ -1,26 +1,36 @@
-#!/usr/bin/env bash
+# Define TERMINAL if not set
+TERMINAL="${TERMINAL:-foot}"
 
 # Path to the tuirun executable
 TUIRUN_PATH="/etc/profiles/per-user/$USER/bin/tuirun"
-LOGFILE="$HOME/tuirun_debug.log"
 
-echo "Launching tuirun..." >>"$LOGFILE"
-date >>"$LOGFILE"
+# Use absolute paths for commands
+PGREP="/run/current-system/sw/bin/pgrep"
+PKILL="/run/current-system/sw/bin/pkill"
+HYPRCTL="/etc/profiles/per-user/$USER/bin/hyprctl"
 
-if pgrep -f "alacritty --title tuirun" >/dev/null; then
-  echo "Terminating existing tuirun process" >>"$LOGFILE"
-  pkill -f "alacritty --title tuirun"
+# Determine OPTIONS based on TERMINAL
+if [ "$TERMINAL" = "foot" ]; then
+  OPTIONS="--override=main.pad=0x0"
+elif [ "$TERMINAL" = "alacritty" ]; then
+  OPTIONS="--option window.padding.x=0 --option window.padding.y=0"
 else
-  echo "Starting new tuirun process" >>"$LOGFILE"
-  if ! hyprctl dispatch exec "alacritty --title tuirun -e sh -c '$TUIRUN_PATH'"; then
-    echo "Failed to launch tuirun in foot terminal" >>"$LOGFILE"
-    exit 1
+  OPTIONS=""
+fi
+
+# Matching pattern for the process
+MATCH_PATTERN="$TERMINAL --title tuirun"
+
+if "$PGREP" -f "$MATCH_PATTERN" >/dev/null; then
+  "$PKILL" -f "$MATCH_PATTERN"
+else
+  # Construct the command
+  CMD="$TERMINAL --title tuirun"
+  if [ -n "$OPTIONS" ]; then
+    CMD="$CMD $OPTIONS"
   fi
-  sleep 1 # Give it a second to start
-  echo "Checking if tuirun process is still running..." >>"$LOGFILE"
-  if pgrep -f "$TUIRUN_PATH" >/dev/null; then
-    echo "tuirun is running" >>"$LOGFILE"
-  else
-    echo "tuirun exited prematurely" >>"$LOGFILE"
-  fi
+  CMD="$CMD -e $TUIRUN_PATH"
+
+  # Launch the terminal with OPTIONS
+  "$HYPRCTL" dispatch exec "$CMD"
 fi

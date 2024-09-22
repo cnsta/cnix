@@ -52,7 +52,7 @@ in {
         #bind = $mod, M, exec, hyprctl dispatch exit
         #bind = $mod, E, exec, $fileManager
         "$mod, E, exec, $fileManager"
-        "$mod, r, exec, $tuirun"
+        "$mod, R, exec, $tuirun"
         "$mod SHIFT, E, exec, $yazi"
         "$mod, F, fullscreen,"
         "$mod SHIFT, F, togglefloating,"

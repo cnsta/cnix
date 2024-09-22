@@ -18,9 +18,9 @@ in {
     modules.hardware.graphics.nvidia = {
       enable = mkEnableOption "Enables NVidia graphics";
       package = mkOption {
-        type = types.enum ["stable" "beta" "production"]; # Added "production" here
+        type = types.enum ["stable" "beta" "production" "latest"];
         default = "stable";
-        description = "Choose between the stable, beta, or production NVidia driver package";
+        description = "Choose between the stable, beta, latest, or production NVidia driver package";
       };
     };
   };
@@ -49,15 +49,17 @@ in {
         package =
           if cfg.package == "beta"
           then config.boot.kernelPackages.nvidiaPackages.beta
+          else if cfg.package == "latest"
+          then config.boot.kernelPackages.nvidiaPackages.latest
           else if cfg.package == "production"
-          then config.boot.kernelPackages.nvidiaPackages.production
+          then config.boot.kernelPackages.nvidiaPackages.prodution
           else config.boot.kernelPackages.nvidiaPackages.stable;
         modesetting.enable = true;
         powerManagement = {
           enable = false;
           finegrained = false;
         };
-        open = false;
+        open = true;
         nvidiaSettings = true;
       };
     };
