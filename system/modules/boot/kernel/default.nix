@@ -56,6 +56,8 @@ in {
         ++ (
           if cfg.hardware == "amd"
           then ["amd_pstate=active"]
+          else if cfg.hardware == "nvidia"
+          then ["nvidia-drm.modeset=1" "nvidia-drm.fbdev=1"]
           else []
         )
         ++ cfg.extraKernelParams;

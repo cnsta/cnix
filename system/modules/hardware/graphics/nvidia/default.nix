@@ -5,12 +5,14 @@
   ...
 }: let
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
-    export __NV_PRIME_RENDER_OFFLOAD=1
-    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export LIBVA_DRIVER_NAME=nvidia
+    export GBM_BACKEND=nvidia-drm
     export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    export __VK_LAYER_NV_optimus=NVIDIA_only
-    export __ELECTRON_OZONE_PLATFORM_HINT=auto
-    exec "$@"
+    export __GL_VRR_ALLOWED=1
+    export XDG_SESSION_TYPE=wayland
+    export NVD_BACKEND=direct
+    export ELECTRON_OZONE_PLATFORM_HINT=auto
+        exec "$@"
   '';
   inherit (lib) types mkIf mkEnableOption mkOption;
   cfg = config.modules.hardware.graphics.nvidia;
