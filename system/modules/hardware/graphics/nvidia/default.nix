@@ -29,6 +29,9 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      egl-wayland
+    ];
     hardware = {
       graphics = {
         enable = true;
@@ -40,9 +43,7 @@ in {
           libvdpau-va-gl
           intel-media-driver
           nvidia-vaapi-driver
-          nvidia-offload
           vulkan-tools
-          egl-wayland
         ];
         extraPackages32 = with pkgs.pkgsi686Linux; [
           vaapiVdpau

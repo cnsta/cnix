@@ -27,7 +27,7 @@
       GBM_BACKEND = "nvidia-drm";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       NVD_BACKEND = "direct";
-      VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+      EGL_PLATFORM = "wayland";
     };
   };
   # disable manuals as nmd fails to build often
