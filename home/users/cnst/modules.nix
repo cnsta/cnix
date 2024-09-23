@@ -54,7 +54,7 @@
         enable = true;
       };
       gpg = {
-        enable = true;
+        enable = false;
       };
 
       mako = {
