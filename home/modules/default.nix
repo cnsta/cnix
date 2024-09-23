@@ -24,6 +24,7 @@
     "${userModules}/utils/zathura"
     "${userModules}/utils/tuirun"
     "${userModules}/utils/eza"
+    "${userModules}/utils/ssh"
     "${userModules}/wm/hyprland"
     "${userModules}/wm/utils/hypridle"
     "${userModules}/wm/utils/hyprlock"

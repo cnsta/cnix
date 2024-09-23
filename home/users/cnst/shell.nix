@@ -83,6 +83,10 @@ in {
       ZSH_THEME_VIRTUALENV_SUFFIX=$ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX
 
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
+            ${lib.optionalString config.services.gpg-agent.enable ''
+        gnupg_path=$(ls $XDG_RUNTIME_DIR/gnupg)
+        export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gnupg/$gnupg_path/S.gpg-agent.ssh"
+      ''}
       microfetch
     '';
   };

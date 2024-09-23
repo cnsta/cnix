@@ -21,7 +21,7 @@
     "${systemModules}/sysd/network/blueman"
     "${systemModules}/sysd/network/mullvad"
     "${systemModules}/sysd/network/samba"
-    "${systemModules}/sysd/network/ssh"
+    "${systemModules}/sysd/network/openssh"
     "${systemModules}/sysd/security/agenix"
     "${systemModules}/sysd/security/gnome-keyring"
     "${systemModules}/sysd/session/dbus"

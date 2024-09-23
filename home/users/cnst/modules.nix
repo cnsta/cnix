@@ -85,6 +85,9 @@
       eza = {
         enable = true;
       };
+      ssh = {
+        enable = true;
+      };
     };
     wm = {
       hyprland = {
