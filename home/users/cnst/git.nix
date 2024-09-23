@@ -8,7 +8,7 @@
   isCnixpad = osConfig.networking.hostName == "cnixpad";
   sshKey =
     if isCnixpad
-    then "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMR2JiKLJMqI48/8lX9ZlG6RYcLMZRYAuk1IpYS72IDD adam@adampad"
+    then "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXCjkKouZrsMoswMIeueO8X/c3kuY3Gb0E9emvkqwUv cnst@cnixpad"
     else "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIk/zMuOgZCX+bVCFDHxtoec96RaVfV4iG1Gohp0qHdU cnst@cnix";
 in {
   home.packages = [pkgs.gh];
