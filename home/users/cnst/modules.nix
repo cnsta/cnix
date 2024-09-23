@@ -53,6 +53,10 @@
       copyq = {
         enable = true;
       };
+      gpg = {
+        enable = true;
+      };
+
       mako = {
         enable = true;
       };
