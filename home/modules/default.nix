@@ -16,6 +16,7 @@
     "${userModules}/userd/copyq"
     "${userModules}/userd/mako"
     "${userModules}/userd/udiskie"
+    "${userModules}/userd/gpg"
     "${userModules}/utils/anyrun"
     "${userModules}/utils/misc"
     "${userModules}/utils/rofi"

@@ -1,5 +1,5 @@
 {
-  description = "Flake config, _heavily_ influenced by fufexan's";
+  description = "cnix nix";
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
