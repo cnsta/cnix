@@ -16,6 +16,7 @@ in {
       options.dark = true;
     };
     extraConfig = {
+      user.signingkey = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
       signing = {
         key = "${config.home.homeDirectory}/.ssh/id_ed25519";
         signByDefault = true;
@@ -24,18 +25,17 @@ in {
         format = "ssh";
         ssh.allowedSignersFile = config.home.homeDirectory + "/" + config.xdg.configFile."git/allowed_signers".target;
       };
+      commit = {
+        verbose = true;
+        gpgSign = true;
+      };
       init.defaultBranch = "main";
-      # commit.gpgSign = lib.mkDefault true;
-
       merge.conflictStyle = "diff3";
-      commit.verbose = true;
       diff.algorithm = "histogram";
       log.date = "iso";
       column.ui = "auto";
       branch.sort = "committerdate";
-      # Automatically track remote branch
       push.autoSetupRemote = true;
-      # Reuse merge conflict fixes when rebasing
       rerere.enabled = true;
     };
     lfs.enable = true;
