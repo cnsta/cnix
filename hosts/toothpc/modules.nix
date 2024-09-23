@@ -94,7 +94,7 @@
         samba = {
           enable = false;
         };
-        ssh = {
+        openssh = {
           enable = true;
         };
       };

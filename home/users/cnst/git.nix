@@ -1,10 +1,15 @@
 {
   config,
   pkgs,
+  osConfig,
   ...
 }: let
-  cfg = config.programs.git;
-  sshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIk/zMuOgZCX+bVCFDHxtoec96RaVfV4iG1Gohp0qHdU cnst@cnix";
+  email = config.programs.git.userEmail;
+  isCnixpad = osConfig.networking.hostName == "cnixpad";
+  sshKey =
+    if isCnixpad
+    then "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMR2JiKLJMqI48/8lX9ZlG6RYcLMZRYAuk1IpYS72IDD adam@adampad"
+    else "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIk/zMuOgZCX+bVCFDHxtoec96RaVfV4iG1Gohp0qHdU cnst@cnix";
 in {
   home.packages = [pkgs.gh];
   programs.git = {
@@ -46,6 +51,6 @@ in {
     ];
   };
   xdg.configFile."git/allowed_signers".text = ''
-    ${cfg.userEmail} namespaces="git" ${sshKey}
+    ${email} namespaces="git" ${sshKey}
   '';
 }
