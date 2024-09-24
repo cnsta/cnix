@@ -127,6 +127,11 @@
         };
         greetd = {
           enable = true;
+          gnomeKeyring.enable = false;
+          autologin = {
+            enable = false;
+            user = "cnst";
+          };
         };
         gvfs = {
           enable = true;
