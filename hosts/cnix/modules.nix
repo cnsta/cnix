@@ -169,7 +169,7 @@
         enable = true;
       };
       anyrun = {
-        enable = true;
+        enable = false;
       };
       chaotic = {
         enable = true;
