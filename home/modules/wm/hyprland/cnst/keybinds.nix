@@ -12,7 +12,7 @@
     else "SUPER";
   term =
     if osConfig.networking.hostName == "cnixpad"
-    then "alacritty"
+    then "foot"
     else "alacritty";
   cfg = config.modules.wm.hyprland.cnst.keybinds;
 in {
@@ -28,7 +28,7 @@ in {
       "$menuw" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
       "$browser" = "firefox";
       "$browserinc" = "firefox --private-window";
-      "$yazi" = "wezterm -e yazi";
+      "$yazi" = "alacritty -e yazi";
       "$tuirun" = "tuirun-toggle.sh";
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -56,11 +56,11 @@ in {
         "$mod SHIFT, E, exec, $yazi"
         "$mod, F, fullscreen,"
         "$mod SHIFT, F, togglefloating,"
-        "$mod, SPACE, exec, $menu"
+        "$mod, SPACE, exec, $tuirun"
         "$mod, P, pseudo," # dwindle
         "$mod, J, togglesplit," # dwindle
         "$mod, C, exec, hyprctl dispatch exec copyq toggle"
-        "$mod, TAB, exec, $menuw"
+        # "$mod, TAB, exec, $menuw"
 
         # Move focus with mainMod + arrow keys
         "$mod, left, movefocus, l"
@@ -95,10 +95,10 @@ in {
         # Laptop controls
         ",XF86AudioLowerVolume, exec, pamixer -d 5"
         ",XF86AudioRaiseVolume, exec, pamixer -i 5"
-        ",XF86AudioMute, exec, pamixer -m"
+        ",XF86AudioMute, exec, pamixer -t"
         ",XF86AudioMicMute, exec, pactl -- set-source-mute 0 toggle"
-        ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
-        ",XF86MonBrightnessUp, exec, brightnessctl s +10%"
+        ",XF86MonBrightnessDown, exec, brightnessctl s 5%-"
+        ",XF86MonBrightnessUp, exec, brightnessctl s +5%"
 
         "$mod, XF86MonBrightnessUp, exec, hyprctl dispatch dpms on"
         "$mod, XF86MonBrightnessDown, exec, hyprctl dispatch dpms off"
