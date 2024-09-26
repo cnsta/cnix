@@ -62,7 +62,7 @@
           };
           nm-applet = {
             enable = true;
-            indicator.enable = true;
+            indicator = true;
           };
         };
       };
