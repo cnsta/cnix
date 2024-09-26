@@ -63,6 +63,9 @@
       udiskie = {
         enable = true;
       };
+      syncthing = {
+        enable = true;
+      };
     };
     utils = {
       anyrun = {
