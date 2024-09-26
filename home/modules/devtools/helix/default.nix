@@ -107,6 +107,7 @@ in {
             x = "delete_selection";
             y = {
               y = ["extend_to_line_bounds" "yank_main_selection_to_clipboard" "normal_mode" "collapse_selection"];
+              d = ":yank-diagnostic";
             };
             Y = ["extend_to_line_end" "yank_main_selection_to_clipboard" "collapse_selection"];
             P = ["paste_clipboard_before" "collapse_selection"];

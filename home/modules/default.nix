@@ -17,6 +17,7 @@
     "${userModules}/userd/mako"
     "${userModules}/userd/udiskie"
     "${userModules}/userd/gpg"
+    "${userModules}/userd/syncthing"
     "${userModules}/utils/anyrun"
     "${userModules}/utils/misc"
     "${userModules}/utils/rofi"
