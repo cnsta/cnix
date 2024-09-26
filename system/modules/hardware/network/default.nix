@@ -31,6 +31,18 @@ in {
             default = {};
             description = "Network interface configurations.";
           };
+          nm-applet = {
+            enable = mkEnableOption {
+              type = types.bool;
+              default = false;
+              description = "Enables the nm-applet service.";
+            };
+            indicator.enable = mkEnableOption {
+              type = types.bool;
+              default = false;
+              description = "Enables the nm-applet indicator";
+            };
+          };
         };
       };
     };
@@ -45,6 +57,10 @@ in {
         enable = true;
         inherit (cfg) interfaces;
       };
+    };
+    programs.nm-applet = {
+      enable = cfg.nm-applet.enable;
+      indicator.enable = cfg.nm-applet.indicator;
     };
   };
 }

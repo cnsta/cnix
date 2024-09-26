@@ -60,6 +60,10 @@
           "enp4s0" = {
             allowedTCPPorts = [22 80 443];
           };
+          nm-applet = {
+            enable = true;
+            indicator.enable = true;
+          };
         };
       };
     };
