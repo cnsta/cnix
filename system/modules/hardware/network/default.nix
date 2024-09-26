@@ -37,7 +37,7 @@ in {
               default = false;
               description = "Enables the nm-applet service.";
             };
-            indicator.enable = mkEnableOption {
+            indicator = mkEnableOption {
               type = types.bool;
               default = false;
               description = "Enables the nm-applet indicator";
@@ -60,7 +60,7 @@ in {
     };
     programs.nm-applet = {
       enable = cfg.nm-applet.enable;
-      indicator.enable = cfg.nm-applet.indicator;
+      indicator = cfg.nm-applet.indicator;
     };
   };
 }
