@@ -12,7 +12,6 @@ in {
   config = mkIf cfg.enable {
     services = {
       blueman.enable = true;
-      blueman-applet.enable = true;
     };
   };
 }

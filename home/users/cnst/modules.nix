@@ -50,6 +50,9 @@
       };
     };
     userd = {
+      blueman-applet = {
+        enable = true;
+      };
       copyq = {
         enable = true;
       };
