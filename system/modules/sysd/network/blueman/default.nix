@@ -10,6 +10,9 @@ in {
     modules.sysd.network.blueman.enable = mkEnableOption "Enables blueman";
   };
   config = mkIf cfg.enable {
-    services.blueman.enable = true;
+    services = {
+      blueman.enable = true;
+      blueman-applet.enable = true;
+    };
   };
 }

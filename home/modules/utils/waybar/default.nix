@@ -11,9 +11,13 @@ in {
     modules.utils.waybar.enable = mkEnableOption "Enables waybar";
   };
   config = mkIf cfg.enable {
+    systemd.user.services.waybar = {
+      Unit.StartLimitBurst = 30;
+    };
     programs.waybar = {
       enable = true;
       package = pkgs.waybar;
+      systemd.enable = true;
     };
   };
 }
