@@ -6,7 +6,7 @@
         lanzaboote.enable = false;
       };
       kernel = {
-        variant = "latest";
+        variant = "stable";
         hardware = "amd";
         extraKernelParams = [];
         extraBlacklistedModules = [];
