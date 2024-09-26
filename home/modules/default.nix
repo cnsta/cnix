@@ -14,6 +14,7 @@
     "${userModules}/terminal/wezterm"
     "${userModules}/terminal/zellij"
     "${userModules}/userd/copyq"
+    "${userModules}/userd/blueman-applet"
     "${userModules}/userd/mako"
     "${userModules}/userd/udiskie"
     "${userModules}/userd/gpg"
