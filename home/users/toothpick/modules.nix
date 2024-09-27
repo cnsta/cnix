@@ -88,9 +88,6 @@
         toothpick = {
           enable = true;
         };
-        adam = {
-          enable = false;
-        };
       };
       utils = {
         hypridle = {
