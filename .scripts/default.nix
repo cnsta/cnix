@@ -1,3 +1,4 @@
+# yanked from https://github.com/NotAShelf/nyx/
 {
   config,
   pkgs,
