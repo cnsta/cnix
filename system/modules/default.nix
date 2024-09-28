@@ -13,6 +13,7 @@
     "${systemModules}/hardware/graphics/nvidia"
     "${systemModules}/hardware/logitech"
     "${systemModules}/hardware/network"
+    "${systemModules}/nix/nh"
     "${systemModules}/studio/blender"
     "${systemModules}/studio/gimp"
     "${systemModules}/studio/inkscape"

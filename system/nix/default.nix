@@ -1,3 +1,4 @@
+# Yanked from https://github.com/fufexan/dotfiles
 {
   inputs,
   lib,
@@ -21,10 +22,13 @@
 
   console.useXkbConfig = true;
 
-  nix = {
+  nix = let
+    flakeInputs = lib.filterAttrs (_: v: lib.isType "flake" v) inputs;
+  in {
     package = pkgs.lix;
+
     # pin the registry to avoid downloading and evaling a new nixpkgs version every time
-    registry = lib.mapAttrs (_: v: {flake = v;}) inputs;
+    registry = lib.mapAttrs (_: v: {flake = v;}) flakeInputs;
 
     # set the path for channels compat
     nixPath = lib.mapAttrsToList (key: _: "${key}=flake:${key}") config.nix.registry;
@@ -42,11 +46,11 @@
 
       trusted-users = ["root" "@wheel"];
     };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      # Keep the last 3 generations
-      options = "--delete-older-than 30d";
-    };
+    # gc = {
+    #   automatic = true;
+    #   dates = "weekly";
+    #   # Keep the last 3 generations
+    #   options = "--delete-older-than 30d";
+    # };
   };
 }
