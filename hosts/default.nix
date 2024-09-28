@@ -3,7 +3,6 @@
   inputs,
   homeImports,
   self,
-  pkgs,
   ...
 }: {
   flake.nixosConfigurations = let
@@ -34,7 +33,6 @@
         shared
         ++ [
           ./cnix
-          "${mod}/nix/nh/cnst"
           "${mod}/dev"
           {
             home-manager = {
@@ -52,7 +50,6 @@
         shared
         ++ [
           ./toothpc
-          "${mod}/nix/nh/toothpick"
           "${mod}/dev"
           {
             home-manager = {
@@ -70,7 +67,6 @@
         shared
         ++ [
           ./cnixpad
-          "${mod}/nix/nh/cnst"
           "${mod}/dev"
           {
             home-manager = {

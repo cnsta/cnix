@@ -42,6 +42,8 @@ in {
     }
   ];
 
+  environment.variables.FLAKE = "/home/cnst/.nix-config";
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = lib.mkDefault "23.11";
 }

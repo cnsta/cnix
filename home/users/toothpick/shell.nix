@@ -29,10 +29,10 @@ in {
       nixdev = "nix develop ~/.nix-config -c $SHELL";
       nixconfig = "cd /home/$USER/.nix-config/";
       ll = "ls -l";
-      nixupdate = "nh os switch -v -H $HOST && sudo nix run /home/$USER/.nix-config";
-      nixup = "nh os switch -H $HOST && sudo nix run /home/$USER/.nix-config";
-      flakeupdate = "nh os switch -u -v -H $HOST && sudo nix run /home/$USER/.nix-config";
-      flakeup = "nh os switch -u -H $HOST && sudo nix run /home/$USER/.nix-config";
+      nixupdate = "nh os switch -v -H $HOST";
+      nixup = "nh os switch -H $HOST";
+      flakeupdate = "nh os switch -u -v -H $HOST";
+      flakeup = "nh os switch -u -H $HOST";
       ".." = "cd ..";
       "..." = "cd ../../";
       "...." = "cd ../../../";

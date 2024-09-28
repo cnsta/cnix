@@ -66,6 +66,15 @@
         };
       };
     };
+    nix = {
+      nh = {
+        enable = true;
+        clean = {
+          enable = true;
+          extraArgs = "--keep 3 --keep-since 21d";
+        };
+      };
+    };
     studio = {
       blender = {
         enable = false;

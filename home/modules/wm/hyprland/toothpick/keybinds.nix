@@ -17,7 +17,6 @@ in {
       "$passwordManager" = "keepassxc";
       "$tuirun" = "tuirun-toggle.sh";
       "$menu" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
-      "$menuw" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
       "$browser" = "firefox";
       "$browserinc" = "firefox --private-window";
       "$ranger" = "rangerscript";
@@ -50,7 +49,6 @@ in {
         "$mod, P, pseudo," # dwindle
         "$mod, J, togglesplit," # dwindle
         "$mod, C, exec, hyprctl dispatch exec copyq toggle"
-        "$mod, TAB, exec, $menuw"
 
         # Move focus with mainMod + arrow keys
         "$mod, left, movefocus, l"
