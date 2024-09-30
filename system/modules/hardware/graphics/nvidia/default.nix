@@ -29,7 +29,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.xserver.videoDrivers = ["nvidia"];
+    services.xserver = {
+      videoDrivers = ["nvidia"];
+      xkb.layout = "se";
+    };
     environment.systemPackages = with pkgs; [
       egl-wayland
     ];
