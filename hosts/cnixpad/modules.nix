@@ -130,7 +130,7 @@
         };
         xserver = {
           amd = {
-            enable = true;
+            enable = false;
           };
         };
       };

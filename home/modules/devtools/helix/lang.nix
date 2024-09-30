@@ -71,6 +71,11 @@
           formatter = deno "json";
         }
         {
+          name = "common-lisp";
+          file-types = ["kbd"];
+          auto-format = true;
+        }
+        {
           name = "markdown";
           auto-format = true;
           formatter = deno "md";
@@ -121,10 +126,6 @@
       };
 
       clangd = {
-        command = "${pkgs.clang-tools}/bin/clangd";
-        clangd.fallbackFlags = ["-std=c++2b"];
-      };
-      cl-lsp = {
         command = "${pkgs.clang-tools}/bin/clangd";
         clangd.fallbackFlags = ["-std=c++2b"];
       };
