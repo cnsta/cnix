@@ -124,6 +124,10 @@
         command = "${pkgs.clang-tools}/bin/clangd";
         clangd.fallbackFlags = ["-std=c++2b"];
       };
+      cl-lsp = {
+        command = "${pkgs.clang-tools}/bin/clangd";
+        clangd.fallbackFlags = ["-std=c++2b"];
+      };
 
       cmake-language-server = {
         command = lib.getExe pkgs.cmake-language-server;

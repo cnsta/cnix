@@ -23,7 +23,7 @@ in {
         "noborder,initialTitle:(tuirun)"
         #windowrulev2 = move 1708 32,class:(floatcal)
         "float,class:(org.keepassxc.KeePassXC)"
-        "size 843 500,class:(org.keepassxc.KeePassXC)"
+        "size 843 530,class:(org.keepassxc.KeePassXC)"
         "move 100%-w-20 40,class:(org.keepassxc.KeePassXC)"
 
         # RANGER/NNN SETTINGS
