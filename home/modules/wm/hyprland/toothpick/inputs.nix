@@ -1,12 +1,11 @@
-{ lib
-, config
-, ...
-}:
-let
+{
+  lib,
+  config,
+  ...
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.modules.wm.hyprland.toothpick.inputs;
-in
-{
+in {
   options = {
     modules.wm.hyprland.toothpick.inputs.enable = mkEnableOption "Enables input settings in Hyprland";
   };
@@ -20,6 +19,9 @@ in
       ];
 
       input = {
+        kb_layout = "se";
+        kb_variant = "nodeadkeys";
+
         follow_mouse = 1;
         accel_profile = "flat";
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
@@ -31,13 +33,6 @@ in
           scroll_factor = 0.5;
         };
       };
-      # Desktop keyboard
-      device = [
-        {
-          name = "usb-hid-keyboard";
-          kb_layout = "se";
-        }
-      ];
       gestures = {
         workspace_swipe = true;
         workspace_swipe_distance = 400;
