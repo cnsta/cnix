@@ -131,7 +131,7 @@
         };
         xserver = {
           nvidia = {
-            enable = true;
+            enable = false;
           };
         };
       };
