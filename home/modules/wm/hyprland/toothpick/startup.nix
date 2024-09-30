@@ -16,6 +16,7 @@ in {
         # exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
         "systemctl --user start polkit-gnome-authentication-agent-1"
         # exec-once = lxqt-policykit-agent &
+        "mullvad-vpn"
         "pamixer --set-volume 50"
         # exec-once = swaybg -i ~/media/images/wallpaper.png
         "wl-clip-persist --clipboard regular --all-mime-type-regex '^(?!x-kde-passwordManagerHint).+'"

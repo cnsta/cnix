@@ -20,6 +20,8 @@ in {
       ];
 
       input = {
+        kb_layout = "se";
+        kb_variant = "nodeadkeys";
         follow_mouse = 1;
         accel_profile = "flat";
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
@@ -32,24 +34,24 @@ in {
         };
       };
       # Desktop keyboard
-      device = [
-        {
-          name = "pfu-limited-hhkb-hybrid";
-          kb_layout = "hhkbse";
-          kb_options = "lv3:rwin_switch";
-        }
-        {
-          name = "hhkb-hybrid_1-keyboard";
-          kb_layout = "hhkbse";
-          kb_options = "lv3:rwin_switch";
-        }
-        # Laptop keyboard
-        {
-          name = "at-translated-set-2-keyboard";
-          kb_layout = "se";
-          kb_options = "ctrl:swapcaps";
-        }
-      ];
+      # device = [
+      #   {
+      #     name = "pfu-limited-hhkb-hybrid";
+      #     kb_layout = "hhkbse";
+      #     kb_options = "lv3:rwin_switch";
+      #   }
+      #   {
+      #     name = "hhkb-hybrid_1-keyboard";
+      #     kb_layout = "hhkbse";
+      #     kb_options = "lv3:rwin_switch";
+      #   }
+      #   # Laptop keyboard
+      #   {
+      #     name = "at-translated-set-2-keyboard";
+      #     kb_layout = "se";
+      #     kb_options = "ctrl:swapcaps";
+      #   }
+      # ];
       gestures = {
         workspace_swipe = true;
         workspace_swipe_distance = 400;

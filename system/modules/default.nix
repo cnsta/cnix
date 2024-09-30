@@ -40,6 +40,7 @@
     "${systemModules}/sysd/system/powerd"
     "${systemModules}/sysd/system/udisks"
     "${systemModules}/sysd/system/zram"
+    "${systemModules}/sysd/system/kanata"
     "${systemModules}/utils/android"
     "${systemModules}/utils/anyrun"
     "${systemModules}/utils/brightnessctl"

@@ -18,7 +18,7 @@ in {
         # exec-once = lxqt-policykit-agent &
         "pamixer --set-volume 50"
         "blueman-applet & udiskie -Nt"
-        # "mullvad-vpn"
+        "mullvad-vpn"
         # exec-once = swaybg -i ~/media/images/wallpaper.png
         "wl-clip-persist --clipboard regular --all-mime-type-regex '^(?!x-kde-passwordManagerHint).+'"
         # exec-once = hyprctl dispatch exec "sleep 4s && copyq --start-server"

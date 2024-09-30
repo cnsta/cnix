@@ -130,8 +130,9 @@
         };
         xserver = {
           amd = {
+            enable = false;
             hhkbse = {
-              enable = true;
+              enable = false;
             };
           };
           nvidia = {
@@ -173,6 +174,9 @@
           enable = true;
         };
         zram = {
+          enable = true;
+        };
+        kanata = {
           enable = true;
         };
       };
