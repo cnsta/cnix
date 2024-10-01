@@ -11,7 +11,6 @@ in {
     modules.hardware.graphics.amd.enable = mkEnableOption "Enables AMD graphics";
   };
   config = mkIf cfg.enable {
-    services.xserver.videoDrivers = ["amdgpu"];
     hardware = {
       graphics = {
         enable = true;
