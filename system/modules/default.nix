@@ -47,6 +47,7 @@
     "${systemModules}/utils/microfetch"
     "${systemModules}/utils/misc"
     "${systemModules}/utils/npm"
+    "${systemModules}/utils/obsidian"
     "${systemModules}/utils/yubikey"
   ];
 }

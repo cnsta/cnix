@@ -200,6 +200,9 @@
       npm = {
         enable = true;
       };
+      obsidian = {
+        enable = true;
+      };
       yubikey = {
         enable = true;
       };
