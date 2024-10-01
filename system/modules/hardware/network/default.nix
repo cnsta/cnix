@@ -32,15 +32,11 @@ in {
             description = "Network interface configurations.";
           };
           nm-applet = {
-            enable = mkEnableOption {
+            enable = mkEnableOption "Enables the nm-applet service.";
+            indicator = mkOption {
               type = types.bool;
               default = false;
-              description = "Enables the nm-applet service.";
-            };
-            indicator = mkEnableOption {
-              type = types.bool;
-              default = false;
-              description = "Enables the nm-applet indicator";
+              description = "Enables the nm-applet indicator.";
             };
           };
         };

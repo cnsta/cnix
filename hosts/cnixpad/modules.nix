@@ -129,9 +129,8 @@
           enable = true;
         };
         xserver = {
-          amd = {
-            enable = false;
-          };
+          videoDrivers = ["amdgpu"];
+          xkbLayout = "se";
         };
       };
       system = {

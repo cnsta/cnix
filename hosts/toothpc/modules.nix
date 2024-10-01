@@ -130,9 +130,8 @@
           enable = true;
         };
         xserver = {
-          nvidia = {
-            enable = false;
-          };
+          videoDrivers = ["nvidia"];
+          xkbLayout = "se";
         };
       };
       system = {

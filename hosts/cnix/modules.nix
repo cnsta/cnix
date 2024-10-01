@@ -129,15 +129,8 @@
           enable = true;
         };
         xserver = {
-          amd = {
-            enable = false;
-            hhkbse = {
-              enable = false;
-            };
-          };
-          nvidia = {
-            enable = false;
-          };
+          videoDrivers = ["amdgpu"];
+          xkbLayout = "se";
         };
       };
       system = {
