@@ -197,6 +197,9 @@
       npm = {
         enable = true;
       };
+      obsidian = {
+        enable = true;
+      };
     };
   };
 }
