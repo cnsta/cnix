@@ -5,6 +5,5 @@
     ./fonts
     ./security
     ./xdg
-    ./zsh
   ];
 }
