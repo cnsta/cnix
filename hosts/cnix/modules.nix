@@ -2,8 +2,12 @@
   modules = {
     boot = {
       loader = {
-        default.enable = false;
-        lanzaboote.enable = true;
+        default = {
+          enable = false;
+        };
+        lanzaboote = {
+          enable = true;
+        };
       };
       kernel = {
         variant = "cachyos";
@@ -139,7 +143,9 @@
         };
         greetd = {
           enable = true;
-          gnomeKeyring.enable = false;
+          gnomeKeyring = {
+            enable = false;
+          };
           autologin = {
             enable = false;
             user = "cnst";
@@ -195,7 +201,9 @@
       };
       misc = {
         enable = true;
-        desktop.enable = true;
+        desktop = {
+          enable = true;
+        };
       };
       npm = {
         enable = true;
@@ -204,6 +212,9 @@
         enable = true;
       };
       yubikey = {
+        enable = true;
+      };
+      zsh = {
         enable = true;
       };
     };

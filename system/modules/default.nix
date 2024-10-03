@@ -49,5 +49,6 @@
     "${systemModules}/utils/npm"
     "${systemModules}/utils/obsidian"
     "${systemModules}/utils/yubikey"
+    "${systemModules}/utils/zsh"
   ];
 }

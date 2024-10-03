@@ -198,6 +198,12 @@
       yubikey = {
         enable = false;
       };
+      obsidian = {
+        enable = false;
+      };
+      zsh = {
+        enable = true;
+      };
     };
   };
 }
