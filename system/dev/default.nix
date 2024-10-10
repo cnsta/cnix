@@ -11,7 +11,7 @@
     lua-language-server
     nixd
     php
-    php84Packages.php-cs-fixer
+    # php84Packages.php-cs-fixer
     phpactor
     python312Packages.python-lsp-server
     bash-language-server

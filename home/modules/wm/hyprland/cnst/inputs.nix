@@ -12,7 +12,7 @@ in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       monitor = [
-        "DP-3, 2560x1440@143.86, auto, auto"
+        "DP-3, 2560x1440@239.97, auto, auto, bitdepth, 10"
         "eDP-1,1920x1200@60.02,auto,1"
       ];
       env = [
