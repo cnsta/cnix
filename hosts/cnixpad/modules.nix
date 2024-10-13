@@ -1,5 +1,5 @@
 {
-  modules = {
+  systemModules = {
     boot = {
       loader = {
         default.enable = true;

@@ -1,14 +1,4 @@
 {
-  # monitors = [
-  #   {
-  #     name = "DP-3";
-  #     width = 2560;
-  #     height = 1440;
-  #     refreshRate = 240;
-  #     workspace = "1";
-  #     primary = true;
-  #   }
-  # ];
   userModules = {
     browsers = {
       firefox = {
