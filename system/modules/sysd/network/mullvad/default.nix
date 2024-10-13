@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.sysd.network.mullvad;
+  cfg = config.systemModules.sysd.network.mullvad;
 in {
   options = {
-    modules.sysd.network.mullvad.enable = mkEnableOption "Enables mullvad";
+    systemModules.sysd.network.mullvad.enable = mkEnableOption "Enables mullvad";
   };
   config = mkIf cfg.enable {
     services.mullvad-vpn = {

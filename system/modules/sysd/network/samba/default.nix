@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.sysd.network.samba;
+  cfg = config.systemModules.sysd.network.samba;
 in {
   options = {
-    modules.sysd.network.samba.enable = mkEnableOption "Enables samba";
+    systemModules.sysd.network.samba.enable = mkEnableOption "Enables samba";
   };
   config = mkIf cfg.enable {
     services = {

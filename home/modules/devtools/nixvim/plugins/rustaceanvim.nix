@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.devtools.nixvim.plugins.rustaceanvim;
+  cfg = config.userModules.devtools.nixvim.plugins.rustaceanvim;
 in {
-  options.modules.devtools.nixvim.plugins.rustaceanvim = {
+  options.userModules.devtools.nixvim.plugins.rustaceanvim = {
     enable = mkEnableOption "Whether to enable rustaceanvim.";
   };
 

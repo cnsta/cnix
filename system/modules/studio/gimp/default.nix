@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.studio.gimp;
+  cfg = config.systemModules.studio.gimp;
 in {
   options = {
-    modules.studio.gimp.enable = mkEnableOption "Enables gimp";
+    systemModules.studio.gimp.enable = mkEnableOption "Enables gimp";
   };
   config = mkIf cfg.enable {
     environment.systemPackages = [

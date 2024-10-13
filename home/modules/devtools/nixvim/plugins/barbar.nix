@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.barbar;
+  cfg = config.userModules.devtools.nixvim.plugins.barbar;
 in {
   options = {
-    modules.devtools.nixvim.plugins.barbar.enable = mkEnableOption "Enables Barbar plugin for nixvim";
+    userModules.devtools.nixvim.plugins.barbar.enable = mkEnableOption "Enables Barbar plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

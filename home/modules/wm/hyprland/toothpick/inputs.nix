@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.wm.hyprland.toothpick.inputs;
+  cfg = config.userModules.wm.hyprland.toothpick.inputs;
 in {
   options = {
-    modules.wm.hyprland.toothpick.inputs.enable = mkEnableOption "Enables input settings in Hyprland";
+    userModules.wm.hyprland.toothpick.inputs.enable = mkEnableOption "Enables input settings in Hyprland";
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {

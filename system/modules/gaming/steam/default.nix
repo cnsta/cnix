@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.gaming.steam;
+  cfg = config.systemModules.gaming.steam;
 in {
   options = {
-    modules.gaming.steam.enable = mkEnableOption "Enables steam";
+    systemModules.gaming.steam.enable = mkEnableOption "Enables steam";
   };
   config = mkIf cfg.enable {
     programs = {

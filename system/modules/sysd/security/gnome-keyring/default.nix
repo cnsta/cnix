@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.sysd.security.gnome-keyring;
+  cfg = config.systemModules.sysd.security.gnome-keyring;
 in {
   options = {
-    modules.sysd.security.gnome-keyring.enable = mkEnableOption "Enables gnome-keyring";
+    systemModules.sysd.security.gnome-keyring.enable = mkEnableOption "Enables gnome-keyring";
   };
   config = mkIf cfg.enable {
     services.gnome.gnome-keyring.enable = true;

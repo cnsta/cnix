@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkMerge mkOption types;
-  cfg = config.modules.sysd.system.greetd;
+  cfg = config.systemModules.sysd.system.greetd;
 in {
   options = {
-    modules.sysd.system.greetd = {
+    systemModules.sysd.system.greetd = {
       enable = mkEnableOption {
         type = types.bool;
         default = false;

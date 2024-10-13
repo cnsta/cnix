@@ -7,10 +7,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkOption mkMerge;
-  cfg = config.modules.sysd.security.agenix;
+  cfg = config.systemModules.sysd.security.agenix;
 in {
   options = {
-    modules.sysd.security.agenix = {
+    systemModules.sysd.security.agenix = {
       enable = mkEnableOption "Enables agenix system environment";
       cnix.enable = mkOption {
         type = lib.types.bool;

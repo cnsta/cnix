@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkOption mkMerge;
-  cfg = config.modules.utils.misc;
+  cfg = config.systemModules.utils.misc;
 in {
   options = {
-    modules.utils.misc = {
+    systemModules.utils.misc = {
       enable = mkEnableOption "Enables miscellaneous packages";
       desktop.enable = mkOption {
         type = lib.types.bool;

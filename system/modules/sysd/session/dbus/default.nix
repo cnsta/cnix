@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.sysd.session.dbus;
+  cfg = config.systemModules.sysd.session.dbus;
 in {
   options = {
-    modules.sysd.session.dbus.enable = mkEnableOption "Enables dbus";
+    systemModules.sysd.session.dbus.enable = mkEnableOption "Enables dbus";
   };
   config = mkIf cfg.enable {
     services.dbus = {

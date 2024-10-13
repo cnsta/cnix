@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.studio.beekeeper;
+  cfg = config.systemModules.studio.beekeeper;
 in {
   options = {
-    modules.studio.beekeeper.enable = mkEnableOption "Enables Beekeeper Studio";
+    systemModules.studio.beekeeper.enable = mkEnableOption "Enables Beekeeper Studio";
   };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [

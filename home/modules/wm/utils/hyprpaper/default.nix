@@ -6,13 +6,13 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.wm.utils.hyprpaper;
+  cfg = config.userModules.wm.utils.hyprpaper;
 
   hyprpaperFlake = inputs.hyprpaper.packages.${pkgs.system}.default;
   # hyprpaperPkg = pkgs.hyprpaper;
 in {
   options = {
-    modules.wm.utils.hyprpaper.enable = mkEnableOption "Enables hyprpaper";
+    userModules.wm.utils.hyprpaper.enable = mkEnableOption "Enables hyprpaper";
   };
   config = mkIf cfg.enable {
     services.hyprpaper = {

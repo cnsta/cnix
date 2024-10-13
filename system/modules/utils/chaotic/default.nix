@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkOption mkMerge;
-  cfg = config.modules.utils.chaotic;
+  cfg = config.systemModules.utils.chaotic;
 in {
   options = {
-    modules.utils.chaotic = {
+    systemModules.utils.chaotic = {
       enable = mkEnableOption "Enables Chaotic AUR packages";
       amd.enable = mkOption {
         type = lib.types.bool;
@@ -20,7 +20,6 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      # Base configuration when Chaotic is enabled
       chaotic.scx.enable = true;
     }
     (mkIf cfg.amd.enable {

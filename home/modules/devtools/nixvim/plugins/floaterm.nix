@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.floaterm;
+  cfg = config.userModules.devtools.nixvim.plugins.floaterm;
 in {
   options = {
-    modules.devtools.nixvim.plugins.floaterm.enable = mkEnableOption "Enables Floaterm plugin for nixvim";
+    userModules.devtools.nixvim.plugins.floaterm.enable = mkEnableOption "Enables Floaterm plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

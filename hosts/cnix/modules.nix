@@ -1,5 +1,5 @@
 {
-  modules = {
+  systemModules = {
     boot = {
       loader = {
         default = {
@@ -131,10 +131,6 @@
         };
         dconf = {
           enable = true;
-        };
-        xserver = {
-          videoDrivers = ["amdgpu"];
-          xkbLayout = "se";
         };
       };
       system = {

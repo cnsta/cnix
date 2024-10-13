@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.neo-tree;
+  cfg = config.userModules.devtools.nixvim.plugins.neo-tree;
 in {
   options = {
-    modules.devtools.nixvim.plugins.neo-tree.enable = mkEnableOption "Enables neo-tree plugin for nixvim";
+    userModules.devtools.nixvim.plugins.neo-tree.enable = mkEnableOption "Enables neo-tree plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.efm;
+  cfg = config.userModules.devtools.nixvim.plugins.efm;
 in {
   options = {
-    modules.devtools.nixvim.plugins.efm.enable = mkEnableOption "Enables EFM LSP support for nixvim";
+    userModules.devtools.nixvim.plugins.efm.enable = mkEnableOption "Enables EFM LSP support for nixvim";
   };
 
   config = mkIf cfg.enable {

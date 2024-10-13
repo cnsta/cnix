@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.terminal.foot;
+  cfg = config.userModules.terminal.foot;
 in {
   options = {
-    modules.terminal.foot.enable = mkEnableOption "Enables foot terminal";
+    userModules.terminal.foot.enable = mkEnableOption "Enables foot terminal";
   };
   config = mkIf cfg.enable {
     programs.foot = {

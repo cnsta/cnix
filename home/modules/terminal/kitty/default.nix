@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.terminal.kitty;
+  cfg = config.userModules.terminal.kitty;
 in {
   options = {
-    modules.terminal.kitty.enable = mkEnableOption "Enables kitty terminal";
+    userModules.terminal.kitty.enable = mkEnableOption "Enables kitty terminal";
   };
   config = mkIf cfg.enable {
     programs.kitty = {

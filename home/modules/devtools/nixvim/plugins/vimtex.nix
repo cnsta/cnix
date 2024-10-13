@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.vimtex;
+  cfg = config.userModules.devtools.nixvim.plugins.vimtex;
 in {
   options = {
-    modules.devtools.nixvim.plugins.vimtex.enable = mkEnableOption "Enables VimTeX plugin for nixvim";
+    userModules.devtools.nixvim.plugins.vimtex.enable = mkEnableOption "Enables VimTeX plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.lightline;
+  cfg = config.userModules.devtools.nixvim.plugins.lightline;
 in {
   options = {
-    modules.devtools.nixvim.plugins.lightline.enable = mkEnableOption "Enables lightline plugin for nixvim";
+    userModules.devtools.nixvim.plugins.lightline.enable = mkEnableOption "Enables lightline plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkOption;
-  cfg = config.modules.boot.kernel;
+  cfg = config.systemModules.boot.kernel;
 in {
   options = {
-    modules.boot.kernel = {
+    systemModules.boot.kernel = {
       variant = mkOption {
         type = lib.types.enum ["stable" "latest" "cachyos"];
         default = "latest";
@@ -30,7 +30,7 @@ in {
       extraBlacklistedModules = mkOption {
         type = lib.types.listOf lib.types.str;
         default = [];
-        description = "Additional kernel modules to blacklist.";
+        description = "Additional kernel systemModules to blacklist.";
       };
     };
   };

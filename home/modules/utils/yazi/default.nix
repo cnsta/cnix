@@ -5,14 +5,14 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.yazi;
+  cfg = config.userModules.utils.yazi;
 in {
   imports = [
     ./theme
   ];
 
   options = {
-    modules.utils.yazi.enable = mkEnableOption "Enables yazi";
+    userModules.utils.yazi.enable = mkEnableOption "Enables yazi";
   };
   config = mkIf cfg.enable {
     programs.yazi = {

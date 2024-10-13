@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.userd.mako;
+  cfg = config.userModules.userd.mako;
 in {
   options = {
-    modules.userd.mako.enable = mkEnableOption "Enables mako";
+    userModules.userd.mako.enable = mkEnableOption "Enables mako";
   };
   config = mkIf cfg.enable {
     services.mako = {

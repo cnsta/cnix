@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.wm.hyprland.toothpick.keybinds;
+  cfg = config.userModules.wm.hyprland.toothpick.keybinds;
 in {
   options = {
-    modules.wm.hyprland.toothpick.keybinds.enable = mkEnableOption "Enables keybind settings in Hyprland";
+    userModules.wm.hyprland.toothpick.keybinds.enable = mkEnableOption "Enables keybind settings in Hyprland";
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {

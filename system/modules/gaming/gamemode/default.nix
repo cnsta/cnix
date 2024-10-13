@@ -6,14 +6,14 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkOption;
-  cfg = config.modules.gaming.gamemode;
+  cfg = config.systemModules.gaming.gamemode;
   pipewireLowLatencyModule = inputs.nix-gaming.nixosModules.pipewireLowLatency;
 in {
   imports = [
     pipewireLowLatencyModule
   ];
   options = {
-    modules.gaming.gamemode = {
+    systemModules.gaming.gamemode = {
       enable = mkEnableOption "Enables gamemode";
       optimizeGpu.enable = mkOption {
         type = lib.types.bool;
@@ -29,7 +29,7 @@ in {
         general = {
           inhibit_screensaver = 1;
           softrealtime = "auto";
-          renice = 15;
+          # renice = 15;
         };
         gpu = mkIf cfg.optimizeGpu.enable {
           apply_gpu_optimisations = "accept-responsibility";

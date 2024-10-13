@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.gaming.mangohud;
+  cfg = config.userModules.gaming.mangohud;
 in {
   options = {
-    modules.gaming.mangohud.enable = mkEnableOption "Enables mangohud";
+    userModules.gaming.mangohud.enable = mkEnableOption "Enables mangohud";
   };
   config = mkIf cfg.enable {
     programs.mangohud = {

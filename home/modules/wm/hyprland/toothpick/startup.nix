@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.wm.hyprland.toothpick.startup;
+  cfg = config.userModules.wm.hyprland.toothpick.startup;
 in {
   options = {
-    modules.wm.hyprland.toothpick.startup.enable = mkEnableOption "Enables startup settings in Hyprland";
+    userModules.wm.hyprland.toothpick.startup.enable = mkEnableOption "Enables startup settings in Hyprland";
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {

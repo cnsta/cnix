@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.waybar;
+  cfg = config.userModules.utils.waybar;
 in {
   options = {
-    modules.utils.waybar.enable = mkEnableOption "Enables waybar";
+    userModules.utils.waybar.enable = mkEnableOption "Enables waybar";
   };
   config = mkIf cfg.enable {
     systemd.user.services.waybar = {

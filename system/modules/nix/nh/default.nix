@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkOption;
-  cfg = config.modules.nix.nh;
+  cfg = config.systemModules.nix.nh;
 in {
   options = {
-    modules.nix.nh = {
+    systemModules.nix.nh = {
       enable = mkEnableOption "Enables nix helper";
       clean = {
         enable = mkEnableOption "Enables nix helper cleaning";

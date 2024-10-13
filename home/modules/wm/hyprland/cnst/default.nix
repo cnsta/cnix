@@ -3,26 +3,26 @@
   config,
   lib,
   pkgs,
-  userModules,
+  umodPath,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkDefault;
-  cfg = config.modules.wm.hyprland.cnst;
+  cfg = config.userModules.wm.hyprland.cnst;
 in {
   imports = [
-    "${userModules}/wm/hyprland/cnst/appearance.nix"
-    "${userModules}/wm/hyprland/cnst/inputs.nix"
-    "${userModules}/wm/hyprland/cnst/keybinds.nix"
-    "${userModules}/wm/hyprland/cnst/rules.nix"
-    "${userModules}/wm/hyprland/cnst/startup.nix"
+    "${umodPath}/wm/hyprland/cnst/appearance.nix"
+    "${umodPath}/wm/hyprland/cnst/inputs.nix"
+    "${umodPath}/wm/hyprland/cnst/keybinds.nix"
+    "${umodPath}/wm/hyprland/cnst/rules.nix"
+    "${umodPath}/wm/hyprland/cnst/startup.nix"
   ];
 
   options = {
-    modules.wm.hyprland.cnst.enable = mkEnableOption "Enable Hyprland";
+    userModules.wm.hyprland.cnst.enable = mkEnableOption "Enable Hyprland";
   };
 
   config = mkIf cfg.enable {
-    modules.wm.hyprland.cnst = {
+    userModules.wm.hyprland.cnst = {
       appearance.enable = mkDefault cfg.enable;
       inputs.enable = mkDefault cfg.enable;
       keybinds.enable = mkDefault cfg.enable;

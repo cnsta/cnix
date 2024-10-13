@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.corectrl;
+  cfg = config.systemModules.utils.corectrl;
 in {
   options = {
-    modules.utils.corectrl.enable = mkEnableOption "Enables CoreCtrl";
+    systemModules.utils.corectrl.enable = mkEnableOption "Enables CoreCtrl";
   };
   config = mkIf cfg.enable {
     programs.corectrl = {

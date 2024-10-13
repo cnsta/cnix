@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.lualine;
+  cfg = config.userModules.devtools.nixvim.plugins.lualine;
 in {
   options = {
-    modules.devtools.nixvim.plugins.lualine.enable = mkEnableOption "Enables Lualine plugin for nixvim";
+    userModules.devtools.nixvim.plugins.lualine.enable = mkEnableOption "Enables Lualine plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

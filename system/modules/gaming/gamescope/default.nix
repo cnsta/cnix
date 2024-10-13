@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.gaming.gamescope;
+  cfg = config.systemModules.gaming.gamescope;
 in {
   options = {
-    modules.gaming.gamescope.enable = mkEnableOption "Enables gamescope";
+    systemModules.gaming.gamescope.enable = mkEnableOption "Enables gamescope";
   };
   config = mkIf cfg.enable {
     programs.gamescope = {

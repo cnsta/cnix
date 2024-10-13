@@ -15,10 +15,10 @@
         exec "$@"
   '';
   inherit (lib) types mkIf mkEnableOption mkOption;
-  cfg = config.modules.hardware.graphics.nvidia;
+  cfg = config.systemModules.hardware.graphics.nvidia;
 in {
   options = {
-    modules.hardware.graphics.nvidia = {
+    systemModules.hardware.graphics.nvidia = {
       enable = mkEnableOption "Enables NVidia graphics";
       package = mkOption {
         type = types.enum ["stable" "beta" "production" "latest"];

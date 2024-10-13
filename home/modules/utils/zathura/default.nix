@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.zathura;
+  cfg = config.userModules.utils.zathura;
 in {
   options = {
-    modules.utils.zathura.enable = mkEnableOption "Enables zathura";
+    userModules.utils.zathura.enable = mkEnableOption "Enables zathura";
   };
   config = mkIf cfg.enable {
     programs.zathura = {

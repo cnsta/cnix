@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.sysd.system.pipewire;
+  cfg = config.systemModules.sysd.system.pipewire;
 in {
   options = {
-    modules.sysd.system.pipewire.enable = mkEnableOption "Enables pipewire";
+    systemModules.sysd.system.pipewire.enable = mkEnableOption "Enables pipewire";
   };
   config = mkIf cfg.enable {
     hardware.pulseaudio.enable = false;

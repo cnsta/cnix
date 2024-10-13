@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.wm.hyprland.cnst.startup;
+  cfg = config.userModules.wm.hyprland.cnst.startup;
 in {
   options = {
-    modules.wm.hyprland.cnst.startup.enable = mkEnableOption "Enables startup settings in Hyprland";
+    userModules.wm.hyprland.cnst.startup.enable = mkEnableOption "Enables startup settings in Hyprland";
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {

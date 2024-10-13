@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.harpoon;
+  cfg = config.userModules.devtools.nixvim.plugins.harpoon;
 in {
   options = {
-    modules.devtools.nixvim.plugins.harpoon.enable = mkEnableOption "Enables Harpoon plugin for nixvim";
+    userModules.devtools.nixvim.plugins.harpoon.enable = mkEnableOption "Enables Harpoon plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

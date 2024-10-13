@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.sysd.system.kanata;
+  cfg = config.systemModules.sysd.system.kanata;
 in {
   options = {
-    modules.sysd.system.kanata.enable = mkEnableOption "Enables kanata keyboard remapping";
+    systemModules.sysd.system.kanata.enable = mkEnableOption "Enables kanata keyboard remapping";
   };
   config = mkIf cfg.enable {
     services.kanata = {

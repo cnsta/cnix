@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.devtools.neovim;
+  cfg = config.userModules.devtools.neovim;
 in {
   imports = [
     ./plugins
@@ -15,7 +15,7 @@ in {
   ];
 
   options = {
-    modules.devtools.neovim.enable = mkEnableOption "Enable neovim";
+    userModules.devtools.neovim.enable = mkEnableOption "Enable neovim";
   };
 
   config = mkIf cfg.enable {

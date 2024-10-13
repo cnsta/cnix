@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.devtools.vscode;
+  cfg = config.userModules.devtools.vscode;
 in {
   options = {
-    modules.devtools.vscode.enable = mkEnableOption "Enables vscode";
+    userModules.devtools.vscode.enable = mkEnableOption "Enables vscode";
   };
   config = mkIf cfg.enable {
     programs.vscode = {

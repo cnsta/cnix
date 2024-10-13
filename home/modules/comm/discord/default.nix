@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.comm.discord;
+  cfg = config.userModules.comm.discord;
 in {
   options = {
-    modules.comm.discord.enable = mkEnableOption "Enables discord";
+    userModules.comm.discord.enable = mkEnableOption "Enables discord";
   };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [vesktop];
