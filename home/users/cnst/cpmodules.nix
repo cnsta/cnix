@@ -1,7 +1,7 @@
 {lib, ...}: let
   inherit (lib) mkForce;
 in {
-  modules = {
+  userModules = {
     browsers = {
       #   firefox = {
       #     enable = mkForce true;

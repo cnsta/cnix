@@ -1,5 +1,5 @@
 {
-  modules = {
+  userModules = {
     browsers = {
       firefox = {
         enable = true;
