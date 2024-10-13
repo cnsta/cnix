@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.obsidian;
+  cfg = config.systemModules.utils.obsidian;
 in {
   options = {
-    modules.utils.obsidian.enable = mkEnableOption "Enables obsidian";
+    systemModules.utils.obsidian.enable = mkEnableOption "Enables obsidian";
   };
   config = mkIf cfg.enable {
     environment.systemPackages = [

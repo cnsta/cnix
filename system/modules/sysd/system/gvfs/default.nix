@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.sysd.system.gvfs;
+  cfg = config.systemModules.sysd.system.gvfs;
 in {
   options = {
-    modules.sysd.system.gvfs.enable = mkEnableOption "Enables gvfs";
+    systemModules.sysd.system.gvfs.enable = mkEnableOption "Enables gvfs";
   };
   config = mkIf cfg.enable {
     services.gvfs.enable = true;

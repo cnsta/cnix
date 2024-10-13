@@ -13,6 +13,7 @@ in {
       ./shell.nix
     ]
     ++ lib.optionals isCnixpad [./cpmodules.nix];
+
   home = {
     username = "cnst";
     homeDirectory = "/home/cnst";

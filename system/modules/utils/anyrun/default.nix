@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.anyrun;
+  cfg = config.systemModules.utils.anyrun;
 in {
   options = {
-    modules.utils.anyrun.enable = mkEnableOption "Enables anyrun";
+    systemModules.utils.anyrun.enable = mkEnableOption "Enables anyrun";
   };
   config = mkIf cfg.enable {
     environment.systemPackages = [

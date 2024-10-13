@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.cmp;
+  cfg = config.userModules.devtools.nixvim.plugins.cmp;
 in {
   options = {
-    modules.devtools.nixvim.plugins.cmp.enable = mkEnableOption "Enables completion plugin for nixvim";
+    userModules.devtools.nixvim.plugins.cmp.enable = mkEnableOption "Enables completion plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

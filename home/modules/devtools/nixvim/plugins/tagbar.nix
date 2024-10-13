@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.tagbar;
+  cfg = config.userModules.devtools.nixvim.plugins.tagbar;
 in {
   options = {
-    modules.devtools.nixvim.plugins.tagbar.enable = mkEnableOption "Enables Tagbar plugin for nixvim";
+    userModules.devtools.nixvim.plugins.tagbar.enable = mkEnableOption "Enables Tagbar plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

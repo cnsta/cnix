@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.none-ls;
+  cfg = config.userModules.devtools.nixvim.plugins.none-ls;
 in {
   options = {
-    modules.devtools.nixvim.plugins.none-ls.enable = mkEnableOption "Enables None-LS plugin for nixvim";
+    userModules.devtools.nixvim.plugins.none-ls.enable = mkEnableOption "Enables None-LS plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

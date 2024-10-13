@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.eza;
+  cfg = config.userModules.utils.eza;
 in {
   options = {
-    modules.utils.eza.enable = mkEnableOption "Enables eza";
+    userModules.utils.eza.enable = mkEnableOption "Enables eza";
   };
   config = mkIf cfg.enable {
     programs.eza = {

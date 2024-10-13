@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.browsers.chromium;
+  cfg = config.userModules.browsers.chromium;
 in {
   options = {
-    modules.browsers.chromium.enable = mkEnableOption "Enables chromium";
+    userModules.browsers.chromium.enable = mkEnableOption "Enables chromium";
   };
   config = mkIf cfg.enable {
     programs.chromium = {

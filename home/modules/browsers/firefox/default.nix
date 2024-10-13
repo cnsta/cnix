@@ -6,13 +6,13 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.browsers.firefox;
+  cfg = config.userModules.browsers.firefox;
 in {
   imports = [
     inputs.nur.hmModules.nur
   ];
   options = {
-    modules.browsers.firefox.enable = mkEnableOption "Enables firefox";
+    userModules.browsers.firefox.enable = mkEnableOption "Enables firefox";
   };
   config = mkIf cfg.enable {
     programs.firefox = {

@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.copilot;
+  cfg = config.userModules.devtools.nixvim.plugins.copilot;
 in {
   options = {
-    modules.devtools.nixvim.plugins.copilot.enable = mkEnableOption "Enables AI tools for nixvim";
+    userModules.devtools.nixvim.plugins.copilot.enable = mkEnableOption "Enables AI tools for nixvim";
   };
 
   config = mkIf cfg.enable {

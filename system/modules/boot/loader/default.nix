@@ -6,10 +6,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkMerge mkForce;
-  cfg = config.modules.boot.loader;
+  cfg = config.systemModules.boot.loader;
 in {
   options = {
-    modules.boot.loader = {
+    systemModules.boot.loader = {
       default = {
         enable = mkEnableOption "Enable default boot loader configuration.";
       };
@@ -28,7 +28,7 @@ in {
       assertions = [
         {
           assertion = !(cfg.default.enable && cfg.lanzaboote.enable);
-          message = "Only one of modules.boot.loader.default.enable and modules.boot.loader.lanzaboote.enable can be set to true.";
+          message = "Only one of systemModules.boot.loader.default.enable and systemModules.boot.loader.lanzaboote.enable can be set to true.";
         }
       ];
     }

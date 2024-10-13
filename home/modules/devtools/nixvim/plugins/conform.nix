@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.conform;
+  cfg = config.userModules.devtools.nixvim.plugins.conform;
 in {
   options = {
-    modules.devtools.nixvim.plugins.conform.enable = mkEnableOption "Enables Conform plugin for nixvim";
+    userModules.devtools.nixvim.plugins.conform.enable = mkEnableOption "Enables Conform plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

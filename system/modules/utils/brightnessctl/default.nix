@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.brightnessctl;
+  cfg = config.systemModules.utils.brightnessctl;
 in {
   options = {
-    modules.utils.brightnessctl.enable = mkEnableOption "Enables brigthnessctl";
+    systemModules.utils.brightnessctl.enable = mkEnableOption "Enables brigthnessctl";
   };
   config = mkIf cfg.enable {
     environment.systemPackages = [

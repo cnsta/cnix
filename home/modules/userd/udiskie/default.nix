@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.userd.udiskie;
+  cfg = config.userModules.userd.udiskie;
 in {
   options = {
-    modules.userd.udiskie.enable = mkEnableOption "Enables udiskie";
+    userModules.userd.udiskie.enable = mkEnableOption "Enables udiskie";
   };
   config = mkIf cfg.enable {
     services.udiskie = {

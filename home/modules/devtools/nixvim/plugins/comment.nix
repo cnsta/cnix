@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.comment;
+  cfg = config.userModules.devtools.nixvim.plugins.comment;
 in {
   options = {
-    modules.devtools.nixvim.plugins.comment.enable = mkEnableOption "Enables Comment plugin for nixvim";
+    userModules.devtools.nixvim.plugins.comment.enable = mkEnableOption "Enables Comment plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

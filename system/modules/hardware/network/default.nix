@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkOption types;
-  cfg = config.modules.hardware.network;
+  cfg = config.systemModules.hardware.network;
 in {
   options = {
-    modules = {
+    systemModules = {
       hardware = {
         network = {
           enable = mkEnableOption "Enable the custom networking module";

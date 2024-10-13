@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.sysd.system.powerd;
+  cfg = config.systemModules.sysd.system.powerd;
 in {
   options = {
-    modules.sysd.system.powerd.enable = mkEnableOption "Enables power-profiles-daemon";
+    systemModules.sysd.system.powerd.enable = mkEnableOption "Enables power-profiles-daemon";
   };
   config = mkIf cfg.enable {
     services = {

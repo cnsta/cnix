@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.lsp;
+  cfg = config.userModules.devtools.nixvim.plugins.lsp;
 in {
   options = {
-    modules.devtools.nixvim.plugins.lsp = {
+    userModules.devtools.nixvim.plugins.lsp = {
       enable = mkEnableOption "Enables LSP support for nixvim";
     };
   };

@@ -6,13 +6,13 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.tuirun;
+  cfg = config.userModules.utils.tuirun;
 in {
   imports = [
     inputs.tuirun.homeManagerModules.default
   ];
   options = {
-    modules.utils.tuirun.enable = mkEnableOption "Enables tuirun";
+    userModules.utils.tuirun.enable = mkEnableOption "Enables tuirun";
   };
   config = mkIf cfg.enable {
     programs.tuirun = {

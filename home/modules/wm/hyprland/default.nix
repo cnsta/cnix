@@ -1,6 +1,6 @@
-{userModules, ...}: {
+{umodPath, ...}: {
   imports = [
-    "${userModules}/wm/hyprland/cnst"
-    "${userModules}/wm/hyprland/toothpick"
+    "${umodPath}/wm/hyprland/cnst"
+    "${umodPath}/wm/hyprland/toothpick"
   ];
 }

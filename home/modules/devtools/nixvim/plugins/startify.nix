@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.startify;
+  cfg = config.userModules.devtools.nixvim.plugins.startify;
 in {
   options = {
-    modules.devtools.nixvim.plugins.startify.enable = mkEnableOption "Enables Startify plugin for nixvim";
+    userModules.devtools.nixvim.plugins.startify.enable = mkEnableOption "Enables Startify plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

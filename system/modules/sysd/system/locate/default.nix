@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.sysd.system.locate;
+  cfg = config.systemModules.sysd.system.locate;
 in {
   options = {
-    modules.sysd.system.locate.enable = mkEnableOption "Enables plocate";
+    systemModules.sysd.system.locate.enable = mkEnableOption "Enables plocate";
   };
   config = mkIf cfg.enable {
     services.locate = {

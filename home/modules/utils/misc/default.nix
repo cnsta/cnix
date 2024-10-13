@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.misc;
+  cfg = config.userModules.utils.misc;
 in {
   options = {
-    modules.utils.misc.enable = mkEnableOption "Enables miscellaneous utility apps";
+    userModules.utils.misc.enable = mkEnableOption "Enables miscellaneous utility apps";
   };
   config = mkIf cfg.enable {
     programs = {

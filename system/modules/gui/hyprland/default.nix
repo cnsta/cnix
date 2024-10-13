@@ -6,10 +6,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.gui.hyprland;
+  cfg = config.systemModules.gui.hyprland;
 in {
   options = {
-    modules.gui.hyprland.enable = mkEnableOption "Enables hyprland";
+    systemModules.gui.hyprland.enable = mkEnableOption "Enables hyprland";
   };
   config = mkIf cfg.enable {
     programs.hyprland = {

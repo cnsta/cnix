@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.yubikey;
+  cfg = config.systemModules.utils.yubikey;
 in {
   options = {
-    modules.utils.yubikey.enable = mkEnableOption "Enables yubikey utilities";
+    systemModules.utils.yubikey.enable = mkEnableOption "Enables yubikey utilities";
   };
   config = mkIf cfg.enable {
     environment.systemPackages = [

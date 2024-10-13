@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.devtools.helix;
+  cfg = config.userModules.devtools.helix;
 in {
   imports = [
     ./lang.nix
@@ -14,7 +14,7 @@ in {
   ];
 
   options = {
-    modules.devtools.helix.enable = mkEnableOption "Enable helix";
+    userModules.devtools.helix.enable = mkEnableOption "Enable helix";
   };
 
   config = mkIf cfg.enable {

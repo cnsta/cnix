@@ -14,10 +14,10 @@
     if osConfig.networking.hostName == "cnixpad"
     then "foot"
     else "alacritty";
-  cfg = config.modules.wm.hyprland.cnst.keybinds;
+  cfg = config.userModules.wm.hyprland.cnst.keybinds;
 in {
   options = {
-    modules.wm.hyprland.cnst.keybinds.enable = mkEnableOption "Enables keybind settings in Hyprland";
+    userModules.wm.hyprland.cnst.keybinds.enable = mkEnableOption "Enables keybind settings in Hyprland";
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {

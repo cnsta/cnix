@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.sysd.network.openssh;
+  cfg = config.systemModules.sysd.network.openssh;
 in {
   options = {
-    modules.sysd.network.openssh.enable = mkEnableOption "Enables openssh";
+    systemModules.sysd.network.openssh.enable = mkEnableOption "Enables openssh";
   };
   config = mkIf cfg.enable {
     services.openssh = {

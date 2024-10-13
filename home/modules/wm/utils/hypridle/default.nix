@@ -6,13 +6,13 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.wm.utils.hypridle;
+  cfg = config.userModules.wm.utils.hypridle;
 
   hypridleFlake = inputs.hypridle.packages.${pkgs.system}.hypridle;
   # hypridlePkg = pkgs.hypridle;
 in {
   options = {
-    modules.wm.utils.hypridle.enable = mkEnableOption "Enables hypridle";
+    userModules.wm.utils.hypridle.enable = mkEnableOption "Enables hypridle";
   };
   config = mkIf cfg.enable {
     services.hypridle = {

@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.wm.hyprland.toothpick.rules;
+  cfg = config.userModules.wm.hyprland.toothpick.rules;
 in {
   options = {
-    modules.wm.hyprland.toothpick.rules.enable = mkEnableOption "Enables window rule settings in Hyprland";
+    userModules.wm.hyprland.toothpick.rules.enable = mkEnableOption "Enables window rule settings in Hyprland";
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {

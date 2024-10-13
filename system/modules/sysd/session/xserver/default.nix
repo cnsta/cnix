@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkOption types;
-  cfg = config.modules.sysd.session.xserver;
+  cfg = config.systemModules.sysd.session.xserver;
 in {
   options = {
-    modules.sysd.session.xserver = {
+    systemModules.sysd.session.xserver = {
       videoDrivers = mkOption {
         type = types.listOf (types.enum ["amdgpu" "nvidia"]);
         default = ["amdgpu"];

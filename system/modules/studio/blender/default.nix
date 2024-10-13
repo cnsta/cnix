@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkOption;
-  cfg = config.modules.studio.blender;
+  cfg = config.systemModules.studio.blender;
 in {
   options = {
-    modules.studio.blender = {
+    systemModules.studio.blender = {
       enable = mkEnableOption "Enables Blender";
       hip.enable = mkOption {
         type = lib.types.bool;

@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.android;
+  cfg = config.systemModules.utils.android;
 in {
   options = {
-    modules.utils.android.enable = mkEnableOption "Enables android tools";
+    systemModules.utils.android.enable = mkEnableOption "Enables android tools";
   };
   config = mkIf cfg.enable {
     programs.adb.enable = true;

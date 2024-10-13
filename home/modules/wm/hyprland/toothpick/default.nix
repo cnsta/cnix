@@ -3,26 +3,26 @@
   config,
   lib,
   pkgs,
-  userModules,
+  umodPath,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkDefault;
-  cfg = config.modules.wm.hyprland.toothpick;
+  cfg = config.userModules.wm.hyprland.toothpick;
 in {
   imports = [
-    "${userModules}/wm/hyprland/toothpick/appearance.nix"
-    "${userModules}/wm/hyprland/toothpick/inputs.nix"
-    "${userModules}/wm/hyprland/toothpick/keybinds.nix"
-    "${userModules}/wm/hyprland/toothpick/rules.nix"
-    "${userModules}/wm/hyprland/toothpick/startup.nix"
+    "${umodPath}/wm/hyprland/toothpick/appearance.nix"
+    "${umodPath}/wm/hyprland/toothpick/inputs.nix"
+    "${umodPath}/wm/hyprland/toothpick/keybinds.nix"
+    "${umodPath}/wm/hyprland/toothpick/rules.nix"
+    "${umodPath}/wm/hyprland/toothpick/startup.nix"
   ];
 
   options = {
-    modules.wm.hyprland.toothpick.enable = mkEnableOption "Enable Hyprland";
+    userModules.wm.hyprland.toothpick.enable = mkEnableOption "Enable Hyprland";
   };
 
   config = mkIf cfg.enable {
-    modules.wm.hyprland.toothpick = {
+    userModules.wm.hyprland.toothpick = {
       appearance.enable = mkDefault cfg.enable;
       inputs.enable = mkDefault cfg.enable;
       keybinds.enable = mkDefault cfg.enable;

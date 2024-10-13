@@ -4,15 +4,15 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.wm.hyprland.cnst.inputs;
+  cfg = config.userModules.wm.hyprland.cnst.inputs;
 in {
   options = {
-    modules.wm.hyprland.cnst.inputs.enable = mkEnableOption "Enables input settings in Hyprland";
+    userModules.wm.hyprland.cnst.inputs.enable = mkEnableOption "Enables input settings in Hyprland";
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       monitor = [
-        "DP-3, 2560x1440@239.97, auto, auto, bitdepth, 10"
+        "DP-3, 2560x1440@240, auto, auto, bitdepth, 10"
         "eDP-1,1920x1200@60.02,auto,1"
       ];
       env = [
@@ -63,7 +63,7 @@ in {
         workspace_swipe_create_new = true;
       };
       misc = {
-        vrr = 2;
+        vrr = 0;
         mouse_move_enables_dpms = 1;
         key_press_enables_dpms = 0;
         force_default_wallpaper = 0;

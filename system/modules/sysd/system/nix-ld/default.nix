@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.sysd.system.nix-ld;
+  cfg = config.systemModules.sysd.system.nix-ld;
 in {
   options = {
-    modules.sysd.system.nix-ld.enable = mkEnableOption "Enables nix-ld";
+    systemModules.sysd.system.nix-ld.enable = mkEnableOption "Enables nix-ld";
   };
   config = mkIf cfg.enable {
     programs.nix-ld = {

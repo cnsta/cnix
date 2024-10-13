@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.wm.hyprland.toothpick.appearance;
+  cfg = config.userModules.wm.hyprland.toothpick.appearance;
 in {
   options = {
-    modules.wm.hyprland.toothpick.appearance.enable = mkEnableOption "Enables appearance settings in Hyprland";
+    userModules.wm.hyprland.toothpick.appearance.enable = mkEnableOption "Enables appearance settings in Hyprland";
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {

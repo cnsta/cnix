@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.rofi;
+  cfg = config.userModules.utils.rofi;
 in {
   options = {
-    modules.utils.rofi.enable = mkEnableOption "Enables firefox";
+    userModules.utils.rofi.enable = mkEnableOption "Enables firefox";
   };
   config = mkIf cfg.enable {
     programs.rofi = {

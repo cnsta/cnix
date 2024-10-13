@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.hardware.graphics.amd;
+  cfg = config.systemModules.hardware.graphics.amd;
 in {
   options = {
-    modules.hardware.graphics.amd.enable = mkEnableOption "Enables AMD graphics";
+    systemModules.hardware.graphics.amd.enable = mkEnableOption "Enables AMD graphics";
   };
   config = mkIf cfg.enable {
     hardware = {

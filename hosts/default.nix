@@ -14,8 +14,8 @@
     cnstConfig = "${self}/home/users/cnst";
     toothpickConfig = "${self}/home/users/toothpick";
 
-    userModules = "${self}/home/modules";
-    systemModules = "${self}/system/modules";
+    umodPath = "${self}/home/modules";
+    smodPath = "${self}/system/modules";
 
     # shorten paths
     inherit (inputs.nixpkgs.lib) nixosSystem;
@@ -25,10 +25,11 @@
     inherit (import "${systemConfig}") shared;
 
     # get these into the module system
-    specialArgs = {inherit inputs self userConfig systemConfig hostConfig cnstConfig toothpickConfig userModules systemModules;};
+    specialArgs = {inherit inputs self userConfig systemConfig hostConfig cnstConfig toothpickConfig umodPath smodPath;};
   in {
     cnix = nixosSystem {
       inherit specialArgs;
+
       modules =
         shared
         ++ [

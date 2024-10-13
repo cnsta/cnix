@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.treesitter;
+  cfg = config.userModules.devtools.nixvim.plugins.treesitter;
 in {
   options = {
-    modules.devtools.nixvim.plugins = {
+    userModules.devtools.nixvim.plugins = {
       treesitter.enable = mkEnableOption "Enables Treesitter plugin for nixvim";
     };
   };

@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.markdown-preview;
+  cfg = config.userModules.devtools.nixvim.plugins.markdown-preview;
 in {
   options = {
-    modules.devtools.nixvim.plugins.markdown-preview.enable = mkEnableOption "Enables Markdown Preview plugin for nixvim";
+    userModules.devtools.nixvim.plugins.markdown-preview.enable = mkEnableOption "Enables Markdown Preview plugin for nixvim";
   };
 
   config = mkIf cfg.enable {

@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.modules.devtools.nixvim.plugins.lsp-format;
+  cfg = config.userModules.devtools.nixvim.plugins.lsp-format;
 in {
   options = {
-    modules.devtools.nixvim.plugins.lsp-format = {
+    userModules.devtools.nixvim.plugins.lsp-format = {
       enable = mkEnableOption "Enables LSP formatting support for nixvim";
     };
   };

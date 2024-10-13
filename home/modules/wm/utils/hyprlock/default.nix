@@ -6,13 +6,13 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.wm.utils.hyprlock;
+  cfg = config.userModules.wm.utils.hyprlock;
 
   hyprlockFlake = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
   # hyprlockPkg = pkgs.hyprlock;
 in {
   options = {
-    modules.wm.utils.hyprlock.enable = mkEnableOption "Enables hyprlock";
+    userModules.wm.utils.hyprlock.enable = mkEnableOption "Enables hyprlock";
   };
   config = mkIf cfg.enable {
     programs.hyprlock = {

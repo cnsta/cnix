@@ -5,13 +5,13 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.modules.utils.anyrun;
+  cfg = config.userModules.utils.anyrun;
 in {
   imports = [
     inputs.anyrun.homeManagerModules.default
   ];
   options = {
-    modules.utils.anyrun.enable = mkEnableOption "Enables anyrun";
+    userModules.utils.anyrun.enable = mkEnableOption "Enables anyrun";
   };
   config = mkIf cfg.enable {
     programs.anyrun = {
