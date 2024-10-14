@@ -1,9 +1,14 @@
 {
   lib,
   config,
+  osConfig,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
+  kbOption =
+    if osConfig.networking.hostName == "cnixpad"
+    then "ctrl:swapcaps"
+    else "";
   cfg = config.userModules.wm.hyprland.cnst.inputs;
 in {
   options = {
@@ -22,6 +27,7 @@ in {
       input = {
         kb_layout = "se";
         kb_variant = "nodeadkeys";
+        kb_options = kbOption;
         follow_mouse = 1;
         accel_profile = "flat";
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
