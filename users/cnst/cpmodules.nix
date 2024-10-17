@@ -7,8 +7,8 @@ in {
       width = mkForce 1920;
       height = mkForce 1200;
       refreshRate = mkForce 60;
-      workspace = mkForce "1";
-      primary = mkForce true;
+      # workspace = "1";
+      # primary = true;
     }
   ];
   home = {
