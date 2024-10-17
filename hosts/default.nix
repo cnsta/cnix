@@ -59,6 +59,7 @@
               extraSpecialArgs = specialArgs;
             };
           }
+          self.nixosModules.system
           inputs.chaotic.nixosModules.default
           inputs.agenix.nixosModules.default
         ];
@@ -76,6 +77,7 @@
               extraSpecialArgs = specialArgs;
             };
           }
+          self.nixosModules.system
           inputs.chaotic.nixosModules.default
           inputs.agenix.nixosModules.default
         ];

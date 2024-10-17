@@ -2,8 +2,12 @@
   system = {
     boot = {
       loader = {
-        default.enable = true;
-        lanzaboote.enable = false;
+        default = {
+          enable = true;
+        };
+        lanzaboote = {
+          enable = false;
+        };
       };
       kernel = {
         variant = "stable";

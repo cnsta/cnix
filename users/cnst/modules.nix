@@ -69,7 +69,6 @@
       gpg = {
         enable = false;
       };
-
       mako = {
         enable = true;
       };
