@@ -16,23 +16,6 @@
         extraBlacklistedModules = [];
       };
     };
-    gaming = {
-      steam = {
-        enable = false;
-      };
-      gamescope = {
-        enable = false;
-      };
-      lutris = {
-        enable = false;
-      };
-      gamemode = {
-        enable = false;
-        optimizeGpu = {
-          enable = false;
-        };
-      };
-    };
     gui = {
       gnome = {
         enable = false;
@@ -67,15 +50,6 @@
         nm-applet = {
           enable = true;
           indicator = true;
-        };
-      };
-    };
-    nix = {
-      nh = {
-        enable = true;
-        clean = {
-          enable = true;
-          extraArgs = "--keep 3 --keep-since 21d";
         };
       };
     };
@@ -131,10 +105,6 @@
         };
         dconf = {
           enable = true;
-        };
-        xserver = {
-          videoDrivers = ["amdgpu"];
-          xkbLayout = "se";
         };
       };
       system = {
@@ -197,6 +167,13 @@
       misc = {
         enable = true;
         desktop.enable = false;
+      };
+      nh = {
+        enable = true;
+        clean = {
+          enable = true;
+          extraArgs = "--keep 3 --keep-since 21d";
+        };
       };
       npm = {
         enable = true;
