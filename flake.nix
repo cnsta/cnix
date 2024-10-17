@@ -6,8 +6,9 @@
       systems = ["x86_64-linux"];
 
       imports = [
-        ./home
+        ./users
         ./hosts
+        ./modules
       ];
 
       perSystem = {pkgs, ...}: {
@@ -89,7 +90,6 @@
     chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
 
     # Miscellaneous
-    helix.url = "github:SoraTenshi/helix/new-daily-driver";
     helix-flake.url = "github:helix-editor/helix";
 
     nix-gaming = {
@@ -100,11 +100,6 @@
       };
     };
 
-    firefox-nightly = {
-      url = "github:nix-community/flake-firefox-nightly";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nur.url = "github:nix-community/NUR";
 
     anyrun.url = "github:anyrun-org/anyrun";
@@ -112,15 +107,10 @@
     agenix.url = "github:ryantm/agenix";
 
     # Rust toolchain
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    wezterm = {
-      url = "github:wez/wezterm/main?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # fenix = {
+    #   url = "github:nix-community/fenix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # Custom apps
     tuirun.url = "git+https://git.sr.ht/~canasta/tuirun";

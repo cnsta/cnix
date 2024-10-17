@@ -1,13 +1,8 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
-  nixpkgs.overlays = [inputs.fenix.overlays.default];
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     # Language servers, other utilities and tools
     gcc
-    rust-analyzer-nightly
+    rust-analyzer
     lua-language-server
     nixd
     php
