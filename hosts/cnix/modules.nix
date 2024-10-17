@@ -1,5 +1,5 @@
 {
-  systemModules = {
+  system = {
     boot = {
       loader = {
         default = {
@@ -17,12 +17,12 @@
       };
     };
     gaming = {
-      steam = {
-        enable = true;
-      };
-      gamescope = {
-        enable = true;
-      };
+      # steam = {
+      #   enable = true;
+      # };
+      # gamescope = {
+      #   enable = true;
+      # };
       lutris = {
         enable = true;
       };
@@ -67,15 +67,6 @@
         nm-applet = {
           enable = true;
           indicator = true;
-        };
-      };
-    };
-    nix = {
-      nh = {
-        enable = true;
-        clean = {
-          enable = true;
-          extraArgs = "--keep 3 --keep-since 21d";
         };
       };
     };
@@ -199,6 +190,13 @@
         enable = true;
         desktop = {
           enable = true;
+        };
+      };
+      nh = {
+        enable = true;
+        clean = {
+          enable = true;
+          extraArgs = "--keep 3 --keep-since 21d";
         };
       };
       npm = {

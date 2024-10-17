@@ -6,13 +6,13 @@
   default = pkgs.mkShell {
     # Add Rust toolchain from Fenix and rust-analyzer-nightly
     packages = [
-      (inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.withComponents [
-        "cargo"
-        "clippy"
-        "rust-src"
-        "rustc"
-        "rustfmt"
-      ])
+      # (inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.withComponents [
+      #   "cargo"
+      #   "clippy"
+      #   "rust-src"
+      #   "rustc"
+      #   "rustfmt"
+      # ])
     ];
 
     nativeBuildInputs = with pkgs; [

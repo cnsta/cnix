@@ -11,11 +11,11 @@
     systemConfig = "${self}/system";
     hostConfig = "${self}/hosts";
 
-    cnstConfig = "${self}/home/users/cnst";
-    toothpickConfig = "${self}/home/users/toothpick";
+    cnstConfig = "${self}/users/cnst";
+    toothpickConfig = "${self}/users/toothpick";
 
-    umodPath = "${self}/home/modules";
-    smodPath = "${self}/system/modules";
+    umodPath = "${self}/modules/home";
+    smodPath = "${self}/modules/system";
 
     # shorten paths
     inherit (inputs.nixpkgs.lib) nixosSystem;
@@ -41,6 +41,7 @@
               extraSpecialArgs = specialArgs;
             };
           }
+          self.nixosModules.system
           inputs.chaotic.nixosModules.default
           inputs.agenix.nixosModules.default
         ];
