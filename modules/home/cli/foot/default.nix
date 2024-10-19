@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.home.terminal.foot;
+  cfg = config.home.cli.foot;
 in {
   options = {
-    home.terminal.foot.enable = mkEnableOption "Enables foot terminal";
+    home.cli.foot.enable = mkEnableOption "Enables foot cli";
   };
   config = mkIf cfg.enable {
     programs.foot = {
@@ -162,7 +162,7 @@ in {
           # font-increase=Control+plus Control+equal Control+KP_Add
           # font-decrease=Control+minus Control+KP_Subtract
           # font-reset=Control+0 Control+KP_0
-          # spawn-terminal=Control+Shift+n
+          # spawn-cli=Control+Shift+n
           # minimize=none
           # maximize=none
           # fullscreen=none

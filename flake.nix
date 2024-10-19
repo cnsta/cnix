@@ -49,6 +49,8 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    nur.url = "github:nix-community/NUR";
+
     # Hyprland environment
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland-contrib = {
@@ -86,7 +88,7 @@
       };
     };
 
-    # Cachyos
+    # Chaotic
     chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
 
     # Miscellaneous
@@ -99,8 +101,6 @@
         flake-parts.follows = "flake-parts";
       };
     };
-
-    nur.url = "github:nix-community/NUR";
 
     anyrun.url = "github:anyrun-org/anyrun";
     microfetch.url = "github:NotAShelf/microfetch";

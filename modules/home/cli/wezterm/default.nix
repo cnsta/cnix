@@ -9,10 +9,10 @@
   weztermPkg = pkgs.wezterm;
   # weztermFlake = inputs.wezterm.packages.${pkgs.system}.default;
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.home.terminal.wezterm;
+  cfg = config.home.cli.wezterm;
 in {
   options = {
-    home.terminal.wezterm.enable = mkEnableOption "Enables wezterm terminal";
+    home.cli.wezterm.enable = mkEnableOption "Enables wezterm cli";
   };
   config = mkIf cfg.enable {
     programs.wezterm = {
