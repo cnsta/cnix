@@ -42,12 +42,18 @@
       #     enable = false;
       #   };
     };
-    terminal = {
+    cli = {
       alacritty = {
+        enable = true;
+      };
+      bash = {
         enable = true;
       };
       foot = {
         enable = true;
+      };
+      jujutsu = {
+        enable = false;
       };
       kitty = {
         enable = true;
@@ -57,6 +63,9 @@
       };
       zellij = {
         enable = false;
+      };
+      zsh = {
+        enable = true;
       };
     };
     userd = {

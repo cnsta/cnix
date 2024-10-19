@@ -13,11 +13,14 @@
 
         ./home/gaming/steam
 
-        ./home/terminal/alacritty
-        ./home/terminal/foot
-        ./home/terminal/kitty
-        ./home/terminal/wezterm
-        ./home/terminal/zellij
+        ./home/cli/alacritty
+        ./home/cli/bash
+        ./home/cli/foot
+        ./home/cli/jujutsu
+        ./home/cli/kitty
+        ./home/cli/wezterm
+        ./home/cli/zellij
+        ./home/cli/zsh
 
         ./home/userd/blueman-applet
         ./home/userd/copyq

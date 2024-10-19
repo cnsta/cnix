@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.home.terminal.zellij;
+  cfg = config.home.cli.zellij;
 in {
   options = {
-    home.terminal.zellij.enable = mkEnableOption "Enables zellij";
+    home.cli.zellij.enable = mkEnableOption "Enables zellij";
   };
   config = mkIf cfg.enable {
     programs.zellij = {

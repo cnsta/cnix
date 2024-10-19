@@ -10,7 +10,7 @@ in {
     [
       ./modules.nix
       ./git.nix
-      ./shell.nix
+      # ./shell.nix
     ]
     ++ lib.optionals isCnixpad [./cpmodules.nix];
 

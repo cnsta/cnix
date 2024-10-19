@@ -20,8 +20,8 @@ in {
       la = "${getExe eza} -lah --tree";
       tree = "${getExe eza} --tree --icons=always";
       extract = "extract.sh";
-      usermodules = "$EDITOR /home/$USER/.nix-config/home/users/$USER/modules.nix";
-      umod = "$EDITOR /home/$USER/.nix-config/home/users/$USER/modules.nix";
+      usermodules = "$EDITOR /home/$USER/.nix-config/users/$USER/modules.nix";
+      umod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules.nix";
       systemmodules = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
       smod = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
       nixcleanboot = "sudo nix run /home/$USER/.nix-config#cleanup-boot";

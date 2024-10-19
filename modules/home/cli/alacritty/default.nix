@@ -4,10 +4,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.home.terminal.alacritty;
+  cfg = config.home.cli.alacritty;
 in {
   options = {
-    home.terminal.alacritty.enable = mkEnableOption "Enables firefox";
+    home.cli.alacritty.enable = mkEnableOption "Enables firefox";
   };
   config = mkIf cfg.enable {
     programs.alacritty = {
