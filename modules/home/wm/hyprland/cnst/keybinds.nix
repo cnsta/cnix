@@ -26,8 +26,8 @@ in {
       "$passwordManager" = "keepassxc";
       "$menu" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
       "$menuw" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
-      "$browser" = "firefox";
-      "$browserinc" = "firefox --private-window";
+      "$browser" = "zen";
+      "$browserinc" = "zen --private-window";
       "$yazi" = "alacritty -e yazi";
       "$tuirun" = "tuirun-toggle.sh";
 

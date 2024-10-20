@@ -1224,7 +1224,8 @@
         "nixpkgs-small": "nixpkgs-small",
         "nur": "nur",
         "systems": "systems_5",
-        "tuirun": "tuirun"
+        "tuirun": "tuirun",
+        "zen-browser": "zen-browser"
       }
     },
     "rust-overlay": {
@@ -1446,6 +1447,26 @@
       "original": {
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729421324,
+        "narHash": "sha256-uZGVMe9EgSXmiX6WysVt8ooHP+KW2biEmP/lxLMQ7aY=",
+        "owner": "cnsta",
+        "repo": "zen-browser-flake",
+        "rev": "70f6800e45062c93c99118a9010a42adbb63b1f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cnsta",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }
