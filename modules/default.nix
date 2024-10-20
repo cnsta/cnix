@@ -4,6 +4,7 @@
       imports = [
         ./home/browsers/chromium
         ./home/browsers/firefox
+        ./home/browsers/zen
 
         ./home/comm/discord
 

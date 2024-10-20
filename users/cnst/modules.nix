@@ -17,6 +17,9 @@
       chromium = {
         enable = false;
       };
+      zen = {
+        enable = true;
+      };
     };
     comm = {
       discord = {

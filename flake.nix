@@ -112,6 +112,11 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    zen-browser = {
+      url = "github:cnsta/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Custom apps
     tuirun.url = "git+https://git.sr.ht/~canasta/tuirun";
   };

@@ -34,7 +34,7 @@ in {
             swedish-dictionary
             reddit-enhancement-suite
             return-youtube-dislikes
-            # enhancer-for-youtube # unfree
+            enhancer-for-youtube # unfree
           ];
           settings = {
             "apz.overscroll.enabled" = true;
