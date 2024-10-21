@@ -81,6 +81,11 @@
       copyq = {
         enable = true;
       };
+      dconf = {
+        settings = {
+          color-scheme = "prefer-dark";
+        };
+      };
       gpg = {
         enable = false;
       };
