@@ -35,7 +35,7 @@ in {
             normal = "block";
             select = "underline";
           };
-          indent-guides.render = false;
+          indent-guides.render = true;
           inline-diagnostics = {
             cursor-line = "hint";
             other-lines = "error";

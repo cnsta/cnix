@@ -41,9 +41,12 @@
       steam = {
         enable = true;
       };
-      #   mangohud = {
-      #     enable = false;
-      #   };
+      mangohud = {
+        enable = true;
+      };
+      lutris = {
+        enable = true;
+      };
     };
     cli = {
       alacritty = {
@@ -81,13 +84,22 @@
       gpg = {
         enable = false;
       };
+      gtk = {
+        enable = true;
+      };
       mako = {
         enable = true;
       };
       udiskie = {
         enable = true;
       };
+      polkit = {
+        enable = true;
+      };
       syncthing = {
+        enable = true;
+      };
+      xdg = {
         enable = true;
       };
     };

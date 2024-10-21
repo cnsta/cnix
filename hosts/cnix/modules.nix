@@ -23,9 +23,9 @@
       # gamescope = {
       #   enable = true;
       # };
-      lutris = {
-        enable = true;
-      };
+      # lutris = {
+      #   enable = true;
+      # };
       gamemode = {
         enable = true;
         optimizeGpu = {
