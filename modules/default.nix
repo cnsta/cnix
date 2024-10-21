@@ -13,6 +13,8 @@
         ./home/devtools/vscode
 
         ./home/gaming/steam
+        ./home/gaming/mangohud
+        ./home/gaming/lutris
 
         ./home/cli/alacritty
         ./home/cli/bash

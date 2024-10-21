@@ -17,7 +17,7 @@ in {
           p.wineWowPackages.staging
           p.pixman
           p.libjpeg
-          p.gnome.zenity
+          p.zenity
         ];
       })
     ];

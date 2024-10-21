@@ -30,6 +30,7 @@ in {
           enable = true;
           extraPackages = with pkgs; [
             libva
+            libvdpau-va-gl
             vaapiVdpau
             libdrm_git
             latencyflex-vulkan
@@ -48,10 +49,12 @@ in {
             vulkanPackages_latest.vulkan-validation-layers
             vulkanPackages_latest.vulkan-volk
           ];
-          extraPackages32 = with pkgs; [
-            mesa32_git
+          extraPackages32 = with pkgs.pkgsi686Linux; [
+            pkgs.mesa32_git
+            pkgs.mesa32_git.opencl
             libdrm32_git
             libva
+            libvdpau-va-gl
             vaapiVdpau
           ];
         };

@@ -107,10 +107,10 @@
     agenix.url = "github:ryantm/agenix";
 
     # Rust toolchain
-    # fenix = {
-    #   url = "github:nix-community/fenix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     zen-browser = {
       url = "github:cnsta/zen-browser-flake";
