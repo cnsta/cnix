@@ -16,10 +16,6 @@ in {
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
-      # monitor = [
-      #   "DP-3, 2560x1440@240, auto, auto, bitdepth, 10"
-      #   "eDP-1,1920x1200@60.02,auto,1"
-      # ];
       monitor = map (
         m: "${m.name},${
           if m.enabled
@@ -55,25 +51,6 @@ in {
           scroll_factor = 0.5;
         };
       };
-      # Desktop keyboard
-      # device = [
-      #   {
-      #     name = "pfu-limited-hhkb-hybrid";
-      #     kb_layout = "hhkbse";
-      #     kb_options = "lv3:rwin_switch";
-      #   }
-      #   {
-      #     name = "hhkb-hybrid_1-keyboard";
-      #     kb_layout = "hhkbse";
-      #     kb_options = "lv3:rwin_switch";
-      #   }
-      #   # Laptop keyboard
-      #   {
-      #     name = "at-translated-set-2-keyboard";
-      #     kb_layout = "se";
-      #     kb_options = "ctrl:swapcaps";
-      #   }
-      # ];
       gestures = {
         workspace_swipe = true;
         workspace_swipe_distance = 400;
@@ -101,11 +78,6 @@ in {
         explicit_sync_kms = 2;
         direct_scanout = false;
       };
-      # cursor = {
-      #   no_hardware_cursors = true;
-      #   no_break_fs_vrr = true;
-      #   min_refresh_rate = 24;
-      # };
     };
   };
 }

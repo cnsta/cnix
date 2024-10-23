@@ -11,9 +11,21 @@ in {
   };
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
-      monitor = [
-        "monitor=DVI-D-1,1920x1080@144,auto,1"
-      ];
+      monitor = map (
+        m: "${m.name},${
+          if m.enabled
+          then "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},1${
+            if m.bitDepth != null
+            then ",bitdepth,${toString m.bitDepth}"
+            else ""
+          }"
+          else "disable"
+        }"
+      ) (config.monitors);
+      workspace = map (
+        m: "name:${m.workspace},monitor:${m.name}"
+      ) (lib.filter (m: m.enabled && m.workspace != null) config.monitors);
+
       env = [
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
       ];
