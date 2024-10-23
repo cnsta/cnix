@@ -1,5 +1,5 @@
 {
-  system = {
+  nixos = {
     boot = {
       loader = {
         default = {
@@ -90,7 +90,7 @@
         enable = false;
       };
     };
-    sysd = {
+    services = {
       network = {
         blueman = {
           enable = true;
@@ -165,6 +165,14 @@
         kanata = {
           enable = true;
         };
+      };
+    };
+    system = {
+      locale = {
+        enable = true;
+        timeZone = "Europe/Stockholm";
+        defaultLocale = "en_US.UTF-8";
+        extraLocale = "sv_SE.UTF-8";
       };
     };
     utils = {

@@ -53,67 +53,69 @@
         ./home/wm/utils/hyprpaper
       ];
     };
-    system = {
+    nixos = {
       imports = [
-        ./system/boot/loader
-        ./system/boot/kernel
+        ./nixos/boot/loader
+        ./nixos/boot/kernel
 
-        ./system/gaming/gamemode
-        ./system/gaming/gamescope
-        ./system/gaming/lutris
-        ./system/gaming/steam
+        ./nixos/gaming/gamemode
+        ./nixos/gaming/gamescope
+        ./nixos/gaming/lutris
+        ./nixos/gaming/steam
 
-        ./system/gui/gnome
-        ./system/gui/hyprland
+        ./nixos/gui/gnome
+        ./nixos/gui/hyprland
 
-        ./system/hardware/bluetooth
-        ./system/hardware/graphics/amd
-        ./system/hardware/graphics/nvidia
-        ./system/hardware/logitech
-        ./system/hardware/network
+        ./nixos/hardware/bluetooth
+        ./nixos/hardware/graphics/amd
+        ./nixos/hardware/graphics/nvidia
+        ./nixos/hardware/logitech
+        ./nixos/hardware/network
 
-        ./system/studio/blender
-        ./system/studio/gimp
-        ./system/studio/inkscape
-        ./system/studio/beekeeper
-        ./system/studio/mysql-workbench
+        ./nixos/studio/blender
+        ./nixos/studio/gimp
+        ./nixos/studio/inkscape
+        ./nixos/studio/beekeeper
+        ./nixos/studio/mysql-workbench
 
-        ./system/sysd/network/blueman
-        ./system/sysd/network/mullvad
-        ./system/sysd/network/samba
-        ./system/sysd/network/openssh
+        ./nixos/services/network/blueman
+        ./nixos/services/network/mullvad
+        ./nixos/services/network/samba
+        ./nixos/services/network/openssh
 
-        ./system/sysd/security/agenix
-        ./system/sysd/security/gnome-keyring
+        ./nixos/services/security/agenix
+        ./nixos/services/security/gnome-keyring
 
-        ./system/sysd/session/dbus
-        ./system/sysd/session/dconf
-        ./system/sysd/session/xserver
+        ./nixos/services/session/dbus
+        ./nixos/services/session/dconf
+        ./nixos/services/session/xserver
 
-        ./system/sysd/system/fwupd
-        ./system/sysd/system/greetd
-        ./system/sysd/system/gvfs
-        ./system/sysd/system/locate
-        ./system/sysd/system/nix-ld
-        ./system/sysd/system/pcscd
-        ./system/sysd/system/pipewire
-        ./system/sysd/system/powerd
-        ./system/sysd/system/udisks
-        ./system/sysd/system/zram
-        ./system/sysd/system/kanata
+        ./nixos/services/system/fwupd
+        ./nixos/services/system/greetd
+        ./nixos/services/system/gvfs
+        ./nixos/services/system/locate
+        ./nixos/services/system/nix-ld
+        ./nixos/services/system/pcscd
+        ./nixos/services/system/pipewire
+        ./nixos/services/system/powerd
+        ./nixos/services/system/udisks
+        ./nixos/services/system/zram
+        ./nixos/services/system/kanata
 
-        ./system/utils/android
-        ./system/utils/anyrun
-        ./system/utils/brightnessctl
-        ./system/utils/chaotic
-        ./system/utils/corectrl
-        ./system/utils/microfetch
-        ./system/utils/misc
-        ./system/utils/nh
-        ./system/utils/npm
-        ./system/utils/obsidian
-        ./system/utils/yubikey
-        ./system/utils/zsh
+        ./nixos/system/locale
+
+        ./nixos/utils/android
+        ./nixos/utils/anyrun
+        ./nixos/utils/brightnessctl
+        ./nixos/utils/chaotic
+        ./nixos/utils/corectrl
+        ./nixos/utils/microfetch
+        ./nixos/utils/misc
+        ./nixos/utils/nh
+        ./nixos/utils/npm
+        ./nixos/utils/obsidian
+        ./nixos/utils/yubikey
+        ./nixos/utils/zsh
       ];
     };
     options = {
