@@ -42,8 +42,11 @@
       #     enable = false;
       #   };
     };
-    terminal = {
+    cli = {
       alacritty = {
+        enable = true;
+      };
+      bash = {
         enable = true;
       };
       foot = {
@@ -58,6 +61,9 @@
       zellij = {
         enable = false;
       };
+      zsh = {
+        enable = true;
+      };
     };
     userd = {
       blueman-applet = {
@@ -66,8 +72,16 @@
       copyq = {
         enable = true;
       };
+      dconf = {
+        settings = {
+          color-scheme = "prefer-dark";
+        };
+      };
       gpg = {
         enable = false;
+      };
+      gtk = {
+        enable = true;
       };
       mako = {
         enable = true;
@@ -75,8 +89,14 @@
       udiskie = {
         enable = true;
       };
+      polkit = {
+        enable = true;
+      };
       syncthing = {
         enable = false;
+      };
+      xdg = {
+        enable = true;
       };
     };
     utils = {
