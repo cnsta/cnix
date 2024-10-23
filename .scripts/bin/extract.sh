@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# yanked from NotAShelf
 SAVEIFS=$IFS
 IFS="$(printf '\n\t')"
 

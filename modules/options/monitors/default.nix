@@ -30,6 +30,11 @@ in {
             type = types.int;
             default = 60;
           };
+          bitDepth = mkOption {
+            type = types.nullOr types.int;
+            default = null;
+            example = 10;
+          };
           position = mkOption {
             type = types.str;
             default = "auto";

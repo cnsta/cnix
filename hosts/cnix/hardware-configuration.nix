@@ -12,12 +12,6 @@
       availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
       kernelModules = [];
       luks.devices."enc".device = "/dev/disk/by-uuid/1bda09f1-5b2c-4040-ab71-cee54a6df910";
-      postDeviceCommands = lib.mkAfter ''
-        mkdir /mnt
-        mount -t btrfs /dev/mapper/enc /mnt
-        btrfs subvolume delete /mnt/root
-        btrfs subvolume snapshot /mnt/root-blank /mnt/root
-      '';
     };
     kernelModules = ["kvm-amd"];
     extraModulePackages = [];
