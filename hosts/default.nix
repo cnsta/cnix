@@ -19,10 +19,6 @@
 
     # shorten paths
     inherit (inputs.nixpkgs.lib) nixosSystem;
-    mod = "${systemConfig}";
-
-    # get the basic config to build on top of
-    inherit (import "${systemConfig}") shared;
 
     # get these into the module system
     specialArgs = {inherit inputs self userConfig systemConfig hostConfig cnstConfig toothpickConfig umodPath smodPath;};
@@ -30,57 +26,51 @@
     cnix = nixosSystem {
       inherit specialArgs;
 
-      modules =
-        shared
-        ++ [
-          ./cnix
-          "${mod}/dev"
-          {
-            home-manager = {
-              users.cnst.imports = homeImports."cnst@cnix";
-              extraSpecialArgs = specialArgs;
-            };
-          }
-          self.nixosModules.nixos
-          inputs.chaotic.nixosModules.default
-          inputs.agenix.nixosModules.default
-        ];
+      modules = [
+        ./cnix
+        "${self}/nix"
+        {
+          home-manager = {
+            users.cnst.imports = homeImports."cnst@cnix";
+            extraSpecialArgs = specialArgs;
+          };
+        }
+        self.nixosModules.nixos
+        inputs.chaotic.nixosModules.default
+        inputs.agenix.nixosModules.default
+      ];
     };
     toothpc = nixosSystem {
       inherit specialArgs;
-      modules =
-        shared
-        ++ [
-          ./toothpc
-          "${mod}/dev"
-          {
-            home-manager = {
-              users.toothpick.imports = homeImports."toothpick@toothpc";
-              extraSpecialArgs = specialArgs;
-            };
-          }
-          self.nixosModules.nixos
-          inputs.chaotic.nixosModules.default
-          inputs.agenix.nixosModules.default
-        ];
+      modules = [
+        ./toothpc
+        "${self}/nix"
+        {
+          home-manager = {
+            users.toothpick.imports = homeImports."toothpick@toothpc";
+            extraSpecialArgs = specialArgs;
+          };
+        }
+        self.nixosModules.nixos
+        inputs.chaotic.nixosModules.default
+        inputs.agenix.nixosModules.default
+      ];
     };
     cnixpad = nixosSystem {
       inherit specialArgs;
-      modules =
-        shared
-        ++ [
-          ./cnixpad
-          "${mod}/dev"
-          {
-            home-manager = {
-              users.cnst.imports = homeImports."cnst@cnixpad";
-              extraSpecialArgs = specialArgs;
-            };
-          }
-          self.nixosModules.nixos
-          inputs.chaotic.nixosModules.default
-          inputs.agenix.nixosModules.default
-        ];
+      modules = [
+        ./cnixpad
+        "${self}/nix"
+        {
+          home-manager = {
+            users.cnst.imports = homeImports."cnst@cnixpad";
+            extraSpecialArgs = specialArgs;
+          };
+        }
+        self.nixosModules.nixos
+        inputs.chaotic.nixosModules.default
+        inputs.agenix.nixosModules.default
+      ];
     };
   };
 }

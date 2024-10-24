@@ -12,6 +12,7 @@ in {
     nixos.gui.hyprland.enable = mkEnableOption "Enables hyprland";
   };
   config = mkIf cfg.enable {
+    security.pam.services.hyprlock.text = "auth include login";
     programs.hyprland = {
       enable = true;
       xwayland.enable = true;

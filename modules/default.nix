@@ -12,9 +12,9 @@
         ./home/devtools/neovim
         ./home/devtools/vscode
 
-        ./home/gaming/steam
-        ./home/gaming/mangohud
-        ./home/gaming/lutris
+        # ./home/gaming/steam
+        # ./home/gaming/mangohud
+        # ./home/gaming/lutris
 
         ./home/cli/alacritty
         ./home/cli/bash
@@ -102,7 +102,10 @@
         ./nixos/services/system/zram
         ./nixos/services/system/kanata
 
+        ./nixos/system/devpkgs
+        ./nixos/system/fonts
         ./nixos/system/locale
+        ./nixos/system/xdg
 
         ./nixos/utils/android
         ./nixos/utils/anyrun

@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   nixos = {
     boot = {
       loader = {
@@ -148,11 +148,22 @@
       };
     };
     system = {
+      devpkgs = {
+        enable = true;
+      };
+      fonts = {
+        enable = true;
+      };
       locale = {
         enable = true;
         timeZone = "Europe/Stockholm";
         defaultLocale = "en_US.UTF-8";
         extraLocale = "sv_SE.UTF-8";
+      };
+      xdg = {
+        enable = true;
+        xdgOpenUsePortal = true;
+        extraPortals = [pkgs.xdg-desktop-portal-gtk];
       };
     };
     utils = {
@@ -160,7 +171,7 @@
         enable = true;
       };
       anyrun = {
-        enable = true;
+        enable = false;
       };
       brightnessctl = {
         enable = true;
