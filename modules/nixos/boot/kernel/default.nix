@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  inherit (lib) mkOption;
+  inherit (lib) mkOption mkIf;
   cfg = config.nixos.boot.kernel;
 in {
   options = {
@@ -69,6 +69,10 @@ in {
           else []
         )
         ++ cfg.extraBlacklistedModules;
+    };
+
+    chaotic = mkIf (cfg.variant == "cachyos") {
+      scx.enable = true;
     };
   };
 }

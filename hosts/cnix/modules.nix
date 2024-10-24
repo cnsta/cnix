@@ -51,6 +51,11 @@
       graphics = {
         amd = {
           enable = true;
+          extraPackages = false;
+          chaotic = {
+            enable = true;
+            extraPackages = true;
+          };
         };
         nvidia = {
           enable = false;
@@ -181,12 +186,6 @@
       };
       anyrun = {
         enable = false;
-      };
-      chaotic = {
-        enable = true;
-        amd = {
-          enable = true;
-        };
       };
       corectrl = {
         enable = true;
