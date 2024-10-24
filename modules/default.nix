@@ -107,7 +107,6 @@
         ./nixos/utils/android
         ./nixos/utils/anyrun
         ./nixos/utils/brightnessctl
-        ./nixos/utils/chaotic
         ./nixos/utils/corectrl
         ./nixos/utils/microfetch
         ./nixos/utils/misc

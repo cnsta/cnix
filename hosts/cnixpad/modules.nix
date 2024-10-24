@@ -34,6 +34,11 @@
       graphics = {
         amd = {
           enable = true;
+          extraPackages = true;
+          chaotic = {
+            enable = false;
+            extraPackages = false;
+          };
         };
         nvidia = {
           enable = false;
@@ -159,12 +164,6 @@
       };
       brightnessctl = {
         enable = true;
-      };
-      chaotic = {
-        enable = false;
-        amd = {
-          enable = false;
-        };
       };
       corectrl = {
         enable = false;

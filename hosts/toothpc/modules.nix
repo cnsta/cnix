@@ -182,12 +182,6 @@
       corectrl = {
         enable = false;
       };
-      chaotic = {
-        enable = false;
-        amd = {
-          enable = false;
-        };
-      };
       microfetch = {
         enable = true;
       };
