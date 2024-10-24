@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   nixos = {
     boot = {
       loader = {
@@ -17,15 +17,15 @@
       };
     };
     gaming = {
-      # steam = {
-      #   enable = true;
-      # };
-      # gamescope = {
-      #   enable = true;
-      # };
-      # lutris = {
-      #   enable = true;
-      # };
+      steam = {
+        enable = true;
+      };
+      gamescope = {
+        enable = true;
+      };
+      lutris = {
+        enable = true;
+      };
       gamemode = {
         enable = true;
         optimizeGpu = {
@@ -173,11 +173,22 @@
       };
     };
     system = {
+      devpkgs = {
+        enable = true;
+      };
+      fonts = {
+        enable = true;
+      };
       locale = {
         enable = true;
         timeZone = "Europe/Stockholm";
         defaultLocale = "en_US.UTF-8";
         extraLocale = "sv_SE.UTF-8";
+      };
+      xdg = {
+        enable = true;
+        xdgOpenUsePortal = true;
+        extraPortals = [pkgs.xdg-desktop-portal-gtk];
       };
     };
     utils = {

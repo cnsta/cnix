@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  inherit (lib) mkIf mkOption mkDefault;
+  inherit (lib) mkIf mkOption mkDefault types;
   cfg = config.nixos.system.locale;
   defaultCategories = [
     "LC_ADDRESS"
@@ -20,22 +20,22 @@ in {
   options = {
     nixos.system.locale = {
       enable = mkOption {
-        type = lib.types.bool;
+        type = types.bool;
         default = true;
         description = "Enable locale configuration.";
       };
       timeZone = mkOption {
-        type = lib.types.str;
+        type = types.str;
         default = null;
         description = "The system time zone (e.g., \"Europe/Stockholm\").";
       };
       defaultLocale = mkOption {
-        type = lib.types.str;
+        type = types.str;
         default = null;
         description = "The default locale for the system (e.g., \"en_US.UTF-8\").";
       };
       extraLocale = mkOption {
-        type = lib.types.str;
+        type = types.str;
         default = null;
         description = ''
           The locale to use for specific LC_* categories.
@@ -44,7 +44,7 @@ in {
         '';
       };
       categories = mkOption {
-        type = lib.types.listOf lib.types.str;
+        type = types.listOf types.str;
         default = defaultCategories;
         description = ''
           List of LC_* categories to override with `locale.extraLocale`.
