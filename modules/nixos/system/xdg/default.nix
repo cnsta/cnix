@@ -15,11 +15,6 @@ in {
         default = true;
         description = "Use xdg-open via the portal.";
       };
-      extraPortals = mkOption {
-        type = types.listOf types.package;
-        default = [pkgs.xdg-desktop-portal-gtk];
-        description = "List of extra portals to include.";
-      };
     };
   };
 
@@ -28,10 +23,10 @@ in {
       enable = true;
       xdgOpenUsePortal = cfg.xdgOpenUsePortal;
       config = {
-        common.default = ["gtk"];
-        hyprland.default = ["gtk" "hyprland"];
+        common.default = "*";
+        hyprland.default = ["hyprland" "gtk"];
       };
-      extraPortals = cfg.extraPortals;
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
   };
 }

@@ -13,6 +13,9 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       lutris
+      bottles
+      wineWowPackages.waylandFull
+      wineWowPackages.stagingFull
     ];
   };
 }

@@ -18,7 +18,7 @@ in {
     programs.hyprlock = {
       enable = true;
       package = hyprlockFlake;
-        settings = {
+      settings = {
         general = {
           disable_loading_bar = true;
           hide_cursor = true;
@@ -30,7 +30,7 @@ in {
         background = [
           {
             monitor = "";
-            path = "~/media/images/dunes.png";
+            path = "~/media/images/l_int06_big.jpg";
           }
         ];
         input-field = [

@@ -17,12 +17,12 @@
       };
     };
     gaming = {
-      # steam = {
-      #   enable = true;
-      # };
-      # gamescope = {
-      #   enable = true;
-      # };
+      steam = {
+        enable = true;
+      };
+      gamescope = {
+        enable = true;
+      };
       lutris = {
         enable = true;
       };
@@ -135,7 +135,9 @@
         };
         greetd = {
           enable = true;
-          gnomeKeyring.enable = false;
+          gnomeKeyring = {
+            enable = false;
+          };
           autologin = {
             enable = false;
             user = "toothpick";
@@ -198,7 +200,9 @@
       };
       misc = {
         enable = true;
-        desktop.enable = true;
+        desktop = {
+          enable = true;
+        };
       };
       nh = {
         enable = true;

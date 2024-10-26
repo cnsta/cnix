@@ -34,14 +34,14 @@
         enable = true;
       };
     };
-    gaming = {
-      steam = {
-        enable = true;
-      };
-      #   mangohud = {
-      #     enable = false;
-      #   };
-    };
+    # gaming = {
+    # steam = {
+    #   enable = true;
+    # };
+    #   mangohud = {
+    #     enable = false;
+    #   };
+    # };
     cli = {
       alacritty = {
         enable = true;
