@@ -182,7 +182,6 @@
       xdg = {
         enable = true;
         xdgOpenUsePortal = true;
-        extraPortals = [pkgs.xdg-desktop-portal-gtk];
       };
     };
     utils = {
