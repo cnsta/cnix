@@ -48,17 +48,17 @@ in {
     #     enable = true;
     #   };
     # };
-    gaming = {
-      steam = {
-        enable = mkForce false;
-      };
-      #   mangohud = {
-      #     enable = true;
-      #   };
-      lutris = {
-        enable = mkForce false;
-      };
-    };
+    # gaming = {
+    #   steam = {
+    #     enable = mkForce false;
+    #   };
+    #   #   mangohud = {
+    #   #     enable = true;
+    #   #   };
+    #   lutris = {
+    #     enable = mkForce false;
+    #   };
+    # };
     # cli = {
     #   alacritty = {
     #     enable = true;

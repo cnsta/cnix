@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   nixos = {
     boot = {
       loader = {
@@ -51,11 +51,7 @@
       graphics = {
         amd = {
           enable = true;
-          extraPackages = false;
-          chaotic = {
-            enable = true;
-            extraPackages = true;
-          };
+          packageSet = "chaotic";
         };
         nvidia = {
           enable = false;
@@ -188,7 +184,6 @@
       xdg = {
         enable = true;
         xdgOpenUsePortal = true;
-        extraPortals = [pkgs.xdg-desktop-portal-gtk];
       };
     };
     utils = {

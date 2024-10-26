@@ -34,11 +34,7 @@
       graphics = {
         amd = {
           enable = true;
-          extraPackages = true;
-          chaotic = {
-            enable = false;
-            extraPackages = false;
-          };
+          packageSet = "standard";
         };
         nvidia = {
           enable = false;
