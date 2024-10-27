@@ -1,6 +1,12 @@
-{pkgs, ...}: {
+{
   nixos = {
     boot = {
+      kernel = {
+        extraBlacklistedModules = [];
+        extraKernelParams = [];
+        hardware = "amd";
+        variant = "stable";
+      };
       loader = {
         default = {
           enable = true;
@@ -9,27 +15,10 @@
           enable = false;
         };
       };
-      kernel = {
-        variant = "stable";
-        hardware = "amd";
-        extraKernelParams = [];
-        extraBlacklistedModules = [];
-      };
-    };
-    gui = {
-      gnome = {
-        enable = false;
-      };
-      hyprland = {
-        enable = true;
-      };
     };
     hardware = {
       bluetooth = {
         enable = true;
-      };
-      logitech = {
-        enable = false;
       };
       graphics = {
         amd = {
@@ -39,6 +28,9 @@
         nvidia = {
           enable = false;
         };
+      };
+      logitech = {
+        enable = true;
       };
       network = {
         enable = true;
@@ -54,124 +46,47 @@
         };
       };
     };
-    studio = {
-      blender = {
-        enable = false;
-        hip = {
-          enable = false;
-        };
-      };
-      gimp = {
-        enable = false;
-      };
-      inkscape = {
-        enable = false;
-      };
-      beekeeper = {
-        enable = false;
-      };
-      mysql-workbench = {
-        enable = false;
-      };
-    };
-    services = {
-      network = {
-        blueman = {
-          enable = true;
-        };
-        mullvad = {
-          enable = true;
-        };
-        samba = {
-          enable = false;
-        };
-        openssh = {
-          enable = true;
-        };
-      };
-      security = {
-        agenix = {
-          enable = true;
-          cnixpad = {
-            enable = true;
-          };
-        };
-        gnome-keyring = {
-          enable = true;
-        };
-      };
-      session = {
-        dbus = {
-          enable = true;
-        };
-        dconf = {
-          enable = true;
-        };
-      };
-      system = {
-        fwupd = {
-          enable = true;
-        };
-        greetd = {
-          enable = true;
-          gnomeKeyring.enable = false;
-          autologin = {
-            enable = false;
-            user = "cnst";
-          };
-        };
-        gvfs = {
-          enable = true;
-        };
-        locate = {
-          enable = true;
-        };
-        nix-ld = {
-          enable = false;
-        };
-        pipewire = {
-          enable = true;
-        };
-        powerd = {
-          enable = true;
-        };
-        udisks = {
-          enable = true;
-        };
-        zram = {
-          enable = false;
-        };
-      };
-    };
-    system = {
-      devpkgs = {
-        enable = true;
-      };
-      fonts = {
-        enable = true;
-      };
-      locale = {
-        enable = true;
-        timeZone = "Europe/Stockholm";
-        defaultLocale = "en_US.UTF-8";
-        extraLocale = "sv_SE.UTF-8";
-      };
-      xdg = {
-        enable = true;
-        xdgOpenUsePortal = true;
-      };
-    };
-    utils = {
+    programs = {
       android = {
         enable = true;
       };
       anyrun = {
         enable = false;
       };
-      brightnessctl = {
-        enable = true;
+      beekeeper = {
+        enable = false;
+      };
+      blender = {
+        enable = false;
+        hip = {
+          enable = false;
+        };
       };
       corectrl = {
+        enable = false;
+      };
+      gamemode = {
+        enable = false;
+        optimizeGpu = {
+          enable = false;
+        };
+      };
+      gamescope = {
+        enable = false;
+      };
+      gimp = {
+        enable = false;
+      };
+      gnome = {
+        enable = false;
+      };
+      hyprland = {
+        enable = true;
+      };
+      inkscape = {
+        enable = false;
+      };
+      lutris = {
         enable = false;
       };
       microfetch = {
@@ -182,6 +97,9 @@
         desktop = {
           enable = false;
         };
+      };
+      mysql-workbench = {
+        enable = false;
       };
       nh = {
         enable = true;
@@ -196,8 +114,101 @@
       obsidian = {
         enable = true;
       };
+      steam = {
+        enable = false;
+      };
+      yubikey = {
+        enable = true;
+      };
       zsh = {
         enable = true;
+      };
+    };
+    services = {
+      agenix = {
+        enable = true;
+        cnixpad = {
+          enable = true;
+        };
+      };
+      blueman = {
+        enable = true;
+      };
+      dbus = {
+        enable = true;
+      };
+      dconf = {
+        enable = true;
+      };
+      fwupd = {
+        enable = true;
+      };
+      gnome-keyring = {
+        enable = false;
+      };
+      greetd = {
+        autologin = {
+          enable = false;
+          user = "cnst";
+        };
+        enable = true;
+        gnomeKeyring = {
+          enable = false;
+        };
+      };
+      gvfs = {
+        enable = true;
+      };
+      kanata = {
+        enable = false;
+      };
+      locate = {
+        enable = true;
+      };
+      mullvad = {
+        enable = true;
+      };
+      nix-ld = {
+        enable = false;
+      };
+      openssh = {
+        enable = true;
+      };
+      pcscd = {
+        enable = true;
+      };
+      pipewire = {
+        enable = true;
+      };
+      powerd = {
+        enable = true;
+      };
+      samba = {
+        enable = false;
+      };
+      udisks = {
+        enable = true;
+      };
+      zram = {
+        enable = false;
+      };
+    };
+    system = {
+      devpkgs = {
+        enable = true;
+      };
+      fonts = {
+        enable = true;
+      };
+      locale = {
+        defaultLocale = "en_US.UTF-8";
+        enable = true;
+        extraLocale = "sv_SE.UTF-8";
+        timeZone = "Europe/Stockholm";
+      };
+      xdg = {
+        enable = true;
+        xdgOpenUsePortal = true;
       };
     };
   };

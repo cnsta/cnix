@@ -1,6 +1,12 @@
-{pkgs, ...}: {
+{
   nixos = {
     boot = {
+      kernel = {
+        extraBlacklistedModules = [];
+        extraKernelParams = [];
+        hardware = "nvidia";
+        variant = "stable";
+      };
       loader = {
         default = {
           enable = false;
@@ -9,44 +15,10 @@
           enable = true;
         };
       };
-      kernel = {
-        variant = "stable";
-        hardware = "nvidia";
-        extraKernelParams = [];
-        extraBlacklistedModules = [];
-      };
-    };
-    gaming = {
-      steam = {
-        enable = true;
-      };
-      gamescope = {
-        enable = true;
-      };
-      lutris = {
-        enable = true;
-      };
-      gamemode = {
-        enable = true;
-        optimizeGpu = {
-          enable = false;
-        };
-      };
-    };
-    gui = {
-      gnome = {
-        enable = false;
-      };
-      hyprland = {
-        enable = true;
-      };
     };
     hardware = {
       bluetooth = {
         enable = false;
-      };
-      logitech = {
-        enable = true;
       };
       graphics = {
         amd = {
@@ -54,8 +26,11 @@
         };
         nvidia = {
           enable = true;
-          package = "latest"; # set to beta/latest/stable/production depending on your needs
+          package = "latest";
         };
+      };
+      logitech = {
+        enable = true;
       };
       network = {
         enable = true;
@@ -71,127 +46,47 @@
         };
       };
     };
-    studio = {
+    programs = {
+      android = {
+        enable = true;
+      };
+      anyrun = {
+        enable = false;
+      };
+      beekeeper = {
+        enable = true;
+      };
       blender = {
         enable = false;
         hip = {
           enable = false;
         };
       };
+      corectrl = {
+        enable = false;
+      };
+      gamemode = {
+        enable = true;
+        optimizeGpu = {
+          enable = false;
+        };
+      };
+      gamescope = {
+        enable = false;
+      };
       gimp = {
+        enable = false;
+      };
+      gnome = {
+        enable = false;
+      };
+      hyprland = {
         enable = true;
       };
       inkscape = {
-        enable = true;
-      };
-      beekeeper = {
-        enable = true;
-      };
-      mysql-workbench = {
-        enable = true;
-      };
-    };
-    services = {
-      network = {
-        blueman = {
-          enable = false;
-        };
-        mullvad = {
-          enable = true;
-        };
-        samba = {
-          enable = false;
-        };
-        openssh = {
-          enable = true;
-        };
-      };
-      security = {
-        agenix = {
-          enable = true;
-          toothpc = {
-            enable = true;
-          };
-        };
-        gnome-keyring = {
-          enable = true;
-        };
-      };
-      session = {
-        dbus = {
-          enable = true;
-        };
-        dconf = {
-          enable = true;
-        };
-        xserver = {
-          videoDrivers = ["nvidia"];
-          xkbLayout = "se";
-        };
-      };
-      system = {
-        fwupd = {
-          enable = true;
-        };
-        greetd = {
-          enable = true;
-          gnomeKeyring = {
-            enable = false;
-          };
-          autologin = {
-            enable = false;
-            user = "toothpick";
-          };
-        };
-        gvfs = {
-          enable = true;
-        };
-        locate = {
-          enable = true;
-        };
-        nix-ld = {
-          enable = false;
-        };
-        pipewire = {
-          enable = true;
-        };
-        powerd = {
-          enable = true;
-        };
-        udisks = {
-          enable = true;
-        };
-        zram = {
-          enable = true;
-        };
-      };
-    };
-    system = {
-      devpkgs = {
-        enable = true;
-      };
-      fonts = {
-        enable = true;
-      };
-      locale = {
-        enable = true;
-        timeZone = "Europe/Stockholm";
-        defaultLocale = "en_US.UTF-8";
-        extraLocale = "sv_SE.UTF-8";
-      };
-      xdg = {
-        enable = true;
-        xdgOpenUsePortal = true;
-      };
-    };
-    utils = {
-      android = {
         enable = false;
       };
-      anyrun = {
-        enable = true;
-      };
-      corectrl = {
+      lutris = {
         enable = false;
       };
       microfetch = {
@@ -203,6 +98,9 @@
           enable = true;
         };
       };
+      mysql-workbench = {
+        enable = true;
+      };
       nh = {
         enable = true;
         clean = {
@@ -213,14 +111,108 @@
       npm = {
         enable = true;
       };
-      yubikey = {
-        enable = false;
-      };
       obsidian = {
-        enable = false;
+        enable = true;
+      };
+      steam = {
+        enable = true;
+      };
+      yubikey = {
+        enable = true;
       };
       zsh = {
         enable = true;
+      };
+    };
+    services = {
+      agenix = {
+        enable = true;
+        toothpc = {
+          enable = true;
+        };
+      };
+      blueman = {
+        enable = false;
+      };
+      dbus = {
+        enable = true;
+      };
+      dconf = {
+        enable = true;
+      };
+      fwupd = {
+        enable = true;
+      };
+      gnome-keyring = {
+        enable = false;
+      };
+      greetd = {
+        autologin = {
+          enable = false;
+          user = "toothpick";
+        };
+        enable = true;
+        gnomeKeyring = {
+          enable = false;
+        };
+      };
+      gvfs = {
+        enable = true;
+      };
+      kanata = {
+        enable = false;
+      };
+      locate = {
+        enable = true;
+      };
+      mullvad = {
+        enable = true;
+      };
+      nix-ld = {
+        enable = false;
+      };
+      openssh = {
+        enable = true;
+      };
+      pcscd = {
+        enable = true;
+      };
+      pipewire = {
+        enable = true;
+      };
+      powerd = {
+        enable = true;
+      };
+      samba = {
+        enable = false;
+      };
+      udisks = {
+        enable = true;
+      };
+      xserver = {
+        videoDrivers = ["nvidia"];
+        xkbLayout = "se";
+      };
+      zram = {
+        enable = true;
+      };
+    };
+    system = {
+      devpkgs = {
+        enable = true;
+      };
+      fonts = {
+        enable = true;
+      };
+      locale = {
+        defaultLocale = "en_US.UTF-8";
+        enable = true;
+        extraLocale = "sv_SE.UTF-8";
+        timeZone = "Europe/Stockholm";
+      };
+      xdg = {
+        enable = true;
+        xdgOpenUsePortal = true;
       };
     };
   };
