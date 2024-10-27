@@ -2,69 +2,52 @@
   flake.nixosModules = {
     home = {
       imports = [
-        ./home/browsers/chromium
-        ./home/browsers/firefox
-        ./home/browsers/zen
+        ./home/programs/alacritty
+        ./home/programs/anyrun
+        ./home/programs/bash
+        ./home/programs/chromium
+        ./home/programs/discord
+        ./home/programs/eza
+        ./home/programs/firefox
+        ./home/programs/foot
+        ./home/programs/helix
+        ./home/programs/hyprland
+        ./home/programs/hyprlock
+        ./home/programs/jujutsu
+        ./home/programs/kitty
+        ./home/programs/misc
+        ./home/programs/mpv
+        ./home/programs/neovim
+        ./home/programs/rofi
+        ./home/programs/ssh
+        ./home/programs/tuirun
+        ./home/programs/vscode
+        ./home/programs/waybar
+        ./home/programs/wezterm
+        ./home/programs/yazi
+        ./home/programs/zathura
+        ./home/programs/zellij
+        ./home/programs/zen
+        ./home/programs/zsh
 
-        ./home/comm/discord
-
-        ./home/devtools/helix
-        ./home/devtools/neovim
-        ./home/devtools/vscode
-
-        # ./home/gaming/steam
-        # ./home/gaming/mangohud
-        # ./home/gaming/lutris
-
-        ./home/cli/alacritty
-        ./home/cli/bash
-        ./home/cli/foot
-        ./home/cli/jujutsu
-        ./home/cli/kitty
-        ./home/cli/wezterm
-        ./home/cli/zellij
-        ./home/cli/zsh
-
-        ./home/userd/blueman-applet
-        ./home/userd/copyq
-        ./home/userd/dconf
-        ./home/userd/gpg
-        ./home/userd/gtk
-        ./home/userd/mako
-        ./home/userd/polkit
-        ./home/userd/syncthing
-        ./home/userd/udiskie
-        ./home/userd/xdg
-
-        ./home/utils/anyrun
-        ./home/utils/eza
-        ./home/utils/misc
-        ./home/utils/mpv
-        ./home/utils/rofi
-        ./home/utils/ssh
-        ./home/utils/tuirun
-        ./home/utils/waybar
-        ./home/utils/yazi
-        ./home/utils/zathura
-
-        ./home/wm/hyprland
-        ./home/wm/utils/hypridle
-        ./home/wm/utils/hyprlock
-        ./home/wm/utils/hyprpaper
+        ./home/services/blueman-applet
+        ./home/services/copyq
+        ./home/services/dconf
+        ./home/services/gpg
+        ./home/services/gtk
+        ./home/services/hypridle
+        ./home/services/hyprpaper
+        ./home/services/mako
+        ./home/services/polkit
+        ./home/services/syncthing
+        ./home/services/udiskie
+        ./home/services/xdg
       ];
     };
     nixos = {
       imports = [
-        ./nixos/boot/loader
         ./nixos/boot/kernel
-
-        ./nixos/gaming/gamemode
-        ./nixos/gaming/gamescope
-        ./nixos/gaming/lutris
-        ./nixos/gaming/steam
-
-        ./nixos/gui/gnome
-        ./nixos/gui/hyprland
+        ./nixos/boot/loader
 
         ./nixos/hardware/bluetooth
         ./nixos/hardware/graphics/amd
@@ -72,52 +55,54 @@
         ./nixos/hardware/logitech
         ./nixos/hardware/network
 
-        ./nixos/studio/blender
-        ./nixos/studio/gimp
-        ./nixos/studio/inkscape
-        ./nixos/studio/beekeeper
-        ./nixos/studio/mysql-workbench
+        ./nixos/programs/android
+        ./nixos/programs/anyrun
+        ./nixos/programs/beekeeper
+        ./nixos/programs/blender
+        ./nixos/programs/brightnessctl
+        ./nixos/programs/corectrl
+        ./nixos/programs/gamemode
+        ./nixos/programs/gamescope
+        ./nixos/programs/gimp
+        ./nixos/programs/gnome
+        ./nixos/programs/hyprland
+        ./nixos/programs/inkscape
+        ./nixos/programs/lutris
+        ./nixos/programs/microfetch
+        ./nixos/programs/misc
+        ./nixos/programs/mysql-workbench
+        ./nixos/programs/nh
+        ./nixos/programs/npm
+        ./nixos/programs/obsidian
+        ./nixos/programs/steam
+        ./nixos/programs/yubikey
+        ./nixos/programs/zsh
 
-        ./nixos/services/network/blueman
-        ./nixos/services/network/mullvad
-        ./nixos/services/network/samba
-        ./nixos/services/network/openssh
-
-        ./nixos/services/security/agenix
-        ./nixos/services/security/gnome-keyring
-
-        ./nixos/services/session/dbus
-        ./nixos/services/session/dconf
-        ./nixos/services/session/xserver
-
-        ./nixos/services/system/fwupd
-        ./nixos/services/system/greetd
-        ./nixos/services/system/gvfs
-        ./nixos/services/system/locate
-        ./nixos/services/system/nix-ld
-        ./nixos/services/system/pcscd
-        ./nixos/services/system/pipewire
-        ./nixos/services/system/powerd
-        ./nixos/services/system/udisks
-        ./nixos/services/system/zram
-        ./nixos/services/system/kanata
+        ./nixos/services/agenix
+        ./nixos/services/blueman
+        ./nixos/services/dbus
+        ./nixos/services/dconf
+        ./nixos/services/fwupd
+        ./nixos/services/gnome-keyring
+        ./nixos/services/greetd
+        ./nixos/services/gvfs
+        ./nixos/services/kanata
+        ./nixos/services/locate
+        ./nixos/services/mullvad
+        ./nixos/services/nix-ld
+        ./nixos/services/openssh
+        ./nixos/services/pcscd
+        ./nixos/services/pipewire
+        ./nixos/services/powerd
+        ./nixos/services/samba
+        ./nixos/services/udisks
+        ./nixos/services/xserver
+        ./nixos/services/zram
 
         ./nixos/system/devpkgs
         ./nixos/system/fonts
         ./nixos/system/locale
         ./nixos/system/xdg
-
-        ./nixos/utils/android
-        ./nixos/utils/anyrun
-        ./nixos/utils/brightnessctl
-        ./nixos/utils/corectrl
-        ./nixos/utils/microfetch
-        ./nixos/utils/misc
-        ./nixos/utils/nh
-        ./nixos/utils/npm
-        ./nixos/utils/obsidian
-        ./nixos/utils/yubikey
-        ./nixos/utils/zsh
       ];
     };
     options = {

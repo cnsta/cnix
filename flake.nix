@@ -89,6 +89,15 @@
       };
     };
 
+    hyprsysteminfo = {
+      url = "github:hyprwm/hyprsysteminfo";
+      inputs = {
+        hyprutils.follows = "hyprland/hyprutils";
+        nixpkgs.follows = "hyprland/nixpkgs";
+        systems.follows = "hyprland/systems";
+      };
+    };
+
     # Chaotic
     chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
 

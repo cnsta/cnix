@@ -10,62 +10,95 @@
     }
   ];
   home = {
-    browsers = {
-      firefox = {
+    programs = {
+      alacritty = {
+        enable = true;
+      };
+      anyrun = {
+        enable = false;
+      };
+      bash = {
         enable = true;
       };
       chromium = {
         enable = true;
       };
-    };
-    comm = {
       discord = {
         enable = true;
       };
-    };
-    devtools = {
-      neovim = {
+      eza = {
         enable = true;
       };
-      vscode = {
-        enable = true;
-      };
-      helix = {
-        enable = true;
-      };
-    };
-    # gaming = {
-    # steam = {
-    #   enable = true;
-    # };
-    #   mangohud = {
-    #     enable = false;
-    #   };
-    # };
-    cli = {
-      alacritty = {
-        enable = true;
-      };
-      bash = {
+      firefox = {
         enable = true;
       };
       foot = {
         enable = true;
       };
+      helix = {
+        enable = true;
+      };
+      hyprland = {
+        cnst = {
+          enable = false;
+        };
+        toothpick = {
+          enable = true;
+        };
+      };
+      hyprlock = {
+        enable = true;
+      };
+      jujutsu = {
+        enable = false;
+      };
       kitty = {
+        enable = true;
+      };
+      misc = {
+        enable = true;
+      };
+      mpv = {
+        enable = true;
+      };
+      neovim = {
+        enable = true;
+      };
+      rofi = {
+        enable = false;
+      };
+      ssh = {
+        enable = true;
+      };
+      tuirun = {
+        enable = true;
+      };
+      vscode = {
+        enable = true;
+      };
+      waybar = {
         enable = true;
       };
       wezterm = {
         enable = false;
       };
+      yazi = {
+        enable = true;
+      };
+      zathura = {
+        enable = true;
+      };
       zellij = {
+        enable = false;
+      };
+      zen = {
         enable = false;
       };
       zsh = {
         enable = true;
       };
     };
-    userd = {
+    services = {
       blueman-applet = {
         enable = false;
       };
@@ -83,10 +116,13 @@
       gtk = {
         enable = true;
       };
-      mako = {
+      hypridle = {
         enable = true;
       };
-      udiskie = {
+      hyprpaper = {
+        enable = true;
+      };
+      mako = {
         enable = true;
       };
       polkit = {
@@ -95,61 +131,11 @@
       syncthing = {
         enable = false;
       };
+      udiskie = {
+        enable = true;
+      };
       xdg = {
         enable = true;
-      };
-    };
-    utils = {
-      anyrun = {
-        enable = false;
-      };
-      rofi = {
-        enable = false;
-      };
-      waybar = {
-        enable = true;
-      };
-      yazi = {
-        enable = true;
-      };
-      zathura = {
-        enable = false;
-      };
-      tuirun = {
-        enable = true;
-      };
-      misc = {
-        enable = true;
-      };
-      mpv = {
-        enable = true;
-      };
-      eza = {
-        enable = true;
-      };
-      ssh = {
-        enable = true;
-      };
-    };
-    wm = {
-      hyprland = {
-        cnst = {
-          enable = false;
-        };
-        toothpick = {
-          enable = true;
-        };
-      };
-      utils = {
-        hypridle = {
-          enable = true;
-        };
-        hyprlock = {
-          enable = true;
-        };
-        hyprpaper = {
-          enable = true;
-        };
       };
     };
   };

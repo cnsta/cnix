@@ -1,18 +1,19 @@
 {
   pkgs,
-  lib,
-  osConfig,
+  # lib,
+  # osConfig,
   ...
-}: let
-  isCnixpad = osConfig.networking.hostName == "cnixpad";
-in {
-  imports =
-    [
-      ./modules.nix
-      ./git.nix
-      # ./shell.nix
-    ]
-    ++ lib.optionals isCnixpad [./cpmodules.nix];
+}:
+# let
+#   isCnixpad = osConfig.networking.hostName == "cnixpad";
+# in
+{
+  imports = [
+    ./modules.nix
+    ./git.nix
+    # ./shell.nix
+  ];
+  # ++ lib.optionals isCnixpad [./cpmodules.nix];
 
   home = {
     username = "cnst";
