@@ -62,6 +62,9 @@
           enable = false;
         };
       };
+      brightnessctl = {
+        enable = true;
+      };
       corectrl = {
         enable = false;
       };
