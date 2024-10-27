@@ -1,0 +1,23 @@
+name: Mirror repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Mirror to SourceHut
+        run: |
+          git remote set-url --add --push origin git@git.sr.ht:~canasta/cnix
+          git remote set-url --push origin --mirror=push
+          git push --mirror
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

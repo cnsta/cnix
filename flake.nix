@@ -49,8 +49,6 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    nur.url = "github:nix-community/NUR";
-
     # Hyprland environment
     hyprland.url = "github:hyprwm/hyprland";
 

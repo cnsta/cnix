@@ -30,7 +30,7 @@
         enable = true;
       };
       chromium = {
-        enable = false;
+        enable = true;
       };
       discord = {
         enable = true;

@@ -10,7 +10,6 @@
     ./gitsigns.nix
     ./treesitter.nix
     ./conform.nix
-    ./gx.nix
     ./bqf.nix
     ./colorizer.nix
     ./web-devicons.nix
