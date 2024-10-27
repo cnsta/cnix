@@ -19,6 +19,11 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Add SourceHut to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan git.sr.ht >> ~/.ssh/known_hosts
+
       - name: Mirror to SourceHut
         run: |
           git remote set-url --add --push origin git@git.sr.ht:~canasta/cnix
