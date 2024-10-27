@@ -9,7 +9,7 @@
   cfg = config.home.programs.firefox;
 in {
   imports = [
-    inputs.nur.hmModules.nur
+    # inputs.nur.hmModules.nur
   ];
   options = {
     home.programs.firefox.enable = mkEnableOption "Enables firefox";
@@ -27,15 +27,15 @@ in {
             order = ["DuckDuckGo" "Google"];
           };
           bookmarks = {};
-          extensions = with config.nur.repos.rycee.firefox-addons; [
-            ublock-origin
-            sponsorblock
-            clearurls
-            swedish-dictionary
-            reddit-enhancement-suite
-            return-youtube-dislikes
-            enhancer-for-youtube # unfree
-          ];
+          # extensions = with config.nur.repos.rycee.firefox-addons; [
+          #   ublock-origin
+          #   sponsorblock
+          #   clearurls
+          #   swedish-dictionary
+          #   reddit-enhancement-suite
+          #   return-youtube-dislikes
+          #   enhancer-for-youtube # unfree
+          # ];
           settings = {
             "apz.overscroll.enabled" = true;
             "browser.aboutConfig.showWarning" = false;

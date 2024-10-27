@@ -37,6 +37,7 @@
       auto-optimise-store = true;
       builders-use-substitutes = true;
       warn-dirty = false;
+      allow-import-from-derivation = false;
       experimental-features = ["nix-command" "flakes"];
       flake-registry = "/etc/nix/registry.json";
 
