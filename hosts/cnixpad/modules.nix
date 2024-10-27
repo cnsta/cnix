@@ -30,7 +30,7 @@
         };
       };
       logitech = {
-        enable = true;
+        enable = false;
       };
       network = {
         enable = true;
