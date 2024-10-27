@@ -1,5 +1,5 @@
 {
-  description = "cnix nix";
+  description = "cnix nix v2";
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
