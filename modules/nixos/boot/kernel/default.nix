@@ -72,7 +72,10 @@ in {
     };
 
     chaotic = mkIf (cfg.variant == "cachyos") {
-      scx.enable = true;
+      scx = {
+        enable = true;
+        scheduler = "scx_lavd";
+      };
     };
   };
 }

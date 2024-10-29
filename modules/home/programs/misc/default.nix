@@ -19,10 +19,6 @@ in {
       feh = {
         enable = true;
       };
-      # system information
-      fastfetch = {
-        enable = true;
-      };
       # a monitor of resources
       btop = {
         enable = true;
@@ -33,12 +29,12 @@ in {
     };
     home.packages = with pkgs; [
       # misc.gui
-      virt-manager
+      # virt-manager
       xfce.thunar
       file-roller # archiver
       gnome-calculator
       keepassxc
-      networkmanagerapplet # tray icon for NetworkManager
+      # networkmanagerapplet # tray icon for NetworkManager
       nwg-look # GTK settings
       pavucontrol # GUI sound control
       qbittorrent
@@ -47,6 +43,7 @@ in {
       # misc.tui
       ranger
       xcur2png
+      cmatrix
       calcurse # calendar
       chatgpt-cli
       exiftool

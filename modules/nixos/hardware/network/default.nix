@@ -9,11 +9,6 @@ in {
   options = {
     nixos.hardware.network = {
       enable = mkEnableOption "Enable the custom networking module";
-      hostName = mkOption {
-        type = types.str;
-        default = "default-hostname";
-        description = "Hostname for the nixos.";
-      };
       interfaces = mkOption {
         type = types.attrsOf (types.submodule {
           options = {
@@ -53,7 +48,6 @@ in {
 
     networking = {
       networkmanager.enable = true;
-      inherit (cfg) hostName;
       nftables.enable = true;
       firewall = {
         enable = true;

@@ -23,7 +23,7 @@ in {
       enable = true;
       xdgOpenUsePortal = cfg.xdgOpenUsePortal;
       config = {
-        common.default = "*";
+        common.default = ["gtk"];
         hyprland.default = ["hyprland" "gtk"];
       };
       extraPortals = [pkgs.xdg-desktop-portal-gtk];

@@ -12,7 +12,7 @@ in {
   };
   config = mkIf cfg.enable {
     home = {
-      packages = [pkgs.glib]; # gsettings
+      # packages = [pkgs.glib]; # gsettings
       pointerCursor = {
         # package = pkgs.catppuccin-cursors.latteDark;
         # name = "catppuccin-latte-dark-cursors";

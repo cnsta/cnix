@@ -14,8 +14,6 @@ in {
     environment.systemPackages = with pkgs; [
       lutris
       bottles
-      wineWowPackages.waylandFull
-      wineWowPackages.stagingFull
     ];
   };
 }

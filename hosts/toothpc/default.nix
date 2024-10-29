@@ -35,6 +35,8 @@ in {
     ./modules.nix
   ];
 
+  networking.hostName = "toothpc";
+
   environment.variables.FLAKE = "/home/toothpick/.nix-config";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

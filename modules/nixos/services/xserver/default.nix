@@ -22,6 +22,7 @@ in {
   };
   config = {
     services.xserver = {
+      enable = true;
       videoDrivers = cfg.videoDrivers;
       xkb.layout = cfg.xkbLayout;
     };

@@ -35,6 +35,8 @@ in {
     ./modules.nix
   ];
 
+  networking.hostName = "cnixpad";
+
   swapDevices = [
     {
       device = "/var/lib/swapfile";

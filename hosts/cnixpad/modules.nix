@@ -34,7 +34,6 @@
       };
       network = {
         enable = true;
-        hostName = "cnixpad";
         interfaces = {
           "wlp6s0" = {
             allowedTCPPorts = [22 80 443];

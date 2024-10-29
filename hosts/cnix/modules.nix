@@ -34,7 +34,6 @@
       };
       network = {
         enable = true;
-        hostName = "cnix";
         interfaces = {
           "enp7s0" = {
             allowedTCPPorts = [22 80 443];
@@ -57,9 +56,9 @@
         enable = false;
       };
       blender = {
-        enable = true;
+        enable = false;
         hip = {
-          enable = true;
+          enable = false;
         };
       };
       brightnessctl = {
@@ -78,7 +77,7 @@
         enable = true;
       };
       gimp = {
-        enable = true;
+        enable = false;
       };
       gnome = {
         enable = false;
@@ -87,7 +86,7 @@
         enable = true;
       };
       inkscape = {
-        enable = true;
+        enable = false;
       };
       lutris = {
         enable = true;
@@ -112,7 +111,7 @@
         };
       };
       npm = {
-        enable = true;
+        enable = false;
       };
       obsidian = {
         enable = true;
@@ -150,11 +149,11 @@
         enable = false;
       };
       greetd = {
+        enable = true;
+        user = "cnst";
         autologin = {
           enable = false;
-          user = "cnst";
         };
-        enable = true;
         gnomeKeyring = {
           enable = false;
         };
@@ -204,8 +203,8 @@
         enable = true;
       };
       locale = {
-        defaultLocale = "en_US.UTF-8";
         enable = true;
+        defaultLocale = "en_US.UTF-8";
         extraLocale = "sv_SE.UTF-8";
         timeZone = "Europe/Stockholm";
       };

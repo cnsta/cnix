@@ -7,7 +7,7 @@
 }: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.hyprland;
-  hyprsysteminfoFlake = inputs.hyprsysteminfo.packages.${pkgs.system}.default;
+  # hyprsysteminfoFlake = inputs.hyprsysteminfo.packages.${pkgs.system}.default;
 in {
   options = {
     nixos.programs.hyprland.enable = mkEnableOption "Enables hyprland";
@@ -17,14 +17,14 @@ in {
     programs.hyprland = {
       enable = true;
       xwayland.enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.default;
-      portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+      package = pkgs.hyprland;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
     environment = {
       variables.NIXOS_OZONE_WL = "1";
       systemPackages = [
-        pkgs.hyprwayland-scanner
-        hyprsysteminfoFlake
+        # pkgs.hyprwayland-scanner
+        # hyprsysteminfoFlake
       ];
     };
   };

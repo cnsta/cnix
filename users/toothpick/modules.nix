@@ -39,12 +39,7 @@
         enable = true;
       };
       hyprland = {
-        cnst = {
-          enable = false;
-        };
-        toothpick = {
-          enable = true;
-        };
+        enable = true;
       };
       hyprlock = {
         enable = true;
