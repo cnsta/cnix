@@ -48,12 +48,7 @@
         enable = true;
       };
       hyprland = {
-        cnst = {
-          enable = true;
-        };
-        toothpick = {
-          enable = false;
-        };
+        enable = true;
       };
       hyprlock = {
         enable = true;
@@ -71,7 +66,7 @@
         enable = true;
       };
       neovim = {
-        enable = true;
+        enable = false;
       };
       rofi = {
         enable = false;
@@ -92,7 +87,7 @@
         enable = false;
       };
       yazi = {
-        enable = true;
+        enable = false;
       };
       zathura = {
         enable = true;
@@ -112,7 +107,7 @@
         enable = true;
       };
       copyq = {
-        enable = true;
+        enable = false;
       };
       dconf = {
         settings = {

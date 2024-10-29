@@ -19,24 +19,24 @@
 
   inputs = {
     # Nix environment
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default-linux";
     hardware.url = "github:nixos/nixos-hardware";
     lanzaboote.url = "github:nix-community/lanzaboote";
 
-    nixpak = {
-      url = "github:nixpak/nixpak";
-      inputs = {
-        nixpkgs.follows = "nixpkgs-small";
-        flake-parts.follows = "flake-parts";
-      };
-    };
+    # nixpak = {
+    #   url = "github:nixpak/nixpak";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     flake-parts.follows = "flake-parts";
+    #   };
+    # };
 
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
     };
+
     flake-compat.url = "github:edolstra/flake-compat";
 
     hm = {
@@ -50,51 +50,51 @@
     };
 
     # Hyprland environment
-    hyprland.url = "github:hyprwm/hyprland";
+    # hyprland.url = "github:hyprwm/hyprland";
 
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "hyprland/nixpkgs";
-    };
+    # hyprland-contrib = {
+    #   url = "github:hyprwm/contrib";
+    #   inputs.nixpkgs.follows = "hyprland/nixpkgs";
+    # };
 
-    hyprlock = {
-      url = "github:hyprwm/hyprlock";
-      inputs = {
-        hyprlang.follows = "hyprland/hyprlang";
-        hyprutils.follows = "hyprland/hyprutils";
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
-      };
-    };
+    # hyprlock = {
+    #   url = "github:hyprwm/hyprlock";
+    #   inputs = {
+    #     hyprlang.follows = "hyprland/hyprlang";
+    #     hyprutils.follows = "hyprland/hyprutils";
+    #     nixpkgs.follows = "hyprland/nixpkgs";
+    #     systems.follows = "hyprland/systems";
+    #   };
+    # };
 
-    hypridle = {
-      url = "github:hyprwm/hypridle";
-      inputs = {
-        hyprlang.follows = "hyprland/hyprlang";
-        hyprutils.follows = "hyprland/hyprutils";
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
-      };
-    };
+    # hypridle = {
+    #   url = "github:hyprwm/hypridle";
+    #   inputs = {
+    #     hyprlang.follows = "hyprland/hyprlang";
+    #     hyprutils.follows = "hyprland/hyprutils";
+    #     nixpkgs.follows = "hyprland/nixpkgs";
+    #     systems.follows = "hyprland/systems";
+    #   };
+    # };
 
-    hyprpaper = {
-      url = "github:hyprwm/hyprpaper";
-      inputs = {
-        hyprlang.follows = "hyprland/hyprlang";
-        hyprutils.follows = "hyprland/hyprutils";
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
-      };
-    };
+    # hyprpaper = {
+    #   url = "github:hyprwm/hyprpaper";
+    #   inputs = {
+    #     hyprlang.follows = "hyprland/hyprlang";
+    #     hyprutils.follows = "hyprland/hyprutils";
+    #     nixpkgs.follows = "hyprland/nixpkgs";
+    #     systems.follows = "hyprland/systems";
+    #   };
+    # };
 
-    hyprsysteminfo = {
-      url = "github:hyprwm/hyprsysteminfo";
-      inputs = {
-        hyprutils.follows = "hyprland/hyprutils";
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
-      };
-    };
+    # hyprsysteminfo = {
+    #   url = "github:hyprwm/hyprsysteminfo";
+    #   inputs = {
+    #     hyprutils.follows = "hyprland/hyprutils";
+    #     nixpkgs.follows = "hyprland/nixpkgs";
+    #     systems.follows = "hyprland/systems";
+    #   };
+    # };
 
     # Chaotic
     chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
@@ -121,7 +121,7 @@
     };
 
     zen-browser = {
-      url = "github:cnsta/zen-browser-flake";
+      url = "git+https://git.sr.ht/~canasta/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

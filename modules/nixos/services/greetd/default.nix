@@ -24,7 +24,7 @@ in {
         default = false;
         description = "Enables autologin for a specified user.";
       };
-      autologin.user = mkOption {
+      user = mkOption {
         type = types.str;
         default = "cnst";
         description = "The username to auto-login when autologin is enabled.";
@@ -39,14 +39,14 @@ in {
         # Conditionally include initial_session if autologin is enabled
         (mkIf cfg.autologin.enable {
           initial_session = {
-            command = "${pkgs.hyprland}/bin/Hyprland";
-            user = cfg.autologin.user;
+            command = "${lib.getExe config.programs.hyprland.package}";
+            user = cfg.user;
           };
         })
         {
           default_session = {
             command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r --remember-session --asterisks";
-            user = "greeter";
+            user = cfg.user;
           };
         }
       ];

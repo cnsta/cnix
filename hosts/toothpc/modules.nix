@@ -34,7 +34,6 @@
       };
       network = {
         enable = true;
-        hostName = "toothpc";
         interfaces = {
           "enp4s0" = {
             allowedTCPPorts = [22 80 443];

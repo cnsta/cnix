@@ -27,6 +27,7 @@ in {
       (mkIf cfg.desktop.enable [
         pkgs.protonup
         pkgs.winetricks
+        pkgs.wine
       ])
     ];
   };

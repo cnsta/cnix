@@ -7,22 +7,22 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkDefault;
-  cfg = config.home.programs.hyprland.cnst;
+  cfg = config.home.programs.hyprland.toothpick;
 in {
   imports = [
-    "${umodPath}/programs/hyprland/cnst/appearance.nix"
-    "${umodPath}/programs/hyprland/cnst/inputs.nix"
-    "${umodPath}/programs/hyprland/cnst/keybinds.nix"
-    "${umodPath}/programs/hyprland/cnst/rules.nix"
-    "${umodPath}/programs/hyprland/cnst/startup.nix"
+    "${umodPath}/programs/hyprland/toothpick/appearance.nix"
+    "${umodPath}/programs/hyprland/toothpick/inputs.nix"
+    "${umodPath}/programs/hyprland/toothpick/keybinds.nix"
+    "${umodPath}/programs/hyprland/toothpick/rules.nix"
+    "${umodPath}/programs/hyprland/toothpick/startup.nix"
   ];
 
   options = {
-    home.programs.hyprland.cnst.enable = mkEnableOption "Enable Hyprland";
+    home.programs.hyprland.toothpick.enable = mkEnableOption "Enable Hyprland";
   };
 
   config = mkIf cfg.enable {
-    home.programs.hyprland.cnst = {
+    home.programs.hyprland.toothpick = {
       appearance.enable = mkDefault cfg.enable;
       inputs.enable = mkDefault cfg.enable;
       keybinds.enable = mkDefault cfg.enable;

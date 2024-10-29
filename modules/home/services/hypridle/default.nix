@@ -2,14 +2,14 @@
   config,
   lib,
   pkgs,
-  inputs,
+  # inputs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.services.hypridle;
 
-  hypridleFlake = inputs.hypridle.packages.${pkgs.system}.hypridle;
-  # hypridlePkg = pkgs.hypridle;
+  # hypridleFlake = inputs.hypridle.packages.${pkgs.system}.hypridle;
+  hypridlePkg = pkgs.hypridle;
 in {
   options = {
     home.services.hypridle.enable = mkEnableOption "Enables hypridle";
@@ -17,7 +17,7 @@ in {
   config = mkIf cfg.enable {
     services.hypridle = {
       enable = true;
-      package = hypridleFlake;
+      package = hypridlePkg;
       settings = {
         general = {
           lock_cmd = "hyprlock";
