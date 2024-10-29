@@ -149,11 +149,11 @@
         enable = false;
       };
       greetd = {
+        enable = true;
+        user = "cnst";
         autologin = {
           enable = false;
-          user = "cnst";
         };
-        enable = true;
         gnomeKeyring = {
           enable = false;
         };

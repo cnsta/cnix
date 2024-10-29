@@ -149,11 +149,11 @@
         enable = false;
       };
       greetd = {
+        enable = true;
+        user = "toothpick";
         autologin = {
           enable = false;
-          user = "toothpick";
         };
-        enable = true;
         gnomeKeyring = {
           enable = false;
         };
