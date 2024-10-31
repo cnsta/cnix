@@ -87,7 +87,7 @@
         enable = false;
       };
       zen = {
-        enable = false;
+        enable = true;
       };
       zsh = {
         enable = true;
