@@ -11,7 +11,6 @@
   imports = [
     ./modules.nix
     ./git.nix
-    # ./shell.nix
   ];
   # ++ lib.optionals isCnixpad [./cpmodules.nix];
 
