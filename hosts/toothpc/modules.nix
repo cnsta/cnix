@@ -5,7 +5,7 @@
         extraBlacklistedModules = [];
         extraKernelParams = [];
         hardware = "nvidia";
-        variant = "stable";
+        variant = "latest";
       };
       loader = {
         default = {
