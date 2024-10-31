@@ -24,6 +24,15 @@
       explicit_sync_kms = 2;
       direct_scanout = false;
     };
+
+  cursorSettings =
+    if toothpc
+    then {
+      no_hardware_cursors = true;
+    }
+    else {
+      no_hardware_cursors = 2;
+    };
 in {
   options = {
     home.programs.hyprland.inputs.enable = mkEnableOption "Enables input settings in Hyprland";
@@ -88,6 +97,7 @@ in {
         force_zero_scaling = false;
       };
       render = renderSettings;
+      cursor = cursorSettings;
     };
   };
 }
