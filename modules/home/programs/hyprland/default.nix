@@ -2,14 +2,11 @@
   config,
   lib,
   pkgs,
-  umodPath,
-  osConfig,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkOption types mkDefault;
   cfg = config.home.programs.hyprland;
   hyprlandPkg = pkgs.hyprland;
-  isCnst = osConfig.networking.hostName == "cnix";
 in {
   imports = [
     ./appearance.nix
@@ -22,6 +19,7 @@ in {
   options = {
     home.programs.hyprland = {
       enable = mkEnableOption "Enable Hyprland";
+      user = mkOption {type = types.enum ["cnst" "toothpick"];};
     };
   };
 
