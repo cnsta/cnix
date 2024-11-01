@@ -49,6 +49,7 @@
       };
       hyprland = {
         enable = true;
+        user = "cnst";
       };
       hyprlock = {
         enable = true;
