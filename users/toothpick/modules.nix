@@ -40,7 +40,6 @@
       };
       hyprland = {
         enable = true;
-        user = "toothpick";
       };
       hyprlock = {
         enable = true;

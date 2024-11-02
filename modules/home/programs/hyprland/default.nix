@@ -19,7 +19,6 @@ in {
   options = {
     home.programs.hyprland = {
       enable = mkEnableOption "Enable Hyprland";
-      user = mkOption {type = types.enum ["cnst" "toothpick"];};
     };
   };
 
