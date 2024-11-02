@@ -5,13 +5,8 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkMerge;
-
-  kbOption =
-    if osConfig.networking.hostName == "cnixpad"
-    then "ctrl:swapcaps"
-    else "";
-
   cfg = config.home.programs.hyprland;
+  host = osConfig.networking.hostName;
 in {
   options = {
     home.programs.hyprland.inputs.enable = mkEnableOption "Enables input settings in Hyprland";
@@ -44,7 +39,6 @@ in {
         input = {
           kb_layout = "se";
           kb_variant = "nodeadkeys";
-          kb_options = kbOption;
           follow_mouse = 1;
           accel_profile = "flat";
           sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
@@ -84,31 +78,37 @@ in {
       };
     }
 
-    (mkIf (cfg.user == "toothpick") {
-      wayland.windowManager.hyprland.settings.render = {
-        explicit_sync = 0;
-        explicit_sync_kms = 0;
-        direct_scanout = false;
+    (mkIf (host == "toothpc") {
+      wayland.windowManager.hyprland.settings = {
+        render = {
+          explicit_sync = 0;
+          explicit_sync_kms = 0;
+          direct_scanout = false;
+        };
+        cursor = {
+          no_hardware_cursors = true;
+        };
       };
     })
 
-    (mkIf (cfg.user != "toothpick") {
-      wayland.windowManager.hyprland.settings.render = {
-        explicit_sync = 2;
-        explicit_sync_kms = 2;
-        direct_scanout = false;
+    (mkIf (host != "toothpc") {
+      wayland.windowManager.hyprland.settings = {
+        render = {
+          explicit_sync = 2;
+          explicit_sync_kms = 2;
+          direct_scanout = false;
+        };
+        cursor = {
+          no_hardware_cursors = 2;
+        };
       };
     })
 
-    (mkIf (cfg.user == "toothpick") {
-      wayland.windowManager.hyprland.settings.cursor = {
-        no_hardware_cursors = true;
-      };
-    })
-
-    (mkIf (cfg.user != "toothpick") {
-      wayland.windowManager.hyprland.settings.cursor = {
-        no_hardware_cursors = 2;
+    (mkIf (host == "cnixpad") {
+      wayland.windowManager.hyprland.settings = {
+        input = {
+          kb_options = "ctrl:swapcaps";
+        };
       };
     })
   ]);

@@ -7,6 +7,7 @@
 }: let
   inherit (lib) mkIf mkEnableOption mkMerge;
   cfg = config.home.programs.hyprland;
+  host = osConfig.networking.hostName;
 in {
   options = {
     home.programs.hyprland.keybinds.enable = mkEnableOption "Enables keybind settings in Hyprland";
@@ -86,32 +87,38 @@ in {
       };
     }
 
-    (mkIf (cfg.user == "cnst") {
-      wayland.windowManager.hyprland.settings = let
-        cnixpad = osConfig.networking.hostName == "cnixpad";
-        modKey =
-          if cnixpad
-          then "ALT_L"
-          else "SUPER";
-      in {
+    (mkIf (host == "cnix") {
+      wayland.windowManager.hyprland.settings = {
         "$terminal" = "alacritty";
         "$browser" = "zen";
         "$browserinc" = "zen --private-window";
-        "$mod" = modKey;
+        "$mod" = "SUPER";
         bind = [
           # Add more host-specific binds as needed
         ];
       };
     })
 
-    (mkIf (cfg.user == "toothpick") {
+    (mkIf (host == "cnixpad") {
+      wayland.windowManager.hyprland.settings = {
+        "$terminal" = "foot";
+        "$browser" = "zen";
+        "$browserinc" = "zen --private-window";
+        "$mod" = "ALT_L";
+        bind = [
+          # Add more host-specific binds as needed
+        ];
+      };
+    })
+
+    (mkIf (host == "toothpc") {
       wayland.windowManager.hyprland.settings = {
         "$terminal" = "foot";
         "$browser" = "firefox";
         "$browserinc" = "firefox --private-window";
         "$mod" = "ALT_L";
         bind = [
-          # Add more toothpc-specific binds as needed
+          # Add more host-specific binds as needed
         ];
       };
     })
