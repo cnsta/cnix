@@ -28,6 +28,7 @@ in {
         pkgs.protonup
         pkgs.winetricks
         pkgs.wine
+        pkgs.geekbench
       ])
     ];
   };

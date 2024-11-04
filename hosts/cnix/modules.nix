@@ -188,6 +188,11 @@
       samba = {
         enable = false;
       };
+      scx = {
+        enable = true;
+        scheduler = "scx_lavd";
+        flags = "--performance --no-core-compaction";
+      };
       udisks = {
         enable = true;
       };

@@ -60,7 +60,7 @@
           name = "nix";
           auto-format = true;
           file-types = ["nix"];
-          language-servers = ["nil"];
+          language-servers = ["nixd"];
           formatter = {
             command = lib.getExe pkgs.alejandra;
             args = ["-q"];
@@ -115,11 +115,6 @@
       ++ prettierLangs langs;
 
     language-server = {
-      gpt = {
-        command = "helix-gpt";
-        args = ["--copilotApiKey" "cat /run/agenix/helix-gpt"];
-      };
-
       bash-language-server = {
         command = lib.getExe pkgs.bash-language-server;
         args = ["start"];
@@ -168,6 +163,10 @@
 
       nil = {
         command = lib.getExe pkgs.nil;
+      };
+
+      nixd = {
+        command = lib.getExe pkgs.nixd;
       };
 
       pyright = {
