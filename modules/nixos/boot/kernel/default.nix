@@ -71,11 +71,8 @@ in {
         ++ cfg.extraBlacklistedModules;
     };
 
-    chaotic = mkIf (cfg.variant == "cachyos") {
-      scx = {
-        enable = true;
-        scheduler = "scx_lavd";
-      };
-    };
+    # chaotic = mkIf (cfg.variant == "cachyos") {
+    #   environment.systemPackages = [pkgs.scx.lavd];
+    # };
   };
 }

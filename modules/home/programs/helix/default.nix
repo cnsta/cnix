@@ -35,7 +35,10 @@ in {
             normal = "block";
             select = "underline";
           };
-          indent-guides.render = true;
+          indent-guides = {
+            render = true;
+            character = "┊";
+          };
           inline-diagnostics = {
             cursor-line = "hint";
             other-lines = "error";
@@ -46,7 +49,7 @@ in {
           };
           gutters = ["diagnostics" "line-numbers" "spacer" "diff"];
           statusline = {
-            separator = "of";
+            separator = "/";
             left = [
               "mode"
               "selections"
@@ -59,8 +62,7 @@ in {
             right = [
               "file-encoding"
               "file-line-ending"
-              "position-percentage"
-              "spacer"
+              "position"
               "separator"
               "total-line-numbers"
             ];

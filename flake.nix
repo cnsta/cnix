@@ -24,13 +24,6 @@
     hardware.url = "github:nixos/nixos-hardware";
     lanzaboote.url = "github:nix-community/lanzaboote";
 
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.systems.follows = "systems";
-    };
-
-    flake-compat.url = "github:edolstra/flake-compat";
-
     hm = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -118,6 +111,9 @@
     };
 
     # Custom apps
-    tuirun.url = "git+https://git.sr.ht/~canasta/tuirun";
+    tuirun = {
+      url = "git+https://git.sr.ht/~canasta/tuirun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

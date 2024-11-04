@@ -50,6 +50,7 @@ in {
         vulkan-tools
         wayland
         wayland-protocols
+        rocmPackages.rocm-smi
       ];
     })
 
@@ -92,6 +93,8 @@ in {
         vulkanPackages_latest.spirv-cross
         wayland-protocols_git
         wayland_git
+        scx.lavd
+        rocmPackages.rocm-smi
       ];
     })
   ]);

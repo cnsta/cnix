@@ -95,6 +95,7 @@
         ./nixos/services/pipewire
         ./nixos/services/powerd
         ./nixos/services/samba
+        ./nixos/services/scx
         ./nixos/services/udisks
         ./nixos/services/xserver
         ./nixos/services/zram

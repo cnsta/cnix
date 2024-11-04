@@ -26,7 +26,7 @@ in {
       nixd
       php
       # php84Packages.php-cs-fixer
-      phpactor
+      # phpactor
       python312Packages.python-lsp-server
       bash-language-server
       nil

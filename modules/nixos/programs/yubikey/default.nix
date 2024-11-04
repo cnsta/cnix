@@ -12,11 +12,11 @@ in {
   };
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      pkgs.yubioath-flutter
-      pkgs.yubikey-manager
+      # pkgs.yubioath-flutter
+      # pkgs.yubikey-manager
       pkgs.yubikey-personalization
       pkgs.yubikey-personalization-gui
-      pkgs.pcsc-tools
+      # pkgs.pcsc-tools
     ];
   };
 }
