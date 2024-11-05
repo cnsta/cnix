@@ -24,7 +24,6 @@ in {
       umod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules.nix";
       systemmodules = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
       smod = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
-      nixcleanboot = "sudo nix run /home/$USER/.nix-config#cleanup-boot";
       nixclean = "nh clean all --keep 3";
       nixdev = "nix develop ~/.nix-config -c $SHELL";
       nixconfig = "cd /home/$USER/.nix-config/";
