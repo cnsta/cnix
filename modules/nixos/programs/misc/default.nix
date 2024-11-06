@@ -23,6 +23,7 @@ in {
       [
         pkgs.nodejs_22
         pkgs.tree
+        pkgs.gnome-disk-utility
       ]
       (mkIf cfg.desktop.enable [
         pkgs.protonup
