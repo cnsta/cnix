@@ -1,6 +1,18 @@
 # cnix
 
-Personal NixOS daily driver.
+My NixOS daily driver. Built primarily for use with
+[Hyprland](https://hyprland.org/). Modules keep multiplying, but here are some
+prominent tools and apps:
+
+- [Chaotic's Nyx](https://www.nyx.chaotic.cx/)
+- [nh](https://github.com/viperML/nh)
+- [agenix](https://github.com/ryantm/agenix)
+- [kanata](https://github.com/jtroo/kanata)
+- [waybar](https://github.com/Alexays/Waybar)
+- [zen-browser](https://github.com/zen-browser/desktop)
+- [helix](https://github.com/helix-editor/helix)
+- [tuirun](https://git.sr.ht/~canasta/tuirun)
+- [mako](https://github.com/emersion/mako)
 
 ## Structure
 
