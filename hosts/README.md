@@ -1,6 +1,0 @@
-```
-hosts
-├── adampad
-├── cnix
-└── toothpc
-```
