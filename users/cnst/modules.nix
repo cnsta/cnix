@@ -74,9 +74,6 @@
       ssh = {
         enable = true;
       };
-      thunar = {
-        enable = true;
-      };
       tuirun = {
         enable = true;
       };

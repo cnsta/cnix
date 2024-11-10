@@ -20,7 +20,6 @@
         ./home/programs/neovim
         ./home/programs/rofi
         ./home/programs/ssh
-        ./home/programs/thunar
         ./home/programs/tuirun
         ./home/programs/vscode
         ./home/programs/waybar
@@ -76,6 +75,7 @@
         ./nixos/programs/npm
         ./nixos/programs/obsidian
         ./nixos/programs/steam
+        ./nixos/programs/thunar
         ./nixos/programs/yubikey
         ./nixos/programs/zsh
 
