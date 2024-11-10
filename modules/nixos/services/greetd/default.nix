@@ -45,7 +45,7 @@ in {
         })
         {
           default_session = {
-            command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r --remember-session --asterisks";
+            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --window-padding 1 --time --time-format '%R - %F' -r --remember-session --asterisks";
             user = cfg.user;
           };
         }

@@ -30,7 +30,7 @@ in {
         background = [
           {
             monitor = "";
-            path = "~/media/images/l_int06_big.jpg";
+            path = "~/media/images/l_ash09_big.jpg";
           }
         ];
         input-field = [
