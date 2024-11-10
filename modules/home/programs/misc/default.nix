@@ -31,8 +31,6 @@ in {
     home.packages = with pkgs; [
       # misc.gui
       # virt-manager
-      xfce.thunar
-      file-roller # archiver
       gnome-calculator
       keepassxc
       # networkmanagerapplet # tray icon for NetworkManager
@@ -63,8 +61,6 @@ in {
       wireguard-tools
       wl-clipboard
       wpa_supplicant
-      xfce.thunar-archive-plugin
-      xfce.thunar-volman
       unzip
       zip
       gnutar

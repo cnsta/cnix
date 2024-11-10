@@ -5,18 +5,18 @@ My NixOS daily driver. Built primarily for use with
 prominent tools and apps:
 
 - [Chaotic's Nyx](https://www.nyx.chaotic.cx/) **CachyOS kernel and mesa-git
-  things**
-- [nh](https://github.com/viperML/nh) **A pretty cool "nix helper"**
-- [agenix](https://github.com/ryantm/agenix) **Age-based encryption**
-- [kanata](https://github.com/jtroo/kanata) **Keyboard mapping, good stuff**
+  things.**
+- [nh](https://github.com/viperML/nh) **A pretty cool "nix helper".**
+- [agenix](https://github.com/ryantm/agenix) **Age based encryption.**
+- [kanata](https://github.com/jtroo/kanata) **Keyboard mapping, good stuff.**
 - [waybar](https://github.com/Alexays/Waybar) **It's a wayland bar!**
-- [zen-browser](https://github.com/zen-browser/desktop) **Alpha stage,
-  firefox-based browser**
+- [zen-browser](https://github.com/zen-browser/desktop) **Alpha stage, firefox
+  based browser.**
 - [helix](https://github.com/helix-editor/helix) **Very quick editor, might
-  switch to permanently!**
+  switch permanently!**
 - [tuirun](https://git.sr.ht/~canasta/tuirun) **Anyrun's applications plugin but
-  with tui. WIP, will add more documentation**
-- [mako](https://github.com/emersion/mako) **Lightweight notifications**
+  with tui. WIP, will add more documentation.**
+- [mako](https://github.com/emersion/mako) **Lightweight notifications.**
 
 ## Structure
 

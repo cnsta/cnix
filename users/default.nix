@@ -7,7 +7,7 @@
 
   sharedImports = [
     # ./etc
-    "${self}/.scripts"
+    "${self}/scripts"
     self.nixosModules.home
     self.nixosModules.options
   ];
