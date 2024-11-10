@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.home.programs.thunar;
+  cfg = config.nixos.programs.thunar;
 in {
   options = {
-    home.programs.thunar.enable = mkEnableOption "Enables thunar file manager";
+    nixos.programs.thunar.enable = mkEnableOption "Enables thunar file manager";
   };
   config = mkIf cfg.enable {
     programs.thunar = {
@@ -21,6 +21,8 @@ in {
     programs.xfconf.enable = true;
     services.tumbler.enable = true;
 
-    environment.systemPackages = [pkgs.file-roller];
+    environment.systemPackages = with pkgs; [
+      file-roller
+    ];
   };
 }

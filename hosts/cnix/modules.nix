@@ -119,6 +119,9 @@
       steam = {
         enable = true;
       };
+      thunar = {
+        enable = true;
+      };
       yubikey = {
         enable = true;
       };
