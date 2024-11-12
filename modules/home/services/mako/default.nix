@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
@@ -13,7 +14,7 @@ in {
     services.mako = {
       enable = true;
       iconPath = "$HOME/.nix-profile/share/icons/Gruvbox-Plus-Dark";
-      font = "FiraCode Nerd Font Medium 12";
+      font = "Input Sans Narrow Regular 12";
       padding = "20";
       margin = "10";
       anchor = "top-right";
@@ -25,7 +26,16 @@ in {
       borderColor = "#689d6add";
       textColor = "#d5c4a1dd";
       layer = "overlay";
-      extraConfig = ''
+      extraConfig = let
+        play = sound: "mpv ${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/${sound}.oga";
+      in ''
+        on-notify=exec ${play "message"}
+        [app-name=yubikey-touch-detector]
+        on-notify=exec ${play "service-login"}
+        [app-name=command_complete summary~="✘.*"]
+        on-notify=exec ${play "dialog-warning"}
+        [app-name=command_complete summary~="✓.*"]
+        on-notify=exec ${play "bell"}
         max-history=50
         max-visible=4
         outer-margin=25
