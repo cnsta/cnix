@@ -27,27 +27,37 @@ in {
         rounding = 0;
         blur = {
           enabled = true;
-          size = 8;
-          passes = 1;
-          vibrancy = 0.1696;
+          brightness = 1.0;
+          contrast = 1.0;
+          noise = 0.01;
+          vibrancy = 0.15;
+          vibrancy_darkness = 0.5;
+          passes = 2;
+          size = 7;
+          popups = true;
+          popups_ignorealpha = 0.2;
         };
-        drop_shadow = false;
-        shadow_range = 4;
-        shadow_render_power = 3;
-        #    col.shadow = rgba(1a1a1aee)
+        shadow = {
+          enabled = true;
+          color = "rgba(00000025)";
+          ignore_window = true;
+          offset = "0 5";
+          range = 45;
+          render_power = 2;
+          scale = 0.95;
+        };
       };
       animations = {
         enabled = true;
         bezier = [
-          "myBezier,0.05, 0.9, 0.1, 1.05"
+          "myBezier,0.19, 1, 0.22, 1"
         ];
         animation = [
           "windows, 1, 3, myBezier"
           "windowsOut, 1, 3, default, popin 80%"
-          "border, 1, 3, default"
-          "borderangle, 1, 8, default"
-          "fade, 1, 7, default"
-          "workspaces, 1, 3, default"
+          "border, 1, 2, default"
+          "workspaces, 1, 2, default, slide"
+          "specialWorkspace, 1, 2, default, fade"
         ];
       };
       dwindle = {
