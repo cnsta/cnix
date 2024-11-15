@@ -95,6 +95,11 @@
       };
     };
 
+    ironbar = {
+      url = "github:JakeStanger/ironbar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     anyrun.url = "github:anyrun-org/anyrun";
     microfetch.url = "github:NotAShelf/microfetch";
     agenix.url = "github:ryantm/agenix";

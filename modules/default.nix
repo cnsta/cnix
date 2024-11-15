@@ -13,11 +13,13 @@
         ./home/programs/helix
         ./home/programs/hyprland
         ./home/programs/hyprlock
+        ./home/programs/ironbar
         ./home/programs/jujutsu
         ./home/programs/kitty
         ./home/programs/misc
         ./home/programs/mpv
         ./home/programs/neovim
+        ./home/programs/nwg-bar
         ./home/programs/rofi
         ./home/programs/ssh
         ./home/programs/tuirun

@@ -53,6 +53,9 @@
       hyprlock = {
         enable = true;
       };
+      ironbar = {
+        enable = false;
+      };
       jujutsu = {
         enable = false;
       };
@@ -67,6 +70,9 @@
       };
       neovim = {
         enable = false;
+      };
+      nwg-bar = {
+        enable = true;
       };
       rofi = {
         enable = false;
