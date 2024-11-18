@@ -154,12 +154,6 @@
       greetd = {
         enable = true;
         user = "cnst";
-        autologin = {
-          enable = false;
-        };
-        gnomeKeyring = {
-          enable = false;
-        };
       };
       gvfs = {
         enable = true;

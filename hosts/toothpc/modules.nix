@@ -154,12 +154,6 @@
       greetd = {
         enable = true;
         user = "toothpick";
-        autologin = {
-          enable = false;
-        };
-        gnomeKeyring = {
-          enable = false;
-        };
       };
       gvfs = {
         enable = true;
