@@ -35,15 +35,15 @@ in {
 
     (mkIf (host == "cnixpad") {
       wayland.windowManager.hyprland.settings.exec-once = [
-        "blueman-applet"
-        "pamixer --set-volume 50"
+        "uwsm app -- blueman-applet"
+        "uwsm app -- pamixer --set-volume 50"
       ];
     })
 
     (mkIf (host == "toothpc") {
       wayland.windowManager.hyprland.settings.exec-once = [
-        "mullvad-vpn"
-        "hyprctl dispatch exec 'sleep 3s && solaar -w hide'"
+        "uwsm app -- mullvad-vpn"
+        "uwsm app -- solaar -w hide"
       ];
     })
   ]);
