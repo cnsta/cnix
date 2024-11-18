@@ -15,5 +15,6 @@ in {
       tray = "always";
       notify = false;
     };
+    systemd.user.services.udiskie.Unit.After = lib.mkForce "graphical-session.target";
   };
 }

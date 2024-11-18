@@ -16,20 +16,20 @@ in {
     {
       wayland.windowManager.hyprland.settings = {
         exec-once = [
+          "hyprlock"
           "systemctl --user start polkit-gnome-authentication-agent-1"
-          "udiskie -Nt"
-          "wl-clip-persist --clipboard regular --all-mime-type-regex '^(?!x-kde-passwordManagerHint).+'"
-          "hyprctl dispatch exec 'sleep 5s && keepassxc'"
+          "uwsm finalize"
+          "uwsm app -- keepassxc'"
         ];
       };
     }
 
     (mkIf (host == "cnix") {
       wayland.windowManager.hyprland.settings.exec-once = [
-        "mullvad-vpn"
-        "blueman-applet"
-        "pamixer --set-volume 50"
-        "hyprctl dispatch exec 'sleep 3s && solaar -w hide'"
+        "uwsm app -- mullvad-vpn"
+        "uwsm app -- blueman-applet"
+        "uwsm app -- pamixer --set-volume 50"
+        "uwsm app -- solaar -w hide"
       ];
     })
 

@@ -8,6 +8,12 @@
   inherit (lib) mkIf mkEnableOption mkMerge;
   cfg = config.home.programs.hyprland;
   host = osConfig.networking.hostName;
+
+  toggle = program: let
+    prog = builtins.substring 0 14 program;
+  in "pkill ${prog} || uwsm app -- ${program}";
+
+  runOnce = program: "pgrep ${program} || uwsm app -- ${program}";
 in {
   options = {
     home.programs.hyprland.keybinds.enable = mkEnableOption "Enables keybind settings in Hyprland";
@@ -18,21 +24,21 @@ in {
       wayland.windowManager.hyprland.settings = {
         # Common Keybind Variables
         "$fileManager" = "thunar";
-        "$passwordManager" = "keepassxc";
         "$menu" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
         "$menuw" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
         "$yazi" = "alacritty -e yazi";
         "$tuirun" = "tuirun-toggle.sh";
 
         bind = [
+          "$mod, L, exec, ${runOnce "hyprlock"}"
           "$mod SHIFT, B, exec, pkill -SIGUSR2 waybar"
           "$mod, A, exec, pkill -SIGUSR1 waybar"
-          "$mod, T, exec, $terminal"
+          "$mod, T, exec, uwsm app -T"
           "$mod, W, exec, $browser"
-          "$mod, K, exec, $passwordManager"
+          "$mod, K, exec, keepassxc"
           "$mod SHIFT, W, exec, $browserinc"
           "$mod, Q, killactive,"
-          "$mod, E, exec, $fileManager"
+          "$mod, E, exec, uwsm app -- $fileManager"
           "$mod, R, exec, $tuirun"
           "$mod SHIFT, E, exec, $yazi"
           "$mod, F, fullscreen,"

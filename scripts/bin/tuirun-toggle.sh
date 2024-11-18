@@ -2,7 +2,7 @@
 TERMINAL="${TERMINAL:-foot}"
 
 # Path to the tuirun executable
-TUIRUN_PATH="/etc/profiles/per-user/$USER/bin/tuirun"
+TUIRUN_PATH="/run/current-system/sw/bin/uwsm app -- tuirun"
 
 # Use absolute paths for commands
 PGREP="/run/current-system/sw/bin/pgrep"
@@ -32,5 +32,5 @@ else
   CMD="$CMD -e $TUIRUN_PATH"
 
   # Launch the terminal with OPTIONS
-  "$HYPRCTL" dispatch exec "$CMD"
+  uwsm app -- "$HYPRCTL" dispatch exec "$CMD"
 fi

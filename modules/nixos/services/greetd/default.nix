@@ -14,16 +14,6 @@ in {
         default = false;
         description = "Enables the greetd service.";
       };
-      gnomeKeyring.enable = mkEnableOption {
-        type = types.bool;
-        default = false;
-        description = "Enables GnomeKeyring PAM service for greetd.";
-      };
-      autologin.enable = mkEnableOption {
-        type = types.bool;
-        default = false;
-        description = "Enables autologin for a specified user.";
-      };
       user = mkOption {
         type = types.str;
         default = "cnst";
@@ -33,26 +23,30 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.greetd = {
+    services.greetd = let
+      session = {
+        command = "${lib.getExe config.programs.uwsm.package} start hyprland-uwsm.desktop";
+        user = cfg.user;
+      };
+    in {
       enable = true;
-      settings = mkMerge [
-        # Conditionally include initial_session if autologin is enabled
-        (mkIf cfg.autologin.enable {
-          initial_session = {
-            command = "${lib.getExe config.programs.hyprland.package}";
-            user = cfg.user;
-          };
-        })
-        {
-          default_session = {
-            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --window-padding 1 --time --time-format '%R - %F' -r --remember-session --asterisks";
-            user = cfg.user;
-          };
-        }
-      ];
+      settings = {
+        terminal.vt = 1;
+        default_session = session;
+        initial_session = session;
+      };
+    };
+
+    programs.uwsm = {
+      enable = true;
+      waylandCompositors.hyprland = {
+        binPath = "/run/current-system/sw/bin/Hyprland";
+        prettyName = "Hyprland";
+        comment = "Hyprland managed by UWSM";
+      };
     };
 
     # Apply GnomeKeyring PAM Service based on user configuration
-    security.pam.services.greetd.enableGnomeKeyring = cfg.gnomeKeyring.enable;
+    # security.pam.services.greetd.enableGnomeKeyring = cfg.gnomeKeyring.enable;
   };
 }

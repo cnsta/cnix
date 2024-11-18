@@ -24,7 +24,7 @@ in {
       xdgOpenUsePortal = cfg.xdgOpenUsePortal;
       config = {
         common.default = ["gtk"];
-        hyprland.default = ["hyprland" "gtk"];
+        hyprland.default = ["gtk" "hyprland"];
       };
       extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
