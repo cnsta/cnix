@@ -2,11 +2,12 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mkOption types mkDefault;
+  inherit (lib) mkIf mkEnableOption mkDefault;
   cfg = config.home.programs.hyprland;
-  hyprlandPkg = pkgs.hyprland;
+  hyprlandPkg = inputs.hyprland.packages.${pkgs.system}.default;
 in {
   imports = [
     ./appearance.nix
@@ -35,6 +36,7 @@ in {
       enable = true;
       package = hyprlandPkg;
       systemd = {
+        enable = false;
         variables = ["--all"];
         extraCommands = [
           "systemctl --user stop graphical-session.target"
@@ -42,5 +44,7 @@ in {
         ];
       };
     };
+
+    systemd.user.targets.tray.Unit.Requires = lib.mkForce ["graphical-session.target"];
   };
 }

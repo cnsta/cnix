@@ -1,5 +1,5 @@
 {
-  # inputs,
+  inputs,
   pkgs,
   config,
   lib,
@@ -8,8 +8,8 @@
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.hyprlock;
 
-  # hyprlockFlake = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
-  hyprlockPkg = pkgs.hyprlock;
+  hyprlockFlake = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
+  # hyprlockPkg = pkgs.hyprlock;
 in {
   options = {
     home.programs.hyprlock.enable = mkEnableOption "Enables hyprlock";
@@ -17,7 +17,7 @@ in {
   config = mkIf cfg.enable {
     programs.hyprlock = {
       enable = true;
-      package = hyprlockPkg;
+      package = hyprlockFlake;
       settings = {
         general = {
           disable_loading_bar = true;

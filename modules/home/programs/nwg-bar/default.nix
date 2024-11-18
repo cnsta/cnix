@@ -38,7 +38,7 @@ in {
     ];
     xdg.configFile."nwg-bar/style.css".text = ''
       window {
-              background-color: rgba (0, 0, 0, 0.6)
+              background-color: rgba (60, 56, 54, 0.6)
       }
 
       /* Outer bar container, takes all the window width/height */
@@ -48,7 +48,7 @@ in {
 
       /* Inner bar container, surrounds buttons */
       #inner-box {
-      	background-color: rgba (0, 0, 0, 0.85);
+      	background-color: rgba (28, 28, 28, 0.85);
       	border-radius: 0px;
       	border-style: none;
       	border-width: 1px;
@@ -70,7 +70,7 @@ in {
       }
 
       button:hover {
-      	background-color: rgba (255, 255, 255, 0.1)
+      	background-color: rgba (255, 255, 255, 0.35)
       }
     '';
   };

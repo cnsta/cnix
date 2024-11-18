@@ -18,9 +18,8 @@ in {
     security.pam.services.hyprlock.text = "auth include login";
     programs.hyprland = {
       enable = true;
-      xwayland.enable = true;
-      package = pkgs.hyprland;
-      portalPackage = pkgs.xdg-desktop-portal-hyprland;
+      package = inputs.hyprland.packages.${pkgs.system}.default;
+      portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     };
     environment = {
       variables.NIXOS_OZONE_WL = "1";

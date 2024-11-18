@@ -21,7 +21,7 @@ in {
         # === TUIRUN SETTINGS ===
         "size 600 300, initialTitle:^(tuirun)$"
         "center, initialTitle:^(tuirun)$"
-        "workspace special:tuirun, initialTitle:^(tuirun)$"
+        # "workspace special:tuirun, initialTitle:^(tuirun)$"
         "noborder, initialTitle:^(tuirun)$"
         "float, initialTitle:^(tuirun)$"
 

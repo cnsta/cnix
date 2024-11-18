@@ -5,4 +5,5 @@ let
 in {
   "cnstssh.age".publicKeys = [cnst cnix];
   "cnixssh.age".publicKeys = [cnst cnix];
+  "lock.jpg".publicKeys = [cnst cnix];
 }
