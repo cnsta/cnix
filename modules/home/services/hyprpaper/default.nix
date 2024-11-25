@@ -46,7 +46,7 @@ in {
           # adampad
           "eDP-1,~/media/images/l_ash08_big.jpg"
           # toothpc
-          "DVI-D-1,~/media/images/dunes.png"
+          "DVI-D-1,~/media/images/l_ash08_big.jpg"
           # "DP-1,/share/wallpapers/cat_pacman.png"
         ];
       };
