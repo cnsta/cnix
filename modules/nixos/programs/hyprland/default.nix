@@ -16,7 +16,7 @@ in {
   };
   config = mkIf cfg.enable {
     security.pam.services.hyprlock.text = "auth include login";
-    programs.hyprland = {
+    programs.hyprland.withUWSM = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.default;
       portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
