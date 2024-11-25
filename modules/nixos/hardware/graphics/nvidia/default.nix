@@ -20,6 +20,7 @@ in {
   options = {
     nixos.hardware.graphics.nvidia = {
       enable = mkEnableOption "Enables NVidia graphics";
+      open.enable = mkEnableOption "Enables open version of drivers";
       package = mkOption {
         type = types.enum ["stable" "beta" "production" "latest"];
         default = "stable";
@@ -64,7 +65,7 @@ in {
           enable = false;
           finegrained = false;
         };
-        open = true;
+        open = cfg.open.enable;
         nvidiaSettings = true;
       };
     };
