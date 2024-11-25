@@ -37,6 +37,10 @@ in {
         "center, class:^(nwg-look)$"
         "float, class:^(nwg-look)$"
 
+        # === OCULANTE SETTINGS ===
+        "center, class:^(oculante)$"
+        "float, class:^(oculante)$"
+
         # === PAVUCONTROL SETTINGS ===
         "move 100%-w-20 40, class:^(pavucontrol)$"
         "size 741 585, class:^(pavucontrol)$"
@@ -54,7 +58,6 @@ in {
         "float, class:^(polkit-gnome-authentication-agent-1)$"
         "float, class:^(org.gnome.Calculator)$"
         "float, class:^(Lxappearance)$"
-        "float, class:^(imv)$"
         "float, class:^(com.github.hluk.copyq)$"
         "float, class:^(blueman-manager)$"
         "float, class:^(floatranger)$"

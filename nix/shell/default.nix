@@ -21,6 +21,7 @@
       gnumake # GNU Make
       pkg-config # Manages library paths during compilation
       perl # Scripting language, sometimes needed during builds
+      gtk-layer-shell
 
       # Version control
       git # Version control system
