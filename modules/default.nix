@@ -23,7 +23,7 @@
         ./home/programs/rofi
         ./home/programs/ssh
         ./home/programs/tuirun
-        ./home/programs/vscode
+        ./home/programs/vscodium
         ./home/programs/waybar
         ./home/programs/wezterm
         ./home/programs/yazi
