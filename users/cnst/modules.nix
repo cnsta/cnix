@@ -83,8 +83,8 @@
       tuirun = {
         enable = true;
       };
-      vscode = {
-        enable = false;
+      vscodium = {
+        enable = true;
       };
       waybar = {
         enable = true;
