@@ -26,9 +26,9 @@
         };
         nvidia = {
           enable = true;
-          package = "beta";
+          package = "latest";
           open = {
-            enable = false;
+            enable = true;
           };
         };
       };
