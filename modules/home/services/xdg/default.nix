@@ -43,18 +43,18 @@ in {
           "application/x-extension-xht" = browser;
           "application/xhtml+xml" = browser;
           "application/json" = browser;
-          "application/pdf" = "org.pwmt.zathura.desktop";
+          "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
           "inode/directory" = "thunar.desktop";
 
-          "image/apng" = "feh.desktop";
-          "image/avif" = "feh.desktop";
-          "image/bmp" = "feh.desktop";
-          "image/gif" = "feh.desktop";
-          "image/jpeg" = "feh.desktop";
-          "image/png" = "feh.desktop";
-          "image/svg+xml" = "feh.desktop";
-          "image/tiff" = "feh.desktop";
-          "image/webp" = "feh.desktop";
+          "image/apng" = "oculante.desktop";
+          "image/avif" = "oculante.desktop";
+          "image/bmp" = "oculante.desktop";
+          "image/gif" = "oculante.desktop";
+          "image/jpeg" = "oculante.desktop";
+          "image/png" = "oculante.desktop";
+          "image/svg+xml" = "oculante.desktop";
+          "image/tiff" = "oculante.desktop";
+          "image/webp" = "oculante.desktop";
 
           "video/H264" = ["mpv.desktop" "vlc.desktop"];
           "video/x-msvideo" = ["mpv.desktop" "vlc.desktop"];

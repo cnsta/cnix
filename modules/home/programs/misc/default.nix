@@ -50,6 +50,7 @@ in {
       libnotify
       pamixer # TUI sound control
       ripgrep
+      oculante
       file
       fd
       gnused
