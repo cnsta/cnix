@@ -59,6 +59,9 @@
       neovim = {
         enable = true;
       };
+      nwg-bar = {
+        enable = true;
+      };
       rofi = {
         enable = false;
       };
