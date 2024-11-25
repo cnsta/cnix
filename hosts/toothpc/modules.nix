@@ -5,7 +5,7 @@
         extraBlacklistedModules = [];
         extraKernelParams = [];
         hardware = "nvidia";
-        variant = "latest";
+        variant = "stable";
       };
       loader = {
         default = {
@@ -26,7 +26,7 @@
         };
         nvidia = {
           enable = true;
-          package = "latest";
+          package = "beta";
           open = {
             enable = true;
           };
