@@ -26,7 +26,8 @@
         };
         nvidia = {
           enable = true;
-          package = "latest";
+          open = false;
+          package = "beta";
         };
       };
       logitech = {

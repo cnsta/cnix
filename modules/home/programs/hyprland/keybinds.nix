@@ -120,8 +120,8 @@ in {
     (mkIf (host == "toothpc") {
       wayland.windowManager.hyprland.settings = {
         "$terminal" = "foot";
-        "$browser" = "firefox";
-        "$browserinc" = "firefox --private-window";
+        "$browser" = "zen";
+        "$browserinc" = "zen --private-window";
         "$mod" = "ALT_L";
         bind = [
           # Add more host-specific binds as needed
