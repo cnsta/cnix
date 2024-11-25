@@ -40,7 +40,7 @@ in {
       };
     }
 
-    (mkIf (host == "cnix") {
+    (mkIf (host == "cnix" || host == "cnixpad") {
       programs.uwsm = {
         enable = true;
         waylandCompositors.hyprland = {
