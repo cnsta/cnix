@@ -11,13 +11,16 @@ in {
     home.programs.waybar.enable = mkEnableOption "Enables waybar";
   };
   config = mkIf cfg.enable {
-    systemd.user.services.waybar = {
-      Unit.StartLimitBurst = 30;
-    };
     programs.waybar = {
       enable = true;
       package = pkgs.waybar;
       systemd.enable = true;
+    };
+
+    systemd.user.services.waybar = {
+      Unit.After = ["graphical-session.target"];
+      Service.Slice = ["app-graphical.slice"];
+      Unit.StartLimitBurst = 30;
     };
   };
 }
