@@ -23,45 +23,53 @@ in {
     };
   };
 
-  config = mkIf cfg.enable (mkMerge [
-    {
-      services.greetd = let
-        session = {
-          command = "${lib.getExe config.programs.uwsm.package} start hyprland-uwsm.desktop";
-          user = cfg.user;
-        };
-      in {
-        enable = true;
-        settings = {
-          terminal.vt = 1;
-          default_session = session;
-          initial_session = session;
-        };
+  config = mkIf cfg.enable {
+    services.greetd = let
+      session = {
+        command = "${lib.getExe config.programs.uwsm.package} start hyprland-uwsm.desktop";
+        user = cfg.user;
       };
-    }
+    in {
+      enable = true;
+      settings = {
+        terminal.vt = 1;
+        default_session = session;
+        initial_session = session;
+      };
+    };
 
-    (mkIf (host == "cnix" || host == "cnixpad") {
-      programs.uwsm = {
-        enable = true;
-        waylandCompositors.hyprland = {
-          binPath = "/etc/profiles/per-user/cnst/bin/Hyprland";
-          prettyName = "Hyprland";
-          comment = "Hyprland managed by UWSM";
-        };
+    programs.uwsm = {
+      enable = true;
+      waylandCompositors.hyprland = {
+        binPath = "/run/current-system/sw/bin/Hyprland";
+        prettyName = "Hyprland";
+        comment = "Hyprland managed by UWSM";
       };
-    })
+    };
 
-    (mkIf (host == "toothpc") {
-      programs.uwsm = {
-        enable = true;
-        waylandCompositors.hyprland = {
-          binPath = "/etc/profiles/per-user/toothpick/bin/Hyprland";
-          prettyName = "Hyprland";
-          comment = "Hyprland managed by UWSM";
-        };
-      };
-    })
-    # Apply GnomeKeyring PAM Service based on user configuration
-    # security.pam.services.greetd.enableGnomeKeyring = cfg.gnomeKeyring.enable;
-  ]);
+    #   (mkIf (host == "cnix" || host == "cnixpad") {
+    #     programs.uwsm = {
+    #       enable = true;
+    #       waylandCompositors.hyprland = {
+    #         binPath = "/etc/profiles/per-user/cnst/bin/Hyprland";
+    #         prettyName = "Hyprland";
+    #         comment = "Hyprland managed by UWSM";
+    #       };
+    #     };
+    #   })
+
+    #   (mkIf (host == "toothpc") {
+    #     programs.uwsm = {
+    #       enable = true;
+    #       waylandCompositors.hyprland = {
+    #         binPath = "/etc/profiles/per-user/toothpick/bin/Hyprland";
+    #         prettyName = "Hyprland";
+    #         comment = "Hyprland managed by UWSM";
+    #       };
+    #     };
+    #   })
+    #   # Apply GnomeKeyring PAM Service based on user configuration
+    #   # security.pam.services.greetd.enableGnomeKeyring = cfg.gnomeKeyring.enable;
+    # ]);
+  };
 }
