@@ -93,7 +93,7 @@ in {
         vulkanPackages_latest.spirv-cross
         wayland-protocols_git
         wayland_git
-        scx.lavd
+        scx.rustscheds
         rocmPackages.rocm-smi
       ];
     })
