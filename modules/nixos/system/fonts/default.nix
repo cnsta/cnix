@@ -27,23 +27,19 @@ in {
       font-awesome
       recursive
       input-fonts
-      (pkgs.nerdfonts.override {
-        fonts = [
-          "JetBrainsMono"
-          "FiraCode"
-          "FiraMono"
-          "Iosevka"
-          "3270"
-          "DroidSansMono"
-          "SourceCodePro"
-          "UbuntuMono"
-          "Overpass"
-          "Monoid"
-          "Mononoki"
-          "Hack"
-          "IBMPlexMono"
-        ];
-      })
+      source-code-pro
+      nerd-fonts.jetbrains-mono
+      ibm-plex
+      nerd-fonts.fira-code
+      nerd-fonts.fira-mono
+      nerd-fonts.iosevka
+      nerd-fonts._3270
+      nerd-fonts.droid-sans-mono
+      nerd-fonts.ubuntu-mono
+      nerd-fonts.overpass
+      nerd-fonts.monoid
+      nerd-fonts.mononoki
+      nerd-fonts.hack
     ];
   };
 }
