@@ -16,10 +16,8 @@ in {
     {
       wayland.windowManager.hyprland.settings = {
         exec-once = [
-          "hyprlock"
-          "systemctl --user start polkit-gnome-authentication-agent-1"
           "uwsm finalize"
-          "uwsm app -- keepassxc'"
+          "hyprlock"
         ];
       };
     }
@@ -28,6 +26,7 @@ in {
       wayland.windowManager.hyprland.settings.exec-once = [
         "uwsm app -- mullvad-vpn"
         "uwsm app -- blueman-applet"
+        "uwsm app -- keepassxc"
         "uwsm app -- pamixer --set-volume 50"
         "uwsm app -- solaar -w hide"
       ];
@@ -36,6 +35,7 @@ in {
     (mkIf (host == "cnixpad") {
       wayland.windowManager.hyprland.settings.exec-once = [
         "uwsm app -- blueman-applet"
+        "uwsm app -- keepassxc"
         "uwsm app -- pamixer --set-volume 50"
       ];
     })
@@ -43,6 +43,7 @@ in {
     (mkIf (host == "toothpc") {
       wayland.windowManager.hyprland.settings.exec-once = [
         "uwsm app -- mullvad-vpn"
+        "uwsm app -- keepassxc"
         "uwsm app -- solaar -w hide"
       ];
     })
