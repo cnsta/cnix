@@ -19,6 +19,7 @@
         ./home/programs/misc
         ./home/programs/mpv
         ./home/programs/neovim
+        ./home/programs/nvf
         ./home/programs/nwg-bar
         ./home/programs/rofi
         ./home/programs/ssh
