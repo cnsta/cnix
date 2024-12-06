@@ -16,6 +16,7 @@
     "cnst@cnix" =
       sharedImports
       ++ [
+        inputs.nvf.homeManagerModules.default
         ./cnst
       ];
     "cnst@cnixpad" =

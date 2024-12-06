@@ -87,6 +87,8 @@
     # Miscellaneous
     helix-flake.url = "github:helix-editor/helix";
 
+    nvf.url = "github:notashelf/nvf";
+
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs = {
