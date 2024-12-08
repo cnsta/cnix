@@ -13,7 +13,6 @@
         ./home/programs/helix
         ./home/programs/hyprland
         ./home/programs/hyprlock
-        ./home/programs/ironbar
         ./home/programs/jujutsu
         ./home/programs/kitty
         ./home/programs/misc
@@ -24,11 +23,12 @@
         ./home/programs/rofi
         ./home/programs/ssh
         ./home/programs/tuirun
-        ./home/programs/vscodium
+        ./home/programs/vscode
         ./home/programs/waybar
         ./home/programs/wezterm
         ./home/programs/yazi
         ./home/programs/zathura
+        ./home/programs/zed-editor
         ./home/programs/zellij
         ./home/programs/zen
         ./home/programs/zsh

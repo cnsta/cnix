@@ -57,6 +57,9 @@
         enable = true;
       };
       neovim = {
+        enable = false;
+      };
+      nvf = {
         enable = true;
       };
       nwg-bar = {

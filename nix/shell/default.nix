@@ -21,7 +21,7 @@
       gnumake # GNU Make
       pkg-config # Manages library paths during compilation
       perl # Scripting language, sometimes needed during builds
-      gtk-layer-shell
+      gtk4-layer-shell
 
       # Version control
       git # Version control system
@@ -40,6 +40,7 @@
       wayland # Wayland client library
       wayland-protocols # Wayland protocols for Wayland applications
       gtk3
+      gtk4
 
       # Cryptography
       openssl # TLS/SSL library for networking and encryption

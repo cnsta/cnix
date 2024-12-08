@@ -8,6 +8,7 @@
   sharedImports = [
     # ./etc
     "${self}/scripts"
+    inputs.nvf.homeManagerModules.default
     self.nixosModules.home
     self.nixosModules.options
   ];
@@ -16,7 +17,6 @@
     "cnst@cnix" =
       sharedImports
       ++ [
-        inputs.nvf.homeManagerModules.default
         ./cnst
       ];
     "cnst@cnixpad" =

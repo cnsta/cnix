@@ -40,7 +40,6 @@ in {
       usbimager # write bootable usb images!
       slurp # select region for screenshot
       # misc.tui
-      ranger
       xcur2png
       cmatrix
       calcurse # calendar

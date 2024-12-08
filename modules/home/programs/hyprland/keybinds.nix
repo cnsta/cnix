@@ -26,7 +26,7 @@ in {
         "$fileManager" = "thunar";
         "$menu" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
         "$menuw" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
-        "$yazi" = "alacritty -e yazi";
+        "$yazi" = "foot -e yazi";
         "$tuirun" = "tuirun-toggle.sh";
 
         bind = [
