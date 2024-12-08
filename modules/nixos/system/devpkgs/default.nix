@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: let
   inherit (lib) mkIf mkOption types;
@@ -24,13 +25,12 @@ in {
       rust-analyzer
       lua-language-server
       nixd
+      nil
       php
       # php84Packages.php-cs-fixer
       # phpactor
       python312Packages.python-lsp-server
       bash-language-server
-      nil
-      nodePackages.vscode-langservers-extracted
       clang-tools
       marksman
       pyright

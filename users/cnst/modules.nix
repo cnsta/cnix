@@ -53,9 +53,6 @@
       hyprlock = {
         enable = true;
       };
-      ironbar = {
-        enable = false;
-      };
       jujutsu = {
         enable = false;
       };
@@ -86,7 +83,7 @@
       tuirun = {
         enable = true;
       };
-      vscodium = {
+      vscode = {
         enable = true;
       };
       waybar = {
@@ -96,9 +93,12 @@
         enable = false;
       };
       yazi = {
-        enable = false;
+        enable = true;
       };
       zathura = {
+        enable = true;
+      };
+      zed-editor = {
         enable = true;
       };
       zellij = {
