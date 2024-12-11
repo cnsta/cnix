@@ -38,6 +38,9 @@
       eza = {
         enable = true;
       };
+      floorp = {
+        enable = true;
+      };
       firefox = {
         enable = true;
       };

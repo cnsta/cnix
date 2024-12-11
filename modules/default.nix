@@ -8,6 +8,7 @@
         ./home/programs/chromium
         ./home/programs/discord
         ./home/programs/eza
+        ./home/programs/floorp
         ./home/programs/firefox
         ./home/programs/foot
         ./home/programs/helix
