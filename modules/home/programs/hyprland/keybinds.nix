@@ -96,8 +96,8 @@ in {
     (mkIf (host == "cnix") {
       wayland.windowManager.hyprland.settings = {
         "$terminal" = "alacritty";
-        "$browser" = "zen";
-        "$browserinc" = "zen --private-window";
+        "$browser" = "floorp";
+        "$browserinc" = "floorp --private-window";
         "$mod" = "SUPER";
         bind = [
           # Add more host-specific binds as needed
