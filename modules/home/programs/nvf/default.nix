@@ -32,7 +32,7 @@ in {
             logFile = "/tmp/nvim.log";
           };
           lsp = {
-            formatOnSave = false;
+            formatOnSave = true;
             lspkind.enable = false;
             lightbulb.enable = false;
             lspsaga.enable = false;
@@ -116,7 +116,9 @@ in {
           statusline = {
             lualine = {
               enable = true;
-              theme = "gruvbox";
+              setupOpts = {
+                options.theme = "gruvbox-material";
+              };
             };
           };
 
@@ -126,11 +128,13 @@ in {
           # vim.g.nvim_ghost_python_executable = 'python'
           # '';
 
-          theme = {
-            enable = true;
-            name = "gruvbox";
-            style = "dark";
-            transparent = false;
+          theme.enable = false;
+
+          extraPlugins = with pkgs.vimPlugins; {
+            gruvbox-material = {
+              package = gruvbox-material;
+              setup = "vim.cmd.colorscheme 'gruvbox-material'";
+            };
           };
 
           autopairs.nvim-autopairs.enable = true;
@@ -218,7 +222,7 @@ in {
 
           ui = {
             borders.enable = true;
-            noice.enable = true;
+            noice.enable = false;
             colorizer.enable = true;
             modes-nvim.enable = false; # the theme looks terrible with catppuccin
             illuminate.enable = true;

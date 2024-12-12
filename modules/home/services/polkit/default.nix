@@ -16,8 +16,8 @@ in {
 
       Install = {
         WantedBy = ["graphical-session.target"];
-        Wants = ["graphical-session.target"];
-        After = ["graphical-session.target"];
+        # Wants = ["graphical-session.target"];
+        # After = ["graphical-session.target"];
       };
 
       Service = {
