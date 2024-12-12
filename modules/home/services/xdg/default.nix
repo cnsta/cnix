@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption elem;
+  inherit (lib) mkIf mkEnableOption mkForce elem;
   browser =
     if elem osConfig.networking.hostName ["cnix" "cnixpad" "toothpc"]
     then "zen.desktop"
@@ -30,7 +30,7 @@ in {
       };
       mimeApps = {
         enable = true;
-        defaultApplications = {
+        defaultApplications = mkForce {
           "text/html" = browser;
           "text/xml" = browser;
           "x-scheme-handler/http" = browser;
