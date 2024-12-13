@@ -95,6 +95,7 @@ in {
         wayland_git
         scx.rustscheds
         rocmPackages.rocm-smi
+        libGL
       ];
     })
   ]);

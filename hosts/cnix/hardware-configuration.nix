@@ -13,7 +13,7 @@
       kernelModules = [];
       luks.devices."enc".device = "/dev/disk/by-uuid/1bda09f1-5b2c-4040-ab71-cee54a6df910";
     };
-    kernelModules = ["kvm-amd"];
+    kernelModules = ["amdgpu"];
     extraModulePackages = [];
     supportedFilesystems = ["btrfs"];
   };

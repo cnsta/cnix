@@ -24,6 +24,7 @@ in {
         pkgs.nodejs_22
         pkgs.tree
         pkgs.gnome-disk-utility
+        pkgs.networkmanagerapplet
       ]
       (mkIf cfg.desktop.enable [
         pkgs.protonup

@@ -32,6 +32,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       egl-wayland
+      libGL
     ];
     hardware = {
       graphics = {

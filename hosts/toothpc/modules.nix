@@ -5,7 +5,7 @@
         extraBlacklistedModules = [];
         extraKernelParams = [];
         hardware = "nvidia";
-        variant = "stable";
+        variant = "latest";
       };
       loader = {
         default = {
@@ -41,10 +41,6 @@
           "enp4s0" = {
             allowedTCPPorts = [22 80 443];
           };
-        };
-        nm-applet = {
-          enable = true;
-          indicator = true;
         };
       };
     };
@@ -180,6 +176,9 @@
         enable = true;
       };
       pipewire = {
+        enable = true;
+      };
+      polkit = {
         enable = true;
       };
       powerd = {
