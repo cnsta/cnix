@@ -18,9 +18,10 @@ in {
     };
 
     systemd.user.services.waybar = {
-      Unit.After = ["graphical-session.target"];
-      Service.Slice = ["app-graphical.slice"];
-      Unit.StartLimitBurst = 30;
+      Unit = {
+        StartLimitBurst = 30;
+        After = lib.mkForce "graphical-session.target";
+      };
     };
   };
 }

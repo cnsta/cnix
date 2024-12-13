@@ -116,7 +116,7 @@
     };
     services = {
       blueman-applet = {
-        enable = true;
+        enable = false;
       };
       copyq = {
         enable = false;
@@ -139,9 +139,6 @@
         enable = true;
       };
       mako = {
-        enable = true;
-      };
-      polkit = {
         enable = true;
       };
       syncthing = {

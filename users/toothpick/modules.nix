@@ -126,9 +126,6 @@
       mako = {
         enable = true;
       };
-      polkit = {
-        enable = true;
-      };
       syncthing = {
         enable = false;
       };

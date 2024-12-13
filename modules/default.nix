@@ -42,7 +42,6 @@
         ./home/services/hypridle
         ./home/services/hyprpaper
         ./home/services/mako
-        ./home/services/polkit
         ./home/services/syncthing
         ./home/services/udiskie
         ./home/services/xdg
@@ -98,6 +97,7 @@
         ./nixos/services/openssh
         ./nixos/services/pcscd
         ./nixos/services/pipewire
+        ./nixos/services/polkit
         ./nixos/services/powerd
         ./nixos/services/samba
         ./nixos/services/scx

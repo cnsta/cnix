@@ -39,10 +39,6 @@
             allowedTCPPorts = [22 80 443];
           };
         };
-        nm-applet = {
-          enable = true;
-          indicator = true;
-        };
       };
     };
     programs = {
@@ -177,6 +173,9 @@
         enable = true;
       };
       pipewire = {
+        enable = true;
+      };
+      polkit = {
         enable = true;
       };
       powerd = {
