@@ -96,8 +96,8 @@ in {
     (mkIf (host == "cnix") {
       wayland.windowManager.hyprland.settings = {
         "$terminal" = "alacritty";
-        "$browser" = "floorp";
-        "$browserinc" = "floorp --private-window";
+        "$browser" = "zen";
+        "$browserinc" = "zen --private-window";
         "$mod" = "SUPER";
         bind = [
           # Add more host-specific binds as needed
@@ -108,8 +108,8 @@ in {
     (mkIf (host == "cnixpad") {
       wayland.windowManager.hyprland.settings = {
         "$terminal" = "foot";
-        "$browser" = "floorp";
-        "$browserinc" = "floorp --private-window";
+        "$browser" = "zen";
+        "$browserinc" = "zen --private-window";
         "$mod" = "ALT_L";
         bind = [
           # Add more host-specific binds as needed
