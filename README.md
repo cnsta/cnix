@@ -10,7 +10,7 @@ prominent tools and apps:
 - [agenix](https://github.com/ryantm/agenix) **Age based encryption.**
 - [kanata](https://github.com/jtroo/kanata) **Keyboard mapping, good stuff.**
 - [waybar](https://github.com/Alexays/Waybar) **It's a wayland bar!**
-- [zen-browser](https://github.com/zen-browser/desktop) **Alpha stage, firefox
+- [zen-browser](https://github.com/zen-browser/desktop) **Beta stage, firefox
   based browser.**
 - [helix](https://github.com/helix-editor/helix) **Very quick editor, might
   switch permanently!**
