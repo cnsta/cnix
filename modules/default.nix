@@ -62,7 +62,6 @@
         ./nixos/programs/anyrun
         ./nixos/programs/beekeeper
         ./nixos/programs/blender
-        ./nixos/programs/brightnessctl
         ./nixos/programs/corectrl
         ./nixos/programs/gamemode
         ./nixos/programs/gamescope
@@ -72,7 +71,7 @@
         ./nixos/programs/inkscape
         ./nixos/programs/lutris
         ./nixos/programs/microfetch
-        ./nixos/programs/misc
+        ./nixos/programs/pkgs
         ./nixos/programs/mysql-workbench
         ./nixos/programs/nh
         ./nixos/programs/npm
@@ -105,7 +104,6 @@
         ./nixos/services/xserver
         ./nixos/services/zram
 
-        ./nixos/system/devpkgs
         ./nixos/system/fonts
         ./nixos/system/locale
         ./nixos/system/xdg

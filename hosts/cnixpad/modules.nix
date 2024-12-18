@@ -57,9 +57,6 @@
           enable = false;
         };
       };
-      brightnessctl = {
-        enable = true;
-      };
       corectrl = {
         enable = false;
       };
@@ -90,10 +87,16 @@
       microfetch = {
         enable = true;
       };
-      misc = {
+      pkgs = {
         enable = true;
         desktop = {
           enable = false;
+        };
+        laptop = {
+          enable = true;
+        };
+        dev = {
+          enable = true;
         };
       };
       mysql-workbench = {
@@ -192,9 +195,6 @@
       };
     };
     system = {
-      devpkgs = {
-        enable = true;
-      };
       fonts = {
         enable = true;
       };

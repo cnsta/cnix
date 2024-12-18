@@ -60,9 +60,6 @@
           enable = false;
         };
       };
-      brightnessctl = {
-        enable = false;
-      };
       corectrl = {
         enable = false;
       };
@@ -93,9 +90,15 @@
       microfetch = {
         enable = true;
       };
-      misc = {
+      pkgs = {
         enable = true;
         desktop = {
+          enable = true;
+        };
+        laptop = {
+          enable = false;
+        };
+        dev = {
           enable = true;
         };
       };
@@ -199,9 +202,6 @@
       };
     };
     system = {
-      devpkgs = {
-        enable = true;
-      };
       fonts = {
         enable = true;
       };
