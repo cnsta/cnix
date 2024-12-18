@@ -57,16 +57,6 @@
           language-servers = ["dprint" "typescript-language-server"];
         }
         {
-          name = "nix";
-          auto-format = true;
-          file-types = ["nix"];
-          language-servers = ["nixd"];
-          formatter = {
-            command = lib.getExe pkgs.alejandra;
-            args = ["-q"];
-          };
-        }
-        {
           name = "json";
           formatter = deno "json";
         }
@@ -79,6 +69,15 @@
           name = "markdown";
           auto-format = true;
           formatter = deno "md";
+        }
+        {
+          name = "nix";
+          auto-format = true;
+          language-servers = ["nil"];
+          formatter = {
+            command = "${pkgs.alejandra}/bin/alejandra";
+            args = ["-q"];
+          };
         }
         {
           name = "python";
@@ -96,6 +95,10 @@
         {
           name = "php";
           auto-format = true;
+          language-servers = ["phpactor"];
+          formatter = {
+            command = lib.getExe pkgs.php84Packages.php-cs-fixer;
+          };
         }
         {
           name = "css";
@@ -115,6 +118,11 @@
       ++ prettierLangs langs;
 
     language-server = {
+      phpactor = {
+        command = lib.getExe pkgs.phpactor;
+        args = ["language-server"];
+      };
+
       bash-language-server = {
         command = lib.getExe pkgs.bash-language-server;
         args = ["start"];
@@ -159,14 +167,6 @@
       dprint = {
         command = lib.getExe pkgs.dprint;
         args = ["lsp"];
-      };
-
-      nil = {
-        command = lib.getExe pkgs.nil;
-      };
-
-      nixd = {
-        command = lib.getExe pkgs.nixd;
       };
 
       pyright = {

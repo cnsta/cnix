@@ -55,6 +55,7 @@ in {
         ])
 
         (mkIf cfg.dev.enable [
+          lldb_19
           nfs-utils
           gcc
           rust-analyzer
@@ -62,14 +63,13 @@ in {
           nixd
           nil
           php
-          # php84Packages.php-cs-fixer
+          vscode-langservers-extracted
           # phpactor
           python312Packages.python-lsp-server
           bash-language-server
           clang-tools
           marksman
           pyright
-          # nodePackages_latest.intelephense
 
           # Formatters
           alejandra
@@ -77,6 +77,7 @@ in {
           nodePackages_latest.fixjson
           nodePackages_latest.sql-formatter
           prettierd
+          # php84Packages.php-cs-fixer
           shfmt
           luaformatter
           black
