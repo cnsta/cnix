@@ -12,13 +12,7 @@
     ./substituters
   ];
 
-  environment = {
-    systemPackages = with pkgs; [
-      git
-      stow
-    ];
-    localBinInPath = true;
-  };
+  environment.localBinInPath = true;
 
   console.useXkbConfig = true;
 

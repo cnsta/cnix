@@ -30,8 +30,9 @@ in {
         name = "Orchis-Grey-Dark-Compact";
       };
       iconTheme = {
-        package = pkgs.adwaita-icon-theme;
-        name = "Adwaita";
+        # package = pkgs.adwaita-icon-theme;
+        package = pkgs.papirus-icon-theme;
+        name = "Papirus-Dark";
       };
       font = {
         name = "Input Sans Narrow Light";
