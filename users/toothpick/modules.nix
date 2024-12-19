@@ -74,7 +74,7 @@
       tuirun = {
         enable = true;
       };
-      vscodium = {
+      vscode = {
         enable = true;
       };
       waybar = {
@@ -104,7 +104,7 @@
         enable = false;
       };
       copyq = {
-        enable = true;
+        enable = false;
       };
       dconf = {
         settings = {
