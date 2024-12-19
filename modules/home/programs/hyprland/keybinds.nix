@@ -33,7 +33,7 @@ in {
           "$mod, L, exec, ${runOnce "hyprlock"}"
           "$mod SHIFT, B, exec, pkill -SIGUSR2 waybar"
           "$mod, A, exec, pkill -SIGUSR1 waybar"
-          "$mod, T, exec, uwsm app -T"
+          "$mod, T, exec, uwsm app $terminal"
           "$mod, W, exec, $browser"
           "$mod, K, exec, keepassxc"
           "$mod SHIFT, W, exec, $browserinc"
