@@ -14,7 +14,7 @@
       filezilla
     ];
     sessionVariables = {
-      BROWSER = "zen";
+      BROWSER = "firefox";
       EDITOR = "nvim";
       TERM = "xterm-256color";
 
