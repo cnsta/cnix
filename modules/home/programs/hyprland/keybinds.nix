@@ -24,26 +24,24 @@ in {
       wayland.windowManager.hyprland.settings = {
         # Common Keybind Variables
         "$fileManager" = "thunar";
-        "$menu" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
-        "$menuw" = "pkill anyrun || anyrun | xargs hyprctl dispatch exec --";
         "$yazi" = "foot -e yazi";
-        "$tuirun" = "tuirun-toggle.sh";
+        "$tuirun" = "uwsm app -- tuirun-toggle.sh";
 
         bind = [
-          "$mod, L, exec, ${runOnce "hyprlock"}"
+          "$mod, SPACE, exec, $tuirun"
+          "$mod, R, exec, $tuirun"
+          "$mod, L, exec, ${toggle "nwg-bar"}"
           "$mod SHIFT, B, exec, pkill -SIGUSR2 waybar"
           "$mod, A, exec, pkill -SIGUSR1 waybar"
-          "$mod, T, exec, uwsm app $terminal"
+          "$mod, T, exec, uwsm app -- $terminal"
           "$mod, W, exec, $browser"
           "$mod, K, exec, keepassxc"
           "$mod SHIFT, W, exec, $browserinc"
           "$mod, Q, killactive,"
           "$mod, E, exec, uwsm app -- $fileManager"
-          "$mod, R, exec, $tuirun"
           "$mod SHIFT, E, exec, $yazi"
           "$mod, F, fullscreen,"
           "$mod SHIFT, F, togglefloating,"
-          "$mod, SPACE, exec, $tuirun"
           "$mod, P, pseudo,"
           "$mod, J, togglesplit,"
           "$mod, C, exec, hyprctl dispatch exec copyq toggle"
@@ -71,17 +69,20 @@ in {
           "$mod SHIFT, 8, movetoworkspace, 8"
           "$mod SHIFT, 9, movetoworkspace, 9"
           "$mod SHIFT, 0, movetoworkspace, 10"
-          ",XF86AudioLowerVolume, exec, pamixer -d 5"
-          ",XF86AudioRaiseVolume, exec, pamixer -i 5"
-          ",XF86AudioMute, exec, pamixer -t"
-          ",XF86AudioMicMute, exec, pactl -- set-source-mute 0 toggle"
+
+          ",XF86AudioLowerVolume, exec, volume-control.sh --dec"
+          ",XF86AudioRaiseVolume, exec, volume-control.sh --inc"
+          ",XF86AudioMute, exec, volume-control.sh --toggle"
+          ",XF86AudioMicMute, exec, volume-control.sh --toggle-mic"
+
           ",XF86MonBrightnessDown, exec, brightnessctl s 5%-"
           ",XF86MonBrightnessUp, exec, brightnessctl s +5%"
           "$mod, XF86MonBrightnessUp, exec, hyprctl dispatch dpms on"
           "$mod, XF86MonBrightnessDown, exec, hyprctl dispatch dpms off"
-          ",Insert,exec,${lib.getExe pkgs.grimblast} --notify --freeze copysave area"
-          "SHIFT,Insert,exec,${lib.getExe pkgs.grimblast} --notify --freeze copysave output"
-          "ALT,Insert,exec,${lib.getExe pkgs.grimblast} --freeze save area - | ${lib.getExe pkgs.tesseract} - - | wl-copy && ${lib.getExe pkgs.libnotify}/bin/notify-send -t 3000 'OCR result copied to buffer'"
+
+          ",Insert, exec, ${runOnce "grimblast"} --notify --freeze copysave area"
+          "SHIFT, Insert, exec, ${runOnce "grimblast"} --notify --freeze copysave output"
+          "ALT, Insert, exec, ${runOnce "grimblast"} --freeze save area - | ${runOnce "tesseract"} - - | wl-copy && ${runOnce "notify-send"} -t 3000 'OCR result copied to buffer'"
           "$mod, S, togglespecialworkspace, magic"
           "$mod SHIFT, S, movetoworkspace, special:magic"
         ];

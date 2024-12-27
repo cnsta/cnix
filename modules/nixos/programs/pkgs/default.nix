@@ -41,6 +41,9 @@ in {
           tree
           gnome-disk-utility
           networkmanagerapplet
+          progress
+          wf-recorder
+          inotify-tools
         ]
 
         (mkIf cfg.desktop.enable [

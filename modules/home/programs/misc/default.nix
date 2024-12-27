@@ -39,6 +39,8 @@ in {
       qbittorrent
       usbimager # write bootable usb images!
       slurp # select region for screenshot
+      grimblast
+      tesseract
       # misc.tui
       xcur2png
       cmatrix

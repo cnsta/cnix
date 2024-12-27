@@ -1,10 +1,10 @@
-#!/bin/sh
+MAKOCTL="/etc/profiles/per-user/$USER/bin/makoctl"
+GREP="/run/current-system/sw/bin/grep"
 
-COUNT=$(makoctl list | grep -c "id")
-ENABLED=󰂚
-DISABLED=󱏧
-if [ "$COUNT" != 0 ]; then DISABLED="󱅫"; fi
-if [ "$(
-  makoctl mode | grep -q "default"
-  echo $?
-)" -eq 0 ]; then echo $ENABLED; else echo $DISABLED; fi
+if "$MAKOCTL" mode | "$GREP" -q "default"; then
+  # Default mode
+  echo "󰂚"
+else
+  # Do-not-disturb mode
+  echo "󱏧"
+fi

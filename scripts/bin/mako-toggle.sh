@@ -1,8 +1,8 @@
-#!/bin/sh
+MAKOCTL="/etc/profiles/per-user/$USER/bin/makoctl"
+GREP="/run/current-system/sw/bin/grep"
 
-# Toggle Mako mode between "do-not-disturb" and "default"
-if makoctl mode | grep -q "default"; then
-    makoctl set-mode do-not-disturb
+if "$MAKOCTL" mode | "$GREP" -q "default"; then
+  "$MAKOCTL" set-mode do-not-disturb
 else
-    makoctl set-mode default
+  "$MAKOCTL" set-mode default
 fi
