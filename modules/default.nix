@@ -2,6 +2,7 @@
   flake.nixosModules = {
     home = {
       imports = [
+        ./home/programs/aerc
         ./home/programs/alacritty
         ./home/programs/anyrun
         ./home/programs/bash
@@ -42,6 +43,7 @@
         ./home/services/hypridle
         ./home/services/hyprpaper
         ./home/services/mako
+        ./home/services/protonmail-bridge
         ./home/services/syncthing
         ./home/services/udiskie
         ./home/services/xdg
