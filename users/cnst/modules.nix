@@ -20,6 +20,10 @@
   ];
   home = {
     programs = {
+      aerc = {
+        enable = false;
+      };
+
       alacritty = {
         enable = true;
       };
@@ -139,6 +143,9 @@
         enable = true;
       };
       mako = {
+        enable = true;
+      };
+      protonmail-bridge = {
         enable = true;
       };
       syncthing = {

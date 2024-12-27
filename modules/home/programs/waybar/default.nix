@@ -54,7 +54,7 @@ in {
             };
             disable-scroll = true;
             rotate = 0;
-            all-outputs = true;
+            all-outputs = false;
             active-only = false;
             on-click = "activate";
             persistent-workspaces = {
@@ -143,7 +143,7 @@ in {
           };
 
           clock = {
-            format = "<span foreground='#928374'></span> {:%a, %d %b  <span foreground='#928374'></span> %H:%M}";
+            format = "<span foreground='#928374'></span> {:%a, %d %b <span foreground='#928374'></span> %H:%M}";
             rotate = 0;
             on-click = "calcurse-toggle.sh";
             on-click-right = "calsync.sh";
@@ -200,12 +200,12 @@ in {
           };
 
           pulseaudio = {
-            format = "<span foreground='#928374'>{icon}</span> {volume}%  {format_source}";
+            format = "<span foreground='#928374'>{icon}</span> {volume}% {format_source}";
             on-scroll-up = "volume-control.sh --inc";
             on-scroll-down = "volume-control.sh --dec";
-            format-bluetooth = "<span foreground='#928374'>{icon}</span> {volume}%  {format_source}";
-            format-bluetooth-muted = "<span foreground='#928374'> {icon}</span>  {format_source}";
-            format-muted = "<span foreground='#928374'></span>  {format_source}";
+            format-bluetooth = "<span foreground='#928374'>{icon}</span> {volume}% {format_source}";
+            format-bluetooth-muted = "<span foreground='#928374'> {icon}</span> {format_source}";
+            format-muted = "<span foreground='#928374'></span> {format_source}";
             format-source = "<span foreground='#928374'></span> {volume}%";
             format-source-muted = "<span foreground='#928374'></span>";
             format-icons = {
