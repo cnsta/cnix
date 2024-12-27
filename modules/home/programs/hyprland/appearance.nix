@@ -13,14 +13,13 @@ in {
     wayland.windowManager.hyprland.settings = {
       general = {
         gaps_in = 2;
-        gaps_out = 4;
+        gaps_out = "4, 4, 4, 4";
         border_size = 3;
         #col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
         #col.inactive_border = rgba(595959aa)
         "col.active_border" = "rgb(4c7a5d)"; # rgba(b16286ee) 45deg
         "col.inactive_border" = "rgb(504945)";
         layout = "dwindle";
-        allow_tearing = false;
         resize_on_border = true;
       };
       decoration = {
@@ -32,13 +31,13 @@ in {
           noise = 0.01;
           vibrancy = 0.15;
           vibrancy_darkness = 0.5;
-          passes = 2;
-          size = 7;
+          passes = 1;
+          size = 3;
           popups = true;
           popups_ignorealpha = 0.2;
         };
         shadow = {
-          enabled = true;
+          enabled = false;
           color = "rgba(00000025)";
           ignore_window = true;
           offset = "0 5";

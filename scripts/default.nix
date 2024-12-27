@@ -59,6 +59,35 @@ in {
           text = readFile ./bin/extract.sh;
         });
       };
+      # WAYBAR
+      ".local/bin/waybar-systemd.sh" = {
+        source = getExe (pkgs.writeShellApplication {
+          name = "waybar-systemd";
+          runtimeInputs = with pkgs; [hyprland];
+          text = readFile ./bin/waybar-systemd.sh;
+        });
+      };
+      ".local/bin/waybar-progress.sh" = {
+        source = getExe (pkgs.writeShellApplication {
+          name = "waybar-progress";
+          runtimeInputs = with pkgs; [hyprland];
+          text = readFile ./bin/waybar-progress.sh;
+        });
+      };
+      ".local/bin/mako.sh" = {
+        source = getExe (pkgs.writeShellApplication {
+          name = "mako";
+          runtimeInputs = with pkgs; [hyprland];
+          text = readFile ./bin/mako.sh;
+        });
+      };
+      ".local/bin/mako-toggle.sh" = {
+        source = getExe (pkgs.writeShellApplication {
+          name = "mako-toggle";
+          runtimeInputs = with pkgs; [hyprland];
+          text = readFile ./bin/mako-toggle.sh;
+        });
+      };
     };
   };
 }

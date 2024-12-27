@@ -63,13 +63,14 @@ in {
         };
 
         misc = {
-          vrr = 0;
           mouse_move_enables_dpms = 1;
           key_press_enables_dpms = 0;
           force_default_wallpaper = 0;
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
           disable_autoreload = true;
+          disable_xdg_env_checks = true;
+          layers_hog_keyboard_focus = false;
         };
 
         xwayland = {
@@ -77,6 +78,40 @@ in {
         };
       };
     }
+
+    (mkIf (host == "cnix") {
+      wayland.windowManager.hyprland.settings = {
+        render = {
+          explicit_sync = 2;
+          explicit_sync_kms = 2;
+          direct_scanout = false;
+        };
+        cursor = {
+          no_hardware_cursors = 2;
+        };
+        general = {
+          allow_tearing = false;
+        };
+        misc = {
+          vrr = 0;
+        };
+      };
+    })
+
+    (mkIf (host == "cnixpad") {
+      wayland.windowManager.hyprland.settings = {
+        input = {
+          kb_options = "ctrl:swapcaps";
+        };
+        general = {
+          allow_tearing = false;
+        };
+        misc = {
+          vrr = 0;
+          vfr = 1;
+        };
+      };
+    })
 
     (mkIf (host == "toothpc") {
       wayland.windowManager.hyprland.settings = {
@@ -88,26 +123,11 @@ in {
         cursor = {
           no_hardware_cursors = true;
         };
-      };
-    })
-
-    (mkIf (host != "toothpc") {
-      wayland.windowManager.hyprland.settings = {
-        render = {
-          explicit_sync = 2;
-          explicit_sync_kms = 2;
-          direct_scanout = false;
+        general = {
+          allow_tearing = false;
         };
-        cursor = {
-          no_hardware_cursors = 2;
-        };
-      };
-    })
-
-    (mkIf (host == "cnixpad") {
-      wayland.windowManager.hyprland.settings = {
-        input = {
-          kb_options = "ctrl:swapcaps";
+        misc = {
+          vrr = 0;
         };
       };
     })

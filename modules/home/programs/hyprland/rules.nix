@@ -62,9 +62,22 @@ in {
         "float, class:^(blueman-manager)$"
         "float, class:^(floatranger)$"
         "float, class:^(floatnnn)$"
+        "float, class:^(uwsm app -- tuirun)$"
       ];
-
       windowrule = [];
+      layerrule = [
+        "animation fade,hyprpicker"
+        "animation fade,selection"
+
+        "noanim,waybar"
+        "ignorezero,waybar"
+        "ignorealpha 0.0,waybar"
+
+        "blur,notifications"
+        "ignorezero,notifications"
+
+        "noanim,wallpaper"
+      ];
     };
   };
 }

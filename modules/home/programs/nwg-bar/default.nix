@@ -18,22 +18,22 @@ in {
       {
         label = "Lock";
         exec = "hyprlock";
-        icon = "${config.gtk.iconTheme.package}/share/icons/Adwaita/symbolic/status/system-lock-screen-symbolic.svg";
+        icon = "${config.gtk.iconTheme.package}/share/icons/Papirus-Dark/symbolic/status/system-lock-screen-symbolic.svg";
       }
       {
         label = "Logout";
         exec = "hyprctl dispatch exit";
-        icon = "${config.gtk.iconTheme.package}/share/icons/Adwaita/symbolic/actions/system-log-out-symbolic.svg";
+        icon = "${config.gtk.iconTheme.package}/share/icons/Papirus-Dark/symbolic/actions/system-log-out-symbolic.svg";
       }
       {
         label = "Reboot";
         exec = "systemctl reboot";
-        icon = "${config.gtk.iconTheme.package}/share/icons/Adwaita/symbolic/actions/system-reboot-symbolic.svg";
+        icon = "${config.gtk.iconTheme.package}/share/icons/Papirus-Dark/symbolic/actions/system-reboot-symbolic.svg";
       }
       {
         label = "Shutdown";
         exec = "systemctl -i poweroff";
-        icon = "${config.gtk.iconTheme.package}/share/icons/Adwaita/symbolic/actions/system-shutdown-symbolic.svg";
+        icon = "${config.gtk.iconTheme.package}/share/icons/Papirus-Dark/symbolic/actions/system-shutdown-symbolic.svg";
       }
     ];
     xdg.configFile."nwg-bar/style.css".text = ''
