@@ -69,6 +69,9 @@
       gamescope = {
         enable = true;
       };
+      ghostty = {
+        enable = true;
+      };
       gimp = {
         enable = false;
       };

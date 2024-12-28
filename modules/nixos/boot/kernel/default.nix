@@ -4,31 +4,31 @@
   config,
   ...
 }: let
-  inherit (lib) mkOption mkIf;
+  inherit (lib) mkOption types;
   cfg = config.nixos.boot.kernel;
 in {
   options = {
     nixos.boot.kernel = {
       variant = mkOption {
-        type = lib.types.enum ["stable" "latest" "cachyos"];
+        type = types.enum ["stable" "latest" "cachyos"];
         default = "latest";
         description = "Kernel variant to use.";
       };
 
       hardware = mkOption {
-        type = lib.types.enum ["amd" "nvidia"];
+        type = types.enum ["amd" "nvidia"];
         default = "amd";
         description = "Hardware type (GPU) configuration.";
       };
 
       extraKernelParams = mkOption {
-        type = lib.types.listOf lib.types.str;
+        type = types.listOf lib.types.str;
         default = [];
         description = "Additional kernel parameters.";
       };
 
       extraBlacklistedModules = mkOption {
-        type = lib.types.listOf lib.types.str;
+        type = types.listOf lib.types.str;
         default = [];
         description = "Additional kernel nixos.to blacklist.";
       };
