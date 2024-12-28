@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   osConfig,
   ...
 }: let
@@ -25,10 +24,10 @@ in {
         # Common Keybind Variables
         "$fileManager" = "thunar";
         "$yazi" = "foot -e yazi";
-        "$tuirun" = "uwsm app -- tuirun-toggle.sh";
+        "$tuirun" = "tuirun-toggle.sh";
 
         bind = [
-          "$mod, SPACE, exec, $tuirun"
+          "$mod, SPACE, exec, tuirun"
           "$mod, R, exec, $tuirun"
           "$mod, L, exec, ${toggle "nwg-bar"}"
           "$mod SHIFT, B, exec, pkill -SIGUSR2 waybar"
@@ -96,7 +95,7 @@ in {
 
     (mkIf (host == "cnix") {
       wayland.windowManager.hyprland.settings = {
-        "$terminal" = "alacritty";
+        "$terminal" = "ghostty";
         "$browser" = "zen";
         "$browserinc" = "zen --private-window";
         "$mod" = "SUPER";

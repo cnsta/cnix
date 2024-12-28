@@ -76,6 +76,8 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Miscellaneous
+    ghostty.url = "github:ghostty-org/ghostty";
+
     helix-flake.url = "github:helix-editor/helix";
 
     nvf.url = "github:notashelf/nvf";

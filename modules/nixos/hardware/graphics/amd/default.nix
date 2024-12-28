@@ -50,7 +50,7 @@ in {
         vulkan-tools
         wayland
         wayland-protocols
-        rocmPackages.rocm-smi
+        # rocmPackages.rocm-smi
       ];
     })
 
@@ -88,13 +88,13 @@ in {
       };
       environment.systemPackages = with pkgs; [
         vulkanPackages_latest.vulkan-tools
-        vulkanPackages_latest.vulkan-tools-lunarg
+        # vulkanPackages_latest.vulkan-tools-lunarg
         vulkanPackages_latest.gfxreconstruct
         vulkanPackages_latest.spirv-cross
         wayland-protocols_git
         wayland_git
         scx.rustscheds
-        rocmPackages.rocm-smi
+        # rocmPackages.rocm-smi
         libGL
       ];
     })

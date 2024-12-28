@@ -38,6 +38,7 @@
       };
       discord = {
         enable = true;
+        variant = "ptb";
       };
       eza = {
         enable = true;

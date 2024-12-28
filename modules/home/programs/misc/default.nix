@@ -21,7 +21,7 @@ in {
       };
       # a monitor of resources
       btop = {
-        enable = true;
+        enable = false;
         package = pkgs.btop.override {rocmSupport = true;};
         settings = {
           color_theme = "gruvbox_material_dark";

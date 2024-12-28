@@ -23,16 +23,21 @@ in {
       ".local/bin/tuirun-toggle.sh" = {
         source = getExe (pkgs.writeShellApplication {
           name = "tuirun-toggle";
-          runtimeInputs = with pkgs; [hyprland];
+          runtimeInputs = with pkgs; [hyprland uwsm];
           text = readFile ./bin/tuirun-toggle.sh;
         });
       };
 
-      ".local/bin/tuirun-debug.sh" = {
+      ".local/bin/tuirun-debugger.sh" = {
         source = getExe (pkgs.writeShellApplication {
-          name = "tuirun-debug";
+          name = "tuirun-debugger";
           runtimeInputs = with pkgs; [hyprland];
-          text = readFile ./bin/tuirun-debug.sh;
+          text = ''
+            # Save environment to file
+            env > /tmp/tuirun-env.txt
+            # Run tuirun
+            /etc/profiles/per-user/cnst/bin/tuirun
+          '';
         });
       };
 
