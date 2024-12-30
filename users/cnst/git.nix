@@ -15,7 +15,7 @@ in {
   programs.git = {
     enable = true;
     userName = "cnst";
-    userEmail = "adamhilmersson@gmail.com";
+    userEmail = "adam@cnst.dev";
     delta = {
       enable = true;
       options.dark = true;

@@ -13,9 +13,15 @@ in {
   config = mkIf cfg.enable {
     programs.rofi = {
       enable = true;
-      package = pkgs.rofi-wayland-unwrapped;
-      configPath = "home/cnst/.config/rofi/config.rasi";
-      font = "Rec Mono Linear 11";
+      package = pkgs.rofi-wayland;
+      extraConfig = {
+        font = "Input Mono Narrow Light 12";
+        show-icons = true;
+        drun-display-format = "{name}";
+        disable-history = false;
+        sidebar-mode = false;
+      };
+      theme = ./style.rasi;
     };
   };
 }

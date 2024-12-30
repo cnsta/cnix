@@ -11,6 +11,7 @@
         ./home/programs/eza
         ./home/programs/floorp
         ./home/programs/firefox
+        ./home/programs/fish
         ./home/programs/foot
         ./home/programs/helix
         ./home/programs/hyprland
@@ -38,12 +39,14 @@
         ./home/services/blueman-applet
         ./home/services/copyq
         ./home/services/dconf
+        ./home/services/dunst
         ./home/services/gpg
         ./home/services/gtk
         ./home/services/hypridle
         ./home/services/hyprpaper
         ./home/services/mako
         ./home/services/protonmail-bridge
+        ./home/services/swaync
         ./home/services/syncthing
         ./home/services/udiskie
         ./home/services/xdg
@@ -65,6 +68,7 @@
         ./nixos/programs/beekeeper
         ./nixos/programs/blender
         ./nixos/programs/corectrl
+        ./nixos/programs/fish
         ./nixos/programs/gamemode
         ./nixos/programs/gamescope
         ./nixos/programs/ghostty
