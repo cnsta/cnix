@@ -24,11 +24,11 @@ in {
         # Common Keybind Variables
         "$fileManager" = "thunar";
         "$yazi" = "foot -e yazi";
-        "$tuirun" = "tuirun-toggle.sh";
+        "$launcher" = "tuirun";
 
         bind = [
-          "$mod, SPACE, exec, tuirun"
-          "$mod, R, exec, $tuirun"
+          "$mod, SPACE, exec, uwsm app -T $launcher"
+          "$mod, R, exec, uwsm app -T $launcher"
           "$mod, L, exec, ${toggle "nwg-bar"}"
           "$mod SHIFT, B, exec, pkill -SIGUSR2 waybar"
           "$mod, A, exec, pkill -SIGUSR1 waybar"
@@ -95,7 +95,7 @@ in {
 
     (mkIf (host == "cnix") {
       wayland.windowManager.hyprland.settings = {
-        "$terminal" = "ghostty";
+        "$terminal" = "wezterm";
         "$browser" = "zen";
         "$browserinc" = "zen --private-window";
         "$mod" = "SUPER";

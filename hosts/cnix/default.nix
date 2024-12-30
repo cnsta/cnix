@@ -8,7 +8,7 @@
 in {
   users.users.cnst = {
     isNormalUser = true;
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     extraGroups = ifTheyExist [
       "wheel"
       "networkmanager"

@@ -19,11 +19,11 @@ in {
         "float, initialTitle:^(floatcal)$"
 
         # === TUIRUN SETTINGS ===
-        "size 600 300, initialTitle:^(tuirun)$"
-        "center, initialTitle:^(tuirun)$"
+        "size 600 300, title:^(tuirun)$"
+        "center, title:^(tuirun)$"
         # "workspace special:tuirun, initialTitle:^(tuirun)$"
-        "noborder, initialTitle:^(tuirun)$"
-        "float, initialTitle:^(tuirun)$"
+        "noborder, title:^(tuirun)$"
+        "float, title:^(tuirun)$"
 
         # === KEEPASSXC SETTINGS ===
         "size 843 530, class:^(org.keepassxc.KeePassXC)$"
@@ -57,12 +57,8 @@ in {
         "float, class:^(feh)$"
         "float, class:^(polkit-gnome-authentication-agent-1)$"
         "float, class:^(org.gnome.Calculator)$"
-        "float, class:^(Lxappearance)$"
         "float, class:^(com.github.hluk.copyq)$"
         "float, class:^(blueman-manager)$"
-        "float, class:^(floatranger)$"
-        "float, class:^(floatnnn)$"
-        "float, class:^(uwsm app -- tuirun)$"
       ];
       windowrule = [];
       layerrule = [

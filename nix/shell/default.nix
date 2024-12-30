@@ -51,8 +51,8 @@
       # export LD_LIBRARY_PATH="${pkgs.openssl.out}/lib:$LD_LIBRARY_PATH"
 
       # Set SHELL to zsh if available
-      export SHELL=$(which zsh)
-      if [ "$SHELL" != "$(which zsh)" ]; then
+      export SHELL=$(which fish)
+      if [ "$SHELL" != "$(which fish)" ]; then
         exec $SHELL
       fi
     '';

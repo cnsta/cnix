@@ -79,6 +79,14 @@ in {
           text = readFile ./bin/waybar-progress.sh;
         });
       };
+      ".local/bin/dunst.sh" = {
+        source = getExe (pkgs.writeShellApplication {
+          name = "dunst";
+          runtimeInputs = with pkgs; [hyprland dbus];
+          text = readFile ./bin/dunst.sh;
+        });
+      };
+
       ".local/bin/mako.sh" = {
         source = getExe (pkgs.writeShellApplication {
           name = "mako";

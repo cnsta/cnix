@@ -17,21 +17,21 @@ in {
           name = config.programs.git.userName;
           email = config.programs.git.userEmail;
         };
-        # ui = {
-        #   diff-editor = lib.mkIf config.programs.neovim.enable [
-        #     "nvim"
-        #     "-c"
-        #     "DiffEditor $left $right $output"
-        #   ];
-        #   pager = "less -FRX";
-        # };
-        # signing = let
-        #   gitCfg = config.programs.git.extraConfig;
-        # in {
-        #   backend = "gpg";
-        #   sign-all = gitCfg.commit.gpgSign;
-        #   key = gitCfg.user.signing.key;
-        # };
+        ui = {
+          diff-editor = lib.mkIf config.programs.helix.enable [
+            "hx"
+            "-c"
+            "DiffEditor $left $right $output"
+          ];
+          pager = "less -FRX";
+        };
+        signing = let
+          gitCfg = config.programs.git.extraConfig;
+        in {
+          backend = "ssh";
+          sign-all = true;
+          key = gitCfg.signing.key;
+        };
         templates = {
           draft_commit_description = ''
             concat(

@@ -23,7 +23,6 @@
       aerc = {
         enable = false;
       };
-
       alacritty = {
         enable = true;
       };
@@ -38,7 +37,7 @@
       };
       discord = {
         enable = true;
-        variant = "ptb";
+        variant = "vesktop";
       };
       eza = {
         enable = true;
@@ -47,6 +46,9 @@
         enable = true;
       };
       firefox = {
+        enable = true;
+      };
+      fish = {
         enable = true;
       };
       foot = {
@@ -98,7 +100,7 @@
         enable = true;
       };
       wezterm = {
-        enable = false;
+        enable = true;
       };
       yazi = {
         enable = true;
@@ -116,7 +118,7 @@
         enable = true;
       };
       zsh = {
-        enable = true;
+        enable = false;
       };
     };
     services = {
@@ -131,6 +133,9 @@
           color-scheme = "prefer-dark";
         };
       };
+      dunst = {
+        enable = true;
+      };
       gpg = {
         enable = false;
       };
@@ -144,10 +149,13 @@
         enable = true;
       };
       mako = {
-        enable = true;
+        enable = false;
       };
       protonmail-bridge = {
         enable = true;
+      };
+      swaync = {
+        enable = false;
       };
       syncthing = {
         enable = true;

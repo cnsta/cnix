@@ -5,9 +5,9 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.home.programs.zsh;
   inherit (lib.meta) getExe;
   inherit (pkgs) eza bat;
+  cfg = config.home.programs.zsh;
 in {
   options = {
     home.programs.zsh.enable = mkEnableOption "Enables zsh home configuration";
@@ -88,6 +88,11 @@ in {
         ZSH_THEME_VIRTUALENV_SUFFIX=$ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX
 
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
+
+        setopt PROMPT_CR
+        setopt PROMPT_SP
+        export PROMPT_EOL_MARK=""
+
         microfetch
       '';
     };
