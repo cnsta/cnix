@@ -31,6 +31,7 @@
 
       # Scripting languages (include if needed)
       # nodejs       # JavaScript runtime environment
+      # nodePackages_latest.nodejs
     ];
 
     buildInputs = with pkgs; [

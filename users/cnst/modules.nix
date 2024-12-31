@@ -37,7 +37,7 @@
       };
       discord = {
         enable = true;
-        variant = "vesktop";
+        variant = "canary";
       };
       eza = {
         enable = true;
