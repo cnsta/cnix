@@ -136,9 +136,9 @@
     };
     services = {
       agenix = {
-        enable = true;
+        enable = false;
         cnix = {
-          enable = true;
+          enable = false;
         };
       };
       blueman = {
@@ -196,7 +196,7 @@
       scx = {
         enable = true;
         scheduler = "scx_lavd";
-        flags = "--performance --no-core-compaction";
+        flags = "--performance";
       };
       udisks = {
         enable = true;
