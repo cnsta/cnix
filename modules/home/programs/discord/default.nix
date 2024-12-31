@@ -27,7 +27,7 @@ in {
       else if variant == "ptb"
       then [pkgs.discord-ptb]
       else if variant == "canary"
-      then [pkgs.discord-canary]
+      then [(pkgs.discord-canary.override {withOpenASAR = true;})]
       else if variant == "vesktop"
       then [pkgs.vesktop]
       else throw "Unknown package variant: ${variant}";

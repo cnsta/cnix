@@ -77,6 +77,7 @@ in {
           # Formatters
           alejandra
           stylua
+          nodePackages_latest.nodejs
           nodePackages_latest.fixjson
           nodePackages_latest.sql-formatter
           prettierd
