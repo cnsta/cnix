@@ -67,6 +67,7 @@ in {
       zip
       gnutar
       p7zip
+      unrar
     ];
   };
 }
