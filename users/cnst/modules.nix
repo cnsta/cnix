@@ -85,7 +85,7 @@
         enable = true;
       };
       rofi = {
-        enable = false;
+        enable = true;
       };
       ssh = {
         enable = true;
@@ -100,7 +100,7 @@
         enable = true;
       };
       wezterm = {
-        enable = true;
+        enable = false;
       };
       yazi = {
         enable = true;
