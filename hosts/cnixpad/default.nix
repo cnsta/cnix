@@ -8,7 +8,7 @@
 in {
   users.users.cnst = {
     isNormalUser = true;
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     # openssh.authorizedKeys.keys = [];
     extraGroups = ifTheyExist [
       "wheel"

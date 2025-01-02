@@ -60,6 +60,9 @@
       corectrl = {
         enable = false;
       };
+      fish = {
+        enable = true;
+      };
       gamemode = {
         enable = false;
         optimizeGpu = {
@@ -125,7 +128,7 @@
         enable = true;
       };
       zsh = {
-        enable = true;
+        enable = false;
       };
     };
     services = {

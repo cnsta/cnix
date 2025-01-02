@@ -14,14 +14,14 @@ in {
     programs.rofi = {
       enable = true;
       package = pkgs.rofi-wayland;
+      theme = ./style.rasi;
+      font = "Input Mono Narrow Light 12";
       extraConfig = {
-        font = "Input Mono Narrow Light 12";
         show-icons = true;
         drun-display-format = "{name}";
         disable-history = false;
         sidebar-mode = false;
       };
-      theme = ./style.rasi;
     };
   };
 }
