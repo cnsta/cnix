@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./modules.nix
+    ./modules
     ./git.nix
   ];
   home = {

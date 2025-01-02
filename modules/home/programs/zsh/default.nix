@@ -24,11 +24,14 @@ in {
         cat = "${getExe bat} --style=plain";
         ls = "${getExe eza} -h --git --icons --color=auto --group-directories-first -s extension";
         ll = "${getExe eza} -l --git --icons --color=auto --group-directories-first -s extension";
-        la = "${getExe eza} -lah --tree";
+        lat = "${getExe eza} -lah --tree";
+        la = "${getExe eza} -lah";
         tree = "${getExe eza} --tree --icons=always";
         extract = "extract.sh";
-        homemodules = "$EDITOR /home/$USER/.nix-config/users/$USER/modules.nix";
-        hmod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules.nix";
+        homemodules = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/home.nix";
+        hmod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/home.nix";
+        homeoptions = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/options.nix";
+        hopt = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/options.nix";
         nixosmodules = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
         nmod = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
         nixcleanboot = "sudo nix run /home/$USER/.nix-config#cleanup-boot";

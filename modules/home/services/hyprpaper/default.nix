@@ -1,5 +1,6 @@
 {
   config,
+  osConfig,
   lib,
   pkgs,
   inputs,
@@ -24,9 +25,9 @@ in {
         splash_offset = 2.0;
 
         preload = [
-          "~/media/images/l_ash08_big.jpg"
-          "~/media/images/l_ash09_big.jpg"
-          "~/media/images/l_int06_big.jpg"
+          "~/media/images/bg_1.jpg"
+          "~/media/images/bg_2.jpg"
+          "~/media/images/bg_3.jpg"
           "~/media/images/by_housevisit_2560.jpg"
           "~/media/images/nix.png"
           "~/media/images/stacks.png"
@@ -42,12 +43,11 @@ in {
 
         wallpaper = [
           # cnix
-          "DP-3,~/media/images/l_ash08_big.jpg"
-          # adampad
-          "eDP-1,~/media/images/l_ash08_big.jpg"
+          "DP-3,${config.theme.background.desktop}"
+          # cnixpad
+          "eDP-1,${config.theme.background.desktop}"
           # toothpc
-          "DVI-D-1,~/media/images/l_ash08_big.jpg"
-          # "DP-1,/share/wallpapers/cat_pacman.png"
+          "DVI-D-1,${config.theme.background.desktop}"
         ];
       };
     };

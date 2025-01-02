@@ -9,7 +9,7 @@
 # in
 {
   imports = [
-    ./modules.nix
+    ./modules
     ./git.nix
   ];
   # ++ lib.optionals isCnixpad [./cpmodules.nix];

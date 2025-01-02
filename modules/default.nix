@@ -120,6 +120,7 @@
     options = {
       imports = [
         ./options/monitors
+        ./options/theme
       ];
     };
   };

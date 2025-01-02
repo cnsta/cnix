@@ -9,8 +9,8 @@
   cfg = config.home.programs.helix;
 in {
   imports = [
-    ./lang.nix
-    ./theme.nix
+    ./languages.nix
+    ./gruvbox.nix
   ];
 
   options = {
