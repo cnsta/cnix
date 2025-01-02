@@ -9,7 +9,6 @@
   inherit (pkgs) eza bat;
   cfg = config.home.programs.fish;
 in {
-  # imports = [./tide.nix];
   options = {
     home.programs.fish.enable = mkEnableOption "Enables fish home configuration";
   };
@@ -24,8 +23,10 @@ in {
       ];
       shellAbbrs = {
         extract = "extract.sh";
-        homemodules = "$EDITOR /home/$USER/.nix-config/users/$USER/modules.nix";
-        hmod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules.nix";
+        homemodules = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/home.nix";
+        hmod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/home.nix";
+        homeoptions = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/options.nix";
+        hopt = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/options.nix";
         nixosmodules = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
         nmod = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
         nixcleanboot = "sudo nix run /home/$USER/.nix-config#cleanup-boot";
@@ -46,7 +47,8 @@ in {
         cat = "${getExe bat} --style=plain";
         ls = "${getExe eza} -h --git --icons --color=auto --group-directories-first -s extension";
         ll = "${getExe eza} -l --git --icons --color=auto --group-directories-first -s extension";
-        la = "${getExe eza} -lah --tree";
+        lat = "${getExe eza} -lah --tree --color=auto --group-directories-first -s extension";
+        la = "${getExe eza} -lah --color=auto --group-directories-first -s extension";
         # Clear screen and scrollback
         clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
       };

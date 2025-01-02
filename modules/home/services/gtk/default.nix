@@ -20,7 +20,7 @@ in {
         name = "Adwaita";
         size = 28;
         gtk.enable = true;
-        x11.enable = true;
+        x11.enable = false;
       };
     };
     gtk = {

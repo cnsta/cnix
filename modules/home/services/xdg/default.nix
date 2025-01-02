@@ -6,7 +6,7 @@
 }: let
   inherit (lib) mkIf mkEnableOption mkForce elem;
   browser =
-    if elem osConfig.networking.hostName ["cnix" "cnixpad" "toothpc"]
+    if elem osConfig.networking.hostName ["cnix" "cnixpad"]
     then "zen.desktop"
     else "firefox.desktop";
   cfg = config.home.services.xdg;
@@ -15,6 +15,31 @@ in {
     home.services.xdg.enable = mkEnableOption "Enables XDG settings";
   };
   config = mkIf cfg.enable {
+    xresources.properties = {
+      "Xcursor.size" = config.home.pointerCursor.size;
+      "Xcursor.theme" = config.home.pointerCursor.name;
+
+      "XTerm*.foreground" = "#d5c4a1";
+      "XTerm*.background" = "#282828";
+      "XTerm*.cursorColor" = "#d5c4a1";
+      "XTerm*.color0" = "#282828";
+      "XTerm*.color1" = "#fb4934";
+      "XTerm*.color2" = "#b8bb26";
+      "XTerm*.color3" = "#fabd2f";
+      "XTerm*.color4" = "#83a598";
+      "XTerm*.color5" = "#d3869b";
+      "XTerm*.color6" = "#8ec07c";
+      "XTerm*.color7" = "#d5c4a1";
+      "XTerm*.color8" = "#665c54";
+      "XTerm*.color9" = "#fe8019";
+      "XTerm*.color10" = "#3c3836";
+      "XTerm*.color11" = "#504945";
+      "XTerm*.color12" = "#bdae93";
+      "XTerm*.color13" = "#ebdbb2";
+      "XTerm*.color14" = "#d65d0e";
+      "XTerm*.color15" = "#fbf1c7";
+    };
+
     xdg = {
       userDirs = {
         enable = true;

@@ -30,7 +30,7 @@ in {
         background = [
           {
             monitor = "";
-            path = "~/media/images/l_ash09_big.jpg";
+            path = config.theme.background.lockscreen;
           }
         ];
         input-field = [
