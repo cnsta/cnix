@@ -67,7 +67,7 @@
         enable = false;
       };
       kitty = {
-        enable = true;
+        enable = false;
       };
       misc = {
         enable = true;
@@ -150,6 +150,9 @@
       };
       mako = {
         enable = false;
+      };
+      nix-index = {
+        enable = true;
       };
       protonmail-bridge = {
         enable = true;

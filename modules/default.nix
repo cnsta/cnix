@@ -45,6 +45,7 @@
         ./home/services/hypridle
         ./home/services/hyprpaper
         ./home/services/mako
+        ./home/services/nix-index
         ./home/services/protonmail-bridge
         ./home/services/swaync
         ./home/services/syncthing
