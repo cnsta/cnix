@@ -44,6 +44,7 @@ in {
           progress
           wf-recorder
           inotify-tools
+          git-crypt
         ]
 
         (mkIf cfg.desktop.enable [
