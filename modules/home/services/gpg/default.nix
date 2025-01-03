@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
@@ -13,6 +14,13 @@ in {
     services.gpg-agent = {
       enable = true;
       enableSshSupport = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+      pinentryPackage = pkgs.pinentry-gnome3;
+    };
+    programs.gpg = {
+      enable = true;
     };
   };
 }
