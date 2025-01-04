@@ -185,7 +185,7 @@
         enable = true;
       };
       powerd = {
-        enable = true;
+        enable = false;
       };
       samba = {
         enable = false;

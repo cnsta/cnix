@@ -109,6 +109,8 @@ in {
           set -x fish_pager_color_description   yellow
           set -x fish_pager_color_prefix        'white' '--bold' '--underline'
           set -x fish_pager_color_progress      'brwhite' '--background=cyan'
+
+          microfetch
         '';
     };
   };

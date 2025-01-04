@@ -16,7 +16,7 @@ in {
     {
       wayland.windowManager.hyprland.settings = {
         exec-once = [
-          "uwsm finalize"
+          "sleep 2 && uwsm finalize"
           "hyprlock"
         ];
       };

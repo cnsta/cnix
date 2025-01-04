@@ -24,7 +24,7 @@
         enable = true;
       };
       floorp = {
-        enable = true;
+        enable = false;
       };
       firefox = {
         enable = true;

@@ -27,17 +27,17 @@ in {
         "$launcher" = "rofi -show drun";
 
         bind = [
-          "$mod, SPACE, exec, uwsm app -- $launcher"
-          "$mod, R, exec, uwsm app -- $launcher"
+          "$mod, SPACE, exec, tuirun-toggle.sh"
+          "$mod, R, exec, $launcher"
           "$mod, L, exec, ${toggle "nwg-bar"}"
           "$mod SHIFT, B, exec, pkill -SIGUSR2 waybar"
           "$mod, A, exec, pkill -SIGUSR1 waybar"
-          "$mod, T, exec, uwsm app -- $terminal"
+          "$mod, T, exec, $terminal"
           "$mod, W, exec, $browser"
           "$mod, K, exec, keepassxc"
           "$mod SHIFT, W, exec, $browserinc"
           "$mod, Q, killactive,"
-          "$mod, E, exec, uwsm app -- $fileManager"
+          "$mod, E, exec, $fileManager"
           "$mod SHIFT, E, exec, $yazi"
           "$mod, F, fullscreen,"
           "$mod SHIFT, F, togglefloating,"
