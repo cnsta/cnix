@@ -5,6 +5,28 @@
   ...
 }: let
   inherit (lib) mkIf mkOption mkEnableOption types;
+  variantMapping = {
+    stable = {
+      dir = "discord";
+      package = pkgs.discord;
+    };
+    ptb = {
+      dir = "discordptb";
+      package = pkgs.discord-ptb;
+    };
+    canary = {
+      dir = "discordcanary";
+      package = pkgs.discord-canary.override {withOpenASAR = true;};
+    };
+    vesktop = {
+      dir = "vesktop";
+      package = pkgs.vesktop;
+    };
+  };
+  getVariantConfig = variant:
+    if builtins.hasAttr variant variantMapping
+    then variantMapping.${variant}
+    else throw "Unknown package variant: ${variant}";
   cfg = config.home.programs.discord;
 in {
   options = {
@@ -17,21 +39,11 @@ in {
       };
     };
   };
-
   config = mkIf cfg.enable {
-    home.packages = let
-      variant = cfg.variant or "stable";
-    in
-      if variant == "stable"
-      then [pkgs.discord]
-      else if variant == "ptb"
-      then [pkgs.discord-ptb]
-      else if variant == "canary"
-      then [(pkgs.discord-canary.override {withOpenASAR = true;})]
-      else if variant == "vesktop"
-      then [pkgs.vesktop]
-      else throw "Unknown package variant: ${variant}";
-
+    home = {
+      sessionVariables.DISCORD_USER_DATA_DIR = "$HOME/.config/${(getVariantConfig cfg.variant).dir}";
+      packages = [(getVariantConfig cfg.variant).package];
+    };
     xdg.configFile = mkIf (cfg.variant == "vesktop") {
       "vesktop/themes/base16.css".text =
         /*
