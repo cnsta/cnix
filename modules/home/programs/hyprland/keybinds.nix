@@ -24,10 +24,10 @@ in {
         # Common Keybind Variables
         "$fileManager" = "thunar";
         "$yazi" = "foot -e yazi";
-        "$launcher" = "rofi -show drun";
+        "$launcher" = "fuzzel";
 
         bind = [
-          "$mod, SPACE, exec, tuirun-toggle.sh"
+          "$mod, SPACE, exec, $launcher"
           "$mod, R, exec, $launcher"
           "$mod, L, exec, ${toggle "nwg-bar"}"
           "$mod SHIFT, B, exec, pkill -SIGUSR2 waybar"

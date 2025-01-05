@@ -5,6 +5,8 @@
   ...
 }: let
   inherit (lib) mkIf mkOption mkEnableOption types;
+  # Workaround for https://github.com/GooseMod/OpenAsar/issues/202
+  # Needlessly complicated, but it's dynamic! :D
   variantMapping = {
     stable = {
       dir = "discord";
