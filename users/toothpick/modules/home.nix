@@ -25,6 +25,9 @@
       foot = {
         enable = true;
       };
+      fuzzel = {
+        enable = true;
+      };
       helix = {
         enable = true;
       };
