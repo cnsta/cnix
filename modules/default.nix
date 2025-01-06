@@ -74,7 +74,6 @@
         ./nixos/programs/fish
         ./nixos/programs/gamemode
         ./nixos/programs/gamescope
-        ./nixos/programs/ghostty
         ./nixos/programs/gimp
         ./nixos/programs/gnome
         ./nixos/programs/hyprland
