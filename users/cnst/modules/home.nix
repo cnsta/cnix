@@ -38,6 +38,9 @@
       fuzzel = {
         enable = true;
       };
+      ghostty = {
+        enable = true;
+      };
       helix = {
         enable = true;
       };

@@ -73,7 +73,7 @@
         enable = true;
       };
       ghostty = {
-        enable = true;
+        enable = false;
       };
       gimp = {
         enable = false;
