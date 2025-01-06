@@ -14,6 +14,7 @@
         ./home/programs/fish
         ./home/programs/foot
         ./home/programs/fuzzel
+        ./home/programs/ghostty
         ./home/programs/helix
         ./home/programs/hyprland
         ./home/programs/hyprlock
