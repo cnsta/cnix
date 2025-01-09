@@ -36,6 +36,9 @@ in {
         secrets = {
           cnstssh.file = "${self}/secrets/cnstssh.age";
           cnixssh.file = "${self}/secrets/cnixssh.age";
+          certpem.file = "${self}/secrets/certpem.age";
+          keypem.file = "${self}/secrets/keypem.age";
+          mailpwd.file = "${self}/secrets/mailpwd.age";
         };
       })
       (mkIf cfg.toothpc.enable {

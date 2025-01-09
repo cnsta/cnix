@@ -133,9 +133,9 @@
     };
     services = {
       agenix = {
-        enable = false;
+        enable = true;
         cnix = {
-          enable = false;
+          enable = true;
         };
       };
       blueman = {
@@ -151,7 +151,7 @@
         enable = true;
       };
       gnome-keyring = {
-        enable = false;
+        enable = true;
       };
       greetd = {
         enable = true;
