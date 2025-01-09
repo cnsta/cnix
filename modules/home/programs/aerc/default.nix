@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  osConfig,
   lib,
   ...
 }: let
@@ -183,11 +184,17 @@ in {
     accounts.email = {
       maildirBasePath = ".mail";
       accounts.protonmail = {
-        realName = "notmuch";
-        address = "notmuch@localhost";
+        primary = true;
+        realName = "adde";
+        address = "adam@cnst.dev";
         aerc = {
           enable = true;
-          extraAccounts.source = "notmuch://~/.mail";
+          extraAccounts = {
+            source = "imap://adam%40cnst.dev@127.0.0.1:1143";
+            source-cred-cmd = "cat ${osConfig.age.secrets.mailpwd.path}";
+            outgoing = "smtp://adam%40cnst.dev@127.0.0.1:1025";
+            outgoing-cred-cmd = "cat ${osConfig.age.secrets.mailpwd.path}";
+          };
           extraBinds.messages."r" = '':reply -aqA {{index (.Filename | split ("/")) 4}}<Enter>'';
           extraBinds.view."r" = '':reply -aqA {{index (.Filename | split ("/")) 4}}<Enter>'';
         };
