@@ -40,8 +40,7 @@ in {
             character = "┊";
           };
           inline-diagnostics = {
-            cursor-line = "hint";
-            other-lines = "error";
+            cursor-line = "disable";
           };
           lsp = {
             display-messages = true;
