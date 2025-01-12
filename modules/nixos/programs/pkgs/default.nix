@@ -45,7 +45,6 @@ in {
           wf-recorder
           inotify-tools
           git-crypt
-          protonmail-bridge-gui
         ]
 
         (mkIf cfg.desktop.enable [
