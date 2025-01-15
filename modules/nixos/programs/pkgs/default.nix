@@ -39,6 +39,7 @@ in {
           git
           stow
           tree
+          traceroute
           gnome-disk-utility
           networkmanagerapplet
           progress
