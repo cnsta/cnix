@@ -142,7 +142,7 @@
         enable = true;
       };
       protonmail-bridge = {
-        enable = true;
+        enable = false;
       };
       swaync = {
         enable = false;
