@@ -104,8 +104,11 @@
           color-scheme = "prefer-dark";
         };
       };
+      dunst = {
+        enable = true;
+      };
       gpg = {
-        enable = false;
+        enable = true;
       };
       gtk = {
         enable = true;
@@ -117,6 +120,9 @@
         enable = true;
       };
       mako = {
+        enable = false;
+      };
+      nix-index = {
         enable = true;
       };
       syncthing = {
