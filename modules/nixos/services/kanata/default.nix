@@ -15,7 +15,10 @@ in {
       enable = true;
       package = pkgs.kanata-with-cmd;
       keyboards.hhkbse = {
-        devices = ["/dev/input/by-id/usb-PFU_Limited_HHKB-Hybrid-event-kbd"];
+        devices = [
+          "/dev/input/by-id/usb-PFU_Limited_HHKB-Hybrid-event-kbd"
+          "/dev/input/event2"
+        ];
         config = builtins.readFile (./. + "/hhkbse.kbd");
       };
     };
