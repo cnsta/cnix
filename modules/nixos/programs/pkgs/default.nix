@@ -46,6 +46,8 @@ in {
           wf-recorder
           inotify-tools
           git-crypt
+          gparted
+          ntfs3g
         ]
 
         (mkIf cfg.desktop.enable [
