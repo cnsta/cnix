@@ -9,7 +9,6 @@
       "https://nix-gaming.cachix.org"
       "https://yazi.cachix.org"
       "https://chaotic-nyx.cachix.org"
-      "https://cache.garnix.io"
     ];
 
     trusted-public-keys = [
@@ -21,7 +20,6 @@
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
       "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8"
-      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
 }
