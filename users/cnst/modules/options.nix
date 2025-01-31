@@ -6,6 +6,7 @@
       height = 1440;
       refreshRate = 240;
       bitDepth = 10;
+      position = "0x0";
       workspace = "1";
       primary = true;
     }
@@ -14,7 +15,8 @@
       width = 1920;
       height = 1080;
       refreshRate = 60;
-      workspace = "2";
+      position = "2560x360";
+      workspace = "4";
       primary = false;
     }
     {
