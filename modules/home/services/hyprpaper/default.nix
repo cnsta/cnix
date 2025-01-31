@@ -43,6 +43,7 @@ in {
         wallpaper = [
           # cnix
           "DP-3,${config.theme.background.desktop}"
+          "DP-4,${config.theme.background.desktop}"
           # cnixpad
           "eDP-1,${config.theme.background.desktop}"
           # toothpc
