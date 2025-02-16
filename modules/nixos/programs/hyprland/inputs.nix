@@ -1,37 +1,18 @@
 {
   lib,
   config,
-  osConfig,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkMerge;
-  cfg = config.home.programs.hyprland;
-  host = osConfig.networking.hostName;
+  cfg = config.nixos.programs.hyprland;
+  host = config.networking.hostName;
 in {
   options = {
-    home.programs.hyprland.inputs.enable = mkEnableOption "Enables input settings in Hyprland";
+    nixos.programs.hyprland.inputs.enable = mkEnableOption "Enables input settings in Hyprland";
   };
   config = mkIf cfg.inputs.enable (mkMerge [
     {
-      wayland.windowManager.hyprland.settings = {
-        monitor =
-          map (
-            m: "${m.name},${
-              if m.enabled
-              then "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},${toString m.scale},transform,${toString m.transform}${
-                if m.bitDepth != null
-                then ",bitdepth,${toString m.bitDepth}"
-                else ""
-              }"
-              else "disable"
-            }"
-          )
-          config.monitors;
-
-        workspace = map (
-          m: "name:${m.workspace},monitor:${m.name}"
-        ) (lib.filter (m: m.enabled && m.workspace != null) config.monitors);
-
+      programs.hyprland.settings = {
         env = [
           "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         ];
@@ -80,7 +61,7 @@ in {
     }
 
     (mkIf (host == "cnix") {
-      wayland.windowManager.hyprland.settings = {
+      programs.hyprland.settings = {
         render = {
           explicit_sync = 2;
           explicit_sync_kms = 2;
@@ -99,7 +80,7 @@ in {
     })
 
     (mkIf (host == "cnixpad") {
-      wayland.windowManager.hyprland.settings = {
+      programs.hyprland.settings = {
         input = {
           kb_options = "ctrl:swapcaps";
         };
@@ -114,7 +95,7 @@ in {
     })
 
     (mkIf (host == "toothpc") {
-      wayland.windowManager.hyprland.settings = {
+      programs.hyprland.settings = {
         render = {
           explicit_sync = 0;
           explicit_sync_kms = 0;

@@ -94,6 +94,7 @@
         ./nixos/services/blueman
         ./nixos/services/dbus
         ./nixos/services/dconf
+        ./nixos/services/flatpak
         ./nixos/services/fwupd
         ./nixos/services/gnome-keyring
         ./nixos/services/greetd
@@ -120,6 +121,7 @@
     };
     options = {
       imports = [
+        ./options/accounts
         ./options/monitors
         ./options/theme
       ];

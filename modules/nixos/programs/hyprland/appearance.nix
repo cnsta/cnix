@@ -4,13 +4,13 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.home.programs.hyprland;
+  cfg = config.nixos.programs.hyprland;
 in {
   options = {
-    home.programs.hyprland.appearance.enable = mkEnableOption "Enables appearance settings in Hyprland";
+    nixos.programs.hyprland.appearance.enable = mkEnableOption "Enables appearance settings in Hyprland";
   };
   config = mkIf cfg.appearance.enable {
-    wayland.windowManager.hyprland.settings = {
+    programs.hyprland.settings = {
       general = {
         gaps_in = 2;
         gaps_out = "4, 4, 4, 4";

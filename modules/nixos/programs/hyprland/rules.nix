@@ -4,14 +4,14 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.home.programs.hyprland.rules;
+  cfg = config.nixos.programs.hyprland.rules;
 in {
   options = {
-    home.programs.hyprland.rules.enable = mkEnableOption "Enables window rule settings in Hyprland";
+    nixos.programs.hyprland.rules.enable = mkEnableOption "Enables window rule settings in Hyprland";
   };
 
   config = mkIf cfg.enable {
-    wayland.windowManager.hyprland.settings = {
+    programs.hyprland.settings = {
       windowrulev2 = [
         # === CALCURSE SETTINGS ===
         "size 843 650, initialTitle:^(floatcal)$"
@@ -65,9 +65,11 @@ in {
       ];
       windowrule = [];
       workspace = [
+        "name:1,monitor:DP-3"
         "name:2,monitor:DP-3"
         "name:3,monitor:DP-3"
         "name:4,monitor:DP-3"
+        "name:5,monitor:DP-4"
         "name:6,monitor:DP-3"
         "name:7,monitor:DP-3"
         "name:8,monitor:DP-3"

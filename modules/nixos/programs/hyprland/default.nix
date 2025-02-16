@@ -1,32 +1,39 @@
 {
-  pkgs,
-  inputs,
   config,
   lib,
+  inputs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption;
+  inherit (lib) mkIf mkEnableOption mkDefault;
   cfg = config.nixos.programs.hyprland;
-  # hyprsysteminfoFlake = inputs.hyprsysteminfo.packages.${pkgs.system}.default;
 in {
+  imports = [
+    inputs.hyprland.nixosModules.default
+    ./appearance.nix
+    ./inputs.nix
+    ./keybinds.nix
+    ./rules.nix
+    ./startup.nix
+  ];
+
   options = {
     nixos.programs.hyprland = {
-      enable = mkEnableOption "Enables hyprland";
+      enable = mkEnableOption "Enable Hyprland";
     };
   };
+
   config = mkIf cfg.enable {
-    security.pam.services.hyprlock.text = "auth include login";
+    nixos.programs.hyprland = {
+      appearance.enable = mkDefault true;
+      inputs.enable = mkDefault true;
+      keybinds.enable = mkDefault true;
+      rules.enable = mkDefault true;
+      startup.enable = mkDefault true;
+    };
+
     programs.hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.default;
-      portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     };
-    environment = {
-      variables.NIXOS_OZONE_WL = "1";
-      systemPackages = [
-        # pkgs.hyprwayland-scanner
-        # hyprsysteminfoFlake
-      ];
-    };
+    environment.variables.NIXOS_OZONE_WL = "1";
   };
 }

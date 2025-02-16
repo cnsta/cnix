@@ -35,7 +35,7 @@
     };
 
     # Hyprland environment
-    hyprland.url = "github:hyprwm/hyprland";
+    hyprland.url = "github:hyprwm/hyprland/nix-module";
 
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
@@ -109,6 +109,10 @@
     wezterm = {
       url = "github:wez/wezterm/main?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ags = {
+      url = "github:Aylur/ags";
     };
 
     # Custom apps

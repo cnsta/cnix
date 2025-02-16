@@ -23,6 +23,7 @@ in {
       settings = [
         {
           height = 25;
+          output = ["DP-3"];
 
           modules-left = [
             "group/system"

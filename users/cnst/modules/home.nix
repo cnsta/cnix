@@ -45,7 +45,7 @@
         enable = true;
       };
       hyprland = {
-        enable = true;
+        enable = false;
       };
       hyprlock = {
         enable = true;
@@ -66,7 +66,7 @@
         enable = false;
       };
       nvf = {
-        enable = true;
+        enable = false;
       };
       nwg-bar = {
         enable = true;

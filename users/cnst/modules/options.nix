@@ -1,12 +1,17 @@
 {
+  accounts = {
+    username = "cnst";
+    hostname = "cnix";
+  };
   monitors = [
     {
       name = "DP-3";
       width = 2560;
       height = 1440;
       refreshRate = 240;
-      bitDepth = 10;
       position = "0x0";
+      transform = 0;
+      bitDepth = 10;
       workspace = "1";
       primary = true;
     }
@@ -15,8 +20,9 @@
       width = 1920;
       height = 1080;
       refreshRate = 60;
-      position = "2560x360";
-      workspace = "4";
+      position = "2560x0";
+      transform = 3;
+      workspace = "5";
       primary = false;
     }
     {
