@@ -19,6 +19,7 @@ in {
       };
       settings = {
         global = {
+          follow = "mouse";
           browser = "${config.home.sessionVariables.BROWSER}";
           padding = 16;
           horizontal_padding = 16;
@@ -28,12 +29,12 @@ in {
         };
         urgency_low = {
           msg_urgency = "low";
-          background = "#665c54";
+          background = "#282828";
           foreground = "#d5c4a1";
         };
         urgency_normal = {
           msg_urgency = "normal";
-          background = "#3c3836";
+          background = "#282828";
           foreground = "#d5c4a1";
           # foreground = "#fbf1c7";
         };

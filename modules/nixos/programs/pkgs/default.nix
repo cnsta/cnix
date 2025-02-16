@@ -62,7 +62,7 @@ in {
         ])
 
         (mkIf cfg.dev.enable [
-          lldb_19
+          # lldb_20 # some biuld error atm
           nfs-utils
           gcc
           rust-analyzer

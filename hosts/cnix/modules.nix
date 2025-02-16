@@ -5,7 +5,7 @@
         extraBlacklistedModules = [];
         extraKernelParams = [];
         hardware = "amd";
-        variant = "cachyos";
+        variant = "latest";
       };
       loader = {
         default = {
@@ -23,7 +23,7 @@
       graphics = {
         amd = {
           enable = true;
-          packageSet = "chaotic";
+          packageSet = "standard";
         };
         nvidia = {
           enable = false;
@@ -58,7 +58,7 @@
         };
       };
       corectrl = {
-        enable = true;
+        enable = false;
       };
       fish = {
         enable = true;
@@ -145,6 +145,9 @@
         enable = true;
       };
       dconf = {
+        enable = true;
+      };
+      flatpak = {
         enable = true;
       };
       fwupd = {

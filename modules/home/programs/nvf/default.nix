@@ -77,7 +77,7 @@ in {
             zig.enable = false;
             ocaml.enable = false;
             nu.enable = false;
-            python.enable = true;
+            python.enable = false; # pyright wont build
             dart.enable = false;
             lua.enable = true;
             bash.enable = true;

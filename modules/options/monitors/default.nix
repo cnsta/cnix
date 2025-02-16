@@ -30,6 +30,10 @@ in {
             type = types.int;
             default = 60;
           };
+          transform = mkOption {
+            type = types.int;
+            default = 0;
+          };
           bitDepth = mkOption {
             type = types.nullOr types.int;
             default = null;
@@ -38,6 +42,10 @@ in {
           position = mkOption {
             type = types.str;
             default = "auto";
+          };
+          scale = mkOption {
+            type = types.str;
+            default = "1";
           };
           enabled = mkOption {
             type = types.bool;

@@ -2,6 +2,7 @@
   config,
   pkgs,
   osConfig,
+  lib,
   ...
 }: let
   email = config.programs.git.userEmail;
@@ -21,18 +22,20 @@ in {
       options.dark = true;
     };
     extraConfig = {
-      user.signingkey = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+      # user.signingkey = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+      user.signingkey = "${config.home.homeDirectory}/.config/git/allowed_signers";
       signing = {
+        format = lib.mkDefault "ssh";
         key = "${config.home.homeDirectory}/.ssh/id_ed25519";
         signByDefault = true;
       };
       gpg = {
-        format = "ssh";
+        # format = lib.mkDefault "ssh";
         ssh.allowedSignersFile = config.home.homeDirectory + "/" + config.xdg.configFile."git/allowed_signers".target;
       };
       commit = {
         verbose = true;
-        gpgSign = true;
+        gpgSign = false;
       };
       init.defaultBranch = "main";
       merge.conflictStyle = "diff3";

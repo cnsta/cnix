@@ -50,6 +50,8 @@ in {
         vulkan-tools
         wayland
         wayland-protocols
+        scx.rustscheds
+        libGL
         # rocmPackages.rocm-smi
       ];
     })

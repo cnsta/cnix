@@ -1,12 +1,11 @@
 {
   lib,
   config,
-  osConfig,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkMerge;
-  cfg = config.home.programs.hyprland;
-  host = osConfig.networking.hostName;
+  cfg = config.nixos.programs.hyprland;
+  host = config.networking.hostName;
 
   toggle = program: let
     prog = builtins.substring 0 14 program;
@@ -15,12 +14,12 @@
   runOnce = program: "pgrep ${program} || uwsm app -- ${program}";
 in {
   options = {
-    home.programs.hyprland.keybinds.enable = mkEnableOption "Enables keybind settings in Hyprland";
+    nixos.programs.hyprland.keybinds.enable = mkEnableOption "Enables keybind settings in Hyprland";
   };
 
   config = mkIf cfg.keybinds.enable (mkMerge [
     {
-      wayland.windowManager.hyprland.settings = {
+      programs.hyprland.settings = {
         # Common Keybind Variables
         "$fileManager" = "thunar";
         "$yazi" = "foot -e yazi";
@@ -92,7 +91,7 @@ in {
     }
 
     (mkIf (host == "cnix") {
-      wayland.windowManager.hyprland.settings = {
+      programs.hyprland.settings = {
         "$terminal" = "ghostty";
         "$browser" = "zen";
         "$browserinc" = "zen --private-window";
@@ -104,7 +103,7 @@ in {
     })
 
     (mkIf (host == "cnixpad") {
-      wayland.windowManager.hyprland.settings = {
+      programs.hyprland.settings = {
         "$terminal" = "foot";
         "$browser" = "zen";
         "$browserinc" = "zen --private-window";
@@ -116,7 +115,7 @@ in {
     })
 
     (mkIf (host == "toothpc") {
-      wayland.windowManager.hyprland.settings = {
+      programs.hyprland.settings = {
         "$terminal" = "alacritty";
         "$browser" = "firefox";
         "$browserinc" = "firefox --private-window";
