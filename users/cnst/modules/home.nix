@@ -96,7 +96,7 @@
         enable = true;
       };
       zed-editor = {
-        enable = true;
+        enable = false;
       };
       zellij = {
         enable = false;
