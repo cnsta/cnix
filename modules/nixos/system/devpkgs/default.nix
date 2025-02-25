@@ -29,7 +29,7 @@ in {
       php
       # php84Packages.php-cs-fixer
       # phpactor
-      python312Packages.python-lsp-server
+      # python312Packages.python-lsp-server
       bash-language-server
       clang-tools
       marksman
@@ -39,8 +39,8 @@ in {
       # Formatters
       alejandra
       stylua
-      nodePackages_latest.fixjson
-      nodePackages_latest.sql-formatter
+      # nodePackages_latest.fixjson
+      # nodePackages_latest.sql-formatter
       prettierd
       shfmt
       luaformatter
