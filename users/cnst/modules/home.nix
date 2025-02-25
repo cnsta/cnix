@@ -81,7 +81,7 @@
         enable = true;
       };
       vscode = {
-        enable = true;
+        enable = false;
       };
       waybar = {
         enable = true;

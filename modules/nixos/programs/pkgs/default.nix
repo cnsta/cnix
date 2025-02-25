@@ -72,7 +72,7 @@ in {
           php
           vscode-langservers-extracted
           # phpactor
-          python312Packages.python-lsp-server
+          python313Packages.python-lsp-server
           bash-language-server
           clang-tools
           marksman
@@ -81,9 +81,10 @@ in {
           # Formatters
           alejandra
           stylua
-          nodePackages_latest.nodejs
-          nodePackages_latest.fixjson
-          nodePackages_latest.sql-formatter
+          nodejs_23
+          fixjson
+          sql-formatter
+          nodePackages.prettier
           prettierd
           # php84Packages.php-cs-fixer
           shfmt
