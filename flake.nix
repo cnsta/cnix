@@ -35,7 +35,7 @@
     };
 
     # Hyprland environment
-    hyprland.url = "github:hyprwm/hyprland/nix-module";
+    hyprland.url = "github:hyprwm/hyprland";
 
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
