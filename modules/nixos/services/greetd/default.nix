@@ -1,12 +1,10 @@
 {
-  pkgs,
   config,
   lib,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mkMerge mkOption types;
+  inherit (lib) mkIf mkEnableOption mkOption types;
   cfg = config.nixos.services.greetd;
-  host = config.networking.hostName;
 in {
   options = {
     nixos.services.greetd = {
@@ -37,39 +35,5 @@ in {
         initial_session = session;
       };
     };
-
-    programs.uwsm = {
-      enable = true;
-      waylandCompositors.hyprland = {
-        binPath = "/run/current-system/sw/bin/Hyprland";
-        prettyName = "Hyprland";
-        comment = "Hyprland managed by UWSM";
-      };
-    };
-
-    #   (mkIf (host == "cnix" || host == "cnixpad") {
-    #     programs.uwsm = {
-    #       enable = true;
-    #       waylandCompositors.hyprland = {
-    #         binPath = "/etc/profiles/per-user/cnst/bin/Hyprland";
-    #         prettyName = "Hyprland";
-    #         comment = "Hyprland managed by UWSM";
-    #       };
-    #     };
-    #   })
-
-    #   (mkIf (host == "toothpc") {
-    #     programs.uwsm = {
-    #       enable = true;
-    #       waylandCompositors.hyprland = {
-    #         binPath = "/etc/profiles/per-user/toothpick/bin/Hyprland";
-    #         prettyName = "Hyprland";
-    #         comment = "Hyprland managed by UWSM";
-    #       };
-    #     };
-    #   })
-    #   # Apply GnomeKeyring PAM Service based on user configuration
-    #   # security.pam.services.greetd.enableGnomeKeyring = cfg.gnomeKeyring.enable;
-    # ]);
   };
 }
