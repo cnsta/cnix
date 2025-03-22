@@ -81,7 +81,7 @@ in {
         ];
       };
     }
-    (mkIf (host == "cnix") {
+    (mkIf (host == "cnixtop") {
       programs.hyprland.settings.workspace = [
         "name:1,monitor:DP-3"
         "name:2,monitor:DP-3"

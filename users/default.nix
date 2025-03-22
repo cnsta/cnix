@@ -14,7 +14,7 @@
   ];
 
   homeImports = {
-    "cnst@cnix" =
+    "cnst@cnixtop" =
       sharedImports
       ++ [
         ./cnst
@@ -23,6 +23,11 @@
       sharedImports
       ++ [
         ./cnst
+      ];
+    "cnst@cnixlab" =
+      sharedImports
+      ++ [
+        ./cnstlab
       ];
     "toothpick@toothpc" =
       sharedImports

@@ -35,7 +35,7 @@ in {
         };
       };
     }
-    (mkIf (host == "cnix") {
+    (mkIf (host == "cnixtop") {
       programs.ghostty.settings.command = "${getExe config.programs.fish.package}";
     })
     (mkIf (host == "cnixpad") {

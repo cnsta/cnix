@@ -41,7 +41,7 @@ in {
         ];
 
         wallpaper = [
-          # cnix
+          # cnixtop
           "DP-3,${config.theme.background.desktop}"
           "DP-4,${config.theme.background.desktop}"
           # cnixpad
@@ -51,6 +51,5 @@ in {
         ];
       };
     };
-    systemd.user.services.hyprpaper.Unit.After = lib.mkForce "graphical-session.target";
   };
 }

@@ -23,36 +23,20 @@
     # get these into the module system
     specialArgs = {inherit inputs self userConfig systemConfig hostConfig cnstConfig toothpickConfig umodPath smodPath;};
   in {
-    cnix = nixosSystem {
+    cnixtop = nixosSystem {
       inherit specialArgs;
 
       modules = [
-        ./cnix
+        ./cnixtop
         "${self}/nix"
         {
           home-manager = {
-            users.cnst.imports = homeImports."cnst@cnix";
+            users.cnst.imports = homeImports."cnst@cnixtop";
             extraSpecialArgs = specialArgs;
           };
         }
         self.nixosModules.nixos
         self.nixosModules.options
-        inputs.chaotic.nixosModules.default
-        inputs.agenix.nixosModules.default
-      ];
-    };
-    toothpc = nixosSystem {
-      inherit specialArgs;
-      modules = [
-        ./toothpc
-        "${self}/nix"
-        {
-          home-manager = {
-            users.toothpick.imports = homeImports."toothpick@toothpc";
-            extraSpecialArgs = specialArgs;
-          };
-        }
-        self.nixosModules.nixos
         inputs.chaotic.nixosModules.default
         inputs.agenix.nixosModules.default
       ];
@@ -65,6 +49,38 @@
         {
           home-manager = {
             users.cnst.imports = homeImports."cnst@cnixpad";
+            extraSpecialArgs = specialArgs;
+          };
+        }
+        self.nixosModules.nixos
+        inputs.chaotic.nixosModules.default
+        inputs.agenix.nixosModules.default
+      ];
+    };
+    cnixlab = nixosSystem {
+      inherit specialArgs;
+      modules = [
+        ./cnixlab
+        "${self}/nix"
+        {
+          home-manager = {
+            users.cnst.imports = homeImports."adamin@cnixlab";
+            extraSpecialArgs = specialArgs;
+          };
+        }
+        self.nixosModules.nixos
+        inputs.chaotic.nixosModules.default
+        inputs.agenix.nixosModules.default
+      ];
+    };
+    toothpc = nixosSystem {
+      inherit specialArgs;
+      modules = [
+        ./toothpc
+        "${self}/nix"
+        {
+          home-manager = {
+            users.toothpick.imports = homeImports."toothpick@toothpc";
             extraSpecialArgs = specialArgs;
           };
         }

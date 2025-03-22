@@ -21,7 +21,7 @@ in {
       };
     }
 
-    (mkIf (host == "cnix") {
+    (mkIf (host == "cnixtop") {
       programs.hyprland.settings.exec-once = [
         "uwsm app -- mullvad-vpn"
         "uwsm app -- blueman-applet"

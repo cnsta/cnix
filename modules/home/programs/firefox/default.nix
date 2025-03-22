@@ -22,9 +22,9 @@ in {
         default = {
           search = {
             force = true;
-            default = "DuckDuckGo";
-            privateDefault = "DuckDuckGo";
-            order = ["DuckDuckGo" "Google"];
+            default = "ddg";
+            privateDefault = "ddg";
+            order = ["ddg" "google"];
           };
           bookmarks = {};
           # extensions = with config.nur.repos.rycee.firefox-addons; [

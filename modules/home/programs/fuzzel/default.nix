@@ -44,7 +44,7 @@ in {
         };
       };
     }
-    (mkIf (host == "cnix") {
+    (mkIf (host == "cnixtop") {
       programs.fuzzel.settings.main.terminal = "${inputs.ghostty.packages.x86_64-linux.default}/bin/ghostty";
     })
     (mkIf (host == "cnixpad") {
