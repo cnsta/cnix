@@ -12,7 +12,7 @@ in {
   options = {
     nixos.services.agenix = {
       enable = mkEnableOption "Enables agenix system environment";
-      cnix.enable = mkOption {
+      cnixtop.enable = mkOption {
         type = lib.types.bool;
         default = false;
         description = "Apply cnix agenix settings";
@@ -32,7 +32,7 @@ in {
 
   config = mkIf cfg.enable {
     age = mkMerge [
-      (mkIf cfg.cnix.enable {
+      (mkIf cfg.cnixtop.enable {
         secrets = {
           cnstssh.file = "${self}/secrets/cnstssh.age";
           cnixssh.file = "${self}/secrets/cnixssh.age";

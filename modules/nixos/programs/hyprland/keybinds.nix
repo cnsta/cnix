@@ -90,7 +90,7 @@ in {
       };
     }
 
-    (mkIf (host == "cnix") {
+    (mkIf (host == "cnixtop") {
       programs.hyprland.settings = {
         "$terminal" = "ghostty";
         "$browser" = "zen";

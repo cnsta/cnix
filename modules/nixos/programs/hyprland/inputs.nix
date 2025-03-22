@@ -60,7 +60,7 @@ in {
       };
     }
 
-    (mkIf (host == "cnix") {
+    (mkIf (host == "cnixtop") {
       programs.hyprland.settings = {
         render = {
           explicit_sync = 2;
