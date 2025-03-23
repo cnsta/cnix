@@ -15,6 +15,9 @@ in {
       enable = true;
       package = pkgs.kanata-with-cmd;
       keyboards.hhkbse = {
+        extraDefCfg = ''
+          process-unmapped-keys yes
+        '';
         devices = [
           "/dev/input/by-id/usb-PFU_Limited_HHKB-Hybrid-event-kbd"
           "/dev/input/event2"

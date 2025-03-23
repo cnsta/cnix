@@ -24,7 +24,7 @@ in {
   config = mkIf cfg.enable {
     systemd.services.scx = {
       enable = true;
-      wantedBy = ["graphical.target"];
+      wantedBy = ["multi-user.target"];
       unitConfig = {
         Description = "Start scx_scheduler";
         ConditionPathIsDirectory = "/sys/kernel/sched_ext";

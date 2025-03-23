@@ -15,47 +15,30 @@
 )
 
 (defsrc
-  esc     1    2    3    4    5    6    7    8    9    0    +    ´    '    §
-  tab     q    w    e    r    t    y    u    i    o    p    å    ¨    bspc
-  lctl    a    s    d    f    g    h    j    k    l    ö    ä    ret
-  lsft    z    x    c    v    b    n    m    ,    .    -    rsft
-          lalt lmet           spc            rmet   ralt
+  2 3 4 5 6 7 8 9 0 + ´ ' §
+  e p ¨
+  l ö ä
+  z x rmet
 )
 
 (deflayer default
-  esc     1    2    3    4    5    6    7    8    9    0    +     pgdn  pgup  del
-  tab     q    w    e    r    t    y    u    i    o    p    å     '     bspc
-  lctl    a    s    d    f    g    h    j    k    l    ö    ä     ret
-  @shift  z    x    c    v    b    n    m    ,    .    -    rsft
-          lalt lmet           spc            @level3 @ralt
-)
-
-(deflayer shift
-  esc     S-1    S-2    S-3    RA-4   S-5    S-6    S-7    S-8    S-9    S-0    S-+    RA-7  RA-0  RA-<
-  tab     S-q    S-w    S-e    S-r    S-t    S-y    S-u    S-i    S-o    S-p    S-å    S-¨   bspc
-  lctl    S-a    S-s    S-d    S-f    S-g    S-h    S-j    S-k    S-l    S-ö    S-ä    S-ret
-  @shift  S-z    S-x    S-c    S-v    S-b    S-n    S-m    S-,    S-.    S--    rsft
-          lalt   lmet          spc           @level3 @ralt
+  _ _ _ _ _ _ _ _ _ _ pgdn pgup del
+  _ _ '
+  _ _ _
+  _ _ @level3
 )
 
 (deflayer level3
-  esc     1      RA-2   RA-3   S-4    RA-5   RA-6   RA-7   RA-8   RA-9   RA-0   RA-+   ⇤     ⇥     S-'
-  tab     q      w      RA-5   r      t      y      u      i      o      ▲      å      RA-¨  bspc
-  lctl    a      s      d      f      g      h      j      k      ◀      ▼      ▶      ret
-  @shift  RA-S-z RA-S-x c      v      b      n      m      ,      .      -      rsft
-          lalt   lmet          spc           @level3 @ralt
+  RA-2 RA-3 S-4 RA-5 S-¨ RA-7 RA-8 RA-9 RA-0 RA-+ ⇥ ⇤ S-'
+  RA-5 ▲ RA-¨
+  ◀ ▼ ▶
+  RA-S-z RA-S-x @level3
 )
 
-(deflayer ralt
-  esc     1    2    3    4    5    6    7    8    9    0    +     pgdn  pgup  del
-  tab     q    w    e    r    t    y    u    i    o    p    å     S-´   bspc
-  lctl    a    s    d    f    g    h    j    k    l    ö    ä     ret
-  @shift  z    x    c    v    b    n    m    ,    .    -    rsft
-          lalt lmet           spc            @level3 @ralt
+(defoverrides
+  (lsft 4) (ralt 4)
 )
 
 (defalias
-  shift   (layer-toggle shift)
   level3  (layer-toggle level3)
-  ralt  (layer-toggle ralt)
 )

@@ -45,5 +45,5 @@
 
   programs.home-manager.enable = true;
 
-  systemd.user.targets.tray.Unit.Requires = lib.mkForce ["graphical-session.target"];
+  # systemd.user.targets.tray.Unit.Requires = lib.mkForce ["graphical-session.target"];
 }
