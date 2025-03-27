@@ -35,6 +35,8 @@ in {
     ./modules.nix
   ];
 
+  time.hardwareClockInLocalTime = true;
+
   networking.hostName = "cnixtop";
 
   environment.variables.FLAKE = "/home/cnst/.nix-config";
