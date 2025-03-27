@@ -32,13 +32,13 @@
       builders-use-substitutes = true;
       warn-dirty = false;
       accept-flake-config = false;
-      allow-import-from-derivation = false;
+      # allow-import-from-derivation = true;
       experimental-features = ["nix-command" "flakes"];
       flake-registry = "/etc/nix/registry.json";
 
       # # for direnv GC roots
-      # keep-derivations = true;
-      # keep-outputs = true;
+      keep-derivations = true;
+      keep-outputs = true;
 
       trusted-users = ["root" "@wheel"];
     };

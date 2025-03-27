@@ -96,14 +96,14 @@
           auto-format = true;
           language-servers = ["dprint" "typescript-language-server"];
         }
-        {
-          name = "php";
-          auto-format = true;
-          language-servers = ["phpactor"];
-          formatter = {
-            command = lib.getExe pkgs.php84Packages.php-cs-fixer;
-          };
-        }
+        # {
+        #   name = "php";
+        #   auto-format = true;
+        #   language-servers = ["phpactor"];
+        #   formatter = {
+        #     command = lib.getExe pkgs.php84Packages.php-cs-fixer;
+        #   };
+        # }
         {
           name = "css";
           auto-format = true;

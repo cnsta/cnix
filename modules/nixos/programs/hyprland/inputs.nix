@@ -15,6 +15,8 @@ in {
       programs.hyprland.settings = {
         env = [
           "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+          # See https://github.com/hyprwm/contrib/issues/142
+          "GRIMBLAST_NO_CURSOR,0"
         ];
 
         input = {
