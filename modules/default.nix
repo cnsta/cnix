@@ -4,7 +4,7 @@
       imports = [
         ./home/programs/aerc
         ./home/programs/alacritty
-        ./home/programs/anyrun
+        # ./home/programs/anyrun
         ./home/programs/bash
         ./home/programs/chromium
         ./home/programs/discord
@@ -67,7 +67,7 @@
         ./nixos/hardware/network
 
         ./nixos/programs/android
-        ./nixos/programs/anyrun
+        # ./nixos/programs/anyrun
         ./nixos/programs/beekeeper
         ./nixos/programs/blender
         ./nixos/programs/corectrl
