@@ -15,7 +15,7 @@ in {
   };
   config = mkIf cfg.enable {
     programs.anyrun = {
-      enable = true;
+      enable = cfg.enable;
 
       #extraCss = builtins.readFile (./. + "/style-dark.css");
     };

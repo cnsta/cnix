@@ -45,9 +45,6 @@
       android = {
         enable = true;
       };
-      anyrun = {
-        enable = false;
-      };
       beekeeper = {
         enable = false;
       };
