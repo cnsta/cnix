@@ -37,6 +37,8 @@
 
 (defoverrides
   (lsft 4) (ralt 4)
+  (lsft pgdn) (ralt 7)
+  (lsft pgup) (ralt 0)
 )
 
 (defalias
