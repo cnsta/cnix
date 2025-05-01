@@ -17,7 +17,9 @@ in {
       enableBashIntegration = true;
       enableFishIntegration = true;
       enableZshIntegration = true;
-      pinentryPackage = pkgs.pinentry-gnome3;
+      pinentry = {
+        package = pkgs.pinentry-gnome3;
+      };
     };
     programs.gpg = {
       enable = true;
