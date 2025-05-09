@@ -81,7 +81,7 @@ in {
           # Formatters
           alejandra
           stylua
-          nodejs_23
+          nodejs_24
           fixjson
           sql-formatter
           nodePackages.prettier

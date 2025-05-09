@@ -44,7 +44,7 @@ in {
     }
   ];
 
-  environment.variables.FLAKE = "/home/cnst/.nix-config";
+  environment.variables.NH_FLAKE = "/home/cnst/.nix-config";
 
   programs.hyprland.settings = {
     monitor = [
