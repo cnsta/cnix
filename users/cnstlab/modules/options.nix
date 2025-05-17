@@ -1,6 +1,6 @@
 {
   accounts = {
-    username = "cnst";
+    username = "cnstlab";
     hostname = "cnixlab";
   };
   monitors = [
