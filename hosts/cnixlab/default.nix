@@ -6,7 +6,7 @@
 }: let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
-  users.users.cnst = {
+  users.users.cnstlab = {
     isNormalUser = true;
     shell = pkgs.fish;
     extraGroups = ifTheyExist [
@@ -35,16 +35,9 @@ in {
     ./modules.nix
   ];
 
-  networking.hostName = "cnix";
+  networking.hostName = "cnixlab";
 
-  environment.variables.NH_FLAKE = "/home/cnst/.nix-config";
-
-  programs.hyprland.settings = {
-    monitor = [
-      "DP-3,2560x1440@240,0x0,1,transform,0,bitdepth,10"
-      "DP-4,1920x1080@60,auto,1,transform,3"
-    ];
-  };
+  environment.variables.NH_FLAKE = "/home/cnstlab/.nix-config";
 
   #   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = lib.mkDefault "23.11";

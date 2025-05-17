@@ -9,10 +9,10 @@
       };
       loader = {
         default = {
-          enable = false;
+          enable = true;
         };
         lanzaboote = {
-          enable = true;
+          enable = false;
         };
       };
     };
@@ -30,7 +30,7 @@
         };
       };
       logitech = {
-        enable = true;
+        enable = false;
       };
       network = {
         enable = true;
@@ -43,7 +43,7 @@
     };
     programs = {
       android = {
-        enable = true;
+        enable = false;
       };
       anyrun = {
         enable = false;
@@ -64,13 +64,13 @@
         enable = true;
       };
       gamemode = {
-        enable = true;
+        enable = false;
         optimizeGpu = {
-          enable = true;
+          enable = false;
         };
       };
       gamescope = {
-        enable = true;
+        enable = false;
       };
       gimp = {
         enable = false;
@@ -79,27 +79,27 @@
         enable = false;
       };
       hyprland = {
-        enable = true;
+        enable = false;
       };
       inkscape = {
         enable = false;
       };
       lutris = {
-        enable = true;
+        enable = false;
       };
       microfetch = {
         enable = true;
       };
       pkgs = {
-        enable = true;
+        enable = false;
         desktop = {
-          enable = true;
+          enable = false;
         };
         laptop = {
           enable = false;
         };
         dev = {
-          enable = true;
+          enable = false;
         };
       };
       mysql-workbench = {
@@ -109,23 +109,23 @@
         enable = true;
         clean = {
           enable = true;
-          extraArgs = "--keep 3 --keep-since 21d";
+          extraArgs = "--keep 9 --keep-since 51d";
         };
       };
       npm = {
         enable = false;
       };
       obsidian = {
-        enable = true;
+        enable = false;
       };
       steam = {
-        enable = true;
+        enable = false;
       };
       thunar = {
-        enable = true;
+        enable = false;
       };
       yubikey = {
-        enable = true;
+        enable = false;
       };
       zsh = {
         enable = false;
@@ -133,13 +133,13 @@
     };
     services = {
       agenix = {
-        enable = true;
+        enable = false;
         cnix = {
-          enable = true;
+          enable = false;
         };
       };
       blueman = {
-        enable = true;
+        enable = false;
       };
       dbus = {
         enable = true;
@@ -148,29 +148,29 @@
         enable = true;
       };
       flatpak = {
-        enable = true;
+        enable = false;
       };
       fwupd = {
         enable = true;
       };
       gnome-keyring = {
-        enable = true;
+        enable = false;
       };
       greetd = {
-        enable = true;
+        enable = false;
         user = "cnst";
       };
       gvfs = {
-        enable = true;
+        enable = false;
       };
       kanata = {
-        enable = true;
+        enable = false;
       };
       locate = {
         enable = true;
       };
       mullvad = {
-        enable = true;
+        enable = false;
       };
       nix-ld = {
         enable = false;
@@ -182,10 +182,10 @@
         enable = true;
       };
       pipewire = {
-        enable = true;
+        enable = false;
       };
       polkit = {
-        enable = true;
+        enable = false;
       };
       powerd = {
         enable = false;
@@ -194,7 +194,7 @@
         enable = false;
       };
       scx = {
-        enable = true;
+        enable = false;
         scheduler = "scx_lavd";
         flags = "--performance";
       };
@@ -207,7 +207,7 @@
     };
     system = {
       fonts = {
-        enable = true;
+        enable = false;
       };
       locale = {
         enable = true;
@@ -216,7 +216,7 @@
         timeZone = "Europe/Stockholm";
       };
       xdg = {
-        enable = true;
+        enable = false;
         xdgOpenUsePortal = true;
       };
     };

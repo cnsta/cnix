@@ -16,8 +16,8 @@
   # ++ lib.optionals isCnixpad [./cpmodules.nix];
 
   home = {
-    username = "cnst";
-    homeDirectory = "/home/cnst";
+    username = "cnstlab";
+    homeDirectory = "/home/cnstlab";
     stateVersion = "23.11";
     extraOutputsToInstall = ["doc" "devdoc"];
     packages = with pkgs; [

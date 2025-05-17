@@ -24,7 +24,7 @@
       ++ [
         ./cnst
       ];
-    "cnst@cnixlab" =
+    "cnstlab@cnixlab" =
       sharedImports
       ++ [
         ./cnstlab

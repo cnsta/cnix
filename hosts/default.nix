@@ -64,7 +64,7 @@
         "${self}/nix"
         {
           home-manager = {
-            users.cnst.imports = homeImports."adamin@cnixlab";
+            users.cnstlab.imports = homeImports."cnstlab@cnixlab";
             extraSpecialArgs = specialArgs;
           };
         }
