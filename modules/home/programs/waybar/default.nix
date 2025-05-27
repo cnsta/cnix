@@ -52,6 +52,7 @@ in {
               "active" = "";
               "empty" = "";
               "persistent" = "";
+              "4" = "";
             };
             disable-scroll = true;
             rotate = 0;

@@ -65,6 +65,7 @@ in {
           # === WORKSPACE RULES ===
           "workspace 5 silent, class:^(discord)$"
           "workspace 5 silent, class:^(vesktop)$"
+          "workspace 4 silent, class:^(steam_app_0)$"
         ];
         windowrule = [];
         layerrule = [
