@@ -66,6 +66,7 @@ in {
           "workspace 5 silent, class:^(discord)$"
           "workspace 5 silent, class:^(vesktop)$"
           "workspace 4 silent, class:^(steam_app_0)$"
+          "workspace 4 silent, title:^(World of Warcraft)$"
         ];
         windowrule = [];
         layerrule = [

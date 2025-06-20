@@ -41,8 +41,10 @@ in {
         vulkan-loader
         vulkan-validation-layers
         vulkan-extension-layer
+        vulkan-utility-libraries
       ];
       hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
+        libva
         vaapiVdpau
         libvdpau-va-gl
       ];

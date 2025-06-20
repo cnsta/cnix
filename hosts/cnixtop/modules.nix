@@ -82,7 +82,7 @@
         enable = false;
       };
       lutris = {
-        enable = true;
+        enable = false;
       };
       microfetch = {
         enable = true;

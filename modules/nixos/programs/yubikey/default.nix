@@ -15,7 +15,6 @@ in {
       # pkgs.yubioath-flutter
       # pkgs.yubikey-manager
       pkgs.yubikey-personalization
-      pkgs.yubikey-personalization-gui
       pkgs.yubikey-touch-detector
       # pkgs.pcsc-tools
     ];
