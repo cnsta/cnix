@@ -29,6 +29,8 @@ in {
       };
     };
     home.packages = with pkgs; [
+      protontricks
+      lutris
       # misc.gui
       # virt-manager
       gnome-calculator

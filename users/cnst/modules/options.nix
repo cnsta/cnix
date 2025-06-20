@@ -1,7 +1,7 @@
 {
   accounts = {
     username = "cnst";
-    hostname = "cnix";
+    hostname = "cnixtop";
   };
   monitors = [
     {
