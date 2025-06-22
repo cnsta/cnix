@@ -43,9 +43,6 @@
       helix = {
         enable = true;
       };
-      hyprland = {
-        enable = false;
-      };
       hyprlock = {
         enable = false;
       };

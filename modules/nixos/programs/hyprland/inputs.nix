@@ -65,8 +65,6 @@ in {
     (mkIf (host == "cnixtop") {
       programs.hyprland.settings = {
         render = {
-          explicit_sync = 2;
-          explicit_sync_kms = 2;
           direct_scanout = false;
         };
         cursor = {
@@ -99,8 +97,6 @@ in {
     (mkIf (host == "toothpc") {
       programs.hyprland.settings = {
         render = {
-          explicit_sync = 0;
-          explicit_sync_kms = 0;
           direct_scanout = false;
         };
         cursor = {

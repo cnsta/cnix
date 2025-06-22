@@ -4,7 +4,6 @@
       imports = [
         ./home/programs/aerc
         ./home/programs/alacritty
-        # ./home/programs/anyrun
         ./home/programs/bash
         ./home/programs/chromium
         ./home/programs/discord
@@ -16,7 +15,6 @@
         ./home/programs/fuzzel
         ./home/programs/ghostty
         ./home/programs/helix
-        ./home/programs/hyprland
         ./home/programs/hyprlock
         ./home/programs/jujutsu
         ./home/programs/kitty
