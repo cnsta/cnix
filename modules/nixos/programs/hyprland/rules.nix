@@ -14,7 +14,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       programs.hyprland.settings = {
-        windowrulev2 = [
+        windowrule = [
           # === CALCURSE SETTINGS ===
           "size 843 650, initialTitle:^(floatcal)$"
           "move 100%-w-20 40, initialTitle:^(floatcal)$"
@@ -68,7 +68,6 @@ in {
           "workspace 4 silent, class:^(steam_app_0)$"
           "workspace 4 silent, title:^(World of Warcraft)$"
         ];
-        windowrule = [];
         layerrule = [
           "animation fade,hyprpicker"
           "animation fade,selection"
