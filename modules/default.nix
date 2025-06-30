@@ -47,9 +47,7 @@
         ./home/services/mako
         ./home/services/nix-index
         ./home/services/protonmail-bridge
-        ./home/services/swaync
         ./home/services/syncthing
-        # ./home/services/quickshell
         ./home/services/udiskie
         ./home/services/xdg
       ];

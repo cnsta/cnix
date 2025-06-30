@@ -140,9 +140,6 @@
       protonmail-bridge = {
         enable = false;
       };
-      swaync = {
-        enable = false;
-      };
       syncthing = {
         enable = true;
       };
