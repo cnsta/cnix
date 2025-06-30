@@ -1,0 +1,188 @@
+[
+  {
+    "backlight": {
+      "format": "<span foreground='#928374'>{icon}</span> {percent}%",
+      "format-icons": [
+        ""
+      ],
+      "tooltip": false
+    },
+    "battery": {
+      "format": "<span foreground='#928374'>{icon}</span> {capacity}%",
+      "format-charging": "<span foreground='#928374'></span> {capacity}%",
+      "format-icons": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "states": {
+        "critical": 15,
+        "warning": 30
+      }
+    },
+    "clock": {
+      "format": "<span foreground='#928374'></span> {:%a, %d %b <span foreground='#928374'></span> %H:%M}",
+      "on-click": "calcurse-toggle.sh",
+      "on-click-right": "calsync.sh",
+      "rotate": 0,
+      "tooltip": false
+    },
+    "cpu": {
+      "format": "<span foreground='#928374'></span> {usage}%",
+      "states": {
+        "critical": 90,
+        "warning": 70
+      }
+    },
+    "custom/dunst": {
+      "exec": "dunst.sh",
+      "on-click": "dunstctl set-paused toggle",
+      "restart-interval": 1,
+      "tooltip": false
+    },
+    "custom/logo": {
+      "format": "   ",
+      "tooltip": false
+    },
+    "custom/mako": {
+      "exec": "mako.sh",
+      "on-click": "mako-toggle.sh",
+      "restart-interval": 1,
+      "tooltip": false
+    },
+    "custom/progress": {
+      "exec": "waybar-progress.sh",
+      "interval": 1,
+      "return-type": "json"
+    },
+    "custom/systemd": {
+      "exec": "waybar-systemd.sh",
+      "interval": 10,
+      "return-type": "json"
+    },
+    "custom/trayicon": {
+      "format": "󰅁",
+      "tooltip": false
+    },
+    "disk": {
+      "format": "<span foreground='#928374'></span> {percentage_free}%",
+      "states": {
+        "critical": 90,
+        "warning": 70
+      }
+    },
+    "group/system": {
+      "drawer": {
+        "click-to-reveal": true,
+        "transistion-left-to-right": true,
+        "transition-duration": 250
+      },
+      "modules": [
+        "custom/logo",
+        "cpu",
+        "memory",
+        "disk",
+        "network"
+      ],
+      "orientation": "inherit"
+    },
+    "group/tray": {
+      "drawer": {
+        "click-to-reveal": true,
+        "transistion-duration": 250,
+        "transition-left-to-right": false
+      },
+      "modules": [
+        "custom/trayicon",
+        "tray"
+      ],
+      "orientation": "inherit"
+    },
+    "height": 25,
+    "hyprland/workspaces": {
+      "active-only": false,
+      "all-outputs": false,
+      "disable-scroll": true,
+      "format": "{icon}",
+      "format-icons": {
+        "4": "",
+        "active": "",
+        "default": "",
+        "empty": "",
+        "persistent": ""
+      },
+      "on-click": "activate",
+      "persistent-workspaces": {
+        "*": 3
+      },
+      "rotate": 0
+    },
+    "memory": {
+      "format": "<span foreground='#928374'></span> {}%",
+      "states": {
+        "critical": 90,
+        "warning": 70
+      }
+    },
+    "modules-center": [
+      "hyprland/workspaces"
+    ],
+    "modules-left": [
+      "group/system"
+    ],
+    "modules-right": [
+      "custom/progress",
+      "custom/systemd",
+      "group/tray",
+      "pulseaudio",
+      "backlight",
+      "battery",
+      "clock",
+      "custom/dunst"
+    ],
+    "network": {
+      "format-disconnected": " <span foreground='#928374'></span> ",
+      "format-ethernet": "<span foreground='#928374'></span> {ifname}",
+      "format-linked": "<span foreground='#928374'></span> {ifname}",
+      "format-wifi": "<span foreground='#928374'></span> {essid}",
+      "interval": 2,
+      "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n {bandwidthDownBits}\n {bandwidthUpBits}"
+    },
+    "output": [
+      "DP-3",
+      "eDP-1"
+    ],
+    "pulseaudio": {
+      "format": "<span foreground='#928374'>{icon}</span> {volume}% {format_source}",
+      "format-bluetooth": "<span foreground='#928374'>{icon}</span> {volume}% {format_source}",
+      "format-bluetooth-muted": "<span foreground='#928374'> {icon}</span> {format_source}",
+      "format-icons": {
+        "car": "",
+        "default": [
+          "",
+          "",
+          ""
+        ],
+        "hands-free": "",
+        "headphone": "",
+        "headset": "",
+        "phone": "",
+        "portable": ""
+      },
+      "format-muted": "<span foreground='#928374'></span> {format_source}",
+      "format-source": "<span foreground='#928374'></span> {volume}%",
+      "format-source-muted": "<span foreground='#928374'></span>",
+      "on-click": "/nix/store/2894dhb9zixl8a46hai9rh20k91mw5p3-pavucontrol-6.1/bin/pavucontrol",
+      "on-click-middle": "/nix/store/xfwsp8vl887ks0hbb227i0fj4lijz082-helvum-0.5.1/bin/helvum",
+      "on-scroll-down": "volume-control.sh --dec",
+      "on-scroll-up": "volume-control.sh --inc"
+    },
+    "tray": {
+      "icon-size": 12,
+      "rotate": 0,
+      "spacing": 5
+    }
+  }
+]

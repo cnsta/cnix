@@ -46,7 +46,6 @@
       # Cryptography
       openssl # TLS/SSL library for networking and encryption
     ];
-
     shellHook = ''
       # Set LD_LIBRARY_PATH if needed (temporary fix)
       # export LD_LIBRARY_PATH="${pkgs.openssl.out}/lib:$LD_LIBRARY_PATH"

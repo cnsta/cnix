@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }: let
   inherit (lib) mkIf mkOption mkMerge types;
@@ -36,6 +37,30 @@ in {
     environment.systemPackages = with pkgs;
       mkMerge [
         [
+          ddcutil
+          app2unit
+          cava
+          lm_sensors
+          qt6.full
+          swappy
+          wayfreeze
+          socat
+          fuzzel
+          imagemagick
+          wl-screenrec
+          jq
+          fd
+          libqalculate
+          (python3.withPackages (ps:
+            with ps; [
+              pip
+              materialyoucolor
+              aubio
+              sounddevice
+              pyaudio
+              numpy
+            ]))
+
           git
           stow
           tree
