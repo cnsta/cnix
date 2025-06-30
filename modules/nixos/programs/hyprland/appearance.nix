@@ -47,10 +47,17 @@ in {
         };
       };
       animations.enabled = true;
+      bezier = [
+        "easeout,0.5, 1, 0.9, 1"
+        "easeoutback,0.34,1.22,0.65,1"
+      ];
       animation = [
         "border, 1, 2, default"
         "fade, 1, 4, default"
-        "windows, 1, 3, default, popin 80%"
+        "windowsOut,1,3,easeout,slide"
+        "windowsMove,1,3,easeoutback"
+        "windowsIn,1,3,easeoutback,slide"
+        # "windows, 1, 2.5, default"
         "workspaces, 1, 2, default, slide"
       ];
       dwindle = {
