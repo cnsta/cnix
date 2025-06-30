@@ -81,6 +81,7 @@ in {
           "ignorezero,notifications"
 
           "noanim,wallpaper"
+          "noanim,launcher"
         ];
       };
     }
