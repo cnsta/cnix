@@ -1,33 +1,29 @@
 * {
   all: unset;
-  background: #282828;
   border: none;
   border-radius: 0;
   font-family:
     Input Mono Narrow Light,
     "Font Awesome 6 Free Solid";
-  font-size: 13px;
+  font-size: 14px;
   min-height: 0;
 }
 
 window#waybar {
-  background: transparent;
   color: #fbf1c7;
-  /* transition-property: background-color; */
-  /* transition-duration: 0.5s; */
+  background-color: rgba(43, 45, 50, 0.5);
 }
 
 #workspaces button {
-  padding: 0 0px;
-  margin: 0 6px;
+  padding: 0 6px;
+  margin: 0 0px;
   background-color: transparent;
   color: #fbf1c7;
   border-top: 3px solid transparent;
   border-bottom: 3px solid transparent;
 }
+
 #workspaces button:hover {
-  background-color: #282828;
-  background: #282828;
   color: #ebdbb2;
   animation: ws_active 0s ease-in-out 1;
   transition: all 0.2s cubic-bezier(0.55, -0.68, 0.48, 1.682);
@@ -41,7 +37,7 @@ window#waybar {
 
 #custom-logo {
   font-size: 16px;
-  background-image: url("../waybar/images/button.svg");
+  background-image: url("assets/button.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 18px 15px;
@@ -54,12 +50,9 @@ window#waybar {
   margin: 1px 0px 0px 0px;
   padding-left: 2px;
   padding-right: 2px;
-  font-family: "Cantarell";
   font-size: 14px;
 }
 
-#custom-usbguard,
-#custom-decrypted,
 #custom-mail,
 #battery.warning,
 #disk.warning,
@@ -126,20 +119,23 @@ window#waybar {
   color: #fbf1c7;
 }
 
+#custom-dunst,
 #custom-mako {
-  color: #928374;
+  color: #fbf1c7;
   background: transparent;
-  opacity: 1;
-  margin: 1px 0px 0px 0px;
-  padding-right: 12px;
-  padding-left: 8px;
-  font-family: "Cantarell";
-  font-size: 16px;
+  padding-right: 6px;
+  padding-left: 4px;
+  /* font-size: 14px; */
 }
 
 #tray menu * {
-  color: #fbf1c7;
+  background-color: rgba(50, 48, 47, 0.9);
   font-family: "Input Sans Compressed";
+  padding: 2px 2px;
+}
+
+#tray menu menuitem:hover {
+  color: #4c7a5d;
 }
 
 #tray {

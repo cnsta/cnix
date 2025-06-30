@@ -72,9 +72,10 @@ in {
           "animation fade,hyprpicker"
           "animation fade,selection"
 
-          "noanim,waybar"
+          "animation fade,waybar"
           "ignorezero,waybar"
           "ignorealpha 0.0,waybar"
+          "blur,waybar"
 
           "blur,notifications"
           "ignorezero,notifications"

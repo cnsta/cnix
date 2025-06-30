@@ -31,6 +31,7 @@ in {
     home.packages = with pkgs; [
       protontricks
       lutris
+      monero-gui
       # misc.gui
       # virt-manager
       gnome-calculator
@@ -70,6 +71,8 @@ in {
       gnutar
       p7zip
       unrar
+      material-icons
+      material-symbols
     ];
   };
 }

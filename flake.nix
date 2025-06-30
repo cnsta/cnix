@@ -12,7 +12,9 @@
       ];
 
       perSystem = {pkgs, ...}: {
-        devShells = import ./nix/shell {inherit pkgs inputs;};
+        devShells = import ./nix/shell {
+          inherit pkgs inputs;
+        };
         formatter = pkgs.alejandra;
       };
     };
@@ -89,6 +91,11 @@
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
       };
+    };
+
+    astal = {
+      url = "github:aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     anyrun.url = "github:anyrun-org/anyrun";

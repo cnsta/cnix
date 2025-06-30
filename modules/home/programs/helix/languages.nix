@@ -92,6 +92,11 @@
           };
         }
         {
+          name = "qml";
+          auto-format = true;
+          language-servers = ["qmlls"];
+        }
+        {
           name = "typescript";
           auto-format = true;
           language-servers = ["dprint" "typescript-language-server"];
@@ -171,6 +176,11 @@
       dprint = {
         command = lib.getExe pkgs.dprint;
         args = ["lsp"];
+      };
+
+      qmlls = {
+        command = "${pkgs.qt6.qtdeclarative}/bin/qmlls";
+        args = ["-E"];
       };
 
       pyright = {
