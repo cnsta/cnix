@@ -4,8 +4,7 @@
       kernel = {
         extraBlacklistedModules = [];
         extraKernelParams = [];
-        hardware = "amd";
-        variant = "latest";
+        variant = "stable";
       };
       loader = {
         default = {
@@ -18,7 +17,7 @@
     };
     hardware = {
       bluetooth = {
-        enable = true;
+        enable = false;
       };
       graphics = {
         amd = {

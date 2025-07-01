@@ -21,13 +21,8 @@
         enable = true;
       };
       graphics = {
-        amd = {
-          enable = true;
-          packageSet = "standard";
-        };
-        nvidia = {
-          enable = false;
-        };
+        enable = true;
+        vendor = "amd";
       };
       logitech = {
         enable = true;

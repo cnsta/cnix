@@ -39,7 +39,10 @@ in {
 
   networking.hostName = "cnixtop";
 
-  environment.variables.NH_FLAKE = "/home/cnst/.nix-config";
+  environment.variables = {
+    NH_FLAKE = "/home/cnst/.nix-config";
+    GEMINI_API_KEY = config.age.secrets.gcapi.path;
+  };
 
   programs.hyprland.settings = {
     monitor = [

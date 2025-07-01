@@ -7,4 +7,5 @@ in {
   "certpem.age".publicKeys = [cnst cnix];
   "keypem.age".publicKeys = [cnst cnix];
   "mailpwd.age".publicKeys = [cnst cnix];
+  "gcapi.age".publicKeys = [cnst cnix];
 }

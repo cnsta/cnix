@@ -17,7 +17,7 @@ in {
 
       hardware = mkOption {
         type = types.enum ["amd" "nvidia"];
-        default = "amd";
+        default = "";
         description = "Hardware type (GPU) configuration.";
       };
 
