@@ -34,6 +34,7 @@
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/cnst/.steam/root/compatibilitytools.d";
       QT_QPA_PLATFORM = "wayland";
       XDG_SESSION_TYPE = "wayland";
+      # GEMINI_API_KEY = "$(cat ${config.age.secrets.gcapi.path})";
     };
   };
 

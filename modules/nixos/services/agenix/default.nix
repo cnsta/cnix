@@ -39,6 +39,10 @@ in {
           certpem.file = "${self}/secrets/certpem.age";
           keypem.file = "${self}/secrets/keypem.age";
           mailpwd.file = "${self}/secrets/mailpwd.age";
+          gcapi = {
+            file = "${self}/secrets/gcapi.age";
+            owner = "cnst";
+          };
         };
       })
       (mkIf cfg.toothpc.enable {
@@ -53,9 +57,11 @@ in {
       })
     ];
 
-    environment.systemPackages = [
-      inputs.agenix.packages.x86_64-linux.default
-      pkgs.age
-    ];
+    environment = {
+      systemPackages = [
+        inputs.agenix.packages.x86_64-linux.default
+        pkgs.age
+      ];
+    };
   };
 }

@@ -21,11 +21,9 @@
         enable = false;
       };
       graphics = {
-        amd = {
-          enable = false;
-        };
+        enable = true;
+        vendor = "nvidia";
         nvidia = {
-          enable = true;
           package = "beta";
           open = {
             enable = true;

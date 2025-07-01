@@ -88,6 +88,7 @@ in {
 
         (mkIf cfg.dev.enable [
           # lldb_20 # some biuld error atm
+          gemini-cli
           nfs-utils
           gcc
           rust-analyzer

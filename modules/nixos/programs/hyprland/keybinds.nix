@@ -92,7 +92,7 @@ in {
 
     (mkIf (host == "cnixtop") {
       programs.hyprland.settings = {
-        "$terminal" = "ghostty";
+        "$terminal" = "alacritty";
         "$browser" = "zen";
         "$browserinc" = "zen --private-window";
         "$mod" = "SUPER";

@@ -11,7 +11,7 @@
 
 window#waybar {
   color: #fbf1c7;
-  background-color: rgba(43, 45, 50, 0.5);
+  background-color: rgba(43, 45, 50, 0.6);
 }
 
 #workspaces button {
@@ -60,7 +60,7 @@ window#waybar {
 #cpu.warning,
 #custom-dnd.dnd-notification,
 #custom-dnd.dnd-none {
-  border-top: 3px solid #282828;
+  border-top: 3px solid transparent;
   border-bottom: 3px solid #c35e0a;
 }
 
@@ -71,12 +71,12 @@ window#waybar {
 #cpu.critical,
 #custom-yubikey,
 #custom-recording {
-  border-top: 3px solid #282828;
+  border-top: 3px solid transparent;
   border-bottom: 3px solid #c14a4a;
 }
 
 #battery.charging {
-  border-top: 3px solid #282828;
+  border-top: 3px solid transparent;
   border-bottom: 3px solid #4c7a5d;
 }
 

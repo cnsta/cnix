@@ -58,8 +58,7 @@
         ./nixos/boot/loader
 
         ./nixos/hardware/bluetooth
-        ./nixos/hardware/graphics/amd
-        ./nixos/hardware/graphics/nvidia
+        ./nixos/hardware/graphics
         ./nixos/hardware/logitech
         ./nixos/hardware/network
 

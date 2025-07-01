@@ -26,14 +26,12 @@ in {
         ConditionEnvironment = "WAYLAND_DISPLAY";
         Description = "waybar";
       };
-
       Service = {
         ExecStart = "${uwsm} app -- ${waybar} -c ${waybarAssets}/config.jsonc -s ${waybarAssets}/style.css";
         Slice = "app-graphical.slice";
         Restart = "always";
-        RestartSec = 10;
+        RestartSec = 30;
       };
-
       Install = {
         WantedBy = ["graphical-session.target"];
       };
