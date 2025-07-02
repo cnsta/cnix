@@ -125,7 +125,7 @@
     services = {
       agenix = {
         enable = false;
-        cnix = {
+        cnixtop = {
           enable = false;
         };
       };
