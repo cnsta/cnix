@@ -20,13 +20,8 @@
         enable = false;
       };
       graphics = {
-        amd = {
-          enable = true;
-          packageSet = "standard";
-        };
-        nvidia = {
-          enable = false;
-        };
+        enable = true;
+        vendor = "intel";
       };
       logitech = {
         enable = false;
@@ -141,7 +136,7 @@
         enable = true;
       };
       dconf = {
-        enable = true;
+        enable = false;
       };
       flatpak = {
         enable = false;
@@ -154,7 +149,7 @@
       };
       greetd = {
         enable = false;
-        user = "cnst";
+        user = "cnstlab";
       };
       gvfs = {
         enable = false;
@@ -175,7 +170,7 @@
         enable = true;
       };
       pcscd = {
-        enable = true;
+        enable = false;
       };
       pipewire = {
         enable = false;
