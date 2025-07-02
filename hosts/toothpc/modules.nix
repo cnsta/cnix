@@ -2,10 +2,8 @@
   nixos = {
     boot = {
       kernel = {
-        extraBlacklistedModules = [];
-        extraKernelParams = [];
-        hardware = "nvidia";
         variant = "latest";
+        hardware = ["nvidia"];
       };
       loader = {
         default = {
