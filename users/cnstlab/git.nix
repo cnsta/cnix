@@ -12,7 +12,7 @@
     if isCnixpad
     then "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXCjkKouZrsMoswMIeueO8X/c3kuY3Gb0E9emvkqwUv cnst@cnixpad"
     else if isCnixlab
-    then "placeholder text"
+    then "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICiNcNex+/hrEQJYJJTj89uPXocSfChU38E5TujWdxaM cnstlab@cnixlab"
     else "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEUub8vbzUn2f39ILhAJ2QeH8xxLSjiyUuo8xvHGx/VB adam@cnst.dev";
 in {
   home.packages = [pkgs.gh];
