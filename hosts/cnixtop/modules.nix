@@ -2,10 +2,8 @@
   nixos = {
     boot = {
       kernel = {
-        extraBlacklistedModules = [];
-        extraKernelParams = [];
-        hardware = "amd";
         variant = "latest";
+        hardware = ["amd"];
       };
       loader = {
         default = {
