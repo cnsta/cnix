@@ -7,9 +7,6 @@
       alacritty = {
         enable = false;
       };
-      anyrun = {
-        enable = false;
-      };
       bash = {
         enable = true;
       };
