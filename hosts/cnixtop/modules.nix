@@ -74,6 +74,9 @@
       inkscape = {
         enable = false;
       };
+      lact = {
+        enable = true;
+      };
       lutris = {
         enable = false;
       };

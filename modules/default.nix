@@ -75,6 +75,7 @@
         ./nixos/programs/gnome
         ./nixos/programs/hyprland
         ./nixos/programs/inkscape
+        ./nixos/programs/lact
         ./nixos/programs/lutris
         ./nixos/programs/microfetch
         ./nixos/programs/pkgs

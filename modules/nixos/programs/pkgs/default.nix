@@ -51,16 +51,7 @@ in {
           jq
           fd
           libqalculate
-          (python3.withPackages (ps:
-            with ps; [
-              pip
-              materialyoucolor
-              aubio
-              sounddevice
-              pyaudio
-              numpy
-            ]))
-
+          mission-center
           git
           stow
           tree
@@ -80,6 +71,7 @@ in {
           winetricks
           wine
           geekbench
+          unigine-heaven
         ])
 
         (mkIf cfg.laptop.enable [

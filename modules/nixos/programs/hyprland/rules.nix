@@ -32,6 +32,11 @@ in {
           "move 100%-w-20 40, class:^(org.keepassxc.KeePassXC)$"
           "float, class:^(org.keepassxc.KeePassXC)$"
 
+          # === MISSION-CENTER SETTINGS ===
+          "size 50% 70%, class:^(io.missioncenter.MissionCenter)$"
+          "center, class:^(io.missioncenter.MissionCenter)$"
+          "float, class:^(io.missioncenter.MissionCenter)$"
+
           # === SUPPRESS MAXIMIZE EVENT ===
           "suppressevent maximize, class:.*" # Suppress maximize events for all windows
 
