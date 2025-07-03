@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkMerge;
@@ -67,6 +68,7 @@ in {
           "$mod SHIFT, 8, movetoworkspace, 8"
           "$mod SHIFT, 9, movetoworkspace, 9"
           "$mod SHIFT, 0, movetoworkspace, 10"
+          "CTRL SHIFT, Escape, exec, ${runOnce "missioncenter"}"
 
           ",XF86AudioLowerVolume, exec, volume-control.sh --dec"
           ",XF86AudioRaiseVolume, exec, volume-control.sh --inc"

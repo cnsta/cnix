@@ -80,6 +80,7 @@ in {
 
       # AMD-specific configuration
       (mkIf (vendor == "amd") {
+        hardware.amdgpu.overdrive.enable = true;
         hardware.graphics.extraPackages = commonPackages ++ mesaVulkanPackages;
         hardware.graphics.extraPackages32 = commonPackages32;
         environment.systemPackages = tools;
