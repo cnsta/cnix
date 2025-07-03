@@ -1,7 +1,8 @@
 {
   accounts = {
     username = "cnstlab";
-    hostname = "cnixlab";
+    mail = "adam@cnst.dev";
+    sshUser = "cnixlab";
   };
   monitors = [
     {

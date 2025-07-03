@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   imports = [
     ./modules
-    ./git.nix
   ];
   home = {
     username = "toothpick";

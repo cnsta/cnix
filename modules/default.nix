@@ -14,6 +14,7 @@
         ./home/programs/foot
         ./home/programs/fuzzel
         ./home/programs/ghostty
+        ./home/programs/git
         ./home/programs/helix
         ./home/programs/hyprlock
         ./home/programs/jujutsu
