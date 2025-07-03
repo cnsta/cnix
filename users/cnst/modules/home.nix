@@ -35,6 +35,9 @@
       fuzzel = {
         enable = true;
       };
+      git = {
+        enable = true;
+      };
       ghostty = {
         enable = true;
       };
