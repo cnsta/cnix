@@ -25,6 +25,12 @@
       fuzzel = {
         enable = true;
       };
+      git = {
+        enable = true;
+      };
+      ghostty = {
+        enable = false;
+      };
       helix = {
         enable = true;
       };
