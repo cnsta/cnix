@@ -15,7 +15,7 @@ in {
     {
       programs.hyprland.settings = {
         exec-once = [
-          "sleep 2 && uwsm finalize"
+          "uwsm finalize"
           "hyprlock"
         ];
       };

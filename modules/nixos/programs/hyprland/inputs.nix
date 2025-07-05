@@ -65,7 +65,7 @@ in {
     (mkIf (host == "cnixtop") {
       programs.hyprland.settings = {
         render = {
-          direct_scanout = false;
+          direct_scanout = 1;
         };
         cursor = {
           no_hardware_cursors = 2;
@@ -75,6 +75,7 @@ in {
         };
         misc = {
           vrr = 0;
+          vfr = true;
         };
       };
     })
@@ -89,7 +90,7 @@ in {
         };
         misc = {
           vrr = 0;
-          vfr = 1;
+          vfr = true;
         };
       };
     })
@@ -97,7 +98,7 @@ in {
     (mkIf (host == "toothpc") {
       programs.hyprland.settings = {
         render = {
-          direct_scanout = false;
+          direct_scanout = 0;
         };
         cursor = {
           no_hardware_cursors = true;

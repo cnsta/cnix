@@ -6,7 +6,7 @@
 }: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.waybar;
-  uwsm = lib.getExe pkgs.uwsm;
+  # uwsm = lib.getExe pkgs.uwsm;
   waybar = lib.getExe pkgs.waybar;
 
   waybarAssets = pkgs.runCommand "waybar-config-assets" {} ''
@@ -22,15 +22,14 @@ in {
   config = mkIf cfg.enable {
     systemd.user.services.waybar = {
       Unit = {
+        Description = "Highly customizable Wayland bar for Sway and Wlroots based compositors.";
         After = ["graphical-session.target"];
-        ConditionEnvironment = "WAYLAND_DISPLAY";
-        Description = "waybar";
       };
       Service = {
-        ExecStart = "${uwsm} app -- ${waybar} -c ${waybarAssets}/config.jsonc -s ${waybarAssets}/style.css";
+        Type = "exec";
+        ExecStart = "${waybar} -c ${waybarAssets}/config.jsonc -s ${waybarAssets}/style.css";
+        Restart = "on-failure";
         Slice = "app-graphical.slice";
-        Restart = "always";
-        RestartSec = 30;
       };
       Install = {
         WantedBy = ["graphical-session.target"];
