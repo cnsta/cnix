@@ -56,8 +56,8 @@ in {
           "float, class:^(com.github.hluk.copyq)$"
           "float, class:^(blueman-manager)$"
 
-          "workspace 5 silent, class:^(discord)$"
-          "workspace 5 silent, class:^(vesktop)$"
+          # "workspace 5 silent, class:^(discord)$"
+          # "workspace 5 silent, class:^(vesktop)$"
           "workspace 4 silent, class:^(steam_app_0)$"
           "workspace 4 silent, title:^(World of Warcraft)$"
         ];
@@ -84,7 +84,7 @@ in {
         "name:2,monitor:DP-3"
         "name:3,monitor:DP-3"
         "name:4,monitor:DP-3"
-        "name:5,monitor:DP-4"
+        "name:5,monitor:DP-3"
         "name:6,monitor:DP-3"
         "name:7,monitor:DP-3"
         "name:8,monitor:DP-3"
