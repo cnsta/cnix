@@ -68,7 +68,7 @@ in {
           "$mod SHIFT, 8, movetoworkspace, 8"
           "$mod SHIFT, 9, movetoworkspace, 9"
           "$mod SHIFT, 0, movetoworkspace, 10"
-          "CTRL SHIFT, Escape, exec, ${runOnce "missioncenter"}"
+          "CTRL SHIFT, Escape, exec, ${runOnce "resources"}"
 
           ",XF86AudioLowerVolume, exec, volume-control.sh --dec"
           ",XF86AudioRaiseVolume, exec, volume-control.sh --inc"
