@@ -38,7 +38,9 @@ in {
     })
 
     (mkIf (host == "cnixpad") {
-      programs.hyprland.settings.exec-once = commonExecOnce;
+      programs.hyprland.settings.exec-once =
+        []
+        ++ commonExecOnce;
     })
 
     (mkIf (host == "toothpc") {

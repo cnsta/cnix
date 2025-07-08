@@ -28,9 +28,9 @@ in {
           "move 100%-w-20 40, class:^(org.keepassxc.KeePassXC)$"
           "float, class:^(org.keepassxc.KeePassXC)$"
 
-          "size 50% 70%, class:^(io.missioncenter.MissionCenter)$"
-          "center, class:^(io.missioncenter.MissionCenter)$"
-          "float, class:^(io.missioncenter.MissionCenter)$"
+          "size 50% 70%, class:^(net.nokyan.Resources)$"
+          "center, class:^(net.nokyan.Resources)$"
+          "float, class:^(net.nokyan.Resources)$"
 
           "suppressevent maximize, class:.*"
 

@@ -51,7 +51,7 @@ in {
           jq
           fd
           libqalculate
-          mission-center
+          resources
           git
           stow
           tree
