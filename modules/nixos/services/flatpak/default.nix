@@ -16,13 +16,18 @@ in {
       gnome-software
     ];
     systemd.services.flatpak-repo = {
-      wantedBy = ["multi-user.target"];
-      requires = ["network-online.target"];
+      description = "Add flathub repository";
       after = ["network-online.target"];
+      wants = ["network-online.target"];
       path = [pkgs.flatpak];
-      script = ''
-        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-      '';
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo";
+        Restart = "on-failure";
+        RestartSec = "5s";
+      };
+      wantedBy = ["multi-user.target"];
     };
   };
 }
