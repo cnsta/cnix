@@ -4,6 +4,7 @@
       kernel = {
         variant = "latest";
         hardware = ["amd"];
+        extraKernelParams = [];
       };
       loader = {
         default = {
