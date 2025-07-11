@@ -4,6 +4,7 @@
       kernel = {
         variant = "latest";
         hardware = ["intel"];
+        extraKernelParams = ["fbcon=rotate:3"];
       };
       loader = {
         default = {
