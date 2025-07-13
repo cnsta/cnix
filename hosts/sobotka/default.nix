@@ -7,7 +7,6 @@
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
   users.users.cnst = {
-    initialPassword = "hehehe";
     isNormalUser = true;
     shell = pkgs.fish;
     extraGroups = ifTheyExist [
