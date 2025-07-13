@@ -4,7 +4,12 @@
       kernel = {
         variant = "latest";
         hardware = ["intel"];
-        extraKernelParams = ["fbcon=rotate:1"];
+        extraKernelParams = [
+          "fbcon=rotate:1"
+          "efi=keep_bootcon"
+          "amd_iommu=on"
+          "iommu=pt"
+        ];
       };
       loader = {
         default = {
