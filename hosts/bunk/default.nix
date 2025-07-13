@@ -35,7 +35,7 @@ in {
     ./modules.nix
   ];
 
-  networking.hostName = "cnixpad";
+  networking.hostName = "bunk";
 
   swapDevices = [
     {

@@ -6,9 +6,9 @@
   inherit (lib) mkOption types;
 
   sshKeys = {
-    cnixpad = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXCjkKouZrsMoswMIeueO8X/c3kuY3Gb0E9emvkqwUv cnst@cnixpad";
-    cnixlab = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICiNcNex+/hrEQJYJJTj89uPXocSfChU38E5TujWdxaM cnstlab@cnixlab";
-    cnixtop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEUub8vbzUn2f39ILhAJ2QeH8xxLSjiyUuo8xvHGx/VB adam@cnst.dev";
+    bunk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXCjkKouZrsMoswMIeueO8X/c3kuY3Gb0E9emvkqwUv cnst@cnixpad";
+    sobotka = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICiNcNex+/hrEQJYJJTj89uPXocSfChU38E5TujWdxaM cnstlab@cnixlab";
+    kima = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEUub8vbzUn2f39ILhAJ2QeH8xxLSjiyUuo8xvHGx/VB adam@cnst.dev";
     toothpc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGu5vZbb5ExampleKeyHereGfDF9c5 toothpick@toothpc";
   };
 

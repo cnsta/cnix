@@ -6,7 +6,7 @@
 }: let
   inherit (lib) mkIf mkEnableOption mkForce elem;
   browser =
-    if elem osConfig.networking.hostName ["cnixtop" "cnixpad"]
+    if elem osConfig.networking.hostName ["kima" "bunk"]
     then "zen.desktop"
     else "firefox.desktop";
   cfg = config.home.services.xdg;

@@ -124,7 +124,7 @@
     services = {
       agenix = {
         enable = true;
-        cnixpad = {
+        bunk = {
           enable = true;
         };
       };

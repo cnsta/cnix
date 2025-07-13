@@ -12,27 +12,32 @@ in {
   options = {
     nixos.services.agenix = {
       enable = mkEnableOption "Enables agenix system environment";
-      cnixtop.enable = mkOption {
+      kima.enable = mkOption {
         type = lib.types.bool;
         default = false;
-        description = "Apply cnix agenix settings";
+        description = "Apply kima agenix settings";
+      };
+      bunk.enable = mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Apply bunk agenix settings";
+      };
+      sobotka.enable = mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Apply sobotka agenix settings";
       };
       toothpc.enable = mkOption {
         type = lib.types.bool;
         default = false;
         description = "Apply toothpc agenix settings";
       };
-      cnixpad.enable = mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Apply cnixpad agenix settings";
-      };
     };
   };
 
   config = mkIf cfg.enable {
     age = mkMerge [
-      (mkIf cfg.cnixtop.enable {
+      (mkIf cfg.kima.enable {
         secrets = {
           cnstssh.file = "${self}/secrets/cnstssh.age";
           cnixssh.file = "${self}/secrets/cnixssh.age";
@@ -45,14 +50,19 @@ in {
           };
         };
       })
+      (mkIf cfg.bunk.enable {
+        secrets = {
+          # Add bunk specific secrets here
+        };
+      })
+      (mkIf cfg.sobotka.enable {
+        secrets = {
+          # Add sobotka specific secrets here
+        };
+      })
       (mkIf cfg.toothpc.enable {
         secrets = {
           # Add toothpc specific secrets here
-        };
-      })
-      (mkIf cfg.cnixpad.enable {
-        secrets = {
-          # Add adampad specific secrets here
         };
       })
     ];

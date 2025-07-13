@@ -23,15 +23,14 @@
     # get these into the module system
     specialArgs = {inherit inputs self userConfig systemConfig hostConfig cnstConfig toothpickConfig umodPath smodPath;};
   in {
-    cnixtop = nixosSystem {
+    kima = nixosSystem {
       inherit specialArgs;
-
       modules = [
-        ./cnixtop
+        ./kima
         "${self}/nix"
         {
           home-manager = {
-            users.cnst.imports = homeImports."cnst@cnixtop";
+            users.cnst.imports = homeImports."cnst@kima";
             extraSpecialArgs = specialArgs;
           };
         }
@@ -41,14 +40,14 @@
         inputs.agenix.nixosModules.default
       ];
     };
-    cnixpad = nixosSystem {
+    bunk = nixosSystem {
       inherit specialArgs;
       modules = [
-        ./cnixpad
+        ./bunk
         "${self}/nix"
         {
           home-manager = {
-            users.cnst.imports = homeImports."cnst@cnixpad";
+            users.cnst.imports = homeImports."cnst@bunk";
             extraSpecialArgs = specialArgs;
           };
         }
@@ -57,14 +56,14 @@
         inputs.agenix.nixosModules.default
       ];
     };
-    cnixlab = nixosSystem {
+    sobotka = nixosSystem {
       inherit specialArgs;
       modules = [
-        ./cnixlab
+        ./sobotka
         "${self}/nix"
         {
           home-manager = {
-            users.cnstlab.imports = homeImports."cnstlab@cnixlab";
+            users.cnst.imports = homeImports."cnst@sobotka";
             extraSpecialArgs = specialArgs;
           };
         }

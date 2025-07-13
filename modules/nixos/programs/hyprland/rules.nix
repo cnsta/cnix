@@ -78,7 +78,7 @@ in {
         ];
       };
     }
-    (mkIf (host == "cnixtop") {
+    (mkIf (host == "kima") {
       programs.hyprland.settings.workspace = [
         "name:1,monitor:DP-3"
         "name:2,monitor:DP-3"
@@ -92,7 +92,7 @@ in {
         "name:10,monitor:DP-3"
       ];
     })
-    (mkIf (host == "cnixpad") {
+    (mkIf (host == "bunk") {
       programs.hyprland.settings.workspace = [];
     })
     (mkIf (host == "toothpc") {

@@ -6,7 +6,6 @@
   extraSpecialArgs = {inherit inputs self;};
 
   sharedImports = [
-    # ./etc
     "${self}/scripts"
     inputs.nvf.homeManagerModules.default
     self.nixosModules.home
@@ -14,20 +13,20 @@
   ];
 
   homeImports = {
-    "cnst@cnixtop" =
+    "cnst@kima" =
       sharedImports
       ++ [
         ./cnst
       ];
-    "cnst@cnixpad" =
+    "cnst@bunk" =
       sharedImports
       ++ [
         ./cnst
       ];
-    "cnstlab@cnixlab" =
+    "cnst@sobotka" =
       sharedImports
       ++ [
-        ./cnstlab
+        ./cnst
       ];
     "toothpick@toothpc" =
       sharedImports

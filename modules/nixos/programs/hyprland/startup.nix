@@ -28,7 +28,7 @@ in {
       };
     }
 
-    (mkIf (host == "cnixtop") {
+    (mkIf (host == "kima") {
       programs.hyprland.settings.exec-once =
         [
           "uwsm app -- mullvad-vpn"
@@ -37,7 +37,7 @@ in {
         ++ commonExecOnce;
     })
 
-    (mkIf (host == "cnixpad") {
+    (mkIf (host == "bunk") {
       programs.hyprland.settings.exec-once =
         []
         ++ commonExecOnce;
