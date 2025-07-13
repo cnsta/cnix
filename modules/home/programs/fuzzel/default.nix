@@ -44,10 +44,10 @@ in {
         };
       };
     }
-    (mkIf (host == "cnixtop") {
+    (mkIf (host == "kima") {
       programs.fuzzel.settings.main.terminal = "${inputs.ghostty.packages.x86_64-linux.default}/bin/ghostty";
     })
-    (mkIf (host == "cnixpad") {
+    (mkIf (host == "bunk") {
       programs.fuzzel.settings.main.terminal = "${pkgs.foot}/bin/foot";
     })
     (mkIf (host == "toothpc") {

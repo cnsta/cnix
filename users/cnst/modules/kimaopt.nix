@@ -2,7 +2,7 @@
   accounts = {
     username = "cnst";
     mail = "adam@cnst.dev";
-    sshUser = "cnixtop";
+    sshUser = "kima";
   };
   monitors = [
     {

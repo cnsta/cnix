@@ -92,7 +92,7 @@ in {
       };
     }
 
-    (mkIf (host == "cnixtop") {
+    (mkIf (host == "kima") {
       programs.hyprland.settings = {
         "$terminal" = "alacritty";
         "$browser" = "zen";
@@ -104,7 +104,7 @@ in {
       };
     })
 
-    (mkIf (host == "cnixpad") {
+    (mkIf (host == "bunk") {
       programs.hyprland.settings = {
         "$terminal" = "foot";
         "$browser" = "zen";

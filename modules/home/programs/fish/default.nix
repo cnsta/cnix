@@ -23,16 +23,9 @@ in {
       ];
       shellAbbrs = {
         extract = "extract.sh";
-        homemodules = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/home.nix";
-        hmod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/home.nix";
-        homeoptions = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/options.nix";
-        hopt = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/options.nix";
-        nixosmodules = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
-        nmod = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
         nixcleanboot = "sudo nix run /home/$USER/.nix-config#cleanup-boot";
         nixclean = "nh clean all --keep 3";
         nixdev = "nix develop ~/.nix-config -c $SHELL";
-        nixconfig = "cd /home/$USER/.nix-config/";
         nixup = "nh os switch -H $hostname";
         nixupv = "nh os switch -v -H $hostname";
         flakeup = "nix flake update";
@@ -43,6 +36,13 @@ in {
         "...." = "cd ../../../";
         "....." = "cd ../../../../";
         "......" = "cd ../../../../../";
+        nixconfig = "cd /home/$USER/.nix-config/";
+        homemodules = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/{$hostname}mod.nix";
+        hmod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/{$hostname}mod.nix";
+        homeoptions = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/{$hostname}opt.nix";
+        hopt = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/{$hostname}opt.nix";
+        nixosmodules = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
+        nmod = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
         tree = "${getExe eza} --tree --icons=always";
         cat = "${getExe bat} --style=plain";
         ls = "${getExe eza} -h --git --icons --color=auto --group-directories-first -s extension";

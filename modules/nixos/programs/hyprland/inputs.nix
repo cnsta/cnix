@@ -62,7 +62,7 @@ in {
       };
     }
 
-    (mkIf (host == "cnixtop") {
+    (mkIf (host == "kima") {
       programs.hyprland.settings = {
         render = {
           direct_scanout = 1;
@@ -80,7 +80,7 @@ in {
       };
     })
 
-    (mkIf (host == "cnixpad") {
+    (mkIf (host == "bunk") {
       programs.hyprland.settings = {
         input = {
           kb_options = "ctrl:swapcaps";

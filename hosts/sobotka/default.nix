@@ -35,22 +35,12 @@ in {
     ./modules.nix
   ];
 
-  time.hardwareClockInLocalTime = true;
+  boot.initrd.luks.devices."luks-47b35d4b-467a-4637-a5f9-45177da62897".device = "/dev/disk/by-uuid/47b35d4b-467a-4637-a5f9-45177da62897";
 
-  networking.hostName = "cnixtop";
+  networking.hostName = "sobotka";
 
-  environment.variables = {
-    NH_FLAKE = "/home/cnst/.nix-config";
-    GEMINI_API_KEY = config.age.secrets.gcapi.path;
-  };
-
-  programs.hyprland.settings = {
-    monitor = [
-      "DP-3,2560x1440@240,0x0,1,transform,0,bitdepth,10"
-      "DP-4,1920x1080@60,auto,1,transform,3"
-    ];
-  };
+  environment.variables.NH_FLAKE = "/home/cnst/.nix-config";
 
   #   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = lib.mkDefault "23.11";
+  system.stateVersion = lib.mkDefault "25.05";
 }

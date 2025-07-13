@@ -3,28 +3,28 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = ["intel"];
-        extraKernelParams = ["fbcon=rotate:1"];
+        hardware = ["amd"];
+        extraKernelParams = [];
       };
       loader = {
         default = {
-          enable = true;
+          enable = false;
         };
         lanzaboote = {
-          enable = false;
+          enable = true;
         };
       };
     };
     hardware = {
       bluetooth = {
-        enable = false;
+        enable = true;
       };
       graphics = {
         enable = true;
-        vendor = "intel";
+        vendor = "amd";
       };
       logitech = {
-        enable = false;
+        enable = true;
       };
       network = {
         enable = true;
@@ -37,7 +37,7 @@
     };
     programs = {
       android = {
-        enable = false;
+        enable = true;
       };
       beekeeper = {
         enable = false;
@@ -55,13 +55,13 @@
         enable = true;
       };
       gamemode = {
-        enable = false;
+        enable = true;
         optimizeGpu = {
-          enable = false;
+          enable = true;
         };
       };
       gamescope = {
-        enable = false;
+        enable = true;
       };
       gimp = {
         enable = false;
@@ -70,10 +70,13 @@
         enable = false;
       };
       hyprland = {
-        enable = false;
+        enable = true;
       };
       inkscape = {
         enable = false;
+      };
+      lact = {
+        enable = true;
       };
       lutris = {
         enable = false;
@@ -82,15 +85,15 @@
         enable = true;
       };
       pkgs = {
-        enable = false;
+        enable = true;
         desktop = {
-          enable = false;
+          enable = true;
         };
         laptop = {
           enable = false;
         };
         dev = {
-          enable = false;
+          enable = true;
         };
       };
       mysql-workbench = {
@@ -100,23 +103,23 @@
         enable = true;
         clean = {
           enable = true;
-          extraArgs = "--keep 9 --keep-since 51d";
+          extraArgs = "--keep 3 --keep-since 21d";
         };
       };
       npm = {
         enable = false;
       };
       obsidian = {
-        enable = false;
+        enable = true;
       };
       steam = {
-        enable = false;
+        enable = true;
       };
       thunar = {
-        enable = false;
+        enable = true;
       };
       yubikey = {
-        enable = false;
+        enable = true;
       };
       zsh = {
         enable = false;
@@ -124,13 +127,13 @@
     };
     services = {
       agenix = {
-        enable = false;
-        cnixtop = {
-          enable = false;
+        enable = true;
+        kima = {
+          enable = true;
         };
       };
       blueman = {
-        enable = false;
+        enable = true;
       };
       dbus = {
         enable = true;
@@ -139,29 +142,29 @@
         enable = true;
       };
       flatpak = {
-        enable = false;
+        enable = true;
       };
       fwupd = {
         enable = true;
       };
       gnome-keyring = {
-        enable = false;
+        enable = true;
       };
       greetd = {
-        enable = false;
-        user = "cnstlab";
+        enable = true;
+        user = "cnst";
       };
       gvfs = {
-        enable = false;
+        enable = true;
       };
       kanata = {
-        enable = false;
+        enable = true;
       };
       locate = {
         enable = true;
       };
       mullvad = {
-        enable = false;
+        enable = true;
       };
       nix-ld = {
         enable = false;
@@ -170,13 +173,13 @@
         enable = true;
       };
       pcscd = {
-        enable = false;
+        enable = true;
       };
       pipewire = {
-        enable = false;
+        enable = true;
       };
       polkit = {
-        enable = false;
+        enable = true;
       };
       powerd = {
         enable = false;
@@ -185,7 +188,7 @@
         enable = false;
       };
       scx = {
-        enable = false;
+        enable = true;
         scheduler = "scx_lavd";
         flags = "--performance";
       };
@@ -198,7 +201,7 @@
     };
     system = {
       fonts = {
-        enable = false;
+        enable = true;
       };
       locale = {
         enable = true;
@@ -207,7 +210,7 @@
         timeZone = "Europe/Stockholm";
       };
       xdg = {
-        enable = false;
+        enable = true;
         xdgOpenUsePortal = true;
       };
     };
