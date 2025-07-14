@@ -10,7 +10,6 @@ in {
     nixos.services.pipewire.enable = mkEnableOption "Enables pipewire";
   };
   config = mkIf cfg.enable {
-    security.rtkit.enable = true;
     services = {
       pulseaudio.enable = false;
       pipewire = {

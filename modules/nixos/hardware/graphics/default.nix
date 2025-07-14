@@ -92,6 +92,7 @@ in {
           commonPackages
           ++ mesaVulkanPackages
           ++ (with pkgs; [
+            vpl-gpu-rt
             intel-media-driver
             intel-compute-runtime
           ]);

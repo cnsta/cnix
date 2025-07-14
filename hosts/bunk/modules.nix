@@ -82,6 +82,9 @@
       };
       pkgs = {
         enable = true;
+        common = {
+          enable = true;
+        };
         desktop = {
           enable = false;
         };

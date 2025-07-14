@@ -9,6 +9,10 @@
 
   hasHardware = hw: builtins.elem hw cfg.hardware;
 in {
+  imports = [
+    ./security.nix
+  ];
+
   options = {
     nixos.boot.kernel = {
       variant = mkOption {

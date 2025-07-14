@@ -15,6 +15,12 @@ in {
         default = true;
         description = "Whether to install default core packages.";
       };
+      common.enable = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Whether to install common packages.";
+      };
+
       desktop.enable = mkOption {
         type = types.bool;
         default = false;
@@ -37,34 +43,38 @@ in {
     environment.systemPackages = with pkgs;
       mkMerge [
         [
+          pciutils
           ddcutil
           app2unit
           cava
           lm_sensors
-          qt6.full
-          swappy
-          wayfreeze
           socat
-          fuzzel
-          imagemagick
-          wl-screenrec
           jq
           fd
-          libqalculate
           resources
           git
           stow
           tree
           traceroute
-          gnome-disk-utility
-          networkmanagerapplet
           progress
-          wf-recorder
-          inotify-tools
           git-crypt
           gparted
           ntfs3g
         ]
+
+        (mkIf cfg.common.enable [
+          qt6.full
+          swappy
+          wayfreeze
+          imagemagick
+          wl-screenrec
+          libqalculate
+          fuzzel
+          gnome-disk-utility
+          networkmanagerapplet
+          inotify-tools
+          wf-recorder
+        ])
 
         (mkIf cfg.desktop.enable [
           protonup
