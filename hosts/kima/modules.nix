@@ -89,6 +89,9 @@
         desktop = {
           enable = true;
         };
+        common = {
+          enable = true;
+        };
         laptop = {
           enable = false;
         };

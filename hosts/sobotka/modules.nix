@@ -3,13 +3,8 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = ["intel"];
-        extraKernelParams = [
-          "fbcon=rotate:1"
-          "efi=keep_bootcon"
-          "amd_iommu=on"
-          "iommu=pt"
-        ];
+        hardware = ["amd"];
+        extraKernelParams = [];
       };
       loader = {
         default = {
@@ -87,8 +82,11 @@
         enable = true;
       };
       pkgs = {
-        enable = false;
+        enable = true;
         desktop = {
+          enable = false;
+        };
+        common = {
           enable = false;
         };
         laptop = {
