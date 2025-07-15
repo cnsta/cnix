@@ -117,6 +117,12 @@
         ./nixos/system/xdg
       ];
     };
+    server = {
+      imports = [
+        ./server/caddy
+        ./server/vaultwarden
+      ];
+    };
     options = {
       imports = [
         ./options/accounts
