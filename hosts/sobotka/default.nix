@@ -33,11 +33,15 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./modules.nix
+    ./server.nix
   ];
 
   boot.initrd.luks.devices."luks-47b35d4b-467a-4637-a5f9-45177da62897".device = "/dev/disk/by-uuid/47b35d4b-467a-4637-a5f9-45177da62897";
 
-  networking.hostName = "sobotka";
+  networking = {
+    hostName = "sobotka";
+    domain = "cnst.dev";
+  };
 
   environment.variables.NH_FLAKE = "/home/cnst/.nix-config";
 

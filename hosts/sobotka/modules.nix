@@ -29,7 +29,7 @@
       network = {
         enable = true;
         interfaces = {
-          "eno1" = {
+          "enp6s0" = {
             allowedTCPPorts = [22 80 443];
           };
         };
