@@ -10,14 +10,14 @@
   vcfg = config.services.vaultwarden.config;
   cfg = config.server.vaultwarden;
 in {
-  options = {
-    server.vaultwarden.enable = mkEnableOption "Enables vaultwarden";
-  };
-
   age.secrets.vaultwarden-env = {
     file = "${self}/secrets/vaultwarden-env.age";
     owner = "vaultwarden";
     mode = "400";
+  };
+
+  options = {
+    server.vaultwarden.enable = mkEnableOption "Enables vaultwarden";
   };
 
   config = mkIf cfg.enable {
