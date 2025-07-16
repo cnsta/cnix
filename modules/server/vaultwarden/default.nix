@@ -30,14 +30,6 @@ in {
     };
 
     services.caddy.virtualHosts."vault.cnst.dev".extraConfig = ''
-      log {
-        level INFO
-        output file {$LOG_FILE} {
-          roll_size 10MB
-          roll_keep 10
-        }
-      }
-
       encode zstd gzip
 
       reverse_proxy ${vcfg.ROCKET_ADDRESS}:${toString vcfg.ROCKET_PORT} {
@@ -53,11 +45,15 @@ in {
 
       config = {
         DOMAIN = "https://vault.${domain}";
-        SIGNUPS_ALLOWED = true;
+        SIGNUPS_ALLOWED = false;
         ROCKET_ADDRESS = "127.0.0.1";
         ROCKET_PORT = 8222;
-        # EXTENDED_LOGGING = true;
-        # LOG_LEVEL = "warn";
+
+        logLevel = "warn";
+        extendedLogging = true;
+        useSyslog = true;
+        invitationsAllowed = false;
+        showPasswordHint = false;
         # IP_HEADER = "CF-Connecting-IP";
       };
     };
