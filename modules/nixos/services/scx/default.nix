@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkOption types;
@@ -22,6 +23,9 @@ in {
     };
   };
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      # scx.rustscheds
+    ];
     systemd.services.scx = {
       enable = true;
       wantedBy = ["multi-user.target"];

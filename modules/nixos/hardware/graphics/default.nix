@@ -35,7 +35,6 @@
     vulkan-tools
     wayland
     wayland-protocols
-    scx.rustscheds
     libGL
   ];
 

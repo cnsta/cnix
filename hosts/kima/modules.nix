@@ -191,7 +191,7 @@
         enable = false;
       };
       scx = {
-        enable = true;
+        enable = false;
         scheduler = "scx_lavd";
         flags = "--performance";
       };
