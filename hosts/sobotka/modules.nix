@@ -127,7 +127,7 @@
     };
     services = {
       agenix = {
-        enable = false;
+        enable = true;
         kima = {
           enable = false;
         };
