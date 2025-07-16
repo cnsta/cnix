@@ -30,20 +30,20 @@ in {
     };
 
     services.caddy.virtualHosts."vault.cnst.dev".extraConfig = ''
-      reverse_proxy ${vcfg.ROCKET_ADDRESS}:${toString vcfg.ROCKET_PORT}
+      reverse_proxy 127.0.0.1:${toString cfg.port}
     '';
 
     services.vaultwarden = {
       enable = true;
-      environmentFile = config.age.secrets.vaultwarden-env.path;
+      # environmentFile = config.age.secrets.vaultwarden-env.path;
 
       backupDir = "/var/backup/vaultwarden";
 
       config = {
         DOMAIN = "https://vault.${domain}";
         SIGNUPS_ALLOWED = true;
-        ROCKET_ADDRESS = "127.0.0.1";
-        ROCKET_PORT = 8222;
+        # ROCKET_ADDRESS = "127.0.0.1";
+        # ROCKET_PORT = 8222;
         # EXTENDED_LOGGING = true;
         # LOG_LEVEL = "warn";
         # IP_HEADER = "CF-Connecting-IP";
