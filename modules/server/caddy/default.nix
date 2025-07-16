@@ -24,20 +24,20 @@ in {
       allowedUDPPorts = ports;
     };
 
-    security.acme = {
-      acceptTerms = true;
-      defaults.email = config.server.email;
-      certs.${config.server.domain} = {
-        reloadServices = ["caddy.service"];
-        domain = "${config.server.domain}";
-        extraDomainNames = ["*.${config.server.domain}"];
-        dnsProvider = "cloudflare";
-        dnsResolver = "1.1.1.1:53";
-        dnsPropagationCheck = true;
-        group = config.services.caddy.group;
-        environmentFile = config.age.secrets.cloudflare-env.path;
-      };
-    };
+    # security.acme = {
+    #   acceptTerms = true;
+    #   defaults.email = config.server.email;
+    #   certs.${config.server.domain} = {
+    #     reloadServices = ["caddy.service"];
+    #     domain = "${config.server.domain}";
+    #     extraDomainNames = ["*.${config.server.domain}"];
+    #     dnsProvider = "cloudflare";
+    #     dnsResolver = "1.1.1.1:53";
+    #     dnsPropagationCheck = true;
+    #     group = config.services.caddy.group;
+    #     environmentFile = config.age.secrets.cloudflare-env.path;
+    #   };
+    # };
 
     services.caddy = {
       enable = true;
