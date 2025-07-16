@@ -68,6 +68,7 @@
           };
         }
         self.nixosModules.nixos
+        self.nixosModules.server
         inputs.agenix.nixosModules.default
       ];
     };
