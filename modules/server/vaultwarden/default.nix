@@ -37,24 +37,34 @@ in {
       }
     '';
 
-    services.vaultwarden = {
-      enable = true;
-      # environmentFile = config.age.secrets.vaultwarden-env.path;
+    services = {
+      cfFail2ban = lib.mkIf config.server.cfFail2ban.enable {
+        jails = {
+          vaultwarden = {
+            serviceName = "vaultwarden";
+            failRegex = "^.*Username or password is incorrect. Try again. IP: <HOST>. Username: <F-USER>.*</F-USER>.$";
+          };
+        };
+      };
+      vaultwarden = {
+        enable = true;
+        # environmentFile = config.age.secrets.vaultwarden-env.path;
 
-      backupDir = "/var/backup/vaultwarden";
+        backupDir = "/var/backup/vaultwarden";
 
-      config = {
-        DOMAIN = "https://vault.${domain}";
-        SIGNUPS_ALLOWED = false;
-        ROCKET_ADDRESS = "127.0.0.1";
-        ROCKET_PORT = 8222;
+        config = {
+          DOMAIN = "https://vault.${domain}";
+          SIGNUPS_ALLOWED = false;
+          ROCKET_ADDRESS = "127.0.0.1";
+          ROCKET_PORT = 8222;
 
-        logLevel = "warn";
-        extendedLogging = true;
-        useSyslog = true;
-        invitationsAllowed = false;
-        showPasswordHint = false;
-        # IP_HEADER = "CF-Connecting-IP";
+          logLevel = "warn";
+          extendedLogging = true;
+          useSyslog = true;
+          invitationsAllowed = false;
+          showPasswordHint = false;
+          # IP_HEADER = "CF-Connecting-IP";
+        };
       };
     };
   };
