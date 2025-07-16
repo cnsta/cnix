@@ -47,13 +47,13 @@ in {
         SIGNUPS_ALLOWED = false;
         ROCKET_ADDRESS = "127.0.0.1";
         ROCKET_PORT = 8222;
+        IP_HEADER = "CF-Connecting-IP";
 
         logLevel = "warn";
         extendedLogging = true;
         useSyslog = true;
         invitationsAllowed = false;
         showPasswordHint = false;
-        # IP_HEADER = "CF-Connecting-IP";
       };
     };
   };
