@@ -29,14 +29,14 @@ in {
       Group = "root";
     };
 
-    services.caddy.virtualHosts."vault.cnst.dev".extraConfig = ''
-      encode zstd gzip
-      reverse_proxy ${vcfg.ROCKET_ADDRESS}:${toString vcfg.ROCKET_PORT} {
-        header_up X-Real-IP {remote_host}
-        # Use this instead, if using Cloudflare's proxy
-        # header_up X-Real-IP {http.request.header.Cf-Connecting-Ip}
-      }
-    '';
+    # services.caddy.virtualHosts."vault.cnst.dev".extraConfig = ''
+    #   encode zstd gzip
+    #   reverse_proxy ${vcfg.ROCKET_ADDRESS}:${toString vcfg.ROCKET_PORT} {
+    #     # header_up X-Real-IP {remote_host}
+    #     # Use this instead, if using Cloudflare's proxy
+    #     header_up X-Real-IP {http.request.header.Cf-Connecting-Ip}
+    #   }
+    # '';
 
     services.vaultwarden = {
       enable = true;
@@ -51,6 +51,7 @@ in {
         ROCKET_PORT = 8222;
         EXTENDED_LOGGING = true;
         LOG_LEVEL = "warn";
+        IP_HEADER = "CF-Connecting-IP";
       };
     };
   };
