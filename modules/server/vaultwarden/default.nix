@@ -37,8 +37,8 @@ in {
       }
     '';
 
-    services = {
-      cfFail2ban = lib.mkIf config.server.cfFail2ban.enable {
+    server = {
+      fail2ban = lib.mkIf config.server.fail2ban.enable {
         jails = {
           vaultwarden = {
             serviceName = "vaultwarden";

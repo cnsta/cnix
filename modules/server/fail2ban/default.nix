@@ -5,9 +5,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.server.cfFail2ban;
+  cfg = config.server.fail2ban;
 in {
-  options.server.cfFail2ban = {
+  options.server.fail2ban = {
     enable = lib.mkEnableOption {
       description = "Enable cloudflare fail2ban";
     };
