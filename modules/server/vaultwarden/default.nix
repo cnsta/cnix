@@ -30,7 +30,7 @@ in {
     };
 
     services.caddy.virtualHosts."vault.cnst.dev".extraConfig = ''
-      reverse_proxy 127.0.0.1:${toString cfg.port}
+      reverse_proxy 127.0.0.1:${toString config.services.vaultwarden.port}
     '';
 
     services.vaultwarden = {
