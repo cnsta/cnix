@@ -15,7 +15,7 @@ in {
       enable = mkEnableOption "Enables vaultwarden";
       url = lib.mkOption {
         type = lib.types.str;
-        default = "pass.${cfg.domain}";
+        default = "vault.${cfg.domain}";
       };
       cloudflared = {
         credentialsFile = lib.mkOption {
