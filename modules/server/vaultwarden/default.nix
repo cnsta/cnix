@@ -21,10 +21,10 @@ in {
             {"AccountTag":"secret"."TunnelSecret":"secret","TunnelID":"secret"}
             '''
           '';
-          tunnelId = lib.mkOption {
-            type = lib.types.str;
-            example = "00000000-0000-0000-0000-000000000000";
-          };
+        };
+        tunnelId = lib.mkOption {
+          type = lib.types.str;
+          example = "00000000-0000-0000-0000-000000000000";
         };
       };
     };
