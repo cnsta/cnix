@@ -5,7 +5,7 @@
     caddy = {
       enable = true;
     };
-    cfFail2ban = {
+    fail2ban = {
       enable = true;
       apiKeyFile = config.age.secrets.cloudflareFirewallApiKey.path;
       zoneId = "0027acdfb8bbe010f55b676ad8698dfb";
