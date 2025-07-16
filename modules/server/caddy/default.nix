@@ -12,11 +12,11 @@ in {
     server.caddy.enable = mkEnableOption "Enables caddy";
   };
   config = mkIf cfg.enable {
-    age.secrets.cloudflare-env = {
-      file = "${self}/secrets/cloudflare-env.age";
-      owner = "caddy";
-      mode = "400";
-    };
+    # age.secrets.cloudflare-env = {
+    #   file = "${self}/secrets/cloudflare-env.age";
+    #   owner = "caddy";
+    #   mode = "400";
+    # };
     networking.firewall = let
       ports = [80 443];
     in {
@@ -26,7 +26,7 @@ in {
 
     services.caddy = {
       enable = true;
-      environmentFile = config.age.secrets.cloudflare-env.path;
+      # environmentFile = config.age.secrets.cloudflare-env.path;
       # package = self.packages.${pkgs.system}.caddy-with-plugins;
     };
   };
