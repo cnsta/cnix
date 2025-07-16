@@ -57,7 +57,7 @@ in {
       })
       (mkIf cfg.sobotka.enable {
         secrets = {
-          # Add sobotka specific secrets here
+          cloudflareFirewallApiKey.file = "${self}/secrets/cloudflareFirewallApiKey.age";
         };
       })
       (mkIf cfg.toothpc.enable {

@@ -121,6 +121,7 @@
       imports = [
         ./server
         ./server/caddy
+        ./server/cfFail2ban
         ./server/vaultwarden
       ];
     };

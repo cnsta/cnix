@@ -128,8 +128,8 @@
     services = {
       agenix = {
         enable = true;
-        kima = {
-          enable = false;
+        sobotka = {
+          enable = true;
         };
       };
       blueman = {

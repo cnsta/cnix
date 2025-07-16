@@ -27,6 +27,11 @@ in {
         default = {};
         description = "Network interface configurations.";
       };
+      extraHosts = mkOption {
+        type = types.lines;
+        default = "";
+        description = "Extra entries for /etc/hosts.";
+      };
     };
   };
 
@@ -45,6 +50,7 @@ in {
         enable = true;
         inherit (cfg) interfaces;
       };
+      extraHosts = cfg.extraHosts;
     };
 
     systemd.services.NetworkManager = {
