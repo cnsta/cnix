@@ -58,6 +58,7 @@ in {
       (mkIf cfg.sobotka.enable {
         secrets = {
           cloudflareFirewallApiKey.file = "${self}/secrets/cloudflareFirewallApiKey.age";
+          vaultwarden-env.file = "${self}/secrets/vaultwarden-env.age";
         };
       })
       (mkIf cfg.toothpc.enable {
