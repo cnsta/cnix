@@ -27,6 +27,8 @@ in {
       "users"
       "plocate"
       "fuse"
+      "fail2ban"
+      "vaultwarden"
     ];
   };
 
