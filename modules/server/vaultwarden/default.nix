@@ -13,6 +13,10 @@ in {
   options = {
     server.vaultwarden = {
       enable = mkEnableOption "Enables vaultwarden";
+      url = lib.mkOption {
+        type = lib.types.str;
+        default = "pass.${cfg.domain}";
+      };
       cloudflared = {
         credentialsFile = lib.mkOption {
           type = lib.types.str;
