@@ -49,17 +49,8 @@ in {
         SIGNUPS_ALLOWED = false;
         ROCKET_ADDRESS = "127.0.0.1";
         ROCKET_PORT = 8222;
-
-        extendedLogging = true;
-        invitationsAllowed = false;
-        showPasswordHint = false;
-
-        useSyslog = true;
-        logLevel = "warn";
-
-        signupsAllowed = false;
-        signupsDomainsWhitelist = domain;
-        signupsVerify = true;
+        EXTENDED_LOGGING = true;
+        LOG_LEVEL = "warn";
       };
     };
   };
