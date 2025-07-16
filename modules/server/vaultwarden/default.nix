@@ -11,7 +11,7 @@
   cfg = config.server.vaultwarden;
 in {
   options = {
-    home.server.vaultwarden.enable = mkEnableOption "Enables vaultwarden";
+    server.vaultwarden.enable = mkEnableOption "Enables vaultwarden";
   };
   config = mkIf cfg.enable {
     age.secrets.vaultwarden-env = {
