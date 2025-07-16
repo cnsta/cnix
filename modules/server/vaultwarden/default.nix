@@ -13,6 +13,13 @@ in {
   options = {
     server.vaultwarden.enable = mkEnableOption "Enables vaultwarden";
   };
+
+  age.secrets.vaultwarden-env = {
+    file = "${self}/secrets/vaultwarden-env.age";
+    owner = "vaultwarden";
+    mode = "400";
+  };
+
   config = mkIf cfg.enable {
     systemd.services.backup-vaultwarden.serviceConfig = {
       User = "root";
@@ -39,6 +46,7 @@ in {
     };
     services.vaultwarden = {
       enable = true;
+      environmentFile = config.age.secrets.vaultwarden-env.path;
 
       backupDir = "/var/backup/vaultwarden";
 
