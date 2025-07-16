@@ -11,7 +11,23 @@
   cfg = config.server.vaultwarden;
 in {
   options = {
-    server.vaultwarden.enable = mkEnableOption "Enables vaultwarden";
+    server.vaultwarden = {
+      enable = mkEnableOption "Enables vaultwarden";
+      cloudflared = {
+        credentialsFile = lib.mkOption {
+          type = lib.types.str;
+          example = lib.literalExpression ''
+            pkgs.writeText "cloudflare-credentials.json" '''
+            {"AccountTag":"secret"."TunnelSecret":"secret","TunnelID":"secret"}
+            '''
+          '';
+          tunnelId = lib.mkOption {
+            type = lib.types.str;
+            example = "00000000-0000-0000-0000-000000000000";
+          };
+        };
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -39,24 +55,36 @@ in {
       };
     };
 
-    services.vaultwarden = {
-      enable = true;
-      environmentFile = config.age.secrets.vaultwarden-env.path;
+    services = {
+      vaultwarden = {
+        enable = true;
+        environmentFile = config.age.secrets.vaultwarden-env.path;
 
-      backupDir = "/var/backup/vaultwarden";
+        backupDir = "/var/backup/vaultwarden";
 
-      config = {
-        DOMAIN = "https://vault.${domain}";
-        SIGNUPS_ALLOWED = false;
-        ROCKET_ADDRESS = "127.0.0.1";
-        ROCKET_PORT = 8222;
-        IP_HEADER = "CF-Connecting-IP";
+        config = {
+          DOMAIN = "https://vault.${domain}";
+          SIGNUPS_ALLOWED = false;
+          ROCKET_ADDRESS = "127.0.0.1";
+          ROCKET_PORT = 8222;
+          IP_HEADER = "CF-Connecting-IP";
 
-        logLevel = "warn";
-        extendedLogging = true;
-        useSyslog = true;
-        invitationsAllowed = false;
-        showPasswordHint = false;
+          logLevel = "warn";
+          extendedLogging = true;
+          useSyslog = true;
+          invitationsAllowed = false;
+          showPasswordHint = false;
+        };
+      };
+      cloudflared = {
+        enable = true;
+        tunnels.${cfg.cloudflared.tunnelId} = {
+          credentialsFile = cfg.cloudflared.credentialsFile;
+          default = "http_status:404";
+          ingress."${cfg.url}".service = "http://${vcfg.ROCKET_ADDRESS}:${
+            toString vcfg.ROCKET_PORT
+          }";
+        };
       };
     };
   };

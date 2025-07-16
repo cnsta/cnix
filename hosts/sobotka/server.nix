@@ -12,6 +12,10 @@
     };
     vaultwarden = {
       enable = true;
+      cloudflared = {
+        tunnelId = "c3f541cb-b97e-4766-ae16-a8d863a3eec8";
+        credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
+      };
     };
   };
 }
