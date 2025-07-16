@@ -119,6 +119,7 @@
     };
     server = {
       imports = [
+        ./server
         ./server/caddy
         ./server/vaultwarden
       ];
