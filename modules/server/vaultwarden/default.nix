@@ -35,19 +35,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    systemd.services.backup-vaultwarden.serviceConfig = {
-      User = "root";
-      Group = "root";
-    };
-
-    services.caddy.virtualHosts."vault.cnst.dev".extraConfig = ''
-      encode zstd gzip
-
-      reverse_proxy ${vcfg.ROCKET_ADDRESS}:${toString vcfg.ROCKET_PORT} {
-        header_up X-Real-IP {http.request.header.Cf-Connecting-Ip}
-      }
-    '';
-
     server = {
       fail2ban = lib.mkIf config.server.fail2ban.enable {
         jails = {
