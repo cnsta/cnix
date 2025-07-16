@@ -10,5 +10,6 @@ in {
   "keypem.age".publicKeys = [cnst kima];
   "mailpwd.age".publicKeys = [cnst kima];
   "gcapi.age".publicKeys = [cnst kima];
+  "cloudflare-env.age".publicKeys = [cnst kima usobotka rsobotka];
   "vaultwarden-env.age".publicKeys = [cnst kima usobotka rsobotka];
 }
