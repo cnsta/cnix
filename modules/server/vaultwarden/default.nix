@@ -31,6 +31,13 @@ in {
 
     services.caddy.virtualHosts."vault.cnst.dev".extraConfig = ''
       reverse_proxy ${vcfg.ROCKET_ADDRESS}:${toString vcfg.ROCKET_PORT}
+      header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "geolocation=(), microphone=(), camera=()"
+      }
     '';
 
     services.vaultwarden = {
