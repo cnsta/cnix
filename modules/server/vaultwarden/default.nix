@@ -24,7 +24,7 @@ in {
       encode zstd gzip
 
       reverse_proxy ${vcfg.ROCKET_ADDRESS}:${toString vcfg.ROCKET_PORT} {
-        header_up X-Real-IP {remote_host}
+        header_up X-Real-IP {http.request.header.Cf-Connecting-Ip}
       }
     '';
 
