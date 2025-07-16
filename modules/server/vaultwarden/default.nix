@@ -14,16 +14,6 @@ in {
     server.vaultwarden.enable = mkEnableOption "Enables vaultwarden";
   };
   config = mkIf cfg.enable {
-    age.secrets.vaultwarden-env = {
-      file = "${self}/secrets/vaultwarden-env.age";
-      owner = "vaultwarden";
-      mode = "400";
-    };
-
-    # allow SMTP
-    # networking.firewall.allowedTCPPorts = [587];
-
-    # this forces the system to create backup folder
     systemd.services.backup-vaultwarden.serviceConfig = {
       User = "root";
       Group = "root";
@@ -48,7 +38,6 @@ in {
       };
       vaultwarden = {
         enable = true;
-        # environmentFile = config.age.secrets.vaultwarden-env.path;
 
         backupDir = "/var/backup/vaultwarden";
 
