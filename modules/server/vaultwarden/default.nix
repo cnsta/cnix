@@ -36,24 +36,24 @@ in {
           };
         };
       };
-      vaultwarden = {
-        enable = true;
+    };
+    services.vaultwarden = {
+      enable = true;
 
-        backupDir = "/var/backup/vaultwarden";
+      backupDir = "/var/backup/vaultwarden";
 
-        config = {
-          DOMAIN = "https://vault.${domain}";
-          SIGNUPS_ALLOWED = false;
-          ROCKET_ADDRESS = "127.0.0.1";
-          ROCKET_PORT = 8222;
+      config = {
+        DOMAIN = "https://vault.${domain}";
+        SIGNUPS_ALLOWED = false;
+        ROCKET_ADDRESS = "127.0.0.1";
+        ROCKET_PORT = 8222;
 
-          logLevel = "warn";
-          extendedLogging = true;
-          useSyslog = true;
-          invitationsAllowed = false;
-          showPasswordHint = false;
-          # IP_HEADER = "CF-Connecting-IP";
-        };
+        logLevel = "warn";
+        extendedLogging = true;
+        useSyslog = true;
+        invitationsAllowed = false;
+        showPasswordHint = false;
+        # IP_HEADER = "CF-Connecting-IP";
       };
     };
   };
