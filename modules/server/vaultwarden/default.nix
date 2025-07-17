@@ -54,7 +54,7 @@ in {
         backupDir = "/var/backup/vaultwarden";
 
         config = {
-          DOMAIN = "https://vault.${domain}";
+          DOMAIN = "https://${cfg.url}";
           SIGNUPS_ALLOWED = false;
           ROCKET_ADDRESS = "127.0.0.1";
           ROCKET_PORT = 8222;
@@ -72,7 +72,7 @@ in {
         tunnels.${cfg.cloudflared.tunnelId} = {
           credentialsFile = cfg.cloudflared.credentialsFile;
           default = "http_status:404";
-          ingress."${cfg.vaultwarden.url}".service = "http://${vcfg.ROCKET_ADDRESS}:${
+          ingress."${cfg.url}".service = "http://${vcfg.ROCKET_ADDRESS}:${
             toString vcfg.ROCKET_PORT
           }";
         };
