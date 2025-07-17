@@ -29,7 +29,6 @@
       network = {
         enable = true;
         extraHosts = ''
-          192.168.88.14 vault.cnst.dev
         '';
         interfaces = {
           "eno1" = {
