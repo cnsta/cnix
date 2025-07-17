@@ -61,6 +61,8 @@ in {
           gparted
           ntfs3g
           cloudflared
+          libargon2
+          openssl
         ]
 
         (mkIf cfg.common.enable [
