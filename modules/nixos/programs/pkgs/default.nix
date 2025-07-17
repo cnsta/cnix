@@ -60,6 +60,7 @@ in {
           git-crypt
           gparted
           ntfs3g
+          cloudflared
         ]
 
         (mkIf cfg.common.enable [
