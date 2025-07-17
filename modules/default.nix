@@ -69,7 +69,7 @@
         ./nixos/programs/blender
         ./nixos/programs/corectrl
         ./nixos/programs/fish
-        ./nixos/programs/gamemode
+        ./nixos/programs/gamemodeservices
         ./nixos/programs/gamescope
         ./nixos/programs/gimp
         ./nixos/programs/gnome
@@ -122,6 +122,7 @@
         ./server
         ./server/caddy
         ./server/fail2ban
+        ./server/homepage
         ./server/vaultwarden
       ];
     };
