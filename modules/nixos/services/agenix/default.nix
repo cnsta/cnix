@@ -58,6 +58,7 @@ in {
       (mkIf cfg.sobotka.enable {
         secrets = {
           cloudflareFirewallApiKey.file = "${self}/secrets/cloudflareFirewallApiKey.age";
+          cloudflareDnsApiToken.file = "${self}/secrets/cloudflareDnsApiToken.age";
           vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";
           vaultwarden-env.file = "${self}/secrets/vaultwarden-env.age";
         };
