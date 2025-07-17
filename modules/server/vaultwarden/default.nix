@@ -72,7 +72,7 @@ in {
         tunnels.${cfg.cloudflared.tunnelId} = {
           credentialsFile = cfg.cloudflared.credentialsFile;
           default = "http_status:404";
-          ingress."${cfg.url}".service = "http://${vcfg.ROCKET_ADDRESS}:${
+          ingress."${cfg.vaultwarden.url}".service = "http://${vcfg.ROCKET_ADDRESS}:${
             toString vcfg.ROCKET_PORT
           }";
         };
