@@ -15,4 +15,5 @@ in {
   "cloudflareFirewallApiKey.age".publicKeys = [cnst kima usobotka rsobotka];
   "vaultwardenCloudflared.age".publicKeys = [cnst kima usobotka rsobotka];
   "cloudflareDnsApiToken.age".publicKeys = [cnst kima usobotka rsobotka];
+  "cloudflareDnsCredentials.age".publicKeys = [cnst kima usobotka rsobotka];
 }

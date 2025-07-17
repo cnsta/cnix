@@ -59,6 +59,7 @@ in {
         secrets = {
           cloudflareFirewallApiKey.file = "${self}/secrets/cloudflareFirewallApiKey.age";
           cloudflareDnsApiToken.file = "${self}/secrets/cloudflareDnsApiToken.age";
+          cloudflareDnsCredentials.file = "${self}/secrets/cloudflareDnsCredentials.age";
           vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";
           vaultwarden-env.file = "${self}/secrets/vaultwarden-env.age";
         };
