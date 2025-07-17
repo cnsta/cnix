@@ -13,7 +13,7 @@ in {
       default = "";
       type = types.str;
       description = ''
-        Base domain name to be used to access the server services via Caddy reverse proxy
+        Domain name to be used to access the server services via Caddy reverse proxy
       '';
     };
   };

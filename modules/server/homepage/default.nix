@@ -110,7 +110,7 @@ in {
           "Services"
           "Smart Home"
         ];
-        hl = config.homelab.services;
+        hl = config.server;
         homepageServices = x: (lib.attrsets.filterAttrs (
             name: value: value ? homepage && value.homepage.category == x
           )
