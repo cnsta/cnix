@@ -1,11 +1,9 @@
-# yanked from @fufexan
+# from @fufexan & @notthebee
 {
   config,
-  self,
   lib,
   ...
 }: let
-  inherit (config.networking) domain;
   inherit (lib) mkIf mkEnableOption;
   vcfg = config.services.vaultwarden.config;
   cfg = config.server.vaultwarden;
@@ -44,6 +42,11 @@ in {
           };
         };
       };
+    };
+
+    systemd.services.backup-vaultwarden.serviceConfig = {
+      User = "root";
+      Group = "root";
     };
 
     services = {
