@@ -15,7 +15,7 @@
       url = "vault.cnst.dev";
       cloudflared = {
         tunnelId = "3c5b96f8-9608-4d7d-9baa-ef24064ec4c1";
-        credentialsFile = config.age.secrets.cloudflareDnsApiToken.path;
+        credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
       };
     };
   };
