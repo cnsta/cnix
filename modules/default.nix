@@ -69,7 +69,7 @@
         ./nixos/programs/blender
         ./nixos/programs/corectrl
         ./nixos/programs/fish
-        ./nixos/programs/gamemodeservices
+        ./nixos/programs/gamemode
         ./nixos/programs/gamescope
         ./nixos/programs/gimp
         ./nixos/programs/gnome
