@@ -30,7 +30,7 @@ in {
         dnsResolver = "1.1.1.1:53";
         dnsPropagationCheck = true;
         group = config.services.caddy.group;
-        environmentFile = config.age.secrets.cloudflareDnsApiToken.path;
+        environmentFile = config.age.secrets.cloudflareDnsCredentials.path;
       };
     };
 
