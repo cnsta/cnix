@@ -33,6 +33,7 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./modules.nix
+    ./options.nix
   ];
 
   networking.hostName = "bunk";
@@ -45,12 +46,6 @@ in {
   ];
 
   environment.variables.NH_FLAKE = "/home/cnst/.nix-config";
-
-  programs.hyprland.settings = {
-    monitor = [
-      "eDP-1,1920x1200@60,0x0,1,transform,0"
-    ];
-  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = lib.mkDefault "23.11";

@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  osConfig,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
@@ -41,13 +42,13 @@ in {
         ];
 
         wallpaper = [
-          # cnixtop
-          "DP-3,${config.theme.background.desktop}"
-          "DP-4,${config.theme.background.desktop}"
-          # cnixpad
-          "eDP-1,${config.theme.background.desktop}"
+          # kima
+          "DP-3,${osConfig.theme.background.desktop}"
+          "HDMI-A-1,${osConfig.theme.background.lockscreen}"
+          # bunk
+          "eDP-1,${osConfig.theme.background.desktop}"
           # toothpc
-          "DVI-D-1,${config.theme.background.desktop}"
+          "DVI-D-1,${osConfig.theme.background.desktop}"
         ];
       };
     };

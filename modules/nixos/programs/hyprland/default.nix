@@ -13,7 +13,7 @@ in {
     ./appearance.nix
     ./inputs.nix
     ./keybinds.nix
-    ./rules.nix
+    ./layout.nix
     ./startup.nix
   ];
 
