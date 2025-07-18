@@ -35,6 +35,7 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./modules.nix
+    ./options.nix
     ./server.nix
   ];
 

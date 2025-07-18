@@ -2,7 +2,7 @@
   accounts = {
     username = "cnst";
     mail = "adam@cnst.dev";
-    sshUser = "bunk";
+    sshUser = "kima";
   };
   monitors = [
     {
@@ -14,17 +14,15 @@
       transform = 0;
       bitDepth = 10;
       workspace = "1";
-      primary = true;
     }
     {
-      name = "DP-4";
+      name = "HDMI-A-1";
       width = 1920;
       height = 1080;
       refreshRate = 60;
       position = "2560x0";
-      transform = 3;
+      # transform = 3;
       workspace = "5";
-      primary = false;
     }
     {
       name = "eDP-1";
@@ -32,7 +30,6 @@
       height = 1200;
       refreshRate = 60;
       workspace = "1";
-      primary = false;
     }
   ];
   theme = {

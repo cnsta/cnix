@@ -3,6 +3,7 @@
   pkgs,
   config,
   lib,
+  osConfig,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
@@ -30,7 +31,7 @@ in {
         background = [
           {
             monitor = "";
-            path = config.theme.background.lockscreen;
+            path = osConfig.theme.background.lockscreen;
           }
         ];
         input-field = [

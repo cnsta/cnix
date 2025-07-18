@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  osConfig,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
@@ -14,8 +15,8 @@ in {
     home.packages = [pkgs.gh];
     programs.git = {
       enable = true;
-      userName = config.accounts.username;
-      userEmail = config.accounts.mail;
+      userName = osConfig.accounts.username;
+      userEmail = osConfig.accounts.mail;
       delta = {
         enable = true;
         options.dark = true;
@@ -53,7 +54,7 @@ in {
       ];
     };
     xdg.configFile."git/allowed_signers".text = ''
-      ${config.accounts.mail} namespaces="git" ${config.accounts.sshKey}
+      ${osConfig.accounts.mail} namespaces="git" ${osConfig.accounts.sshKey}
     '';
   };
 }
