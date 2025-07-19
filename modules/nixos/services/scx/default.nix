@@ -24,7 +24,7 @@ in {
   };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      # scx.rustscheds
+      scx.rustscheds
     ];
     systemd.services.scx = {
       enable = true;
