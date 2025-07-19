@@ -126,11 +126,11 @@
         ./server/vaultwarden
       ];
     };
-    options = {
+    settings = {
       imports = [
-        ./options/accounts
-        ./options/monitors
-        ./options/theme
+        ./settings/accounts
+        ./settings/monitors
+        ./settings/theme
       ];
     };
   };

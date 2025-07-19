@@ -12,7 +12,7 @@
     toothpc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGu5vZbb5ExampleKeyHereGfDF9c5 toothpick@toothpc";
   };
 
-  keyName = config.accounts.sshUser or null;
+  keyName = config.settings.accounts.sshUser or null;
 
   selectedKey =
     if keyName != null
@@ -23,7 +23,7 @@
       sshKeys
     else builtins.abort "No accounts.sshUser provided, cannot select SSH key.";
 in {
-  options.accounts = {
+  options.settings.accounts = {
     username = mkOption {
       type = types.str;
       default = "cnst";

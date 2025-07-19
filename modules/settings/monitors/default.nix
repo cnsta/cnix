@@ -1,12 +1,8 @@
 # Yanked from Misterio77
-{
-  lib,
-  config,
-  ...
-}: let
+{lib, ...}: let
   inherit (lib) mkOption types;
 in {
-  options.monitors = mkOption {
+  options.settings.monitors = mkOption {
     type = types.listOf (
       types.submodule {
         options = {
