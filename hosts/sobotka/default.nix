@@ -46,6 +46,8 @@ in {
     domain = "cnst.dev";
   };
 
+  powerManagement.enable = false;
+
   swapDevices = [
     {
       device = "/var/lib/swapfile";
