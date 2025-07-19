@@ -39,8 +39,8 @@ in {
         nixconfig = "cd /home/$USER/.nix-config/";
         homemodules = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/{$hostname}mod.nix";
         hmod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/{$hostname}mod.nix";
-        nixoptions = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/options.nix";
-        nopt = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/options.nix";
+        nixsettings = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/settings.nix";
+        nset = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/settings.nix";
         nixosmodules = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
         nmod = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
         tree = "${getExe eza} --tree --icons=always";

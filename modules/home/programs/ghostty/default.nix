@@ -2,6 +2,7 @@
   config,
   lib,
   osConfig,
+  pkgs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkMerge getExe;
@@ -15,6 +16,7 @@ in {
     {
       programs.ghostty = {
         enable = true;
+        package = pkgs.ghostty-bin;
         enableBashIntegration = config.programs.bash.enable;
         enableFishIntegration = config.programs.fish.enable;
         enableZshIntegration = config.programs.zsh.enable;

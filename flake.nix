@@ -79,8 +79,6 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Miscellaneous
-    ghostty.url = "github:ghostty-org/ghostty";
-
     helix-flake.url = "github:helix-editor/helix";
 
     nvf.url = "github:notashelf/nvf";
@@ -91,11 +89,6 @@
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
       };
-    };
-
-    astal = {
-      url = "github:aylur/astal";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     anyrun.url = "github:anyrun-org/anyrun";
@@ -110,11 +103,6 @@
 
     zen-browser = {
       url = "git+https://git.sr.ht/~canasta/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    wezterm = {
-      url = "github:wez/wezterm/main?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
