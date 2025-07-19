@@ -150,7 +150,29 @@ in {
                   widget = {
                     type = "glances";
                     url = "http://localhost:${port}";
-                    metric = "sensor:Package id 0";
+                    metric = "sensor:Tctl";
+                    chart = false;
+                    version = 4;
+                  };
+                };
+              }
+              {
+                "GPU Radeon" = {
+                  widget = {
+                    type = "glances";
+                    url = "http://localhost:${port}";
+                    metric = "sensor:junction";
+                    chart = false;
+                    version = 4;
+                  };
+                };
+              }
+              {
+                "GPU Intel" = {
+                  widget = {
+                    type = "glances";
+                    url = "http://localhost:${port}";
+                    metric = "sensor:Composite";
                     chart = false;
                     version = 4;
                   };
