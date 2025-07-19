@@ -16,7 +16,7 @@ in {
     {
       programs.ghostty = {
         enable = true;
-        package = pkgs.ghostty-bin;
+        package = pkgs.ghostty;
         enableBashIntegration = config.programs.bash.enable;
         enableFishIntegration = config.programs.fish.enable;
         enableZshIntegration = config.programs.zsh.enable;
