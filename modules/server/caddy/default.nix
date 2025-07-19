@@ -1,6 +1,4 @@
 {
-  self,
-  pkgs,
   config,
   lib,
   ...
@@ -16,7 +14,6 @@ in {
       ports = [80 443];
     in {
       allowedTCPPorts = ports;
-      allowedUDPPorts = ports;
     };
 
     security.acme = {
@@ -36,8 +33,21 @@ in {
 
     services.caddy = {
       enable = true;
-      # environmentFile = config.age.secrets.cloudflare-env.path;
-      # package = self.packages.${pkgs.system}.caddy-with-plugins;
+      globalConfig = ''
+        auto_https off
+      '';
+      virtualHosts = {
+        "http://${config.server.domain}" = {
+          extraConfig = ''
+            redir https://{host}{uri}
+          '';
+        };
+        "http://*.${config.server.domain}" = {
+          extraConfig = ''
+            redir https://{host}{uri}
+          '';
+        };
+      };
     };
   };
 }

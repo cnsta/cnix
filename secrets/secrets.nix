@@ -12,6 +12,7 @@ in {
   "gcapi.age".publicKeys = [cnst kima];
   "cloudflare-env.age".publicKeys = [cnst kima usobotka rsobotka];
   "vaultwarden-env.age".publicKeys = [cnst kima usobotka rsobotka];
+  "homepage-env.age".publicKeys = [cnst kima usobotka rsobotka];
   "cloudflareFirewallApiKey.age".publicKeys = [cnst kima usobotka rsobotka];
   "vaultwardenCloudflared.age".publicKeys = [cnst kima usobotka rsobotka];
   "cloudflareDnsApiToken.age".publicKeys = [cnst kima usobotka rsobotka];
