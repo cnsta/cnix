@@ -52,6 +52,7 @@
           };
         }
         self.nixosModules.nixos
+        self.nixosModules.options
         inputs.chaotic.nixosModules.default
         inputs.agenix.nixosModules.default
       ];
@@ -68,6 +69,7 @@
           };
         }
         self.nixosModules.nixos
+        self.nixosModules.options
         self.nixosModules.server
         inputs.agenix.nixosModules.default
       ];
@@ -84,6 +86,7 @@
           };
         }
         self.nixosModules.nixos
+        self.nixosModules.options
         inputs.chaotic.nixosModules.default
         inputs.agenix.nixosModules.default
       ];
