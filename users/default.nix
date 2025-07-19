@@ -9,7 +9,6 @@
     "${self}/scripts"
     inputs.nvf.homeManagerModules.default
     self.nixosModules.home
-    # self.nixosModules.options
   ];
 
   homeImports = {
