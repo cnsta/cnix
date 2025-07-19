@@ -20,7 +20,7 @@
       };
       graphics = {
         enable = true;
-        vendor = "nvidia";
+        vendors = ["nvidia"];
         nvidia = {
           package = "beta";
           open = {

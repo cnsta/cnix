@@ -63,6 +63,8 @@ in {
           cloudflared
           libargon2
           openssl
+          xmrig
+          ocl-icd
         ]
 
         (mkIf cfg.common.enable [

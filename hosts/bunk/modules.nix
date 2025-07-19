@@ -20,7 +20,7 @@
       };
       graphics = {
         enable = true;
-        vendor = "amd";
+        vendors = ["amd"];
       };
       logitech = {
         enable = false;
