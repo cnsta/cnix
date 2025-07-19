@@ -46,6 +46,13 @@ in {
     domain = "cnst.dev";
   };
 
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 8 * 1024;
+    }
+  ];
+
   environment.variables.NH_FLAKE = "/home/cnst/.nix-config";
 
   #   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

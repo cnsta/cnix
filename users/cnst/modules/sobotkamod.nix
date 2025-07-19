@@ -141,7 +141,7 @@
         enable = false;
       };
       syncthing = {
-        enable = true;
+        enable = false;
       };
       udiskie = {
         enable = false;
