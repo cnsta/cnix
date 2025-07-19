@@ -31,7 +31,7 @@ in {
             text = ''
               filename="index-${pkgs.stdenv.system}"
               mkdir -p ~/.cache/nix-index && cd ~/.cache/nix-index
-              wget -N "https://github.com/nix-community/nix-index-database/releases/download/latest/$filename"
+              wget -N "https://github.com/nix-community/nix-index-database/releases/download/2025-07-06-034719/$filename"
               ln -sf "$filename" "files"
             '';
           }
