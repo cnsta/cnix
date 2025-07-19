@@ -94,7 +94,7 @@ in {
 
     (mkIf (host == "kima") {
       programs.hyprland.settings = {
-        "$terminal" = "alacritty";
+        "$terminal" = "ghostty";
         "$browser" = "zen";
         "$browserinc" = "zen --private-window";
         "$mod" = "SUPER";

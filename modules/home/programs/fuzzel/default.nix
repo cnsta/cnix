@@ -3,7 +3,6 @@
   lib,
   pkgs,
   osConfig,
-  inputs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkMerge;
@@ -45,7 +44,7 @@ in {
       };
     }
     (mkIf (host == "kima") {
-      programs.fuzzel.settings.main.terminal = "${inputs.ghostty.packages.x86_64-linux.default}/bin/ghostty";
+      programs.fuzzel.settings.main.terminal = "${pkgs.ghostty}/bin/ghostty";
     })
     (mkIf (host == "bunk") {
       programs.fuzzel.settings.main.terminal = "${pkgs.foot}/bin/foot";
