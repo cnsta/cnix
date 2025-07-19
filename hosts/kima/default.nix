@@ -36,21 +36,12 @@ in {
     ./settings.nix
   ];
 
-  time.hardwareClockInLocalTime = true;
-
   networking.hostName = "kima";
 
   environment.variables = {
     NH_FLAKE = "/home/cnst/.nix-config";
     GEMINI_API_KEY = config.age.secrets.gcapi.path;
   };
-
-  # programs.hyprland.settings = {
-  #   monitor = [
-  #     "DP-3,2560x1440@240,0x0,1,transform,0,bitdepth,10"
-  #     "DP-4,1920x1080@60,auto,1,transform,3"
-  #   ];
-  # };
 
   #   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = lib.mkDefault "23.11";
