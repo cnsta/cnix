@@ -15,8 +15,8 @@ in {
     home.packages = [pkgs.gh];
     programs.git = {
       enable = true;
-      userName = osConfig.accounts.username;
-      userEmail = osConfig.accounts.mail;
+      userName = osConfig.settings.accounts.username;
+      userEmail = osConfig.settings.accounts.mail;
       delta = {
         enable = true;
         options.dark = true;
@@ -54,7 +54,7 @@ in {
       ];
     };
     xdg.configFile."git/allowed_signers".text = ''
-      ${osConfig.accounts.mail} namespaces="git" ${osConfig.accounts.sshKey}
+      ${osConfig.settings.accounts.mail} namespaces="git" ${osConfig.settings.accounts.sshKey}
     '';
   };
 }

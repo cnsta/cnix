@@ -1,8 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}: let
+{lib, ...}: let
   inherit (lib) mkOption types;
   bgs = {
     wallpaper_1 = "~/media/images/bg_1.jpg";
@@ -11,7 +7,7 @@
   };
   bgList = builtins.attrNames bgs;
 in {
-  options.theme = {
+  options.settings.theme = {
     background = {
       lockscreen = mkOption {
         type = types.enum bgList;

@@ -31,7 +31,7 @@ in {
         background = [
           {
             monitor = "";
-            path = osConfig.theme.background.lockscreen;
+            path = osConfig.settings.theme.background.lockscreen;
           }
         ];
         input-field = [

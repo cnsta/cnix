@@ -33,7 +33,7 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./modules.nix
-    ./options.nix
+    ./settings.nix
   ];
 
   time.hardwareClockInLocalTime = true;
