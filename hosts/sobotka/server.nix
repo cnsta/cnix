@@ -32,7 +32,7 @@
     wireguard-netns = {
       enable = true;
       namespace = "vpn";
-      configFile = config.age.secrets.wireguardCredentials.path;
+      configFile = config.age.secrets.wgCredentials.path;
     };
   };
 }

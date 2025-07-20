@@ -23,6 +23,7 @@ in {
     systemd.services."netns@${cfg.namespace}" = {
       description = "WireGuard VPN netns (${cfg.namespace})";
       after = ["network-online.target"];
+      wants = ["network-online.target"];
       wantedBy = ["multi-user.target"];
       serviceConfig = {
         Type = "oneshot";
