@@ -43,7 +43,9 @@ in {
           done
 
           ip -n "$NS" link set wg0 up
-          ip netns exec "$NS" wg setconf wg0 "$CONFIG"
+
+          grep -vE '^(Address|DNS) *=' "$CONFIG" | ip netns exec "$NS" wg setconf wg0 /dev/stdin
+
           ip netns exec "$NS" ip link set lo up
           ip netns exec "$NS" ip route add default dev wg0
 
