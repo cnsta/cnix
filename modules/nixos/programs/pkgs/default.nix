@@ -44,6 +44,7 @@ in {
       mkMerge [
         [
           pciutils
+          wireguard-tools
           ddcutil
           app2unit
           cava
