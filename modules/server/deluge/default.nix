@@ -64,7 +64,7 @@ in {
       sockets."delugedproxy" = {
         enable = true;
         description = "Socket for Proxy to Deluge WebUI";
-        listenStreams = ["58846"];
+        listenStreams = ["58847"];
         wantedBy = ["sockets.target"];
       };
 
@@ -85,7 +85,7 @@ in {
         serviceConfig = {
           User = config.services.deluge.user;
           Group = config.services.deluge.group;
-          ExecStart = "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd --exit-idle-time=5min 127.0.0.1:58846";
+          ExecStart = "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd --exit-idle-time=5min 127.0.0.1:58847";
           PrivateNetwork = "yes";
         };
       };
