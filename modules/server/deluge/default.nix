@@ -66,6 +66,7 @@ in {
       };
 
       services."delugedproxy" = {
+        enable = true;
         description = "Proxy to Deluge in Network Namespace";
         requires = [
           "deluged.service"
@@ -79,10 +80,10 @@ in {
           JoinsNamespaceOf = "deluged.service";
         };
         serviceConfig = {
-          Type = "simple";
+          User = config.services.deluge.user;
+          Group = config.services.deluge.group;
           ExecStart = "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd --exit-idle-time=5min 127.0.0.1:58846";
-          PrivateNetwork = true;
-          NetworkNamespacePath = "/var/run/netns/${ns}";
+          PrivateNetwork = "yes";
         };
       };
     };
