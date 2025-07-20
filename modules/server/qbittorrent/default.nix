@@ -65,8 +65,8 @@ in {
           config.age.secrets.gluetunEnv.path
         ];
         environment = {
-          PUID = srv.uid;
-          PGID = srv.gid;
+          PUID = "${builtins.toString srv.uid}";
+          PGID = "${builtins.toString srv.gid}";
           TZ = "Etc/UTC";
           WEBUI_PORT = "${builtins.toString cfg.port}";
         };
