@@ -54,7 +54,10 @@ in {
     systemd = lib.mkIf srv.wireguard-netns.enable {
       services.deluged = {
         bindsTo = ["netns@${ns}.service"];
-        requires = ["network-online.target"];
+        services.deluged.requires = [
+          "network-online.target"
+          "${ns}.service"
+        ];
         serviceConfig.NetworkNamespacePath = "/var/run/netns/${ns}";
       };
 
