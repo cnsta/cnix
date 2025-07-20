@@ -30,7 +30,7 @@
         enable = true;
         interfaces = {
           "enp6s0" = {
-            allowedTCPPorts = [22 80 443 8112];
+            allowedTCPPorts = [22 80 443 8090];
             allowedUDPPorts = [58846 6881];
           };
         };

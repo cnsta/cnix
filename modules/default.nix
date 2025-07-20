@@ -126,7 +126,7 @@
         ./server/vaultwarden
         ./server/prowlarr
         ./server/lidarr
-        ./server/deluge
+        ./server/qbittorrent
         ./server/wireguard-netns
       ];
     };

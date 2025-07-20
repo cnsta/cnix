@@ -3,19 +3,19 @@
   lib,
   ...
 }: let
-  cfg = config.server.deluge;
-  url = "https://deluge.${config.server.domain}";
-  port = 8112;
+  cfg = config.server.qbittorrent;
+  url = "https://qbt.${config.server.domain}";
+  port = 8090;
 in {
   options.server.deluge = {
     enable = lib.mkEnableOption "Enable Deluge";
     url = lib.mkOption {
       type = lib.types.str;
-      default = "deluge.${config.server.domain}";
+      default = "qbt.${config.server.domain}";
     };
     homepage.name = lib.mkOption {
       type = lib.types.str;
-      default = "Deluge";
+      default = "qBittorrent";
     };
     homepage.description = lib.mkOption {
       type = lib.types.str;
@@ -23,7 +23,7 @@ in {
     };
     homepage.icon = lib.mkOption {
       type = lib.types.str;
-      default = "deluge.svg";
+      default = "qbittorrent.svg";
     };
     homepage.category = lib.mkOption {
       type = lib.types.str;
@@ -42,12 +42,12 @@ in {
     virtualisation.podman.enable = true;
 
     virtualisation.oci-containers.containers = {
-      deluge = {
-        image = "linuxserver/deluge:latest";
+      qbittorrent = {
+        image = "linuxserver/qbittorrent:latest";
         autoStart = true;
         dependsOn = ["gluetun"];
         ports = [
-          "8112:8112"
+          "8090:8090"
           "58846:58846"
         ];
         extraOptions = [
@@ -64,6 +64,7 @@ in {
           PUID = "1000";
           PGID = "1000";
           TZ = "Etc/UTC";
+          WEBUI_PORT = "${builtins.toString cfg.port}";
         };
       };
 
@@ -72,7 +73,7 @@ in {
         ports = [
           "8388:8388"
           "58846:58846"
-          "8112:8112"
+          "8090:8090"
         ];
         devices = ["/dev/net/tun:/dev/net/tun"];
         autoStart = true;
