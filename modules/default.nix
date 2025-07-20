@@ -126,6 +126,8 @@
         ./server/vaultwarden
         ./server/prowlarr
         ./server/lidarr
+        ./server/deluge
+        ./server/wireguard-netns
       ];
     };
     settings = {

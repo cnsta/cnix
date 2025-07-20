@@ -28,5 +28,11 @@
         credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
       };
     };
+    deluge.enable = true;
+    wireguard-netns = {
+      enable = true;
+      namespace = "vpn";
+      configFile = config.age.secrets.wireguardCredentials.path;
+    };
   };
 }
