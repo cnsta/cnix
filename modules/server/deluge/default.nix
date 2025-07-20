@@ -54,10 +54,13 @@ in {
     systemd = lib.mkIf srv.wireguard-netns.enable {
       services.deluged.serviceConfig.NetworkNamespacePath = "/var/run/netns/${ns}";
 
-      services.deluged.after = ["netns@${ns}.service"];
-      services.deluge-web.after = ["netns@${ns}.service"];
+      services.deluged.after = [
+        "netns@${ns}.service"
+        "network-online.target"
+      ];
 
-      sockets."deluge-web-proxy" = {
+      sockets."delugedproxy" = {
+        enable = true;
         description = "Socket Proxy for Deluge WebUI";
         listenStreams = [
           "127.0.0.1:8112"
@@ -65,10 +68,13 @@ in {
         wantedBy = ["sockets.target"];
       };
 
-      services."deluge-web-proxy" = {
-        description = "Proxy to Deluge WebUI in Network Namespace";
-        requires = ["deluge-web.socket"];
-        after = ["deluge-web.socket"];
+      services."delugedproxy" = {
+        description = "Proxy to Deluge in Network Namespace";
+        requires = ["deluged.service"];
+        after = ["delugedproxy.socket"];
+        unitConfig = {
+          JoinsNamespaceOf = "deluged.service";
+        };
 
         serviceConfig = {
           Type = "simple";
