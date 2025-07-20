@@ -1,92 +1,88 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: let
-  srv = config.server;
   cfg = config.server.deluge;
-  ns = config.server.wireguard-netns.namespace;
+  url = "https://deluge.${config.server.domain}";
+  port = 8112;
 in {
   options.server.deluge = {
-    enable = lib.mkEnableOption "Deluge torrent client (bound to a Wireguard VPN network)";
-    configDir = lib.mkOption {
+    enable = lib.mkEnableOption "Enable Deluge";
+    category = lib.mkOption {
       type = lib.types.str;
-      default = "/var/lib/deluge";
+      default = "Arr";
     };
-    url = lib.mkOption {
-      type = lib.types.str;
-      default = "deluge.${srv.domain}";
-    };
-    homepage.name = lib.mkOption {
-      type = lib.types.str;
-      default = "Deluge";
-    };
-    homepage.description = lib.mkOption {
-      type = lib.types.str;
-      default = "Torrent client";
-    };
-    homepage.icon = lib.mkOption {
-      type = lib.types.str;
-      default = "deluge.svg";
-    };
-    homepage.category = lib.mkOption {
-      type = lib.types.str;
-      default = "Downloads";
+    homepage = lib.mkOption {
+      type = lib.types.attrs;
+      default = {
+        name = "Deluge";
+        icon = "deluge.svg";
+        description = "Shh";
+        href = url;
+        siteMonitor = url;
+      };
     };
   };
-
   config = lib.mkIf cfg.enable {
-    services.deluge = {
-      enable = true;
-      user = srv.user;
-      group = srv.group;
-      web.enable = true;
-    };
-
-    services.caddy.virtualHosts."${cfg.url}" = {
-      useACMEHost = srv.domain;
+    services.caddy.virtualHosts."${url}" = {
+      useACMEHost = config.server.domain;
       extraConfig = ''
-        reverse_proxy http://127.0.0.1:8112
+        reverse_proxy http://127.0.0.1:${toString port}
       '';
     };
 
-    systemd = lib.mkIf srv.wireguard-netns.enable {
-      services.deluged = {
-        bindsTo = ["netns@${ns}.service"];
-        requires = [
-          "network-online.target"
-          "${ns}.service"
+    virtualisation.podman.enable = true;
+    virtualisation.oci-containers.containers = {
+      deluge = {
+        image = "linuxserver/deluge:latest";
+        autoStart = true;
+        dependsOn = ["gluetun"];
+        ports = [
+          "8112:8112"
+          "6881:6881"
         ];
-        serviceConfig.NetworkNamespacePath = "/var/run/netns/${ns}";
-      };
-
-      sockets."delugedproxy" = {
-        enable = true;
-        description = "Socket for Proxy to Deluge WebUI";
-        listenStreams = ["58847"];
-        wantedBy = ["sockets.target"];
-      };
-
-      services."delugedproxy" = {
-        enable = true;
-        description = "Proxy to Deluge in Network Namespace";
-        requires = [
-          "deluged.service"
-          "delugedproxy.socket"
+        extraOptions = [
+          "--pull=newer"
+          "--network=container:gluetun"
         ];
-        after = [
-          "deluged.service"
-          "delugedproxy.socket"
+        volumes = [
+          "/var/deluge/config:/config"
+          "/var/deluge/downloads:/var/deluge/downloads"
         ];
-        unitConfig = {
-          JoinsNamespaceOf = "deluged.service";
+        environmentFiles = [
+          config.sops.secrets.gluetunEnv.path
+        ];
+        environment = {
+          PUID = "1000";
+          PGID = "1000";
+          TZ = "Etc/UTC";
         };
-        serviceConfig = {
-          User = config.services.deluge.user;
-          Group = config.services.deluge.group;
-          ExecStart = "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd --exit-idle-time=5min 127.0.0.1:58847";
-          PrivateNetwork = "yes";
+      };
+
+      gluetun = {
+        image = "qmcgaw/gluetun";
+        ports = [
+          "8388:8388"
+          # Deluge
+          "58846:58846"
+          "8112:8112"
+        ];
+        devices = ["/dev/net/tun:/dev/net/tun"];
+        autoStart = true;
+        extraOptions = [
+          "--pull=newer"
+          "--cap-add=NET_ADMIN"
+        ];
+        volumes = ["/var:/gluetun"];
+        environmentFiles = [
+          config.age.secrets.gluetunEnv.path
+        ];
+        environment = {
+          DEV_MODE = "false";
+          VPN_SERVICE_PROVIDER = "mullvad";
+          VPN_TYPE = "wireguard";
+          SERVER_CITIES = "Stockholm";
         };
       };
     };

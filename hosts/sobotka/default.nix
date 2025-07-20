@@ -44,22 +44,6 @@ in {
   networking = {
     hostName = "sobotka";
     domain = "cnst.dev";
-    firewall.allowedUDPPorts = [51820];
-    wireguard = {
-      interfaces.wg1 = {
-        ips = [
-          "192.168.88.14/24"
-        ];
-        peers = [
-          {
-            name = "kima";
-            allowedIPs = ["192.168.88.13/24"];
-            publicKey = "cUeRvwTwrL5GRc4dHjea89RJSa1kh4kIA/sHYzmscyQ=";
-          }
-        ];
-        privateKeyFile = config.age.secrets.wgSobotkaPrivateKey.path;
-      };
-    };
   };
 
   powerManagement.enable = false;
