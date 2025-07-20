@@ -31,7 +31,7 @@
     deluge.enable = true;
     wireguard-netns = {
       enable = true;
-      namespace = "vpn2";
+      namespace = "vpn";
       configFile = config.age.secrets.wgCredentials.path;
       privateIP = "10.68.145.193";
       dnsIP = "10.64.0.1";

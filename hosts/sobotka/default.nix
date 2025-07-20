@@ -44,23 +44,22 @@ in {
   networking = {
     hostName = "sobotka";
     domain = "cnst.dev";
-    # wireguard = {
-    #   interfaces.wg0 = {
-    #     ips = [
-    #       "127.0.0.1/8"
-    #     ];
-    #     peers = [
-    #       {
-    #         allowedIPs = [
-    #           "192.168.88.13/24"
-    #         ];
-    #         # endpoint = "demo.wireguard.io:12913";
-    #         publicKey = "cUeRvwTwrL5GRc4dHjea89RJSa1kh4kIA/sHYzmscyQ=";
-    #       }
-    #     ];
-    #     privateKeyFile = config.age.secrets.wgSobotkaPrivateKey.path;
-    #   };
-    # };
+    firewall.allowedUDPPorts = [51820];
+    wireguard = {
+      interfaces.wg1 = {
+        ips = [
+          "127.0.0.1/8"
+        ];
+        peers = [
+          {
+            name = "kima";
+            allowedIPs = ["192.168.88.13/24"];
+            publicKey = "cUeRvwTwrL5GRc4dHjea89RJSa1kh4kIA/sHYzmscyQ=";
+          }
+        ];
+        privateKeyFile = config.age.secrets.wgSobotkaPrivateKey.path;
+      };
+    };
   };
 
   powerManagement.enable = false;
