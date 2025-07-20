@@ -13,6 +13,12 @@
     homepage = {
       enable = true;
     };
+    prowlarr = {
+      enable = true;
+    };
+    lidarr = {
+      enable = true;
+    };
     vaultwarden = {
       enable = true;
       url = "vault.cnst.dev";
