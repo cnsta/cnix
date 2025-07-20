@@ -33,7 +33,7 @@
       enable = true;
       namespace = "vpn";
       configFile = config.age.secrets.wgCredentials.path;
-      privateIP = "10.68.145.193/32";
+      privateIP = "10.68.145.193";
       dnsIP = "10.64.0.1";
     };
   };
