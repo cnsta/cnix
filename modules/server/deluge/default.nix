@@ -53,7 +53,6 @@ in {
 
     systemd = lib.mkIf srv.wireguard-netns.enable {
       services.deluged.serviceConfig.NetworkNamespacePath = "/var/run/netns/${ns}";
-      services.deluge-web.serviceConfig.NetworkNamespacePath = "/var/run/netns/${ns}";
 
       services.deluged.after = ["netns@${ns}.service"];
       services.deluge-web.after = ["netns@${ns}.service"];
