@@ -44,17 +44,37 @@ in {
   networking = {
     hostName = "sobotka";
     domain = "cnst.dev";
-    firewall.extraCommands = ''
-      # Allow LAN access to Deluge Web UI
-      nft add rule inet filter input ip saddr 192.168.88.0/24 tcp dport 8112 accept
-
-      # Allow LAN access to Deluge daemon and torrent port
-      nft add rule inet filter input ip saddr 192.168.88.0/24 udp dport { 58846, 6881 } accept
-
-      # Block all other access to those ports
-      nft add rule inet filter input tcp dport 8112 drop
-      nft add rule inet filter input udp dport { 58846, 6881 } drop
-    '';
+    nftables.tables = {
+      filter = {
+        family = "inet";
+        chains.input.rules = [
+          {
+            match = "ip saddr 127.0.0.1 tcp dport 8112";
+            action = "accept";
+          }
+          {
+            match = "ip saddr 192.168.88.0/24 tcp dport 8112";
+            action = "accept";
+          }
+          {
+            match = "ip saddr 127.0.0.1 udp dport { 58846, 6881 }";
+            action = "accept";
+          }
+          {
+            match = "ip saddr 192.168.88.0/24 udp dport { 58846, 6881 }";
+            action = "accept";
+          }
+          {
+            match = "tcp dport 8112";
+            action = "drop";
+          }
+          {
+            match = "udp dport { 58846, 6881 }";
+            action = "drop";
+          }
+        ];
+      };
+    };
   };
 
   powerManagement.enable = false;
