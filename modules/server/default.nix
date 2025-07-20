@@ -7,6 +7,7 @@
   cfg = config.server;
 in {
   options.server = {
+    enable = lib.mkEnableOption "The homelab services and configuration variables";
     email = mkOption {
       default = "";
       type = types.str;

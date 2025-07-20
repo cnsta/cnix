@@ -1,5 +1,6 @@
 {config, ...}: {
   server = {
+    enable = true;
     email = "adam@cnst.dev";
     domain = "cnst.dev";
     caddy = {
