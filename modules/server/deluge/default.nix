@@ -68,8 +68,8 @@ in {
 
       services."deluge-web-proxy" = {
         description = "Proxy to Deluge WebUI in Network Namespace";
-        requires = ["deluge-web-proxy.socket"];
-        after = ["deluge-web-proxy.socket"];
+        requires = ["deluge-web.socket"];
+        after = ["deluge-web.socket"];
 
         serviceConfig = {
           Type = "simple";
