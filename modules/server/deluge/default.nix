@@ -54,8 +54,8 @@ in {
           "--network=container:gluetun"
         ];
         volumes = [
-          "/var/deluge/config:/config"
-          "/var/deluge/downloads:/var/deluge/downloads"
+          "config:/storage/volumes/config"
+          "config:/storage/volumes/downloads"
         ];
         environmentFiles = [
           config.age.secrets.gluetunEnv.path
