@@ -49,20 +49,20 @@ in {
         ExecStart = with pkgs;
           writers.writeBash "wg-up" ''
             set -eux
-            ${iproute2}/bin/ip link add wg0 type wireguard
-            ${iproute2}/bin/ip link set wg0 netns ${cfg.namespace}
-            ${iproute2}/bin/ip -n ${cfg.namespace} address add ${cfg.privateIP} dev wg0
+            ${iproute2}/bin/ip link add wg1 type wireguard
+            ${iproute2}/bin/ip link set wg1 netns ${cfg.namespace}
+            ${iproute2}/bin/ip -n ${cfg.namespace} address add ${cfg.privateIP} dev wg1
             ${iproute2}/bin/ip netns exec ${cfg.namespace} \
-            ${wireguard-tools}/bin/wg setconf wg0 ${cfg.configFile}
-            ${iproute2}/bin/ip -n ${cfg.namespace} link set wg0 up
+            ${wireguard-tools}/bin/wg setconf wg1 ${cfg.configFile}
+            ${iproute2}/bin/ip -n ${cfg.namespace} link set wg1 up
             ${iproute2}/bin/ip -n ${cfg.namespace} link set lo up
-            ${iproute2}/bin/ip -n ${cfg.namespace} route add default dev wg0
+            ${iproute2}/bin/ip -n ${cfg.namespace} route add default dev wg1
           '';
         ExecStop = with pkgs;
           writers.writeBash "wg-down" ''
             set -eux
-            ${iproute2}/bin/ip -n ${cfg.namespace} route del default dev wg0
-            ${iproute2}/bin/ip -n ${cfg.namespace} link del wg0
+            ${iproute2}/bin/ip -n ${cfg.namespace} route del default dev wg1
+            ${iproute2}/bin/ip -n ${cfg.namespace} link del wg1
           '';
       };
     };
