@@ -58,7 +58,7 @@ in {
         "network-online.target"
         "${ns}.service"
       ];
-      services.deluged.serviceConfig.NetworkNamespacePath = ["/var/run/netns/${ns}"];
+      services.deluged.serviceConfig.NetworkNamespacePath = "/var/run/netns/${ns}";
       sockets."deluged-proxy" = {
         enable = true;
         description = "Socket for Proxy to Deluge WebUI";
