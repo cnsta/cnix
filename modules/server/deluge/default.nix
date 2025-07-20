@@ -54,7 +54,7 @@ in {
     systemd = lib.mkIf srv.wireguard-netns.enable {
       services.deluged = {
         bindsTo = ["netns@${ns}.service"];
-        services.deluged.requires = [
+        requires = [
           "network-online.target"
           "${ns}.service"
         ];
