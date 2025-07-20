@@ -47,8 +47,8 @@ in {
         autoStart = true;
         dependsOn = ["gluetun"];
         ports = [
-          "8112:8112"
-          "6881:6881"
+          "192.168.88.14:8112:8112"
+          "192.168.88.14:58846:58846"
         ];
         extraOptions = [
           "--network=container:gluetun"
