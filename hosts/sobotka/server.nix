@@ -3,6 +3,8 @@
     enable = true;
     email = "adam@cnst.dev";
     domain = "cnst.dev";
+    uid = 994;
+    gid = 994;
     caddy = {
       enable = true;
     };
