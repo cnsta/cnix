@@ -28,6 +28,6 @@
         credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
       };
     };
-    deluge.enable = true;
+    qbittorrent.enable = true;
   };
 }
