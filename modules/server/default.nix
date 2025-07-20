@@ -7,7 +7,7 @@
   cfg = config.server;
 in {
   options.server = {
-    enable = lib.mkEnableOption "The homelab services and configuration variables";
+    enable = lib.mkEnableOption "The server services and configuration variables";
     email = mkOption {
       default = "";
       type = types.str;
@@ -26,31 +26,46 @@ in {
       default = "share";
       type = lib.types.str;
       description = ''
-        User to run the homelab services as
+        User to run the server services as
       '';
     };
     group = lib.mkOption {
       default = "share";
       type = lib.types.str;
       description = ''
-        Group to run the homelab services as
+        Group to run the server services as
       '';
     };
+    uid = lib.mkOption {
+      default = 1000;
+      type = lib.types.int;
+      description = ''
+        UID to run the server services as
+      '';
+    };
+    gid = lib.mkOption {
+      default = 1000;
+      type = lib.types.int;
+      description = ''
+        GID to run the server services as
+      '';
+    };
+
     timeZone = lib.mkOption {
       default = "Europe/Stockholm";
       type = lib.types.str;
       description = ''
-        Time zone to be used for the homelab services
+        Time zone to be used for the server services
       '';
     };
   };
   config = lib.mkIf cfg.enable {
     users = {
       groups.${cfg.group} = {
-        gid = 993;
+        gid = cfg.gid;
       };
       users.${cfg.user} = {
-        uid = 994;
+        uid = cfg.uid;
         isSystemUser = true;
         group = cfg.group;
       };
