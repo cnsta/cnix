@@ -17,57 +17,54 @@ in {
       default = "vpn";
       description = "Name of the network namespace";
     };
+    privateIP = lib.mkOption {
+      type = lib.types.str;
+    };
+    dnsIP = lib.mkOption {
+      type = lib.types.str;
+    };
   };
-
-  config = lib.mkIf cfg.enable (
-    let
-      netnsSetup = pkgs.writeShellApplication {
-        name = "netns-${cfg.namespace}-setup";
-        runtimeInputs = with pkgs; [iproute2 wireguard-tools gawk coreutils];
-        text = ''
-          set -eux
-
-          CONFIG=${cfg.configFile}
-          NS=${cfg.namespace}
-          ADDR=$(awk -F' *= *' '/^Address/ { print $2 }' "$CONFIG")
-          DNS=$(awk -F' *= *' '/^DNS/ { print $2 }' "$CONFIG")
-          ip netns delete "$NS" 2>/dev/null || true
-          ip netns add "$NS"
-          ip link add wg0 type wireguard
-          ip link set wg0 netns "$NS"
-          IFS=',' read -ra ADDRS <<< "$ADDR"
-          for ip in "''${ADDRS[@]}"; do
-            ip -n "$NS" addr add "$ip" dev wg0
-          done
-          ip -n "$NS" link set wg0 up
-          grep -vE '^(Address|DNS) *=' "$CONFIG" | ip netns exec "$NS" wg setconf wg0 /dev/stdin
-          ip netns exec "$NS" ip link set lo up
-          ip netns exec "$NS" ip route add default dev wg0
-          mkdir -p /etc/netns/"$NS"
-          echo "nameserver $DNS" > /etc/netns/"$NS"/resolv.conf
-        '';
+  config = lib.mkIf cfg.enable {
+    systemd.services."netns@" = {
+      description = "%I network namespace";
+      before = ["network.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "${pkgs.iproute2}/bin/ip netns add %I";
+        ExecStop = "${pkgs.iproute2}/bin/ip netns del %I";
       };
-      netnsTeardown = pkgs.writeShellApplication {
-        name = "netns-${cfg.namespace}-teardown";
-        runtimeInputs = with pkgs; [iproute2];
-        text = ''
-          set -eu
-          ip netns delete ${cfg.namespace} || true
-        '';
-      };
-    in {
-      systemd.services."netns@${cfg.namespace}" = {
-        description = "WireGuard VPN netns (${cfg.namespace})";
-        requires = ["network-online.target"];
-        wantedBy = ["multi-user.target"];
+    };
+    environment.etc."netns/${cfg.namespace}/resolv.conf".text = "nameserver ${cfg.dnsIP}";
 
-        serviceConfig = {
-          Type = "oneshot";
-          RemainAfterExit = true;
-          ExecStart = "${netnsSetup}/bin/netns-${cfg.namespace}-setup";
-          ExecStop = "${netnsTeardown}/bin/netns-${cfg.namespace}-teardown";
-        };
+    systemd.services.${cfg.namespace} = {
+      description = "${cfg.namespace} network interface";
+      bindsTo = ["netns@${cfg.namespace}.service"];
+      requires = ["network-online.target"];
+      after = ["netns@${cfg.namespace}.service"];
+      wantedBy = ["multi-user.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = with pkgs;
+          writers.writeBash "wg-up" ''
+            set -e
+            ${iproute2}/bin/ip link add wg0 type wireguard
+            ${iproute2}/bin/ip link set wg0 netns ${cfg.namespace}
+            ${iproute2}/bin/ip -n ${cfg.namespace} address add ${cfg.privateIP} dev wg0
+            ${iproute2}/bin/ip netns exec ${cfg.namespace} \
+            ${wireguard-tools}/bin/wg setconf wg0 ${cfg.configFile}
+            ${iproute2}/bin/ip -n ${cfg.namespace} link set wg0 up
+            ${iproute2}/bin/ip -n ${cfg.namespace} link set lo up
+            ${iproute2}/bin/ip -n ${cfg.namespace} route add default dev wg0
+          '';
+        ExecStop = with pkgs;
+          writers.writeBash "wg-down" ''
+            set -e
+            ${iproute2}/bin/ip -n ${cfg.namespace} route del default dev wg0
+            ${iproute2}/bin/ip -n ${cfg.namespace} link del wg0
+          '';
       };
-    }
-  );
+    };
+  };
 }
