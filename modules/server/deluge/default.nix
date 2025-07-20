@@ -52,35 +52,35 @@ in {
     };
 
     systemd = lib.mkIf srv.wireguard-netns.enable {
-      services.deluged.serviceConfig.NetworkNamespacePath = "/var/run/netns/${ns}";
-
-      services.deluged.requires = [
-        "netns@${ns}.service"
-        "network-online.target"
-      ];
+      services.deluged = {
+        bindsTo = ["netns@${ns}.service"];
+        requires = ["network-online.target"];
+        serviceConfig.NetworkNamespacePath = "/var/run/netns/${ns}";
+      };
 
       sockets."delugedproxy" = {
         enable = true;
-        description = "Socket Proxy for Deluge WebUI";
-        listenStreams = [
-          "127.0.0.1:8112"
-        ];
+        description = "Socket for Proxy to Deluge WebUI";
+        listenStreams = ["58846"];
         wantedBy = ["sockets.target"];
       };
 
       services."delugedproxy" = {
         description = "Proxy to Deluge in Network Namespace";
-        requires = ["deluged.service"];
-        after = ["delugedproxy.socket"];
+        requires = [
+          "deluged.service"
+          "delugedproxy.socket"
+        ];
+        after = [
+          "deluged.service"
+          "delugedproxy.socket"
+        ];
         unitConfig = {
           JoinsNamespaceOf = "deluged.service";
         };
-
         serviceConfig = {
           Type = "simple";
-          ExecStart = ''
-            ${pkgs.socat}/bin/socat - TCP4:127.0.0.1:8112
-          '';
+          ExecStart = "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd --exit-idle-time=5min 127.0.0.1:58846";
           PrivateNetwork = true;
           NetworkNamespacePath = "/var/run/netns/${ns}";
         };

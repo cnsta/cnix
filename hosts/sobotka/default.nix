@@ -55,10 +55,10 @@ in {
               "192.168.88.13/24"
             ];
             # endpoint = "demo.wireguard.io:12913";
-            # publicKey = "xTIBA5rboUvnH4htodjb6e697QjLERt1NAB4mZqp8Dg=";
+            publicKey = "cUeRvwTwrL5GRc4dHjea89RJSa1kh4kIA/sHYzmscyQ=";
           }
         ];
-        # privateKey = "yAnz5TF+lXXJte14tji3zlMNq+hd2rYUIgJBgB3fBmk=";
+        privateKeyFile = config.age.secrets.wgSobotkaPrivateKey.path;
       };
     };
   };

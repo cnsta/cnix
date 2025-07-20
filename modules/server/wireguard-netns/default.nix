@@ -58,9 +58,7 @@ in {
     in {
       systemd.services."netns@${cfg.namespace}" = {
         description = "WireGuard VPN netns (${cfg.namespace})";
-        bindsTo = ["netns@${cfg.namespace}.service"];
         requires = ["network-online.target"];
-        after = ["netns@${cfg.namespace}.service"];
         wantedBy = ["multi-user.target"];
 
         serviceConfig = {

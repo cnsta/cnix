@@ -18,4 +18,5 @@ in {
   "cloudflareDnsApiToken.age".publicKeys = [cnst kima usobotka rsobotka];
   "cloudflareDnsCredentials.age".publicKeys = [cnst kima usobotka rsobotka];
   "wgCredentials.age".publicKeys = [cnst kima usobotka rsobotka];
+  "wgSobotkaPrivateKey.age".publicKeys = [cnst kima usobotka rsobotka];
 }
