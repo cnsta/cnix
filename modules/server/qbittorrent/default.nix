@@ -4,14 +4,17 @@
   ...
 }: let
   cfg = config.server.qbittorrent;
-  url = "https://qbt.${config.server.domain}";
-  port = 8090;
 in {
   options.server.qbittorrent = {
     enable = lib.mkEnableOption "Enable qBittorrent";
     url = lib.mkOption {
       type = lib.types.str;
       default = "qbt.${config.server.domain}";
+    };
+    port = lib.mkOption {
+      type = lib.types.int;
+      default = 8080;
+      description = "The port to host qBittorrent on.";
     };
     homepage.name = lib.mkOption {
       type = lib.types.str;
@@ -32,10 +35,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.caddy.virtualHosts."${url}" = {
+    services.caddy.virtualHosts."${cfg.url}" = {
       useACMEHost = config.server.domain;
       extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString port}
+        reverse_proxy http://127.0.0.1:${toString cfg.port}
       '';
     };
 

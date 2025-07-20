@@ -28,6 +28,9 @@
         credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
       };
     };
-    qbittorrent.enable = true;
+    qbittorrent = {
+      enable = true;
+      port = 8090;
+    };
   };
 }
