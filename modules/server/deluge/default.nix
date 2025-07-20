@@ -51,7 +51,7 @@ in {
           "/var/deluge/downloads:/var/deluge/downloads"
         ];
         environmentFiles = [
-          config.sops.secrets.gluetunEnv.path
+          config.age.secrets.gluetunEnv.path
         ];
         environment = {
           PUID = "1000";
