@@ -9,21 +9,28 @@
 in {
   options.server.deluge = {
     enable = lib.mkEnableOption "Enable Deluge";
-    category = lib.mkOption {
+    url = lib.mkOption {
       type = lib.types.str;
-      default = "Arr";
+      default = "deluge.${config.server.domain}";
     };
-    homepage = lib.mkOption {
-      type = lib.types.attrs;
-      default = {
-        name = "Deluge";
-        icon = "deluge.svg";
-        description = "Shh";
-        href = url;
-        siteMonitor = url;
-      };
+    homepage.name = lib.mkOption {
+      type = lib.types.str;
+      default = "Deluge";
+    };
+    homepage.description = lib.mkOption {
+      type = lib.types.str;
+      default = "Torrent client";
+    };
+    homepage.icon = lib.mkOption {
+      type = lib.types.str;
+      default = "deluge.svg";
+    };
+    homepage.category = lib.mkOption {
+      type = lib.types.str;
+      default = "Downloads";
     };
   };
+
   config = lib.mkIf cfg.enable {
     services.caddy.virtualHosts."${url}" = {
       useACMEHost = config.server.domain;
