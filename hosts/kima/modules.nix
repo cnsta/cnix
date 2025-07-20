@@ -30,7 +30,8 @@
         enable = true;
         extraHosts = ''
           192.168.88.14 cnst.dev
-          192.168.88.14 *.cnst.dev
+          192.168.88.14 lidarr.cnst.dev
+          192.168.88.14 prowlarr.cnst.dev
         '';
         interfaces = {
           "eno1" = {

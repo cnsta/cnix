@@ -34,7 +34,6 @@ in {
     services.caddy = {
       enable = true;
       globalConfig = ''
-        servers { trusted_proxies static private_ranges }
         auto_https off
       '';
       virtualHosts = {
