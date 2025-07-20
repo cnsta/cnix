@@ -7,8 +7,8 @@
   url = "https://qbt.${config.server.domain}";
   port = 8090;
 in {
-  options.server.deluge = {
-    enable = lib.mkEnableOption "Enable Deluge";
+  options.server.qbittorrent = {
+    enable = lib.mkEnableOption "Enable qBittorrent";
     url = lib.mkOption {
       type = lib.types.str;
       default = "qbt.${config.server.domain}";
