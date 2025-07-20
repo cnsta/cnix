@@ -127,7 +127,6 @@
         ./server/prowlarr
         ./server/lidarr
         ./server/qbittorrent
-        ./server/wireguard-netns
       ];
     };
     settings = {
