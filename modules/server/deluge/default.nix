@@ -40,6 +40,7 @@ in {
     };
 
     virtualisation.podman.enable = true;
+
     virtualisation.oci-containers.containers = {
       deluge = {
         image = "linuxserver/deluge:latest";
@@ -50,7 +51,6 @@ in {
           "6881:6881"
         ];
         extraOptions = [
-          "--pull=newer"
           "--network=container:gluetun"
         ];
         volumes = [
@@ -71,14 +71,12 @@ in {
         image = "qmcgaw/gluetun";
         ports = [
           "8388:8388"
-          # Deluge
           "58846:58846"
           "8112:8112"
         ];
         devices = ["/dev/net/tun:/dev/net/tun"];
         autoStart = true;
         extraOptions = [
-          "--pull=newer"
           "--cap-add=NET_ADMIN"
         ];
         volumes = ["/var:/gluetun"];
