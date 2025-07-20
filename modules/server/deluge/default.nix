@@ -35,14 +35,13 @@ in {
       default = "Downloads";
     };
   };
+
   config = lib.mkIf cfg.enable {
     services.deluge = {
       enable = true;
       user = srv.user;
       group = srv.group;
-      web = {
-        enable = true;
-      };
+      web.enable = true;
     };
 
     services.caddy.virtualHosts."${cfg.url}" = {
@@ -53,37 +52,32 @@ in {
     };
 
     systemd = lib.mkIf srv.wireguard-netns.enable {
-      services.deluged.bindsTo = ["netns@${ns}.service"];
-      services.deluged.requires = [
-        "network-online.target"
-        "${ns}.service"
-      ];
       services.deluged.serviceConfig.NetworkNamespacePath = "/var/run/netns/${ns}";
-      sockets."deluged-proxy" = {
-        enable = true;
-        description = "Socket for Proxy to Deluge WebUI";
-        listenStreams = ["58846"];
+      services.deluge-web.serviceConfig.NetworkNamespacePath = "/var/run/netns/${ns}";
+
+      services.deluged.after = ["netns@${ns}.service"];
+      services.deluge-web.after = ["netns@${ns}.service"];
+
+      sockets."deluge-web-proxy" = {
+        description = "Socket Proxy for Deluge WebUI";
+        listenStreams = [
+          "127.0.0.1:8112"
+        ];
         wantedBy = ["sockets.target"];
       };
-      services."deluged-proxy" = {
-        enable = true;
-        description = "Proxy to Deluge Daemon in Network Namespace";
-        requires = [
-          "deluged.service"
-          "deluged-proxy.socket"
-        ];
-        after = [
-          "deluged.service"
-          "deluged-proxy.socket"
-        ];
-        unitConfig = {
-          JoinsNamespaceOf = "deluged.service";
-        };
+
+      services."deluge-web-proxy" = {
+        description = "Proxy to Deluge WebUI in Network Namespace";
+        requires = ["deluge-web-proxy.socket"];
+        after = ["deluge-web-proxy.socket"];
+
         serviceConfig = {
-          User = config.services.deluge.user;
-          Group = config.services.deluge.group;
-          ExecStart = "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd --exit-idle-time=5min 127.0.0.1:58846";
-          PrivateNetwork = "yes";
+          Type = "simple";
+          ExecStart = ''
+            ${pkgs.socat}/bin/socat - TCP4:127.0.0.1:8112
+          '';
+          PrivateNetwork = true;
+          NetworkNamespacePath = "/var/run/netns/${ns}";
         };
       };
     };
