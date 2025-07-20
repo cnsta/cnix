@@ -48,44 +48,42 @@ in {
       filter = {
         family = "inet";
         content = ''
-          table inet filter {
-            chain input {
-              type filter hook input priority 0;
+          chain input {
+            type filter hook input priority 0;
 
-              # Accept localhost traffic
-              iifname lo accept
+            # Accept localhost traffic
+            iifname lo accept
 
-              # Accept established/related traffic
-              ct state { established, related } accept
+            # Accept established/related traffic
+            ct state { established, related } accept
 
-              # Allow ICMP (ping etc.)
-              ip protocol icmp accept
-              ip6 nexthdr icmpv6 accept
+            # Allow ICMP (ping etc.)
+            ip protocol icmp accept
+            ip6 nexthdr icmpv6 accept
 
-              # Allow SSH
-              tcp dport 22 accept
+            # Allow SSH
+            tcp dport 22 accept
 
-              # --- Custom rules for Deluge ---
-              ip saddr 192.168.88.0/24 tcp dport 8112 accept
-              ip saddr 192.168.88.0/24 udp dport { 58846, 6881 } accept
+            # --- Custom rules for Deluge ---
+            ip saddr 192.168.88.0/24 tcp dport 8112 accept
+            ip saddr 192.168.88.0/24 udp dport { 58846, 6881 } accept
 
-              # Drop other external access to these ports
-              tcp dport 8112 drop
-              udp dport { 58846, 6881 } drop
+            # Drop other external access to these ports
+            tcp dport 8112 drop
+            udp dport { 58846, 6881 } drop
 
-              # Default deny
-              counter drop
-            }
+            # Default deny
+            counter drop
+          }
 
-            chain forward {
-              type filter hook forward priority 0;
-              accept
-            }
+          chain forward {
+            type filter hook forward priority 0;
+            accept
+          }
 
-            chain output {
-              type filter hook output priority 0;
-              accept
-            }
+          chain output {
+            type filter hook output priority 0;
+            accept
           }
         '';
       };
