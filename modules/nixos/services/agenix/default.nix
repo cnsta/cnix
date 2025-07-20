@@ -62,6 +62,7 @@ in {
           cloudflareDnsCredentials.file = "${self}/secrets/cloudflareDnsCredentials.age";
           wgCredentials.file = "${self}/secrets/wgCredentials.age";
           wgSobotkaPrivateKey.file = "${self}/secrets/wgSobotkaPrivateKey.age";
+          gutetunEnv.file = "${self}/secrets/gutetunEnv.age";
           vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";
           vaultwarden-env.file = "${self}/secrets/vaultwarden-env.age";
           homepage-env.file = "${self}/secrets/homepage-env.age";
