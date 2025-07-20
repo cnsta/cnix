@@ -124,6 +124,8 @@
         ./server/fail2ban
         ./server/homepage
         ./server/vaultwarden
+        ./server/prowlarr
+        ./server/lidarr
       ];
     };
     settings = {
