@@ -19,16 +19,12 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    systemd.services."netns@${cfg.namespace}" = {
-      description = "WireGuard VPN netns (${cfg.namespace})";
-      after = ["network-online.target"];
-      wants = ["network-online.target"];
-      wantedBy = ["multi-user.target"];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-        ExecStart = pkgs.writeShellScript "netns-${cfg.namespace}-setup" ''
+  config = lib.mkIf cfg.enable (
+    let
+      netnsSetup = pkgs.writeShellApplication {
+        name = "netns-${cfg.namespace}-setup";
+        runtimeInputs = with pkgs; [iproute2 wireguard-tools gawk coreutils];
+        text = ''
           set -eux
 
           CONFIG=${cfg.configFile}
@@ -36,9 +32,7 @@ in {
           ADDR=$(awk -F' *= *' '/^Address/ { print $2 }' "$CONFIG")
           DNS=$(awk -F' *= *' '/^DNS/ { print $2 }' "$CONFIG")
 
-          # Clean up any existing netns
           ip netns delete "$NS" 2>/dev/null || true
-
           ip netns add "$NS"
           ip link add wg0 type wireguard
           ip link set wg0 netns "$NS"
@@ -48,14 +42,33 @@ in {
           ip netns exec "$NS" ip link set lo up
           ip netns exec "$NS" ip route add default dev wg0
 
-          # Set DNS
           mkdir -p /etc/netns/"$NS"
           echo "nameserver $DNS" > /etc/netns/"$NS"/resolv.conf
         '';
-        ExecStop = pkgs.writeShellScript "netns-${cfg.namespace}-teardown" ''
+      };
+
+      netnsTeardown = pkgs.writeShellApplication {
+        name = "netns-${cfg.namespace}-teardown";
+        runtimeInputs = with pkgs; [iproute2];
+        text = ''
+          set -eu
           ip netns delete ${cfg.namespace} || true
         '';
       };
-    };
-  };
+    in {
+      systemd.services."netns@${cfg.namespace}" = {
+        description = "WireGuard VPN netns (${cfg.namespace})";
+        after = ["network-online.target"];
+        wants = ["network-online.target"];
+        wantedBy = ["multi-user.target"];
+
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          ExecStart = "${netnsSetup}/bin/netns-${cfg.namespace}-setup";
+          ExecStop = "${netnsTeardown}/bin/netns-${cfg.namespace}-teardown";
+        };
+      };
+    }
+  );
 }

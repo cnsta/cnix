@@ -32,6 +32,7 @@
           192.168.88.14 cnst.dev
           192.168.88.14 lidarr.cnst.dev
           192.168.88.14 prowlarr.cnst.dev
+          192.168.88.14 deluge.cnst.dev
         '';
         interfaces = {
           "eno1" = {
