@@ -48,7 +48,7 @@ in {
         RemainAfterExit = true;
         ExecStart = with pkgs;
           writers.writeBash "wg-up" ''
-            set -eux
+            set -e
             ${iproute2}/bin/ip link add wg1 type wireguard
             ${iproute2}/bin/ip link set wg1 netns ${cfg.namespace}
             ${iproute2}/bin/ip -n ${cfg.namespace} address add ${cfg.privateIP} dev wg1
@@ -60,7 +60,7 @@ in {
           '';
         ExecStop = with pkgs;
           writers.writeBash "wg-down" ''
-            set -eux
+            set -e
             ${iproute2}/bin/ip -n ${cfg.namespace} route del default dev wg1
             ${iproute2}/bin/ip -n ${cfg.namespace} link del wg1
           '';
