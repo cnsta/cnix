@@ -46,14 +46,16 @@ in {
         reverse_proxy http://127.0.0.1:8686
       '';
     };
-    users.users.lidarr = {
-      uid = 306;
-      group = "lidarr";
-      extraGroups = ["media"];
-      isSystemUser = true;
-    };
-    groups.lidarr = {
-      gid = 306;
+    users = {
+      users.lidarr = {
+        uid = 306;
+        group = "lidarr";
+        extraGroups = ["media"];
+        isSystemUser = true;
+      };
+      groups.lidarr = {
+        gid = 306;
+      };
     };
   };
 }
