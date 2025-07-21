@@ -47,7 +47,6 @@ in {
 
     virtualisation.oci-containers.containers = {
       qbittorrent = {
-        user = "${srv.user}:${srv.group};";
         image = "linuxserver/qbittorrent:latest";
         autoStart = true;
         dependsOn = ["gluetun"];
@@ -95,6 +94,16 @@ in {
           VPN_TYPE = "wireguard";
           SERVER_CITIES = "Stockholm";
         };
+      };
+    };
+    users = {
+      users.qbittorrent = {
+        uid = srv.uid;
+        group = "qbittorrent";
+        isSystemUser = true;
+      };
+      groups.qbittorrent = {
+        gid = srv.gid;
       };
     };
   };
