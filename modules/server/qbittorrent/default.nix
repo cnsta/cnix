@@ -70,7 +70,7 @@ in {
         volumes = [
           "config:/storage/volumes/config"
           "config:/storage/volumes/downloads"
-          "/var/lib/qbittorrent:/config"
+          # "/var/lib/qbittorrent:/config"
         ];
         environmentFiles = [
           config.age.secrets.gluetunEnv.path
@@ -108,16 +108,16 @@ in {
       };
     };
 
-    environment.persistence."/persist/backup" = {
-      directories = [
-        {
-          directory = "/var/lib/qbittorrent";
-          user = "qbittorrent";
-          group = "qbittorrent";
-          mode = "0750";
-        }
-      ];
-    };
+    # environment.persistence."/persist/backup" = {
+    #   directories = [
+    #     {
+    #       directory = "/var/lib/qbittorrent";
+    #       user = "qbittorrent";
+    #       group = "qbittorrent";
+    #       mode = "0750";
+    #     }
+    #   ];
+    # };
 
     users = {
       users.qbittorrent = {
