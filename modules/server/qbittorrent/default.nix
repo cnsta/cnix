@@ -68,9 +68,8 @@ in {
           "--network=container:gluetun"
         ];
         volumes = [
-          "config:/storage/volumes/config"
-          "config:/storage/volumes/downloads"
-          # "/var/lib/qbittorrent:/config"
+          "/var/lib/qbittorrent:/config"
+          "/shared/downloads:/downloads"
         ];
         environmentFiles = [
           config.age.secrets.gluetunEnv.path
@@ -108,21 +107,11 @@ in {
       };
     };
 
-    # environment.persistence."/persist/backup" = {
-    #   directories = [
-    #     {
-    #       directory = "/var/lib/qbittorrent";
-    #       user = "qbittorrent";
-    #       group = "qbittorrent";
-    #       mode = "0750";
-    #     }
-    #   ];
-    # };
-
     users = {
       users.qbittorrent = {
         uid = cfg.uid;
         group = "qbittorrent";
+        extraGroups = ["media"];
         isSystemUser = true;
       };
       groups.qbittorrent = {
