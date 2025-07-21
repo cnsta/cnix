@@ -175,6 +175,11 @@
       mullvad = {
         enable = true;
       };
+      nfs = {
+        enable = true;
+        server.enable = false;
+        client.enable = true;
+      };
       nix-ld = {
         enable = false;
       };
