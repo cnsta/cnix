@@ -58,15 +58,15 @@ in {
           "--network=container:gluetun"
         ];
         volumes = [
-          "/var/lib/qbittorrent:/config"
-          "/shared/downloads:/downloads"
+          "config:/var/lib/qbittorrent"
+          "downloads:/home/cnst/downloads"
         ];
         environmentFiles = [
           config.age.secrets.gluetunEnv.path
         ];
         environment = {
-          PUID = "${builtins.toString srv.uid}";
-          PGID = "${builtins.toString srv.gid}";
+          PUID = "0";
+          PGID = "777";
           TZ = "Etc/UTC";
           WEBUI_PORT = "${builtins.toString cfg.port}";
         };

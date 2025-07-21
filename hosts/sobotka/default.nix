@@ -29,6 +29,13 @@ in {
       "fuse"
       "fail2ban"
       "vaultwarden"
+      "qbittorrent"
+      "lidarr"
+      "prowlarr"
+      "bazarr"
+      "sonarr"
+      "radarr"
+      "media"
     ];
   };
 
