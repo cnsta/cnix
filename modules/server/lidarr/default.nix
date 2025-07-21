@@ -46,5 +46,10 @@ in {
         reverse_proxy http://127.0.0.1:8686
       '';
     };
+    users.users.lidarr = {
+      group = "lidarr";
+      extraGroups = ["media"];
+      isSystemUser = true;
+    };
   };
 }

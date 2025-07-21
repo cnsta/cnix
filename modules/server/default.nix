@@ -70,5 +70,6 @@ in {
         group = cfg.group;
       };
     };
+    users.groups.media.gid = 777;
   };
 }
