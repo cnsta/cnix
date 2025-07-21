@@ -39,8 +39,6 @@ in {
   config = lib.mkIf cfg.enable {
     services.${unit} = {
       enable = true;
-      user = srv.user;
-      group = srv.group;
     };
     services.caddy.virtualHosts."${cfg.url}" = {
       useACMEHost = srv.domain;
