@@ -3,7 +3,6 @@
   lib,
   ...
 }: let
-  srv = config.server;
   cfg = config.server.qbittorrent;
 in {
   options.server.qbittorrent = {
@@ -65,9 +64,9 @@ in {
           config.age.secrets.gluetunEnv.path
         ];
         environment = {
-          PUID = "0";
+          PUID = "1001";
           PGID = "777";
-          TZ = "Etc/UTC";
+          TZ = "Europe/Stockholm";
           WEBUI_PORT = "${builtins.toString cfg.port}";
         };
       };
