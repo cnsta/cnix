@@ -109,13 +109,13 @@ in {
 
     users = {
       users.qbittorrent = {
-        uid = cfg.uid;
+        uid = 994;
         group = "qbittorrent";
         extraGroups = ["media"];
         isSystemUser = true;
       };
       groups.qbittorrent = {
-        gid = cfg.gid;
+        gid = 993;
       };
     };
   };

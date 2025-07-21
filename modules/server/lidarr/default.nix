@@ -47,9 +47,13 @@ in {
       '';
     };
     users.users.lidarr = {
+      uid = 306;
       group = "lidarr";
       extraGroups = ["media"];
       isSystemUser = true;
+    };
+    groups.lidarr = {
+      gid = 306;
     };
   };
 }
