@@ -17,16 +17,6 @@ in {
       default = 8080;
       description = "The port to host qBittorrent on.";
     };
-    uid = lib.mkOption {
-      type = lib.types.int;
-      default = 899;
-      description = "The uid of qBittorrent.";
-    };
-    gid = lib.mkOption {
-      type = lib.types.int;
-      default = 898;
-      description = "The gid qBittorrent.";
-    };
     homepage.name = lib.mkOption {
       type = lib.types.str;
       default = "qBittorrent";
@@ -109,13 +99,13 @@ in {
 
     users = {
       users.qbittorrent = {
-        uid = 994;
+        uid = 899;
         group = "qbittorrent";
         extraGroups = ["media"];
         isSystemUser = true;
       };
       groups.qbittorrent = {
-        gid = 993;
+        gid = 898;
       };
     };
   };
