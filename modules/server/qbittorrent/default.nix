@@ -59,7 +59,7 @@ in {
         ];
         volumes = [
           "config:/var/lib/qbittorrent"
-          "downloads:/home/cnst/downloads"
+          "downloads:/home/media/downloads"
         ];
         environmentFiles = [
           config.age.secrets.gluetunEnv.path
