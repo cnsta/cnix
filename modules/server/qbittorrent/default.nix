@@ -57,8 +57,8 @@ in {
           "--network=container:gluetun"
         ];
         volumes = [
-          "config:/var/lib/qbittorrent"
-          "downloads:/home/media/downloads"
+          "config:/var/lib/"
+          "downloads:/home/media/"
         ];
         environmentFiles = [
           config.age.secrets.gluetunEnv.path
