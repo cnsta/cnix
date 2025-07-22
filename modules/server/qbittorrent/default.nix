@@ -47,7 +47,6 @@ in {
     virtualisation.oci-containers.containers = {
       qbittorrent = {
         image = "ghcr.io/hotio/qbittorrent:latest";
-        user = "994:993";
         autoStart = true;
         dependsOn = ["gluetun"];
         ports = [
