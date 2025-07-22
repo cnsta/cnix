@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  unit = "lidarr";
+  unit = "sonarr";
   srv = config.server;
   cfg = config.server.${unit};
 in {
@@ -21,7 +21,7 @@ in {
     };
     homepage.name = lib.mkOption {
       type = lib.types.str;
-      default = "Lidarr";
+      default = "Sonarr";
     };
     homepage.description = lib.mkOption {
       type = lib.types.str;
@@ -29,7 +29,7 @@ in {
     };
     homepage.icon = lib.mkOption {
       type = lib.types.str;
-      default = "lidarr.svg";
+      default = "sonarr.svg";
     };
     homepage.category = lib.mkOption {
       type = lib.types.str;
@@ -45,7 +45,7 @@ in {
     services.caddy.virtualHosts."${cfg.url}" = {
       useACMEHost = srv.domain;
       extraConfig = ''
-        reverse_proxy http://127.0.0.1:8686
+        reverse_proxy http://127.0.0.1:8989
       '';
     };
   };

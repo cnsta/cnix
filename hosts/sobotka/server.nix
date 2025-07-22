@@ -24,6 +24,12 @@
     lidarr = {
       enable = true;
     };
+    sonarr = {
+      enable = true;
+    };
+    radarr = {
+      enable = true;
+    };
     vaultwarden = {
       enable = true;
       url = "vault.cnst.dev";
