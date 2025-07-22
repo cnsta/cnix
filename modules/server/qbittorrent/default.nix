@@ -99,16 +99,16 @@ in {
       };
     };
 
-    # users = {
-    #   users.qbittorrent = {
-    #     inherit uid;
-    #     group = "qbittorrent";
-    #     extraGroups = ["${srv.group}"];
-    #     isSystemUser = true;
-    #   };
-    #   groups.qbittorrent = {
-    #     inherit gid;
-    #   };
-    # };
+    users = {
+      users.qbittorrent = {
+        inherit uid;
+        group = "qbittorrent";
+        extraGroups = ["${srv.group}"];
+        isSystemUser = true;
+      };
+      groups.qbittorrent = {
+        inherit gid;
+      };
+    };
   };
 }
