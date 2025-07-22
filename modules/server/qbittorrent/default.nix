@@ -49,7 +49,7 @@ in {
 
     virtualisation.oci-containers.containers = {
       qbittorrent = {
-        image = "linuxserver/qbittorrent:latest";
+        image = "ghcr.io/hotio/qbittorrent:latest";
         autoStart = true;
         dependsOn = ["gluetun"];
         ports = [
@@ -60,15 +60,15 @@ in {
           "--network=container:gluetun"
         ];
         volumes = [
-          "config:/var/lib/qbittorrent"
-          "downloads:/share/downloads"
+          "/var/lib/qbittorrent:/config:rw"
+          "/share/downloads:/downloads:rw"
         ];
         environmentFiles = [
           config.age.secrets.gluetunEnv.path
         ];
         environment = {
-          PUID = toString uid;
-          PGID = toString gid;
+          # PUID = toString uid;
+          # PGID = toString gid;
           TZ = "Europe/Stockholm";
           WEBUI_PORT = "${builtins.toString cfg.port}";
         };
