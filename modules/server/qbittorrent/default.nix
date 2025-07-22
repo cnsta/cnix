@@ -53,7 +53,7 @@ in {
         autoStart = true;
         dependsOn = ["gluetun"];
         ports = [
-          "8090:8090"
+          "8080:8080"
           "58846:58846"
         ];
         extraOptions = [
@@ -79,7 +79,7 @@ in {
         ports = [
           "8388:8388"
           "58846:58846"
-          "8090:8090"
+          "8080:8080"
         ];
         devices = ["/dev/net/tun:/dev/net/tun"];
         autoStart = true;
