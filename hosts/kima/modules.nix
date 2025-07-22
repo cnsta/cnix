@@ -36,6 +36,8 @@
           192.168.88.14 sonarr.cnst.dev
           192.168.88.14 prowlarr.cnst.dev
           192.168.88.14 qbt.cnst.dev
+          192.168.88.14 jellyseerr.cnst.dev
+          192.168.88.14 jellyfin.cnst.dev
         '';
         interfaces = {
           "eno1" = {
