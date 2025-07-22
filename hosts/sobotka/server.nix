@@ -17,10 +17,10 @@
       enable = true;
     };
     prowlarr = {
-      enable = false;
+      enable = true;
     };
     lidarr = {
-      enable = false;
+      enable = true;
     };
     vaultwarden = {
       enable = true;
@@ -31,7 +31,7 @@
       };
     };
     qbittorrent = {
-      enable = false;
+      enable = true;
       port = 8090;
     };
   };
