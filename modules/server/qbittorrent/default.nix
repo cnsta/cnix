@@ -103,7 +103,7 @@ in {
         # extraGroups = ["media"];
         isSystemUser = true;
       };
-      groups.qbittorrent = {
+      users.groups.media = {
         gid = 777;
       };
     };
