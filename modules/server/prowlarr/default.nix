@@ -39,6 +39,8 @@ in {
   config = lib.mkIf cfg.enable {
     services.${unit} = {
       enable = true;
+      user = srv.user;
+      group = srv.group;
     };
     services.caddy.virtualHosts."${cfg.url}" = {
       useACMEHost = srv.domain;
@@ -46,10 +48,10 @@ in {
         reverse_proxy http://127.0.0.1:9696
       '';
     };
-    users.users.prowlarr = {
-      group = "prowlarr";
-      isSystemUser = true;
-    };
-    users.groups.prowlarr = {};
+    # users.users.prowlarr = {
+    #   group = "prowlarr";
+    #   isSystemUser = true;
+    # };
+    # users.groups.prowlarr = {};
   };
 }
