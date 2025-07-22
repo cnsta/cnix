@@ -64,7 +64,7 @@ in {
           config.age.secrets.gluetunEnv.path
         ];
         environment = {
-          PUID = "1001";
+          PUID = "899";
           PGID = "777";
           TZ = "Europe/Stockholm";
           WEBUI_PORT = "${builtins.toString cfg.port}";
@@ -99,12 +99,12 @@ in {
     users = {
       users.qbittorrent = {
         uid = 899;
-        group = "qbittorrent";
-        extraGroups = ["media"];
+        group = "media";
+        # extraGroups = ["media"];
         isSystemUser = true;
       };
       groups.qbittorrent = {
-        gid = 898;
+        gid = 777;
       };
     };
   };
