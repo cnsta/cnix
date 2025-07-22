@@ -4,9 +4,6 @@
   ...
 }: let
   cfg = config.server.qbittorrent;
-  srv = config.server;
-  uid = 899;
-  gid = 777;
 in {
   options.server.qbittorrent = {
     enable = lib.mkEnableOption "Enable qBittorrent";
@@ -50,7 +47,7 @@ in {
     virtualisation.oci-containers.containers = {
       qbittorrent = {
         image = "ghcr.io/hotio/qbittorrent:latest";
-        user = "share";
+        user = "994:993";
         autoStart = true;
         dependsOn = ["gluetun"];
         ports = [
@@ -99,17 +96,5 @@ in {
         };
       };
     };
-
-    # users = {
-    #   users.qbittorrent = {
-    #     inherit uid;
-    #     group = "${srv.group}";
-    #     # extraGroups = ["${srv.group}"];
-    #     isSystemUser = true;
-    #   };
-    #   # groups.qbittorrent = {
-    #   #   inherit gid;
-    #   # };
-    # };
   };
 }
