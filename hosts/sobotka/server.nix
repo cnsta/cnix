@@ -30,6 +30,12 @@
     radarr = {
       enable = true;
     };
+    jellyseerr = {
+      enable = true;
+    };
+    jellyfin = {
+      enable = true;
+    };
     vaultwarden = {
       enable = true;
       url = "vault.cnst.dev";

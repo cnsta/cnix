@@ -3,33 +3,33 @@
   lib,
   ...
 }: let
-  unit = "sonarr";
+  service = "jellyseerr";
   srv = config.server;
-  cfg = config.server.${unit};
+  cfg = config.server.${service};
 in {
-  options.server.${unit} = {
+  options.server.${service} = {
     enable = lib.mkEnableOption {
-      description = "Enable ${unit}";
-    };
-    configDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/var/lib/${unit}";
+      description = "Enable ${service}";
     };
     url = lib.mkOption {
       type = lib.types.str;
-      default = "${unit}.${srv.domain}";
+      default = "${service}.${srv.domain}";
+    };
+    port = lib.mkOption {
+      type = lib.types.port;
+      default = 5055;
     };
     homepage.name = lib.mkOption {
       type = lib.types.str;
-      default = "Sonarr";
+      default = "Jellyseerr";
     };
     homepage.description = lib.mkOption {
       type = lib.types.str;
-      default = "Series collection manager";
+      default = "Media request and discovery manager";
     };
     homepage.icon = lib.mkOption {
       type = lib.types.str;
-      default = "sonarr.svg";
+      default = "jellyseerr.svg";
     };
     homepage.category = lib.mkOption {
       type = lib.types.str;
@@ -37,15 +37,14 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    services.${unit} = {
+    services.${service} = {
       enable = true;
-      user = srv.user;
-      group = srv.group;
+      port = cfg.port;
     };
     services.caddy.virtualHosts."${cfg.url}" = {
       useACMEHost = srv.domain;
       extraConfig = ''
-        reverse_proxy http://127.0.0.1:8989
+        reverse_proxy http://127.0.0.1:${toString cfg.port}
       '';
     };
   };

@@ -3,41 +3,41 @@
   lib,
   ...
 }: let
-  unit = "sonarr";
+  service = "jellyfin";
+  cfg = config.server.${service};
   srv = config.server;
-  cfg = config.server.${unit};
 in {
-  options.server.${unit} = {
+  options.server.${service} = {
     enable = lib.mkEnableOption {
-      description = "Enable ${unit}";
+      description = "Enable ${service}";
     };
     configDir = lib.mkOption {
       type = lib.types.str;
-      default = "/var/lib/${unit}";
+      default = "/var/lib/${service}";
     };
     url = lib.mkOption {
       type = lib.types.str;
-      default = "${unit}.${srv.domain}";
+      default = "jellyfin.${srv.domain}";
     };
     homepage.name = lib.mkOption {
       type = lib.types.str;
-      default = "Sonarr";
+      default = "Jellyfin";
     };
     homepage.description = lib.mkOption {
       type = lib.types.str;
-      default = "Series collection manager";
+      default = "The Free Software Media System";
     };
     homepage.icon = lib.mkOption {
       type = lib.types.str;
-      default = "sonarr.svg";
+      default = "jellyfin.svg";
     };
     homepage.category = lib.mkOption {
       type = lib.types.str;
-      default = "Arr";
+      default = "Media";
     };
   };
   config = lib.mkIf cfg.enable {
-    services.${unit} = {
+    services.${service} = {
       enable = true;
       user = srv.user;
       group = srv.group;
@@ -45,7 +45,7 @@ in {
     services.caddy.virtualHosts."${cfg.url}" = {
       useACMEHost = srv.domain;
       extraConfig = ''
-        reverse_proxy http://127.0.0.1:8989
+        reverse_proxy http://127.0.0.1:8096
       '';
     };
   };

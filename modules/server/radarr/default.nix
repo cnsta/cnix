@@ -25,7 +25,7 @@ in {
     };
     homepage.description = lib.mkOption {
       type = lib.types.str;
-      default = "Music collection manager";
+      default = "Film collection manager";
     };
     homepage.icon = lib.mkOption {
       type = lib.types.str;
