@@ -129,6 +129,8 @@
         ./server/lidarr
         ./server/radarr
         ./server/sonarr
+        ./server/jellyseerr
+        ./server/jellyfin
         ./server/qbittorrent
       ];
     };
