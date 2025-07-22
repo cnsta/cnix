@@ -49,7 +49,7 @@ in {
 
     virtualisation.oci-containers.containers = {
       qbittorrent = {
-        user = "${srv.user}:${srv.group}";
+        user = "${srv.uid}:${srv.gid}";
         image = "linuxserver/qbittorrent:latest";
         autoStart = true;
         dependsOn = ["gluetun"];
