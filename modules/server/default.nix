@@ -70,6 +70,5 @@ in {
         group = cfg.group;
       };
     };
-    users.groups.media = {};
   };
 }

@@ -36,6 +36,7 @@ in {
       "sonarr"
       "radarr"
       "media"
+      "share"
     ];
   };
 
