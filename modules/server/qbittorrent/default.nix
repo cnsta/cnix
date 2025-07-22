@@ -50,6 +50,7 @@ in {
     virtualisation.oci-containers.containers = {
       qbittorrent = {
         image = "ghcr.io/hotio/qbittorrent:latest";
+        user = "share";
         autoStart = true;
         dependsOn = ["gluetun"];
         ports = [
@@ -99,16 +100,16 @@ in {
       };
     };
 
-    users = {
-      users.qbittorrent = {
-        inherit uid;
-        group = "qbittorrent";
-        extraGroups = ["${srv.group}"];
-        isSystemUser = true;
-      };
-      groups.qbittorrent = {
-        inherit gid;
-      };
-    };
+    # users = {
+    #   users.qbittorrent = {
+    #     inherit uid;
+    #     group = "${srv.group}";
+    #     # extraGroups = ["${srv.group}"];
+    #     isSystemUser = true;
+    #   };
+    #   # groups.qbittorrent = {
+    #   #   inherit gid;
+    #   # };
+    # };
   };
 }
