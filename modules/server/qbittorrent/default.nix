@@ -5,8 +5,8 @@
 }: let
   cfg = config.server.qbittorrent;
   srv = config.server;
-  # uid = 899;
-  # gid = 777;
+  uid = 899;
+  gid = 777;
 in {
   options.server.qbittorrent = {
     enable = lib.mkEnableOption "Enable qBittorrent";
@@ -50,7 +50,6 @@ in {
     virtualisation.oci-containers.containers = {
       qbittorrent = {
         image = "linuxserver/qbittorrent:latest";
-        user = "994:993";
         autoStart = true;
         dependsOn = ["gluetun"];
         ports = [
@@ -62,14 +61,14 @@ in {
         ];
         volumes = [
           "config:/var/lib/qbittorrent"
-          "downloads:/home/share/downloads"
+          "downloads:/share/downloads"
         ];
         environmentFiles = [
           config.age.secrets.gluetunEnv.path
         ];
         environment = {
-          # PUID = toString uid;
-          # PGID = toString gid;
+          PUID = toString srv.uid;
+          PGID = toString srv.gid;
           TZ = "Europe/Stockholm";
           WEBUI_PORT = "${builtins.toString cfg.port}";
         };
@@ -100,15 +99,16 @@ in {
       };
     };
 
-    # users = {
-    #   users.qbittorrent = {
-    #     inherit uid;
-    #     group = "qbittorrent";
-    #     isSystemUser = true;
-    #   };
-    #   groups.qbittorrent = {
-    #     inherit gid;
-    #   };
-    # };
+    users = {
+      users.qbittorrent = {
+        inherit uid;
+        group = "qbittorrent";
+        extraGroups = ["${srv.group}"];
+        isSystemUser = true;
+      };
+      groups.qbittorrent = {
+        inherit gid;
+      };
+    };
   };
 }
