@@ -103,9 +103,9 @@ in {
         # extraGroups = ["media"];
         isSystemUser = true;
       };
-      users.groups.media = {
-        gid = 777;
-      };
+    };
+    users.groups.media = {
+      gid = 777;
     };
   };
 }
