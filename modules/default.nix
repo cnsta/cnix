@@ -127,6 +127,8 @@
         ./server/vaultwarden
         ./server/prowlarr
         ./server/lidarr
+        ./server/radarr
+        ./server/sonarr
         ./server/qbittorrent
       ];
     };
