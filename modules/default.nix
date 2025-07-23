@@ -19,11 +19,11 @@
         ./home/programs/hyprlock
         ./home/programs/jujutsu
         ./home/programs/kitty
-        ./home/programs/misc
         ./home/programs/mpv
         ./home/programs/neovim
         ./home/programs/nvf
         ./home/programs/nwg-bar
+        ./home/programs/pkgs
         ./home/programs/rofi
         ./home/programs/ssh
         ./home/programs/tuirun

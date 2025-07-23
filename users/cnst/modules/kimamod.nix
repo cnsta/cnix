@@ -53,9 +53,6 @@
       kitty = {
         enable = false;
       };
-      misc = {
-        enable = true;
-      };
       mpv = {
         enable = true;
       };
@@ -67,6 +64,11 @@
       };
       nwg-bar = {
         enable = true;
+      };
+      pkgs = {
+        enable = true;
+        common.enable = true;
+        desktop.enable = true;
       };
       rofi = {
         enable = true;

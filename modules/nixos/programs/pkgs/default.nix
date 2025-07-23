@@ -31,6 +31,11 @@ in {
         default = false;
         description = "Whether to install laptop-specific packages.";
       };
+      server.enable = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Whether to install server-specific packages.";
+      };
       dev.enable = mkOption {
         type = types.bool;
         default = false;
@@ -92,6 +97,10 @@ in {
 
         (mkIf cfg.laptop.enable [
           brightnessctl
+        ])
+
+        (mkIf cfg.server.enable [
+          intel-gpu-tools
         ])
 
         (mkIf cfg.dev.enable [
