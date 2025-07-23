@@ -54,7 +54,7 @@ in {
           # PIHOLE_DNS_ = "10.88.0.1#5335";
           # DNSSEC = "false";
           # REV_SERVER = "true";
-          VIRTUAL_HOST = "${unit}.${srv.domain}";
+          # VIRTUAL_HOST = "${unit}.${srv.domain}";
           WEBTHEME = "default-darker";
         };
         environmentFiles = [config.age.secrets.pihole.path];
