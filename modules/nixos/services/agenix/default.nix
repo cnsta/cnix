@@ -66,6 +66,7 @@ in {
           vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";
           vaultwarden-env.file = "${self}/secrets/vaultwarden-env.age";
           homepage-env.file = "${self}/secrets/homepage-env.age";
+          pihole.file = "${self}/secrets/pihole.age";
         };
       })
       (mkIf cfg.toothpc.enable {
