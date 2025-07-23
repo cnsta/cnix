@@ -66,7 +66,6 @@
       };
       pkgs = {
         enable = true;
-        server.enable = true;
       };
       rofi = {
         enable = false;

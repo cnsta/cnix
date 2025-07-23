@@ -101,8 +101,7 @@ in {
           ])
 
         (mkIf cfg.server.enable [
-          nvtopPackages.full
-        ])
+          ])
 
         (mkIf cfg.dev.enable [
           ])
