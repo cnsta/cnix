@@ -43,8 +43,10 @@
       kitty = {
         enable = true;
       };
-      misc = {
+      pkgs = {
         enable = true;
+        common.enable = true;
+        desktop.enable = true;
       };
       mpv = {
         enable = true;
