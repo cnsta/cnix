@@ -7,6 +7,10 @@
     group = "share";
     uid = 994;
     gid = 993;
+
+    unbound = {
+      enable = true;
+    };
     caddy = {
       enable = true;
     };
