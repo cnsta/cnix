@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  inputs,
   ...
 }: let
   inherit (lib) mkIf mkOption mkMerge types;
@@ -100,7 +99,8 @@ in {
         ])
 
         (mkIf cfg.server.enable [
-          intel-gpu-tools
+          nvtopPackages.intel
+          nvtopPackages.amd
         ])
 
         (mkIf cfg.dev.enable [
