@@ -133,6 +133,7 @@
         ./server/jellyseerr
         ./server/jellyfin
         ./server/qbittorrent
+        ./server/uptime-kuma
       ];
     };
     settings = {
