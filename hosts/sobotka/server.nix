@@ -39,6 +39,9 @@
     jellyfin = {
       enable = true;
     };
+    uptime-kuma = {
+      enable = true;
+    };
     vaultwarden = {
       enable = true;
       url = "vault.cnst.dev";
