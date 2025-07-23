@@ -52,9 +52,6 @@
       kitty = {
         enable = false;
       };
-      misc = {
-        enable = false;
-      };
       mpv = {
         enable = false;
       };
@@ -66,6 +63,9 @@
       };
       nwg-bar = {
         enable = false;
+      };
+      pkgs = {
+        enable = true;
       };
       rofi = {
         enable = false;

@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mkOption types;
+  inherit (lib) mkIf mkEnableOption mkOption types mkMerge;
   cfg = config.home.programs.pkgs;
 in {
   options = {
@@ -15,7 +15,6 @@ in {
         default = false;
         description = "Whether to install common packages.";
       };
-
       desktop.enable = mkOption {
         type = types.bool;
         default = false;

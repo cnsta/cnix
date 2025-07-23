@@ -53,9 +53,6 @@
       kitty = {
         enable = false;
       };
-      misc = {
-        enable = true;
-      };
       mpv = {
         enable = true;
       };
@@ -68,6 +65,10 @@
       nwg-bar = {
         enable = true;
       };
+      pkgs = {
+        enable = true;
+        common.enable = true;
+      };
       rofi = {
         enable = true;
       };
@@ -75,7 +76,7 @@
         enable = true;
       };
       tuirun = {
-        enable = true;
+        enable = false;
       };
       vscode = {
         enable = false;
