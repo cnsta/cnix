@@ -93,6 +93,9 @@
         laptop = {
           enable = false;
         };
+        server = {
+          enable = true;
+        };
         dev = {
           enable = false;
         };
