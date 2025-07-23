@@ -125,6 +125,7 @@
         ./server/fail2ban
         ./server/homepage
         ./server/vaultwarden
+        ./server/bazarr
         ./server/prowlarr
         ./server/lidarr
         ./server/radarr
