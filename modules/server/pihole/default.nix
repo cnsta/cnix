@@ -51,8 +51,8 @@ in {
         volumes = ["/var/lib/pihole:/etc/pihole/"];
         environment = {
           CUSTOM_CACHE_SIZE = "0";
-          PIHOLE_DNS_ = "10.88.0.1#5335";
-          DNSSEC = "false";
+          # PIHOLE_DNS_ = "10.88.0.1#5335";
+          # DNSSEC = "false";
           REV_SERVER = "true";
           VIRTUAL_HOST = "${unit}.${srv.domain}";
           WEBTHEME = "default-darker";
@@ -69,7 +69,7 @@ in {
     services.caddy.virtualHosts."${cfg.url}" = {
       useACMEHost = srv.domain;
       extraConfig = ''
-        reverse_proxy http://127.0.0.1:8686
+        reverse_proxy http://127.0.0.1:8053
       '';
     };
   };

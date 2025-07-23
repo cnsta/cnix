@@ -8,8 +8,11 @@
     uid = 994;
     gid = 993;
 
-    unbound = {
+    pihole = {
       enable = true;
+    };
+    unbound = {
+      enable = false;
     };
     caddy = {
       enable = true;

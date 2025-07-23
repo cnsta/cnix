@@ -133,6 +133,7 @@
         ./server/jellyseerr
         ./server/jellyfin
         ./server/qbittorrent
+        ./server/pihole
         ./server/unbound
         ./server/uptime-kuma
       ];
