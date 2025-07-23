@@ -101,6 +101,7 @@ in {
         (mkIf cfg.server.enable [
           nvtopPackages.intel
           nvtopPackages.amd
+          dig
         ])
 
         (mkIf cfg.dev.enable [
