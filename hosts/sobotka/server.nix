@@ -18,6 +18,9 @@
     homepage = {
       enable = true;
     };
+    bazarr = {
+      enable = true;
+    };
     prowlarr = {
       enable = true;
     };
