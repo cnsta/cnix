@@ -53,7 +53,7 @@ in {
           CUSTOM_CACHE_SIZE = "0";
           # PIHOLE_DNS_ = "10.88.0.1#5335";
           # DNSSEC = "false";
-          REV_SERVER = "true";
+          # REV_SERVER = "true";
           VIRTUAL_HOST = "${unit}.${srv.domain}";
           WEBTHEME = "default-darker";
         };
