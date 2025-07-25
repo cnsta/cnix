@@ -25,7 +25,7 @@ in {
     };
     homepage.icon = lib.mkOption {
       type = lib.types.str;
-      default = "/icons/pi-hole.svg";
+      default = "pi-hole.svg";
     };
     homepage.category = lib.mkOption {
       type = lib.types.str;
