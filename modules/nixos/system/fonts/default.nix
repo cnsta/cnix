@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: let
   inherit (lib) mkIf mkOption types;
@@ -19,6 +20,7 @@ in {
 
   config = mkIf cfg.enable {
     fonts.packages = with pkgs; [
+      inputs.fonts.packages.${pkgs.system}.vcr-mono
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
