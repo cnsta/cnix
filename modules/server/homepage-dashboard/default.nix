@@ -42,7 +42,7 @@ in {
       environmentFile = config.age.secrets.homepage-env.path;
       customCSS = ''
         body, html {
-          font-family: vcr-mono, Helvetica, Arial, sans-serif !important;
+          font-family: vcr-mono, Inter, sans-serif !important;
         }
         .font-medium {
           font-weight: 700 !important;

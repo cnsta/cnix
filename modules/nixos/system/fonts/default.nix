@@ -42,6 +42,7 @@ in {
       nerd-fonts.monoid
       nerd-fonts.mononoki
       nerd-fonts.hack
+      inter
     ];
   };
 }
