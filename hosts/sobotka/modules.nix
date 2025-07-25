@@ -28,6 +28,9 @@
       };
       network = {
         enable = true;
+        extraHosts = ''
+          192.168.88.14 cnst.dev
+        '';
         interfaces = {
           "enp6s0" = {
             allowedTCPPorts = [22 80 443 8090];
