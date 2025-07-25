@@ -50,11 +50,11 @@ in {
         image = "pihole/pihole:latest";
         volumes = ["/var/lib/pihole:/etc/pihole/"];
         environment = {
+          TZ = "Europe/Moscow";
           CUSTOM_CACHE_SIZE = "0";
           # PIHOLE_DNS_ = "10.88.0.1#5335";
           # DNSSEC = "false";
           # REV_SERVER = "true";
-          # VIRTUAL_HOST = "${unit}.${srv.domain}";
           WEBTHEME = "default-darker";
         };
         environmentFiles = [config.age.secrets.pihole.path];
@@ -62,6 +62,11 @@ in {
           "53:53/tcp"
           "53:53/udp"
           "8053:80/tcp"
+        ];
+        extraOptions = [
+          "--cap-add=NET_ADMIN"
+          "--cap-add=SYS_NICE"
+          "--cap-add=SYS_TIME"
         ];
       };
     };
