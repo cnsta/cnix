@@ -123,7 +123,7 @@
         ./server
         ./server/caddy
         ./server/fail2ban
-        ./server/homepage
+        ./server/homepage-dashboard
         ./server/vaultwarden
         ./server/bazarr
         ./server/prowlarr

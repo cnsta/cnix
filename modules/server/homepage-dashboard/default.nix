@@ -4,10 +4,10 @@
   ...
 }: let
   service = "homepage-dashboard";
-  cfg = config.server.homepage;
+  cfg = config.server.homepage-dashboard;
   server = config.server;
 in {
-  options.server.homepage = {
+  options.server.homepage-dashboard = {
     enable = lib.mkEnableOption {
       description = "Enable ${service}";
     };
@@ -42,7 +42,7 @@ in {
       environmentFile = config.age.secrets.homepage-env.path;
       customCSS = ''
         body, html {
-          font-family: SF Pro Display, Helvetica, Arial, sans-serif !important;
+          font-family: vcr-mono, Helvetica, Arial, sans-serif !important;
         }
         .font-medium {
           font-weight: 700 !important;

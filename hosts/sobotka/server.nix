@@ -22,7 +22,7 @@
       apiKeyFile = config.age.secrets.cloudflareFirewallApiKey.path;
       zoneId = "0027acdfb8bbe010f55b676ad8698dfb";
     };
-    homepage = {
+    homepage-dashboard = {
       enable = true;
     };
     bazarr = {

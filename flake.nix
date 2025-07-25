@@ -110,10 +110,12 @@
       url = "github:Aylur/ags";
     };
 
-    # Custom apps
+    # Custom
     tuirun = {
       url = "git+https://git.sr.ht/~canasta/tuirun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    fonts.url = "git+https://git.sr.ht/~canasta/fonts";
   };
 }
