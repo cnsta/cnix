@@ -13,7 +13,7 @@ in {
     };
     url = lib.mkOption {
       type = lib.types.str;
-      default = "${unit}.${srv.domain}/admin";
+      default = "${unit}.${srv.domain}";
     };
     homepage.name = lib.mkOption {
       type = lib.types.str;
@@ -50,7 +50,7 @@ in {
         image = "pihole/pihole:latest";
         volumes = ["/var/lib/pihole:/etc/pihole/"];
         environment = {
-          TZ = "Europe/Moscow";
+          TZ = "Europe/Stockholm";
           CUSTOM_CACHE_SIZE = "0";
           # PIHOLE_DNS_ = "10.88.0.1#5335";
           # DNSSEC = "false";
