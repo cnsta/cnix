@@ -13,7 +13,7 @@ in {
     };
     url = lib.mkOption {
       type = lib.types.str;
-      default = "${unit}.${srv.domain}";
+      default = "${unit}.${srv.domain}/admin";
     };
     homepage.name = lib.mkOption {
       type = lib.types.str;
@@ -25,7 +25,7 @@ in {
     };
     homepage.icon = lib.mkOption {
       type = lib.types.str;
-      default = "pihole.svg";
+      default = "/pi-hole.svg";
     };
     homepage.category = lib.mkOption {
       type = lib.types.str;
