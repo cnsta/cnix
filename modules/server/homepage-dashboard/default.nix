@@ -42,6 +42,10 @@ in {
       environmentFile = config.age.secrets.homepage-env.path;
       customCSS = ''
         body, html {
+          --mint: #d7ffff;
+          --outerspace: #f8ffff;
+          --ghostY: #0d090f;
+          background: var(--ghostY);
           font-family: vcr-mono, vcr-mono !important;
         }
         .font-medium {
@@ -52,6 +56,33 @@ in {
         }
         .font-thin {
           font-weight: 400 !important;
+        }
+        body .colorOverlay {
+          background: linear-gradient(0deg, var(--overlayA) 0%, var(--overlayB) 100%);
+          z-index: 2147483647;
+          pointer-events: none;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          overflow: hidden;
+        body {
+          background: var(--ghostY);
+          color: var(--mint);
+          fill: var(--outerspace);
+          min-width: 320px;
+          max-width: 100%;
+          min-height: 100%;
+          -webkit-font-smoothing: antialiased;
+          --overlayA: rgba(130, 0, 100, 0.07);
+          --overlayB: rgba(30, 190, 180, 0.07);
+          margin: 0;
+          padding: 0;
+          font-family: MainFont, sans-serif;
+          font-size: 16px;
+          font-weight: 600;
+          position: relative;
         }
         #information-widgets {
           padding-left: 1.5rem;
