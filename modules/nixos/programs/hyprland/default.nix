@@ -18,9 +18,7 @@ in {
   ];
 
   options = {
-    nixos.programs.hyprland = {
-      enable = mkEnableOption "Enable Hyprland";
-    };
+    nixos.programs.hyprland.enable = mkEnableOption "Enable Hyprland";
   };
 
   config = mkIf cfg.enable {
