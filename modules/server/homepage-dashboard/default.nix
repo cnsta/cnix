@@ -42,10 +42,12 @@ in {
       environmentFile = config.age.secrets.homepage-env.path;
       customCSS = ''
         @font-face {
-          font-family:"vcr-mono";
-          src: url("https://git.sr.ht/~canasta/fonts/tree/main/item/fonts/vcr-mono/TTF/vcr-mono.ttf") format("truetype");
+          font-family: "VCR OSD Mono";
+          src: url("https://git.sr.ht/~canasta/fonts/tree/main/item/fonts/vcr-mono/TTF/vcr-mono.ttf")
+            format("truetype");
         }
-        body, html {
+        body,
+        html {
           --mint: #d7ffff;
           --outerspace: #f8ffff;
           --ghostY: #0d090f;
@@ -70,34 +72,35 @@ in {
           left: 0;
           right: 0;
           overflow: hidden;
-        body {
-          background: var(--ghostY);
-          color: var(--mint);
-          fill: var(--outerspace);
-          min-width: 320px;
-          max-width: 100%;
-          min-height: 100%;
-          -webkit-font-smoothing: antialiased;
-          --overlayA: rgba(130, 0, 100, 0.07);
-          --overlayB: rgba(30, 190, 180, 0.07);
-          margin: 0;
-          padding: 0;
-          font: inherit;
-          font-family: vcr-mono;
-          font-size: 16px;
-          font-weight: 600;
-          position: relative;
+          body {
+            background: var(--ghostY);
+            color: var(--mint);
+            fill: var(--outerspace);
+            min-width: 320px;
+            max-width: 100%;
+            min-height: 100%;
+            -webkit-font-smoothing: antialiased;
+            --overlayA: rgba(130, 0, 100, 0.07);
+            --overlayB: rgba(30, 190, 180, 0.07);
+            margin: 0;
+            padding: 0;
+            font: inherit;
+            font-family: VCR OSD Mono Regular;
+            font-size: 16px;
+            font-weight: 600;
+            position: relative;
+          }
+          #information-widgets {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+          }
+          div#footer {
+            display: none;
+          }
+          .services-group.basis-full.flex-1.px-1.-my-1 {
+            padding-bottom: 3rem;
+          }
         }
-        #information-widgets {
-          padding-left: 1.5rem;
-          padding-right: 1.5rem;
-        }
-        div#footer {
-          display: none;
-        }
-        .services-group.basis-full.flex-1.px-1.-my-1 {
-          padding-bottom: 3rem;
-        };
       '';
       settings = {
         layout = [
