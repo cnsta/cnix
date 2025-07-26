@@ -41,12 +41,15 @@ in {
       enable = true;
       environmentFile = config.age.secrets.homepage-env.path;
       customCSS = ''
+        @font-face {
+          font-family:"vcr-mono";
+          src: url("https://git.sr.ht/~canasta/fonts/tree/main/item/fonts/vcr-mono/TTF/vcr-mono.ttf") format("truetype");
+        }
         body, html {
           --mint: #d7ffff;
           --outerspace: #f8ffff;
           --ghostY: #0d090f;
           background: var(--ghostY);
-          font-family: vcr-mono, vcr-mono !important;
         }
         .font-medium {
           font-weight: 700 !important;
@@ -79,7 +82,8 @@ in {
           --overlayB: rgba(30, 190, 180, 0.07);
           margin: 0;
           padding: 0;
-          font-family: MainFont, sans-serif;
+          font: inherit;
+          font-family: vcr-mono;
           font-size: 16px;
           font-weight: 600;
           position: relative;
