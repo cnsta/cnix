@@ -21,7 +21,7 @@ in {
         enableFishIntegration = config.programs.fish.enable;
         enableZshIntegration = config.programs.zsh.enable;
         settings = {
-          theme = "GruvboxDarkHard";
+          theme = "GruvboxDark";
           focus-follows-mouse = true;
           resize-overlay = "never";
           background-opacity = 0.95;
