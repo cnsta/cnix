@@ -103,6 +103,7 @@ in {
       #   }
       # '';
       settings = {
+        background = "/fonts/foto.jpg";
         layout = [
           {
             Glances = {
