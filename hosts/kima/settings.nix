@@ -22,7 +22,7 @@
         height = 1080;
         refreshRate = 60;
         position = "2560x0";
-        # transform = 3;
+        transform = 3;
         workspace = "5";
       }
       {

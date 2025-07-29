@@ -4,7 +4,7 @@
       kernel = {
         variant = "latest";
         hardware = ["amd"];
-        extraKernelParams = [];
+        extraKernelParams = ["fbcon=rotate:1"];
       };
       loader = {
         default = {
@@ -165,7 +165,7 @@
         enable = true;
       };
       gnome-keyring = {
-        enable = true;
+        enable = false;
       };
       greetd = {
         enable = true;
@@ -205,6 +205,9 @@
       };
       powerd = {
         enable = false;
+      };
+      psd = {
+        enable = true;
       };
       samba = {
         enable = false;

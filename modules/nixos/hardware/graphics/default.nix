@@ -12,7 +12,6 @@
     libva
     vaapiVdpau
     libvdpau-va-gl
-    libGL
   ];
 
   commonPackages32 = with pkgs.pkgsi686Linux; [
@@ -32,7 +31,6 @@
     vulkan-tools
     wayland
     wayland-protocols
-    libGL
   ];
 
   nvidiaOffloadScript = pkgs.writeShellScriptBin "nvidia-offload" ''

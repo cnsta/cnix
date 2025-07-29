@@ -107,6 +107,7 @@
         ./nixos/services/pipewire
         ./nixos/services/polkit
         ./nixos/services/powerd
+        ./nixos/services/psd
         ./nixos/services/samba
         ./nixos/services/scx
         ./nixos/services/udisks
