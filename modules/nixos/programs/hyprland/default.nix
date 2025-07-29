@@ -32,7 +32,7 @@ in {
 
     programs.hyprland = {
       enable = true;
-      # package = pkgs.hyprland;
+      package = pkgs.hyprland;
       withUWSM = true;
     };
     environment.variables.NIXOS_OZONE_WL = "1";

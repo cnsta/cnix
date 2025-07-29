@@ -13,6 +13,7 @@ in {
   config = mkIf cfg.enable {
     services.dbus = {
       enable = true;
+      implementation = "broker";
       packages = with pkgs; [
         gcr
       ];
