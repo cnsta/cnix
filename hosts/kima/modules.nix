@@ -4,7 +4,7 @@
       kernel = {
         variant = "latest";
         hardware = ["amd"];
-        extraKernelParams = ["fbcon=rotate:1"];
+        extraKernelParams = [];
       };
       loader = {
         default = {

@@ -21,10 +21,10 @@ in {
       package = hyprlockFlake;
       settings = {
         general = {
-          disable_loading_bar = true;
+          # disable_loading_bar = true;
           hide_cursor = true;
-          no_fade_in = true;
-          no_fade_out = true;
+          # no_fade_in = true;
+          # no_fade_out = true;
           ignore_empty_input = true;
           immediate_render = true;
         };
@@ -49,7 +49,7 @@ in {
             fade_on_empty = false;
             fade_timeout = 0;
             fail_text = "";
-            fail_transition = 0;
+            # fail_transition = 0;
             placeholder_text = "";
             hide_input = false;
             rounding = 0;

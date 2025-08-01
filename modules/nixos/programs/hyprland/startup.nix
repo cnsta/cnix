@@ -23,7 +23,7 @@ in {
       programs.hyprland.settings = {
         execr-once = [
           "uwsm finalize"
-          "hyprlock"
+          # "hyprlock"
         ];
       };
     }
