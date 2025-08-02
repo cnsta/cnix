@@ -35,8 +35,8 @@ in {
         name = "Papirus-Dark";
       };
       font = {
-        name = "Input Sans Narrow Light";
-        size = 10;
+        name = "Inter Light";
+        size = 11;
       };
       cursorTheme = {
         # package = pkgs.catppuccin-cursors.latteDark;

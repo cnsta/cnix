@@ -59,8 +59,8 @@ in {
         };
         environmentFiles = [config.age.secrets.pihole.path];
         ports = [
-          "53:53/tcp"
-          "53:53/udp"
+          "192.168.88.14:53:53/tcp"
+          "192.168.88.14:53:53/udp"
           "8053:80/tcp"
         ];
         extraOptions = [
