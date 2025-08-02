@@ -48,7 +48,10 @@ in {
       containers.pihole = {
         autoStart = true;
         image = "pihole/pihole:latest";
-        volumes = ["/var/lib/pihole:/etc/pihole/"];
+        volumes = [
+          "/var/lib/pihole:/etc/pihole/"
+          "/var/lib/dnsmasq.d:/etc/dnsmasq.d/"
+        ];
         environment = {
           TZ = "Europe/Stockholm";
           CUSTOM_CACHE_SIZE = "0";
@@ -59,8 +62,8 @@ in {
         };
         environmentFiles = [config.age.secrets.pihole.path];
         ports = [
-          "192.168.88.14:53:53/tcp"
-          "192.168.88.14:53:53/udp"
+          "53:53/tcp"
+          "53:53/udp"
           "8053:80/tcp"
         ];
         extraOptions = [
