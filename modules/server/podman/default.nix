@@ -74,7 +74,7 @@ in {
       podman.enable = true;
     };
 
-    networking.firewall = lib.mkIf cfg.pihole.enable {
+    networking.firewall = {
       allowedTCPPorts = [53 5335];
       allowedUDPPorts = [53 5335];
     };
