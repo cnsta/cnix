@@ -80,7 +80,7 @@ in {
     };
 
     services.caddy.virtualHosts = lib.mkMerge [
-      (lib.mkIf cfg.qbittorent.enable {
+      (lib.mkIf cfg.qbittorrent.enable {
         "${cfg.qbittorrent.url}" = {
           useACMEHost = srv.domain;
           extraConfig = ''
