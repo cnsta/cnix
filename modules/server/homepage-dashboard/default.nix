@@ -158,13 +158,14 @@ in {
       in
         lib.lists.forEach homepageCategories (cat: {
           "${cat}" =
-            lib.lists.forEach (lib.attrsets.mapAttrsToList (name: value: name) (homepageServices "${cat}"))
+            lib.lists.forEach
+            (lib.attrsets.mapAttrsToList (name: value: {inherit name value;}) (homepageServices "${cat}"))
             (x: {
-              "${hl.${x}.homepage.name}" = {
-                icon = hl.${x}.homepage.icon;
-                description = hl.${x}.homepage.description;
-                href = "https://${hl.${x}.url}";
-                siteMonitor = "https://${hl.${x}.url}";
+              "${x.value.homepage.name}" = {
+                icon = x.value.homepage.icon;
+                description = x.value.homepage.description;
+                href = "https://${x.value.url}";
+                siteMonitor = "https://${x.value.url}";
               };
             });
         })
