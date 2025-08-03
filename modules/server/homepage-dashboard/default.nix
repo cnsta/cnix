@@ -5,7 +5,7 @@
 }: let
   service = "homepage-dashboard";
   cfg = config.server.homepage-dashboard;
-  server = config.server;
+  srv = config.server;
 in {
   options.server.homepage-dashboard = {
     enable = lib.mkEnableOption {
@@ -150,10 +150,11 @@ in {
           "Smart Home"
         ];
         hl = config.server;
+        mergedServices = hl // hl.podman;
         homepageServices = x: (lib.attrsets.filterAttrs (
             name: value: value ? homepage && value.homepage.category == x
           )
-          server);
+          mergedServices);
       in
         lib.lists.forEach homepageCategories (cat: {
           "${cat}" =
@@ -243,8 +244,8 @@ in {
           }
         ];
     };
-    services.caddy.virtualHosts."${server.domain}" = {
-      useACMEHost = server.domain;
+    services.caddy.virtualHosts."${srv.domain}" = {
+      useACMEHost = srv.domain;
       extraConfig = ''
         reverse_proxy http://127.0.0.1:${toString config.services.${service}.listenPort}
       '';
