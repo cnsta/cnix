@@ -64,7 +64,6 @@
         ./nixos/hardware/network
 
         ./nixos/programs/android
-        # ./nixos/programs/anyrun
         ./nixos/programs/beekeeper
         ./nixos/programs/blender
         ./nixos/programs/corectrl
