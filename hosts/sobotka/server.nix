@@ -62,7 +62,7 @@
       };
       pihole = {
         enable = true;
-        port = 8054;
+        port = 8053;
       };
     };
   };
