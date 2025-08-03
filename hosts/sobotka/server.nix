@@ -8,9 +8,6 @@
     uid = 994;
     gid = 993;
 
-    pihole = {
-      enable = true;
-    };
     unbound = {
       enable = false;
     };
@@ -57,9 +54,16 @@
         credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
       };
     };
-    qbittorrent = {
+    podman = {
       enable = true;
-      port = 8080;
+      qbittorrent = {
+        enable = true;
+        port = 8080;
+      };
+      pihole = {
+        enable = true;
+        port = 8054;
+      };
     };
   };
 }
