@@ -45,7 +45,7 @@ in {
       };
       port = lib.mkOption {
         type = lib.types.int;
-        default = 5031;
+        default = 5030;
         description = "The port to host Soulseek webui on.";
       };
       homepage.name = lib.mkOption {
