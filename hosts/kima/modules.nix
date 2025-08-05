@@ -41,6 +41,7 @@
           192.168.88.14 jellyfin.cnst.dev
           192.168.88.14 uptime.cnst.dev
           192.168.88.14 pihole.cnst.dev
+          192.168.88.14 slskd.cnst.dev
         '';
         interfaces = {
           "eno1" = {

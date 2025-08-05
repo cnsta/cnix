@@ -67,6 +67,7 @@ in {
           vaultwarden-env.file = "${self}/secrets/vaultwarden-env.age";
           homepage-env.file = "${self}/secrets/homepage-env.age";
           pihole.file = "${self}/secrets/pihole.age";
+          slskd.file = "${self}/secrets/slskd.age";
         };
       })
       (mkIf cfg.toothpc.enable {
