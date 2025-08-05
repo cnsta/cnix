@@ -60,6 +60,9 @@
         enable = true;
         port = 8080;
       };
+      slskd = {
+        enable = true;
+      };
       pihole = {
         enable = true;
         port = 8053;
