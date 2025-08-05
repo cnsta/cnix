@@ -224,7 +224,7 @@
     };
     system = {
       fonts = {
-        enable = false;
+        enable = true;
       };
       locale = {
         enable = true;

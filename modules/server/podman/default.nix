@@ -43,6 +43,11 @@ in {
         type = lib.types.str;
         default = "slskd.${srv.domain}";
       };
+      port = lib.mkOption {
+        type = lib.types.int;
+        default = 5031;
+        description = "The port to host Soulseek webui on.";
+      };
       homepage.name = lib.mkOption {
         type = lib.types.str;
         default = "slskd";
@@ -110,6 +115,15 @@ in {
           useACMEHost = srv.domain;
           extraConfig = ''
             reverse_proxy http://127.0.0.1:${toString cfg.qbittorrent.port}
+          '';
+        };
+      })
+
+      (lib.mkIf cfg.slskd.enable {
+        "${cfg.slskd.url}" = {
+          useACMEHost = srv.domain;
+          extraConfig = ''
+            reverse_proxy http://127.0.0.1:${toString cfg.slskd.port}
           '';
         };
       })
