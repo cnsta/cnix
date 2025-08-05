@@ -36,6 +36,31 @@ in {
         default = "Downloads";
       };
     };
+
+    slskd = {
+      enable = lib.mkEnableOption "Enable Soulseek";
+      url = lib.mkOption {
+        type = lib.types.str;
+        default = "slskd.${srv.domain}";
+      };
+      homepage.name = lib.mkOption {
+        type = lib.types.str;
+        default = "slskd";
+      };
+      homepage.description = lib.mkOption {
+        type = lib.types.str;
+        default = "Web-based Soulseek client";
+      };
+      homepage.icon = lib.mkOption {
+        type = lib.types.str;
+        default = "slskd.svg";
+      };
+      homepage.category = lib.mkOption {
+        type = lib.types.str;
+        default = "Downloads";
+      };
+    };
+
     pihole = {
       enable = lib.mkEnableOption {
         description = "Enable";
@@ -100,6 +125,35 @@ in {
     ];
 
     virtualisation.oci-containers.containers = lib.mkMerge [
+      (lib.mkIf cfg.enable {
+        gluetun = {
+          image = "qmcgaw/gluetun";
+          ports = [
+            "8388:8388"
+            "58846:58846"
+            "8080:8080"
+            "5030:5030"
+            "5031:5031"
+            "50300:50300"
+          ];
+          devices = ["/dev/net/tun:/dev/net/tun"];
+          autoStart = true;
+          extraOptions = [
+            "--cap-add=NET_ADMIN"
+          ];
+          volumes = ["/var:/gluetun"];
+          environmentFiles = [
+            config.age.secrets.gluetunEnv.path
+          ];
+          environment = {
+            DEV_MODE = "false";
+            VPN_SERVICE_PROVIDER = "mullvad";
+            VPN_TYPE = "wireguard";
+            SERVER_CITIES = "Stockholm";
+          };
+        };
+      })
+
       (lib.mkIf cfg.qbittorrent.enable {
         qbittorrent = {
           image = "ghcr.io/hotio/qbittorrent:latest";
@@ -126,28 +180,36 @@ in {
             WEBUI_PORT = "${builtins.toString cfg.qbittorrent.port}";
           };
         };
+      })
 
-        gluetun = {
-          image = "qmcgaw/gluetun";
-          ports = [
-            "8388:8388"
-            "58846:58846"
-            "8080:8080"
-          ];
-          devices = ["/dev/net/tun:/dev/net/tun"];
+      (lib.mkIf cfg.slskd.enable {
+        slskd = {
+          image = "slskd/slskd:latest";
           autoStart = true;
-          extraOptions = [
-            "--cap-add=NET_ADMIN"
+          dependsOn = ["gluetun"];
+          ports = [
+            "5030:5030"
+            "5031:5031"
+            "50300:50300"
           ];
-          volumes = ["/var:/gluetun"];
+          extraOptions = [
+            "--network=container:gluetun"
+          ];
+          volumes = [
+            "/var/lib/slskd:/app:rw"
+            "/share/downloads:/downloads:rw"
+          ];
           environmentFiles = [
             config.age.secrets.gluetunEnv.path
           ];
           environment = {
-            DEV_MODE = "false";
-            VPN_SERVICE_PROVIDER = "mullvad";
-            VPN_TYPE = "wireguard";
-            SERVER_CITIES = "Stockholm";
+            TZ = "Europe/Stockholm";
+            PUID = "981";
+            PGID = "982";
+            SLSKD_REMOTE_CONFIGURATION = "true";
+            SLSKD_REMOTE_FILE_MANAGEMENT = "true";
+            SLSKD_DOWNLOADS_DIR = "/downloads";
+            SLSKD_UMASK = "022";
           };
         };
       })
