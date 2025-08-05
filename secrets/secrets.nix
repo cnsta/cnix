@@ -21,4 +21,5 @@ in {
   "wgSobotkaPrivateKey.age".publicKeys = [cnst kima usobotka rsobotka];
   "gluetunEnv.age".publicKeys = [cnst kima usobotka rsobotka];
   "pihole.age".publicKeys = [cnst kima usobotka rsobotka];
+  "slskd.age".publicKeys = [cnst kima usobotka rsobotka];
 }

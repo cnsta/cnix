@@ -215,6 +215,7 @@ in {
           ];
           environmentFiles = [
             config.age.secrets.gluetunEnv.path
+            config.age.secrets.slskd.path
           ];
           environment = {
             TZ = "Europe/Stockholm";
