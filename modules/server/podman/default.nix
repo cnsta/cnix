@@ -225,7 +225,6 @@ in {
             SLSKD_REMOTE_FILE_MANAGEMENT = "true";
             SLSKD_DOWNLOADS_DIR = "/downloads";
             SLSKD_UMASK = "022";
-            SLSKD_SLSK_LISTEN_PORT = "51820";
           };
         };
       })
