@@ -79,7 +79,7 @@
         enable = true;
       };
       gimp = {
-        enable = false;
+        enable = true;
       };
       gnome = {
         enable = false;

@@ -12,7 +12,7 @@ in {
   };
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      pkgs.gimp-with-plugins
+      pkgs.gimp3-with-plugins
     ];
   };
 }
