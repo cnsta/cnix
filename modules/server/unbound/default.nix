@@ -14,7 +14,7 @@ in {
   };
   config = lib.mkIf cfg.enable {
     services = {
-      resolved.enable = lib.mkForce false;
+      # resolved.enable = lib.mkForce false;
       unbound = {
         enable = true;
         enableRootTrustAnchor = true;
@@ -23,6 +23,12 @@ in {
         package = pkgs.unbound-full;
         settings = {
           server = {
+            access-control = [
+              "127.0.0.0/8 allow"
+              "10.88.0.0/24 allow"
+              "::1 allow"
+              "192.168.88.0/24 allow"
+            ];
             aggressive-nsec = true;
             cache-max-ttl = 86400;
             cache-min-ttl = 300;
@@ -44,6 +50,7 @@ in {
             infra-cache-slabs = 8;
             interface = [
               "127.0.0.1@5335"
+              "192.168.88.14@5335"
               "::@5335"
             ];
             key-cache-slabs = 8;
@@ -83,8 +90,6 @@ in {
               "255.255.255.255/32"
               "2001:db8::/32"
             ];
-            private-domain = ["local"];
-            domain-insecure = ["local"];
           };
         };
       };
