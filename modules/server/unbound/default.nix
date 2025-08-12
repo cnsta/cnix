@@ -14,7 +14,7 @@ in {
   };
   config = lib.mkIf cfg.enable {
     services = {
-      # resolved.enable = lib.mkForce false;
+      resolved.enable = lib.mkForce false;
       unbound = {
         enable = true;
         enableRootTrustAnchor = true;

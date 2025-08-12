@@ -9,7 +9,7 @@
     gid = 993;
 
     unbound = {
-      enable = false;
+      enable = true;
     };
     caddy = {
       enable = true;
