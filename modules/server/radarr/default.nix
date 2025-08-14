@@ -43,9 +43,8 @@ in {
       group = srv.group;
     };
     services.caddy.virtualHosts."${cfg.url}" = {
-      # useACMEHost = srv.domain;
+      useACMEHost = srv.domain;
       extraConfig = ''
-        tls internal
         reverse_proxy http://127.0.0.1:7878
       '';
     };
