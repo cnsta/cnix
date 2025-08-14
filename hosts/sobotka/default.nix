@@ -51,7 +51,7 @@ in {
 
   networking = {
     hostName = "sobotka";
-    domain = "cnst.dev";
+    domain = "cnst.lan";
   };
 
   powerManagement.enable = false;

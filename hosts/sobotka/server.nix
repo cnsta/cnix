@@ -2,7 +2,7 @@
   server = {
     enable = true;
     email = "adam@cnst.dev";
-    domain = "cnst.dev";
+    domain = "cnst.lan";
     user = "share";
     group = "share";
     uid = 994;
@@ -48,7 +48,7 @@
     };
     vaultwarden = {
       enable = true;
-      url = "vault.cnst.dev";
+      url = "vault.cnst.lan";
       cloudflared = {
         tunnelId = "fdd98086-6a4c-44f2-bba0-eb86b833cce5";
         credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
