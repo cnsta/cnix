@@ -51,7 +51,6 @@ in {
 
   networking = {
     hostName = "sobotka";
-    domain = "sobotka.local";
   };
 
   powerManagement.enable = false;
