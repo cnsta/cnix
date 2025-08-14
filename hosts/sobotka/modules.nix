@@ -28,20 +28,20 @@
       };
       network = {
         enable = true;
-        extraHosts = ''
-          192.168.88.14 sobotka
-          192.168.88.14 cnst.dev
-          192.168.88.14 lidarr.cnst.dev
-          192.168.88.14 radarr.cnst.dev
-          192.168.88.14 sonarr.cnst.dev
-          192.168.88.14 prowlarr.cnst.dev
-          192.168.88.14 bazarr.cnst.dev
-          192.168.88.14 qbt.cnst.dev
-          192.168.88.14 jellyseerr.cnst.dev
-          192.168.88.14 jellyfin.cnst.dev
-          192.168.88.14 uptime.cnst.dev
-          192.168.88.14 pihole.cnst.dev
-        '';
+        # extraHosts = ''
+        #   192.168.88.14 sobotka
+        #   192.168.88.14 cnst.dev
+        #   192.168.88.14 lidarr.cnst.dev
+        #   192.168.88.14 radarr.cnst.dev
+        #   192.168.88.14 sonarr.cnst.dev
+        #   192.168.88.14 prowlarr.cnst.dev
+        #   192.168.88.14 bazarr.cnst.dev
+        #   192.168.88.14 qbt.cnst.dev
+        #   192.168.88.14 jellyseerr.cnst.dev
+        #   192.168.88.14 jellyfin.cnst.dev
+        #   192.168.88.14 uptime.cnst.dev
+        #   192.168.88.14 pihole.cnst.dev
+        # '';
         interfaces = {
           "enp6s0" = {
             allowedTCPPorts = [22 80 443 8090];
