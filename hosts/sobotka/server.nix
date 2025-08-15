@@ -17,7 +17,7 @@
     fail2ban = {
       enable = true;
       apiKeyFile = config.age.secrets.cloudflareFirewallApiKey.path;
-      zoneId = "0027acdfb8bbe010f55b676ad8698dfb";
+      zoneId = "9c5bc447b995ef5110ed384dca1d5624";
     };
     homepage-dashboard = {
       enable = true;

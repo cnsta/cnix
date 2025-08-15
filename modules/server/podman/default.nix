@@ -157,7 +157,7 @@ in {
           ];
           volumes = ["/var:/gluetun"];
           environmentFiles = [
-            config.age.secrets.gluetunEnv.path
+            config.age.secrets.gluetunEnvironment.path
           ];
           environment = {
             DEV_MODE = "false";
@@ -185,7 +185,7 @@ in {
             "/share/downloads:/downloads:rw"
           ];
           environmentFiles = [
-            config.age.secrets.gluetunEnv.path
+            config.age.secrets.gluetunEnvironment.path
           ];
           environment = {
             PUID = "994";
@@ -214,7 +214,7 @@ in {
             "/share/downloads:/downloads:rw"
           ];
           environmentFiles = [
-            config.age.secrets.gluetunEnv.path
+            config.age.secrets.gluetunEnvironment.path
             config.age.secrets.slskd.path
           ];
           environment = {

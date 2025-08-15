@@ -62,10 +62,10 @@ in {
           cloudflareDnsCredentials.file = "${self}/secrets/cloudflareDnsCredentials.age";
           wgCredentials.file = "${self}/secrets/wgCredentials.age";
           wgSobotkaPrivateKey.file = "${self}/secrets/wgSobotkaPrivateKey.age";
-          gluetunEnv.file = "${self}/secrets/gluetunEnv.age";
+          gluetunEnvironment.file = "${self}/secrets/gluetunEnvironment.age";
           vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";
-          vaultwarden-env.file = "${self}/secrets/vaultwarden-env.age";
-          homepage-env.file = "${self}/secrets/homepage-env.age";
+          vaultwardenEnvironment.file = "${self}/secrets/vaultwardenEnvironment.age";
+          homepageEnvironment.file = "${self}/secrets/homepageEnvironment.age";
           pihole.file = "${self}/secrets/pihole.age";
           slskd.file = "${self}/secrets/slskd.age";
         };

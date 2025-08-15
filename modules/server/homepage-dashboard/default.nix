@@ -3,13 +3,13 @@
   lib,
   ...
 }: let
-  service = "homepage-dashboard";
+  unit = "homepage-dashboard";
   cfg = config.server.homepage-dashboard;
   srv = config.server;
 in {
   options.server.homepage-dashboard = {
     enable = lib.mkEnableOption {
-      description = "Enable ${service}";
+      description = "Enable ${unit}";
     };
     misc = lib.mkOption {
       default = [];
@@ -37,9 +37,9 @@ in {
   };
   config = lib.mkIf cfg.enable {
     services.glances.enable = true;
-    services.${service} = {
+    services.${unit} = {
       enable = true;
-      environmentFile = config.age.secrets.homepage-env.path;
+      environmentFile = config.age.secrets.homepageEnvironment.path;
       # customCSS = ''
       #   @font-face {
       #     font-family: "VCR OSD Mono";
@@ -248,7 +248,7 @@ in {
     services.caddy.virtualHosts."${srv.domain}" = {
       useACMEHost = srv.domain;
       extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString config.services.${service}.listenPort}
+        reverse_proxy http://127.0.0.1:${toString config.services.${unit}.listenPort}
       '';
     };
   };
