@@ -10,16 +10,16 @@ in {
   "keypem.age".publicKeys = [cnst kima];
   "mailpwd.age".publicKeys = [cnst kima];
   "gcapi.age".publicKeys = [cnst kima];
-  "cloudflare-env.age".publicKeys = [cnst kima usobotka rsobotka];
-  "vaultwarden-env.age".publicKeys = [cnst kima usobotka rsobotka];
-  "homepage-env.age".publicKeys = [cnst kima usobotka rsobotka];
+  "cloudflareEnvironment.age".publicKeys = [cnst kima usobotka rsobotka];
+  "vaultwardenEnvironment.age".publicKeys = [cnst kima usobotka rsobotka];
+  "homepageEnvironment.age".publicKeys = [cnst kima usobotka rsobotka];
   "cloudflareFirewallApiKey.age".publicKeys = [cnst kima usobotka rsobotka];
   "vaultwardenCloudflared.age".publicKeys = [cnst kima usobotka rsobotka];
   "cloudflareDnsApiToken.age".publicKeys = [cnst kima usobotka rsobotka];
   "cloudflareDnsCredentials.age".publicKeys = [cnst kima usobotka rsobotka];
   "wgCredentials.age".publicKeys = [cnst kima usobotka rsobotka];
   "wgSobotkaPrivateKey.age".publicKeys = [cnst kima usobotka rsobotka];
-  "gluetunEnv.age".publicKeys = [cnst kima usobotka rsobotka];
+  "gluetunEnvironment.age".publicKeys = [cnst kima usobotka rsobotka];
   "pihole.age".publicKeys = [cnst kima usobotka rsobotka];
   "slskd.age".publicKeys = [cnst kima usobotka rsobotka];
 }
