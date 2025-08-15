@@ -14,11 +14,6 @@
     caddy = {
       enable = true;
     };
-    fail2ban = {
-      enable = true;
-      apiKeyFile = config.age.secrets.cloudflareFirewallApiKey.path;
-      zoneId = "9c5bc447b995ef5110ed384dca1d5624";
-    };
     homepage-dashboard = {
       enable = true;
     };
@@ -48,11 +43,16 @@
     };
     vaultwarden = {
       enable = true;
-      url = "vault.cnix.dev";
+      url = "vault.cnst.dev";
       cloudflared = {
         tunnelId = "fdd98086-6a4c-44f2-bba0-eb86b833cce5";
         credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
       };
+    };
+    fail2ban = {
+      enable = true;
+      apiKeyFile = config.age.secrets.cloudflareFirewallApiKey.path;
+      zoneId = "0027acdfb8bbe010f55b676ad8698dfb";
     };
     podman = {
       enable = true;
