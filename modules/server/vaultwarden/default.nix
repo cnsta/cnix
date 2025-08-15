@@ -52,7 +52,7 @@ in {
     services = {
       vaultwarden = {
         enable = true;
-        environmentFile = config.age.secrets.vaultwarden-env.path;
+        environmentFile = config.age.secrets.vaultwardenEnvironment.path;
 
         backupDir = "/var/backup/vaultwarden";
 
