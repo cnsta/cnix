@@ -60,7 +60,7 @@
         enable = false;
       };
       nvf = {
-        enable = false;
+        enable = true;
       };
       nwg-bar = {
         enable = true;

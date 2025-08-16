@@ -18,11 +18,29 @@ in {
       enableManpages = true;
       settings = {
         vim = {
+          repl = {
+            conjure.enable = true;
+          };
+          spellcheck = {
+            enable = true;
+            languages = [
+              "en"
+            ];
+          };
+          clipboard = {
+            enable = true;
+            registers = "unnamedplus";
+            providers.wl-copy.enable = true;
+          };
+          options = {
+            shiftwidth = 2;
+            conceallevel = 1;
+            scrolloff = 1;
+          };
+          preventJunkFiles = true;
           searchCase = "smart";
-          useSystemClipboard = true;
           viAlias = true;
           vimAlias = true;
-          lineNumberMode = "number";
           undoFile = {
             enable = true;
           };
@@ -41,9 +59,6 @@ in {
               setupOpts.buffers.write_to_disk = true;
             };
             trouble.enable = true;
-            lspSignature.enable = true;
-            lsplines.enable = false;
-            nvim-docs-view.enable = false; # lags *horribly* whenever l is pressed
           };
 
           debugger = {
@@ -54,7 +69,6 @@ in {
           };
 
           languages = {
-            enableLSP = true;
             enableFormat = true;
             enableTreesitter = true;
             enableExtraDiagnostics = true;
@@ -139,7 +153,13 @@ in {
 
           autopairs.nvim-autopairs.enable = true;
 
-          autocomplete.nvim-cmp.enable = true;
+          autocomplete.blink-cmp = {
+            enable = true;
+            friendly-snippets.enable = true;
+            setupOpts = {
+              signature.enabled = true;
+            };
+          };
           snippets.luasnip.enable = true;
 
           filetree = {
@@ -191,26 +211,29 @@ in {
           };
 
           utility = {
+            undotree.enable = true;
+            oil-nvim.enable = true;
             ccc.enable = false;
+            vim-wakatime.enable = true;
             icon-picker.enable = true;
             surround.enable = true;
             diffview-nvim.enable = true;
             motion = {
               hop.enable = false;
-              leap.enable = true;
+              leap = {
+                enable = true;
+                mappings = {
+                  leapForwardTo = "s";
+                  leapBackwardTo = "S";
+                };
+              };
               precognition.enable = false;
             };
 
             images = {
               image-nvim.enable = false;
+              img-clip.enable = true;
             };
-          };
-
-          notes = {
-            obsidian.enable = false; # FIXME: neovim fails to build if obsidian is enabled
-            orgmode.enable = false;
-            mind-nvim.enable = false;
-            todo-comments.enable = true;
           };
 
           terminal = {
@@ -222,7 +245,7 @@ in {
 
           ui = {
             borders.enable = true;
-            noice.enable = false;
+            noice.enable = true;
             colorizer.enable = true;
             modes-nvim.enable = false; # the theme looks terrible with catppuccin
             illuminate.enable = true;
@@ -247,7 +270,7 @@ in {
             chatgpt.enable = false;
             copilot = {
               enable = false;
-              cmp.enable = true;
+              cmp.enable = false;
             };
           };
 
@@ -266,61 +289,27 @@ in {
           presence = {
             neocord.enable = false;
           };
-
           lazy.plugins = with pkgs.vimPlugins; {
-            # ghost-nvim = {
-            #   package = pkgs.vimUtils.buildVimPlugin {
-            #     name = "ghost-nvim";
-            #     src = pkgs.fetchFromGitHub {
-            #       owner = "subnut";
-            #       repo = "nvim-ghost.nvim";
-            #       rev = "v0.5.4";
-            #       hash = "sha256-XldDgPqVeIfUjaRLVUMp88eHBHLzoVgOmT3gupPs+ao=";
-            #     };
-            #     setup = ''
-            #       require('ghost').setup(),
-            #     '';
-            #   };
-            # };
-            ${oil-nvim.pname} = {
+            ${lazygit-nvim.pname} = {
               lazy = true;
-              package = oil-nvim;
-              setupModule = "oil";
-              after = ''
-                print('loaded oil')
-              '';
-              cmd = ["Oil"];
-              keys = [
-                {
-                  key = "-";
-                  action = ":Oil<CR>";
-                  mode = "n";
-                }
+              cmd = [
+                "LazyGit"
+                "LazyGitConfig"
+                "LazyGitCurrentFile"
+                "LazyGitFilter"
+                "LazyGitFilterCurrentFile"
               ];
-            };
-            ${zen-mode-nvim.pname} = {
-              lazy = true;
-              package = zen-mode-nvim;
-              setupModule = "zen-mode-nvim";
-              cmd = ["ZenMode"];
-            };
-            ${eyeliner-nvim.pname} = {
-              package = eyeliner-nvim;
-              event = ["BufEnter"];
-              after = ''print('hello')'';
-            };
-            ${quarto-nvim.pname} = {
-              lazy = true;
-              cmd = "QuartoPreview";
-              package = quarto-nvim;
-            };
-            ${typst-preview-nvim.pname} = {
-              lazy = true;
-              cmd = "TypstPreview";
-              package = typst-preview-nvim;
+              package = lazygit-nvim;
               setupOpts = {
                 open_cmd = "zen %s";
               };
+              keys = [
+                {
+                  key = "<leader>lg";
+                  action = "<cmd>LazyGit<cr>";
+                  mode = "n";
+                }
+              ];
             };
           };
           keymaps = [
@@ -336,7 +325,21 @@ in {
               mode = "n";
               action = ":Telescope find_files<CR>";
               silent = true;
-              desc = "removes search highlight when pressing esc";
+              desc = "Look for Files";
+            }
+            {
+              key = "-";
+              action = ":Oil<CR>";
+              mode = "n";
+              silent = true;
+              desc = "enable Oil";
+            }
+            {
+              key = "<F5>";
+              action = ":UndotreeToggle<CR>";
+              mode = "n";
+              silent = true;
+              desc = "Toggle Undotree";
             }
           ];
         };

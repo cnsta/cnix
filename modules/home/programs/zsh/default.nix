@@ -61,10 +61,8 @@ in {
       profileExtra = ''
         export PATH="$HOME/.local/bin:$PATH"
       '';
-      initExtraFirst = ''
+      initContent = ''
         autoload -U colors && colors
-      '';
-      initExtra = ''
         ZSH_THEME_GIT_PROMPT_PREFIX="%F{143}(%F{167}"
         ZSH_THEME_GIT_PROMPT_SUFFIX="%f "
         ZSH_THEME_GIT_PROMPT_DIRTY="%F{143}) %F{202}%1{✗%}"
