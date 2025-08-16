@@ -22,11 +22,16 @@
       ++ [
         ./cnst
       ];
-    "cnst@sobotka" =
-      sharedImports
-      ++ [
-        ./cnst
-      ];
+    # "cnst@sobotka" =
+    #   sharedImports
+    #   ++ [
+    #     ./cnst
+    #   ];
+    # "cnst@ziggy" =
+    #   sharedImports
+    #   ++ [
+    #     ./cnst
+    #   ];
     "toothpick@toothpc" =
       sharedImports
       ++ [

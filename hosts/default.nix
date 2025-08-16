@@ -74,6 +74,23 @@
         inputs.agenix.nixosModules.default
       ];
     };
+    ziggy = nixosSystem {
+      inherit specialArgs;
+      modules = [
+        ./ziggy
+        "${self}/nix"
+        {
+          home-manager = {
+            users.cnst.imports = homeImports."cnst@ziggy";
+            extraSpecialArgs = specialArgs;
+          };
+        }
+        self.nixosModules.nixos
+        self.nixosModules.settings
+        self.nixosModules.server
+        inputs.agenix.nixosModules.default
+      ];
+    };
     toothpc = nixosSystem {
       inherit specialArgs;
       modules = [
