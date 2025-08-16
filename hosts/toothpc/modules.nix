@@ -22,7 +22,7 @@
         enable = true;
         vendors = ["nvidia"];
         nvidia = {
-          package = "beta";
+          package = "latest";
           open = {
             enable = true;
           };
