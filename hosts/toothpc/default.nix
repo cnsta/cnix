@@ -38,7 +38,10 @@ in {
 
   networking.hostName = "toothpc";
 
-  environment.variables.NH_FLAKE = "/home/toothpick/.nix-config";
+  environment.variables = {
+    NH_FLAKE = "/home/toothpick/.nix-config";
+    ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = lib.mkDefault "23.11";

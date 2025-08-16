@@ -45,7 +45,7 @@
         enable = true;
       };
       beekeeper = {
-        enable = true;
+        enable = false;
       };
       blender = {
         enable = false;
