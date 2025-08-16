@@ -4,7 +4,6 @@
       username = "toothpick";
       mail = "place@holder";
       sshUser = "toothpc";
-      role = "desktop";
     };
     monitors = [
       {
