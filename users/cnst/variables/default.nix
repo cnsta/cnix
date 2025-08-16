@@ -1,11 +1,6 @@
 {osConfig, ...}: let
   hostSpecificVariables =
-    if osConfig.networking.hostName == "sobotka"
-    then {
-      EDITOR = "hx";
-      TERM = "xterm-256color";
-    }
-    else if osConfig.networking.hostName == "bunk"
+    if osConfig.networking.hostName == "bunk"
     then {
       BROWSER = "zen";
       EDITOR = "hx";

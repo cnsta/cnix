@@ -62,12 +62,6 @@
       modules = [
         ./sobotka
         "${self}/nix"
-        # {
-        #   home-manager = {
-        #     users.cnst.imports = homeImports."cnst@sobotka";
-        # extraSpecialArgs = specialArgs;
-        #   };
-        # }
         self.nixosModules.nixos
         self.nixosModules.settings
         self.nixosModules.server
@@ -79,12 +73,6 @@
       modules = [
         ./ziggy
         "${self}/nix"
-        {
-          home-manager = {
-            users.cnst.imports = homeImports."cnst@ziggy";
-            extraSpecialArgs = specialArgs;
-          };
-        }
         self.nixosModules.nixos
         self.nixosModules.settings
         self.nixosModules.server

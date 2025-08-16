@@ -33,7 +33,7 @@
       warn-dirty = false;
       accept-flake-config = false;
       # allow-import-from-derivation = true;
-      experimental-features = ["nix-command" "flakes" "repl-flake"];
+      experimental-features = ["nix-command" "flakes"];
       flake-registry = "/etc/nix/registry.json";
 
       # # for direnv GC roots
