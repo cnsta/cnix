@@ -88,7 +88,6 @@ in {
               then
                 commonPackages
                 ++ (with pkgs; [
-                  nvidiaOffloadScript
                   intel-media-driver
                   nvidia-vaapi-driver
                   vulkan-tools
