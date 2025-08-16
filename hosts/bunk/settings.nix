@@ -4,7 +4,6 @@
       username = "cnst";
       mail = "adam@cnst.dev";
       sshUser = "bunk";
-      role = "desktop";
     };
     monitors = [
       {

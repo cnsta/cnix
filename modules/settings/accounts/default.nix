@@ -45,10 +45,5 @@ in {
       default = null;
       description = "Optional override for selecting an SSH key by name";
     };
-    role = mkOption {
-      type = types.enum ["desktop" "server"];
-      default = "desktop";
-      description = "Defines the system role (desktop or server).";
-    };
   };
 }
