@@ -58,7 +58,7 @@
       ];
     };
     sobotka = nixosSystem {
-      # inherit specialArgs;
+      inherit specialArgs;
       modules = [
         ./sobotka
         "${self}/nix"
