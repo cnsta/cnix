@@ -58,16 +58,16 @@
       ];
     };
     sobotka = nixosSystem {
-      inherit specialArgs;
+      # inherit specialArgs;
       modules = [
         ./sobotka
         "${self}/nix"
-        {
-          home-manager = {
-            users.cnst.imports = homeImports."cnst@sobotka";
-            extraSpecialArgs = specialArgs;
-          };
-        }
+        # {
+        #   home-manager = {
+        #     users.cnst.imports = homeImports."cnst@sobotka";
+        # extraSpecialArgs = specialArgs;
+        #   };
+        # }
         self.nixosModules.nixos
         self.nixosModules.settings
         self.nixosModules.server
