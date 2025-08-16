@@ -4,6 +4,7 @@
       username = "cnst";
       mail = "adam@cnst.dev";
       sshUser = "sobotka";
+      role = "server";
     };
   };
 }
