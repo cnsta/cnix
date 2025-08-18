@@ -27,17 +27,6 @@
       };
       network = {
         enable = true;
-        extraHosts = ''
-          192.168.88.14 sobotka
-          192.168.88.14 cnst.dev
-          192.168.88.14 lidarr.cnst.dev
-          192.168.88.14 radarr.cnst.dev
-          192.168.88.14 sonarr.cnst.dev
-          192.168.88.14 prowlarr.cnst.dev
-          192.168.88.14 qbt.cnst.dev
-          192.168.88.14 jellyseerr.cnst.dev
-          192.168.88.14 jellyfin.cnst.dev
-        '';
         interfaces = {
           "wlp6s0" = {
             allowedTCPPorts = [22 80 443];
@@ -81,6 +70,7 @@
       };
       hyprland = {
         enable = true;
+        withUWSM = true;
       };
       inkscape = {
         enable = false;

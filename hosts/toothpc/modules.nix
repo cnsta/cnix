@@ -73,6 +73,7 @@
       };
       hyprland = {
         enable = true;
+        withUWSM = true;
       };
       inkscape = {
         enable = false;

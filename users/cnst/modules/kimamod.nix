@@ -140,9 +140,6 @@
       nix-index = {
         enable = true;
       };
-      protonmail-bridge = {
-        enable = false;
-      };
       syncthing = {
         enable = true;
       };
