@@ -27,10 +27,10 @@ in {
         la = "${getExe eza} -lah";
         tree = "${getExe eza} --tree --icons=always";
         extract = "extract.sh";
-        homemodules = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/home.nix";
-        hmod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/home.nix";
-        homeoptions = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/options.nix";
-        hopt = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/options.nix";
+        homemodules = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/{$HOST}mod.nix";
+        hmod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/{$HOST}mod.nix";
+        nixsettings = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/settings.nix";
+        nset = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/settings.nix";
         nixosmodules = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
         nmod = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
         nixcleanboot = "sudo nix run /home/$USER/.nix-config#cleanup-boot";
