@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mkDefault;
+  inherit (lib) mkIf mkEnableOption mkOption mkDefault;
   cfg = config.nixos.programs.hyprland;
 in {
   imports = [
@@ -18,7 +18,14 @@ in {
   ];
 
   options = {
-    nixos.programs.hyprland.enable = mkEnableOption "Enable Hyprland";
+    nixos.programs.hyprland = {
+      enable = mkEnableOption "Enable Hyprland";
+      withUWSM = mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Use UWSM to handle hyprland session";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -30,11 +37,24 @@ in {
       startup.enable = mkDefault true;
     };
 
-    programs.hyprland = {
-      enable = true;
-      package = pkgs.hyprland;
-      withUWSM = true;
+    programs = {
+      hyprland = {
+        enable = true;
+        package = pkgs.hyprland;
+        withUWSM = cfg.withUWSM;
+      };
+      uwsm = mkIf cfg.withUWSM {
+        enable = true;
+        waylandCompositors = {
+          hyprland = {
+            prettyName = "Hyprland";
+            comment = "Hyprland compositor managed by UWSM";
+            binPath = "/run/current-system/sw/bin/Hyprland";
+          };
+        };
+      };
     };
+
     environment.variables.NIXOS_OZONE_WL = "1";
   };
 }
