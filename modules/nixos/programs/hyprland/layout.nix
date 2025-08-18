@@ -35,7 +35,7 @@ in {
                 then ",bitdepth,${toString m.bitDepth}"
                 else "";
             in "${m.name},${
-              if m.enabled
+              if m.enable
               then "${resolution},${position},${scale}${transformStr}${bitdepthStr}"
               else "disable"
             }"
@@ -44,7 +44,7 @@ in {
 
         workspace = map (
           m: "${m.workspace},monitor:${m.name}"
-        ) (lib.filter (m: m.enabled && m.workspace != null) config.settings.monitors);
+        ) (lib.filter (m: m.enable && m.workspace != null) config.settings.monitors);
 
         windowrule = [
           "size 843 650, initialTitle:^(floatcal)$"

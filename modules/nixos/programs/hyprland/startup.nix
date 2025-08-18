@@ -9,7 +9,6 @@
 
   commonExecOnce = [
     "pamixer --set-volume 50"
-    "uwsm app -- blueman-applet"
     "uwsm app -- keepassxc"
     "uwsm app -- nm-applet --indicator"
   ];
@@ -33,13 +32,16 @@ in {
         [
           "uwsm app -- mullvad-vpn"
           "uwsm app -- solaar -w hide -b regular"
+          "uwsm app -- blueman-applet"
         ]
         ++ commonExecOnce;
     })
 
     (mkIf (host == "bunk") {
       programs.hyprland.settings.exec-once =
-        []
+        [
+          "uwsm app -- blueman-applet"
+        ]
         ++ commonExecOnce;
     })
 
