@@ -39,7 +39,7 @@ in {
             type = types.str;
             default = "1";
           };
-          enabled = mkOption {
+          enable = mkOption {
             type = types.bool;
             default = true;
           };

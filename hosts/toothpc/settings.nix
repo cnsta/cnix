@@ -15,6 +15,10 @@
         transform = 0;
         workspace = "1";
       }
+      {
+        name = "Unknown-1";
+        enable = false;
+      }
     ];
     theme = {
       background = {

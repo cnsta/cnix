@@ -23,9 +23,7 @@
         vendors = ["nvidia"];
         nvidia = {
           package = "latest";
-          open = {
-            enable = true;
-          };
+          open = true;
         };
       };
       logitech = {

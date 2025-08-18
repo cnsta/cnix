@@ -56,8 +56,11 @@ in {
     };
 
     nvidia = {
-      open.enable = mkEnableOption "Enable NVidia open drivers";
-
+      open = mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Use nvidia open driver";
+      };
       package = mkOption {
         type = types.enum ["stable" "beta" "production" "latest"];
         default = "stable";
@@ -135,7 +138,7 @@ in {
         modesetting.enable = true;
         powerManagement.enable = false;
         powerManagement.finegrained = false;
-        open = cfg.nvidia.open.enable;
+        open = cfg.nvidia.open;
         nvidiaSettings = true;
       };
     })
