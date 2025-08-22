@@ -37,6 +37,7 @@ in {
       "radarr"
       "media"
       "share"
+      "pihole"
     ];
   };
 
@@ -47,23 +48,12 @@ in {
     ./server.nix
   ];
 
-  boot.initrd.luks.devices."luks-47b35d4b-467a-4637-a5f9-45177da62897".device = "/dev/disk/by-uuid/47b35d4b-467a-4637-a5f9-45177da62897";
-
   networking = {
     hostName = "ziggy";
   };
 
-  powerManagement.enable = false;
-
-  swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 8 * 1024;
-    }
-  ];
-
   environment.variables.NH_FLAKE = "/home/cnst/.nix-config";
 
   #   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = lib.mkDefault "25.05";
+  system.stateVersion = lib.mkDefault "25.11";
 }

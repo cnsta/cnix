@@ -29,7 +29,7 @@
       network = {
         enable = true;
         interfaces = {
-          "enp6s0" = {
+          "enu1u1" = {
             allowedTCPPorts = [22 80 443 8090];
             allowedUDPPorts = [58846 6881];
           };

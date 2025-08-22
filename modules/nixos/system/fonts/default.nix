@@ -31,8 +31,9 @@ in {
         recursive
         input-fonts
         source-code-pro
-        nerd-fonts.jetbrains-mono
         ibm-plex
+        nerd-fonts.jetbrains-mono
+        nerd-fonts.departure-mono
         nerd-fonts.fira-code
         nerd-fonts.fira-mono
         nerd-fonts.iosevka

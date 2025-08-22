@@ -84,6 +84,7 @@ in {
           networkmanagerapplet
           inotify-tools
           wf-recorder
+          nautilus
         ])
 
         (mkIf cfg.desktop.enable [
