@@ -22,7 +22,7 @@ in {
     {
       programs.hyprland.settings = {
         # Common Keybind Variables
-        "$fileManager" = "thunar";
+        "$fileManager" = "nautilus";
         "$yazi" = "foot -e yazi";
         "$launcher" = "fuzzel";
 

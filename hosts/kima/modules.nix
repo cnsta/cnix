@@ -120,7 +120,7 @@
         enable = true;
       };
       thunar = {
-        enable = true;
+        enable = false;
       };
       yubikey = {
         enable = true;

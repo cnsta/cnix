@@ -2,9 +2,7 @@
   all: unset;
   border: none;
   border-radius: 0;
-  font-family:
-    Input Mono Narrow Light,
-    "Font Awesome 6 Free Solid";
+  font-family: "Input Mono Narrow Light", "Font Awesome 6 Free Solid";
   font-size: 14px;
   min-height: 0;
 }
@@ -89,9 +87,14 @@ window#waybar {
 #memory,
 #backlight,
 #battery,
+#date,
 #clock {
   padding: 0 3px;
   margin: 0 3px;
+}
+
+#clock {
+  font-family: "DepartureMono Nerd Font";
 }
 
 #custom-dnd,

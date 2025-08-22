@@ -23,12 +23,20 @@
       }
     },
     "clock": {
-      "format": "<span foreground='#928374'></span> {:%a, %d %b <span foreground='#928374'></span> %H:%M}",
-      "on-click": "calcurse-toggle.sh",
-      "on-click-right": "calsync.sh",
+      "interval": 60,
+      "format": "{:%H:%M}",
+      // "on-click": "calcurse-toggle.sh",
+      // "on-click-right": "calsync.sh",
       "rotate": 0,
       "tooltip": false
     },
+    // "date": {
+    //   "format": "<span foreground='#928374'></span> {%a, %d %b}",
+    //   "on-click": "calcurse-toggle.sh",
+    //   "on-click-right": "calsync.sh",
+    //   "rotate": 0,
+    //   "tooltip": false
+    // },
     "cpu": {
       "format": "<span foreground='#928374'></span> {usage}%",
       "states": {
@@ -139,6 +147,7 @@
       "pulseaudio",
       "backlight",
       "battery",
+      "date",
       "clock",
       "custom/dunst"
     ],
