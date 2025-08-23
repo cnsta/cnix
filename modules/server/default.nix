@@ -5,6 +5,7 @@
 }: let
   inherit (lib) mkOption types;
   cfg = config.server;
+  ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
   options.server = {
     enable = lib.mkEnableOption "The server services and configuration variables";
@@ -68,6 +69,26 @@ in {
         uid = cfg.uid;
         isSystemUser = true;
         group = cfg.group;
+        extraGroups = ifTheyExist [
+          "audio"
+          "video"
+          "docker"
+          "libvirtd"
+          "qemu-libvirtd"
+          "rtkit"
+          "fail2ban"
+          "vaultwarden"
+          "qbittorrent"
+          "lidarr"
+          "prowlarr"
+          "bazarr"
+          "sonarr"
+          "radarr"
+          "media"
+          "share"
+          "render"
+          "input"
+        ];
       };
     };
   };
