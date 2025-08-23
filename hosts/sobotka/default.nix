@@ -37,6 +37,8 @@ in {
       "radarr"
       "media"
       "share"
+      "jellyfin"
+      "render"
     ];
   };
 
