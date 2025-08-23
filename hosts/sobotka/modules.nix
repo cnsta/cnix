@@ -143,7 +143,7 @@
         enable = true;
       };
       dconf = {
-        enable = true;
+        enable = false;
       };
       flatpak = {
         enable = false;

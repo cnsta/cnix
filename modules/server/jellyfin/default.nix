@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   service = "jellyfin";
@@ -42,6 +43,9 @@ in {
       user = srv.user;
       group = srv.group;
     };
+    environment.systemPackages = with pkgs; [
+      jellyfin-ffmpeg
+    ];
     services.caddy.virtualHosts."${cfg.url}" = {
       useACMEHost = srv.domain;
       extraConfig = ''
