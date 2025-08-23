@@ -103,6 +103,7 @@ in {
           nvtopPackages.intel
           nvtopPackages.amd
           dig
+          helix
         ])
 
         (mkIf cfg.dev.enable [
