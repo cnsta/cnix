@@ -39,12 +39,14 @@ in {
           "~/media/images/galaxy.png"
           "~/media/images/deathstar.png"
           "~/media/images/trollskog.png"
+          "~/media/images/waterwindow.jpg"
+          "~/media/images/barngreet.png"
         ];
 
         wallpaper = [
           # kima
           "DP-3,${osConfig.settings.theme.background.desktop}"
-          "HDMI-A-1,${osConfig.settings.theme.background.lockscreen}"
+          "HDMI-A-1,${osConfig.settings.theme.background.vertical}"
           # bunk
           "eDP-1,${osConfig.settings.theme.background.desktop}"
           # toothpc

@@ -39,7 +39,8 @@ in {
     services.glances.enable = true;
     services.${unit} = {
       enable = true;
-      environmentFile = config.age.secrets.homepageEnvironment.path;
+      allowedHosts = srv.url;
+      # environmentFile = config.age.secrets.homepageEnvironment.path;
       # customCSS = ''
       #   @font-face {
       #     font-family: "VCR OSD Mono";
@@ -141,6 +142,27 @@ in {
         statusStyle = "dot";
         hideVersion = "true";
       };
+
+      widgets = [
+        {
+          openmeteo = {
+            label = "Current";
+            units = "metric";
+            cache = 5;
+          };
+        }
+        {
+          openmeteo = {
+            label = "Kalmar";
+            timezone = "Europe/Stockholm";
+            units = "metric";
+            cache = 5;
+            latitude = 56.707262;
+            longitude = 16.324541;
+          };
+        }
+      ];
+
       services = let
         homepageCategories = [
           "Arr"

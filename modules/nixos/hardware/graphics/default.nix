@@ -86,6 +86,7 @@ in {
                   vpl-gpu-rt
                   intel-media-driver
                   intel-compute-runtime
+                  intel-vaapi-driver
                 ])
               else if vendor == "nvidia"
               then
