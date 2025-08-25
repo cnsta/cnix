@@ -39,7 +39,7 @@ in {
     services.glances.enable = true;
     services.${unit} = {
       enable = true;
-      allowedHosts = srv.url;
+      allowedHosts = srv.domain;
       # environmentFile = config.age.secrets.homepageEnvironment.path;
       # customCSS = ''
       #   @font-face {
