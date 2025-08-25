@@ -146,13 +146,6 @@ in {
       widgets = [
         {
           openmeteo = {
-            label = "Current";
-            units = "metric";
-            cache = 5;
-          };
-        }
-        {
-          openmeteo = {
             label = "Kalmar";
             timezone = "Europe/Stockholm";
             units = "metric";
@@ -186,8 +179,8 @@ in {
               "${x.value.homepage.name}" = {
                 icon = x.value.homepage.icon;
                 description = x.value.homepage.description;
-                href = "https://${x.value.url}";
-                siteMonitor = "https://${x.value.url}";
+                href = "http://${x.value.url}";
+                siteMonitor = "http://${x.value.url}";
               };
             });
         })
