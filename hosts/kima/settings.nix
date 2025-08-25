@@ -35,8 +35,9 @@
     ];
     theme = {
       background = {
-        lockscreen = "wallpaper_2";
+        lockscreen = "wallpaper_4";
         desktop = "wallpaper_1";
+        vertical = "wallpaper_5";
       };
     };
   };

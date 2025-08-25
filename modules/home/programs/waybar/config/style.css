@@ -2,7 +2,7 @@
   all: unset;
   border: none;
   border-radius: 0;
-  font-family: "Input Mono Narrow Light", "Font Awesome 6 Free Solid";
+  font-family: "DepartureMono Nerd Font", "Font Awesome 6 Free Solid";
   font-size: 14px;
   min-height: 0;
 }

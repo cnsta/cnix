@@ -4,7 +4,7 @@
       kernel = {
         variant = "latest";
         hardware = ["amd"];
-        extraKernelParams = [];
+        extraKernelParams = ["amdgpu.dcdebugmask=0x10"];
       };
       loader = {
         default = {
