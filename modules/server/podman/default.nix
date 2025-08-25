@@ -95,6 +95,11 @@ in {
         type = lib.types.str;
         default = "Services";
       };
+      homepage.path = lib.mkOption {
+        type = lib.types.str;
+        default = "/admin";
+        description = "Optional path suffix for homepage links (e.g. /admin).";
+      };
     };
   };
 
