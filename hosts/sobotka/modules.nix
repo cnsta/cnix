@@ -171,8 +171,8 @@
         enable = true;
       };
       nfs = {
-        enable = true;
-        server.enable = true;
+        enable = false;
+        server.enable = false;
         client.enable = false;
       };
       nix-ld = {
