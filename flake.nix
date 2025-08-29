@@ -37,6 +37,8 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    flake-compat.url = "github:edolstra/flake-compat";
+
     # Hyprland environment
     hyprland.url = "github:hyprwm/hyprland";
 
