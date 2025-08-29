@@ -92,7 +92,6 @@
     };
 
     anyrun.url = "github:anyrun-org/anyrun";
-    microfetch.url = "github:NotAShelf/microfetch";
     agenix.url = "github:ryantm/agenix";
 
     # Rust toolchain
@@ -104,10 +103,6 @@
     zen-browser = {
       url = "git+https://git.sr.ht/~canasta/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ags = {
-      url = "github:Aylur/ags";
     };
 
     # Custom

@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  pkgs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
@@ -11,6 +11,6 @@ in {
     nixos.programs.microfetch.enable = mkEnableOption "Enables microfetch";
   };
   config = mkIf cfg.enable {
-    environment.systemPackages = [inputs.microfetch.packages.x86_64-linux.default];
+    environment.systemPackages = [pkgs.microfetch];
   };
 }
