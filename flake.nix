@@ -9,6 +9,7 @@
         ./users
         ./hosts
         ./modules
+        ./fmt-hooks.nix
       ];
 
       perSystem = {pkgs, ...}: {
@@ -102,6 +103,19 @@
 
     zen-browser = {
       url = "git+https://git.sr.ht/~canasta/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "flake-compat";
+      };
+    };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

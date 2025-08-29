@@ -79,7 +79,7 @@
           auto-format = true;
           language-servers = ["nil"];
           formatter = {
-            command = "${pkgs.alejandra}/bin/alejandra";
+            command = "${pkgs.nixfmt}/bin/nixfmt";
             args = ["-q"];
           };
         }
