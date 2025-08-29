@@ -38,15 +38,15 @@
           injection-regex = "(clojure|clj|edn|boot|yuck)";
           file-types = ["clj" "cljs" "cljc" "clje" "cljr" "cljx" "edn" "boot" "yuck"];
         }
-        {
-          name = "cmake";
-          auto-format = true;
-          language-servers = ["cmake-language-server"];
-          formatter = {
-            command = lib.getExe pkgs.cmake-format;
-            args = ["-"];
-          };
-        }
+        # {
+        #   name = "cmake";
+        #   auto-format = true;
+        #   language-servers = ["cmake-language-server"];
+        #   formatter = {
+        #     command = lib.getExe pkgs.cmake-format;
+        #     args = ["-"];
+        #   };
+        # }
         {
           name = "lua";
           auto-format = true;
@@ -55,11 +55,11 @@
             command = lib.getExe pkgs.stylua;
           };
         }
-        {
-          name = "javascript";
-          auto-format = true;
-          language-servers = ["dprint" "typescript-language-server"];
-        }
+        # {
+        #   name = "javascript";
+        #   auto-format = true;
+        #   language-servers = ["dprint" "typescript-language-server"];
+        # }
         {
           name = "json";
           formatter = deno "json";
@@ -83,24 +83,24 @@
             args = ["-q"];
           };
         }
-        {
-          name = "python";
-          language-servers = ["pylsp"];
-          formatter = {
-            command = lib.getExe pkgs.black;
-            args = ["-" "--quiet" "--line-length 100"];
-          };
-        }
+        # {
+        #   name = "python";
+        #   language-servers = ["pylsp"];
+        #   formatter = {
+        #     command = lib.getExe pkgs.black;
+        #     args = ["-" "--quiet" "--line-length 100"];
+        #   };
+        # }
         {
           name = "qml";
           auto-format = true;
           language-servers = ["qmlls"];
         }
-        {
-          name = "typescript";
-          auto-format = true;
-          language-servers = ["dprint" "typescript-language-server"];
-        }
+        # {
+        #   name = "typescript";
+        #   auto-format = true;
+        #   language-servers = ["dprint" "typescript-language-server"];
+        # }
         # {
         #   name = "php";
         #   auto-format = true;
@@ -142,9 +142,9 @@
         clangd.fallbackFlags = ["-std=c++2b"];
       };
 
-      cmake-language-server = {
-        command = lib.getExe pkgs.cmake-language-server;
-      };
+      # cmake-language-server = {
+      #   command = lib.getExe pkgs.cmake-language-server;
+      # };
 
       lua-language-server = {
         command = lib.getExe pkgs.lua-language-server;
@@ -173,27 +173,27 @@
         };
       };
 
-      dprint = {
-        command = lib.getExe pkgs.dprint;
-        args = ["lsp"];
-      };
+      # dprint = {
+      #   command = lib.getExe pkgs.dprint;
+      #   args = ["lsp"];
+      # };
 
       qmlls = {
         command = "${pkgs.qt6.qtdeclarative}/bin/qmlls";
         args = ["-E"];
       };
 
-      pyright = {
-        command = "${pkgs.pyright}/bin/pyright-langserver";
-        args = ["--stdio"];
-        config = {
-          reportMissingTypeStubs = false;
-          analysis = {
-            typeCheckingMode = "basic";
-            autoImportCompletions = true;
-          };
-        };
-      };
+      # pyright = {
+      #   command = "${pkgs.pyright}/bin/pyright-langserver";
+      #   args = ["--stdio"];
+      #   config = {
+      #     reportMissingTypeStubs = false;
+      #     analysis = {
+      #       typeCheckingMode = "basic";
+      #       autoImportCompletions = true;
+      #     };
+      #   };
+      # };
 
       typescript-language-server = {
         command = lib.getExe pkgs.nodePackages.typescript-language-server;

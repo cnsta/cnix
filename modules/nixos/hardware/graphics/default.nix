@@ -34,13 +34,10 @@
   ];
 
   nvidiaOffloadScript = pkgs.writeShellScriptBin "nvidia-offload" ''
-    export LIBVA_DRIVER_NAME=nvidia
-    export GBM_BACKEND=nvidia-drm
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
     export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    export __GL_VRR_ALLOWED=1
-    export XDG_SESSION_TYPE=wayland
-    export NVD_BACKEND=direct
-    export ELECTRON_OZONE_PLATFORM_HINT=auto
+    export __VK_LAYER_NV_optimus=NVIDIA_only
     exec "$@"
   '';
 
@@ -92,6 +89,7 @@ in {
               then
                 commonPackages
                 ++ (with pkgs; [
+                  nvidiaOffloadScript
                   intel-media-driver
                   nvidia-vaapi-driver
                   vulkan-tools
