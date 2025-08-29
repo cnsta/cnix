@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.thunar;
-in {
+in
+{
   options = {
     nixos.programs.thunar.enable = mkEnableOption "Enables thunar file manager";
   };

@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.polkit;
-in {
+in
+{
   options = {
     nixos.services.polkit.enable = mkEnableOption "Enables polkit";
   };
@@ -21,9 +23,9 @@ in {
         TimeoutStopSec = 10;
       };
 
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
     };
   };
 }

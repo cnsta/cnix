@@ -2,11 +2,13 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption mkMerge;
   host = config.networking.hostName;
   cfg = config.nixos.programs.hyprland.rules;
-in {
+in
+{
   options = {
     nixos.programs.hyprland.rules.enable = mkEnableOption "Enables window rule settings in Hyprland";
   };
@@ -14,37 +16,30 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       programs.hyprland.settings = {
-        monitor =
-          map (
-            m: let
-              resolution =
-                if m.width != null && m.height != null
-                then "${toString m.width}x${toString m.height}@${toString m.refreshRate}"
-                else "preferred";
+        monitor = map (
+          m:
+          let
+            resolution =
+              if m.width != null && m.height != null then
+                "${toString m.width}x${toString m.height}@${toString m.refreshRate}"
+              else
+                "preferred";
 
-              position = m.position or "auto";
-              scale = m.scale;
+            position = m.position or "auto";
+            scale = m.scale;
 
-              transformStr =
-                if m.transform != 0
-                then ",transform,${toString m.transform}"
-                else "";
+            transformStr = if m.transform != 0 then ",transform,${toString m.transform}" else "";
 
-              bitdepthStr =
-                if m.bitDepth != null
-                then ",bitdepth,${toString m.bitDepth}"
-                else "";
-            in "${m.name},${
-              if m.enable
-              then "${resolution},${position},${scale}${transformStr}${bitdepthStr}"
-              else "disable"
-            }"
-          )
-          config.settings.monitors;
+            bitdepthStr = if m.bitDepth != null then ",bitdepth,${toString m.bitDepth}" else "";
+          in
+          "${m.name},${
+            if m.enable then "${resolution},${position},${scale}${transformStr}${bitdepthStr}" else "disable"
+          }"
+        ) config.settings.monitors;
 
-        workspace = map (
-          m: "${m.workspace},monitor:${m.name}"
-        ) (lib.filter (m: m.enable && m.workspace != null) config.settings.monitors);
+        workspace = map (m: "${m.workspace},monitor:${m.name}") (
+          lib.filter (m: m.enable && m.workspace != null) config.settings.monitors
+        );
 
         windowrule = [
           "size 843 650, initialTitle:^(floatcal)$"

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.neovim.plugins = with pkgs.vimPlugins; [
     # LSP and completions for injected langs
     otter-nvim
@@ -8,9 +9,7 @@
       plugin = nvim-lspconfig;
       type = "lua";
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           local lspconfig = require("lspconfig")
 
@@ -56,9 +55,7 @@
       plugin = ltex_extra-nvim;
       type = "lua";
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           local ltex_extra = require("ltex_extra")
           add_lsp(lspconfig.ltex, {
@@ -84,9 +81,7 @@
       plugin = cmp-git;
       type = "lua";
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           require("cmp_git").setup({})
         '';
@@ -97,9 +92,7 @@
       plugin = nvim-cmp;
       type = "lua";
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           local cmp = require("cmp")
 

@@ -5,10 +5,12 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.nvf;
-in {
+in
+{
   options = {
     home.programs.nvf.enable = mkEnableOption "Enables nvf (neovim)";
   };

@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in {
+in
+{
   users.users.toothpick = {
     isNormalUser = true;
     shell = pkgs.zsh;

@@ -2,12 +2,15 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.hyprland;
-in {
+in
+{
   options = {
-    nixos.programs.hyprland.appearance.enable = mkEnableOption "Enables appearance settings in Hyprland";
+    nixos.programs.hyprland.appearance.enable =
+      mkEnableOption "Enables appearance settings in Hyprland";
   };
   config = mkIf cfg.appearance.enable {
     programs.hyprland.settings = {

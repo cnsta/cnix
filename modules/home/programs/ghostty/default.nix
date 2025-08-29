@@ -4,11 +4,18 @@
   osConfig,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkMerge getExe;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkMerge
+    getExe
+    ;
   cfg = config.home.programs.ghostty;
   host = osConfig.networking.hostName;
-in {
+in
+{
   options = {
     home.programs.ghostty.enable = mkEnableOption "Enables ghostty";
   };

@@ -2,8 +2,14 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf mkOption mkDefault types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkOption
+    mkDefault
+    types
+    ;
   cfg = config.nixos.system.locale;
   defaultCategories = [
     "LC_ADDRESS"
@@ -16,7 +22,8 @@
     "LC_TELEPHONE"
     "LC_TIME"
   ];
-in {
+in
+{
   options = {
     nixos.system.locale = {
       enable = mkOption {
@@ -58,7 +65,7 @@ in {
     time.timeZone = mkDefault cfg.timeZone;
     i18n.defaultLocale = mkDefault cfg.defaultLocale;
     i18n.extraLocaleSettings = mkIf (cfg.extraLocale != null) (
-      lib.foldl' (attrs: lc: attrs // {"${lc}" = cfg.extraLocale;}) {} cfg.categories
+      lib.foldl' (attrs: lc: attrs // { "${lc}" = cfg.extraLocale; }) { } cfg.categories
     );
   };
 }

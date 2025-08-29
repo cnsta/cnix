@@ -3,8 +3,14 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf mkOption mkEnableOption types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkOption
+    mkEnableOption
+    types
+    ;
   # Workaround for https://github.com/GooseMod/OpenAsar/issues/202
   # Needlessly complicated, but it's dynamic! :D
   variantMapping = {
@@ -18,24 +24,32 @@
     };
     canary = {
       dir = "discordcanary";
-      package = pkgs.discord-canary.override {withOpenASAR = true;};
+      package = pkgs.discord-canary.override { withOpenASAR = true; };
     };
     vesktop = {
       dir = "vesktop";
       package = pkgs.vesktop;
     };
   };
-  getVariantConfig = variant:
-    if builtins.hasAttr variant variantMapping
-    then variantMapping.${variant}
-    else throw "Unknown package variant: ${variant}";
+  getVariantConfig =
+    variant:
+    if builtins.hasAttr variant variantMapping then
+      variantMapping.${variant}
+    else
+      throw "Unknown package variant: ${variant}";
   cfg = config.home.programs.discord;
-in {
+in
+{
   options = {
     home.programs.discord = {
       enable = mkEnableOption "Enables discord";
       variant = mkOption {
-        type = types.enum ["stable" "ptb" "canary" "vesktop"];
+        type = types.enum [
+          "stable"
+          "ptb"
+          "canary"
+          "vesktop"
+        ];
         default = "stable";
         description = "Preferred package version to use";
       };
@@ -44,13 +58,11 @@ in {
   config = mkIf cfg.enable {
     home = {
       sessionVariables.DISCORD_USER_DATA_DIR = "$HOME/.config/${(getVariantConfig cfg.variant).dir}";
-      packages = [(getVariantConfig cfg.variant).package];
+      packages = [ (getVariantConfig cfg.variant).package ];
     };
     xdg.configFile = mkIf (cfg.variant == "vesktop") {
       "vesktop/themes/base16.css".text =
-        /*
-        css
-        */
+        # css
         ''
           /**
            * @name Material Gruvbox

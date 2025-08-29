@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.services.gtk;
-in {
+in
+{
   options = {
     home.services.gtk.enable = mkEnableOption "Enables miscellaneous GTK elements";
   };

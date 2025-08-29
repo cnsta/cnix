@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.gvfs;
-in {
+in
+{
   options = {
     nixos.services.gvfs.enable = mkEnableOption "Enables gvfs";
   };

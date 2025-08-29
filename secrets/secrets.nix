@@ -3,23 +3,102 @@ let
   kima = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJjoPdpiF8pjKN3ZEHeLEwVxoqwcCdzpVVlZkxJohFdg root@cnix";
   usobotka = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG5ydTeaWcowmNXdDNqIa/lb5l9w5CAzyF2Kg6U5PSSu cnst@sobotka";
   rsobotka = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJWLTYWowtpGmGolmkCE7+l9jr5QEnDqRxoezNqAIe+j root@nixos";
-in {
-  "cnstssh.age".publicKeys = [cnst kima];
-  "cnixssh.age".publicKeys = [cnst kima];
-  "certpem.age".publicKeys = [cnst kima];
-  "keypem.age".publicKeys = [cnst kima];
-  "mailpwd.age".publicKeys = [cnst kima];
-  "gcapi.age".publicKeys = [cnst kima];
-  "cloudflareEnvironment.age".publicKeys = [cnst kima usobotka rsobotka];
-  "vaultwardenEnvironment.age".publicKeys = [cnst kima usobotka rsobotka];
-  "homepageEnvironment.age".publicKeys = [cnst kima usobotka rsobotka];
-  "cloudflareFirewallApiKey.age".publicKeys = [cnst kima usobotka rsobotka];
-  "vaultwardenCloudflared.age".publicKeys = [cnst kima usobotka rsobotka];
-  "cloudflareDnsApiToken.age".publicKeys = [cnst kima usobotka rsobotka];
-  "cloudflareDnsCredentials.age".publicKeys = [cnst kima usobotka rsobotka];
-  "wgCredentials.age".publicKeys = [cnst kima usobotka rsobotka];
-  "wgSobotkaPrivateKey.age".publicKeys = [cnst kima usobotka rsobotka];
-  "gluetunEnvironment.age".publicKeys = [cnst kima usobotka rsobotka];
-  "pihole.age".publicKeys = [cnst kima usobotka rsobotka];
-  "slskd.age".publicKeys = [cnst kima usobotka rsobotka];
+in
+{
+  "cnstssh.age".publicKeys = [
+    cnst
+    kima
+  ];
+  "cnixssh.age".publicKeys = [
+    cnst
+    kima
+  ];
+  "certpem.age".publicKeys = [
+    cnst
+    kima
+  ];
+  "keypem.age".publicKeys = [
+    cnst
+    kima
+  ];
+  "mailpwd.age".publicKeys = [
+    cnst
+    kima
+  ];
+  "gcapi.age".publicKeys = [
+    cnst
+    kima
+  ];
+  "cloudflareEnvironment.age".publicKeys = [
+    cnst
+    kima
+    usobotka
+    rsobotka
+  ];
+  "vaultwardenEnvironment.age".publicKeys = [
+    cnst
+    kima
+    usobotka
+    rsobotka
+  ];
+  "homepageEnvironment.age".publicKeys = [
+    cnst
+    kima
+    usobotka
+    rsobotka
+  ];
+  "cloudflareFirewallApiKey.age".publicKeys = [
+    cnst
+    kima
+    usobotka
+    rsobotka
+  ];
+  "vaultwardenCloudflared.age".publicKeys = [
+    cnst
+    kima
+    usobotka
+    rsobotka
+  ];
+  "cloudflareDnsApiToken.age".publicKeys = [
+    cnst
+    kima
+    usobotka
+    rsobotka
+  ];
+  "cloudflareDnsCredentials.age".publicKeys = [
+    cnst
+    kima
+    usobotka
+    rsobotka
+  ];
+  "wgCredentials.age".publicKeys = [
+    cnst
+    kima
+    usobotka
+    rsobotka
+  ];
+  "wgSobotkaPrivateKey.age".publicKeys = [
+    cnst
+    kima
+    usobotka
+    rsobotka
+  ];
+  "gluetunEnvironment.age".publicKeys = [
+    cnst
+    kima
+    usobotka
+    rsobotka
+  ];
+  "pihole.age".publicKeys = [
+    cnst
+    kima
+    usobotka
+    rsobotka
+  ];
+  "slskd.age".publicKeys = [
+    cnst
+    kima
+    usobotka
+    rsobotka
+  ];
 }

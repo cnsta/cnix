@@ -3,10 +3,12 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.gimp;
-in {
+in
+{
   options = {
     nixos.programs.gimp.enable = mkEnableOption "Enables gimp";
   };

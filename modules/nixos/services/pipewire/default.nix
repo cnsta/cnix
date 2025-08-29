@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.pipewire;
-in {
+in
+{
   options = {
     nixos.services.pipewire.enable = mkEnableOption "Enables pipewire";
   };

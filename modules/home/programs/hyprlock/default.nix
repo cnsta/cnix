@@ -5,13 +5,15 @@
   lib,
   osConfig,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.hyprlock;
 
   hyprlockFlake = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
   # hyprlockPkg = pkgs.hyprlock;
-in {
+in
+{
   options = {
     home.programs.hyprlock.enable = mkEnableOption "Enables hyprlock";
   };

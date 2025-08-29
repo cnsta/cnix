@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.obsidian;
-in {
+in
+{
   options = {
     nixos.programs.obsidian.enable = mkEnableOption "Enables obsidian";
   };

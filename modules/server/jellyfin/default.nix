@@ -3,11 +3,13 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   service = "jellyfin";
   cfg = config.server.${service};
   srv = config.server;
-in {
+in
+{
   options.server.${service} = {
     enable = lib.mkEnableOption {
       description = "Enable ${service}";

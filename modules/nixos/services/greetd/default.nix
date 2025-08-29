@@ -2,10 +2,17 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkOption types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    types
+    ;
   cfg = config.nixos.services.greetd;
-in {
+in
+{
   options = {
     nixos.services.greetd = {
       enable = mkEnableOption {
@@ -22,18 +29,20 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.greetd = let
-      session = {
-        command = "${lib.getExe config.programs.uwsm.package} start hyprland-uwsm.desktop";
-        user = cfg.user;
+    services.greetd =
+      let
+        session = {
+          command = "${lib.getExe config.programs.uwsm.package} start hyprland-uwsm.desktop";
+          user = cfg.user;
+        };
+      in
+      {
+        enable = true;
+        settings = {
+          terminal.vt = 1;
+          default_session = session;
+          initial_session = session;
+        };
       };
-    in {
-      enable = true;
-      settings = {
-        terminal.vt = 1;
-        default_session = session;
-        initial_session = session;
-      };
-    };
   };
 }

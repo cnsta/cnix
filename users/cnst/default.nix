@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./modules
     ./variables
@@ -8,7 +9,10 @@
     username = "cnst";
     homeDirectory = "/home/cnst";
     stateVersion = "23.11";
-    extraOutputsToInstall = ["doc" "devdoc"];
+    extraOutputsToInstall = [
+      "doc"
+      "devdoc"
+    ];
     packages = with pkgs; [
       bun
     ];

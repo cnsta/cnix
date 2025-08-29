@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.openssh;
-in {
+in
+{
   options = {
     nixos.services.openssh.enable = mkEnableOption "Enables openssh";
   };

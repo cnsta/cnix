@@ -2,11 +2,13 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkOption types;
   cfg = config.server;
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in {
+in
+{
   options.server = {
     enable = lib.mkEnableOption "The server services and configuration variables";
     email = mkOption {

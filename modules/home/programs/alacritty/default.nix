@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.alacritty;
-in {
+in
+{
   options = {
     home.programs.alacritty.enable = mkEnableOption "Enables firefox";
   };

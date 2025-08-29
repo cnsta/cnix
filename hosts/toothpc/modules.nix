@@ -3,7 +3,7 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = ["nvidia"];
+        hardware = [ "nvidia" ];
       };
       loader = {
         default = {
@@ -20,7 +20,7 @@
       };
       graphics = {
         enable = true;
-        vendors = ["nvidia"];
+        vendors = [ "nvidia" ];
         nvidia = {
           package = "latest";
           open = true;
@@ -33,7 +33,11 @@
         enable = true;
         interfaces = {
           "enp4s0" = {
-            allowedTCPPorts = [22 80 443];
+            allowedTCPPorts = [
+              22
+              80
+              443
+            ];
           };
         };
       };
@@ -189,7 +193,7 @@
         enable = true;
       };
       xserver = {
-        videoDrivers = ["nvidia"];
+        videoDrivers = [ "nvidia" ];
         xkbLayout = "se";
       };
       zram = {

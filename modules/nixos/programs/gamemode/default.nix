@@ -4,11 +4,13 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption mkOption;
   cfg = config.nixos.programs.gamemode;
   pipewireLowLatencyModule = inputs.nix-gaming.nixosModules.pipewireLowLatency;
-in {
+in
+{
   imports = [
     pipewireLowLatencyModule
   ];

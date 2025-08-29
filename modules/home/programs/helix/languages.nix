@@ -2,31 +2,48 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   programs.helix.languages = {
-    language = let
-      deno = lang: {
-        command = lib.getExe pkgs.deno;
-        args = ["fmt" "-" "--ext" lang];
-      };
+    language =
+      let
+        deno = lang: {
+          command = lib.getExe pkgs.deno;
+          args = [
+            "fmt"
+            "-"
+            "--ext"
+            lang
+          ];
+        };
 
-      prettier = lang: {
-        command = "prettier";
-        args = ["--parser" lang];
-      };
-      prettierLangs = map (e: {
-        name = e;
-        formatter = prettier e;
-      });
-      langs = ["css" "scss" "html"];
-    in
+        prettier = lang: {
+          command = "prettier";
+          args = [
+            "--parser"
+            lang
+          ];
+        };
+        prettierLangs = map (e: {
+          name = e;
+          formatter = prettier e;
+        });
+        langs = [
+          "css"
+          "scss"
+          "html"
+        ];
+      in
       [
         {
           name = "bash";
           auto-format = true;
           formatter = {
             command = lib.getExe pkgs.shfmt;
-            args = ["-i" "2"];
+            args = [
+              "-i"
+              "2"
+            ];
           };
         }
         {
@@ -36,7 +53,17 @@
         {
           name = "clojure";
           injection-regex = "(clojure|clj|edn|boot|yuck)";
-          file-types = ["clj" "cljs" "cljc" "clje" "cljr" "cljx" "edn" "boot" "yuck"];
+          file-types = [
+            "clj"
+            "cljs"
+            "cljc"
+            "clje"
+            "cljr"
+            "cljx"
+            "edn"
+            "boot"
+            "yuck"
+          ];
         }
         # {
         #   name = "cmake";
@@ -50,7 +77,7 @@
         {
           name = "lua";
           auto-format = true;
-          language-servers = ["lua-language-server"];
+          language-servers = [ "lua-language-server" ];
           formatter = {
             command = lib.getExe pkgs.stylua;
           };
@@ -66,7 +93,7 @@
         }
         {
           name = "common-lisp";
-          file-types = ["kbd"];
+          file-types = [ "kbd" ];
           auto-format = true;
         }
         {
@@ -77,10 +104,10 @@
         {
           name = "nix";
           auto-format = true;
-          language-servers = ["nil"];
+          language-servers = [ "nil" ];
           formatter = {
             command = "${pkgs.nixfmt}/bin/nixfmt";
-            args = ["-q"];
+            args = [ "-q" ];
           };
         }
         # {
@@ -94,7 +121,7 @@
         {
           name = "qml";
           auto-format = true;
-          language-servers = ["qmlls"];
+          language-servers = [ "qmlls" ];
         }
         # {
         #   name = "typescript";
@@ -112,13 +139,13 @@
         {
           name = "css";
           auto-format = true;
-          language-servers = ["vscode-css-language-server"];
+          language-servers = [ "vscode-css-language-server" ];
         }
         {
           name = "rust";
           auto-format = true;
-          file-types = ["rs"];
-          language-servers = ["rust-analyzer"];
+          file-types = [ "rs" ];
+          language-servers = [ "rust-analyzer" ];
           formatter = {
             command = lib.getExe pkgs.rustfmt;
           };
@@ -129,17 +156,17 @@
     language-server = {
       phpactor = {
         command = lib.getExe pkgs.phpactor;
-        args = ["language-server"];
+        args = [ "language-server" ];
       };
 
       bash-language-server = {
         command = lib.getExe pkgs.bash-language-server;
-        args = ["start"];
+        args = [ "start" ];
       };
 
       clangd = {
         command = "${pkgs.clang-tools}/bin/clangd";
-        clangd.fallbackFlags = ["-std=c++2b"];
+        clangd.fallbackFlags = [ "-std=c++2b" ];
       };
 
       # cmake-language-server = {
@@ -152,7 +179,7 @@
 
       deno-lsp = {
         command = lib.getExe pkgs.deno;
-        args = ["lsp"];
+        args = [ "lsp" ];
         environment.NO_COLOR = "1";
         config.deno = {
           enable = true;
@@ -160,7 +187,9 @@
           unstable = true;
           suggest = {
             completeFunctionCalls = false;
-            imports = {hosts."https://deno.land" = true;};
+            imports = {
+              hosts."https://deno.land" = true;
+            };
           };
           inlayHints = {
             enumMemberValues.enabled = true;
@@ -180,7 +209,7 @@
 
       qmlls = {
         command = "${pkgs.qt6.qtdeclarative}/bin/qmlls";
-        args = ["-E"];
+        args = [ "-E" ];
       };
 
       # pyright = {
@@ -197,36 +226,38 @@
 
       typescript-language-server = {
         command = lib.getExe pkgs.nodePackages.typescript-language-server;
-        args = ["--stdio"];
-        config = let
-          inlayHints = {
-            includeInlayEnumMemberValueHints = true;
-            includeInlayFunctionLikeReturnTypeHints = true;
-            includeInlayFunctionParameterTypeHints = true;
-            includeInlayParameterNameHints = "all";
-            includeInlayParameterNameHintsWhenArgumentMatchesName = true;
-            includeInlayPropertyDeclarationTypeHints = true;
-            includeInlayVariableTypeHints = true;
-          };
-        in {
-          typescript-language-server.source = {
-            addMissingImports.ts = true;
-            fixAll.ts = true;
-            organizeImports.ts = true;
-            removeUnusedImports.ts = true;
-            sortImports.ts = true;
-          };
+        args = [ "--stdio" ];
+        config =
+          let
+            inlayHints = {
+              includeInlayEnumMemberValueHints = true;
+              includeInlayFunctionLikeReturnTypeHints = true;
+              includeInlayFunctionParameterTypeHints = true;
+              includeInlayParameterNameHints = "all";
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true;
+              includeInlayPropertyDeclarationTypeHints = true;
+              includeInlayVariableTypeHints = true;
+            };
+          in
+          {
+            typescript-language-server.source = {
+              addMissingImports.ts = true;
+              fixAll.ts = true;
+              organizeImports.ts = true;
+              removeUnusedImports.ts = true;
+              sortImports.ts = true;
+            };
 
-          typescript = {inherit inlayHints;};
-          javascript = {inherit inlayHints;};
+            typescript = { inherit inlayHints; };
+            javascript = { inherit inlayHints; };
 
-          hostInfo = "helix";
-        };
+            hostInfo = "helix";
+          };
       };
 
       vscode-css-language-server = {
         command = "${pkgs.vscode-langservers-extracted}/bin/vscode-css-language-server";
-        args = ["--stdio"];
+        args = [ "--stdio" ];
         config = {
           provideFormatter = true;
           css.validate.enable = true;

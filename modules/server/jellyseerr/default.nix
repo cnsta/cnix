@@ -2,11 +2,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   service = "jellyseerr";
   srv = config.server;
   cfg = config.server.${service};
-in {
+in
+{
   options.server.${service} = {
     enable = lib.mkEnableOption {
       description = "Enable ${service}";

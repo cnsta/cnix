@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.blueman;
-in {
+in
+{
   options = {
     nixos.services.blueman.enable = mkEnableOption "Enables blueman";
   };

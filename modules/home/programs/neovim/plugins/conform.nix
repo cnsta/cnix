@@ -1,12 +1,11 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.neovim.plugins = with pkgs.vimPlugins; [
     {
       plugin = conform-nvim;
       type = "lua";
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           require("conform").setup({
           	default_format_opts = {

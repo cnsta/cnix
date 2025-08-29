@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.udisks;
-in {
+in
+{
   options = {
     nixos.services.udisks.enable = mkEnableOption "Enables udisks";
   };

@@ -1,4 +1,5 @@
-{inputs, ...}: {
+{ inputs, ... }:
+{
   imports = [
     inputs.git-hooks.flakeModule
     inputs.treefmt-nix.flakeModule
@@ -6,7 +7,7 @@
 
   perSystem = {
     pre-commit.settings = {
-      excludes = ["flake.lock"];
+      excludes = [ "flake.lock" ];
       hooks.treefmt.enable = true;
     };
 

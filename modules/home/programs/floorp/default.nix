@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.floorp;
-in {
+in
+{
   options = {
     home.programs.floorp.enable = mkEnableOption "Enables floorp browser";
   };

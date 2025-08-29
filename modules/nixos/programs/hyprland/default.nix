@@ -4,10 +4,17 @@
   inputs,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkOption mkDefault;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    mkDefault
+    ;
   cfg = config.nixos.programs.hyprland;
-in {
+in
+{
   imports = [
     inputs.hyprland.nixosModules.default
     ./appearance.nix

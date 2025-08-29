@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.yubikey;
-in {
+in
+{
   options = {
     nixos.programs.yubikey.enable = mkEnableOption "Enables yubikey utilities";
   };

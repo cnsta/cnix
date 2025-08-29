@@ -4,10 +4,12 @@
   config,
   inputs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkOption types;
   cfg = config.nixos.system.devpkgs;
-in {
+in
+{
   options = {
     nixos.system.devpkgs = {
       enable = mkOption {

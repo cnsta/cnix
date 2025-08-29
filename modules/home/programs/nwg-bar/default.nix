@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.nwg-bar;
-in {
+in
+{
   options = {
     home.programs.nwg-bar.enable = mkEnableOption "Enables nwg-bar";
   };

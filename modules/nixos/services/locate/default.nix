@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.locate;
-in {
+in
+{
   options = {
     nixos.services.locate.enable = mkEnableOption "Enables plocate";
   };

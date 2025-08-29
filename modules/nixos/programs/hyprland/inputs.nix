@@ -2,11 +2,13 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption mkMerge;
   cfg = config.nixos.programs.hyprland;
   host = config.networking.hostName;
-in {
+in
+{
   options = {
     nixos.programs.hyprland.inputs.enable = mkEnableOption "Enables input settings in Hyprland";
   };

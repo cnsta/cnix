@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.nix-ld;
-in {
+in
+{
   options = {
     nixos.services.nix-ld.enable = mkEnableOption "Enables nix-ld";
   };

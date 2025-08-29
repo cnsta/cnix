@@ -4,10 +4,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf getExe;
   cfg = config.home.services.nix-index;
-in {
+in
+{
   options = {
     home.services.nix-index.enable = mkEnableOption "Enables nix-index";
   };
@@ -46,7 +48,7 @@ in {
         OnBootSec = "10m";
         OnUnitActiveSec = "24h";
       };
-      Install.WantedBy = ["timers.target"];
+      Install.WantedBy = [ "timers.target" ];
     };
   };
 }

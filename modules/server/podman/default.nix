@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   srv = config.server;
   cfg = config.server.podman;
-in {
+in
+{
   options.server.podman = {
     enable = lib.mkEnableOption "Enables Podman";
     qbittorrent = {
@@ -110,8 +112,14 @@ in {
     };
 
     networking.firewall = lib.mkIf cfg.pihole.enable {
-      allowedTCPPorts = [53 5335];
-      allowedUDPPorts = [53 5335];
+      allowedTCPPorts = [
+        53
+        5335
+      ];
+      allowedUDPPorts = [
+        53
+        5335
+      ];
     };
 
     services.caddy.virtualHosts = lib.mkMerge [
@@ -155,12 +163,12 @@ in {
             "5031:5031"
             "50300:50300"
           ];
-          devices = ["/dev/net/tun:/dev/net/tun"];
+          devices = [ "/dev/net/tun:/dev/net/tun" ];
           autoStart = true;
           extraOptions = [
             "--cap-add=NET_ADMIN"
           ];
-          volumes = ["/var:/gluetun"];
+          volumes = [ "/var:/gluetun" ];
           environmentFiles = [
             config.age.secrets.gluetunEnvironment.path
           ];
@@ -177,7 +185,7 @@ in {
         qbittorrent = {
           image = "ghcr.io/hotio/qbittorrent:latest";
           autoStart = true;
-          dependsOn = ["gluetun"];
+          dependsOn = [ "gluetun" ];
           ports = [
             "8080:8080"
             "58846:58846"
@@ -205,7 +213,7 @@ in {
         slskd = {
           image = "slskd/slskd:latest";
           autoStart = true;
-          dependsOn = ["gluetun"];
+          dependsOn = [ "gluetun" ];
           ports = [
             "5030:5030"
             "5031:5031"
@@ -250,7 +258,7 @@ in {
             # REV_SERVER = "true";
             WEBTHEME = "default-darker";
           };
-          environmentFiles = [config.age.secrets.pihole.path];
+          environmentFiles = [ config.age.secrets.pihole.path ];
           ports = [
             "53:53/tcp"
             "53:53/udp"

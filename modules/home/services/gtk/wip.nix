@@ -3,10 +3,12 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) types mkOption mkIf;
   cfg = config.home.userd.gtk;
-in {
+in
+{
   options = {
     home.userd.gtk.enable = mkOption {
       type = types.bool;
@@ -60,7 +62,7 @@ in {
 
   config = mkIf cfg.enable {
     home = {
-      packages = [pkgs.glib];
+      packages = [ pkgs.glib ];
 
       pointerCursor = {
         package = cfg.cursorTheme.package;

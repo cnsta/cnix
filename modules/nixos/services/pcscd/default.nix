@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.pcscd;
-in {
+in
+{
   options = {
     nixos.services.pcscd.enable = mkEnableOption "Enables pcscd";
   };

@@ -2,16 +2,28 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf mkOption types mkEnableOption;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkOption
+    types
+    mkEnableOption
+    ;
   cfg = config.nixos.services.xserver;
-in {
+in
+{
   options = {
     nixos.services.xserver = {
       enable = mkEnableOption "Enables xserver";
       videoDrivers = mkOption {
-        type = types.listOf (types.enum ["amdgpu" "nvidia"]);
-        default = ["amdgpu"];
+        type = types.listOf (
+          types.enum [
+            "amdgpu"
+            "nvidia"
+          ]
+        );
+        default = [ "amdgpu" ];
         description = "The names of the video drivers the configuration supports";
       };
       xkbLayout = mkOption {

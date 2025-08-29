@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.steam;
-in {
+in
+{
   options = {
     nixos.programs.steam.enable = mkEnableOption "Enables steam";
   };

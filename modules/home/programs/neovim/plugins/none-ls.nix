@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
       none-ls-nvim
@@ -6,9 +7,7 @@
       nvim-treesitter.withAllGrammars
     ];
     extraConfig =
-      /*
-      lua
-      */
+      # lua
       ''
         -- Require necessary plugins
         require("plenary")

@@ -3,21 +3,22 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   programs.neovim = {
     extraConfig =
       lib.mkAfter # vim
-      
-      ''
-        function! SetCustomKeywords()
-          syn match Todo  /TODO/
-          syn match Done  /DONE/
-          syn match Start /START/
-          syn match End   /END/
-        endfunction
 
-        autocmd Syntax * call SetCustomKeywords()
-      '';
+        ''
+          function! SetCustomKeywords()
+            syn match Todo  /TODO/
+            syn match Done  /DONE/
+            syn match Start /START/
+            syn match End   /END/
+          endfunction
+
+          autocmd Syntax * call SetCustomKeywords()
+        '';
     plugins = with pkgs.vimPlugins; [
       rust-vim
       dart-vim-plugin
@@ -34,15 +35,11 @@
 
       {
         plugin = vimtex;
-        config = let
-          viewMethod =
-            if config.programs.zathura.enable
-            then "zathura"
-            else "general";
-        in
-          /*
-          vim
-          */
+        config =
+          let
+            viewMethod = if config.programs.zathura.enable then "zathura" else "general";
+          in
+          # vim
           ''
             let g:vimtex_view_method = '${viewMethod}'
             "Don't open automatically

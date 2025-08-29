@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.services.syncthing;
-in {
+in
+{
   options = {
     home.services.syncthing.enable = mkEnableOption "Enables syncthing";
   };

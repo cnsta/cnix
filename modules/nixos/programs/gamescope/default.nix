@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.gamescope;
-in {
+in
+{
   options = {
     nixos.programs.gamescope.enable = mkEnableOption "Enables gamescope";
   };

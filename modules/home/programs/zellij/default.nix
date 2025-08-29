@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.zellij;
-in {
+in
+{
   options = {
     home.programs.zellij.enable = mkEnableOption "Enables zellij";
   };

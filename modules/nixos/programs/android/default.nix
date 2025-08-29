@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.android;
-in {
+in
+{
   options = {
     nixos.programs.android.enable = mkEnableOption "Enables android tools";
   };

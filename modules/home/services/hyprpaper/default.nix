@@ -5,13 +5,15 @@
   inputs,
   osConfig,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.services.hyprpaper;
 
   hyprpaperFlake = inputs.hyprpaper.packages.${pkgs.system}.default;
   # hyprpaperPkg = pkgs.hyprpaper;
-in {
+in
+{
   options = {
     home.services.hyprpaper.enable = mkEnableOption "Enables hyprpaper";
   };

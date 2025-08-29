@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./modules
   ];
@@ -7,7 +8,10 @@
     username = "toothpick";
     homeDirectory = "/home/toothpick";
     stateVersion = "23.11";
-    extraOutputsToInstall = ["doc" "devdoc"];
+    extraOutputsToInstall = [
+      "doc"
+      "devdoc"
+    ];
 
     packages = with pkgs; [
       filezilla

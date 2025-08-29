@@ -3,14 +3,27 @@
   lib,
   osConfig,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkForce elem;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkForce
+    elem
+    ;
   browser =
-    if elem osConfig.networking.hostName ["kima" "bunk"]
-    then "zen.desktop"
-    else "firefox.desktop";
+    if
+      elem osConfig.networking.hostName [
+        "kima"
+        "bunk"
+      ]
+    then
+      "zen.desktop"
+    else
+      "firefox.desktop";
   cfg = config.home.services.xdg;
-in {
+in
+{
   options = {
     home.services.xdg.enable = mkEnableOption "Enables XDG settings";
   };
@@ -81,15 +94,42 @@ in {
           "image/tiff" = "oculante.desktop";
           "image/webp" = "oculante.desktop";
 
-          "video/H264" = ["mpv.desktop" "vlc.desktop"];
-          "video/x-msvideo" = ["mpv.desktop" "vlc.desktop"];
-          "video/mp4" = ["mpv.desktop" "vlc.desktop"];
-          "video/mpeg" = ["mpv.desktop" "vlc.desktop"];
-          "video/ogg" = ["mpv.desktop" "vlc.desktop"];
-          "video/mp2t" = ["mpv.desktop" "vlc.desktop"];
-          "video/webm" = ["mpv.desktop" "vlc.desktop"];
-          "video/3gpp" = ["mpv.desktop" "vlc.desktop"];
-          "video/3gpp2" = ["mpv.desktop" "vlc.desktop"];
+          "video/H264" = [
+            "mpv.desktop"
+            "vlc.desktop"
+          ];
+          "video/x-msvideo" = [
+            "mpv.desktop"
+            "vlc.desktop"
+          ];
+          "video/mp4" = [
+            "mpv.desktop"
+            "vlc.desktop"
+          ];
+          "video/mpeg" = [
+            "mpv.desktop"
+            "vlc.desktop"
+          ];
+          "video/ogg" = [
+            "mpv.desktop"
+            "vlc.desktop"
+          ];
+          "video/mp2t" = [
+            "mpv.desktop"
+            "vlc.desktop"
+          ];
+          "video/webm" = [
+            "mpv.desktop"
+            "vlc.desktop"
+          ];
+          "video/3gpp" = [
+            "mpv.desktop"
+            "vlc.desktop"
+          ];
+          "video/3gpp2" = [
+            "mpv.desktop"
+            "vlc.desktop"
+          ];
 
           "application/x-7z-compressed" = "org.gnome.FileRoller.desktop";
           "application/zip" = "org.gnome.FileRoller.desktop";

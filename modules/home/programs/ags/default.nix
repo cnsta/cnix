@@ -4,11 +4,13 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.ags;
-in {
-  imports = [inputs.ags.homeManagerModules.default];
+in
+{
+  imports = [ inputs.ags.homeManagerModules.default ];
   options = {
     home.programs.ags.enable = mkEnableOption "Enables ags";
   };

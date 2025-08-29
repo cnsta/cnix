@@ -4,15 +4,17 @@
   lib,
   osConfig,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.git;
-in {
+in
+{
   options = {
     home.programs.git.enable = mkEnableOption "Enables git";
   };
   config = mkIf cfg.enable {
-    home.packages = [pkgs.gh];
+    home.packages = [ pkgs.gh ];
     programs.git = {
       enable = true;
       userName = osConfig.settings.accounts.username;
@@ -31,7 +33,8 @@ in {
         };
         gpg = {
           # format = lib.mkDefault "ssh";
-          ssh.allowedSignersFile = config.home.homeDirectory + "/" + config.xdg.configFile."git/allowed_signers".target;
+          ssh.allowedSignersFile =
+            config.home.homeDirectory + "/" + config.xdg.configFile."git/allowed_signers".target;
         };
         commit = {
           verbose = true;

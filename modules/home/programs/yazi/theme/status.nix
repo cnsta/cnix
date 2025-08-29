@@ -39,10 +39,20 @@
     };
 
     # Permissions;
-    permissions_t = {fg = "#504945";};
-    permissions_r = {fg = "#b8bb26";};
-    permissions_w = {fg = "#fb4934";};
-    permissions_x = {fg = "#b8bb26";};
-    permissions_s = {fg = "#665c54";};
+    permissions_t = {
+      fg = "#504945";
+    };
+    permissions_r = {
+      fg = "#b8bb26";
+    };
+    permissions_w = {
+      fg = "#fb4934";
+    };
+    permissions_x = {
+      fg = "#b8bb26";
+    };
+    permissions_s = {
+      fg = "#665c54";
+    };
   };
 }

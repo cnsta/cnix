@@ -1,12 +1,11 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.neovim.plugins = with pkgs.vimPlugins; [
     {
       plugin = alpha-nvim;
       type = "lua";
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           local alpha = require("alpha")
           local dashboard = require("alpha.themes.dashboard")

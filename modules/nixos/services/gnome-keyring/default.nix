@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.gnome-keyring;
-in {
+in
+{
   options = {
     nixos.services.gnome-keyring.enable = mkEnableOption "Enables gnome-keyring";
   };

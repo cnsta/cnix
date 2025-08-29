@@ -4,10 +4,12 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.zen;
-in {
+in
+{
   options = {
     home.programs.zen.enable = mkEnableOption "Enables zen browser";
   };

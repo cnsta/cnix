@@ -3,15 +3,26 @@
   lib,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkOption types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    types
+    ;
   cfg = config.nixos.services.scx;
-in {
+in
+{
   options = {
     nixos.services.scx = {
       enable = mkEnableOption "Enables scx scheduler";
       scheduler = mkOption {
-        type = types.enum ["scx_lavd" "scx_rusty" "scx_bpfland"];
+        type = types.enum [
+          "scx_lavd"
+          "scx_rusty"
+          "scx_bpfland"
+        ];
         description = "Selects the scheduler for scx";
         default = "scx_lavd";
       };
@@ -28,7 +39,7 @@ in {
     ];
     systemd.services.scx = {
       enable = true;
-      wantedBy = ["multi-user.target"];
+      wantedBy = [ "multi-user.target" ];
       unitConfig = {
         Description = "Start scx_scheduler";
         ConditionPathIsDirectory = "/sys/kernel/sched_ext";

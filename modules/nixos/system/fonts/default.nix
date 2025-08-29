@@ -4,10 +4,12 @@
   config,
   inputs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkOption types;
   cfg = config.nixos.system.fonts;
-in {
+in
+{
   options = {
     nixos.system.fonts = {
       enable = mkOption {
@@ -49,10 +51,10 @@ in {
       ];
 
       fontconfig.defaultFonts = {
-        serif = ["Tinos"];
-        sansSerif = ["Inter"];
-        monospace = ["Input Mono Narrow Light"];
-        emoji = ["Noto Color Emoji"];
+        serif = [ "Tinos" ];
+        sansSerif = [ "Inter" ];
+        monospace = [ "Input Mono Narrow Light" ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
   };

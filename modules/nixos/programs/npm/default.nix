@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.npm;
-in {
+in
+{
   options = {
     nixos.programs.npm.enable = mkEnableOption "Enables npm";
   };

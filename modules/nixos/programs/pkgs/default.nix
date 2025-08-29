@@ -3,10 +3,17 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf mkOption mkMerge types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkOption
+    mkMerge
+    types
+    ;
   cfg = config.nixos.programs.pkgs;
-in {
+in
+{
   options = {
     nixos.programs.pkgs = {
       enable = mkOption {
@@ -44,7 +51,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs;
+    environment.systemPackages =
+      with pkgs;
       mkMerge [
         [
           pciutils

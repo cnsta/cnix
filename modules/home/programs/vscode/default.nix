@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.vscode;
-in {
+in
+{
   options = {
     home.programs.vscode.enable = mkEnableOption "Enables vscode";
   };

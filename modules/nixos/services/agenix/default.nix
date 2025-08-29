@@ -5,10 +5,17 @@
   pkgs,
   self,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkOption mkMerge;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    mkMerge
+    ;
   cfg = config.nixos.services.agenix;
-in {
+in
+{
   options = {
     nixos.services.agenix = {
       enable = mkEnableOption "Enables agenix system environment";

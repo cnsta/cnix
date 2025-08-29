@@ -3,8 +3,8 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = ["amd"];
-        extraKernelParams = [];
+        hardware = [ "amd" ];
+        extraKernelParams = [ ];
       };
       loader = {
         default = {
@@ -21,7 +21,10 @@
       };
       graphics = {
         enable = true;
-        vendors = ["intel" "amd"];
+        vendors = [
+          "intel"
+          "amd"
+        ];
       };
       logitech = {
         enable = false;
@@ -30,8 +33,16 @@
         enable = true;
         interfaces = {
           "enp6s0" = {
-            allowedTCPPorts = [22 80 443 8090];
-            allowedUDPPorts = [58846 6881];
+            allowedTCPPorts = [
+              22
+              80
+              443
+              8090
+            ];
+            allowedUDPPorts = [
+              58846
+              6881
+            ];
           };
         };
       };

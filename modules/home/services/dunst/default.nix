@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.services.dunst;
-in {
+in
+{
   options = {
     home.services.dunst.enable = mkEnableOption "Enables dunst";
   };

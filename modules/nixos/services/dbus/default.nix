@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.dbus;
-in {
+in
+{
   options = {
     nixos.services.dbus.enable = mkEnableOption "Enables dbus";
   };
