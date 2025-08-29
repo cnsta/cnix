@@ -3,17 +3,22 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption mkMerge;
   cfg = config.nixos.programs.hyprland;
   host = config.networking.hostName;
 
-  toggle = program: let
-    prog = builtins.substring 0 14 program;
-  in "pkill ${prog} || uwsm app -- ${program}";
+  toggle =
+    program:
+    let
+      prog = builtins.substring 0 14 program;
+    in
+    "pkill ${prog} || uwsm app -- ${program}";
 
   runOnce = program: "pgrep ${program} || uwsm app -- ${program}";
-in {
+in
+{
   options = {
     nixos.programs.hyprland.keybinds.enable = mkEnableOption "Enables keybind settings in Hyprland";
   };

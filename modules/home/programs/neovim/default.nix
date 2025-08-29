@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.neovim;
-in {
+in
+{
   imports = [
     ./plugins
     ./lsp.nix
@@ -22,9 +24,7 @@ in {
     programs.neovim = {
       enable = true;
       extraLuaConfig =
-        /*
-        lua
-        */
+        # lua
         ''
           -- Use system clipboard
           vim.opt.clipboard = "unnamedplus"

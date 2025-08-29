@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.hardware.logitech;
-in {
+in
+{
   options = {
     nixos.hardware.logitech.enable = mkEnableOption "Enables logitech";
   };

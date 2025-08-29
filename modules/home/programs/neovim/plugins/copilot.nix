@@ -1,12 +1,11 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.neovim.plugins = with pkgs.vimPlugins; [
     {
       plugin = copilot-lua;
       type = "lua";
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           require("copilot").setup({
           	panel = {

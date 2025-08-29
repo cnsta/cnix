@@ -4,11 +4,13 @@
   pkgs,
   osConfig,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption mkMerge;
   cfg = config.home.programs.fuzzel;
   host = osConfig.networking.hostName;
-in {
+in
+{
   options = {
     home.programs.fuzzel.enable = mkEnableOption "Enables fuzzel";
   };

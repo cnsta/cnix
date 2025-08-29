@@ -1,13 +1,17 @@
 {
   programs.yazi.theme.manager = {
-    cwd = {fg = "#83a598";};
+    cwd = {
+      fg = "#83a598";
+    };
     # Hovered
     hovered = {
       fg = "#282828";
       bg = "#83a598";
     };
 
-    preview_hovered = {underline = true;};
+    preview_hovered = {
+      underline = true;
+    };
 
     # Find
     find_keyword = {
@@ -47,11 +51,23 @@
 
     # Border;
     border_symbol = "│";
-    border_style = {fg = "#665c54";};
+    border_style = {
+      fg = "#665c54";
+    };
 
     # Offset;
-    folder_offset = [1 0 1 0];
-    preview_offset = [1 1 1 1];
+    folder_offset = [
+      1
+      0
+      1
+      0
+    ];
+    preview_offset = [
+      1
+      1
+      1
+      1
+    ];
 
     # Highlighting;
     syntect_theme = "";

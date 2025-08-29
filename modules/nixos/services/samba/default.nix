@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.samba;
-in {
+in
+{
   options = {
     nixos.services.samba.enable = mkEnableOption "Enables samba";
   };

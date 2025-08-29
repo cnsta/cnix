@@ -3,8 +3,8 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = [];
-        extraKernelParams = [];
+        hardware = [ ];
+        extraKernelParams = [ ];
       };
       loader = {
         default = {
@@ -21,7 +21,7 @@
       };
       graphics = {
         enable = false;
-        vendors = [];
+        vendors = [ ];
       };
       logitech = {
         enable = false;
@@ -30,8 +30,16 @@
         enable = true;
         interfaces = {
           "enu1u1" = {
-            allowedTCPPorts = [22 80 443 8090];
-            allowedUDPPorts = [58846 6881];
+            allowedTCPPorts = [
+              22
+              80
+              443
+              8090
+            ];
+            allowedUDPPorts = [
+              58846
+              6881
+            ];
           };
         };
       };

@@ -3,10 +3,17 @@
   config,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf mkOption mkEnableOption types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkOption
+    mkEnableOption
+    types
+    ;
   cfg = config.nixos.system.xdg;
-in {
+in
+{
   options = {
     nixos.system.xdg = {
       enable = mkEnableOption "Enable XDG portal.";
@@ -23,10 +30,13 @@ in {
       enable = true;
       xdgOpenUsePortal = cfg.xdgOpenUsePortal;
       config = {
-        common.default = ["gtk"];
-        hyprland.default = ["gtk" "hyprland"];
+        common.default = [ "gtk" ];
+        hyprland.default = [
+          "gtk"
+          "hyprland"
+        ];
       };
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
   };
 }

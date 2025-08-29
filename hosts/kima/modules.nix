@@ -3,8 +3,8 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = ["amd"];
-        extraKernelParams = ["amdgpu.dcdebugmask=0x10"];
+        hardware = [ "amd" ];
+        extraKernelParams = [ "amdgpu.dcdebugmask=0x10" ];
       };
       loader = {
         default = {
@@ -21,7 +21,7 @@
       };
       graphics = {
         enable = true;
-        vendors = ["amd"];
+        vendors = [ "amd" ];
       };
       logitech = {
         enable = true;
@@ -30,7 +30,11 @@
         enable = true;
         interfaces = {
           "eno1" = {
-            allowedTCPPorts = [22 80 443];
+            allowedTCPPorts = [
+              22
+              80
+              443
+            ];
           };
         };
       };

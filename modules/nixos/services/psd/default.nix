@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.psd;
-in {
+in
+{
   options = {
     nixos.services.psd.enable = mkEnableOption "Enables Profile Sync Daemon";
   };

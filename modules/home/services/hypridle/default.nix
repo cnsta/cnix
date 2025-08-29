@@ -4,13 +4,15 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.services.hypridle;
 
   hypridleFlake = inputs.hypridle.packages.${pkgs.system}.hypridle;
   # hypridlePkg = pkgs.hypridle;
-in {
+in
+{
   options = {
     home.services.hypridle.enable = mkEnableOption "Enables hypridle";
   };

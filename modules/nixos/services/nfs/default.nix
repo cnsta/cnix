@@ -2,10 +2,17 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkOption types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    types
+    ;
   cfg = config.nixos.services.nfs;
-in {
+in
+{
   options.nixos.services.nfs = {
     enable = mkEnableOption "Enable NFS support";
 
@@ -37,18 +44,28 @@ in {
       };
       options = mkOption {
         type = types.listOf types.str;
-        default = ["x-systemd.automount"];
+        default = [ "x-systemd.automount" ];
         description = "Mount options";
       };
     };
   };
 
   config = mkIf cfg.enable {
-    boot.supportedFilesystems = ["nfs"];
+    boot.supportedFilesystems = [ "nfs" ];
     services.rpcbind.enable = true;
     networking.firewall = {
-      allowedTCPPorts = [2049 4000 4001 4002];
-      allowedUDPPorts = [2049 4000 4001 4002];
+      allowedTCPPorts = [
+        2049
+        4000
+        4001
+        4002
+      ];
+      allowedUDPPorts = [
+        2049
+        4000
+        4001
+        4002
+      ];
     };
 
     services.nfs.server = mkIf cfg.server.enable {

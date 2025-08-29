@@ -4,10 +4,12 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.helix;
-in {
+in
+{
   imports = [
     ./languages.nix
     ./gruvbox.nix
@@ -46,7 +48,12 @@ in {
             display-messages = true;
             display-inlay-hints = true;
           };
-          gutters = ["diagnostics" "line-numbers" "spacer" "diff"];
+          gutters = [
+            "diagnostics"
+            "line-numbers"
+            "spacer"
+            "diff"
+          ];
           statusline = {
             separator = "/";
             left = [
@@ -57,7 +64,7 @@ in {
               "spinner"
               "diagnostics"
             ];
-            center = ["file-name"];
+            center = [ "file-name" ];
             right = [
               "file-encoding"
               "file-line-ending"
@@ -78,62 +85,103 @@ in {
           };
         };
 
-        keys = let
-          spaceMode = {
-            space = "file_picker";
-            n = "global_search";
-            f = ":format";
-            c = "toggle_comments";
-            t = {
-              d = "goto_type_definition";
-              i = "goto_implementation";
-              r = "goto_reference";
-              t = "goto_definition";
-              w = "trim_selections";
+        keys =
+          let
+            spaceMode = {
+              space = "file_picker";
+              n = "global_search";
+              f = ":format";
+              c = "toggle_comments";
+              t = {
+                d = "goto_type_definition";
+                i = "goto_implementation";
+                r = "goto_reference";
+                t = "goto_definition";
+                w = "trim_selections";
+              };
+              x = ":buffer-close";
+              w = ":w";
+              q = ":q";
+              y = "yank";
+              p = "paste_after";
+              P = "paste_before";
+              R = "replace_with_yanked";
             };
-            x = ":buffer-close";
-            w = ":w";
-            q = ":q";
-            y = "yank";
-            p = "paste_after";
-            P = "paste_before";
-            R = "replace_with_yanked";
-          };
-        in {
-          normal = {
-            d = {
-              d = ["extend_to_line_bounds" "yank_main_selection_to_clipboard" "delete_selection"];
-              s = ["surround_delete"];
+          in
+          {
+            normal = {
+              d = {
+                d = [
+                  "extend_to_line_bounds"
+                  "yank_main_selection_to_clipboard"
+                  "delete_selection"
+                ];
+                s = [ "surround_delete" ];
+              };
+              x = "delete_selection";
+              y = {
+                y = [
+                  "extend_to_line_bounds"
+                  "yank_main_selection_to_clipboard"
+                  "normal_mode"
+                  "collapse_selection"
+                ];
+                d = ":yank-diagnostic";
+              };
+              Y = [
+                "extend_to_line_end"
+                "yank_main_selection_to_clipboard"
+                "collapse_selection"
+              ];
+              P = [
+                "paste_clipboard_before"
+                "collapse_selection"
+              ];
+              p = [
+                "paste_clipboard_after"
+                "collapse_selection"
+              ];
+              C-a = "select_all";
+              del = "delete_selection";
+              space = spaceMode;
             };
-            x = "delete_selection";
-            y = {
-              y = ["extend_to_line_bounds" "yank_main_selection_to_clipboard" "normal_mode" "collapse_selection"];
-              d = ":yank-diagnostic";
+            insert = {
+              C-v = "paste_clipboard_after";
+              C-c = "yank_to_clipboard";
+              C-x = "completion";
+              del = "delete_selection";
+              esc = [
+                "collapse_selection"
+                "normal_mode"
+              ];
             };
-            Y = ["extend_to_line_end" "yank_main_selection_to_clipboard" "collapse_selection"];
-            P = ["paste_clipboard_before" "collapse_selection"];
-            p = ["paste_clipboard_after" "collapse_selection"];
-            C-a = "select_all";
-            del = "delete_selection";
-            space = spaceMode;
+            select = {
+              space = spaceMode;
+              d = [
+                "yank_main_selection_to_clipboard"
+                "delete_selection"
+              ];
+              x = [
+                "yank_main_selection_to_clipboard"
+                "delete_selection"
+              ];
+              y = [
+                "yank_main_selection_to_clipboard"
+                "normal_mode"
+                "flip_selections"
+                "collapse_selection"
+              ];
+              Y = [
+                "extend_to_line_bounds"
+                "yank_main_selection_to_clipboard"
+                "goto_line_start"
+                "collapse_selection"
+                "normal_mode"
+              ];
+              p = [ "replace_selections_with_clipboard" ];
+              P = [ "paste_clipboard_before" ];
+            };
           };
-          insert = {
-            C-v = "paste_clipboard_after";
-            C-c = "yank_to_clipboard";
-            C-x = "completion";
-            del = "delete_selection";
-            esc = ["collapse_selection" "normal_mode"];
-          };
-          select = {
-            space = spaceMode;
-            d = ["yank_main_selection_to_clipboard" "delete_selection"];
-            x = ["yank_main_selection_to_clipboard" "delete_selection"];
-            y = ["yank_main_selection_to_clipboard" "normal_mode" "flip_selections" "collapse_selection"];
-            Y = ["extend_to_line_bounds" "yank_main_selection_to_clipboard" "goto_line_start" "collapse_selection" "normal_mode"];
-            p = ["replace_selections_with_clipboard"];
-            P = ["paste_clipboard_before"];
-          };
-        };
       };
     };
   };

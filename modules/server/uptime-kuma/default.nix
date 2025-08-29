@@ -2,11 +2,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   unit = "uptime-kuma";
   cfg = config.server.${unit};
   srv = config.server;
-in {
+in
+{
   options.server.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";

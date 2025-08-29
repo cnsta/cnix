@@ -3,10 +3,18 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkOption types mkMerge;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    types
+    mkMerge
+    ;
   cfg = config.home.programs.pkgs;
-in {
+in
+{
   options = {
     home.programs.pkgs = {
       enable = mkEnableOption "Enables miscellaneous utility apps";
@@ -41,14 +49,15 @@ in {
     programs = {
       btop = {
         enable = true;
-        package = pkgs.btop.override {rocmSupport = true;};
+        package = pkgs.btop.override { rocmSupport = true; };
         settings = {
           color_theme = "gruvbox_material_dark";
         };
       };
     };
 
-    home.packages = with pkgs;
+    home.packages =
+      with pkgs;
       mkMerge [
         [
           cmatrix
@@ -98,13 +107,13 @@ in {
         ])
 
         (mkIf cfg.laptop.enable [
-          ])
+        ])
 
         (mkIf cfg.server.enable [
-          ])
+        ])
 
         (mkIf cfg.dev.enable [
-          ])
+        ])
       ];
   };
 }

@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.services.blueman-applet;
-in {
+in
+{
   options = {
     home.services.blueman-applet.enable = mkEnableOption "Enables blueman-applet";
   };

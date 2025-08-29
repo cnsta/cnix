@@ -1,12 +1,11 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.neovim.plugins = with pkgs.vimPlugins; [
     {
       plugin = nvim-treesitter.withAllGrammars;
       type = "lua";
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           require("nvim-treesitter.configs").setup({
           	highlight = {

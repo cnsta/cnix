@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.zsh;
-in {
+in
+{
   options = {
     nixos.programs.zsh.enable = mkEnableOption "Enables zsh shell";
   };

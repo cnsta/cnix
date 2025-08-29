@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.jujutsu;
-in {
+in
+{
   options = {
     home.programs.jujutsu.enable = mkEnableOption "Enables jujutsu";
   };
@@ -25,13 +27,15 @@ in {
           ];
           pager = "less -FRX";
         };
-        signing = let
-          gitCfg = config.programs.git.extraConfig;
-        in {
-          backend = "ssh";
-          sign-all = true;
-          key = gitCfg.signing.key;
-        };
+        signing =
+          let
+            gitCfg = config.programs.git.extraConfig;
+          in
+          {
+            backend = "ssh";
+            sign-all = true;
+            key = gitCfg.signing.key;
+          };
         templates = {
           draft_commit_description = ''
             concat(

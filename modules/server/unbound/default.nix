@@ -3,10 +3,12 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   unit = "unbound";
   cfg = config.server.${unit};
-in {
+in
+{
   options.server.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";

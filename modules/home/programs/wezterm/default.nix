@@ -4,13 +4,15 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   enable_wayland = "true";
   # weztermPkg = pkgs.wezterm;
   weztermFlake = inputs.wezterm.packages.${pkgs.system}.default;
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.wezterm;
-in {
+in
+{
   options = {
     home.programs.wezterm.enable = mkEnableOption "Enables wezterm programs";
   };
@@ -19,9 +21,7 @@ in {
       enable = true;
       package = weztermFlake;
       extraConfig =
-        /*
-        lua
-        */
+        # lua
         ''
           local wezterm = require 'wezterm'
 

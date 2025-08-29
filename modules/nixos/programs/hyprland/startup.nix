@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption mkMerge;
   cfg = config.nixos.programs.hyprland;
   host = config.networking.hostName;
@@ -12,7 +13,8 @@
     "uwsm app -- keepassxc"
     "uwsm app -- nm-applet --indicator"
   ];
-in {
+in
+{
   options = {
     nixos.programs.hyprland.startup.enable = mkEnableOption "Enables startup settings in Hyprland";
   };
@@ -28,30 +30,27 @@ in {
     }
 
     (mkIf (host == "kima") {
-      programs.hyprland.settings.exec-once =
-        [
-          "uwsm app -- mullvad-vpn"
-          "uwsm app -- solaar -w hide -b regular"
-          "uwsm app -- blueman-applet"
-        ]
-        ++ commonExecOnce;
+      programs.hyprland.settings.exec-once = [
+        "uwsm app -- mullvad-vpn"
+        "uwsm app -- solaar -w hide -b regular"
+        "uwsm app -- blueman-applet"
+      ]
+      ++ commonExecOnce;
     })
 
     (mkIf (host == "bunk") {
-      programs.hyprland.settings.exec-once =
-        [
-          "uwsm app -- blueman-applet"
-        ]
-        ++ commonExecOnce;
+      programs.hyprland.settings.exec-once = [
+        "uwsm app -- blueman-applet"
+      ]
+      ++ commonExecOnce;
     })
 
     (mkIf (host == "toothpc") {
-      programs.hyprland.settings.exec-once =
-        [
-          "uwsm app -- mullvad-vpn"
-          "uwsm app -- solaar -w hide -b regular"
-        ]
-        ++ commonExecOnce;
+      programs.hyprland.settings.exec-once = [
+        "uwsm app -- mullvad-vpn"
+        "uwsm app -- solaar -w hide -b regular"
+      ]
+      ++ commonExecOnce;
     })
   ]);
 }

@@ -2,9 +2,7 @@
   config = {
     programs.neovim = {
       extraLuaConfig =
-        /*
-        lua
-        */
+        # lua
         ''
           -- Key mappings for various commands and navigation
           vim.api.nvim_set_keymap("n", "<C-j>", "<C-e>", { noremap = true })

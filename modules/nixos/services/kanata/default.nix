@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.kanata;
-in {
+in
+{
   options = {
     nixos.services.kanata.enable = mkEnableOption "Enables kanata keyboard remapping";
   };

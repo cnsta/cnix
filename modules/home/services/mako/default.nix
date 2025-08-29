@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.services.mako;
-in {
+in
+{
   options = {
     home.services.mako.enable = mkEnableOption "Enables mako";
   };
@@ -26,28 +28,30 @@ in {
       borderColor = "#689d6add";
       textColor = "#d5c4a1dd";
       layer = "overlay";
-      extraConfig = let
-        play = sound: "mpv ${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/${sound}.oga";
-      in ''
-        max-history=50
-        max-visible=4
-        outer-margin=25
-        icon-location=right
-        max-icon-size=48
-        [urgency=high]
-        border-color=#7DAEA3dd
-        [urgency=critical]
-        border-color=#f95f32dd
-        on-notify=exec ${play "message"}
-        [app-name=yubikey-touch-detector]
-        on-notify=exec ${play "service-login"}
-        [app-name=command_complete summary~="✘.*"]
-        on-notify=exec ${play "dialog-warning"}
-        [app-name=command_complete summary~="✓.*"]
-        on-notify=exec ${play "bell"}
-        [mode=do-not-disturb]
-        invisible=1
-      '';
+      extraConfig =
+        let
+          play = sound: "mpv ${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/${sound}.oga";
+        in
+        ''
+          max-history=50
+          max-visible=4
+          outer-margin=25
+          icon-location=right
+          max-icon-size=48
+          [urgency=high]
+          border-color=#7DAEA3dd
+          [urgency=critical]
+          border-color=#f95f32dd
+          on-notify=exec ${play "message"}
+          [app-name=yubikey-touch-detector]
+          on-notify=exec ${play "service-login"}
+          [app-name=command_complete summary~="✘.*"]
+          on-notify=exec ${play "dialog-warning"}
+          [app-name=command_complete summary~="✓.*"]
+          on-notify=exec ${play "bell"}
+          [mode=do-not-disturb]
+          invisible=1
+        '';
     };
   };
 }

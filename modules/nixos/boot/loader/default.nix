@@ -4,10 +4,17 @@
   config,
   inputs,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkMerge mkForce;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkMerge
+    mkForce
+    ;
   cfg = config.nixos.boot.loader;
-in {
+in
+{
   options = {
     nixos.boot.loader = {
       default = {
@@ -54,7 +61,7 @@ in {
         loader.systemd-boot.enable = mkForce false;
       };
 
-      environment.systemPackages = [pkgs.sbctl];
+      environment.systemPackages = [ pkgs.sbctl ];
     })
   ];
 }

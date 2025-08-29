@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.services.gpg;
-in {
+in
+{
   options = {
     home.services.gpg.enable = mkEnableOption "Enables gpg";
   };

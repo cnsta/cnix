@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.powerd;
-in {
+in
+{
   options = {
     nixos.services.powerd.enable = mkEnableOption "Enables power-profiles-daemon";
   };

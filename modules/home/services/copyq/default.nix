@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.services.copyq;
-in {
+in
+{
   options = {
     home.services.copyq.enable = mkEnableOption "Enables copyq";
   };

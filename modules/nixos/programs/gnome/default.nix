@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.gnome;
-in {
+in
+{
   options = {
     nixos.programs.gnome.enable = mkEnableOption "Enables gnome";
   };

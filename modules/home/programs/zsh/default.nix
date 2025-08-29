@@ -3,12 +3,14 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   inherit (lib.meta) getExe;
   inherit (pkgs) eza bat;
   cfg = config.home.programs.zsh;
-in {
+in
+{
   options = {
     home.programs.zsh.enable = mkEnableOption "Enables zsh home configuration";
   };

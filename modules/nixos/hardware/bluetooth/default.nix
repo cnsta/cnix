@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.hardware.bluetooth;
-in {
+in
+{
   options = {
     nixos.hardware.bluetooth.enable = mkEnableOption "Enables bluetooth";
   };

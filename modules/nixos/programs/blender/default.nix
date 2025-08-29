@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption mkOption;
   cfg = config.nixos.programs.blender;
-in {
+in
+{
   options = {
     nixos.programs.blender = {
       enable = mkEnableOption "Enables Blender";
@@ -19,11 +21,7 @@ in {
   };
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      (
-        if cfg.hip.enable
-        then pkgs.blender-hip
-        else pkgs.blender
-      )
+      (if cfg.hip.enable then pkgs.blender-hip else pkgs.blender)
     ];
   };
 }

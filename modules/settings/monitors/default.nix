@@ -1,7 +1,9 @@
 # Yanked from Misterio77
-{lib, ...}: let
+{ lib, ... }:
+let
   inherit (lib) mkOption types;
-in {
+in
+{
   options.settings.monitors = mkOption {
     type = types.listOf (
       types.submodule {
@@ -50,6 +52,6 @@ in {
         };
       }
     );
-    default = [];
+    default = [ ];
   };
 }

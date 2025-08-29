@@ -3,12 +3,14 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   inherit (lib.meta) getExe;
   inherit (pkgs) eza bat;
   cfg = config.home.programs.fish;
-in {
+in
+{
   options = {
     home.programs.fish.enable = mkEnableOption "Enables fish home configuration";
   };
@@ -59,17 +61,13 @@ in {
         up-or-search = lib.readFile ./up-or-search.fish;
         # Check stuff in PATH
         nix-inspect =
-          /*
-          fish
-          */
+          # fish
           ''
             set -s PATH | grep "PATH\[.*/nix/store" | cut -d '|' -f2 |  grep -v -e "-man" -e "-terminfo" | perl -pe 's:^/nix/store/\w{32}-([^/]*)/bin$:\1:' | sort | uniq
           '';
       };
       interactiveShellInit =
-        /*
-        fish
-        */
+        # fish
         ''
           # Open command buffer in vim when alt+e is pressed
           bind \ee edit_command_buffer

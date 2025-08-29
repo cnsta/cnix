@@ -7,8 +7,9 @@
   pkgs,
   modulesPath,
   ...
-}: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
     initrd = {
@@ -20,14 +21,14 @@
         "usb_storage"
         "sd_mod"
       ];
-      kernelModules = [];
+      kernelModules = [ ];
     };
-    kernelModules = [];
+    kernelModules = [ ];
     kernelParams = [
       "intel_pstate=active"
       "nvidia_drm.modeset=1"
     ];
-    extraModulePackages = [];
+    extraModulePackages = [ ];
   };
 
   fileSystems."/" = {
@@ -35,15 +36,19 @@
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."luks-81dcb5e4-7adb-44ee-99df-69e366f8b735".device = "/dev/disk/by-uuid/81dcb5e4-7adb-44ee-99df-69e366f8b735";
+  boot.initrd.luks.devices."luks-81dcb5e4-7adb-44ee-99df-69e366f8b735".device =
+    "/dev/disk/by-uuid/81dcb5e4-7adb-44ee-99df-69e366f8b735";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/CA19-5F2A";
     fsType = "vfat";
-    options = ["fmask=0022" "dmask=0022"];
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

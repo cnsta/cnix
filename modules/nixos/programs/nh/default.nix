@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption mkOption;
   cfg = config.nixos.programs.nh;
-in {
+in
+{
   options = {
     nixos.programs.nh = {
       enable = mkEnableOption "Enables nix helper";

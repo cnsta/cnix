@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.mullvad;
-in {
+in
+{
   options = {
     nixos.services.mullvad.enable = mkEnableOption "Enables mullvad";
   };

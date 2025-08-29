@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.foot;
-in {
+in
+{
   options = {
     home.programs.foot.enable = mkEnableOption "Enables foot programs";
   };

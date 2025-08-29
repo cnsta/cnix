@@ -1,12 +1,11 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.neovim.plugins = with pkgs.vimPlugins; [
     {
       plugin = nvim-autopairs;
       type = "lua";
       config =
-        /*
-        lua
-        */
+        # lua
         ''
           require("nvim-autopairs").setup({})
         '';

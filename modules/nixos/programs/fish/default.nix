@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.fish;
-in {
+in
+{
   options = {
     nixos.programs.fish.enable = mkEnableOption "Enables fish shell";
   };

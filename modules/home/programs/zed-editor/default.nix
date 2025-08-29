@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.zed-editor;
-in {
+in
+{
   options = {
     home.programs.zed-editor.enable = mkEnableOption "Enables zed-editor";
   };

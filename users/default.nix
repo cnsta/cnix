@@ -2,8 +2,9 @@
   self,
   inputs,
   ...
-}: let
-  extraSpecialArgs = {inherit inputs self;};
+}:
+let
+  extraSpecialArgs = { inherit inputs self; };
 
   sharedImports = [
     "${self}/scripts"
@@ -12,16 +13,12 @@
   ];
 
   homeImports = {
-    "cnst@kima" =
-      sharedImports
-      ++ [
-        ./cnst
-      ];
-    "cnst@bunk" =
-      sharedImports
-      ++ [
-        ./cnst
-      ];
+    "cnst@kima" = sharedImports ++ [
+      ./cnst
+    ];
+    "cnst@bunk" = sharedImports ++ [
+      ./cnst
+    ];
     # "cnst@sobotka" =
     #   sharedImports
     #   ++ [
@@ -32,30 +29,30 @@
     #   ++ [
     #     ./cnst
     #   ];
-    "toothpick@toothpc" =
-      sharedImports
-      ++ [
-        ./toothpick
-      ];
+    "toothpick@toothpc" = sharedImports ++ [
+      ./toothpick
+    ];
   };
 
   inherit (inputs.hm.lib) homeManagerConfiguration;
 
   pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 
-  makeHomeConfiguration = modules:
+  makeHomeConfiguration =
+    modules:
     homeManagerConfiguration {
       inherit pkgs extraSpecialArgs modules;
     };
-in {
-  _module.args = {inherit homeImports;};
+in
+{
+  _module.args = { inherit homeImports; };
 
   flake = {
-    homeConfigurations = builtins.listToAttrs (map
-      (name: {
-        name = builtins.replaceStrings ["@"] ["_"] name;
+    homeConfigurations = builtins.listToAttrs (
+      map (name: {
+        name = builtins.replaceStrings [ "@" ] [ "_" ] name;
         value = makeHomeConfiguration homeImports.${name};
-      })
-      (builtins.attrNames homeImports));
+      }) (builtins.attrNames homeImports)
+    );
   };
 }

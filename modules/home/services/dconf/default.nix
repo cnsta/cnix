@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) types mkOption;
   cfg = config.home.services.dconf;
-in {
+in
+{
   options = {
     home.services.dconf.settings.color-scheme = mkOption {
       type = types.str;

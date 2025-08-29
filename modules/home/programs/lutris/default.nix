@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.lutris;
-in {
+in
+{
   options = {
     home.programs.lutris.enable = mkEnableOption "Enables lutris";
   };

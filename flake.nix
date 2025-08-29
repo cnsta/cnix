@@ -1,23 +1,37 @@
 {
   description = "cnix nix";
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux" "aarch64-linux"];
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
 
       imports = [
         ./users
         ./hosts
         ./modules
+        ./pkgs
         ./fmt-hooks.nix
       ];
 
-      perSystem = {pkgs, ...}: {
-        devShells = import ./nix/shell {
-          inherit pkgs inputs;
+      perSystem =
+        { config, pkgs, ... }:
+        {
+          devShells.default = pkgs.mkShell {
+            packages = [
+              pkgs.git
+              config.packages.repl
+            ];
+            name = "dots";
+            env.DIRENV_LOG_FORMAT = "";
+            shellHook = ''
+              ${config.pre-commit.installationScript}
+            '';
+          };
         };
-        formatter = pkgs.alejandra;
-      };
     };
 
   inputs = {

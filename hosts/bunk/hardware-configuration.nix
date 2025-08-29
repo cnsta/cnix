@@ -6,8 +6,9 @@
   lib,
   modulesPath,
   ...
-}: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   boot = {
     initrd = {
       availableKernelModules = [
@@ -18,11 +19,11 @@
         "usb_storage"
         "sd_mod"
       ];
-      kernelModules = ["amdgpu"];
+      kernelModules = [ "amdgpu" ];
     };
 
-    kernelModules = ["kvm-amd"];
-    extraModulePackages = [];
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
   };
 
   fileSystems."/" = {
@@ -30,12 +31,16 @@
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."luks-e75ac560-748f-4071-bbe7-479678400be3".device = "/dev/disk/by-uuid/e75ac560-748f-4071-bbe7-479678400be3";
+  boot.initrd.luks.devices."luks-e75ac560-748f-4071-bbe7-479678400be3".device =
+    "/dev/disk/by-uuid/e75ac560-748f-4071-bbe7-479678400be3";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/7E84-D168";
     fsType = "vfat";
-    options = ["fmask=0022" "dmask=0022"];
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

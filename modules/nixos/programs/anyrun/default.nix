@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.anyrun;
-in {
+in
+{
   options = {
     nixos.programs.anyrun.enable = mkEnableOption "Enables anyrun";
   };

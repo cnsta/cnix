@@ -3,11 +3,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   vcfg = config.services.vaultwarden.config;
   cfg = config.server.vaultwarden;
-in {
+in
+{
   options = {
     server.vaultwarden = {
       enable = mkEnableOption "Enables vaultwarden";
@@ -75,9 +77,7 @@ in {
         tunnels.${cfg.cloudflared.tunnelId} = {
           credentialsFile = cfg.cloudflared.credentialsFile;
           default = "http_status:404";
-          ingress."${cfg.url}".service = "http://${vcfg.ROCKET_ADDRESS}:${
-            toString vcfg.ROCKET_PORT
-          }";
+          ingress."${cfg.url}".service = "http://${vcfg.ROCKET_ADDRESS}:${toString vcfg.ROCKET_PORT}";
         };
       };
     };

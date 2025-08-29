@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.flatpak;
-in {
+in
+{
   options = {
     nixos.services.flatpak.enable = mkEnableOption "Enables flatpaks and gnome software";
   };
@@ -17,9 +19,9 @@ in {
     ];
     systemd.services.flatpak-repo = {
       description = "Add flathub repository";
-      after = ["network-online.target"];
-      wants = ["network-online.target"];
-      path = [pkgs.flatpak];
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      path = [ pkgs.flatpak ];
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
@@ -27,7 +29,7 @@ in {
         Restart = "on-failure";
         RestartSec = "5s";
       };
-      wantedBy = ["multi-user.target"];
+      wantedBy = [ "multi-user.target" ];
     };
   };
 }

@@ -3,7 +3,7 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = ["amd"];
+        hardware = [ "amd" ];
       };
       loader = {
         default = {
@@ -20,7 +20,7 @@
       };
       graphics = {
         enable = true;
-        vendors = ["amd"];
+        vendors = [ "amd" ];
       };
       logitech = {
         enable = false;
@@ -29,7 +29,11 @@
         enable = true;
         interfaces = {
           "wlp6s0" = {
-            allowedTCPPorts = [22 80 443];
+            allowedTCPPorts = [
+              22
+              80
+              443
+            ];
           };
         };
       };

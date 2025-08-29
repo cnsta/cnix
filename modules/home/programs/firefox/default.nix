@@ -4,10 +4,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.firefox;
-in {
+in
+{
   imports = [
     # inputs.nur.hmModules.nur
   ];
@@ -24,9 +26,12 @@ in {
             force = true;
             default = "ddg";
             privateDefault = "ddg";
-            order = ["ddg" "google"];
+            order = [
+              "ddg"
+              "google"
+            ];
           };
-          bookmarks = {};
+          bookmarks = { };
           # extensions = with config.nur.repos.rycee.firefox-addons; [
           #   ublock-origin
           #   sponsorblock

@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.yazi;
-in {
+in
+{
   imports = [
     ./theme
   ];
@@ -25,7 +27,11 @@ in {
 
       settings = {
         manager = {
-          layout = [1 4 3];
+          layout = [
+            1
+            4
+            3
+          ];
           sort_by = "alphabetical";
           sort_sensitive = true;
           sort_reverse = false;

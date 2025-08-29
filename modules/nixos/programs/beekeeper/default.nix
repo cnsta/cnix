@@ -3,10 +3,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.programs.beekeeper;
-in {
+in
+{
   options = {
     nixos.programs.beekeeper.enable = mkEnableOption "Enables Beekeeper Studio";
   };

@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.eza;
-in {
+in
+{
   options = {
     home.programs.eza.enable = mkEnableOption "Enables eza";
   };

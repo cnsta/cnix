@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.dconf;
-in {
+in
+{
   options = {
     nixos.services.dconf.enable = mkEnableOption "Enables dconf";
   };
