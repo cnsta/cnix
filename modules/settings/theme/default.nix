@@ -24,7 +24,8 @@ in
         example = "wallpaper_2";
       };
       secondary = mkOption {
-        type = types.enum bgList;
+        type = types.nullOr (types.enum bgList);
+        default = null;
         apply = name: if name == null then null else bgs.${name};
         example = "wallpaper_3";
       };
