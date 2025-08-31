@@ -8,52 +8,47 @@
 }:
 let
   inherit (lib) mkIf mkEnableOption;
+
   cfg = config.home.services.hyprpaper;
 
   hyprpaperFlake = inputs.hyprpaper.packages.${pkgs.system}.default;
-  # hyprpaperPkg = pkgs.hyprpaper;
+
+  bgs = {
+    wallpaper_1 = "~/media/images/bg_1.jpg";
+    wallpaper_2 = "~/media/images/bg_2.jpg";
+    wallpaper_3 = "~/media/images/bg_3.jpg";
+    wallpaper_4 = "~/media/images/waterwindow.jpg";
+    wallpaper_5 = "~/media/images/barngreet.png";
+  };
+
+  resolve = name: if name == null then null else bgs.${name};
+  bg = osConfig.settings.theme.background;
+
+  wallpapers = builtins.filter (x: x != null) [
+    "DP-3,${resolve bg.primary}"
+    (if bg.secondary != null then "HDMI-A-1,${resolve bg.secondary}" else null)
+    "eDP-1,${resolve bg.primary}"
+    "DVI-D-1,${resolve bg.primary}"
+  ];
 in
 {
   options = {
-    home.services.hyprpaper.enable = mkEnableOption "Enables hyprpaper";
+    home.services.hyprpaper.enable = mkEnableOption "Enable hyprpaper wallpaper service";
   };
+
   config = mkIf cfg.enable {
     services.hyprpaper = {
       enable = true;
       package = hyprpaperFlake;
+
       settings = {
         ipc = "on";
         splash = false;
         splash_offset = 2.0;
 
-        preload = [
-          "~/media/images/bg_1.jpg"
-          "~/media/images/bg_2.jpg"
-          "~/media/images/bg_3.jpg"
-          "~/media/images/by_housevisit_2560.jpg"
-          "~/media/images/nix.png"
-          "~/media/images/stacks.png"
-          "~/media/images/ship.png"
-          "~/media/images/cabin.png"
-          "~/media/images/dunes.png"
-          "~/media/images/globe.png"
-          "~/media/images/space.jpg"
-          "~/media/images/galaxy.png"
-          "~/media/images/deathstar.png"
-          "~/media/images/trollskog.png"
-          "~/media/images/waterwindow.jpg"
-          "~/media/images/barngreet.png"
-        ];
+        preload = builtins.attrValues bgs;
 
-        wallpaper = [
-          # kima
-          "DP-3,${osConfig.settings.theme.background.primary}"
-          "HDMI-A-1,${osConfig.settings.theme.background.secondary}"
-          # bunk
-          "eDP-1,${osConfig.settings.theme.background.primary}"
-          # toothpc
-          "DVI-D-1,${osConfig.settings.theme.background.primary}"
-        ];
+        wallpaper = wallpapers;
       };
     };
   };

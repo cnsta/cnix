@@ -1,34 +1,28 @@
 { lib, ... }:
 let
   inherit (lib) mkOption types;
-  bgs = {
-    wallpaper_1 = "~/media/images/bg_1.jpg";
-    wallpaper_2 = "~/media/images/bg_2.jpg";
-    wallpaper_3 = "~/media/images/bg_3.jpg";
-    wallpaper_4 = "~/media/images/waterwindow.jpg";
-    wallpaper_5 = "~/media/images/barngreet.png";
-  };
-  bgList = builtins.attrNames bgs;
+  bgList = [
+    "wallpaper_1"
+    "wallpaper_2"
+    "wallpaper_3"
+    "wallpaper_4"
+    "wallpaper_5"
+  ];
 in
 {
-  options.settings.theme = {
-    background = {
-      lockscreen = mkOption {
-        type = types.enum bgList;
-        apply = name: bgs.${name};
-        example = "wallpaper_1";
-      };
-      primary = mkOption {
-        type = types.enum bgList;
-        apply = name: bgs.${name};
-        example = "wallpaper_2";
-      };
-      secondary = mkOption {
-        type = types.nullOr (types.enum bgList);
-        default = null;
-        apply = name: if name == null then null else bgs.${name};
-        example = "wallpaper_3";
-      };
+  options.settings.theme.background = {
+    lockscreen = mkOption {
+      type = types.enum bgList;
+      example = "wallpaper_1";
+    };
+    primary = mkOption {
+      type = types.enum bgList;
+      example = "wallpaper_2";
+    };
+    secondary = mkOption {
+      type = types.nullOr (types.enum bgList);
+      default = null;
+      example = "wallpaper_3";
     };
   };
 }
