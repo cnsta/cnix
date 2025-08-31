@@ -11,7 +11,7 @@
         enable = true;
       };
       chromium = {
-        enable = true;
+        enable = false;
       };
       discord = {
         enable = true;
@@ -138,9 +138,6 @@
       };
       nix-index = {
         enable = true;
-      };
-      protonmail-bridge = {
-        enable = false;
       };
       syncthing = {
         enable = true;
