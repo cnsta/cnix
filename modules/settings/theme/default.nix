@@ -18,14 +18,14 @@ in
         apply = name: bgs.${name};
         example = "wallpaper_1";
       };
-      desktop = mkOption {
+      primary = mkOption {
         type = types.enum bgList;
         apply = name: bgs.${name};
         example = "wallpaper_2";
       };
-      vertical = mkOption {
+      secondary = mkOption {
         type = types.enum bgList;
-        apply = name: bgs.${name};
+        apply = name: if name == null then null else bgs.${name};
         example = "wallpaper_3";
       };
     };
