@@ -156,6 +156,23 @@ in
             longitude = 16.324541;
           };
         }
+        {
+          datetime = {
+            text_size = "x1";
+            format = {
+              hour12 = false;
+              timeStyle = "short";
+              dateStyle = "long";
+            };
+          };
+        }
+        {
+          resources = {
+            label = "";
+            memory = true;
+            disk = [ "/" ];
+          };
+        }
       ];
 
       services =
@@ -238,7 +255,7 @@ in
                     widget = {
                       type = "glances";
                       url = "http://localhost:${port}";
-                      metric = "sensor:Composite";
+                      metric = "sensor:pkg";
                       chart = false;
                       version = 4;
                     };
