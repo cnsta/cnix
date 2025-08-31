@@ -47,12 +47,12 @@ in
 
         wallpaper = [
           # kima
-          "DP-3,${osConfig.settings.theme.background.desktop}"
-          "HDMI-A-1,${osConfig.settings.theme.background.vertical}"
+          "DP-3,${osConfig.settings.theme.background.primary}"
+          "HDMI-A-1,${osConfig.settings.theme.background.secondary}"
           # bunk
-          "eDP-1,${osConfig.settings.theme.background.desktop}"
+          "eDP-1,${osConfig.settings.theme.background.primary}"
           # toothpc
-          "DVI-D-1,${osConfig.settings.theme.background.desktop}"
+          "DVI-D-1,${osConfig.settings.theme.background.primary}"
         ];
       };
     };
