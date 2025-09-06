@@ -4,6 +4,7 @@
   config,
   lib,
   osConfig,
+  cLib,
   ...
 }:
 let
@@ -12,6 +13,9 @@ let
 
   hyprlockFlake = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
   # hyprlockPkg = pkgs.hyprlock;
+  #
+  bg = osConfig.settings.theme.background;
+  inherit (cLib.theme.bgs) resolve;
 in
 {
   options = {
@@ -33,7 +37,7 @@ in
         background = [
           {
             monitor = "";
-            path = osConfig.settings.theme.background.lockscreen;
+            path = resolve bg.lockscreen;
           }
         ];
         input-field = [

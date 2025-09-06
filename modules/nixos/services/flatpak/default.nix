@@ -14,9 +14,6 @@ in
   };
   config = mkIf cfg.enable {
     services.flatpak.enable = true;
-    environment.systemPackages = with pkgs; [
-      gnome-software
-    ];
     systemd.services.flatpak-repo = {
       description = "Add flathub repository";
       after = [ "network-online.target" ];

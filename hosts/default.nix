@@ -8,7 +8,7 @@
 {
   flake.nixosConfigurations =
     let
-      # custom paths
+      cLib = import ../lib inputs.nixpkgs.lib;
       userConfig = "${self}/home";
       systemConfig = "${self}/system";
       hostConfig = "${self}/hosts";
@@ -19,12 +19,11 @@
       umodPath = "${self}/modules/home";
       smodPath = "${self}/modules/system";
 
-      # shorten paths
       inherit (inputs.nixpkgs.lib) nixosSystem;
 
-      # get these into the module system
       specialArgs = {
         inherit
+          cLib
           inputs
           self
           userConfig
