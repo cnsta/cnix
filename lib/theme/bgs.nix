@@ -10,9 +10,22 @@ lib: {
 
     list = builtins.attrNames files;
 
-    resolve = name: if name == null then null else files.${name};
+    resolve =
+      name:
+      if name == null then
+        null
+      else if files ? ${name} then
+        files.${name}
+      else
+        null;
 
-    resolveList = names: builtins.filter (x: x != null) (map resolve names);
+    safe = val: val != null;
+
+    resolveList =
+      mappings:
+      builtins.filter safe (
+        map (m: if m.bg == null then null else "${m.monitor},${resolve m.bg}") mappings
+      );
 
     all = builtins.attrValues files;
   };

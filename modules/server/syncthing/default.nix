@@ -23,7 +23,7 @@ in
     };
     homepage.description = lib.mkOption {
       type = lib.types.str;
-      default = "Continuous file synchronization program.";
+      default = "Continuous file synchronization program";
     };
     homepage.icon = lib.mkOption {
       type = lib.types.str;

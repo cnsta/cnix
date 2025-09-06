@@ -55,7 +55,7 @@ in
         splash_offset = 2.0;
 
         preload = bgs.all;
-        wallpaper = wallpapers;
+        wallpaper = bgs.resolveList monitorMappings;
       };
     };
   };
