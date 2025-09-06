@@ -4,6 +4,7 @@
   pkgs,
   inputs,
   osConfig,
+  cLib,
   ...
 }:
 let
@@ -13,22 +14,29 @@ let
 
   hyprpaperFlake = inputs.hyprpaper.packages.${pkgs.system}.default;
 
-  bgs = {
-    wallpaper_1 = "~/media/images/bg_1.jpg";
-    wallpaper_2 = "~/media/images/bg_2.jpg";
-    wallpaper_3 = "~/media/images/bg_3.jpg";
-    wallpaper_4 = "~/media/images/waterwindow.jpg";
-    wallpaper_5 = "~/media/images/barngreet.png";
-  };
-
-  resolve = name: if name == null then null else bgs.${name};
   bg = osConfig.settings.theme.background;
 
-  wallpapers = builtins.filter (x: x != null) [
-    "DP-3,${resolve bg.primary}"
-    (if bg.secondary != null then "HDMI-A-1,${resolve bg.secondary}" else null)
-    "eDP-1,${resolve bg.primary}"
-    "DVI-D-1,${resolve bg.primary}"
+  bgs = cLib.theme.bgs;
+
+  wallpapers = map (m: "${m.monitor},${bgs.resolve m.bg}") monitorMappings;
+
+  monitorMappings = [
+    {
+      monitor = "DP-3";
+      bg = bg.primary;
+    }
+    {
+      monitor = "HDMI-A-1";
+      bg = bg.secondary;
+    }
+    {
+      monitor = "eDP-1";
+      bg = bg.primary;
+    }
+    {
+      monitor = "DVI-D-1";
+      bg = bg.primary;
+    }
   ];
 in
 {
@@ -46,8 +54,7 @@ in
         splash = false;
         splash_offset = 2.0;
 
-        preload = builtins.attrValues bgs;
-
+        preload = bgs.all;
         wallpaper = wallpapers;
       };
     };

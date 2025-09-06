@@ -110,6 +110,10 @@ in
           in
           {
             normal = {
+              C-up = "move_visual_line_up";
+              C-down = "move_visual_line_down";
+              C-left = "move_prev_word_start";
+              C-right = "move_next_word_start";
               d = {
                 d = [
                   "extend_to_line_bounds"
@@ -146,6 +150,10 @@ in
               space = spaceMode;
             };
             insert = {
+              C-up = "move_visual_line_up";
+              C-down = "move_visual_line_down";
+              C-left = "move_prev_word_start";
+              C-right = "move_next_word_start";
               C-v = "paste_clipboard_after";
               C-c = "yank_to_clipboard";
               C-x = "completion";
