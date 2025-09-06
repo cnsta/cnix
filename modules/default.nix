@@ -129,6 +129,7 @@
         ./server/lidarr
         ./server/radarr
         ./server/sonarr
+        ./server/syncthing
         ./server/jellyseerr
         ./server/jellyfin
         ./server/podman
