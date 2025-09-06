@@ -51,8 +51,6 @@ in
     };
     services.${unit} = {
       enable = true;
-      user = srv.user;
-      group = srv.group;
       guiAddress = "0.0.0.0:8384";
       overrideFolders = false;
       overrideDevices = false;
