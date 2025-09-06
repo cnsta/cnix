@@ -53,6 +53,7 @@ in
       enable = true;
       user = srv.user;
       group = srv.group;
+      guiAddress = "0.0.0.0:8384";
       overrideFolders = false;
       overrideDevices = false;
       dataDir = "${srv.mounts.fast}/Syncthing";
