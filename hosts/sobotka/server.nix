@@ -9,6 +9,11 @@
     uid = 994;
     gid = 993;
 
+    mounts = {
+      fast = "/mnt/user";
+      config = "/persist/opt/services";
+    };
+
     unbound = {
       enable = true;
     };

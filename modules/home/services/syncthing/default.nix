@@ -9,7 +9,9 @@ let
 in
 {
   options = {
-    home.services.syncthing.enable = mkEnableOption "Enables syncthing";
+    home.services.syncthing = {
+      enable = mkEnableOption "Enables syncthing";
+    };
   };
   config = mkIf cfg.enable {
     services.syncthing = {

@@ -11,6 +11,20 @@ in
 {
   options.server = {
     enable = lib.mkEnableOption "The server services and configuration variables";
+    mounts.fast = lib.mkOption {
+      default = "/mnt/cache";
+      type = lib.types.path;
+      description = ''
+        Path to the 'fast' tier mount
+      '';
+    };
+    mounts.config = lib.mkOption {
+      default = "/persist/opt/services";
+      type = lib.types.path;
+      description = ''
+        Path to the service configuration files
+      '';
+    };
     email = mkOption {
       default = "";
       type = types.str;
@@ -53,7 +67,6 @@ in
         GID to run the server services as
       '';
     };
-
     timeZone = lib.mkOption {
       default = "Europe/Stockholm";
       type = lib.types.str;
@@ -62,6 +75,7 @@ in
       '';
     };
   };
+
   config = lib.mkIf cfg.enable {
     users = {
       groups.${cfg.group} = {
