@@ -7,9 +7,6 @@ let
   unit = "syncthing";
   srv = config.server;
   cfg = config.server.${unit};
-  dir = [
-    "${srv.mounts.config}/syncthing"
-  ];
 in
 {
   options.server.${unit} = {
@@ -38,7 +35,6 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-    systemd.tmpfiles.rules = map (x: "d ${x} 0775 share share - -") dir;
     networking.firewall = {
       allowedTCPPorts = [
         8384
@@ -55,8 +51,8 @@ in
       guiAddress = "0.0.0.0:8384";
       overrideFolders = false;
       overrideDevices = false;
-      dataDir = "${srv.mounts.fast}/Syncthing";
-      configDir = "${srv.mounts.config}/syncthing";
+      dataDir = "/home/${srv.user}/syncthing";
+      configDir = "/home/${srv.user}/syncthing/.config/syncting";
     };
     services.caddy.virtualHosts."${cfg.url}" = {
       useACMEHost = srv.domain;
