@@ -84,6 +84,7 @@ in
       })
       (mkIf cfg.ziggy.enable {
         secrets = {
+          cloudflareDnsCredentials.file = "${self}/secrets/cloudflareDnsCredentials.age";
           pihole.file = "${self}/secrets/pihole.age";
         };
       })
