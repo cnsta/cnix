@@ -3,7 +3,7 @@
   server = {
     enable = true;
     email = "adam@cnst.dev";
-    domain = "cnix.dev";
+    domain = "ziggy.local";
     user = "share";
     group = "share";
     uid = 974;

@@ -6,6 +6,23 @@
 let
   srv = config.server;
   cfg = config.server.podman;
+  
+  piholeUrl =
+  if config.networking.hostName == "sobotka" then
+  "pihole0"
+  else if config.networking.hostName == "ziggy" then
+  "pihole1"
+  else
+    throw "Unknown hostname";
+
+    getPiholeSecret =
+    hostname:
+    if hostname == "ziggy" then
+      [ config.age.secrets.piholeZiggy.path ]
+    else if hostname == "sobotka" then
+      [ config.age.secrets.pihole.path ]
+    else
+      throw "Unknown hostname: ${hostname}";
 in
 {
   options.server.podman = {
@@ -80,7 +97,7 @@ in
       };
       url = lib.mkOption {
         type = lib.types.str;
-        default = "pihole.${srv.domain}";
+        default = "${piholeUrl}.${srv.domain}";
       };
       homepage.name = lib.mkOption {
         type = lib.types.str;
@@ -259,7 +276,7 @@ in
             # REV_SERVER = "true";
             WEBTHEME = "default-darker";
           };
-          environmentFiles = [ config.age.secrets.pihole.path ];
+          environmentFiles = getPiholeSecret config.networking.hostName;
           ports = [
             "53:53/tcp"
             "53:53/udp"

@@ -6,7 +6,16 @@
 let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.server.caddy;
-in
+
+  getCloudflareCredentials =
+    hostname:
+    if hostname == "ziggy" then
+      config.age.secrets.cloudflareDnsCredentialsZiggy.path
+    else if hostname == "sobotka" then
+      config.age.secrets.cloudflareDnsCredentials.path
+    else
+      throw "Unknown hostname: ${hostname}";
+  in      
 {
   options = {
     server.caddy.enable = mkEnableOption "Enables caddy";
@@ -34,7 +43,7 @@ in
         dnsResolver = "1.1.1.1:53";
         dnsPropagationCheck = true;
         group = config.services.caddy.group;
-        environmentFile = config.age.secrets.cloudflareDnsCredentials.path;
+        environmentFile = getCloudflareCredentials config.networking.hostName;
       };
     };
 
