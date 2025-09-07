@@ -23,6 +23,9 @@ in
       lanzaboote = {
         enable = mkEnableOption "Enable Lanzaboote boot loader configuration.";
       };
+      extlinux = {
+        enable = mkEnableOption "Enable extlinux boot loader configuration.";
+      };
     };
   };
 
@@ -34,14 +37,18 @@ in
     {
       assertions = [
         {
-          assertion = !(cfg.default.enable && cfg.lanzaboote.enable);
-          message = "Only one of nixos.boot.loader.default.enable and nixos.boot.loader.lanzaboote.enable can be set to true.";
+          assertion =
+            (lib.count (x: x) [
+              cfg.default.enable
+              cfg.lanzaboote.enable
+              cfg.extlinux.enable
+            ]) <= 1;
+          message = "Only one of nixos.boot.loader.{default,lanzaboote,extlinux}.enable can be set to true.";
         }
       ];
     }
 
     (mkIf cfg.default.enable {
-      # Default boot loader configuration
       boot.loader = {
         systemd-boot.enable = true;
         systemd-boot.graceful = true;
@@ -49,18 +56,18 @@ in
       };
     })
 
+    (mkIf cfg.extlinux.enable {
+      boot.loader.generic-extlinux-compatible.enable = true;
+    })
+
     (mkIf cfg.lanzaboote.enable {
-      # Lanzaboote boot loader configuration
       boot = {
         lanzaboote = {
           enable = true;
           pkiBundle = "/var/lib/sbctl";
         };
-
-        # We let Lanzaboote install systemd-boot
         loader.systemd-boot.enable = mkForce false;
       };
-
       environment.systemPackages = [ pkgs.sbctl ];
     })
   ];

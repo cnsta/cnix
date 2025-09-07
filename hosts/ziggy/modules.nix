@@ -8,6 +8,9 @@
       };
       loader = {
         default = {
+          enable = false;
+        };
+        extlinux = {
           enable = true;
         };
         lanzaboote = {
