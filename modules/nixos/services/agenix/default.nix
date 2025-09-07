@@ -86,7 +86,7 @@ in
 
     environment = {
       systemPackages = [
-        inputs.agenix.packages.x86_64-linux.default
+        inputs.agenix.packages.${pkgs.system}.default
         pkgs.age
       ];
     };

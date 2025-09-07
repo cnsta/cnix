@@ -11,14 +11,9 @@ let
   inherit (lib) mkIf mkEnableOption;
 
   cfg = config.home.services.hyprpaper;
-
   hyprpaperFlake = inputs.hyprpaper.packages.${pkgs.system}.default;
-
   bg = osConfig.settings.theme.background;
-
   bgs = cLib.theme.bgs;
-
-  wallpapers = map (m: "${m.monitor},${bgs.resolve m.bg}") monitorMappings;
 
   monitorMappings = [
     {
