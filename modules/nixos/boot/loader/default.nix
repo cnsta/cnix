@@ -57,7 +57,10 @@ in
     })
 
     (mkIf cfg.extlinux.enable {
-      boot.loader.generic-extlinux-compatible.enable = true;
+      boot.loader = {
+        generic-extlinux-compatible.enable = true;
+        grub.enable = false;
+      };
     })
 
     (mkIf cfg.lanzaboote.enable {
