@@ -10,6 +10,7 @@ in
 {
   options.server.podman = {
     enable = lib.mkEnableOption "Enables Podman";
+    gluetun.enable = lib.mkEnableOption "Enables gluetun";
     qbittorrent = {
       enable = lib.mkEnableOption "Enable qBittorrent";
       url = lib.mkOption {
@@ -152,7 +153,7 @@ in
     ];
 
     virtualisation.oci-containers.containers = lib.mkMerge [
-      (lib.mkIf cfg.enable {
+      (lib.mkIf cfg.gluetun.enable {
         gluetun = {
           image = "qmcgaw/gluetun";
           ports = [

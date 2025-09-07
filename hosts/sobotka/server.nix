@@ -65,6 +65,7 @@
     };
     podman = {
       enable = true;
+      gluetun.enable = true;
       qbittorrent = {
         enable = true;
         port = 8080;

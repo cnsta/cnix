@@ -77,6 +77,11 @@ in
           slskd.file = "${self}/secrets/slskd.age";
         };
       })
+      (mkIf cfg.ziggy.enable {
+        secrets = {
+          pihole.file = "${self}/secrets/pihole.age";
+        };
+      })
       (mkIf cfg.toothpc.enable {
         secrets = {
           # Add toothpc specific secrets here
