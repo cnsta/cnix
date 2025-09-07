@@ -72,6 +72,8 @@ in
     kima
     usobotka
     rsobotka
+    uziggy
+    rziggy
   ];
   "wgCredentials.age".publicKeys = [
     cnst
