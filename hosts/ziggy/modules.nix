@@ -144,6 +144,9 @@
       agenix = {
         enable = true;
         sobotka = {
+          enable = false;
+        };
+        ziggy = {
           enable = true;
         };
       };
