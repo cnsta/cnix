@@ -84,8 +84,8 @@ in
       })
       (mkIf cfg.ziggy.enable {
         secrets = {
-          cloudflareDnsCredentials.file = "${self}/secrets/cloudflareDnsCredentials.age";
-          pihole.file = "${self}/secrets/pihole.age";
+          cloudflareDnsCredentialsZiggy.file = "${self}/secrets/cloudflareDnsCredentialsZiggy.age";
+          piholeZiggy.file = "${self}/secrets/piholeZiggy.age";
         };
       })
       (mkIf cfg.toothpc.enable {

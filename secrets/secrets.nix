@@ -72,6 +72,10 @@ in
     kima
     usobotka
     rsobotka
+  ];
+  "cloudflareDnsCredentialsZiggy.age".publicKeys = [
+    cnst
+    kima
     uziggy
     rziggy
   ];
@@ -98,6 +102,10 @@ in
     kima
     usobotka
     rsobotka
+  ];
+   "piholeZiggy.age".publicKeys = [
+    cnst
+    kima
     uziggy
     rziggy
   ];
