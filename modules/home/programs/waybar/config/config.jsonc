@@ -115,8 +115,8 @@
       "format": "{icon}",
       "format-icons": {
         "urgent": "",
-        "active": "",
-        "visible": "",
+        "active": "",
+        "visible": "",
         "default": "",
         "empty": ""
       },

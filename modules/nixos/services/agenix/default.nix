@@ -34,6 +34,11 @@ in
         default = false;
         description = "Apply sobotka agenix settings";
       };
+      ziggy.enable = mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Apply ziggy agenix settings";
+      };
       toothpc.enable = mkOption {
         type = lib.types.bool;
         default = false;
