@@ -25,7 +25,6 @@ in
       ];
       shellAbbrs = {
         extract = "extract.sh";
-        nixcleanboot = "sudo nix run /home/$USER/.nix-config#cleanup-boot";
         nixclean = "nh clean all --keep 3";
         nixdev = "nix develop ~/.nix-config -c $SHELL";
         nixup = "nh os switch -H $hostname";
