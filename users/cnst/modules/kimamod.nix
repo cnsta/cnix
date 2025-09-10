@@ -27,7 +27,7 @@
         enable = true;
       };
       fish = {
-        enable = false;
+        enable = true;
       };
       foot = {
         enable = true;

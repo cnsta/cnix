@@ -20,11 +20,13 @@
       smodPath = "${self}/modules/system";
 
       inherit (inputs.nixpkgs.lib) nixosSystem;
+      inherit (self) outputs;
 
       specialArgs = {
         inherit
           cLib
           inputs
+          outputs
           self
           userConfig
           systemConfig

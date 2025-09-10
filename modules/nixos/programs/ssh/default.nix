@@ -1,33 +1,24 @@
 {
   config,
-  outputs,
   lib,
-  self,
   ...
 }:
 let
-  hosts = lib.attrNames outputs.nixosConfigurations;
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.openssh;
-
-  hostsWithKeys = builtins.filter (
-    hostname: builtins.pathExists "${self}/hosts/${hostname}/ssh_host_ed25519_key.pub"
-  ) hosts;
 in
 {
   options = {
     nixos.services.openssh = {
-      enable = mkEnableOption "Enables openssh";
+      enable = mkEnableOption "Enables ssh";
     };
   };
-
   config = mkIf cfg.enable {
     programs.ssh = {
-      knownHosts = lib.genAttrs hostsWithKeys (hostname: {
-        publicKeyFile = "${self}/hosts/${hostname}/ssh_host_ed25519_key.pub";
-      });
+      knownHosts = {
+        publicKeyFile = /etc/ssh/ssh_host_ed25519_key.pub;
+      };
     };
-
     services.openssh = {
       enable = true;
       settings = {

@@ -65,6 +65,7 @@
       };
       fish = {
         enable = true;
+        homeless.enable = true;
       };
       gamemode = {
         enable = false;
