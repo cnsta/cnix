@@ -12,7 +12,7 @@ in
 {
   imports = [
     ./languages.nix
-    ./gruvbox.nix
+    # ./gruvbox.nix
   ];
 
   options = {
@@ -26,7 +26,7 @@ in
       package = inputs.helix-flake.packages.${pkgs.system}.default;
 
       settings = {
-        theme = "gruvbox_custom";
+        theme = "gruvbox_dark_hard";
         editor = {
           color-modes = true;
           scrolloff = 0;
