@@ -135,6 +135,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    niri.url = "github:sodiboo/niri-flake";
+
     # Custom
     tuirun = {
       url = "git+https://git.sr.ht/~canasta/tuirun";

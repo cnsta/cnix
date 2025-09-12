@@ -1,5 +1,22 @@
 [
   {
+    "modules-left": [
+      "group/system"
+    ],
+    "modules-center": [
+      "niri/workspaces"
+    ],
+    "modules-right": [
+      "custom/progress",
+      "custom/systemd",
+      "group/tray",
+      "pulseaudio",
+      "backlight",
+      "battery",
+      "date",
+      "clock",
+      "custom/dunst"
+    ],
     "backlight": {
       "format": "<span foreground='#928374'>{icon}</span> {percent}%",
       "format-icons": [
@@ -128,6 +145,19 @@
         "*": 3
       }
     },
+    "niri/workspaces": {
+      "format": "{icon}",
+      "format-icons": {
+        // Named workspaces
+        // (you need to configure them in niri)
+        "browser": "",
+        "discord": "",
+        "chat": "<b></b>",
+        // Icons by state
+        "active": "",
+        "default": ""
+      }
+    },
     "memory": {
       "format": "<span foreground='#928374'></span> {}%",
       "states": {
@@ -135,23 +165,6 @@
         "warning": 70
       }
     },
-    "modules-center": [
-      "hyprland/workspaces"
-    ],
-    "modules-left": [
-      "group/system"
-    ],
-    "modules-right": [
-      "custom/progress",
-      "custom/systemd",
-      "group/tray",
-      "pulseaudio",
-      "backlight",
-      "battery",
-      "date",
-      "clock",
-      "custom/dunst"
-    ],
     "network": {
       "format-disconnected": " <span foreground='#928374'></span> ",
       "format-ethernet": "<span foreground='#928374'></span> {ifname}",

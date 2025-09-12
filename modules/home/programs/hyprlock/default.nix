@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  config,
   lib,
   osConfig,
   cLib,
@@ -9,7 +8,7 @@
 }:
 let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.home.programs.hyprlock;
+  cfg = osConfig.nixos.programs.hyprland;
 
   hyprlockFlake = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
   # hyprlockPkg = pkgs.hyprlock;
@@ -18,9 +17,6 @@ let
   inherit (cLib.theme.bgs) resolve;
 in
 {
-  options = {
-    home.programs.hyprlock.enable = mkEnableOption "Enables hyprlock";
-  };
   config = mkIf cfg.enable {
     programs.hyprlock = {
       enable = true;

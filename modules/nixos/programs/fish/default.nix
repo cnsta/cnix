@@ -20,7 +20,14 @@ in
 
   config = mkMerge [
     (mkIf cfg.enable {
-      programs.fish.enable = true;
+      programs.fish = {
+        enable = true;
+        vendor = {
+          completions.enable = true;
+          config.enable = true;
+          functions.enable = true;
+        };
+      };
     })
 
     (mkIf cfg.homeless.enable {

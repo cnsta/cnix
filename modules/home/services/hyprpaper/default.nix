@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   inputs,
@@ -8,9 +7,9 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkEnableOption;
+  inherit (lib) mkIf;
 
-  cfg = config.home.services.hyprpaper;
+  cfg = osConfig.nixos.programs.hyprland;
   hyprpaperFlake = inputs.hyprpaper.packages.${pkgs.system}.default;
   bg = osConfig.settings.theme.background;
   bgs = cLib.theme.bgs;
@@ -35,10 +34,6 @@ let
   ];
 in
 {
-  options = {
-    home.services.hyprpaper.enable = mkEnableOption "Enable hyprpaper wallpaper service";
-  };
-
   config = mkIf cfg.enable {
     services.hyprpaper = {
       enable = true;

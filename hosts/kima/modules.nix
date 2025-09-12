@@ -74,8 +74,8 @@
         enable = false;
       };
       hyprland = {
-        enable = true;
-        withUWSM = true;
+        enable = false;
+        withUWSM = false;
       };
       inkscape = {
         enable = false;
@@ -87,6 +87,9 @@
         enable = false;
       };
       microfetch = {
+        enable = true;
+      };
+      niri = {
         enable = true;
       };
       pkgs = {

@@ -14,6 +14,16 @@ in
     sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
 
     file = {
+      ".local/bin/spawn-or-focus.sh" = {
+        source = getExe (
+          pkgs.writeShellApplication {
+            name = "spawn-or-focus";
+            runtimeInputs = with pkgs; [ niri ];
+            text = readFile ./bin/spawn-or-focus.sh;
+          }
+        );
+      };
+
       ".local/bin/pavucontrol-toggle.sh" = {
         source = getExe (
           pkgs.writeShellApplication {

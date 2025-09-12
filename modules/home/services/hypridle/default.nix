@@ -1,21 +1,18 @@
 {
-  config,
+  osConfig,
   lib,
   pkgs,
   inputs,
   ...
 }:
 let
-  inherit (lib) mkIf mkEnableOption;
-  cfg = config.home.services.hypridle;
+  inherit (lib) mkIf;
+  cfg = osConfig.nixos.programs.hyprland;
 
   hypridleFlake = inputs.hypridle.packages.${pkgs.system}.hypridle;
   # hypridlePkg = pkgs.hypridle;
 in
 {
-  options = {
-    home.services.hypridle.enable = mkEnableOption "Enables hypridle";
-  };
   config = mkIf cfg.enable {
     services.hypridle = {
       enable = true;
