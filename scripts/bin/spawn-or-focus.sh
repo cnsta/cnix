@@ -1,3 +1,4 @@
+# Written based on @fasterius work
 # Check if at least one argument is provided
 if [ $# -lt 1 ]; then
   notify-send -t 5000 "Usage: spawn-or-focus.sh <APP_CLASS> [APP_CMD]"
