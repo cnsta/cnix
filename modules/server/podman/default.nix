@@ -6,16 +6,16 @@
 let
   srv = config.server;
   cfg = config.server.podman;
-  
-  piholeUrl =
-  if config.networking.hostName == "sobotka" then
-  "pihole0"
-  else if config.networking.hostName == "ziggy" then
-  "pihole1"
-  else
-    throw "Unknown hostname";
 
-    getPiholeSecret =
+  piholeUrl =
+    if config.networking.hostName == "sobotka" then
+      "pihole0"
+    else if config.networking.hostName == "ziggy" then
+      "pihole1"
+    else
+      throw "Unknown hostname";
+
+  getPiholeSecret =
     hostname:
     if hostname == "ziggy" then
       [ config.age.secrets.piholeZiggy.path ]
@@ -213,7 +213,7 @@ in
           ];
           volumes = [
             "/var/lib/qbittorrent:/config:rw"
-            "/share/downloads:/downloads:rw"
+            "/mnt/data/media/downloads:/downloads:rw"
           ];
           environmentFiles = [
             config.age.secrets.gluetunEnvironment.path
@@ -242,7 +242,7 @@ in
           ];
           volumes = [
             "/var/lib/slskd:/app:rw"
-            "/share/downloads:/downloads:rw"
+            "/mnt/data/media/downloads:/downloads:rw"
           ];
           environmentFiles = [
             config.age.secrets.gluetunEnvironment.path
