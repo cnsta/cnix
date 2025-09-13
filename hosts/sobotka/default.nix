@@ -68,6 +68,16 @@ in
     }
   ];
 
+  boot = {
+    supportedFilesystems = [ "zfs" ];
+    zfs.extraPools = [ "data" ];
+  };
+
+  services.zfs = {
+    autoSnapshot.enable = true;
+    autoScrub.enable = true;
+  };
+
   environment.variables.NH_FLAKE = "/home/cnst/.nix-config";
 
   #   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
