@@ -38,7 +38,10 @@ in
     ./settings.nix
   ];
 
-  networking.hostName = "kima";
+  networking = {
+    hostName = "kima";
+    hostId = "6bdeec22";
+  };
 
   environment.variables = {
     NH_FLAKE = "/home/cnst/.nix-config";

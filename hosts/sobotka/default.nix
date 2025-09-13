@@ -56,6 +56,7 @@ in
 
   networking = {
     hostName = "sobotka";
+    hostId = "784991aa";
   };
 
   powerManagement.enable = false;
