@@ -22,7 +22,6 @@
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.supportedFilesystems = [ "zfs" ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
