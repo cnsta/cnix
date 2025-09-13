@@ -112,6 +112,8 @@ in
           nvtopPackages.amd
           dig
           helix
+          zfs
+          zfstools
         ])
 
         (mkIf cfg.dev.enable [
