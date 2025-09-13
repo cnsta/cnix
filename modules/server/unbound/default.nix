@@ -3,21 +3,17 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   unit = "unbound";
   cfg = config.server.${unit};
 
-  hostIp =
-    hostname:
-    if hostname == "ziggy" then
-      "192.168.88.12"
-    else if hostname == "sobotka" then
-      "192.168.88.15"
-    else
-      throw "No IP defined for host ${hostname}";
-in
-{
+  hostIp = hostname:
+    if hostname == "ziggy"
+    then "192.168.88.12"
+    else if hostname == "sobotka"
+    then "192.168.88.14"
+    else throw "No IP defined for host ${hostname}";
+in {
   options.server.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
