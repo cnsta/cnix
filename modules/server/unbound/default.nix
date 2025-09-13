@@ -13,7 +13,7 @@ let
     if hostname == "ziggy" then
       "192.168.88.12"
     else if hostname == "sobotka" then
-      "192.168.88.14"
+      "192.168.88.15"
     else
       throw "No IP defined for host ${hostname}";
 in
