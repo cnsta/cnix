@@ -49,8 +49,6 @@ in
     age.secrets.keepalived.file = "${self}/secrets/keepalived.age";
     services.keepalived = {
       enable = true;
-      openFirewall = true;
-
       vrrpInstances.VI = {
         interface = cfg.interface;
         virtualRouterId = 69;
