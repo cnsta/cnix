@@ -39,21 +39,28 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-    services.${unit} = {
-      enable = true;
-      # user = srv.user;
-      # group = srv.group;
+    services = {
+      ${unit} = {
+        enable = true;
+      };
+      flaresolverr = {
+        enable = true;
+      };
+
+      caddy = {
+        virtualHosts."${cfg.url}" = {
+          useACMEHost = srv.domain;
+          extraConfig = ''
+            reverse_proxy http://127.0.0.1:9696
+          '';
+        };
+        virtualHosts."${cfg.url}" = {
+          useACMEHost = srv.domain;
+          extraConfig = ''
+            reverse_proxy http://127.0.0.1:8191
+          '';
+        };
+      };
     };
-    services.caddy.virtualHosts."${cfg.url}" = {
-      useACMEHost = srv.domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:9696
-      '';
-    };
-    # users.users.prowlarr = {
-    #   group = "prowlarr";
-    #   isSystemUser = true;
-    # };
-    # users.groups.prowlarr = {};
   };
 }
