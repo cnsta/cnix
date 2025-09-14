@@ -54,7 +54,7 @@ in
             reverse_proxy http://127.0.0.1:9696
           '';
         };
-        virtualHosts."${cfg.url}" = {
+        virtualHosts."flaresolverr.${srv.url}" = {
           useACMEHost = srv.domain;
           extraConfig = ''
             reverse_proxy http://127.0.0.1:8191
