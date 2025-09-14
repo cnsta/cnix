@@ -60,7 +60,7 @@ in
         unicastPeers = peers;
         virtualIps = [
           {
-            addr = "10.2.1.69/24";
+            addr = "192.168.88.69/24";
           }
         ];
         extraConfig = ''
