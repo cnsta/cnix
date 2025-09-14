@@ -21,6 +21,9 @@
       enable = true;
     };
     homepage-dashboard = {
+      enable = false;
+    };
+    dashy = {
       enable = true;
     };
     bazarr = {
