@@ -42,71 +42,7 @@ in
     services.${unit} = {
       enable = true;
       allowedHosts = srv.domain;
-      # environmentFile = config.age.secrets.homepageEnvironment.path;
-      # customCSS = ''
-      #   @font-face {
-      #     font-family: "VCR OSD Mono";
-      #     src: url("https://git.sr.ht/~canasta/fonts/tree/main/item/fonts/vcr-mono/TTF/vcr-mono.ttf")
-      #       format("truetype");
-      #   }
-      #   body,
-      #   html {
-      #     --mint: #d7ffff;
-      #     --outerspace: #f8ffff;
-      #     --ghostY: #0d090f;
-      #     background: var(--ghostY);
-      #   }
-      #   .font-medium {
-      #     font-weight: 700 !important;
-      #   }
-      #   .font-light {
-      #     font-weight: 500 !important;
-      #   }
-      #   .font-thin {
-      #     font-weight: 400 !important;
-      #   }
-      #   body .colorOverlay {
-      #     background: linear-gradient(0deg, var(--overlayA) 0%, var(--overlayB) 100%);
-      #     z-index: 2147483647;
-      #     pointer-events: none;
-      #     position: absolute;
-      #     top: 0;
-      #     bottom: 0;
-      #     left: 0;
-      #     right: 0;
-      #     overflow: hidden;
-      #     body {
-      #       background: var(--ghostY);
-      #       color: var(--mint);
-      #       fill: var(--outerspace);
-      #       min-width: 320px;
-      #       max-width: 100%;
-      #       min-height: 100%;
-      #       -webkit-font-smoothing: antialiased;
-      #       --overlayA: rgba(130, 0, 100, 0.07);
-      #       --overlayB: rgba(30, 190, 180, 0.07);
-      #       margin: 0;
-      #       padding: 0;
-      #       font: inherit;
-      #       font-family: VCR OSD Mono Regular;
-      #       font-size: 16px;
-      #       font-weight: 600;
-      #       position: relative;
-      #     }
-      #     #information-widgets {
-      #       padding-left: 1.5rem;
-      #       padding-right: 1.5rem;
-      #     }
-      #     div#footer {
-      #       display: none;
-      #     }
-      #     .services-group.basis-full.flex-1.px-1.-my-1 {
-      #       padding-bottom: 3rem;
-      #     }
-      #   }
-      # '';
       settings = {
-        background = "/fonts/foto.jpg";
         layout = [
           {
             Glances = {

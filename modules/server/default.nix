@@ -11,20 +11,6 @@ in
 {
   options.server = {
     enable = lib.mkEnableOption "The server services and configuration variables";
-    mounts.fast = lib.mkOption {
-      default = "/mnt/cache";
-      type = lib.types.path;
-      description = ''
-        Path to the 'fast' tier mount
-      '';
-    };
-    mounts.config = lib.mkOption {
-      default = "/persist/opt/services";
-      type = lib.types.path;
-      description = ''
-        Path to the service configuration files
-      '';
-    };
     email = mkOption {
       default = "";
       type = types.str;

@@ -124,6 +124,7 @@
         ./server/caddy
         ./server/fail2ban
         ./server/homepage-dashboard
+        ./server/dashy
         ./server/vaultwarden
         ./server/bazarr
         ./server/prowlarr
