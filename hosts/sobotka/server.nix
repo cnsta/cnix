@@ -63,6 +63,10 @@
     syncthing = {
       enable = true;
     };
+    keepalived = {
+      enable = true;
+      interface = "enp6s0";
+    };
     podman = {
       enable = true;
       gluetun.enable = true;
