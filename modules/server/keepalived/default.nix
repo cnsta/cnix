@@ -14,11 +14,13 @@ let
       {
         ip = "192.168.88.14";
         priority = 20;
+        state = "MASTER";
       }
     else if hostname == "ziggy" then
       {
         ip = "192.168.88.12";
         priority = 10;
+        state = "BACKUP";
       }
     else
       throw "No keepalived config defined for host ${hostname}";
@@ -50,9 +52,11 @@ in
     services.keepalived = {
       enable = true;
       vrrpInstances.VI = {
+        state = _self.state;
         interface = cfg.interface;
         virtualRouterId = 69;
         priority = _self.priority;
+        unicastSrcIp = _self.ip;
         unicastPeers = peers;
         virtualIps = [
           {
