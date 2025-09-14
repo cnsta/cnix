@@ -48,6 +48,10 @@
     fail2ban = {
       enable = false;
     };
+    keepalived = {
+      enable = true;
+      interface = "enu1u1";
+    };
     podman = {
       enable = true;
       gluetun.enable = false;

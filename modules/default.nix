@@ -136,6 +136,7 @@
         ./server/podman
         ./server/unbound
         ./server/uptime-kuma
+        ./server/keepalived
       ];
     };
     settings = {
