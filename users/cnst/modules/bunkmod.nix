@@ -44,9 +44,6 @@
       helix = {
         enable = true;
       };
-      hyprlock = {
-        enable = true;
-      };
       jujutsu = {
         enable = false;
       };
@@ -125,12 +122,6 @@
         enable = true;
       };
       gtk = {
-        enable = true;
-      };
-      hypridle = {
-        enable = true;
-      };
-      hyprpaper = {
         enable = true;
       };
       mako = {
