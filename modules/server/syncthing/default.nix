@@ -2,13 +2,11 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   unit = "syncthing";
   srv = config.server;
   cfg = config.server.${unit};
-in
-{
+in {
   options.server.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
@@ -52,7 +50,7 @@ in
       overrideFolders = false;
       overrideDevices = false;
       dataDir = "/home/${srv.user}/syncthing";
-      configDir = "/home/${srv.user}/syncthing/.config/syncting";
+      configDir = "/home/${srv.user}/syncthing/.config/syncthing";
     };
     services.caddy.virtualHosts."${cfg.url}" = {
       useACMEHost = srv.domain;
