@@ -3,11 +3,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   unit = "gitea";
   srv = config.server;
   cfg = config.server.${unit};
-in {
+in
+{
   options.server.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
@@ -65,7 +67,7 @@ in {
           MODE = "console";
         };
         mailer = {
-          ENABLED = true;
+          ENABLED = false;
           MAILER_TYPE = "sendmail";
           FROM = "noreply+adam@cnst.dev";
           SENDMAIL_PATH = "/run/wrappers/bin/sendmail";
@@ -77,6 +79,9 @@ in {
           DEFAULT_BRANCH = "main";
           DEFAULT_REPO_UNITS = "repo.code,repo.issues,repo.pulls";
           DISABLE_DOWNLOAD_SOURCE_ARCHIVES = true;
+        };
+        indexer = {
+          REPO_INDEXER_ENABLED = true;
         };
         server = {
           DOMAIN = cfg.url;
