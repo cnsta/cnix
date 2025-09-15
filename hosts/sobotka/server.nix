@@ -8,6 +8,9 @@
     uid = 994;
     gid = 993;
 
+    gitea = {
+      enable = true;
+    };
     unbound = {
       enable = true;
     };
@@ -15,9 +18,6 @@
       enable = true;
     };
     homepage-dashboard = {
-      enable = false;
-    };
-    dashy = {
       enable = true;
     };
     bazarr = {
@@ -67,7 +67,6 @@
     podman = {
       enable = true;
       gluetun.enable = true;
-      dashy.enable = true;
       qbittorrent = {
         enable = true;
         port = 8080;
