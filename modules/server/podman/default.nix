@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   srv = config.server;
@@ -23,18 +24,6 @@ in {
   options.server.podman = {
     enable = lib.mkEnableOption "Enables Podman";
     gluetun.enable = lib.mkEnableOption "Enables gluetun";
-    dashy = {
-      enable = lib.mkEnableOption "Enable dashy";
-      port = lib.mkOption {
-        type = lib.types.int;
-        default = 8081;
-        description = "The port to host Dashy on.";
-      };
-      url = lib.mkOption {
-        type = lib.types.str;
-        default = "dashy.${srv.domain}";
-      };
-    };
 
     qbittorrent = {
       enable = lib.mkEnableOption "Enable qBittorrent";
@@ -149,15 +138,6 @@ in {
     };
 
     services.caddy.virtualHosts = lib.mkMerge [
-      (lib.mkIf cfg.dashy.enable {
-        "${cfg.dashy.url}" = {
-          useACMEHost = srv.domain;
-          extraConfig = ''
-            reverse_proxy http://127.0.0.1:${toString cfg.dashy.port}
-          '';
-        };
-      })
-
       (lib.mkIf cfg.qbittorrent.enable {
         "${cfg.qbittorrent.url}" = {
           useACMEHost = srv.domain;
@@ -213,17 +193,6 @@ in {
             VPN_TYPE = "wireguard";
             SERVER_CITIES = "Stockholm";
           };
-        };
-      })
-
-      (lib.mkIf cfg.dashy.enable {
-        dashy = {
-          image = "lissy93/dashy:latest";
-          autoStart = true;
-          ports = ["${toString cfg.dashy.port}:80"];
-          volumes = [
-            "${srv.dashy.configFile}:/app/user-data/conf.yml"
-          ];
         };
       })
 
