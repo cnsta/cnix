@@ -58,7 +58,7 @@
       zoneId = "0027acdfb8bbe010f55b676ad8698dfb";
     };
     syncthing = {
-      enable = true;
+      enable = false;
     };
     keepalived = {
       enable = true;
