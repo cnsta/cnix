@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   server = {
     enable = true;
     email = "adam@cnst.dev";
@@ -8,11 +7,6 @@
     group = "share";
     uid = 994;
     gid = 993;
-
-    mounts = {
-      fast = "/mnt/user";
-      config = "/persist/opt/services";
-    };
 
     unbound = {
       enable = true;
@@ -73,6 +67,7 @@
     podman = {
       enable = true;
       gluetun.enable = true;
+      dashy.enable = true;
       qbittorrent = {
         enable = true;
         port = 8080;

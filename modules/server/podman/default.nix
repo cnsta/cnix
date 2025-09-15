@@ -2,32 +2,40 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   srv = config.server;
   cfg = config.server.podman;
 
   piholeUrl =
-    if config.networking.hostName == "sobotka" then
-      "pihole0"
-    else if config.networking.hostName == "ziggy" then
-      "pihole1"
-    else
-      throw "Unknown hostname";
+    if config.networking.hostName == "sobotka"
+    then "pihole0"
+    else if config.networking.hostName == "ziggy"
+    then "pihole1"
+    else throw "Unknown hostname";
 
-  getPiholeSecret =
-    hostname:
-    if hostname == "ziggy" then
-      [ config.age.secrets.piholeZiggy.path ]
-    else if hostname == "sobotka" then
-      [ config.age.secrets.pihole.path ]
-    else
-      throw "Unknown hostname: ${hostname}";
-in
-{
+  getPiholeSecret = hostname:
+    if hostname == "ziggy"
+    then [config.age.secrets.piholeZiggy.path]
+    else if hostname == "sobotka"
+    then [config.age.secrets.pihole.path]
+    else throw "Unknown hostname: ${hostname}";
+in {
   options.server.podman = {
     enable = lib.mkEnableOption "Enables Podman";
     gluetun.enable = lib.mkEnableOption "Enables gluetun";
+    dashy = {
+      enable = lib.mkEnableOption "Enable dashy";
+      port = lib.mkOption {
+        type = lib.types.int;
+        default = 8081;
+        description = "The port to host Dashy on.";
+      };
+      url = lib.mkOption {
+        type = lib.types.str;
+        default = "dashy.${srv.domain}";
+      };
+    };
+
     qbittorrent = {
       enable = lib.mkEnableOption "Enable qBittorrent";
       url = lib.mkOption {
@@ -141,6 +149,15 @@ in
     };
 
     services.caddy.virtualHosts = lib.mkMerge [
+      (lib.mkIf cfg.dashy.enable {
+        "${cfg.dashy.url}" = {
+          useACMEHost = srv.domain;
+          extraConfig = ''
+            reverse_proxy http://127.0.0.1:${toString cfg.dashy.port}
+          '';
+        };
+      })
+
       (lib.mkIf cfg.qbittorrent.enable {
         "${cfg.qbittorrent.url}" = {
           useACMEHost = srv.domain;
@@ -181,12 +198,12 @@ in
             "5031:5031"
             "50300:50300"
           ];
-          devices = [ "/dev/net/tun:/dev/net/tun" ];
+          devices = ["/dev/net/tun:/dev/net/tun"];
           autoStart = true;
           extraOptions = [
             "--cap-add=NET_ADMIN"
           ];
-          volumes = [ "/var:/gluetun" ];
+          volumes = ["/var:/gluetun"];
           environmentFiles = [
             config.age.secrets.gluetunEnvironment.path
           ];
@@ -199,11 +216,22 @@ in
         };
       })
 
+      (lib.mkIf cfg.dashy.enable {
+        dashy = {
+          image = "lissy93/dashy:latest";
+          autoStart = true;
+          ports = ["${toString cfg.dashy.port}:80"];
+          volumes = [
+            "${srv.dashy.configFile}:/app/user-data/conf.yml"
+          ];
+        };
+      })
+
       (lib.mkIf cfg.qbittorrent.enable {
         qbittorrent = {
           image = "ghcr.io/hotio/qbittorrent:latest";
           autoStart = true;
-          dependsOn = [ "gluetun" ];
+          dependsOn = ["gluetun"];
           ports = [
             "8080:8080"
             "58846:58846"
@@ -231,7 +259,7 @@ in
         slskd = {
           image = "slskd/slskd:latest";
           autoStart = true;
-          dependsOn = [ "gluetun" ];
+          dependsOn = ["gluetun"];
           ports = [
             "5030:5030"
             "5031:5031"
