@@ -15,6 +15,9 @@ in
   };
   config = mkIf cfg.enable {
     nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+    environment.systemPackages = with pkgs; [
+      xwayland-satellite-unstable
+    ];
     systemd.user.services.niri-flake-polkit.enable = false;
     programs.niri = {
       enable = true;

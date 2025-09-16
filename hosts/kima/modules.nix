@@ -171,6 +171,9 @@
       kanata = {
         enable = true;
       };
+      libvirtd = {
+        enable = true;
+      };
       locate = {
         enable = true;
       };
