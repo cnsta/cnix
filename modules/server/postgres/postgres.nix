@@ -54,14 +54,28 @@ in {
         local all postgres peer
         local sameuser all peer
 
-        # extra users
+        # local peer access for extra users
         ${lib.concatMapStringsSep "\n" (
             {
               database,
               extraUsers,
               ...
             }:
-              lib.concatMapStringsSep "\n" (user: "local ${database} ${user} peer") extraUsers
+              lib.concatMapStringsSep "\n" (user: "local ${database} ${user} peer") ([database] ++ extraUsers)
+          )
+          cfg.databases}
+
+        # host access (TCP) for databases and their users
+        ${lib.concatMapStringsSep "\n" (
+            {
+              database,
+              extraUsers,
+              ...
+            }:
+              lib.concatMapStringsSep "\n" (user: ''
+                host ${database} ${user} 127.0.0.1/32 trust
+                host ${database} ${user} ::1/128 trust
+              '') ([database] ++ extraUsers)
           )
           cfg.databases}
       '';

@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   server = {
     enable = true;
     email = "adam@cnst.dev";
@@ -45,6 +44,15 @@
     uptime-kuma = {
       enable = true;
     };
+    keycloak = {
+      enable = true;
+      url = "login.cnst.dev";
+      dbPasswordFile = config.age.secrets.keycloakDbPasswordFile.path;
+      cloudflared = {
+        tunnelId = "590f60f8-baaa-4106-b2d1-43740c79531e";
+        credentialsFile = config.age.secrets.keycloakCloudflared.path;
+      };
+    };
     vaultwarden = {
       enable = true;
       url = "vault.cnst.dev";
@@ -53,12 +61,12 @@
         credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
       };
     };
-    nextcloud = {
+    ocis = {
       enable = true;
       url = "cloud.cnst.dev";
       cloudflared = {
-        tunnelId = "fdd98086-6a4c-44f2-bba0-eb86b833cce5";
-        credentialsFile = config.age.secrets.nextcloudCloudflared.path;
+        tunnelId = "8871dad0-e6ff-424c-9a6b-222ef0f492df";
+        credentialsFile = config.age.secrets.ocisCloudflared.path;
       };
     };
     fail2ban = {
