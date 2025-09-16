@@ -131,7 +131,7 @@ in {
         in {
           PROXY_AUTOPROVISION_ACCOUNTS = "true";
           PROXY_ROLE_ASSIGNMENT_DRIVER = "oidc";
-          OCIS_OIDC_ISSUER = "https://${srv.keycloak.url}/realms/master";
+          OCIS_OIDC_ISSUER = "https://${srv.keycloak.url}/realms/OpenCloud";
           PROXY_OIDC_REWRITE_WELLKNOWN = "true";
           WEB_OIDC_CLIENT_ID = "ocis";
           OCIS_LOG_LEVEL = "error";
@@ -144,10 +144,9 @@ in {
           GRAPH_ASSIGN_DEFAULT_USER_ROLE = "false";
           PROXY_CSP_CONFIG_FILE_LOCATION = toString (cspFormat.generate "csp.yaml" cspConfig);
           GRAPH_USERNAME_MATCH = "none";
-          # PROXY_OIDC_ACCESS_TOKEN_VERIFY_METHOD = "none";
           PROXY_ROLE_ASSIGNMENT_ENABLED = "true";
           PROXY_ROLE_ASSIGNMENT_OIDC_CLAIM = "realm_access.roles";
-          PROXY_ROLE_ASSIGNMENT_MAPPING = "ocisAdmin:admin,cnst:user";
+          PROXY_ROLE_ASSIGNMENT_MAPPING = "ocisAdmin:admin,ocisUser:user";
         };
       };
     };
