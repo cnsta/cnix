@@ -15,9 +15,17 @@ in
   };
   config = mkIf cfg.enable {
     nixpkgs.overlays = [ inputs.niri.overlays.niri ];
-    environment.systemPackages = with pkgs; [
-      xwayland-satellite-unstable
-    ];
+    environment = {
+      variables = {
+        NIXOS_OZONE_WL = "1";
+        QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      };
+      systemPackages = with pkgs; [
+        xwayland-satellite-unstable
+        wl-clipboard
+        wayland-utils
+      ];
+    };
     systemd.user.services.niri-flake-polkit.enable = false;
     programs.niri = {
       enable = true;
