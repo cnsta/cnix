@@ -25,8 +25,7 @@ let
     rziggy
   ];
   all = core ++ sobotka ++ ziggy;
-in
-{
+in {
   # Generic
   "cnstssh.age".publicKeys = core;
   "cnixssh.age".publicKeys = core;
@@ -41,6 +40,7 @@ in
   "homepageEnvironment.age".publicKeys = core ++ sobotka;
   "cloudflareFirewallApiKey.age".publicKeys = core ++ sobotka;
   "vaultwardenCloudflared.age".publicKeys = core ++ sobotka;
+  "nextcloudCloudflared.age".publicKeys = core ++ sobotka;
   "cloudflareDnsApiToken.age".publicKeys = core ++ sobotka;
   "cloudflareDnsCredentials.age".publicKeys = core ++ sobotka;
   "wgCredentials.age".publicKeys = core ++ sobotka;
