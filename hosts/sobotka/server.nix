@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   server = {
     enable = true;
     email = "adam@cnst.dev";
@@ -50,6 +51,14 @@
       cloudflared = {
         tunnelId = "fdd98086-6a4c-44f2-bba0-eb86b833cce5";
         credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
+      };
+    };
+    nextcloud = {
+      enable = true;
+      url = "cloud.cnst.dev";
+      cloudflared = {
+        tunnelId = "fdd98086-6a4c-44f2-bba0-eb86b833cce5";
+        credentialsFile = config.age.secrets.nextcloudCloudflared.path;
       };
     };
     fail2ban = {
