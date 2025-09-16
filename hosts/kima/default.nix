@@ -46,8 +46,6 @@ in
   environment.variables = {
     NH_FLAKE = "/home/cnst/.nix-config";
     GEMINI_API_KEY = config.age.secrets.gcapi.path;
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    NIXOS_OZONE_WL = "1";
   };
 
   #   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

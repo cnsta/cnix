@@ -92,7 +92,6 @@ in
           adwaita-icon-theme
           qt5.qtwayland
           qt6.qtwayland
-          wl-clipboard
           wpa_supplicant
           unrar
           material-icons
