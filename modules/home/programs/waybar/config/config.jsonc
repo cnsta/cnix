@@ -1,5 +1,11 @@
 [
   {
+    "height": 25,
+    "layer": "top",
+    "output": [
+      "DP-3",
+      "eDP-1"
+    ],
     "modules-left": [
       "group/system"
     ],
@@ -9,13 +15,12 @@
     "modules-right": [
       "custom/progress",
       "custom/systemd",
-      "group/tray",
       "pulseaudio",
       "backlight",
       "battery",
-      "date",
-      "clock",
-      "custom/dunst"
+      "group/tray",
+      "custom/dunst",
+      "clock"
     ],
     "backlight": {
       "format": "<span foreground='#928374'>{icon}</span> {percent}%",
@@ -42,18 +47,9 @@
     "clock": {
       "interval": 60,
       "format": "{:%H:%M}",
-      // "on-click": "calcurse-toggle.sh",
-      // "on-click-right": "calsync.sh",
       "rotate": 0,
       "tooltip": false
     },
-    // "date": {
-    //   "format": "<span foreground='#928374'></span> {%a, %d %b}",
-    //   "on-click": "calcurse-toggle.sh",
-    //   "on-click-right": "calsync.sh",
-    //   "rotate": 0,
-    //   "tooltip": false
-    // },
     "cpu": {
       "format": "<span foreground='#928374'></span> {usage}%",
       "states": {
@@ -125,16 +121,13 @@
       ],
       "orientation": "inherit"
     },
-    "height": 25,
     "hyprland/workspaces": {
       "active-only": false,
       "all-outputs": false,
       "format": "{icon}",
       "format-icons": {
         "urgent": "",
-        "active": "",
         "visible": "",
-        "default": "",
         "empty": ""
       },
       "on-click": "activate",
@@ -148,14 +141,11 @@
     "niri/workspaces": {
       "format": "{icon}",
       "format-icons": {
-        // Named workspaces
-        // (you need to configure them in niri)
         "browser": "",
         "discord": "",
         "chat": "<b></b>",
-        // Icons by state
-        "active": "",
-        "default": ""
+        "active": "",
+        "default": ""
       }
     },
     "memory": {
@@ -173,10 +163,6 @@
       "interval": 2,
       "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n {bandwidthDownBits}\n {bandwidthUpBits}"
     },
-    "output": [
-      "DP-3",
-      "eDP-1"
-    ],
     "pulseaudio": {
       "format": "<span foreground='#928374'>{icon}</span> {volume}% {format_source}",
       "format-bluetooth": "<span foreground='#928374'>{icon}</span> {volume}% {format_source}",

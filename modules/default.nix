@@ -97,7 +97,7 @@
         ./nixos/services/greetd
         ./nixos/services/gvfs
         ./nixos/services/kanata
-        ./nixos/services/libvirtd
+        ./nixos/services/virtualisation
         ./nixos/services/locate
         ./nixos/services/mullvad
         ./nixos/services/mullvad-netns
