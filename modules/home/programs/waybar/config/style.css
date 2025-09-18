@@ -2,14 +2,25 @@
   all: unset;
   border: none;
   border-radius: 0;
-  font-family: "DepartureMono Nerd Font", "Font Awesome 6 Free Solid";
-  font-size: 14px;
+  font-family:
+    "DepartureMono Nerd Font", "Input Sans Compressed",
+    "Font Awesome 6 Free Solid";
+  font-size: 15px;
   min-height: 0;
 }
 
 window#waybar {
   color: #fbf1c7;
-  background-color: rgba(43, 45, 50, 0.6);
+  background-color: rgba(43, 45, 50, 0.5);
+}
+
+tooltip {
+  background: rgba(50, 50, 50, 0.9);
+  border: 1px solid rgba(100, 114, 125, 0.6);
+}
+tooltip label {
+  color: #fbf1c7;
+  font-family: "Input Sans Compressed";
 }
 
 #workspaces button {
@@ -23,14 +34,10 @@ window#waybar {
 
 #workspaces button:hover {
   color: #ebdbb2;
-  animation: ws_active 0s ease-in-out 1;
-  transition: all 0.2s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
 #workspaces button.active {
   color: #fbf1c7;
-  animation: ws_active 0s ease-in-out 1;
-  transition: all 0.2s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
 #custom-logo {
@@ -87,13 +94,14 @@ window#waybar {
 #memory,
 #backlight,
 #battery,
-#date,
-#clock {
+#date {
   padding: 0 3px;
   margin: 0 3px;
 }
 
 #clock {
+  padding: 0px 3px;
+  margin: 0px 6px 0px 0px;
   font-family: "DepartureMono Nerd Font";
 }
 
@@ -132,12 +140,17 @@ window#waybar {
 }
 
 #tray menu * {
-  background-color: rgba(50, 48, 47, 0.9);
+  background: rgba(50, 50, 50, 0.9);
+  color: #fbf1c7;
   font-family: "Input Sans Compressed";
   padding: 2px 2px;
 }
 
-#tray menu menuitem:hover {
+#tray menu {
+  border: 1px solid rgba(100, 114, 125, 0.6);
+}
+
+#tray menu item:hover {
   color: #4c7a5d;
 }
 

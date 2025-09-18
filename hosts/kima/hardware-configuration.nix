@@ -21,8 +21,9 @@
     "usbhid"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
+    "amdgpu"
     "kvm-amd"
     "i2c-dev"
   ];

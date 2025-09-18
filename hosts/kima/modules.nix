@@ -4,7 +4,7 @@
       kernel = {
         variant = "latest";
         hardware = [ "amd" ];
-        extraKernelParams = [ "amdgpu.dcdebugmask=0x10" ];
+        extraKernelParams = [ ];
       };
       loader = {
         default = {
@@ -171,8 +171,8 @@
       kanata = {
         enable = true;
       };
-      libvirtd = {
-        enable = true;
+      virtualisation = {
+        enable = false;
       };
       locate = {
         enable = true;
