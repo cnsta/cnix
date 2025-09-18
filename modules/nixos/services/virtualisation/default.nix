@@ -6,12 +6,15 @@
 }:
 let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.nixos.services.libvirtd;
+  cfg = config.nixos.services.virtualisation;
 in
 {
   options = {
-    nixos.services.libvirtd.enable = mkEnableOption "Enables libvirtd";
+    nixos.services.virtualisation.enable = mkEnableOption "Enables virtualisation";
   };
+  imports = [
+    ./vfio.nix
+  ];
 
   config = mkIf cfg.enable {
     networking.firewall.trustedInterfaces = [ "virbr0" ];
@@ -21,7 +24,6 @@ in
     ];
 
     virtualisation = {
-      kvmgt.enable = true;
       spiceUSBRedirection.enable = true;
       libvirtd = {
         enable = true;
@@ -34,5 +36,6 @@ in
         };
       };
     };
+    nixos.services.virtualisation.vfio.enable = true;
   };
 }
