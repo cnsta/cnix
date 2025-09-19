@@ -12,8 +12,17 @@ in
 {
   home = {
     sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
-
     file = {
+      ".local/bin/spawn.sh" = {
+        source = getExe (
+          pkgs.writeShellApplication {
+            name = "spawn";
+            runtimeInputs = with pkgs; [ niri ];
+            text = readFile ./bin/spawn.sh;
+          }
+        );
+      };
+
       ".local/bin/spawn-or-focus.sh" = {
         source = getExe (
           pkgs.writeShellApplication {
@@ -30,34 +39,6 @@ in
             name = "pavucontrol-toggle";
             runtimeInputs = with pkgs; [ hyprland ];
             text = readFile ./bin/pavucontrol-toggle.sh;
-          }
-        );
-      };
-
-      ".local/bin/tuirun-toggle.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "tuirun-toggle";
-            runtimeInputs = with pkgs; [
-              hyprland
-              uwsm
-            ];
-            text = readFile ./bin/tuirun-toggle.sh;
-          }
-        );
-      };
-
-      ".local/bin/tuirun-debugger.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "tuirun-debugger";
-            runtimeInputs = with pkgs; [ hyprland ];
-            text = ''
-              # Save environment to file
-              env > /tmp/tuirun-env.txt
-              # Run tuirun
-              /etc/profiles/per-user/cnst/bin/tuirun
-            '';
           }
         );
       };
