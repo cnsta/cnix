@@ -131,7 +131,7 @@ in {
         in {
           PROXY_AUTOPROVISION_ACCOUNTS = "true";
           PROXY_ROLE_ASSIGNMENT_DRIVER = "oidc";
-          OCIS_OIDC_ISSUER = "https://${srv.keycloak.url}/realms/OpenCloud";
+          OCIS_OIDC_ISSUER = "https://${srv.keycloak.url}/realms/ownCloud";
           PROXY_OIDC_REWRITE_WELLKNOWN = "true";
           WEB_OIDC_CLIENT_ID = "ocis";
           OCIS_LOG_LEVEL = "error";
