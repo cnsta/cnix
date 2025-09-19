@@ -126,7 +126,7 @@
         ./server/caddy
         ./server/fail2ban
         ./server/homepage-dashboard
-        ./server/ocis
+        ./server/nextcloud
         ./server/keycloak
         ./server/vaultwarden
         ./server/bazarr
