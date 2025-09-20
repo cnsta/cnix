@@ -42,8 +42,8 @@ in {
   "vaultwardenCloudflared.age".publicKeys = core ++ sobotka;
   "keycloakDbPasswordFile.age".publicKeys = core ++ sobotka;
   "keycloakCloudflared.age".publicKeys = core ++ sobotka;
-  "ocisCloudflared.age".publicKeys = core ++ sobotka;
-  "ocisAdminPass.age".publicKeys = core ++ sobotka;
+  "nextcloudCloudflared.age".publicKeys = core ++ sobotka;
+  "nextcloudAdminPass.age".publicKeys = core ++ sobotka;
   "cloudflareDnsApiToken.age".publicKeys = core ++ sobotka;
   "cloudflareDnsCredentials.age".publicKeys = core ++ sobotka;
   "wgCredentials.age".publicKeys = core ++ sobotka;

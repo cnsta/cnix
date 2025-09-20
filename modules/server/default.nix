@@ -1,14 +1,16 @@
 {
   lib,
   config,
+  pkgs,
   ...
-}:
-let
+}: let
+  hardDrives = [
+    "/dev/disk/by-label/data"
+  ];
   inherit (lib) mkOption types;
   cfg = config.server;
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in
-{
+in {
   options.server = {
     enable = lib.mkEnableOption "The server services and configuration variables";
     email = mkOption {
@@ -23,6 +25,13 @@ in
       type = types.str;
       description = ''
         Domain name to be used to access the server services via Caddy reverse proxy
+      '';
+    };
+    domainPublic = mkOption {
+      default = "";
+      type = types.str;
+      description = ''
+        Public domain name to be used to access the server services via Caddy reverse proxy
       '';
     };
     user = lib.mkOption {
@@ -91,6 +100,18 @@ in
           "render"
           "input"
         ];
+      };
+    };
+
+    systemd.services.hd-idle = {
+      description = "External HD spin down daemon";
+      wantedBy = ["multi-user.target"];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = let
+          idleTime = toString 900;
+          hardDriveParameter = lib.strings.concatMapStringsSep " " (x: "-a ${x} -i ${idleTime}") hardDrives;
+        in "${pkgs.hd-idle}/bin/hd-idle -i 0 ${hardDriveParameter}";
       };
     };
   };

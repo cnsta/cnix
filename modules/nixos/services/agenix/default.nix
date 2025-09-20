@@ -77,7 +77,7 @@ in {
           keycloakCloudflared.file = "${self}/secrets/keycloakCloudflared.age";
           keycloakDbPasswordFile.file = "${self}/secrets/keycloakDbPasswordFile.age";
           nextcloudAdminPass.file = "${self}/secrets/nextcloudAdminPass.age";
-          ocisCloudflared.file = "${self}/secrets/ocisCloudflared.age";
+          nextcloudCloudflared.file = "${self}/secrets/nextcloudCloudflared.age";
           vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";
           vaultwardenEnvironment.file = "${self}/secrets/vaultwardenEnvironment.age";
           homepageEnvironment.file = "${self}/secrets/homepageEnvironment.age";

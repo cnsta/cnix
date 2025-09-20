@@ -3,11 +3,9 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in
-{
+in {
   users.users.cnst = {
     isNormalUser = true;
     shell = pkgs.fish;
@@ -51,8 +49,7 @@ in
     ./server.nix
   ];
 
-  boot.initrd.luks.devices."luks-47b35d4b-467a-4637-a5f9-45177da62897".device =
-    "/dev/disk/by-uuid/47b35d4b-467a-4637-a5f9-45177da62897";
+  boot.initrd.luks.devices."luks-47b35d4b-467a-4637-a5f9-45177da62897".device = "/dev/disk/by-uuid/47b35d4b-467a-4637-a5f9-45177da62897";
 
   networking = {
     hostName = "sobotka";
@@ -69,14 +66,16 @@ in
   ];
 
   boot = {
-    supportedFilesystems = [ "zfs" ];
-    zfs.extraPools = [ "data" ];
+    supportedFilesystems = ["zfs"];
+    zfs.extraPools = ["data"];
   };
 
   services.zfs = {
     autoSnapshot.enable = true;
     autoScrub.enable = true;
   };
+
+  environment.etc."nextcloud-admin-pass".text = "DeHKor3x8^eqqnBXjqhQ&QBl*3!sOLg8agfzOILihju#^0!2AfJ9W*vn";
 
   environment.variables.NH_FLAKE = "/home/cnst/.nix-config";
 
