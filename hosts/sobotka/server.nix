@@ -3,6 +3,7 @@
     enable = true;
     email = "adam@cnst.dev";
     domain = "cnix.dev";
+    domainPublic = "cnst.dev";
     user = "share";
     group = "share";
     uid = 994;
@@ -61,12 +62,12 @@
         credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
       };
     };
-    ocis = {
+    nextcloud = {
       enable = true;
-      url = "cloud.cnst.dev";
+      adminpassFile = config.age.secrets.nextcloudAdminPass.path;
       cloudflared = {
-        tunnelId = "8871dad0-e6ff-424c-9a6b-222ef0f492df";
-        credentialsFile = config.age.secrets.ocisCloudflared.path;
+        tunnelId = "35802b60-7012-4f70-a686-f493c8f2dec0";
+        credentialsFile = config.age.secrets.nextcloudCloudflared.path;
       };
     };
     fail2ban = {
