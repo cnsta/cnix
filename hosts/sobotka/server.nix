@@ -65,10 +65,6 @@
     nextcloud = {
       enable = true;
       adminpassFile = config.age.secrets.nextcloudAdminPass.path;
-      cloudflared = {
-        tunnelId = "35802b60-7012-4f70-a686-f493c8f2dec0";
-        credentialsFile = config.age.secrets.nextcloudCloudflared.path;
-      };
     };
     fail2ban = {
       enable = true;

@@ -25,7 +25,7 @@ in {
     };
     url = lib.mkOption {
       type = lib.types.str;
-      default = "cloud.${srv.domainPublic}";
+      default = "cloud.${srv.domain}";
     };
     homepage.name = lib.mkOption {
       type = lib.types.str;
@@ -43,29 +43,8 @@ in {
       type = lib.types.str;
       default = "Services";
     };
-    cloudflared.credentialsFile = lib.mkOption {
-      type = lib.types.str;
-      example = lib.literalExpression ''
-        pkgs.writeText "cloudflare-credentials.json" '''
-        {"AccountTag":"secret"."TunnelSecret":"secret","TunnelID":"secret"}
-        '''
-      '';
-    };
-    cloudflared.tunnelId = lib.mkOption {
-      type = lib.types.str;
-      example = "00000000-0000-0000-0000-000000000000";
-    };
   };
   config = lib.mkIf cfg.enable {
-    services.cloudflared = {
-      enable = true;
-      tunnels.${cfg.cloudflared.tunnelId} = {
-        credentialsFile = cfg.cloudflared.credentialsFile;
-        default = "http_status:404";
-        ingress."${cfg.url}".service = "http://127.0.0.1:8083";
-      };
-    };
-
     server.fail2ban = lib.mkIf config.server.fail2ban.enable {
       jails = {
         nextcloud = {
@@ -84,23 +63,17 @@ in {
         redis = true;
       };
       phpOptions = {
-        "opcache.jit" = "tracing";
-        "opcache.jit_buffer_size" = "100M";
-        "opcache.interned_strings_buffer" = "16";
-        "opcache.max_accelerated_files" = "10000";
-        "opcache.memory_consumption" = "1280";
+        "opcache.interned_strings_buffer" = "32";
       };
       maxUploadSize = "50G";
       settings = {
         maintenance_window_start = "1";
-        trusted_proxies = ["127.0.0.1"];
-        trusted_domains = ["cloud.${srv.domainPublic}"];
-        overwriteprotocol = "https";
-        overwritehost = "cloud.${srv.domainPublic}";
-        overwrite.cli.url = "https://cloud.${srv.domainPublic}";
-        forwarded_for_headers = [
-          "HTTP_CF_CONNECTING_IP"
+        trusted_proxies = [
+          "127.0.0.1"
+          "::1"
         ];
+        trusted_domains = ["cloud.${srv.domain}"];
+        overwriteprotocol = "https";
         enabledPreviewProviders = [
           "OC\\Preview\\BMP"
           "OC\\Preview\\GIF"
@@ -124,30 +97,73 @@ in {
         adminpassFile = cfg.adminpassFile;
       };
     };
+    users.groups.nextcloud.members = [
+      config.services.caddy.user
+    ];
     services = {
-      nginx = {
-        virtualHosts.nextcloud = {
-          useACMEHost = srv.domainPublic;
-          listen = [
-            {
-              addr = "127.0.0.1";
-              port = 8083;
-            }
-          ];
-          extraConfig = ''
-            add_header Referrer-Policy                      "no-referrer"   always;
-            add_header X-Content-Type-Options               "nosniff"       always;
-            add_header X-Download-Options                   "noopen"        always;
-            add_header X-Frame-Options                      "SAMEORIGIN"    always;
-            add_header X-Permitted-Cross-Domain-Policies    "none"          always;
-            add_header X-Robots-Tag                         "none"          always;
-            add_header X-XSS-Protection                     "1; mode=block" always;
-            add_header Strict-Transport-Security "max-age=15552000; includeSubDomains;";
+      nginx.enable = false;
 
-            access_log /var/log/nginx/nextcloud.access.log;
-            error_log /var/log/nginx/nextcloud.error.log;
-          '';
-        };
+      phpfpm.pools.nextcloud.settings = {
+        "listen.owner" = config.services.caddy.user;
+        "listen.group" = config.services.caddy.group;
+      };
+
+      caddy.virtualHosts.${cfg.url} = let
+        webroot = config.services.nginx.virtualHosts.nextcloud.root;
+      in {
+        useACMEHost = srv.domain;
+        extraConfig = ''
+            encode zstd gzip
+
+            root * ${webroot}
+
+            redir /.well-known/carddav /remote.php/dav 301
+            redir /.well-known/caldav /remote.php/dav 301
+            redir /.well-known/* /index.php{uri} 301
+            redir /remote/* /remote.php{uri} 301
+
+            header {
+                Strict-Transport-Security max-age=31536000
+                Permissions-Policy interest-cohort=()
+                X-Content-Type-Options nosniff
+                X-Frame-Options SAMEORIGIN
+                Referrer-Policy no-referrer
+                X-XSS-Protection "1; mode=block"
+                X-Permitted-Cross-Domain-Policies none
+                X-Robots-Tag "noindex, nofollow"
+                -X-Powered-By
+            }
+
+            php_fastcgi unix/${config.services.phpfpm.pools.nextcloud.socket} {
+                root ${webroot}
+                env front_controller_active true
+                env modHeadersAvailable true
+            }
+
+            @forbidden {
+                path /build/* /tests/* /config/* /lib/* /3rdparty/* /templates/* /data/*
+                path /.* /autotest* /occ* /issue* /indie* /db_* /console*
+                not path /.well-known/*
+            }
+            error @forbidden 404
+
+            @immutable {
+                path *.css *.js *.mjs *.svg *.gif *.png *.jpg *.ico *.wasm *.tflite
+                query v=*
+            }
+            header @immutable Cache-Control "max-age=15778463, immutable"
+
+          @static {
+              path *.css *.js *.mjs *.svg *.gif *.png *.jpg *.ico *.wasm *.tflite
+              not query v=*
+          }
+          header @static Cache-Control "max-age=15778463"
+
+          @woff2 path *.woff2
+          header @woff2 Cache-Control "max-age=604800"
+
+          file_server
+        '';
       };
     };
     server.postgresql.databases = [

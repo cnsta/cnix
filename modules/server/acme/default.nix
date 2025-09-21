@@ -39,16 +39,16 @@ in {
         group = config.services.caddy.group;
         environmentFile = getCloudflareCredentials config.networking.hostName;
       };
-      certs.${config.server.domainPublic} = {
-        reloadServices = ["nginx.service"];
-        domain = "${config.server.domainPublic}";
-        extraDomainNames = ["*.${config.server.domainPublic}"];
-        dnsProvider = "cloudflare";
-        dnsResolver = "1.1.1.1:53";
-        dnsPropagationCheck = true;
-        group = config.services.nginx.group;
-        environmentFile = getCloudflareCredentials config.networking.hostName;
-      };
+      # certs.${config.server.domainPublic} = {
+      #   reloadServices = ["nginx.service"];
+      #   domain = "${config.server.domainPublic}";
+      #   extraDomainNames = ["*.${config.server.domainPublic}"];
+      #   dnsProvider = "cloudflare";
+      #   dnsResolver = "1.1.1.1:53";
+      #   dnsPropagationCheck = true;
+      #   group = config.services.nginx.group;
+      #   environmentFile = getCloudflareCredentials config.networking.hostName;
+      # };
     };
 
     services.caddy = {
