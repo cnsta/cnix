@@ -102,17 +102,5 @@ in {
         ];
       };
     };
-
-    systemd.services.hd-idle = {
-      description = "External HD spin down daemon";
-      wantedBy = ["multi-user.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = let
-          idleTime = toString 900;
-          hardDriveParameter = lib.strings.concatMapStringsSep " " (x: "-a ${x} -i ${idleTime}") hardDrives;
-        in "${pkgs.hd-idle}/bin/hd-idle -i 0 ${hardDriveParameter}";
-      };
-    };
   };
 }
