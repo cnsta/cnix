@@ -15,7 +15,7 @@
     unbound = {
       enable = true;
     };
-    caddy = {
+    acme = {
       enable = true;
     };
     homepage-dashboard = {

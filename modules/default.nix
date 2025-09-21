@@ -123,7 +123,7 @@
     server = {
       imports = [
         ./server
-        ./server/caddy
+        ./server/acme
         ./server/fail2ban
         ./server/homepage-dashboard
         ./server/nextcloud

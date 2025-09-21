@@ -4,7 +4,7 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.server.caddy;
+  cfg = config.server.acme;
 
   getCloudflareCredentials = hostname:
     if hostname == "ziggy"
@@ -14,7 +14,7 @@
     else throw "Unknown hostname: ${hostname}";
 in {
   options = {
-    server.caddy.enable = mkEnableOption "Enables caddy";
+    server.acme.enable = mkEnableOption "Enables ACME";
   };
   config = mkIf cfg.enable {
     networking.firewall = let
@@ -40,13 +40,13 @@ in {
         environmentFile = getCloudflareCredentials config.networking.hostName;
       };
       certs.${config.server.domainPublic} = {
-        reloadServices = ["caddy.service"];
+        reloadServices = ["nginx.service"];
         domain = "${config.server.domainPublic}";
         extraDomainNames = ["*.${config.server.domainPublic}"];
         dnsProvider = "cloudflare";
         dnsResolver = "1.1.1.1:53";
         dnsPropagationCheck = true;
-        group = config.services.caddy.group;
+        group = config.services.nginx.group;
         environmentFile = getCloudflareCredentials config.networking.hostName;
       };
     };
@@ -63,17 +63,6 @@ in {
           '';
         };
         "http://*.${config.server.domain}" = {
-          extraConfig = ''
-            redir https://{host}{uri}
-          '';
-        };
-
-        "http://${config.server.domainPublic}" = {
-          extraConfig = ''
-            redir https://{host}{uri}
-          '';
-        };
-        "http://*.${config.server.domainPublic}" = {
           extraConfig = ''
             redir https://{host}{uri}
           '';

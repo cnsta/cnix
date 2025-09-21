@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   server = {
     enable = true;
     email = "adam@cnst.dev";
@@ -12,7 +11,7 @@
     unbound = {
       enable = true;
     };
-    caddy = {
+    acme = {
       enable = true;
     };
     homepage-dashboard = {

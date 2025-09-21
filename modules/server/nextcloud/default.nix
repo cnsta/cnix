@@ -57,12 +57,6 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    services.nginx.virtualHosts."nextcloud".listen = [
-      {
-        addr = "127.0.0.1";
-        port = 8083;
-      }
-    ];
     services.cloudflared = {
       enable = true;
       tunnels.${cfg.cloudflared.tunnelId} = {
@@ -89,22 +83,21 @@ in {
       caching = {
         redis = true;
       };
-      occ = {
-        maintenance = "install";
+      phpOptions = {
+        "opcache.jit" = "tracing";
+        "opcache.jit_buffer_size" = "100M";
+        "opcache.interned_strings_buffer" = "16";
+        "opcache.max_accelerated_files" = "10000";
+        "opcache.memory_consumption" = "1280";
       };
-      database.createLocally = true;
       maxUploadSize = "50G";
       settings = {
+        maintenance_window_start = "1";
         trusted_proxies = ["127.0.0.1"];
-        trusted_domains = ["cloud.${srv.domainPublic}" "192.168.88.14"];
+        trusted_domains = ["cloud.${srv.domainPublic}"];
         overwriteprotocol = "https";
         overwritehost = "cloud.${srv.domainPublic}";
         overwrite.cli.url = "https://cloud.${srv.domainPublic}";
-        # mail_smtpmode = "sendmail";
-        # mail_sendmailmode = "pipe";
-        # user_oidc = {
-        #   allow_multiple_user_backends = 0;
-        # };
         forwarded_for_headers = [
           "HTTP_CF_CONNECTING_IP"
         ];
@@ -131,11 +124,31 @@ in {
         adminpassFile = cfg.adminpassFile;
       };
     };
-    services.caddy.virtualHosts."${srv.domainPublic}" = {
-      useACMEHost = srv.domainPublic;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:8083
-      '';
+    services = {
+      nginx = {
+        virtualHosts.nextcloud = {
+          useACMEHost = srv.domainPublic;
+          listen = [
+            {
+              addr = "127.0.0.1";
+              port = 8083;
+            }
+          ];
+          extraConfig = ''
+            add_header Referrer-Policy                      "no-referrer"   always;
+            add_header X-Content-Type-Options               "nosniff"       always;
+            add_header X-Download-Options                   "noopen"        always;
+            add_header X-Frame-Options                      "SAMEORIGIN"    always;
+            add_header X-Permitted-Cross-Domain-Policies    "none"          always;
+            add_header X-Robots-Tag                         "none"          always;
+            add_header X-XSS-Protection                     "1; mode=block" always;
+            add_header Strict-Transport-Security "max-age=15552000; includeSubDomains;";
+
+            access_log /var/log/nginx/nextcloud.access.log;
+            error_log /var/log/nginx/nextcloud.error.log;
+          '';
+        };
+      };
     };
     server.postgresql.databases = [
       {
