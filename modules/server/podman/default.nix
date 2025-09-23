@@ -137,31 +137,58 @@ in {
       ];
     };
 
-    services.caddy.virtualHosts = lib.mkMerge [
+    services.traefik = lib.mkMerge [
+      (lib.mkIf cfg.pihole.enable {
+        dynamicConfigOptions = {
+          http = {
+            services = {
+              pihole.loadBalancer.servers = [{url = "http://localhost:${toString cfg.pihole.port}";}];
+            };
+            routers = {
+              pihole = {
+                entryPoints = ["websecure"];
+                rule = "Host(`${cfg.pihole.url}`)";
+                service = "pihole";
+                tls.certResolver = "letsencrypt";
+              };
+            };
+          };
+        };
+      })
+
       (lib.mkIf cfg.qbittorrent.enable {
-        "${cfg.qbittorrent.url}" = {
-          useACMEHost = srv.domain;
-          extraConfig = ''
-            reverse_proxy http://127.0.0.1:${toString cfg.qbittorrent.port}
-          '';
+        dynamicConfigOptions = {
+          http = {
+            services = {
+              qbittorrent.loadBalancer.servers = [{url = "http://localhost:${toString cfg.qbittorrent.port}";}];
+            };
+            routers = {
+              qbittorrent = {
+                entryPoints = ["websecure"];
+                rule = "Host(`${cfg.qbittorrent.url}`)";
+                service = "qbittorrent";
+                tls.certResolver = "letsencrypt";
+              };
+            };
+          };
         };
       })
 
       (lib.mkIf cfg.slskd.enable {
-        "${cfg.slskd.url}" = {
-          useACMEHost = srv.domain;
-          extraConfig = ''
-            reverse_proxy http://127.0.0.1:${toString cfg.slskd.port}
-          '';
-        };
-      })
-
-      (lib.mkIf cfg.pihole.enable {
-        "${cfg.pihole.url}" = {
-          useACMEHost = srv.domain;
-          extraConfig = ''
-            reverse_proxy http://127.0.0.1:${toString cfg.pihole.port}
-          '';
+        dynamicConfigOptions = {
+          http = {
+            services = {
+              slskd.loadBalancer.servers = [{url = "http://localhost:${toString cfg.slskd.port}";}];
+            };
+            routers = {
+              slskd = {
+                entryPoints = ["websecure"];
+                rule = "Host(`${cfg.slskd.url}`)";
+                service = "slskd";
+                tls.certResolver = "letsencrypt";
+              };
+            };
+          };
         };
       })
     ];
@@ -268,9 +295,6 @@ in {
           environment = {
             TZ = "Europe/Stockholm";
             CUSTOM_CACHE_SIZE = "0";
-            # PIHOLE_DNS_ = "10.88.0.1#5335";
-            # DNSSEC = "false";
-            # REV_SERVER = "true";
             WEBTHEME = "default-darker";
           };
           environmentFiles = getPiholeSecret config.networking.hostName;

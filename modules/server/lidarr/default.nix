@@ -2,13 +2,11 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   unit = "lidarr";
   srv = config.server;
   cfg = config.server.${unit};
-in
-{
+in {
   options.server.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
@@ -44,11 +42,21 @@ in
       user = srv.user;
       group = srv.group;
     };
-    services.caddy.virtualHosts."${cfg.url}" = {
-      useACMEHost = srv.domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:8686
-      '';
+    services.traefik = {
+      dynamicConfigOptions = {
+        http = {
+          services.lidarr.loadBalancer.servers = [{url = "http://127.0.0.1:8686";}];
+          routers = {
+            lidarr = {
+              entryPoints = ["websecure"];
+              rule = "Host(`${cfg.url}`)";
+              service = "lidarr";
+              tls.certResolver = "letsencrypt";
+              # middlewares = ["authentik"];
+            };
+          };
+        };
+      };
     };
   };
 }

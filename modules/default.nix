@@ -127,14 +127,12 @@
         ./server/fail2ban
         ./server/homepage-dashboard
         ./server/nextcloud
-        ./server/keycloak
         ./server/vaultwarden
         ./server/bazarr
         ./server/prowlarr
         ./server/lidarr
         ./server/radarr
         ./server/sonarr
-        ./server/syncthing
         ./server/jellyseerr
         ./server/jellyfin
         ./server/podman
@@ -143,6 +141,9 @@
         ./server/keepalived
         ./server/gitea
         ./server/postgres
+        ./server/traefik
+        ./server/www
+        ./server/authentik
       ];
     };
     settings = {

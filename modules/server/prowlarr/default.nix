@@ -2,13 +2,11 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   unit = "prowlarr";
   srv = config.server;
   cfg = config.server.${unit};
-in
-{
+in {
   options.server.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
@@ -47,18 +45,34 @@ in
         enable = true;
       };
 
-      caddy = {
-        virtualHosts."${cfg.url}" = {
-          useACMEHost = srv.domain;
-          extraConfig = ''
-            reverse_proxy http://127.0.0.1:9696
-          '';
-        };
-        virtualHosts."flaresolverr.${srv.domain}" = {
-          useACMEHost = srv.domain;
-          extraConfig = ''
-            reverse_proxy http://127.0.0.1:8191
-          '';
+      traefik = {
+        dynamicConfigOptions = {
+          http = {
+            services = {
+              prowlarr = {
+                loadBalancer.servers = [{url = "http://127.0.0.1:9696";}];
+              };
+              flaresolverr = {
+                loadBalancer.servers = [{url = "http://127.0.0.1:8191";}];
+              };
+            };
+            routers = {
+              prowlarr = {
+                entryPoints = ["websecure"];
+                rule = "Host(`${cfg.url}`)";
+                service = "prowlarr";
+                tls.certResolver = "letsencrypt";
+                # middlewares = ["authentik"];
+              };
+              flaresolverr = {
+                entryPoints = ["websecure"];
+                rule = "Host(`flaresolverr.${srv.domain}`)";
+                service = "flaresolverr";
+                tls.certResolver = "letsencrypt";
+                # middlewares = ["authentik"];
+              };
+            };
+          };
         };
       };
     };

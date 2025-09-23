@@ -2,13 +2,11 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   unit = "uptime-kuma";
   cfg = config.server.${unit};
   srv = config.server;
-in
-{
+in {
   options.server.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
@@ -39,14 +37,26 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-    services.${unit} = {
-      enable = true;
-    };
-    services.caddy.virtualHosts."${cfg.url}" = {
-      useACMEHost = srv.domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:3001
-      '';
+    services = {
+      ${unit} = {
+        enable = true;
+      };
+      traefik = {
+        dynamicConfigOptions = {
+          http = {
+            services.uptime-kuma.loadBalancer.servers = [{url = "http://127.0.0.1:3001";}];
+            routers = {
+              uptime-kuma = {
+                entryPoints = ["websecure"];
+                rule = "Host(`${cfg.url}`)";
+                service = "uptime-kuma";
+                tls.certResolver = "letsencrypt";
+                # middlewares = ["authentik"];
+              };
+            };
+          };
+        };
+      };
     };
   };
 }
