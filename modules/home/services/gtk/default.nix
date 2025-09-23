@@ -27,10 +27,10 @@ in
     };
     gtk = {
       enable = true;
-      theme = {
-        package = pkgs.orchis-theme;
-        name = "Orchis-Grey-Dark-Compact";
-      };
+      # theme = {
+      #   package = pkgs.orchis-theme;
+      #   name = "Orchis-Grey-Dark-Compact";
+      # };
       iconTheme = {
         # package = pkgs.adwaita-icon-theme;
         package = pkgs.papirus-icon-theme;
