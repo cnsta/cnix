@@ -3,13 +3,11 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   service = "jellyfin";
   cfg = config.server.${service};
   srv = config.server;
-in
-{
+in {
   options.server.${service} = {
     enable = lib.mkEnableOption {
       description = "Enable ${service}";
@@ -48,11 +46,21 @@ in
     environment.systemPackages = with pkgs; [
       jellyfin-ffmpeg
     ];
-    services.caddy.virtualHosts."${cfg.url}" = {
-      useACMEHost = srv.domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:8096
-      '';
+    services.traefik = {
+      dynamicConfigOptions = {
+        http = {
+          services.jellyfin.loadBalancer.servers = [{url = "http://127.0.0.1:8096";}];
+          routers = {
+            jellyfin = {
+              entryPoints = ["websecure"];
+              rule = "Host(`${cfg.url}`)";
+              service = "jellyfin";
+              tls.certResolver = "letsencrypt";
+              # middlewares = ["authentik"];
+            };
+          };
+        };
+      };
     };
   };
 }

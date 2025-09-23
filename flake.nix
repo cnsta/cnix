@@ -1,9 +1,8 @@
 {
   description = "cnix nix";
 
-  outputs =
-    inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -17,21 +16,23 @@
         ./fmt-hooks.nix
       ];
 
-      perSystem =
-        { config, pkgs, ... }:
-        {
-          devShells.default = pkgs.mkShell {
-            packages = [
-              pkgs.git
-              config.packages.repl
-            ];
-            name = "dots";
-            env.DIRENV_LOG_FORMAT = "";
-            shellHook = ''
-              ${config.pre-commit.installationScript}
-            '';
-          };
+      perSystem = {
+        config,
+        pkgs,
+        ...
+      }: {
+        devShells.default = pkgs.mkShell {
+          packages = [
+            pkgs.git
+            config.packages.repl
+          ];
+          name = "dots";
+          env.DIRENV_LOG_FORMAT = "";
+          shellHook = ''
+            ${config.pre-commit.installationScript}
+          '';
         };
+      };
     };
 
   inputs = {
@@ -49,6 +50,14 @@
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    authentik = {
+      url = "github:nix-community/authentik-nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
     };
 
     flake-compat.url = "github:edolstra/flake-compat";

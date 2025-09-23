@@ -2,13 +2,11 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   service = "jellyseerr";
   srv = config.server;
   cfg = config.server.${service};
-in
-{
+in {
   options.server.${service} = {
     enable = lib.mkEnableOption {
       description = "Enable ${service}";
@@ -43,11 +41,21 @@ in
       enable = true;
       port = cfg.port;
     };
-    services.caddy.virtualHosts."${cfg.url}" = {
-      useACMEHost = srv.domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString cfg.port}
-      '';
+    services.traefik = {
+      dynamicConfigOptions = {
+        http = {
+          services.jellyseerr.loadBalancer.servers = [{url = "http://127.0.0.1:${toString cfg.port}";}];
+          routers = {
+            jellyseerr = {
+              entryPoints = ["websecure"];
+              rule = "Host(`${cfg.url}`)";
+              service = "jellyseerr";
+              tls.certResolver = "letsencrypt";
+              # middlewares = ["authentik"];
+            };
+          };
+        };
+      };
     };
   };
 }

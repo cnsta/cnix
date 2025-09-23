@@ -40,8 +40,6 @@ in {
   "homepageEnvironment.age".publicKeys = core ++ sobotka;
   "cloudflareFirewallApiKey.age".publicKeys = core ++ sobotka;
   "vaultwardenCloudflared.age".publicKeys = core ++ sobotka;
-  "keycloakDbPasswordFile.age".publicKeys = core ++ sobotka;
-  "keycloakCloudflared.age".publicKeys = core ++ sobotka;
   "nextcloudCloudflared.age".publicKeys = core ++ sobotka;
   "nextcloudAdminPass.age".publicKeys = core ++ sobotka;
   "cloudflareDnsApiToken.age".publicKeys = core ++ sobotka;
@@ -51,6 +49,8 @@ in {
   "gluetunEnvironment.age".publicKeys = core ++ sobotka;
   "pihole.age".publicKeys = core ++ sobotka;
   "slskd.age".publicKeys = core ++ sobotka;
+  "authentikEnv.age".publicKeys = core ++ sobotka;
+  "traefikEnv.age".publicKeys = core ++ sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = core ++ ziggy;

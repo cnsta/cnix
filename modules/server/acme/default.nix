@@ -39,16 +39,16 @@ in {
         group = config.services.caddy.group;
         environmentFile = getCloudflareCredentials config.networking.hostName;
       };
-      # certs.${config.server.domainPublic} = {
-      #   reloadServices = ["nginx.service"];
-      #   domain = "${config.server.domainPublic}";
-      #   extraDomainNames = ["*.${config.server.domainPublic}"];
-      #   dnsProvider = "cloudflare";
-      #   dnsResolver = "1.1.1.1:53";
-      #   dnsPropagationCheck = true;
-      #   group = config.services.nginx.group;
-      #   environmentFile = getCloudflareCredentials config.networking.hostName;
-      # };
+      certs.${config.server.www.url} = {
+        reloadServices = ["caddy.service"];
+        domain = "${config.server.www.url}";
+        extraDomainNames = ["*.${config.server.www.url}"];
+        dnsProvider = "cloudflare";
+        dnsResolver = "1.1.1.1:53";
+        dnsPropagationCheck = true;
+        group = config.services.caddy.group;
+        environmentFile = getCloudflareCredentials config.networking.hostName;
+      };
     };
 
     services.caddy = {
@@ -63,6 +63,17 @@ in {
           '';
         };
         "http://*.${config.server.domain}" = {
+          extraConfig = ''
+            redir https://{host}{uri}
+          '';
+        };
+
+        "http://${config.server.www.url}" = {
+          extraConfig = ''
+            redir https://{host}{uri}
+          '';
+        };
+        "http://*.${config.server.www.url}" = {
           extraConfig = ''
             redir https://{host}{uri}
           '';

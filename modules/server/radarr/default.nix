@@ -2,13 +2,11 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   unit = "radarr";
   srv = config.server;
   cfg = config.server.${unit};
-in
-{
+in {
   options.server.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
@@ -44,11 +42,21 @@ in
       user = srv.user;
       group = srv.group;
     };
-    services.caddy.virtualHosts."${cfg.url}" = {
-      useACMEHost = srv.domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:7878
-      '';
+    services.traefik = {
+      dynamicConfigOptions = {
+        http = {
+          services.radarr.loadBalancer.servers = [{url = "http://127.0.0.1:7878";}];
+          routers = {
+            radarr = {
+              entryPoints = ["websecure"];
+              rule = "Host(`${cfg.url}`)";
+              service = "radarr";
+              tls.certResolver = "letsencrypt";
+              # middlewares = ["authentik"];
+            };
+          };
+        };
+      };
     };
   };
 }

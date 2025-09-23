@@ -27,13 +27,6 @@ in {
         Domain name to be used to access the server services via Caddy reverse proxy
       '';
     };
-    domainPublic = mkOption {
-      default = "";
-      type = types.str;
-      description = ''
-        Public domain name to be used to access the server services via Caddy reverse proxy
-      '';
-    };
     user = lib.mkOption {
       default = "share";
       type = lib.types.str;
@@ -99,6 +92,8 @@ in {
           "share"
           "render"
           "input"
+          "authentik"
+          "traefik"
         ];
       };
     };

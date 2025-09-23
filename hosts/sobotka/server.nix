@@ -3,12 +3,21 @@
     enable = true;
     email = "adam@cnst.dev";
     domain = "cnix.dev";
-    domainPublic = "cnst.dev";
     user = "share";
     group = "share";
     uid = 994;
     gid = 993;
 
+    authentik = {
+      enable = true;
+    };
+    traefik = {
+      enable = true;
+    };
+    www = {
+      enable = true;
+      url = "cnst.dev";
+    };
     gitea = {
       enable = true;
     };
@@ -16,7 +25,7 @@
       enable = true;
     };
     acme = {
-      enable = true;
+      enable = false;
     };
     homepage-dashboard = {
       enable = true;
@@ -45,15 +54,6 @@
     uptime-kuma = {
       enable = true;
     };
-    keycloak = {
-      enable = true;
-      url = "login.cnst.dev";
-      dbPasswordFile = config.age.secrets.keycloakDbPasswordFile.path;
-      cloudflared = {
-        tunnelId = "590f60f8-baaa-4106-b2d1-43740c79531e";
-        credentialsFile = config.age.secrets.keycloakCloudflared.path;
-      };
-    };
     vaultwarden = {
       enable = true;
       url = "vault.cnst.dev";
@@ -70,9 +70,6 @@
       enable = true;
       apiKeyFile = config.age.secrets.cloudflareFirewallApiKey.path;
       zoneId = "0027acdfb8bbe010f55b676ad8698dfb";
-    };
-    syncthing = {
-      enable = false;
     };
     keepalived = {
       enable = true;

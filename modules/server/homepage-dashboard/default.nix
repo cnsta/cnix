@@ -2,19 +2,17 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   unit = "homepage-dashboard";
   cfg = config.server.homepage-dashboard;
   srv = config.server;
-in
-{
+in {
   options.server.homepage-dashboard = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
     };
     misc = lib.mkOption {
-      default = [ ];
+      default = [];
       type = lib.types.listOf (
         lib.types.attrsOf (
           lib.types.submodule {
@@ -38,81 +36,81 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-    services.glances.enable = true;
-    services.${unit} = {
-      enable = true;
-      allowedHosts = srv.domain;
-      settings = {
-        layout = [
+    services = {
+      glances.enable = true;
+      ${unit} = {
+        enable = true;
+        allowedHosts = srv.domain;
+        settings = {
+          layout = [
+            {
+              Glances = {
+                header = false;
+                style = "row";
+                columns = 4;
+              };
+            }
+            {
+              Arr = {
+                header = true;
+                style = "column";
+              };
+            }
+            {
+              Downloads = {
+                header = true;
+                style = "column";
+              };
+            }
+            {
+              Media = {
+                header = true;
+                style = "column";
+              };
+            }
+            {
+              Services = {
+                header = true;
+                style = "column";
+              };
+            }
+          ];
+          headerStyle = "clean";
+          statusStyle = "dot";
+          hideVersion = "true";
+        };
+
+        widgets = [
           {
-            Glances = {
-              header = false;
-              style = "row";
-              columns = 4;
+            openmeteo = {
+              label = "Kalmar";
+              timezone = "Europe/Stockholm";
+              units = "metric";
+              cache = 5;
+              latitude = 56.707262;
+              longitude = 16.324541;
             };
           }
           {
-            Arr = {
-              header = true;
-              style = "column";
+            datetime = {
+              text_size = "x1";
+              format = {
+                hour12 = false;
+                timeStyle = "short";
+                dateStyle = "long";
+              };
             };
           }
           {
-            Downloads = {
-              header = true;
-              style = "column";
-            };
-          }
-          {
-            Media = {
-              header = true;
-              style = "column";
-            };
-          }
-          {
-            Services = {
-              header = true;
-              style = "column";
+            resources = {
+              label = "";
+              memory = true;
+              disk = ["/"];
             };
           }
         ];
-        headerStyle = "clean";
-        statusStyle = "dot";
-        hideVersion = "true";
-      };
 
-      widgets = [
-        {
-          openmeteo = {
-            label = "Kalmar";
-            timezone = "Europe/Stockholm";
-            units = "metric";
-            cache = 5;
-            latitude = 56.707262;
-            longitude = 16.324541;
-          };
-        }
-        {
-          datetime = {
-            text_size = "x1";
-            format = {
-              hour12 = false;
-              timeStyle = "short";
-              dateStyle = "long";
-            };
-          };
-        }
-        {
-          resources = {
-            label = "";
-            memory = true;
-            disk = [ "/" ];
-          };
-        }
-      ];
-
-      services =
-        let
+        services = let
           homepageCategories = [
             "Arr"
             "Media"
@@ -122,15 +120,14 @@ in
           ];
           hl = config.server;
           mergedServices = hl // hl.podman;
-          homepageServices =
-            x:
-            (lib.attrsets.filterAttrs (
+          homepageServices = x: (lib.attrsets.filterAttrs (
               name: value: value ? homepage && value.homepage.category == x
-            ) mergedServices);
+            )
+            mergedServices);
         in
-        lib.lists.forEach homepageCategories (cat: {
-          "${cat}" =
-            lib.lists.forEach
+          lib.lists.forEach homepageCategories (cat: {
+            "${cat}" =
+              lib.lists.forEach
               (lib.attrsets.mapAttrsToList (name: value: {
                 inherit name;
                 url = value.url;
@@ -144,15 +141,13 @@ in
                   siteMonitor = "https://${x.url}${x.homepage.path or ""}";
                 };
               });
-        })
-        ++ [ { Misc = cfg.misc; } ]
-        ++ [
-          {
-            Glances =
-              let
+          })
+          ++ [{Misc = cfg.misc;}]
+          ++ [
+            {
+              Glances = let
                 port = toString config.services.glances.port;
-              in
-              [
+              in [
                 {
                   Info = {
                     widget = {
@@ -220,14 +215,26 @@ in
                   };
                 }
               ];
-          }
-        ];
-    };
-    services.caddy.virtualHosts."${srv.domain}" = {
-      useACMEHost = srv.domain;
-      extraConfig = ''
-        reverse_proxy http://127.0.0.1:${toString config.services.${unit}.listenPort}
-      '';
+            }
+          ];
+      };
+
+      traefik = {
+        dynamicConfigOptions = {
+          http = {
+            services.homepage.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.${unit}.listenPort}";}];
+            routers = {
+              homepage = {
+                entryPoints = ["websecure"];
+                rule = "Host(`cnix.dev`)";
+                service = "homepage";
+                tls.certResolver = "letsencrypt";
+                # middlewares = ["authentik"];
+              };
+            };
+          };
+        };
+      };
     };
   };
 }

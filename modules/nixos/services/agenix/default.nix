@@ -74,8 +74,6 @@ in {
           wgCredentials.file = "${self}/secrets/wgCredentials.age";
           wgSobotkaPrivateKey.file = "${self}/secrets/wgSobotkaPrivateKey.age";
           gluetunEnvironment.file = "${self}/secrets/gluetunEnvironment.age";
-          keycloakCloudflared.file = "${self}/secrets/keycloakCloudflared.age";
-          keycloakDbPasswordFile.file = "${self}/secrets/keycloakDbPasswordFile.age";
           nextcloudAdminPass.file = "${self}/secrets/nextcloudAdminPass.age";
           nextcloudCloudflared.file = "${self}/secrets/nextcloudCloudflared.age";
           vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";
