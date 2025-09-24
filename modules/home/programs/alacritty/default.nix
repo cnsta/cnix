@@ -14,8 +14,8 @@ in
   config = mkIf cfg.enable {
     programs.alacritty = {
       enable = true;
+      theme = "dark_plus";
       settings = {
-        theme = "dark_plus";
         # Default colors
         # colors = {
         #   primary = {
