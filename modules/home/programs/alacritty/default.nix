@@ -14,7 +14,7 @@ in
   config = mkIf cfg.enable {
     programs.alacritty = {
       enable = true;
-      theme = "dark_plus";
+      theme = "gruvbox_material_hard_dark";
       settings = {
         # Default colors
         # colors = {
