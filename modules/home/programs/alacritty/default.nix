@@ -74,7 +74,7 @@ in
         ];
         window = {
           dynamic_title = true;
-          opacity = 0.9;
+          opacity = 0.95;
           padding = {
             x = 5;
             y = 5;
