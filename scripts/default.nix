@@ -33,6 +33,20 @@ in
         );
       };
 
+      ".local/bin/choosepaper.sh" = {
+        source = getExe (
+          pkgs.writeShellApplication {
+            name = "spawn";
+            runtimeInputs = with pkgs; [
+              fzf
+              swaybg
+              pistol
+            ];
+            text = readFile ./bin/choosepaper.sh;
+          }
+        );
+      };
+
       ".local/bin/pavucontrol-toggle.sh" = {
         source = getExe (
           pkgs.writeShellApplication {

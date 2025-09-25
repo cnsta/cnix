@@ -1,11 +1,11 @@
 lib: {
   bgs = rec {
     files = {
-      wallpaper_1 = "~/media/images/bg_1.jpg";
-      wallpaper_2 = "~/media/images/bg_2.jpg";
-      wallpaper_3 = "~/media/images/bg_3.jpg";
-      wallpaper_4 = "~/media/images/waterwindow.jpg";
-      wallpaper_5 = "~/media/images/barngreet.png";
+      wallpaper_1 = "~/media/images/bgs/bg_1.jpg";
+      wallpaper_2 = "~/media/images/bgs/bg_2.jpg";
+      wallpaper_3 = "~/media/images/bgs/bg_3.jpg";
+      wallpaper_4 = "~/media/images/bgs/waterwindow.jpg";
+      wallpaper_5 = "~/media/images/bgs/barngreet.png";
     };
 
     list = builtins.attrNames files;
