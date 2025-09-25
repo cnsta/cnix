@@ -30,6 +30,9 @@
     homepage-dashboard = {
       enable = true;
     };
+    n8n = {
+      enable = true;
+    };
     bazarr = {
       enable = true;
     };

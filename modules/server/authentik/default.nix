@@ -23,7 +23,7 @@ in {
     };
     homepage.description = lib.mkOption {
       type = lib.types.str;
-      default = "Open Source Identity and Access Management";
+      default = "An open-source IdP for modern SSO";
     };
     homepage.icon = lib.mkOption {
       type = lib.types.str;
