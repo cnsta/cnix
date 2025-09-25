@@ -135,6 +135,7 @@
         ./server/sonarr
         ./server/jellyseerr
         ./server/jellyfin
+        ./server/n8n
         ./server/podman
         ./server/unbound
         ./server/uptime-kuma
