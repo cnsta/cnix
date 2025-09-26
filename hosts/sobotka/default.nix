@@ -39,6 +39,7 @@ in {
       "share"
       "jellyfin"
       "render"
+      "traefik"
     ];
   };
 

@@ -1,20 +1,19 @@
 {
   config,
   lib,
+  self,
   ...
-}:
-let
+}: let
   unit = "homepage-dashboard";
   cfg = config.server.homepage-dashboard;
   srv = config.server;
-in
-{
+in {
   options.server.homepage-dashboard = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
     };
     misc = lib.mkOption {
-      default = [ ];
+      default = [];
       type = lib.types.listOf (
         lib.types.attrsOf (
           lib.types.submodule {
@@ -38,11 +37,16 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
+    age.secrets = {
+      homepageEnvironment = {
+        file = "${self}/secrets/homepageEnvironment.age";
+      };
+    };
     services = {
       glances.enable = true;
       ${unit} = {
         enable = true;
-        allowedHosts = srv.domain;
+        environmentFile = config.age.secrets.homepageEnvironment.path;
         settings = {
           layout = [
             {
@@ -81,7 +85,6 @@ in
           statusStyle = "dot";
           hideVersion = "true";
         };
-
         widgets = [
           {
             openmeteo = {
@@ -94,139 +97,118 @@ in
             };
           }
           {
-            datetime = {
-              text_size = "x1";
-              format = {
-                hour12 = false;
-                timeStyle = "short";
-                dateStyle = "long";
-              };
-            };
-          }
-          {
             resources = {
-              label = "root";
+              label = "SYSTEM";
               memory = true;
-              disk = [ "/dev/dm-1" ];
-            };
-          }
-          {
-            resources = {
-              label = "zfs";
-              memory = true;
-              disk = [ "/mnt/data" ];
+              cpu = true;
+              uptime = true;
             };
           }
         ];
-        services =
-          let
-            homepageCategories = [
-              "Arr"
-              "Media"
-              "Downloads"
-              "Services"
-              "Smart Home"
-            ];
-            hl = config.server;
-            mergedServices = hl // hl.podman;
-            homepageServices =
-              x:
-              (lib.attrsets.filterAttrs (
-                name: value: value ? homepage && value.homepage.category == x
-              ) mergedServices);
-          in
+        services = let
+          homepageCategories = [
+            "Arr"
+            "Media"
+            "Downloads"
+            "Services"
+          ];
+          hl = config.server;
+          mergedServices = hl // hl.podman;
+          homepageServices = x: (lib.attrsets.filterAttrs (
+              name: value: value ? homepage && value.homepage.category == x
+            )
+            mergedServices);
+        in
           lib.lists.forEach homepageCategories (cat: {
             "${cat}" =
               lib.lists.forEach
-                (lib.attrsets.mapAttrsToList (name: value: {
-                  inherit name;
-                  url = value.url;
-                  homepage = value.homepage;
-                }) (homepageServices "${cat}"))
-                (x: {
-                  "${x.homepage.name}" = {
-                    icon = x.homepage.icon;
-                    description = x.homepage.description;
-                    href = "https://${x.url}${x.homepage.path or ""}";
-                    siteMonitor = "https://${x.url}${x.homepage.path or ""}";
-                  };
-                });
+              (lib.attrsets.mapAttrsToList (name: value: {
+                inherit name;
+                url = value.url;
+                homepage = value.homepage;
+              }) (homepageServices "${cat}"))
+              (x: {
+                "${x.homepage.name}" = {
+                  icon = x.homepage.icon;
+                  description = x.homepage.description;
+                  href = "https://${x.url}${x.homepage.path or ""}";
+                  siteMonitor = "https://${x.url}${x.homepage.path or ""}";
+                };
+              });
           })
-          ++ [ { Misc = cfg.misc; } ]
+          ++ [{Misc = cfg.misc;}]
           ++ [
             {
-              Glances =
-                let
-                  port = toString config.services.glances.port;
-                in
-                [
-                  {
-                    Info = {
-                      widget = {
-                        type = "glances";
-                        url = "http://localhost:${port}";
-                        metric = "info";
-                        chart = false;
-                        version = 4;
-                      };
+              Glances = let
+                port = toString config.services.glances.port;
+              in [
+                {
+                  Info = {
+                    widget = {
+                      type = "glances";
+                      url = "http://localhost:${port}";
+                      metric = "info";
+                      chart = false;
+                      version = 4;
                     };
-                  }
-                  {
-                    "CPU Temp" = {
-                      widget = {
-                        type = "glances";
-                        url = "http://localhost:${port}";
-                        metric = "sensor:Tctl";
-                        chart = false;
-                        version = 4;
-                      };
+                  };
+                }
+                {
+                  "CPU Temp" = {
+                    widget = {
+                      type = "glances";
+                      url = "http://localhost:${port}";
+                      metric = "sensor:Tctl";
+                      chart = false;
+                      version = 4;
                     };
-                  }
-                  {
-                    "GPU Radeon" = {
-                      widget = {
-                        type = "glances";
-                        url = "http://localhost:${port}";
-                        metric = "sensor:junction";
-                        chart = false;
-                        version = 4;
-                      };
+                  };
+                }
+                {
+                  "GPU Radeon" = {
+                    widget = {
+                      type = "glances";
+                      url = "http://localhost:${port}";
+                      metric = "sensor:junction";
+                      chart = false;
+                      version = 4;
                     };
-                  }
-                  {
-                    "GPU Intel" = {
-                      widget = {
-                        type = "glances";
-                        url = "http://localhost:${port}";
-                        metric = "sensor:pkg";
-                        chart = false;
-                        version = 4;
-                      };
+                  };
+                }
+                {
+                  "GPU Intel" = {
+                    widget = {
+                      type = "glances";
+                      url = "http://localhost:${port}";
+                      metric = "sensor:pkg";
+                      chart = false;
+                      version = 4;
                     };
-                  }
-                  {
-                    Processes = {
-                      widget = {
-                        type = "glances";
-                        url = "http://localhost:${port}";
-                        metric = "process";
-                        chart = false;
-                        version = 4;
-                      };
+                  };
+                }
+                {
+                  Processes = {
+                    widget = {
+                      type = "glances";
+                      url = "http://localhost:${port}";
+                      metric = "process";
+                      chart = false;
+                      version = 4;
                     };
-                  }
-                  {
-                    Network = {
-                      widget = {
-                        type = "glances";
-                        url = "http://localhost:${port}";
-                        metric = "network:enp6s0";
-                        chart = false;
-                        version = 4;
-                      };
+                  };
+                }
+                {
+                  Network = {
+                    widget = {
+                      type = "glances";
+                      url = "http://localhost:${port}";
+                      metric = "network:enp6s0";
+                      chart = false;
+                      version = 4;
                     };
-                  }
-                ];
+                  };
+                }
+              ];
             }
           ];
       };
@@ -235,11 +217,11 @@ in
         dynamicConfigOptions = {
           http = {
             services.homepage.loadBalancer.servers = [
-              { url = "http://127.0.0.1:${toString config.services.${unit}.listenPort}"; }
+              {url = "http://127.0.0.1:${toString config.services.${unit}.listenPort}";}
             ];
             routers = {
               homepage = {
-                entryPoints = [ "websecure" ];
+                entryPoints = ["websecure"];
                 rule = "Host(`cnix.dev`)";
                 service = "homepage";
                 tls.certResolver = "letsencrypt";
