@@ -78,7 +78,6 @@ in {
           nextcloudCloudflared.file = "${self}/secrets/nextcloudCloudflared.age";
           vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";
           vaultwardenEnvironment.file = "${self}/secrets/vaultwardenEnvironment.age";
-          homepageEnvironment.file = "${self}/secrets/homepageEnvironment.age";
           pihole.file = "${self}/secrets/pihole.age";
           slskd.file = "${self}/secrets/slskd.age";
         };

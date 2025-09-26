@@ -11,9 +11,6 @@
     unbound = {
       enable = true;
     };
-    acme = {
-      enable = true;
-    };
     homepage-dashboard = {
       enable = false;
     };

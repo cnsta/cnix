@@ -100,7 +100,6 @@
         ./nixos/services/virtualisation
         ./nixos/services/locate
         ./nixos/services/mullvad
-        ./nixos/services/mullvad-netns
         ./nixos/services/nfs
         ./nixos/services/nix-ld
         ./nixos/services/openssh
@@ -123,7 +122,6 @@
     server = {
       imports = [
         ./server
-        ./server/acme
         ./server/fail2ban
         ./server/homepage-dashboard
         ./server/nextcloud
