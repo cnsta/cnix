@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  self,
   ...
 }: let
   unit = "nextcloud";
@@ -45,6 +46,11 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
+    age.secrets = {
+      nextcloudAdminPass.file = "${self}/secrets/nextcloudAdminPass.age";
+      nextcloudCloudflared.file = "${self}/secrets/nextcloudCloudflared.age";
+    };
+
     server.fail2ban = lib.mkIf config.server.fail2ban.enable {
       jails = {
         nextcloud = {

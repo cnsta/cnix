@@ -2,14 +2,13 @@
 {
   config,
   lib,
+  self,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   vcfg = config.services.vaultwarden.config;
   cfg = config.server.vaultwarden;
-in
-{
+in {
   options = {
     server.vaultwarden = {
       enable = mkEnableOption "Enables vaultwarden";
@@ -35,6 +34,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    age.secrets = {
+      vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";
+      vaultwardenEnvironment.file = "${self}/secrets/vaultwardenEnvironment.age";
+    };
+
     server = {
       fail2ban = lib.mkIf config.server.fail2ban.enable {
         jails = {
