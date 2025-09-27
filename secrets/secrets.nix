@@ -1,7 +1,11 @@
 let
   # --- Users ---
-  cnst = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEUub8vbzUn2f39ILhAJ2QeH8xxLSjiyUuo8xvHGx/VB adam@cnst.dev";
-  kima = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJjoPdpiF8pjKN3ZEHeLEwVxoqwcCdzpVVlZkxJohFdg root@cnix";
+  ukima = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEUub8vbzUn2f39ILhAJ2QeH8xxLSjiyUuo8xvHGx/VB adam@cnst.dev";
+  rkima = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJjoPdpiF8pjKN3ZEHeLEwVxoqwcCdzpVVlZkxJohFdg root@cnix";
+
+  # --- Hosts: bunk ---
+  ubunk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXCjkKouZrsMoswMIeueO8X/c3kuY3Gb0E9emvkqwUv cnst@cnixpad";
+  rbunk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH72llEVDSHH/FZnjLVCe6zfdkdJRRVg2QL+ifHiPXXk root@cnix";
 
   # --- Hosts: sobotka ---
   usobotka = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG5ydTeaWcowmNXdDNqIa/lb5l9w5CAzyF2Kg6U5PSSu cnst@sobotka";
@@ -12,9 +16,13 @@ let
   rziggy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHnca8xg1MZ4Hx5k5SVFSxcPnWc1O6r7w7JGYzX9aQm8 root@nixos";
 
   # --- Groups ---
-  core = [
-    cnst
-    kima
+  kima = [
+    ukima
+    rkima
+  ];
+  bunk = [
+    ubunk
+    rbunk
   ];
   sobotka = [
     usobotka
@@ -24,38 +32,39 @@ let
     uziggy
     rziggy
   ];
-  all = core ++ sobotka ++ ziggy;
-in {
+  all = kima ++ bunk ++ sobotka ++ ziggy;
+in
+{
   # Generic
-  "cnstssh.age".publicKeys = core;
-  "cnixssh.age".publicKeys = core;
-  "certpem.age".publicKeys = core;
-  "keypem.age".publicKeys = core;
-  "mailpwd.age".publicKeys = core;
-  "gcapi.age".publicKeys = core;
+  "cnstssh.age".publicKeys = kima;
+  "cnixssh.age".publicKeys = kima;
+  "certpem.age".publicKeys = kima;
+  "keypem.age".publicKeys = kima;
+  "mailpwd.age".publicKeys = kima;
+  "gcapi.age".publicKeys = kima;
 
-  # Shared between core + sobotka
-  "cloudflareEnvironment.age".publicKeys = core ++ sobotka;
-  "vaultwardenEnvironment.age".publicKeys = core ++ sobotka;
-  "homepageEnvironment.age".publicKeys = core ++ sobotka;
-  "cloudflareFirewallApiKey.age".publicKeys = core ++ sobotka;
-  "vaultwardenCloudflared.age".publicKeys = core ++ sobotka;
-  "nextcloudCloudflared.age".publicKeys = core ++ sobotka;
-  "nextcloudAdminPass.age".publicKeys = core ++ sobotka;
-  "cloudflareDnsApiToken.age".publicKeys = core ++ sobotka;
-  "cloudflareDnsCredentials.age".publicKeys = core ++ sobotka;
-  "wgCredentials.age".publicKeys = core ++ sobotka;
-  "wgSobotkaPrivateKey.age".publicKeys = core ++ sobotka;
-  "gluetunEnvironment.age".publicKeys = core ++ sobotka;
-  "sobotkaPihole.age".publicKeys = core ++ sobotka;
-  "slskd.age".publicKeys = core ++ sobotka;
-  "authentikEnv.age".publicKeys = core ++ sobotka;
-  "traefikEnv.age".publicKeys = core ++ sobotka;
+  # Shared between kima + sobotka
+  "cloudflareEnvironment.age".publicKeys = kima ++ sobotka;
+  "vaultwardenEnvironment.age".publicKeys = kima ++ sobotka;
+  "homepageEnvironment.age".publicKeys = kima ++ sobotka;
+  "cloudflareFirewallApiKey.age".publicKeys = kima ++ sobotka;
+  "vaultwardenCloudflared.age".publicKeys = kima ++ sobotka;
+  "nextcloudCloudflared.age".publicKeys = kima ++ sobotka;
+  "nextcloudAdminPass.age".publicKeys = kima ++ sobotka;
+  "cloudflareDnsApiToken.age".publicKeys = kima ++ sobotka;
+  "cloudflareDnsCredentials.age".publicKeys = kima ++ sobotka;
+  "wgCredentials.age".publicKeys = kima ++ sobotka;
+  "wgSobotkaPrivateKey.age".publicKeys = kima ++ sobotka;
+  "gluetunEnvironment.age".publicKeys = kima ++ sobotka;
+  "sobotkaPihole.age".publicKeys = kima ++ sobotka;
+  "slskd.age".publicKeys = kima ++ sobotka;
+  "authentikEnv.age".publicKeys = kima ++ sobotka;
+  "traefikEnv.age".publicKeys = kima ++ sobotka;
 
   # Ziggy-specific
-  "cloudflareDnsCredentialsZiggy.age".publicKeys = core ++ ziggy;
-  "ziggyPihole.age".publicKeys = core ++ ziggy;
+  "cloudflareDnsCredentialsZiggy.age".publicKeys = kima ++ ziggy;
+  "ziggyPihole.age".publicKeys = kima ++ ziggy;
 
   # Both sobotka + ziggy (for HA stuff like keepalived)
-  "keepalived.age".publicKeys = core ++ sobotka ++ ziggy;
+  "keepalived.age".publicKeys = kima ++ sobotka ++ ziggy;
 }
