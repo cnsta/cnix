@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  self,
   ...
 }: let
   srv = config.server;
@@ -121,6 +122,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    age.secrets = {
+      pihole.file = "${self}/secrets/${config.networking.hostName}Pihole.age";
+      slskd.file = "${self}/secrets/slskd.age";
+    };
+
     virtualisation = {
       containers.enable = true;
       podman.enable = true;

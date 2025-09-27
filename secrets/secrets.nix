@@ -47,14 +47,14 @@ in {
   "wgCredentials.age".publicKeys = core ++ sobotka;
   "wgSobotkaPrivateKey.age".publicKeys = core ++ sobotka;
   "gluetunEnvironment.age".publicKeys = core ++ sobotka;
-  "pihole.age".publicKeys = core ++ sobotka;
+  "sobotkaPihole.age".publicKeys = core ++ sobotka;
   "slskd.age".publicKeys = core ++ sobotka;
   "authentikEnv.age".publicKeys = core ++ sobotka;
   "traefikEnv.age".publicKeys = core ++ sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = core ++ ziggy;
-  "piholeZiggy.age".publicKeys = core ++ ziggy;
+  "ziggyPihole.age".publicKeys = core ++ ziggy;
 
   # Both sobotka + ziggy (for HA stuff like keepalived)
   "keepalived.age".publicKeys = core ++ sobotka ++ ziggy;

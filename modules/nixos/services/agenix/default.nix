@@ -74,18 +74,11 @@ in {
           wgCredentials.file = "${self}/secrets/wgCredentials.age";
           wgSobotkaPrivateKey.file = "${self}/secrets/wgSobotkaPrivateKey.age";
           gluetunEnvironment.file = "${self}/secrets/gluetunEnvironment.age";
-          nextcloudAdminPass.file = "${self}/secrets/nextcloudAdminPass.age";
-          nextcloudCloudflared.file = "${self}/secrets/nextcloudCloudflared.age";
-          vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";
-          vaultwardenEnvironment.file = "${self}/secrets/vaultwardenEnvironment.age";
-          pihole.file = "${self}/secrets/pihole.age";
-          slskd.file = "${self}/secrets/slskd.age";
         };
       })
       (mkIf cfg.ziggy.enable {
         secrets = {
           cloudflareDnsCredentialsZiggy.file = "${self}/secrets/cloudflareDnsCredentialsZiggy.age";
-          piholeZiggy.file = "${self}/secrets/piholeZiggy.age";
         };
       })
       (mkIf cfg.toothpc.enable {
