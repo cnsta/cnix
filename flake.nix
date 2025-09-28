@@ -1,8 +1,9 @@
 {
   description = "cnix nix";
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -16,23 +17,25 @@
         ./fmt-hooks.nix
       ];
 
-      perSystem = {
-        config,
-        pkgs,
-        ...
-      }: {
-        devShells.default = pkgs.mkShell {
-          packages = [
-            pkgs.git
-            config.packages.repl
-          ];
-          name = "dots";
-          env.DIRENV_LOG_FORMAT = "";
-          shellHook = ''
-            ${config.pre-commit.installationScript}
-          '';
+      perSystem =
+        {
+          config,
+          pkgs,
+          ...
+        }:
+        {
+          devShells.default = pkgs.mkShell {
+            packages = [
+              pkgs.git
+              config.packages.repl
+            ];
+            name = "dots";
+            env.DIRENV_LOG_FORMAT = "";
+            shellHook = ''
+              ${config.pre-commit.installationScript}
+            '';
+          };
         };
-      };
     };
 
   inputs = {
