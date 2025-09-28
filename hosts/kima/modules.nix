@@ -214,6 +214,9 @@
         scheduler = "scx_lavd";
         flags = "--performance";
       };
+      tailscale = {
+        enable = true
+      };
       udisks = {
         enable = true;
       };
