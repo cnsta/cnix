@@ -3,8 +3,8 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = [ "amd" ];
-        extraKernelParams = [ ];
+        hardware = ["amd"];
+        extraKernelParams = [];
       };
       loader = {
         default = {
@@ -212,6 +212,9 @@
         enable = false;
         scheduler = "scx_lavd";
         flags = "--performance";
+      };
+      tailscale = {
+        enable = true;
       };
       udisks = {
         enable = true;

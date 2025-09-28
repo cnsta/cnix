@@ -8,15 +8,8 @@
     uid = 994;
     gid = 993;
 
-    authentik = {
-      enable = true;
-    };
     traefik = {
       enable = true;
-    };
-    www = {
-      enable = true;
-      url = "cnst.dev";
     };
     gitea = {
       enable = true;
@@ -60,6 +53,22 @@
       cloudflared = {
         tunnelId = "fdd98086-6a4c-44f2-bba0-eb86b833cce5";
         credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
+      };
+    };
+    www = {
+      enable = true;
+      url = "cnst.dev";
+      cloudflared = {
+        tunnelId = "e5076186-efb7-405a-998c-6155af7fb221";
+        credentialsFile = config.age.secrets.wwwCloudflared.path;
+      };
+    };
+    authentik = {
+      enable = true;
+      url = "auth.cnst.dev";
+      cloudflared = {
+        tunnelId = "b66f9368-db9e-4302-8b48-527cda34a635";
+        credentialsFile = config.age.secrets.authentikCloudflared.path;
       };
     };
     nextcloud = {

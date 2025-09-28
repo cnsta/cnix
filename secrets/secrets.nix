@@ -33,8 +33,7 @@ let
     rziggy
   ];
   all = kima ++ bunk ++ sobotka ++ ziggy;
-in
-{
+in {
   # Generic
   "cnstssh.age".publicKeys = kima;
   "cnixssh.age".publicKeys = kima;
@@ -60,6 +59,8 @@ in
   "slskd.age".publicKeys = kima ++ sobotka;
   "authentikEnv.age".publicKeys = kima ++ sobotka;
   "traefikEnv.age".publicKeys = kima ++ sobotka;
+  "wwwCloudflared.age".publicKeys = kima ++ sobotka;
+  "authentikCloudflared.age".publicKeys = kima ++ sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = kima ++ ziggy;

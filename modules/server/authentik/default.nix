@@ -15,7 +15,21 @@ in {
     };
     url = lib.mkOption {
       type = lib.types.str;
-      default = "auth.${srv.domain}";
+      default = "auth.${srv.www.domain}";
+    };
+    cloudflared = {
+      credentialsFile = lib.mkOption {
+        type = lib.types.str;
+        example = lib.literalExpression ''
+          pkgs.writeText "cloudflare-credentials.json" '''
+          {"AccountTag":"secret"."TunnelSecret":"secret","TunnelID":"secret"}
+          '''
+        '';
+      };
+      tunnelId = lib.mkOption {
+        type = lib.types.str;
+        example = "00000000-0000-0000-0000-000000000000";
+      };
     };
     homepage.name = lib.mkOption {
       type = lib.types.str;
@@ -36,10 +50,28 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    age.secrets.authentikEnv = {
-      file = "${self}/secrets/authentikEnv.age";
-      owner = "authentik";
+    age.secrets = {
+      authentikEnv = {
+        file = "${self}/secrets/authentikEnv.age";
+        owner = "authentik";
+      };
+      authentikCloudflared = {
+        file = "${self}/secrets/authentikCloudflared.age";
+        owner = "authentik";
+      };
     };
+
+    server = {
+      fail2ban = lib.mkIf cfg.enable {
+        jails = {
+          authentik = {
+            serviceName = "${cfg.url}";
+            failRegex = "^.*Username or password is incorrect. Try again. IP: <HOST>. Username: <F-USER>.*</F-USER>.$";
+          };
+        };
+      };
+    };
+
     services = {
       authentik = {
         enable = true;
@@ -49,6 +81,15 @@ in {
           };
           disable_startup_analytics = true;
           avatars = "initials";
+        };
+      };
+
+      cloudflared = {
+        enable = true;
+        tunnels.${cfg.cloudflared.tunnelId} = {
+          credentialsFile = cfg.cloudflared.credentialsFile;
+          default = "http_status:404";
+          ingress."${cfg.url}".service = "http://127.0.0.1:9000";
         };
       };
 
@@ -89,7 +130,7 @@ in {
             routers = {
               auth = {
                 entryPoints = ["websecure"];
-                rule = "Host(`${cfg.url}`) || HostRegexp(`{subdomain:[a-z0-9]+}.${srv.domain}`) && PathPrefix(`/outpost.goauthentik.io/`)";
+                rule = "Host(`${cfg.url}`) || HostRegexp(`{subdomain:[a-z0-9]+}.${srv.www.url}`) && PathPrefix(`/outpost.goauthentik.io/`)";
                 service = "auth";
                 tls.certResolver = "letsencrypt";
               };
