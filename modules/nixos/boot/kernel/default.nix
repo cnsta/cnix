@@ -5,7 +5,12 @@
   ...
 }:
 let
-  inherit (lib) mkOption types;
+  inherit (lib)
+    mkOption
+    types
+    mkEnableOption
+    mkIf
+    ;
   cfg = config.nixos.boot.kernel;
 
   hasHardware = hw: builtins.elem hw cfg.hardware;
@@ -37,7 +42,10 @@ in
         );
         default = [ ];
         description = "List of hardware types (e.g. GPU and CPU vendors) to configure kernel settings for.";
+
       };
+
+      amdOverdrive.enable = mkEnableOption "Enable AMD pstate/overdrive";
 
       extraKernelParams = mkOption {
         type = types.listOf types.str;
@@ -74,7 +82,7 @@ in
         "quiet"
         "splash"
       ]
-      ++ (if hasHardware "amd" then [ "amd_pstate=active" ] else [ ])
+      ++ (if hasHardware "amd" then [ ] else [ ])
       ++ (if hasHardware "intel" then [ ] else [ ])
       ++ (if hasHardware "nvidia" then [ ] else [ ])
       ++ cfg.extraKernelParams;
@@ -85,5 +93,6 @@ in
         ++ (if hasHardware "nvidia" then [ "nouveau" ] else [ ])
         ++ cfg.extraBlacklistedModules;
     };
+    hardware.amdgpu.overdrive.enable = mkIf cfg.amdOverdrive.enable true;
   };
 }

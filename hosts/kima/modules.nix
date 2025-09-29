@@ -5,6 +5,7 @@
         variant = "latest";
         hardware = [ "amd" ];
         extraKernelParams = [ ];
+        amdOverdrive.enable = true;
       };
       loader = {
         default = {

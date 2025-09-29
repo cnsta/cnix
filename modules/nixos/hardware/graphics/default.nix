@@ -89,37 +89,39 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
-      hardware.graphics = {
-        enable = true;
-        enable32Bit = true;
-        extraPackages = flatten (
-          concatMap (
-            vendor:
-            if vendor == "amd" then
-              commonPackages ++ mesaVulkanPackages
-            else if vendor == "intel" then
-              commonPackages
-              ++ mesaVulkanPackages
-              ++ (with pkgs; [
-                vpl-gpu-rt
-                intel-media-driver
-                intel-compute-runtime
-                intel-vaapi-driver
-              ])
-            else if vendor == "nvidia" then
-              commonPackages
-              ++ (with pkgs; [
-                nvidiaOffloadScript
-                intel-media-driver
-                nvidia-vaapi-driver
-                vulkan-tools
-              ])
-            else
-              [ ]
-          ) cfg.vendors
-        );
+      hardware = {
+        graphics = {
+          enable = true;
+          enable32Bit = true;
+          extraPackages = flatten (
+            concatMap (
+              vendor:
+              if vendor == "amd" then
+                commonPackages ++ mesaVulkanPackages
+              else if vendor == "intel" then
+                commonPackages
+                ++ mesaVulkanPackages
+                ++ (with pkgs; [
+                  vpl-gpu-rt
+                  intel-media-driver
+                  intel-compute-runtime
+                  intel-vaapi-driver
+                ])
+              else if vendor == "nvidia" then
+                commonPackages
+                ++ (with pkgs; [
+                  nvidiaOffloadScript
+                  intel-media-driver
+                  nvidia-vaapi-driver
+                  vulkan-tools
+                ])
+              else
+                [ ]
+            ) cfg.vendors
+          );
 
-        extraPackages32 = flatten (concatMap (_: commonPackages32) cfg.vendors);
+          extraPackages32 = flatten (concatMap (_: commonPackages32) cfg.vendors);
+        };
       };
 
       environment.systemPackages = flatten (
@@ -144,10 +146,6 @@ in
         ) cfg.vendors
       );
     }
-
-    (mkIf (hasVendor "amd") {
-      hardware.amdgpu.overdrive.enable = true;
-    })
 
     (mkIf (hasVendor "nvidia") {
       hardware.nvidia = {
