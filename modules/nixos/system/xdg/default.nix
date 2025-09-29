@@ -30,13 +30,19 @@ in
       enable = true;
       xdgOpenUsePortal = cfg.xdgOpenUsePortal;
       config = {
-        common.default = [ "gtk" ];
+        common.default = [
+          "gtk"
+          "gnome"
+        ];
         hyprland.default = [
           "gtk"
           "hyprland"
         ];
       };
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-gnome
+      ];
     };
   };
 }

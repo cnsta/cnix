@@ -215,7 +215,7 @@
         flags = "--performance";
       };
       tailscale = {
-        enable = true
+        enable = true;
       };
       udisks = {
         enable = true;
