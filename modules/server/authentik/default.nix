@@ -65,7 +65,7 @@ in {
       fail2ban = lib.mkIf cfg.enable {
         jails = {
           authentik = {
-            serviceName = "${cfg.url}";
+            serviceName = "authentik";
             failRegex = "^.*Username or password is incorrect. Try again. IP: <HOST>. Username: <F-USER>.*</F-USER>.$";
           };
         };

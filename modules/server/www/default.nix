@@ -44,9 +44,11 @@ in {
     server = {
       fail2ban = lib.mkIf config.server.www.enable {
         jails = {
-          www = {
-            serviceName = "cnst.dev";
-            failRegex = "^.*Username or password is incorrect. Try again. IP: <HOST>. Username: <F-USER>.*</F-USER>.$";
+          nginx-404 = {
+            serviceName = "nginx";
+            failRegex = ''^.*\[error\].*directory index of.* is forbidden.*client: <HOST>.*$'';
+            ignoreRegex = "";
+            maxRetry = 5;
           };
         };
       };
@@ -64,12 +66,21 @@ in {
         virtualHosts."webfinger" = {
           forceSSL = false;
           serverName = cfg.url;
-          root = "/etc/webfinger";
+          root = "/var/www/webfinger";
+
           locations."= /.well-known/webfinger" = {
-            root = "/etc/webfinger";
+            root = "/var/www/webfinger";
             extraConfig = ''
               default_type application/jrd+json;
               try_files /.well-known/webfinger =404;
+            '';
+          };
+
+          locations."= /robots.txt" = {
+            root = "/var/www/webfinger";
+            extraConfig = ''
+              default_type text/plain;
+              try_files /robots.txt =404;
             '';
           };
         };
@@ -85,17 +96,24 @@ in {
       };
     };
 
-    environment.etc."webfinger/.well-known/webfinger".text = ''
-      {
-        "subject": "acct:adam@${cfg.url}",
-        "links": [
-          {
-            "rel": "http://openid.net/specs/connect/1.0/issuer",
-            "href": "https://auth.${cfg.url}/application/o/tailscale/"
-          }
-        ]
-      }
-    '';
+    environment.etc = {
+      "webfinger/.well-known/webfinger".text = ''
+        {
+          "subject": "acct:adam@${cfg.url}",
+          "links": [
+            {
+              "rel": "http://openid.net/specs/connect/1.0/issuer",
+              "href": "https://auth.${cfg.url}/application/o/tailscale/"
+            }
+          ]
+        }
+      '';
+
+      "webfinger/robots.txt".text = ''
+        User-agent: *
+        Disallow: /
+      '';
+    };
 
     services.traefik.dynamicConfigOptions.http = {
       routers.webfinger = {
