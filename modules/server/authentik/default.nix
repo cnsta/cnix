@@ -54,10 +54,14 @@ in {
       authentikEnv = {
         file = "${self}/secrets/authentikEnv.age";
         owner = "authentik";
+        group = "authentik";
+        mode = "0400";
       };
       authentikCloudflared = {
         file = "${self}/secrets/authentikCloudflared.age";
         owner = "authentik";
+        group = "authentik";
+        mode = "0400";
       };
     };
 
@@ -66,7 +70,7 @@ in {
         jails = {
           authentik = {
             serviceName = "authentik";
-            failregex = ^.*Username or password is incorrect.*IP:\s*<HOST>
+            failRegex = "^.*Username or password is incorrect.*IP:\s*<HOST>";
           };
         };
       };
@@ -99,7 +103,7 @@ in {
             middlewares = {
               authentik = {
                 forwardAuth = {
-                  tls.insecureSkipVerify = true;
+                  # tls.insecureSkipVerify = true;
                   address = "https://localhost:9443/outpost.goauthentik.io/auth/traefik";
                   trustForwardHeader = true;
                   authResponseHeaders = [
