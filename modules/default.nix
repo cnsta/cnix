@@ -141,7 +141,7 @@
         ./server/keepalived
         ./server/gitea
         ./server/postgres
-        ./server/traefik
+        ./server/nginx
         ./server/www
         ./server/authentik
       ];

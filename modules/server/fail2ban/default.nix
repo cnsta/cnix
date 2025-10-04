@@ -58,14 +58,14 @@ in {
       jails =
         lib.attrsets.mapAttrs (name: value: {
           settings = {
-            bantime = "24h";
-            findtime = "10m";
+            bantime = "168h";
+            findtime = "30m";
             enabled = true;
             backend = "systemd";
             journalmatch = "_SYSTEMD_UNIT=${value.serviceName}.service";
             port = "http,https";
             filter = "${name}";
-            maxretry = 3;
+            maxretry = value.maxRetry or 5;
             action = "cloudflare-token-agenix";
           };
         })

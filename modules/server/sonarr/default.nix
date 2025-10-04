@@ -43,15 +43,16 @@ in {
       group = srv.group;
     };
     services.traefik = {
+      # staticConfigOptions.entryPoints.${unit}.address = "127.0.0.1:8989";
       dynamicConfigOptions = {
         http = {
-          services.sonarr.loadBalancer.servers = [{url = "http://127.0.0.1:8989";}];
+          # services.sonarr.loadBalancer.servers = [{url = "http://127.0.0.1:8989";}];
           routers = {
             sonarr = {
               entryPoints = ["websecure"];
               rule = "Host(`${cfg.url}`)";
               service = "sonarr";
-              tls.certResolver = "letsencrypt";
+              # tls.certResolver = "letsencrypt";
               # middlewares = ["authentik"];
             };
           };

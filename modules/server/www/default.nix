@@ -114,18 +114,5 @@ in {
         Disallow: /
       '';
     };
-
-    services.traefik.dynamicConfigOptions.http = {
-      routers.webfinger = {
-        entryPoints = ["websecure"];
-        rule = "Host(`${cfg.url}`) && Path(`/.well-known/webfinger`)";
-        service = "webfinger";
-        tls.certResolver = "letsencrypt";
-      };
-
-      services.webfinger.loadBalancer.servers = [
-        {url = "http://127.0.0.1:8283";}
-      ];
-    };
   };
 }

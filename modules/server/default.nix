@@ -17,14 +17,14 @@ in {
       default = "";
       type = types.str;
       description = ''
-        Email name to be used to access the server services via Caddy reverse proxy
+        Email name to be used to access the server services via NGINX reverse proxy
       '';
     };
     domain = mkOption {
       default = "";
       type = types.str;
       description = ''
-        Domain name to be used to access the server services via Caddy reverse proxy
+        Domain name to be used to access the server services via NGINX reverse proxy
       '';
     };
     user = lib.mkOption {
@@ -65,6 +65,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    _module.args = {
+      myLib = import ./lib.nix {
+        inherit lib config pkgs;
+      };
+    };
     users = {
       groups.${cfg.group} = {
         gid = cfg.gid;
@@ -93,7 +98,7 @@ in {
           "render"
           "input"
           "authentik"
-          "traefik"
+          "nginx"
         ];
       };
     };

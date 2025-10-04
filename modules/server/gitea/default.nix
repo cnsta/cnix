@@ -99,23 +99,6 @@ in {
       };
     };
 
-    services.traefik = {
-      dynamicConfigOptions = {
-        http = {
-          services.gitea.loadBalancer.servers = [{url = "http://127.0.0.1:5003";}];
-          routers = {
-            gitea = {
-              entryPoints = ["websecure"];
-              rule = "Host(`${cfg.url}`)";
-              service = "gitea";
-              tls.certResolver = "letsencrypt";
-              # middlewares = ["authentik"];
-            };
-          };
-        };
-      };
-    };
-
     server.postgresql.databases = [
       {
         database = "gitea";

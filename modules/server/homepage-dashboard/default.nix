@@ -212,25 +212,6 @@ in {
             }
           ];
       };
-
-      traefik = {
-        dynamicConfigOptions = {
-          http = {
-            services.homepage.loadBalancer.servers = [
-              {url = "http://127.0.0.1:${toString config.services.${unit}.listenPort}";}
-            ];
-            routers = {
-              homepage = {
-                entryPoints = ["websecure"];
-                rule = "Host(`cnix.dev`)";
-                service = "homepage";
-                tls.certResolver = "letsencrypt";
-                # middlewares = ["authentik"];
-              };
-            };
-          };
-        };
-      };
     };
   };
 }

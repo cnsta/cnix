@@ -53,15 +53,9 @@ in {
     age.secrets = {
       authentikEnv = {
         file = "${self}/secrets/authentikEnv.age";
-        owner = "authentik";
-        group = "authentik";
-        mode = "0400";
       };
       authentikCloudflared = {
         file = "${self}/secrets/authentikCloudflared.age";
-        owner = "authentik";
-        group = "authentik";
-        mode = "0400";
       };
     };
 
@@ -110,15 +104,9 @@ in {
                     "X-authentik-username"
                     "X-authentik-groups"
                     "X-authentik-email"
-                    "X-authentik-name"
-                    "X-authentik-uid"
                     "X-authentik-jwt"
-                    "X-authentik-meta-jwks"
-                    "X-authentik-meta-outpost"
-                    "X-authentik-meta-provider"
-                    "X-authentik-meta-app"
-                    "X-authentik-meta-version"
                   ];
+                  timeout = "10s";
                 };
               };
             };

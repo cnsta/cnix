@@ -34,7 +34,7 @@ in {
       };
       port = lib.mkOption {
         type = lib.types.int;
-        default = 8080;
+        default = 8387;
         description = "The port to host qBittorrent on.";
       };
       homepage.name = lib.mkOption {
@@ -143,62 +143,6 @@ in {
       ];
     };
 
-    services.traefik = lib.mkMerge [
-      (lib.mkIf cfg.pihole.enable {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              pihole.loadBalancer.servers = [{url = "http://localhost:${toString cfg.pihole.port}";}];
-            };
-            routers = {
-              pihole = {
-                entryPoints = ["websecure"];
-                rule = "Host(`${cfg.pihole.url}`)";
-                service = "pihole";
-                tls.certResolver = "letsencrypt";
-              };
-            };
-          };
-        };
-      })
-
-      (lib.mkIf cfg.qbittorrent.enable {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              qbittorrent.loadBalancer.servers = [{url = "http://localhost:${toString cfg.qbittorrent.port}";}];
-            };
-            routers = {
-              qbittorrent = {
-                entryPoints = ["websecure"];
-                rule = "Host(`${cfg.qbittorrent.url}`)";
-                service = "qbittorrent";
-                tls.certResolver = "letsencrypt";
-              };
-            };
-          };
-        };
-      })
-
-      (lib.mkIf cfg.slskd.enable {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              slskd.loadBalancer.servers = [{url = "http://localhost:${toString cfg.slskd.port}";}];
-            };
-            routers = {
-              slskd = {
-                entryPoints = ["websecure"];
-                rule = "Host(`${cfg.slskd.url}`)";
-                service = "slskd";
-                tls.certResolver = "letsencrypt";
-              };
-            };
-          };
-        };
-      })
-    ];
-
     virtualisation.oci-containers.containers = lib.mkMerge [
       (lib.mkIf cfg.gluetun.enable {
         gluetun = {
@@ -206,7 +150,7 @@ in {
           ports = [
             "8388:8388"
             "58846:58846"
-            "8080:8080"
+            "8387:8387"
             "5030:5030"
             "5031:5031"
             "50300:50300"
@@ -235,7 +179,7 @@ in {
           autoStart = true;
           dependsOn = ["gluetun"];
           ports = [
-            "8080:8080"
+            "8387:8387"
             "58846:58846"
           ];
           extraOptions = [

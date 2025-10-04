@@ -8,7 +8,7 @@
     uid = 994;
     gid = 993;
 
-    traefik = {
+    nginx = {
       enable = true;
     };
     gitea = {
@@ -42,7 +42,11 @@
       enable = true;
     };
     jellyfin = {
-      enable = true;
+      enable = false;
+      cloudflared = {
+        tunnelId = "234811e2-bc86-44b2-9abd-493686e25704";
+        credentialsFile = config.age.secrets.jellyfinCloudflared.path;
+      };
     };
     uptime-kuma = {
       enable = true;
@@ -56,7 +60,7 @@
       };
     };
     www = {
-      enable = true;
+      enable = false;
       url = "cnst.dev";
       cloudflared = {
         tunnelId = "e5076186-efb7-405a-998c-6155af7fb221";
@@ -88,14 +92,14 @@
       enable = true;
       gluetun.enable = true;
       qbittorrent = {
-        enable = true;
-        port = 8080;
+        enable = false;
+        port = 8387;
       };
       slskd = {
         enable = true;
       };
       pihole = {
-        enable = true;
+        enable = false;
         port = 8053;
       };
     };
