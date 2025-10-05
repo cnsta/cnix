@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   server = {
     enable = true;
     email = "adam@cnst.dev";
@@ -44,10 +43,6 @@
     };
     jellyfin = {
       enable = true;
-      cloudflared = {
-        tunnelId = "234811e2-bc86-44b2-9abd-493686e25704";
-        credentialsFile = config.age.secrets.jellyfinCloudflared.path;
-      };
     };
     uptime-kuma = {
       enable = true;
@@ -94,7 +89,7 @@
       gluetun.enable = true;
       qbittorrent = {
         enable = true;
-        port = 8387;
+        port = 8080;
       };
       slskd = {
         enable = true;
