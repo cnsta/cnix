@@ -61,6 +61,7 @@ in {
   "traefikEnv.age".publicKeys = kima ++ sobotka;
   "wwwCloudflared.age".publicKeys = kima ++ sobotka;
   "authentikCloudflared.age".publicKeys = kima ++ sobotka;
+  "sobotkaTsAuth.age".publicKeys = kima ++ sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = kima ++ ziggy;

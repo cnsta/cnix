@@ -49,7 +49,7 @@ in {
             dashboard = true;
           };
           certificatesResolvers = {
-            tailscale.tailscale = {};
+            vpn.tailscale = {};
             letsencrypt = {
               acme = {
                 email = "adam@cnst.dev";
