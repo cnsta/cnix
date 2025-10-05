@@ -18,7 +18,7 @@ in {
     };
     url = lib.mkOption {
       type = lib.types.str;
-      default = "sobotka.taila7448a.ts.net";
+      default = "fin.${srv.tailscale.url}";
     };
     homepage.name = lib.mkOption {
       type = lib.types.str;
@@ -49,13 +49,13 @@ in {
     services.traefik = {
       dynamicConfigOptions = {
         http = {
-          services.${unit}.loadBalancer.servers = [{url = "http://127.0.0.1:8096";}];
+          services.${unit}.loadBalancer.servers = [{url = "http://localhost:8096";}];
           routers = {
             jellyfinRouter = {
               entryPoints = ["websecure"];
               rule = "Host(`${cfg.url}`)";
               service = "${unit}";
-              tls.certResolver = "vpn";
+              tls.certResolver = "letsencrypt";
             };
           };
         };

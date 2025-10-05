@@ -9,6 +9,10 @@ with lib; let
 in {
   options.server.tailscale = {
     enable = mkEnableOption "Enable tailscale server configuration";
+    url = lib.mkOption {
+      type = lib.types.str;
+      default = "ts.cnst.dev";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -21,7 +25,6 @@ in {
       authKeyFile = config.age.secrets.sobotkaTsAuth.path;
       extraSetFlags = [
         "--advertise-exit-node"
-        "--advertise-routes=192.168.88.0/24"
       ];
     };
   };
