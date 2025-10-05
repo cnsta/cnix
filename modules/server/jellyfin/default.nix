@@ -3,13 +3,11 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   unit = "jellyfin";
   cfg = config.server.${unit};
   srv = config.server;
-in
-{
+in {
   options.server.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
@@ -51,11 +49,11 @@ in
     services.traefik = {
       dynamicConfigOptions = {
         http = {
-          services.${unit}.loadBalancer.servers = [ { url = "http://127.0.0.1:8096"; } ];
+          services.${unit}.loadBalancer.servers = [{url = "http://127.0.0.1:8096";}];
           routers = {
             jellyfinRouter = {
-              entryPoints = [ "websecure" ];
-              rule = "Host(`sobotka.taila7448a.ts.net.ts.net`)";
+              entryPoints = ["websecure"];
+              rule = "Host(`fin.${srv.www.url}`)";
               service = "${unit}";
               tls.certResolver = "tailscale";
             };
