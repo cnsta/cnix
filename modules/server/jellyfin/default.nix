@@ -3,18 +3,20 @@
   lib,
   pkgs,
   ...
-}: let
-  service = "jellyfin";
-  cfg = config.server.${service};
+}:
+let
+  unit = "jellyfin";
+  cfg = config.server.${unit};
   srv = config.server;
-in {
-  options.server.${service} = {
+in
+{
+  options.server.${unit} = {
     enable = lib.mkEnableOption {
-      description = "Enable ${service}";
+      description = "Enable ${unit}";
     };
     configDir = lib.mkOption {
       type = lib.types.str;
-      default = "/var/lib/${service}";
+      default = "/var/lib/${unit}";
     };
     url = lib.mkOption {
       type = lib.types.str;
@@ -38,7 +40,7 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    services.${service} = {
+    services.${unit} = {
       enable = true;
       user = srv.user;
       group = srv.group;
@@ -49,14 +51,13 @@ in {
     services.traefik = {
       dynamicConfigOptions = {
         http = {
-          services.jellyfin.loadBalancer.servers = [{url = "http://127.0.0.1:8096";}];
+          services.${unit}.loadBalancer.servers = [ { url = "http://127.0.0.1:8096"; } ];
           routers = {
-            jellyfin = {
-              entryPoints = ["websecure"];
-              rule = "Host(`${cfg.url}`)";
-              service = "jellyfin";
-              tls.certResolver = "letsencrypt";
-              # middlewares = ["authentik"];
+            jellyfinRouter = {
+              entryPoints = [ "websecure" ];
+              rule = "Host(`sobotka.taila7448a.ts.net.ts.net`)";
+              service = "${unit}";
+              tls.certResolver = "tailscale";
             };
           };
         };
