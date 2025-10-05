@@ -99,7 +99,7 @@ in {
             middlewares = {
               authentik = {
                 forwardAuth = {
-                  tls.insecureSkipVerify = true;
+                  # tls.insecureSkipVerify = true;
                   address = "https://localhost:9443/outpost.goauthentik.io/auth/traefik";
                   trustForwardHeader = true;
                   authResponseHeaders = [
@@ -130,7 +130,7 @@ in {
             routers = {
               auth = {
                 entryPoints = ["websecure"];
-                rule = "Host(`${cfg.url}`) || HostRegexp(`{subdomain:[a-z0-9]+}.${srv.www.url}`) && PathPrefix(`/outpost.goauthentik.io/`)";
+                rule = "Host(`${cfg.url}`) && PathPrefix(`/outpost.goauthentik.io/`)";
                 service = "auth";
                 tls.certResolver = "letsencrypt";
               };

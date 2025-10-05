@@ -23,7 +23,7 @@ in {
     age.secrets.traefikEnv = {
       file = "${self}/secrets/traefikEnv.age";
       mode = "640";
-      owner = "root";
+      owner = "traefik";
       group = "traefik";
     };
 
@@ -88,6 +88,10 @@ in {
                   {
                     main = "cnix.dev";
                     sans = ["*.cnix.dev"];
+                  }
+                  {
+                    main = "ts.cnst.dev";
+                    sans = ["*ts.cnst.dev"];
                   }
                 ];
               };
