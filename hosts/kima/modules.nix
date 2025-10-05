@@ -3,8 +3,8 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = [ "amd" ];
-        extraKernelParams = [ ];
+        hardware = ["amd"];
+        extraKernelParams = [];
         amdOverdrive.enable = true;
       };
       loader = {
@@ -22,13 +22,20 @@
       };
       graphics = {
         enable = true;
-        vendors = [ "amd" ];
+        vendors = ["amd"];
       };
       logitech = {
         enable = true;
       };
       network = {
         enable = true;
+        nameservers = [
+          "192.168.88.1"
+          "192.168.88.69"
+        ];
+        search = [
+          "taila7448a.ts.net"
+        ];
         interfaces = {
           "eno1" = {
             allowedTCPPorts = [

@@ -18,7 +18,7 @@ in {
     };
     url = lib.mkOption {
       type = lib.types.str;
-      default = "jellyfin.${srv.domain}";
+      default = "sobotka.taila7448a.ts.net";
     };
     homepage.name = lib.mkOption {
       type = lib.types.str;
@@ -53,9 +53,9 @@ in {
           routers = {
             jellyfinRouter = {
               entryPoints = ["websecure"];
-              rule = "Host(`fin.${srv.www.url}`)";
+              rule = "Host(`${cfg.url}`)";
               service = "${unit}";
-              tls.certResolver = "tailscale";
+              tls.certResolver = "vpn";
             };
           };
         };

@@ -144,6 +144,7 @@
         ./server/traefik
         ./server/www
         ./server/authentik
+        ./server/tailscale
       ];
     };
     settings = {

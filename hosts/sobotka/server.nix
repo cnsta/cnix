@@ -11,6 +11,9 @@
     traefik = {
       enable = true;
     };
+    tailscale = {
+      enable = true;
+    };
     gitea = {
       enable = true;
     };
