@@ -4,11 +4,18 @@
   pkgs,
   self,
   ...
-}: let
-  inherit (lib) mkOption mkEnableOption mkIf types;
+}:
+let
+  inherit (lib)
+    mkOption
+    mkEnableOption
+    mkIf
+    types
+    ;
   cfg = config.server.www;
   srv = config.server;
-in {
+in
+{
   options.server.www = {
     enable = mkEnableOption {
       description = "Enable personal website";
@@ -117,14 +124,14 @@ in {
 
     services.traefik.dynamicConfigOptions.http = {
       routers.webfinger = {
-        entryPoints = ["websecure"];
+        entryPoints = [ "websecure" ];
         rule = "Host(`${cfg.url}`) && Path(`/.well-known/webfinger`)";
         service = "webfinger";
         tls.certResolver = "letsencrypt";
       };
 
       services.webfinger.loadBalancer.servers = [
-        {url = "http://127.0.0.1:8283";}
+        { url = "http://127.0.0.1:8283"; }
       ];
     };
   };

@@ -4,11 +4,13 @@
   pkgs,
   self,
   ...
-}: let
+}:
+let
   unit = "authentik";
   cfg = config.server.${unit};
   srv = config.server;
-in {
+in
+{
   options.server.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
@@ -53,15 +55,9 @@ in {
     age.secrets = {
       authentikEnv = {
         file = "${self}/secrets/authentikEnv.age";
-        owner = "authentik";
-        group = "authentik";
-        mode = "0400";
       };
       authentikCloudflared = {
         file = "${self}/secrets/authentikCloudflared.age";
-        owner = "authentik";
-        group = "authentik";
-        mode = "0400";
       };
     };
 
@@ -110,15 +106,16 @@ in {
                     "X-authentik-username"
                     "X-authentik-groups"
                     "X-authentik-email"
-                    "X-authentik-name"
-                    "X-authentik-uid"
+                    # "X-authentik-name"
+                    # "X-authentik-uid"
                     "X-authentik-jwt"
-                    "X-authentik-meta-jwks"
-                    "X-authentik-meta-outpost"
-                    "X-authentik-meta-provider"
-                    "X-authentik-meta-app"
-                    "X-authentik-meta-version"
+                    # "X-authentik-meta-jwks"
+                    # "X-authentik-meta-outpost"
+                    # "X-authentik-meta-provider"
+                    # "X-authentik-meta-app"
+                    # "X-authentik-meta-version"
                   ];
+                  timeout = "10s";
                 };
               };
             };
@@ -133,7 +130,7 @@ in {
 
             routers = {
               auth = {
-                entryPoints = ["websecure"];
+                entryPoints = [ "websecure" ];
                 rule = "Host(`${cfg.url}`) || HostRegexp(`{subdomain:[a-z0-9]+}.${srv.www.url}`) && PathPrefix(`/outpost.goauthentik.io/`)";
                 service = "auth";
                 tls.certResolver = "letsencrypt";
