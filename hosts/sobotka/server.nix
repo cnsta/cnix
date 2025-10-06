@@ -14,9 +14,6 @@
     tailscale = {
       enable = true;
     };
-    gitea = {
-      enable = true;
-    };
     unbound = {
       enable = true;
     };
@@ -49,6 +46,14 @@
     };
     uptime-kuma = {
       enable = true;
+    };
+    gitea = {
+      enable = true;
+      url = "git.cnst.dev";
+      cloudflared = {
+        tunnelId = "33e2fb8e-ecef-4d42-b845-6d15e216e448";
+        credentialsFile = config.age.secrets.giteaCloudflared.path;
+      };
     };
     vaultwarden = {
       enable = true;

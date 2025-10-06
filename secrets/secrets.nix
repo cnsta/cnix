@@ -48,6 +48,7 @@ in {
   "homepageEnvironment.age".publicKeys = kima ++ sobotka;
   "cloudflareFirewallApiKey.age".publicKeys = kima ++ sobotka;
   "vaultwardenCloudflared.age".publicKeys = kima ++ sobotka;
+  "giteaCloudflared.age".publicKeys = kima ++ sobotka;
   "nextcloudCloudflared.age".publicKeys = kima ++ sobotka;
   "nextcloudAdminPass.age".publicKeys = kima ++ sobotka;
   "cloudflareDnsApiToken.age".publicKeys = kima ++ sobotka;
