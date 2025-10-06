@@ -116,6 +116,7 @@ in {
 
         (mkIf cfg.dev.enable [
           # lldb_20 # some biuld error atm
+          sqlite
           gemini-cli
           nfs-utils
           gcc
