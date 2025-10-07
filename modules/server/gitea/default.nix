@@ -63,7 +63,7 @@ in {
         jails = {
           gitea = {
             serviceName = "gitea";
-            failRegex = "^.*Username or password is incorrect. Try again. IP: <HOST>. Username: <F-USER>.*</F-USER>.$";
+            failRegex = ''.*(Failed authentication attempt|invalid credentials|Attempted access of unknown user).* from <HOST>'';
           };
         };
       };

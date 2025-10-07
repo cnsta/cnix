@@ -3,17 +3,18 @@
   lib,
   ...
 }: let
-  service = "jellyseerr";
+  unit = "jellyseerr";
   srv = config.server;
-  cfg = config.server.${service};
+  cfg = config.server.${unit};
 in {
-  options.server.${service} = {
+  options.server.${unit} = {
     enable = lib.mkEnableOption {
-      description = "Enable ${service}";
+      description = "Enable ${unit}";
     };
     url = lib.mkOption {
       type = lib.types.str;
-      default = "${service}.${srv.domain}";
+      # default = "seer.${srv.tailscale.url}";
+      default = "jellyseerr.${srv.domain}";
     };
     port = lib.mkOption {
       type = lib.types.port;
@@ -37,21 +38,20 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    services.${service} = {
+    services.${unit} = {
       enable = true;
       port = cfg.port;
     };
     services.traefik = {
       dynamicConfigOptions = {
         http = {
-          services.jellyseerr.loadBalancer.servers = [{url = "http://127.0.0.1:${toString cfg.port}";}];
+          services.jellyseerr.loadBalancer.servers = [{url = "http://localhost:${toString cfg.port}";}];
           routers = {
             jellyseerr = {
               entryPoints = ["websecure"];
               rule = "Host(`${cfg.url}`)";
-              service = "jellyseerr";
+              service = "${unit}";
               tls.certResolver = "letsencrypt";
-              # middlewares = ["authentik"];
             };
           };
         };

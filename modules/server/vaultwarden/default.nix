@@ -44,7 +44,7 @@ in {
         jails = {
           vaultwarden = {
             serviceName = "vaultwarden";
-            failRegex = "^.*Username or password is incorrect. Try again. IP: <HOST>. Username: <F-USER>.*</F-USER>.$";
+            failRegex = ''^.*?Username or password is incorrect\. Try again\. IP: <ADDR>\. Username:.*$'';
           };
         };
       };
@@ -72,7 +72,7 @@ in {
           logLevel = "warn";
           extendedLogging = true;
           useSyslog = true;
-          invitationsAllowed = false;
+          invitationsAllowed = true;
           showPasswordHint = false;
         };
       };

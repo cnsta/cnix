@@ -30,13 +30,27 @@ in {
               example = "vaultwarden";
               type = lib.types.str;
             };
+            _groupsre = lib.mkOption {
+              type = lib.types.lines;
+              example = ''(?:(?:,?\s*"\w+":(?:"[^"]+"|\w+))*)'';
+              default = "";
+            };
             failRegex = lib.mkOption {
-              type = lib.types.str;
-              example = "Login failed from IP: <HOST>";
+              type = lib.types.lines;
+              example = ''
+                ^Login failed from IP: <HOST>$
+                ^Two-factor challenge failed from <HOST>$
+              '';
             };
             ignoreRegex = lib.mkOption {
               type = lib.types.str;
               default = "";
+            };
+            datePattern = lib.mkOption {
+              type = lib.types.str;
+              default = "";
+              example = '',?\s*"time"\s*:\s*"%%Y-%%m-%%d[T ]%%H:%%M:%%S(%%z)?"'';
+              description = "Optional datepattern line for the fail2ban filter.";
             };
             maxRetry = lib.mkOption {
               type = lib.types.int;
@@ -75,11 +89,18 @@ in {
     environment.etc = lib.attrsets.mergeAttrsList [
       (lib.attrsets.mapAttrs' (
           name: value: (lib.nameValuePair "fail2ban/filter.d/${name}.conf" {
-            text = ''
-              [Definition]
-              failregex = ${value.failRegex}
-              ignoreregex = ${value.ignoreRegex}
-            '';
+            text =
+              ''
+                [Definition]
+                failregex = ${value.failRegex}
+                ignoreregex = ${value.ignoreRegex}
+              ''
+              + lib.optionalString (value.datePattern != "") ''
+                datepattern = ${value.datePattern}
+              ''
+              + lib.optionalString (value._groupsre != "") ''
+                _groupsre = ${value._groupsre}
+              '';
           })
         )
         cfg.jails)
