@@ -66,7 +66,7 @@ in {
         jails = {
           authentik = {
             serviceName = "authentik";
-            failRegex = "^.*Username or password is incorrect.*IP:\s*<HOST>";
+            failRegex = ''^.*Username or password is incorrect.*IP:\s*<HOST>'';
           };
         };
       };

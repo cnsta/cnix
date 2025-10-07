@@ -47,7 +47,7 @@ in {
           nginx-404 = {
             serviceName = "nginx";
             failRegex = ''^.*\[error\].*directory index of.* is forbidden.*client: <HOST>.*$'';
-            ignoreRegex = "";
+            ignoreRegex = '''';
             maxRetry = 5;
           };
         };
