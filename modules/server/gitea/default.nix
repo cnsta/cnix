@@ -121,6 +121,10 @@ in {
           indexer = {
             REPO_INDEXER_ENABLED = true;
           };
+          oauth2_client = {
+            ENABLE_AUTO_REGISTRATION = true;
+            ACCOUNT_LINKING = "auto";
+          };
           server = {
             DOMAIN = cfg.url;
             LANDING_PAGE = "explore";
