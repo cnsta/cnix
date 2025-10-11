@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -17,6 +18,20 @@ in
         enable = true;
         gamescopeSession.enable = true;
       };
+      gamescope = {
+        enable = true;
+        capSysNice = true;
+        args = [
+          "--rt"
+          "--expose-wayland"
+        ];
+      };
     };
+    environment.systemPackages = with pkgs; [
+      protonup
+      wine
+      winetricks
+      wine-wayland
+    ];
   };
 }
