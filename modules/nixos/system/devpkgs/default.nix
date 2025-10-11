@@ -45,7 +45,6 @@ in
       # nodePackages_latest.sql-formatter
       prettierd
       shfmt
-      luaformatter
       black
     ];
   };

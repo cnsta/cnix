@@ -88,7 +88,7 @@ in
           hyprpicker
           libnotify
           pamixer
-          oculante
+          loupe
           adwaita-icon-theme
           qt5.qtwayland
           qt6.qtwayland
