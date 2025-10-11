@@ -69,7 +69,7 @@ in {
     services = {
       ${unit} = {
         enable = true;
-        package = pkgs.nextcloud31;
+        package = pkgs.nextcloud32;
         hostName = "nextcloud";
         configureRedis = true;
         caching = {
