@@ -3,8 +3,8 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = ["amd"];
-        extraKernelParams = [];
+        hardware = [ "amd" ];
+        extraKernelParams = [ ];
         amdOverdrive.enable = true;
       };
       loader = {
@@ -22,7 +22,7 @@
       };
       graphics = {
         enable = true;
-        vendors = ["amd"];
+        vendors = [ "amd" ];
       };
       logitech = {
         enable = true;
@@ -73,7 +73,7 @@
         };
       };
       gamescope = {
-        enable = true;
+        enable = false;
       };
       gimp = {
         enable = true;
