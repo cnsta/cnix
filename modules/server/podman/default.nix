@@ -143,61 +143,63 @@ in {
       ];
     };
 
-    services.traefik = lib.mkMerge [
-      (lib.mkIf cfg.pihole.enable {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              pihole.loadBalancer.servers = [{url = "http://localhost:${toString cfg.pihole.port}";}];
-            };
-            routers = {
-              pihole = {
-                entryPoints = ["websecure"];
-                rule = "Host(`${cfg.pihole.url}`)";
-                service = "pihole";
-                tls.certResolver = "letsencrypt";
+    services = {
+      traefik = lib.mkMerge [
+        (lib.mkIf cfg.pihole.enable {
+          dynamicConfigOptions = {
+            http = {
+              services = {
+                pihole.loadBalancer.servers = [{url = "http://localhost:${toString cfg.pihole.port}";}];
+              };
+              routers = {
+                pihole = {
+                  entryPoints = ["websecure"];
+                  rule = "Host(`${cfg.pihole.url}`)";
+                  service = "pihole";
+                  tls.certResolver = "letsencrypt";
+                };
               };
             };
           };
-        };
-      })
+        })
 
-      (lib.mkIf cfg.qbittorrent.enable {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              qbittorrent.loadBalancer.servers = [{url = "http://localhost:${toString cfg.qbittorrent.port}";}];
-            };
-            routers = {
-              qbittorrent = {
-                entryPoints = ["websecure"];
-                rule = "Host(`${cfg.qbittorrent.url}`)";
-                service = "qbittorrent";
-                tls.certResolver = "letsencrypt";
+        (lib.mkIf cfg.qbittorrent.enable {
+          dynamicConfigOptions = {
+            http = {
+              services = {
+                qbittorrent.loadBalancer.servers = [{url = "http://localhost:${toString cfg.qbittorrent.port}";}];
+              };
+              routers = {
+                qbittorrent = {
+                  entryPoints = ["websecure"];
+                  rule = "Host(`${cfg.qbittorrent.url}`)";
+                  service = "qbittorrent";
+                  tls.certResolver = "letsencrypt";
+                };
               };
             };
           };
-        };
-      })
+        })
 
-      (lib.mkIf cfg.slskd.enable {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              slskd.loadBalancer.servers = [{url = "http://localhost:${toString cfg.slskd.port}";}];
-            };
-            routers = {
-              slskd = {
-                entryPoints = ["websecure"];
-                rule = "Host(`${cfg.slskd.url}`)";
-                service = "slskd";
-                tls.certResolver = "letsencrypt";
+        (lib.mkIf cfg.slskd.enable {
+          dynamicConfigOptions = {
+            http = {
+              services = {
+                slskd.loadBalancer.servers = [{url = "http://localhost:${toString cfg.slskd.port}";}];
+              };
+              routers = {
+                slskd = {
+                  entryPoints = ["websecure"];
+                  rule = "Host(`${cfg.slskd.url}`)";
+                  service = "slskd";
+                  tls.certResolver = "letsencrypt";
+                };
               };
             };
           };
-        };
-      })
-    ];
+        })
+      ];
+    };
 
     virtualisation.oci-containers.containers = lib.mkMerge [
       (lib.mkIf cfg.gluetun.enable {
@@ -293,7 +295,7 @@ in {
       (lib.mkIf cfg.pihole.enable {
         pihole = {
           autoStart = true;
-          image = "pihole/pihole:latest";
+          image = "pihole/pihole:2025.08.0";
           volumes = [
             "/var/lib/pihole:/etc/pihole/"
             "/var/lib/dnsmasq.d:/etc/dnsmasq.d/"

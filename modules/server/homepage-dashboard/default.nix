@@ -101,7 +101,7 @@ in {
               label = "SYSTEM";
               memory = true;
               cpu = true;
-              uptime = true;
+              uptime = false;
             };
           }
         ];

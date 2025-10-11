@@ -68,7 +68,10 @@ in {
 
   boot = {
     supportedFilesystems = ["zfs"];
-    zfs.extraPools = ["data"];
+    zfs = {
+      package = pkgs.zfs_unstable;
+      extraPools = ["data"];
+    };
   };
 
   services.zfs = {

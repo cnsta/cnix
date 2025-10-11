@@ -53,11 +53,9 @@ in {
     age.secrets = {
       authentikEnv = {
         file = "${self}/secrets/authentikEnv.age";
-        owner = "authentik";
       };
       authentikCloudflared = {
         file = "${self}/secrets/authentikCloudflared.age";
-        owner = "authentik";
       };
     };
 
@@ -99,7 +97,6 @@ in {
             middlewares = {
               authentik = {
                 forwardAuth = {
-                  # tls.insecureSkipVerify = true;
                   address = "https://localhost:9443/outpost.goauthentik.io/auth/traefik";
                   trustForwardHeader = true;
                   authResponseHeaders = [
