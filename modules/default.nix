@@ -123,28 +123,31 @@
     server = {
       imports = [
         ./server
-        ./server/fail2ban
-        ./server/homepage-dashboard
-        ./server/nextcloud
-        ./server/vaultwarden
-        ./server/bazarr
-        ./server/prowlarr
-        ./server/lidarr
-        ./server/radarr
-        ./server/sonarr
-        ./server/jellyseerr
-        ./server/jellyfin
-        ./server/n8n
-        ./server/podman
-        ./server/unbound
-        ./server/uptime-kuma
-        ./server/keepalived
-        ./server/gitea
-        ./server/postgres
-        ./server/traefik
-        ./server/www
-        ./server/authentik
-        ./server/tailscale
+
+        ./server/infra/authentik
+        ./server/infra/fail2ban
+        ./server/infra/keepalived
+        ./server/infra/podman
+        ./server/infra/postgres
+        ./server/infra/tailscale
+        ./server/infra/traefik
+        ./server/infra/unbound
+        ./server/infra/www
+
+        ./server/services/bazarr
+        ./server/services/flaresolverr
+        ./server/services/gitea
+        ./server/services/homepage-dashboard
+        ./server/services/jellyfin
+        ./server/services/jellyseerr
+        ./server/services/lidarr
+        ./server/services/n8n
+        ./server/services/nextcloud
+        ./server/services/prowlarr
+        ./server/services/radarr
+        ./server/services/sonarr
+        ./server/services/uptime-kuma
+        ./server/services/vaultwarden
       ];
     };
     settings = {
