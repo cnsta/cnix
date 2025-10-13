@@ -5,8 +5,7 @@
   osConfig,
   cLib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = osConfig.nixos.programs.hyprland;
 
@@ -15,8 +14,7 @@ let
   #
   bg = osConfig.settings.theme.background;
   inherit (cLib.theme.bgs) resolve;
-in
-{
+in {
   config = mkIf cfg.enable {
     programs.hyprlock = {
       enable = true;
