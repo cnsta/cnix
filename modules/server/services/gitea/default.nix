@@ -1,4 +1,3 @@
-# "inspired" by @jtojnar <3
 {
   config,
   lib,
@@ -7,21 +6,23 @@
 }: let
   unit = "gitea";
   cfg = config.server.services.${unit};
+  domain = "${cfg.subdomain}.${config.server.infra.www.url}";
 in {
   config = lib.mkIf cfg.enable {
-    age.secrets = {
-      giteaCloudflared.file = "${self}/secrets/giteaCloudflared.age";
-    };
+    age.secrets.giteaCloudflared.file = "${self}/secrets/giteaCloudflared.age";
 
     server.infra = {
-      fail2ban = {
-        jails = {
-          gitea = {
-            serviceName = "gitea";
-            failRegex = ''.*(Failed authentication attempt|invalid credentials|Attempted access of unknown user).* from <HOST>'';
-          };
-        };
+      fail2ban.jails.unit = {
+        serviceName = "${unit}";
+        failRegex = ''
+          .*(Failed authentication attempt|invalid credentials|Attempted access of unknown user).*
+          from <HOST>
+        '';
       };
+
+      postgresql.databases = [
+        {database = unit;}
+      ];
     };
 
     services = {
@@ -30,11 +31,11 @@ in {
         tunnels.${cfg.cloudflared.tunnelId} = {
           credentialsFile = cfg.cloudflared.credentialsFile;
           default = "http_status:404";
-          ingress."${cfg.url}".service = "http://localhost:${toString cfg.port}";
+          ingress."${domain}".service = "http://localhost:${toString cfg.port}";
         };
       };
 
-      ${unit} = {
+      gitea = {
         enable = true;
         appName = "cnix code forge";
 
@@ -46,63 +47,51 @@ in {
           createDatabase = false;
         };
 
-        lfs = {
-          enable = true;
-        };
+        lfs.enable = true;
 
         settings = {
           cors = {
             ENABLED = true;
             SCHEME = "https";
-            ALLOW_DOMAIN = cfg.url;
+            ALLOW_DOMAIN = domain;
           };
-          log = {
-            MODE = "console";
-          };
+
+          log.MODE = "console";
+
           mailer = {
             ENABLED = false;
             MAILER_TYPE = "sendmail";
             FROM = "noreply+adam@cnst.dev";
             SENDMAIL_PATH = "/run/wrappers/bin/sendmail";
           };
-          picture = {
-            DISABLE_GRAVATAR = true;
-          };
+
+          picture.DISABLE_GRAVATAR = true;
+
           repository = {
             DEFAULT_BRANCH = "main";
             DEFAULT_REPO_UNITS = "repo.code,repo.issues,repo.pulls";
             DISABLE_DOWNLOAD_SOURCE_ARCHIVES = true;
           };
-          indexer = {
-            REPO_INDEXER_ENABLED = true;
-          };
+
+          indexer.REPO_INDEXER_ENABLED = true;
+
           oauth2_client = {
             ENABLE_AUTO_REGISTRATION = true;
             ACCOUNT_LINKING = "auto";
           };
+
           server = {
-            DOMAIN = cfg.url;
+            DOMAIN = domain;
             LANDING_PAGE = "explore";
             HTTP_PORT = cfg.port;
-            ROOT_URL = "https://${cfg.url}/";
+            ROOT_URL = "https://${domain}/";
           };
-          security = {
-            DISABLE_GIT_HOOKS = false;
-          };
-          service = {
-            DISABLE_REGISTRATION = true;
-          };
-          session = {
-            COOKIE_SECURE = true;
-          };
+
+          security.DISABLE_GIT_HOOKS = false;
+          service.DISABLE_REGISTRATION = true;
+          session.COOKIE_SECURE = true;
         };
       };
     };
-
-    server.infra.postgresql.databases = [
-      {
-        database = "gitea";
-      }
-    ];
   };
 }

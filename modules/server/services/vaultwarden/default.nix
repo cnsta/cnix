@@ -7,7 +7,7 @@
 }: let
   unit = "vaultwarden";
   cfg = config.server.services.${unit};
-  www = config.server.infra.www;
+  domain = "${cfg.subdomain}.${config.server.infra.www.url}";
 in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
@@ -15,15 +15,9 @@ in {
       vaultwardenEnvironment.file = "${self}/secrets/vaultwardenEnvironment.age";
     };
 
-    server.infra = {
-      fail2ban = {
-        jails = {
-          vaultwarden = {
-            serviceName = "${unit}";
-            failRegex = ''^.*?Username or password is incorrect\. Try again\. IP: <ADDR>\. Username:.*$'';
-          };
-        };
-      };
+    server.infra.fail2ban.jails.${unit} = {
+      serviceName = "${unit}";
+      failRegex = ''^.*?Username or password is incorrect\. Try again\. IP: <ADDR>\. Username:.*$'';
     };
 
     services = {
@@ -32,7 +26,7 @@ in {
         tunnels.${cfg.cloudflared.tunnelId} = {
           credentialsFile = cfg.cloudflared.credentialsFile;
           default = "http_status:404";
-          ingress."${cfg.url}".service = "http://localhost:${toString cfg.port}";
+          ingress."${domain}".service = "http://localhost:${toString cfg.port}";
         };
       };
 
@@ -43,7 +37,7 @@ in {
         backupDir = "/var/backup/vaultwarden";
 
         config = {
-          DOMAIN = "https://vault.${www.url}";
+          DOMAIN = "https://${domain}";
           SIGNUPS_ALLOWED = false;
           ROCKET_ADDRESS = "127.0.0.1";
           ROCKET_PORT = cfg.port;

@@ -5,8 +5,7 @@
   osConfig,
   cLib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf;
 
   cfg = osConfig.nixos.programs.hyprland;
@@ -32,8 +31,7 @@ let
       bg = bg.primary;
     }
   ];
-in
-{
+in {
   config = mkIf cfg.enable {
     services.hyprpaper = {
       enable = true;

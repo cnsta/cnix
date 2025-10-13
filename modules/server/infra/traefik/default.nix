@@ -11,23 +11,34 @@
   srv = config.server;
 
   # Generates all Traefik routers from the central service list
+  # generateRouters = services:
+  #   lib.mapAttrs' (
+  #     name: service: let
+  #       domain =
+  #         if service.exposure == "tunnel"
+  #         then "cnst.dev"
+  #         else if service.exposure == "tailscale"
+  #         then "ts.cnst.dev"
+  #         else srv.domain;
+  #     in
+  #       lib.nameValuePair "${service.subdomain}" {
+  #         entryPoints = ["websecure"];
+  #         rule = "Host(`${service.subdomain}.${domain}`)";
+  #         service = service.subdomain;
+  #         tls.certResolver = "letsencrypt";
+  #       }
+  #   ) (lib.filterAttrs (name: service: service.enable) services);
+
   generateRouters = services:
     lib.mapAttrs' (
-      name: service: let
-        domain =
-          if service.exposure == "tunnel"
-          then "cnst.dev"
-          else if service.exposure == "tailscale"
-          then "ts.cnst.dev"
-          else srv.domain;
-      in
+      name: service:
         lib.nameValuePair "${service.subdomain}" {
           entryPoints = ["websecure"];
-          rule = "Host(`${service.subdomain}.${domain}`)";
+          rule = "Host(`${config.clib.server.mkServiceUrl service}`)";
           service = service.subdomain;
           tls.certResolver = "letsencrypt";
         }
-    ) (lib.filterAttrs (name: service: service.enable) services);
+    ) (lib.filterAttrs (_: s: s.enable) services);
 
   # Generates all Traefik backend services
   generateServices = services:

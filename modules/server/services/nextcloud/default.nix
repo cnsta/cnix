@@ -15,19 +15,15 @@ in {
       nextcloudCloudflared.file = "${self}/secrets/nextcloudCloudflared.age";
     };
 
-    server.infra.fail2ban = lib.mkIf srv.infra.fail2ban.enable {
-      jails = {
-        nextcloud = {
-          serviceName = "${unit}";
-          _groupsre = ''(?:(?:,?\s*"\w+":(?:"[^"]+"|\w+))*)'';
-          failRegex = ''
-            ^\{%(_groupsre)s,?\s*"remoteAddr":"<HOST>"%(_groupsre)s,?\s*"message":"Login failed:
-                        ^\{%(_groupsre)s,?\s*"remoteAddr":"<HOST>"%(_groupsre)s,?\s*"message":"Two-factor challenge failed:
-                        ^\{%(_groupsre)s,?\s*"remoteAddr":"<HOST>"%(_groupsre)s,?\s*"message":"Trusted domain error.
-          '';
-          datePattern = '',?\s*"time"\s*:\s*"%%Y-%%m-%%d[T ]%%H:%%M:%%S(%%z)?"'';
-        };
-      };
+    server.infra.fail2ban.jails.nextcloud = {
+      serviceName = "${unit}";
+      _groupsre = ''(?:(?:,?\s*"\w+":(?:"[^"]+"|\w+))*)'';
+      failRegex = ''
+        ^\{%(_groupsre)s,?\s*"remoteAddr":"<HOST>"%(_groupsre)s,?\s*"message":"Login failed:
+                    ^\{%(_groupsre)s,?\s*"remoteAddr":"<HOST>"%(_groupsre)s,?\s*"message":"Two-factor challenge failed:
+                    ^\{%(_groupsre)s,?\s*"remoteAddr":"<HOST>"%(_groupsre)s,?\s*"message":"Trusted domain error.
+      '';
+      datePattern = '',?\s*"time"\s*:\s*"%%Y-%%m-%%d[T ]%%H:%%M:%%S(%%z)?"'';
     };
 
     services = {

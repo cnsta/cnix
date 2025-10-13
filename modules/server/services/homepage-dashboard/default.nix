@@ -5,7 +5,7 @@
   ...
 }: let
   unit = "homepage-dashboard";
-  cfg = config.server.services.homepage-dashboard;
+  cfg = config.server.services.${unit};
   srv = config.server;
 in {
   config = lib.mkIf cfg.enable {
@@ -14,11 +14,14 @@ in {
         file = "${self}/secrets/homepageEnvironment.age";
       };
     };
+
     services = {
       glances.enable = true;
+
       ${unit} = {
         enable = true;
         environmentFile = config.age.secrets.homepageEnvironment.path;
+
         settings = {
           layout = [
             {
@@ -53,10 +56,12 @@ in {
               };
             }
           ];
+
           headerStyle = "clean";
           statusStyle = "dot";
           hideVersion = "true";
         };
+
         widgets = [
           {
             openmeteo = {
@@ -77,6 +82,7 @@ in {
             };
           }
         ];
+
         services = let
           homepageCategories = [
             "Arr"
@@ -84,21 +90,30 @@ in {
             "Downloads"
             "Services"
           ];
-          hl = config.server.services;
-          homepageServices = x: (lib.attrsets.filterAttrs (
-              _name: value: value ? homepage && value.homepage.category == x
+
+          allServices = srv.services;
+
+          homepageServicesFor = category:
+            lib.filterAttrs
+            (
+              name: value:
+                name
+                != unit
+                && value ? homepage
+                && value.homepage.category == category
             )
-            srv.services);
+            allServices;
         in
           lib.lists.forEach homepageCategories (cat: {
             "${cat}" =
-              lib.lists.forEach (lib.attrsets.mapAttrsToList (name: _value: name) (homepageServices "${cat}"))
+              lib.lists.forEach
+              (lib.attrsets.mapAttrsToList (name: _value: name) (homepageServicesFor cat))
               (x: {
-                "${hl.${x}.homepage.name}" = {
-                  icon = hl.${x}.homepage.icon;
-                  description = hl.${x}.homepage.description;
-                  href = "https://${hl.${x}.url}";
-                  siteMonitor = "https://${hl.${x}.url}";
+                "${allServices.${x}.homepage.name}" = {
+                  icon = allServices.${x}.homepage.icon;
+                  description = allServices.${x}.homepage.description;
+                  href = "https://${allServices.${x}.url}";
+                  siteMonitor = "https://${allServices.${x}.url}";
                 };
               });
           })
