@@ -1,6 +1,14 @@
-{self, ...}: {
+{
+  self,
+  lib,
+  ...
+}: let
+  clib = import "${self}/lib/server" {inherit lib;};
+in {
   imports = [
-    "${self}/lib/server"
+    {
+      _module.args.clib = clib;
+    }
     ./options.nix
     ./infra
     ./services

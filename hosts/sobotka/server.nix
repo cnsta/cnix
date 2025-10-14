@@ -57,12 +57,14 @@
     services = {
       homepage-dashboard = {
         enable = true;
-        subdomain = "";
+        subdomain = "dash";
+        exposure = "local";
         port = 8082;
       };
       n8n = {
         enable = true;
         subdomain = "n8n";
+        exposure = "local";
         port = 5678;
         homepage = {
           name = "n8n";
@@ -74,6 +76,7 @@
       bazarr = {
         enable = true;
         subdomain = "bazarr";
+        exposure = "local";
         port = 6767;
         homepage = {
           name = "Bazarr";
@@ -85,6 +88,7 @@
       prowlarr = {
         enable = true;
         subdomain = "prowlarr";
+        exposure = "local";
         port = 9696;
         homepage = {
           name = "prowlarr";
@@ -96,6 +100,7 @@
       flaresolverr = {
         enable = true;
         subdomain = "flaresolverr";
+        exposure = "local";
         port = 8191;
         homepage = {
           name = "FlareSolverr";
@@ -107,6 +112,7 @@
       lidarr = {
         enable = true;
         subdomain = "lidarr";
+        exposure = "local";
         port = 8686;
         homepage = {
           name = "Lidarr";
@@ -118,6 +124,7 @@
       sonarr = {
         enable = true;
         subdomain = "sonarr";
+        exposure = "local";
         port = 8989;
         homepage = {
           name = "Sonarr";
@@ -129,6 +136,7 @@
       radarr = {
         enable = true;
         subdomain = "radarr";
+        exposure = "local";
         port = 7878;
         homepage = {
           name = "Radarr";
@@ -140,6 +148,7 @@
       jellyseerr = {
         enable = true;
         subdomain = "jellyseerr";
+        exposure = "local";
         port = 5055;
         homepage = {
           name = "Jellyseerr";
@@ -163,6 +172,7 @@
       uptime-kuma = {
         enable = true;
         subdomain = "uptime";
+        exposure = "local";
         port = 3001;
         homepage = {
           name = "Uptime Kuma";
@@ -218,6 +228,7 @@
       qbittorrent = {
         enable = true;
         subdomain = "qbt";
+        exposure = "local";
         port = 8080;
         homepage = {
           name = "qBittorrent";
@@ -229,6 +240,7 @@
       slskd = {
         enable = true;
         subdomain = "slskd";
+        exposure = "local";
         port = 5030;
         homepage = {
           name = "Soulseek";
@@ -240,6 +252,7 @@
       pihole = {
         enable = true;
         subdomain = "pihole";
+        exposure = "local";
         port = 8053;
         homepage = {
           name = "PiHole";

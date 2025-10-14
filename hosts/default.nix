@@ -6,7 +6,7 @@
   ...
 }: {
   flake.nixosConfigurations = let
-    cLib = import ../lib inputs.nixpkgs.lib;
+    # clib = import ../lib inputs.nixpkgs.lib;
     userConfig = "${self}/home";
     systemConfig = "${self}/system";
     hostConfig = "${self}/hosts";
@@ -22,7 +22,7 @@
 
     specialArgs = {
       inherit
-        cLib
+        # clib
         inputs
         outputs
         self

@@ -8,10 +8,22 @@
   cfg = config.server.infra.${unit};
   srv = config.server;
 
-  generateLocalRecords = services:
-    lib.mapAttrsToList (
-      name: service: "local-data: \"${service.subdomain}.${srv.domain}. A ${srv.ip}\""
-    ) (lib.filterAttrs (name: service: service.enable) services);
+  svcNames = lib.attrNames srv.services;
+
+  localARecords = builtins.concatLists (map (
+      name: let
+        s = srv.services.${name};
+      in
+        if s != null && s.enable && s.subdomain != null
+        then [''"${s.subdomain}.${srv.domain}. A ${srv.ip}"'']
+        else []
+    )
+    svcNames);
+
+  revParts = lib.lists.reverseList (lib.splitString "." srv.ip);
+  revName = lib.concatStringsSep "." revParts;
+
+  localPTRs = ["${revName}.in-addr.arpa. PTR traefik.${srv.domain}"];
 
   hostIp = hostname:
     if hostname == "ziggy"
@@ -104,10 +116,10 @@ in {
               "255.255.255.255/32"
               "2001:db8::/32"
             ];
-            local-data = generateLocalRecords srv.services;
-            local-data-ptr = [
-              "local-data: \"traefik.${srv.domain}. A ${srv.ip}\""
-            ];
+            local-data = localARecords;
+
+            # Example PTR entry: "14.88.168.192.in-addr.arpa. PTR traefik.cnix.dev."
+            # local-data-ptr = localPTRs;
           };
         };
       };
