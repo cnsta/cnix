@@ -3,7 +3,7 @@
   pkgs,
   lib,
   osConfig,
-  cLib,
+  clib,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
@@ -13,7 +13,7 @@
   # hyprlockPkg = pkgs.hyprlock;
   #
   bg = osConfig.settings.theme.background;
-  inherit (cLib.theme.bgs) resolve;
+  inherit (clib.theme.bgs) resolve;
 in {
   config = mkIf cfg.enable {
     programs.hyprlock = {

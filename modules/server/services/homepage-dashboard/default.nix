@@ -2,6 +2,7 @@
   config,
   lib,
   self,
+  clib,
   ...
 }: let
   unit = "homepage-dashboard";
@@ -90,8 +91,9 @@ in {
             "Downloads"
             "Services"
           ];
-
           allServices = srv.services;
+
+          getDomain = s: clib.server.mkHostDomain config s;
 
           homepageServicesFor = category:
             lib.filterAttrs
@@ -108,12 +110,15 @@ in {
             "${cat}" =
               lib.lists.forEach
               (lib.attrsets.mapAttrsToList (name: _value: name) (homepageServicesFor cat))
-              (x: {
-                "${allServices.${x}.homepage.name}" = {
-                  icon = allServices.${x}.homepage.icon;
-                  description = allServices.${x}.homepage.description;
-                  href = "https://${allServices.${x}.url}";
-                  siteMonitor = "https://${allServices.${x}.url}";
+              (x: let
+                service = allServices.${x};
+                domain = getDomain service;
+              in {
+                "${service.homepage.name}" = {
+                  icon = service.homepage.icon;
+                  description = service.homepage.description;
+                  href = "https://${domain}";
+                  siteMonitor = "https://${domain}";
                 };
               });
           })

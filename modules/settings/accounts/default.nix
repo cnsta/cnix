@@ -2,8 +2,7 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   inherit (lib) mkOption types;
 
   sshKeys = {
@@ -16,14 +15,14 @@ let
   keyName = config.settings.accounts.sshUser or null;
 
   selectedKey =
-    if keyName != null then
+    if keyName != null
+    then
       lib.attrByPath [
         keyName
-      ] (builtins.abort "No SSH key defined for hostname/key '${toString keyName}'") sshKeys
-    else
-      builtins.abort "No accounts.sshUser provided, cannot select SSH key.";
-in
-{
+      ] (builtins.abort "No SSH key defined for hostname/key '${toString keyName}'")
+      sshKeys
+    else builtins.abort "No accounts.sshUser provided, cannot select SSH key.";
+in {
   options.settings.accounts = {
     username = mkOption {
       type = types.str;
@@ -45,6 +44,22 @@ in
       type = lib.types.nullOr lib.types.str;
       default = null;
       description = "Optional override for selecting an SSH key by name";
+    };
+    domains = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          local = lib.mkOption {
+            type = lib.types.str;
+            default = "127.0.0.1";
+            description = "The local domain of the host";
+          };
+          public = lib.mkOption {
+            type = lib.types.str;
+            default = "example.com";
+            description = "The public domain of the host";
+          };
+        };
+      };
     };
   };
 }

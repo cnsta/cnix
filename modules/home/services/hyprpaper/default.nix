@@ -3,7 +3,7 @@
   pkgs,
   inputs,
   osConfig,
-  cLib,
+  clib,
   ...
 }: let
   inherit (lib) mkIf;
@@ -11,7 +11,7 @@
   cfg = osConfig.nixos.programs.hyprland;
   hyprpaperFlake = inputs.hyprpaper.packages.${pkgs.system}.default;
   bg = osConfig.settings.theme.background;
-  bgs = cLib.theme.bgs;
+  bgs = clib.theme.bgs;
 
   monitorMappings = [
     {

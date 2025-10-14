@@ -1,5 +1,6 @@
 {
   lib,
+  clib,
   config,
   pkgs,
   self,
@@ -29,21 +30,21 @@
   #       }
   #   ) (lib.filterAttrs (name: service: service.enable) services);
 
-  generateRouters = services:
+  generateRouters = services: config:
     lib.mapAttrs' (
       name: service:
-        lib.nameValuePair "${service.subdomain}" {
+        lib.nameValuePair name {
           entryPoints = ["websecure"];
-          rule = "Host(`${config.clib.server.mkServiceUrl service}`)";
-          service = service.subdomain;
+          # FIX 3: Use backticks for the Host rule and interpolation
+          rule = "Host(`${clib.server.mkFullDomain config service}`)";
+          service = name;
           tls.certResolver = "letsencrypt";
         }
     ) (lib.filterAttrs (_: s: s.enable) services);
 
-  # Generates all Traefik backend services
   generateServices = services:
     lib.mapAttrs' (name: service:
-      lib.nameValuePair "${service.subdomain}" {
+      lib.nameValuePair name {
         loadBalancer.servers = [{url = "http://localhost:${toString service.port}";}];
       }) (lib.filterAttrs (name: service: service.enable) services);
 
@@ -168,12 +169,10 @@ in {
 
         dynamicConfigOptions = {
           http = {
-            # Generate the services from your central list
             services = generateServices srv.services;
 
-            # Generate the routers and manually add the special 'api' router
             routers =
-              (generateRouters srv.services)
+              (generateRouters srv.services config)
               // {
                 api = {
                   entryPoints = ["websecure"];
