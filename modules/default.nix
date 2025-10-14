@@ -123,28 +123,6 @@
     server = {
       imports = [
         ./server
-        ./server/fail2ban
-        ./server/homepage-dashboard
-        ./server/nextcloud
-        ./server/vaultwarden
-        ./server/bazarr
-        ./server/prowlarr
-        ./server/lidarr
-        ./server/radarr
-        ./server/sonarr
-        ./server/jellyseerr
-        ./server/jellyfin
-        ./server/n8n
-        ./server/podman
-        ./server/unbound
-        ./server/uptime-kuma
-        ./server/keepalived
-        ./server/gitea
-        ./server/postgres
-        ./server/traefik
-        ./server/www
-        ./server/authentik
-        ./server/tailscale
       ];
     };
     settings = {
