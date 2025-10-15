@@ -82,8 +82,8 @@
         enable = false;
       };
       hyprland = {
-        enable = false;
-        withUWSM = false;
+        enable = true;
+        withUWSM = true;
       };
       inkscape = {
         enable = false;
@@ -98,7 +98,7 @@
         enable = true;
       };
       niri = {
-        enable = true;
+        enable = false;
       };
       pkgs = {
         enable = true;
