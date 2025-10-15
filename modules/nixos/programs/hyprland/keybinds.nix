@@ -99,7 +99,7 @@ in
 
     (mkIf (host == "kima") {
       programs.hyprland.settings = {
-        "$terminal" = "ghostty";
+        "$terminal" = "alacritty";
         "$browser" = "zen";
         "$browserinc" = "zen --private-window";
         "$mod" = "SUPER";
@@ -111,7 +111,7 @@ in
 
     (mkIf (host == "bunk") {
       programs.hyprland.settings = {
-        "$terminal" = "foot";
+        "$terminal" = "alacritty";
         "$browser" = "zen";
         "$browserinc" = "zen --private-window";
         "$mod" = "ALT_L";
