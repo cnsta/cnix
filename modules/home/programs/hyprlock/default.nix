@@ -1,24 +1,18 @@
 {
-  inputs,
-  pkgs,
   lib,
   osConfig,
   clib,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption;
+  inherit (lib) mkIf;
   cfg = osConfig.nixos.programs.hyprland;
 
-  hyprlockFlake = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
-  # hyprlockPkg = pkgs.hyprlock;
-  #
   bg = osConfig.settings.theme.background;
   inherit (clib.theme.bgs) resolve;
 in {
   config = mkIf cfg.enable {
     programs.hyprlock = {
       enable = true;
-      package = hyprlockFlake;
       settings = {
         general = {
           # disable_loading_bar = true;

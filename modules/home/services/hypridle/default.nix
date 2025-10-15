@@ -1,22 +1,14 @@
 {
   osConfig,
   lib,
-  pkgs,
-  inputs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf;
   cfg = osConfig.nixos.programs.hyprland;
-
-  hypridleFlake = inputs.hypridle.packages.${pkgs.system}.hypridle;
-  # hypridlePkg = pkgs.hypridle;
-in
-{
+in {
   config = mkIf cfg.enable {
     services.hypridle = {
       enable = true;
-      package = hypridleFlake;
       settings = {
         general = {
           lock_cmd = "hyprlock";

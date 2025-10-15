@@ -24,6 +24,13 @@ in {
         environmentFile = config.age.secrets.homepageEnvironment.path;
 
         settings = {
+          color = "stone";
+          theme = "dark";
+          headerStyle = "clean";
+          statusStyle = "dot";
+          hideVersion = true;
+          useEqualHeights = true;
+
           layout = [
             {
               Glances = {
@@ -57,10 +64,6 @@ in {
               };
             }
           ];
-
-          headerStyle = "clean";
-          statusStyle = "dot";
-          hideVersion = "true";
         };
 
         widgets = [
@@ -125,72 +128,94 @@ in {
           ++ [
             {
               Glances = let
-                port = toString config.services.glances.port;
+                glancesShared = {
+                  type = "glances";
+                  url = "http://localhost:${toString config.services.glances.port}";
+                  chart = true;
+                  version = 4;
+                };
               in [
                 {
-                  Info = {
-                    widget = {
-                      type = "glances";
-                      url = "http://localhost:${port}";
-                      metric = "info";
-                      chart = false;
-                      version = 4;
-                    };
+                  Memory = {
+                    widget =
+                      glancesShared
+                      // {
+                        metric = "memory";
+                        refreshInterval = 2000;
+                        pointsLimit = 30;
+                      };
                   };
                 }
                 {
+                  "CPU Usage" = {
+                    widget =
+                      glancesShared
+                      // {
+                        metric = "cpu";
+                        refreshInterval = 2000;
+                        pointsLimit = 30;
+                      };
+                  };
+                }
+
+                {
                   "CPU Temp" = {
-                    widget = {
-                      type = "glances";
-                      url = "http://localhost:${port}";
-                      metric = "sensor:Tctl";
-                      chart = false;
-                      version = 4;
-                    };
+                    widget =
+                      glancesShared
+                      // {
+                        metric = "sensor:Tctl";
+                        refreshInterval = 5000;
+                        pointsLimit = 20;
+                      };
                   };
                 }
                 {
                   "GPU Radeon" = {
-                    widget = {
-                      type = "glances";
-                      url = "http://localhost:${port}";
-                      metric = "sensor:junction";
-                      chart = false;
-                      version = 4;
-                    };
+                    widget =
+                      glancesShared
+                      // {
+                        metric = "sensor:junction";
+                      };
                   };
                 }
                 {
                   "GPU Intel" = {
-                    widget = {
-                      type = "glances";
-                      url = "http://localhost:${port}";
-                      metric = "sensor:pkg";
-                      chart = false;
-                      version = 4;
-                    };
+                    widget =
+                      glancesShared
+                      // {
+                        metric = "sensor:pkg";
+                      };
                   };
                 }
                 {
+                  "ZFS Pool" = {
+                    widget =
+                      glancesShared
+                      // {
+                        metric = "fs:/mnt/data";
+                        refreshInterval = 30000;
+                        pointsLimit = 20;
+                        diskUnits = "bytes";
+                      };
+                  };
+                }
+
+                {
                   Processes = {
-                    widget = {
-                      type = "glances";
-                      url = "http://localhost:${port}";
-                      metric = "process";
-                      chart = false;
-                      version = 4;
-                    };
+                    widget =
+                      glancesShared
+                      // {
+                        metric = "process";
+                      };
                   };
                 }
                 {
                   Network = {
-                    widget = {
-                      type = "glances";
-                      url = "http://localhost:${port}";
-                      metric = "network:enp6s0";
-                      chart = false;
-                      version = 4;
-                    };
+                    widget =
+                      glancesShared
+                      // {
+                        metric = "network:enp6s0";
+                      };
                   };
                 }
               ];
