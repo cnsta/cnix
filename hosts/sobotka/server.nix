@@ -91,7 +91,7 @@
         exposure = "local";
         port = 9696;
         homepage = {
-          name = "prowlarr";
+          name = "Prowlarr";
           description = "PVR indexer";
           icon = "prowlarr.svg";
           category = "Arr";
@@ -209,7 +209,7 @@
         homepage = {
           name = "Vaultwarden";
           description = "Password manager";
-          icon = "vaultwarden.svg";
+          icon = "vaultwarden-light.svg";
           category = "Services";
         };
       };
