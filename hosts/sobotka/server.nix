@@ -153,7 +153,7 @@
         homepage = {
           name = "Jellyseerr";
           description = "Media request and discovery manager";
-          icon = "jellyserr.svg";
+          icon = "jellyseerr.svg";
           category = "Arr";
         };
       };
