@@ -1,7 +1,5 @@
 {
   lib,
-  pkgs,
-  inputs,
   osConfig,
   clib,
   ...
@@ -9,7 +7,6 @@
   inherit (lib) mkIf;
 
   cfg = osConfig.nixos.programs.hyprland;
-  hyprpaperFlake = inputs.hyprpaper.packages.${pkgs.system}.default;
   bg = osConfig.settings.theme.background;
   bgs = clib.theme.bgs;
 
@@ -35,7 +32,6 @@ in {
   config = mkIf cfg.enable {
     services.hyprpaper = {
       enable = true;
-      package = hyprpaperFlake;
 
       settings = {
         ipc = "on";
