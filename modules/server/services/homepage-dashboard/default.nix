@@ -117,8 +117,8 @@ in {
                 "${service.homepage.name}" = {
                   icon = service.homepage.icon;
                   description = service.homepage.description;
-                  href = "https://${domain}";
-                  siteMonitor = "https://${domain}";
+                  href = "https://${service.subdomain}.${domain}${service.homepage.path or ""}";
+                  siteMonitor = "https://${service.subdomain}.${domain}${x.homepage.path or ""}";
                 };
               });
           })
