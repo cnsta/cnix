@@ -9,6 +9,7 @@
     ./lidarr
     ./n8n
     ./nextcloud
+    ./ollama
     ./prowlarr
     ./radarr
     ./sonarr

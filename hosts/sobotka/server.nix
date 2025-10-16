@@ -73,6 +73,18 @@
           category = "Services";
         };
       };
+      ollama = {
+        enable = true;
+        subdomain = "ai";
+        exposure = "local";
+        port = 8001;
+        homepage = {
+          name = "ollama";
+          description = "AI platform";
+          icon = "ollama.svg";
+          category = "Services";
+        };
+      };
       bazarr = {
         enable = true;
         subdomain = "bazarr";
