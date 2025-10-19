@@ -19,6 +19,9 @@ in
       keyboards.hhkbse = {
         extraDefCfg = ''
           process-unmapped-keys yes
+          linux-dev-names-include (
+            "HHKB-Hybrid_1 Keyboard"
+           )
         '';
         devices = [
           "/dev/input/by-id/usb-PFU_Limited_HHKB-Hybrid-event-kbd"

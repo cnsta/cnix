@@ -18,9 +18,7 @@ in
         gaps_in = 2;
         gaps_out = "4, 4, 4, 4";
         border_size = 3;
-        #col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-        #col.inactive_border = rgba(595959aa)
-        "col.active_border" = "rgb(4c7a5d)"; # rgba(b16286ee) 45deg
+        "col.active_border" = "rgb(4c7a5d)";
         "col.inactive_border" = "rgb(504945)";
         layout = "dwindle";
         resize_on_border = true;
