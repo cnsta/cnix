@@ -21,7 +21,7 @@ in
           let
             resolution =
               if m.width != null && m.height != null then
-                "${toString m.width}x${toString m.height}@${toString m.refreshRate}"
+                "${toString m.width}x${toString m.height}@${m.refreshRate}"
               else
                 "preferred";
 
