@@ -9,6 +9,7 @@
 in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      ollama
       intel-compute-runtime
       intel-graphics-compiler
       level-zero
