@@ -10,7 +10,7 @@
         name = "DVI-D-1";
         width = 1920;
         height = 1080;
-        refreshRate = 144;
+        refreshRate = "144";
         position = "0x0";
         transform = 0;
         workspace = "1";
