@@ -82,7 +82,6 @@ in
         ]
 
         (mkIf cfg.common.enable [
-          qt6.full
           swappy
           wayfreeze
           imagemagick
