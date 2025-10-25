@@ -6,7 +6,7 @@
 }: let
   unit = "authentik";
   cfg = config.server.infra.${unit};
-  srv = config.server.infra.www.domain;
+  srv = config.server.infra;
 in {
   options.server.infra.${unit} = {
     enable = lib.mkEnableOption {
@@ -14,7 +14,7 @@ in {
     };
     url = lib.mkOption {
       type = lib.types.str;
-      default = "auth.${srv.www.domain}";
+      default = "auth.${srv.www.url}";
     };
     port = lib.mkOption {
       type = lib.types.port;
