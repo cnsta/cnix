@@ -20,11 +20,6 @@
     )
     svcNames);
 
-  revParts = lib.lists.reverseList (lib.splitString "." srv.ip);
-  revName = lib.concatStringsSep "." revParts;
-
-  localPTRs = ["${revName}.in-addr.arpa. PTR traefik.${srv.domain}"];
-
   hostIp = hostname:
     if hostname == "ziggy"
     then "192.168.88.12"
@@ -116,10 +111,11 @@ in {
               "255.255.255.255/32"
               "2001:db8::/32"
             ];
-            local-data = localARecords;
-
-            # Example PTR entry: "14.88.168.192.in-addr.arpa. PTR traefik.cnix.dev."
-            # local-data-ptr = localPTRs;
+            local-data =
+              [
+                ''"traefik.${config.settings.accounts.domains.local}. A 192.168.88.14"''
+              ]
+              ++ localARecords;
           };
         };
       };
