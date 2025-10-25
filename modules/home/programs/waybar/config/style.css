@@ -28,8 +28,8 @@ tooltip label {
   margin: 0 0px;
   background-color: transparent;
   color: #fbf1c7;
-  border-top: 2px solid transparent;
-  border-bottom: 2px solid transparent;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
 }
 
 #workspaces button:hover {
@@ -45,7 +45,7 @@ tooltip label {
   background-image: url("assets/button.svg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 24px 20px;
+  background-size: 21px 18px;
 }
 
 #custom-trayicon {
