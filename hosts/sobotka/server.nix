@@ -22,6 +22,10 @@
       traefik = {
         enable = true;
       };
+      headscale = {
+        enable = true;
+        port = 8581;
+      };
       tailscale = {
         enable = true;
       };
