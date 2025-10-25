@@ -2,7 +2,6 @@
   imports = [
     ./authentik
     ./fail2ban
-    ./headscale
     ./keepalived
     ./podman
     ./postgres
