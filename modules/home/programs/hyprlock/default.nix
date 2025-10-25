@@ -3,13 +3,15 @@
   osConfig,
   clib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
   cfg = osConfig.nixos.programs.hyprland;
 
   bg = osConfig.settings.theme.background;
   inherit (clib.theme.bgs) resolve;
-in {
+in
+{
   config = mkIf cfg.enable {
     programs.hyprlock = {
       enable = true;
@@ -52,6 +54,7 @@ in {
             position = "0, 20";
             halign = "center";
             valign = "center";
+            font_family = "DepartureMono Nerd Font Mono Italic";
           }
         ];
         label = [
@@ -63,7 +66,7 @@ in {
             shadow_boost = 0.5;
             color = "rgba(FFFFFFFF)";
             font_size = 25;
-            font_family = "Input Mono Compressed";
+            font_family = "DepartureMono Nerd Font Mono Regular";
             position = "0, 230";
             halign = "center";
             valign = "center";
@@ -76,7 +79,7 @@ in {
             shadow_boost = 0.5;
             color = "rgba(FFFFFFFF)";
             font_size = 85;
-            font_family = "Input Mono Compressed";
+            font_family = "DepartureMono Nerd Font Mono Regular";
             position = "0, 300";
             halign = "center";
             valign = "center";
