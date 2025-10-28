@@ -3,7 +3,7 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = ["amd"];
+        hardware = [ "amd" ];
       };
       loader = {
         default = {
@@ -20,7 +20,7 @@
       };
       graphics = {
         enable = true;
-        vendors = ["amd"];
+        vendors = [ "amd" ];
       };
       logitech = {
         enable = false;
@@ -123,10 +123,10 @@
         enable = false;
       };
       thunar = {
-        enable = true;
+        enable = false;
       };
       yubikey = {
-        enable = true;
+        enable = false;
       };
       zsh = {
         enable = false;
@@ -168,7 +168,7 @@
         enable = true;
       };
       mullvad = {
-        enable = true;
+        enable = false;
       };
       nix-ld = {
         enable = false;
@@ -195,7 +195,7 @@
         enable = true;
       };
       zram = {
-        enable = false;
+        enable = true;
       };
     };
     system = {
