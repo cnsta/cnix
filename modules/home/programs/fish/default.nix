@@ -6,8 +6,9 @@
 }:
 let
   inherit (lib) mkIf mkEnableOption;
-  inherit (lib.meta) getExe;
-  inherit (pkgs) eza bat;
+  packageNames = map (p: p.pname or p.name or null) config.home.packages;
+  hasPackage = name: lib.any (x: x == name) packageNames;
+  hasEza = hasPackage "eza";
   cfg = config.home.programs.fish;
 in
 {
@@ -46,12 +47,8 @@ in
         nset = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/settings.nix";
         nixosmodules = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
         nmod = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
-        tree = "${getExe eza} --tree --icons=always";
-        cat = "${getExe bat} --style=plain";
-        ls = "${getExe eza} -h --git --icons --color=auto --group-directories-first -s extension";
-        ll = "${getExe eza} -l --git --icons --color=auto --group-directories-first -s extension";
-        lat = "${getExe eza} -lah --tree --color=auto --group-directories-first -s extension";
-        la = "${getExe eza} -lah --color=auto --group-directories-first -s extension";
+        ls = mkIf hasEza "eza";
+        tree = mkIf hasEza "eza --tree --icons=always";
         # Clear screen and scrollback
         clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
       };
@@ -61,14 +58,12 @@ in
         # Merge history when pressing up
         up-or-search = lib.readFile ./up-or-search.fish;
         # Check stuff in PATH
-        nix-inspect =
-          # fish
+        nix-inspect = # fish
           ''
             set -s PATH | grep "PATH\[.*/nix/store" | cut -d '|' -f2 |  grep -v -e "-man" -e "-terminfo" | perl -pe 's:^/nix/store/\w{32}-([^/]*)/bin$:\1:' | sort | uniq
           '';
       };
-      interactiveShellInit =
-        # fish
+      interactiveShellInit = # fish
         ''
           # Open command buffer in vim when alt+e is pressed
           bind \ee edit_command_buffer

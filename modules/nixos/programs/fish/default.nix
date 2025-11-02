@@ -1,13 +1,14 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
-  inherit (lib.meta) getExe;
-  inherit (pkgs) eza bat;
   inherit (lib) mkIf mkEnableOption mkMerge;
+  packageNames = map (p: p.pname or p.name or null) config.home.packages;
+  hasPackage = name: lib.any (x: x == name) packageNames;
+  hasEza = hasPackage "eza";
+
   cfg = config.nixos.programs.fish;
 in
 {
@@ -22,6 +23,7 @@ in
     (mkIf cfg.enable {
       programs.fish = {
         enable = true;
+        useBabelfish = true;
         vendor = {
           completions.enable = true;
           config.enable = true;
@@ -55,17 +57,12 @@ in
           nset = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/settings.nix";
           nixosmodules = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
           nmod = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
-          tree = "${getExe eza} --tree --icons=always";
-          cat = "${getExe bat} --style=plain";
-          ls = "${getExe eza} -h --git --icons --color=auto --group-directories-first -s extension";
-          ll = "${getExe eza} -l --git --icons --color=auto --group-directories-first -s extension";
-          lat = "${getExe eza} -lah --tree --color=auto --group-directories-first -s extension";
-          la = "${getExe eza} -lah --color=auto --group-directories-first -s extension";
+          ls = mkIf hasEza "eza";
+          tree = mkIf hasEza "eza --tree --icons=always";
           # Clear screen and scrollback
           clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
         };
-        interactiveShellInit =
-          # fish
+        interactiveShellInit = # fish
           ''
             # Open command buffer in vim when alt+e is pressed
             bind \ee edit_command_buffer
