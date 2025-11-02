@@ -79,6 +79,13 @@ in
           xmrig
           ocl-icd
           dig
+          unzip
+          zip
+          gnutar
+          gnused
+          p7zip
+          ripgrep
+          file
         ]
 
         (mkIf cfg.common.enable [

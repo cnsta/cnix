@@ -62,16 +62,8 @@ in
         [
           cmatrix
           xcur2png
-          ripgrep
-          file
-          fd
-          gnused
           nix-tree
           wireguard-tools
-          unzip
-          zip
-          gnutar
-          p7zip
         ]
 
         (mkIf cfg.common.enable [
