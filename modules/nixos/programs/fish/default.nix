@@ -1,17 +1,13 @@
 {
   config,
   lib,
+  pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption mkMerge;
-  packageNames = map (p: p.pname or p.name or null) config.home.packages;
-  hasPackage = name: lib.any (x: x == name) packageNames;
-  hasEza = hasPackage "eza";
 
   cfg = config.nixos.programs.fish;
-in
-{
+in {
   options = {
     nixos.programs.fish = {
       enable = mkEnableOption "Enables fish shell";
@@ -57,12 +53,13 @@ in
           nset = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/settings.nix";
           nixosmodules = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
           nmod = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
-          ls = mkIf hasEza "eza";
-          tree = mkIf hasEza "eza --tree --icons=always";
+          ls = lib.getExe pkgs.eza;
+          tree = "${lib.getExe pkgs.eza} --tree --icons=always";
           # Clear screen and scrollback
           clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
         };
-        interactiveShellInit = # fish
+        interactiveShellInit =
+          # fish
           ''
             # Open command buffer in vim when alt+e is pressed
             bind \ee edit_command_buffer
