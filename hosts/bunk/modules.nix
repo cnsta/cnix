@@ -27,6 +27,13 @@
       };
       network = {
         enable = true;
+        nameservers = [
+          "192.168.88.1"
+          "192.168.88.69"
+        ];
+        search = [
+          "taila7448a.ts.net"
+        ];
         interfaces = {
           "wlp6s0" = {
             allowedTCPPorts = [
@@ -190,6 +197,9 @@
       };
       samba = {
         enable = false;
+      };
+      tailscale = {
+        enable = true;
       };
       udisks = {
         enable = true;

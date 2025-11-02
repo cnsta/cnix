@@ -120,7 +120,7 @@
         enable = true;
       };
       gpg = {
-        enable = false;
+        enable = true;
       };
       gtk = {
         enable = true;
