@@ -19,13 +19,13 @@ let
 
   commonPackages = with pkgs; [
     libva
-    vaapiVdpau
+    libva-vdpau-driver
     libvdpau-va-gl
   ];
 
   commonPackages32 = with pkgs.pkgsi686Linux; [
     libva
-    vaapiVdpau
+    libva-vdpau-driver
     libvdpau-va-gl
   ];
 

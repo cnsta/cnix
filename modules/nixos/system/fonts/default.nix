@@ -26,7 +26,7 @@ in
         inputs.fonts.packages.${pkgs.system}.vcr-mono
         noto-fonts
         noto-fonts-cjk-sans
-        noto-fonts-emoji
+        noto-fonts-color-emoji
         liberation_ttf
         fira-code-symbols
         font-awesome

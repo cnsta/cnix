@@ -28,7 +28,7 @@ in
       };
     };
     environment.systemPackages = with pkgs; [
-      protonup
+      protonup-ng
       wine
       winetricks
       wine-wayland
