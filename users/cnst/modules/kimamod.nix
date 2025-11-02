@@ -57,7 +57,7 @@
         enable = false;
       };
       nvf = {
-        enable = true;
+        enable = false;
       };
       nwg-bar = {
         enable = true;

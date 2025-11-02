@@ -18,6 +18,7 @@
   2 3 4 5 6 7 8 9 0 + ´ ' §
   e p ¨
   l ö ä
+  -
   z x rmet
 )
 
@@ -25,13 +26,16 @@
   _ _ _ _ _ _ _ _ _ _ pgdn pgup del
   _ _ '
   _ _ _
+  _
   _ _ @level3
 )
+
 
 (deflayer level3
   RA-2 RA-3 S-4 RA-5 S-¨ RA-7 RA-8 RA-9 RA-0 RA-+ ⇥ ⇤ S-'
   RA-5 ▲ RA-¨
   ◀ ▼ ▶
+  RA-<
   RA-S-z RA-S-x @level3
 )
 
