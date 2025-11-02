@@ -39,7 +39,7 @@
         enable = true;
       };
       ghostty = {
-        enable = true;
+        enable = false;
       };
       helix = {
         enable = true;
@@ -120,7 +120,7 @@
         enable = true;
       };
       gpg = {
-        enable = true;
+        enable = false;
       };
       gtk = {
         enable = true;
