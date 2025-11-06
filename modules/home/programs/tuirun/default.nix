@@ -20,7 +20,7 @@ in
     programs.tuirun = {
       enable = true;
       config = {
-        plugins = with inputs.tuirun.packages.${pkgs.system}; [
+        plugins = with inputs.tuirun.packages.${pkgs.stdenv.hostPlatform.system}; [
           runner
         ];
         closeOnClick = true;

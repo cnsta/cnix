@@ -5,16 +5,17 @@
   pkgs,
   self,
   ...
-}: let
-  inherit
-    (lib)
+}:
+let
+  inherit (lib)
     mkIf
     mkEnableOption
     mkOption
     mkMerge
     ;
   cfg = config.nixos.services.agenix;
-in {
+in
+{
   options = {
     nixos.services.agenix = {
       enable = mkEnableOption "Enables agenix system environment";
@@ -90,7 +91,7 @@ in {
 
     environment = {
       systemPackages = [
-        inputs.agenix.packages.${pkgs.system}.default
+        inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
         pkgs.age
       ];
     };
