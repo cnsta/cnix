@@ -23,7 +23,7 @@ in
   config = mkIf cfg.enable {
     fonts = {
       packages = with pkgs; [
-        inputs.fonts.packages.${pkgs.system}.vcr-mono
+        inputs.fonts.packages.${pkgs.stdenv.hostPlatform.system}.vcr-mono
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-color-emoji

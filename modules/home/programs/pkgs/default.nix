@@ -33,11 +33,6 @@ in
         default = false;
         description = "Whether to install laptop-specific packages.";
       };
-      server.enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to install server-specific packages.";
-      };
       dev.enable = mkOption {
         type = types.bool;
         default = false;
@@ -98,9 +93,6 @@ in
         ])
 
         (mkIf cfg.laptop.enable [
-        ])
-
-        (mkIf cfg.server.enable [
         ])
 
         (mkIf cfg.dev.enable [

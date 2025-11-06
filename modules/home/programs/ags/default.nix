@@ -23,7 +23,7 @@ in
 
       # additional packages to add to gjs's runtime
       extraPackages = with pkgs; [
-        inputs.ags.packages.${pkgs.system}.battery
+        inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}.battery
         fzf
         io
         astal3
