@@ -126,7 +126,7 @@
     };
 
     zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
+      url = "git+https://git.sr.ht/~canasta/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
