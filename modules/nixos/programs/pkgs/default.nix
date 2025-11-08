@@ -86,6 +86,8 @@ in
           p7zip
           ripgrep
           file
+          libnotify
+          unrar
         ]
 
         (mkIf cfg.common.enable [

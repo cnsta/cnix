@@ -62,7 +62,6 @@ in
         ]
 
         (mkIf cfg.common.enable [
-          keepassxc
           usbimager
           nwg-look
           pavucontrol
@@ -70,17 +69,13 @@ in
           slurp
           grimblast
           tesseract
-          calcurse
           exiftool
           hyprpicker
-          libnotify
-          pamixer
           loupe
           adwaita-icon-theme
           qt5.qtwayland
           qt6.qtwayland
           wpa_supplicant
-          unrar
           material-icons
           material-symbols
           feh

@@ -72,7 +72,7 @@ in
           pkgs.writeShellApplication {
             name = "volume-control";
             runtimeInputs = with pkgs; [
-              pamixer
+              wireplumber
               libnotify
             ];
             text = readFile ./bin/volume-control.sh;
