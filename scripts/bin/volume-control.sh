@@ -4,7 +4,7 @@ iDIR="$HOME/.config/mako/icons"
 
 # Get Volume
 get_volume() {
-  pamixer --get-volume
+  wpctl get-volume @DEFAULT_AUDIO_SINK@
 }
 
 # Get icons
@@ -33,29 +33,29 @@ notify_user() {
 
 # Increase Volume
 inc_volume() {
-  pamixer -i 5 && notify_user
+  wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+ && notify_user
 }
 
 # Decrease Volume
 dec_volume() {
-  pamixer -d 5 && notify_user
+  wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && notify_user
 }
 
 # Toggle Mute
 toggle_mute() {
-  if pamixer --get-mute | grep -q "false"; then
-    pamixer -m && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/vol_off.svg" "Volume Switched OFF"
+  if wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep "[MUTED]"; then
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$(get_icon)" "Volume Switched ON"
   else
-    pamixer -u && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$(get_icon)" "Volume Switched ON"
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ 1 && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/vol_off.svg" "Volume Switched OFF"
   fi
 }
 
 # Toggle Mic
 toggle_mic() {
-  if pamixer --default-source --get-mute | grep -q "false"; then
-    pamixer --default-source -m && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/mic_off.svg" "Microphone Switched OFF"
+  if wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep "[MUTED]"; then
+    wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0 && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/mic.svg" "Microphone Switched ON"
   else
-    pamixer --default-source -u && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/mic.svg" "Microphone Switched ON"
+    wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1 && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$iDIR/mic_off.svg" "Microphone Switched OFF"
   fi
 }
 
@@ -66,17 +66,17 @@ get_mic_icon() {
 
 # Notify
 notify_mic_user() {
-  notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$(get_mic_icon)" "Mic-Level : $(pamixer --default-source --get-volume) %"
+  notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i "$(get_mic_icon)" "Mic-Level : $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) %"
 }
 
 # Increase MIC Volume
 inc_mic_volume() {
-  pamixer --default-source -i 5 && notify_mic_user
+  wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SOURCE@ 5%+ && notify_mic_user
 }
 
 # Decrease MIC Volume
 dec_mic_volume() {
-  pamixer --default-source -d 5 && notify_mic_user
+  wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SOURCE@ 5%- && notify_mic_user
 }
 
 # Execute accordingly

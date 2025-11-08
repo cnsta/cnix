@@ -9,8 +9,7 @@ let
   host = config.networking.hostName;
 
   commonExecOnce = [
-    "pamixer --set-volume 50"
-    "uwsm app -- keepassxc"
+    "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.5"
     "uwsm app -- nm-applet --indicator"
   ];
 in
