@@ -3,6 +3,7 @@
     ./authentik
     ./fail2ban
     ./keepalived
+    ./mysql
     ./podman
     ./postgres
     ./tailscale
