@@ -9,7 +9,7 @@ let
   host = config.networking.hostName;
 
   commonExecOnce = [
-    "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.5"
+    "sleep 3s && wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.5"
     "uwsm app -- nm-applet --indicator"
   ];
 in
@@ -30,9 +30,9 @@ in
 
     (mkIf (host == "kima") {
       programs.hyprland.settings.exec-once = [
-        "uwsm app -- mullvad-vpn"
         "uwsm app -- solaar -w hide -b regular"
         "uwsm app -- blueman-applet"
+        "uwsm app -- jellyfin-mpv-shim"
       ]
       ++ commonExecOnce;
     })
@@ -40,6 +40,7 @@ in
     (mkIf (host == "bunk") {
       programs.hyprland.settings.exec-once = [
         "uwsm app -- blueman-applet"
+        "uwsm app -- jellyfin-mpv-shim"
       ]
       ++ commonExecOnce;
     })
