@@ -6,7 +6,7 @@
   self,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf types;
+  inherit (lib) mkEnableOption mkIf;
 
   cfg = config.server.infra.traefik;
   srv = config.server;
@@ -16,7 +16,6 @@
       name: service:
         lib.nameValuePair name {
           entryPoints = ["websecure"];
-          # FIX 3: Use backticks for the Host rule and interpolation
           rule = "Host(`${clib.server.mkFullDomain config service}`)";
           service = name;
           tls.certResolver = "letsencrypt";
@@ -28,13 +27,6 @@
       lib.nameValuePair name {
         loadBalancer.servers = [{url = "http://localhost:${toString service.port}";}];
       }) (lib.filterAttrs (name: service: service.enable) services);
-
-  getCloudflareCredentials = hostname:
-    if hostname == "ziggy"
-    then config.age.secrets.cloudflareDnsCredentialsZiggy.path
-    else if hostname == "sobotka"
-    then config.age.secrets.cloudflareDnsCredentials.path
-    else throw "Unknown hostname: ${hostname}";
 in {
   options.server.infra.traefik = {
     enable = mkEnableOption "Enable global Traefik reverse proxy with ACME";
@@ -48,7 +40,6 @@ in {
         owner = "traefik";
         group = "traefik";
       };
-      crowdsecApi.file = "${self}/secrets/crowdsecApi.age";
     };
 
     systemd.services.traefik = {
@@ -108,7 +99,6 @@ in {
                 scheme = "https";
                 permanent = true;
               };
-              # http.middlewares = "crowdsec@file";
             };
 
             websecure = {
@@ -127,23 +117,11 @@ in {
                   }
                 ];
               };
-              # http.middlewares = "crowdsec@file";
             };
 
             experimental = {
               address = ":1111";
               forwardedHeaders.insecure = true;
-            };
-          };
-
-          experimental = {
-            # Install the Crowdsec Bouncer plugin
-            plugins = {
-              #enabled = "true";
-              bouncer = {
-                moduleName = "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin";
-                version = "v1.4.5";
-              };
             };
           };
         };
@@ -162,19 +140,6 @@ in {
                   tls.certResolver = "letsencrypt";
                 };
               };
-            # middlewares = {
-            #   crowdsec = {
-            #     plugin = {
-            #       bouncer = {
-            #         enabled = "true";
-            #         logLevel = "DEBUG";
-            #         crowdsecLapiKeyFile = config.age.secrets.crowdsecApi.path;
-            #         crowdsecMode = "live";
-            #         crowdsecLapiHost = ":4223";
-            #       };
-            #     };
-            #   };
-            # };
           };
         };
       };

@@ -63,8 +63,6 @@ in {
   "wwwCloudflared.age".publicKeys = kima ++ sobotka;
   "authentikCloudflared.age".publicKeys = kima ++ sobotka;
   "sobotkaTsAuth.age".publicKeys = kima ++ sobotka;
-  "mikrotikSecret.age".publicKeys = kima ++ sobotka;
-  "crowdsecApi.age".publicKeys = kima ++ sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = kima ++ ziggy;
