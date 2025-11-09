@@ -3,7 +3,9 @@ let
   inherit (lib) mkOption types;
   bgList = [
     "wallpaper_1"
+    "wallpaper_1.2"
     "wallpaper_2"
+    "wallpaper_2.2"
     "wallpaper_3"
     "wallpaper_4"
     "wallpaper_5"
