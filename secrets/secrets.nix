@@ -33,7 +33,10 @@ let
     rziggy
   ];
   all = kima ++ bunk ++ sobotka ++ ziggy;
-in {
+in
+{
+  "access-token.age".publicKeys = all;
+
   # Generic
   "cnstssh.age".publicKeys = kima;
   "cnixssh.age".publicKeys = kima;

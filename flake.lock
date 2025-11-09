@@ -2020,11 +2020,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1762712081,
+        "lastModified": 1762713700,
         "narHash": "sha256-FLTU942AMIStKkzvqOpmA5vmeUhKWrhYDHbdY1MXWHw=",
         "ref": "refs/heads/main",
-        "rev": "d73b896aefd37c22338f1074fd022cc71d90ef1e",
-        "revCount": 148,
+        "rev": "682d27e5cc872f222d24365d0ad4f048022fca5f",
+        "revCount": 150,
         "type": "git",
         "url": "https://git.sr.ht/~canasta/zen-browser-flake"
       },
