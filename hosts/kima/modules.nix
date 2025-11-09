@@ -86,7 +86,7 @@
         withUWSM = true;
       };
       inkscape = {
-        enable = false;
+        enable = true;
       };
       lact = {
         enable = true;
@@ -186,7 +186,7 @@
         enable = true;
       };
       mullvad = {
-        enable = true;
+        enable = false;
       };
       nfs = {
         enable = false;
