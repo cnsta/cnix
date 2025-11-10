@@ -34,20 +34,22 @@ in
 
   imports = [
     ./hardware-configuration.nix
+    ./disko.nix
     ./modules.nix
     ./settings.nix
   ];
 
   networking = {
     hostName = "kima";
-    hostId = "6bdeec22";
+    hostId = "723158aa";
   };
+
+  boot.zfs.package = pkgs.zfs_unstable;
 
   environment.variables = {
     NH_FLAKE = "/home/cnst/.nix-config";
     GEMINI_API_KEY = config.age.secrets.gcapi.path;
   };
 
-  #   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = lib.mkDefault "23.11";
+  system.stateVersion = lib.mkDefault "25.11";
 }

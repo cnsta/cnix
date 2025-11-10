@@ -9,10 +9,10 @@
       };
       loader = {
         default = {
-          enable = false;
+          enable = true;
         };
         lanzaboote = {
-          enable = true;
+          enable = false;
         };
       };
     };
