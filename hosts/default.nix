@@ -54,6 +54,7 @@
           }
           self.nixosModules.nixos
           self.nixosModules.settings
+          inputs.disko.nixosModules.disko
           inputs.chaotic.nixosModules.default
           inputs.agenix.nixosModules.default
         ];
