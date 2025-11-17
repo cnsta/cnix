@@ -33,8 +33,7 @@ let
     rziggy
   ];
   all = kima ++ bunk ++ sobotka ++ ziggy;
-in
-{
+in {
   "accessTokens.age".publicKeys = all;
 
   # Generic
@@ -66,6 +65,7 @@ in
   "wwwCloudflared.age".publicKeys = sobotka;
   "authentikCloudflared.age".publicKeys = sobotka;
   "sobotkaTsAuth.age".publicKeys = sobotka;
+  "forgejoCloudflared.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

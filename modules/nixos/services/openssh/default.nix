@@ -4,17 +4,17 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   hosts = lib.attrNames outputs.nixosConfigurations;
   inherit (lib) mkIf mkEnableOption;
   cfg = config.nixos.services.openssh;
 
-  hostsWithKeys = builtins.filter (
-    hostname: builtins.pathExists "${self}/hosts/${hostname}/ssh_host_ed25519_key.pub"
-  ) hosts;
-in
-{
+  hostsWithKeys =
+    builtins.filter (
+      hostname: builtins.pathExists "${self}/hosts/${hostname}/ssh_host_ed25519_key.pub"
+    )
+    hosts;
+in {
   options = {
     nixos.services.openssh = {
       enable = mkEnableOption "Enables openssh";
@@ -31,7 +31,7 @@ in
     services.openssh = {
       enable = true;
       settings = {
-        AcceptEnv = "WAYLAND_DISPLAY";
+        # AcceptEnv = "WAYLAND_DISPLAY";
         GatewayPorts = "clientspecified";
         PasswordAuthentication = false;
         PermitRootLogin = "no";

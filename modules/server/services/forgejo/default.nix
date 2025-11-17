@@ -2,25 +2,26 @@
   config,
   lib,
   self,
+  pkgs,
   ...
-}:
-let
+}: let
   unit = "forgejo";
   cfg = config.server.services.${unit};
   domain = "${cfg.subdomain}.${config.server.infra.www.url}";
-in
-{
+in {
   config = lib.mkIf cfg.enable {
-    age.secrets.giteaCloudflared.file = "${self}/secrets/forgejoCloudflared.age";
+    age.secrets.forgejoCloudflared.file = "${self}/secrets/forgejoCloudflared.age";
 
     server.infra = {
       fail2ban.jails.${unit} = {
         serviceName = "${unit}";
         failRegex = ''.*(Failed authentication attempt|invalid credentials|Attempted access of unknown user).* from <HOST>'';
       };
+    };
 
-      postgresql.databases = [
-        { database = "forgejo"; }
+    environment = {
+      systemPackages = with pkgs; [
+        forgejo-cli
       ];
     };
 
@@ -36,19 +37,15 @@ in
 
       forgejo = {
         enable = true;
-        appName = "cnix code forge";
 
-        database = {
-          type = "postgres";
-          socket = "/run/postgresql";
-          name = "forgejo";
-          user = "forgejo";
-          createDatabase = false;
-        };
+        database.type = "postgres";
 
         lfs.enable = true;
 
         settings = {
+          overall = {
+            APP_NAME = "cnix forge";
+          };
           cors = {
             ENABLED = true;
             # SCHEME = "https";
@@ -84,6 +81,10 @@ in
             LANDING_PAGE = "home";
             HTTP_PORT = cfg.port;
             ROOT_URL = "https://${domain}/";
+          };
+
+          ui = {
+            DEFAULT_THEME = "forgejo-dark";
           };
 
           security.DISABLE_GIT_HOOKS = false;
