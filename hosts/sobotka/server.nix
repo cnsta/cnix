@@ -193,9 +193,25 @@
           category = "Services";
         };
       };
-      gitea = {
+      forgejo = {
         enable = true;
         subdomain = "git";
+        exposure = "tunnel";
+        port = 3031;
+        cloudflared = {
+          tunnelId = "9ce34a38-7f0e-4a20-81db-00940bcced7e";
+          credentialsFile = config.age.secrets.forgejoCloudflared.path;
+        };
+        homepage = {
+          name = "Forgejo";
+          description = "Lightweight software forge";
+          icon = "forgejo.svg";
+          category = "Services";
+        };
+      };
+      gitea = {
+        enable = false;
+        subdomain = "gitea";
         exposure = "tunnel";
         port = 5003;
         cloudflared = {

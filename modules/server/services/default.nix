@@ -7,6 +7,7 @@
     ./jellyfin
     ./jellyseerr
     ./lidarr
+    ./forgejo
     ./n8n
     ./nextcloud
     ./ollama
