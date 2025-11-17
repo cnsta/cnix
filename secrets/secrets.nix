@@ -4,8 +4,8 @@ let
   rkima = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHUx5j5tTgRMmLB/DC1nmRdPeNZC04UQiF3aDowhd+kn root@nixos";
 
   # --- Hosts: bunk ---
-  ubunk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXCjkKouZrsMoswMIeueO8X/c3kuY3Gb0E9emvkqwUv cnst@cnixpad";
-  rbunk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH72llEVDSHH/FZnjLVCe6zfdkdJRRVg2QL+ifHiPXXk root@cnix";
+  ubunk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHd48tFwqAKAoE+37zDsTGQTrBS/6cQ+kQQw3596XsdY cnst@bunk";
+  rbunk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGwhIj0kRDt3WbpBPF/JbQsrLWIVGWjfz78p8L0ij16M root@bunk";
 
   # --- Hosts: sobotka ---
   usobotka = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG5ydTeaWcowmNXdDNqIa/lb5l9w5CAzyF2Kg6U5PSSu cnst@sobotka";
@@ -33,7 +33,8 @@ let
     rziggy
   ];
   all = kima ++ bunk ++ sobotka ++ ziggy;
-in {
+in
+{
   "accessTokens.age".publicKeys = all;
 
   # Generic
