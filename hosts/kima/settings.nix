@@ -35,8 +35,8 @@
     ];
     theme = {
       background = {
-        lockscreen = "wallpaper_4";
-        primary = "wallpaper_1.2";
+        lockscreen = "wallpaper_1";
+        primary = "wallpaper_2";
         secondary = "wallpaper_5";
       };
     };
