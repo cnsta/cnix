@@ -35,42 +35,42 @@ let
   all = kima ++ bunk ++ sobotka ++ ziggy;
 in
 {
-  "access-token.age".publicKeys = all;
+  # "access-token.age".publicKeys = all;
 
   # Generic
-  "cnstssh.age".publicKeys = kima;
-  "cnixssh.age".publicKeys = kima;
-  "certpem.age".publicKeys = kima;
-  "keypem.age".publicKeys = kima;
-  "mailpwd.age".publicKeys = kima;
-  "gcapi.age".publicKeys = kima;
+  # "cnstssh.age".publicKeys = kima;
+  # "cnixssh.age".publicKeys = kima;
+  # "certpem.age".publicKeys = kima;
+  # "keypem.age".publicKeys = kima;
+  # "mailpwd.age".publicKeys = kima;
+  # "gcapi.age".publicKeys = kima;
 
   # Shared between kima + sobotka
-  "cloudflareEnvironment.age".publicKeys = kima ++ sobotka;
-  "vaultwardenEnvironment.age".publicKeys = kima ++ sobotka;
-  "homepageEnvironment.age".publicKeys = kima ++ sobotka;
-  "cloudflareFirewallApiKey.age".publicKeys = kima ++ sobotka;
-  "vaultwardenCloudflared.age".publicKeys = kima ++ sobotka;
-  "giteaCloudflared.age".publicKeys = kima ++ sobotka;
-  "nextcloudCloudflared.age".publicKeys = kima ++ sobotka;
-  "nextcloudAdminPass.age".publicKeys = kima ++ sobotka;
-  "cloudflareDnsApiToken.age".publicKeys = kima ++ sobotka;
-  "cloudflareDnsCredentials.age".publicKeys = kima ++ sobotka;
-  "wgCredentials.age".publicKeys = kima ++ sobotka;
-  "wgSobotkaPrivateKey.age".publicKeys = kima ++ sobotka;
-  "gluetunEnvironment.age".publicKeys = kima ++ sobotka;
-  "sobotkaPihole.age".publicKeys = kima ++ sobotka;
-  "slskd.age".publicKeys = kima ++ sobotka;
-  "authentikEnv.age".publicKeys = kima ++ sobotka;
-  "traefikEnv.age".publicKeys = kima ++ sobotka;
-  "wwwCloudflared.age".publicKeys = kima ++ sobotka;
-  "authentikCloudflared.age".publicKeys = kima ++ sobotka;
-  "sobotkaTsAuth.age".publicKeys = kima ++ sobotka;
+  "cloudflareEnvironment.age".publicKeys = sobotka;
+  "vaultwardenEnvironment.age".publicKeys = sobotka;
+  "homepageEnvironment.age".publicKeys = sobotka;
+  "cloudflareFirewallApiKey.age".publicKeys = sobotka;
+  "vaultwardenCloudflared.age".publicKeys = sobotka;
+  "giteaCloudflared.age".publicKeys = sobotka;
+  "nextcloudCloudflared.age".publicKeys = sobotka;
+  "nextcloudAdminPass.age".publicKeys = sobotka;
+  "cloudflareDnsApiToken.age".publicKeys = sobotka;
+  "cloudflareDnsCredentials.age".publicKeys = sobotka;
+  "wgCredentials.age".publicKeys = sobotka;
+  "wgSobotkaPrivateKey.age".publicKeys = sobotka;
+  "gluetunEnvironment.age".publicKeys = sobotka;
+  "sobotkaPihole.age".publicKeys = sobotka;
+  "slskd.age".publicKeys = sobotka;
+  "authentikEnv.age".publicKeys = sobotka;
+  "traefikEnv.age".publicKeys = sobotka;
+  "wwwCloudflared.age".publicKeys = sobotka;
+  "authentikCloudflared.age".publicKeys = sobotka;
+  "sobotkaTsAuth.age".publicKeys = sobotka;
 
   # Ziggy-specific
-  "cloudflareDnsCredentialsZiggy.age".publicKeys = kima ++ ziggy;
-  "ziggyPihole.age".publicKeys = kima ++ ziggy;
+  "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;
+  "ziggyPihole.age".publicKeys = ziggy;
 
   # Both sobotka + ziggy (for HA stuff like keepalived)
-  "keepalived.age".publicKeys = kima ++ sobotka ++ ziggy;
+  "keepalived.age".publicKeys = sobotka ++ ziggy;
 }

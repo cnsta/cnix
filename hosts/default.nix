@@ -52,8 +52,8 @@
               extraSpecialArgs = specialArgsWithClib;
             };
           }
-          self.nixosModules.nixos
-          self.nixosModules.settings
+          self.modules.nixos
+          self.modules.settings
           inputs.disko.nixosModules.disko
           inputs.chaotic.nixosModules.default
           inputs.agenix.nixosModules.default

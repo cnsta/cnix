@@ -9,7 +9,7 @@ let
   sharedImports = [
     "${self}/scripts"
     inputs.nvf.homeManagerModules.default
-    self.nixosModules.home
+    self.modules.home
   ];
 
   homeImports = {

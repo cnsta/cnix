@@ -48,7 +48,6 @@ in
 
   environment.variables = {
     NH_FLAKE = "/home/cnst/.nix-config";
-    GEMINI_API_KEY = config.age.secrets.gcapi.path;
   };
 
   system.stateVersion = lib.mkDefault "25.11";
