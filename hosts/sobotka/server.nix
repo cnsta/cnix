@@ -74,7 +74,7 @@
         };
       };
       ollama = {
-        enable = true;
+        enable = false;
         subdomain = "ai";
         exposure = "local";
         port = 8001;
@@ -259,6 +259,18 @@
           description = "Web-based Soulseek client";
           icon = "slskd.svg";
           category = "Downloads";
+        };
+      };
+      tdarr = {
+        enable = true;
+        subdomain = "tdarr";
+        exposure = "local";
+        port = 8265;
+        homepage = {
+          name = "Tdarr";
+          description = "Media transcoding application";
+          icon = "tdarr.svg";
+          category = "Media";
         };
       };
       pihole = {
