@@ -14,7 +14,7 @@
     ./substituters
   ];
 
-  age.secrets.access-token.file = "${self}/secrets/access-token.age";
+  age.secrets.accessTokens.file = "${self}/secrets/accessTokens.age";
 
   environment.localBinInPath = true;
 
@@ -54,7 +54,7 @@
         ];
       };
       extraOptions = ''
-        !include ${config.age.secrets.access-token.path}
+        !include ${config.age.secrets.accessTokens.path}
       '';
     };
 }

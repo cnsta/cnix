@@ -35,7 +35,7 @@ let
   all = kima ++ bunk ++ sobotka ++ ziggy;
 in
 {
-  # "access-token.age".publicKeys = all;
+  "accessTokens.age".publicKeys = all;
 
   # Generic
   # "cnstssh.age".publicKeys = kima;
