@@ -51,15 +51,15 @@ in
     age = mkMerge [
       (mkIf cfg.kima.enable {
         secrets = {
-          cnstssh.file = "${self}/secrets/cnstssh.age";
-          cnixssh.file = "${self}/secrets/cnixssh.age";
-          certpem.file = "${self}/secrets/certpem.age";
-          keypem.file = "${self}/secrets/keypem.age";
-          mailpwd.file = "${self}/secrets/mailpwd.age";
-          gcapi = {
-            file = "${self}/secrets/gcapi.age";
-            owner = "cnst";
-          };
+          # cnstssh.file = "${self}/secrets/cnstssh.age";
+          # cnixssh.file = "${self}/secrets/cnixssh.age";
+          # certpem.file = "${self}/secrets/certpem.age";
+          # keypem.file = "${self}/secrets/keypem.age";
+          # mailpwd.file = "${self}/secrets/mailpwd.age";
+          # gcapi = {
+          #   file = "${self}/secrets/gcapi.age";
+          #   owner = "cnst";
+          # };
         };
       })
       (mkIf cfg.bunk.enable {

@@ -1,5 +1,5 @@
 {
-  flake.nixosModules = {
+  flake.modules = {
     home = {
       imports = [
         ./home/programs/aerc
