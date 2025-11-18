@@ -67,9 +67,9 @@ in
           "center, class:^(oculante)$"
           "float, class:^(oculante)$"
 
-          "move 100%-w-20 40, class:^(pavucontrol)$"
-          "size 741 585, class:^(pavucontrol)$"
-          "float, class:^(pavucontrol)$"
+          "move 100%-w-20 40, class:^(pwvucontrol)$"
+          "size 741 585, class:^(pwvucontrol)$"
+          "float, class:^(pwvucontrol)$"
 
           "center, class:^(xarchiver)$"
           "float, class:^(xarchiver)$"

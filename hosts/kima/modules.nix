@@ -208,8 +208,12 @@
       polkit = {
         enable = true;
       };
-      powerd = {
+      power = {
         enable = false;
+        cpuFreqGovernor = "performance";
+        powertop.enable = false;
+        powerProfilesDaemon.enable = false;
+        upower.enable = false;
       };
       psd = {
         enable = true;

@@ -3,7 +3,6 @@ let
   hostSpecificVariables =
     if osConfig.networking.hostName == "bunk" then
       {
-        BROWSER = "zen";
         EDITOR = "hx";
         TERM = "xterm-256color";
         QT_QPA_PLATFORM = "wayland";
@@ -11,7 +10,6 @@ let
       }
     else
       {
-        BROWSER = "zen";
         EDITOR = "hx";
         TERM = "xterm-256color";
         # VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";

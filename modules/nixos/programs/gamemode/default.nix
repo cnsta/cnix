@@ -2,18 +2,13 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 let
   inherit (lib) mkIf mkEnableOption mkOption;
   cfg = config.nixos.programs.gamemode;
-  pipewireLowLatencyModule = inputs.nix-gaming.nixosModules.pipewireLowLatency;
 in
 {
-  imports = [
-    pipewireLowLatencyModule
-  ];
   options = {
     nixos.programs.gamemode = {
       enable = mkEnableOption "Enables gamemode";
@@ -44,7 +39,5 @@ in
         };
       };
     };
-    # see https://github.com/fufexan/nix-gaming/#pipewire-low-latency
-    services.pipewire.lowLatency.enable = true;
   };
 }
