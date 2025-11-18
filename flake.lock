@@ -819,11 +819,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1763484558,
-        "narHash": "sha256-/yIDQ43aqY1IaNgqwdRMlK6niSHSqT+gHjQZE01H54A=",
+        "lastModified": 1763488494,
+        "narHash": "sha256-dXU0RoJsnm2nNM4nEW0cm95Zh77ywXL25pz/4IEphf0=",
         "owner": "hyprwm",
         "repo": "hyprland",
-        "rev": "e4b40abce649dc64fd645cbc4226f47ac9d32bd9",
+        "rev": "6a8d3069926dc8b442b0e6bc5b8d4099de5a3131",
         "type": "github"
       },
       "original": {
@@ -1953,15 +1953,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1763457799,
-        "narHash": "sha256-33hJpIuqbn/PHf4VCZAktxDCUxnWLOtMAOyAFd75O9E=",
+        "lastModified": 1763317021,
+        "narHash": "sha256-UOP9AyuBvQCEzGe6u8FxuhnJU2ShUPU4G7z7zraFNoo=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "85bc80b9d8c8b22ed273163dd7c7adfad9287a5d",
+        "rev": "db2be18049b9159a33ee7083566040fca4254c03",
         "type": "github"
       },
       "original": {
         "owner": "0xc000022070",
+        "ref": "beta",
         "repo": "zen-browser-flake",
         "type": "github"
       }
