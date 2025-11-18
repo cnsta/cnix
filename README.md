@@ -6,27 +6,27 @@ more machines and systems in my home looked primed for NixOS.
 
 Modules keep multiplying, but here are some tools and apps I use:
 
-- **[nh](https://github.com/viperML/nh)** A pretty cool "nix helper".
-- **[agenix](https://github.com/ryantm/agenix)** Age based encryption.
-- **[kanata](https://github.com/jtroo/kanata)** Keyboard mapping, good stuff.
-- **[waybar](https://github.com/Alexays/Waybar)** It's a wayland bar!
-- **[zen-browser](https://github.com/zen-browser/desktop)** Beta stage, firefox
-  based browser.
-- **[fuzzel](https://codeberg.org/dnkl/fuzzel)** App launcher, does what it
-  says!
-- **[helix](https://github.com/helix-editor/helix)** Neat vim-like editor.
-- **[dunst](https://github.com/dunst-project/dunst)** Lightweight notifications
-  daemon.
-- **[microfetch](https://github.com/NotAShelf/microfetch)** It's neofetch but
-  better.
+- **[nh](https://github.com/viperML/nh)** _A pretty cool "nix helper"._
+- **[agenix](https://github.com/ryantm/agenix)** _Age based encryption._
+- **[kanata](https://github.com/jtroo/kanata)** _Keyboard mapping, good stuff._
+- **[waybar](https://github.com/Alexays/Waybar)** _It's a wayland bar!_
+- **[zen-browser](https://github.com/zen-browser/desktop)** _Beta stage, firefox
+  based browser._
+- **[fuzzel](https://codeberg.org/dnkl/fuzzel)** _App launcher, does what it
+  says!_
+- **[helix](https://github.com/helix-editor/helix)** _Neat vim-like editor._
+- **[dunst](https://github.com/dunst-project/dunst)** _Lightweight notifications
+  daemon._
+- **[microfetch](https://github.com/NotAShelf/microfetch)** _It's neofetch but
+  better._
 
 ## Hosts
 
-- **bunk** Basic Thinkpad, L13 or something?
-- **kima** Main desktop, 9950x, 6950xt.
-- **sobotka** Server, 3950x, Intel B580, Radeon Pro W5700.
-- **toothpc** Brother's dekstop, Intel CPU, Nvidia GPU.
-- **ziggy** Raspberry Pi, running secondary pihole and unbound.
+- **bunk** _Basic Thinkpad, L13 or something?_
+- **kima** _Main desktop, 9950x, 6950xt._
+- **sobotka** _Server, 3950x, Intel B580, Radeon Pro W5700._
+- **toothpc** _Brother's dekstop, Intel CPU, Nvidia GPU._
+- **ziggy** _Raspberry Pi, running secondary pihole and unbound._
 
 ## Structure
 
