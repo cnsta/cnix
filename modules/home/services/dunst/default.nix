@@ -22,7 +22,6 @@ in
       settings = {
         global = {
           follow = "mouse";
-          browser = "${config.home.sessionVariables.BROWSER}";
           padding = 16;
           horizontal_padding = 16;
           font = "Input Sans Compressed Light 12";

@@ -195,8 +195,7 @@
       "format-muted": "<span foreground='#928374'></span> {format_source}",
       "format-source": "<span foreground='#928374'></span> {volume}%",
       "format-source-muted": "<span foreground='#928374'></span>",
-      "on-click": "/nix/store/2894dhb9zixl8a46hai9rh20k91mw5p3-pavucontrol-6.1/bin/pavucontrol",
-      "on-click-middle": "/nix/store/xfwsp8vl887ks0hbb227i0fj4lijz082-helvum-0.5.1/bin/helvum",
+      "on-click": "pwvucontrol",
       "on-scroll-down": "volume-control.sh --dec",
       "on-scroll-up": "volume-control.sh --inc"
     },

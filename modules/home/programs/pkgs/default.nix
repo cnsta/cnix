@@ -64,7 +64,6 @@ in
         (mkIf cfg.common.enable [
           usbimager
           nwg-look
-          pavucontrol
           gnome-calculator
           slurp
           grimblast

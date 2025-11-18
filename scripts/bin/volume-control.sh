@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 iDIR="$HOME/.config/mako/icons"
 
 # Get Volume

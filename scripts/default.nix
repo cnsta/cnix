@@ -47,12 +47,12 @@ in
         );
       };
 
-      ".local/bin/pavucontrol-toggle.sh" = {
+      ".local/bin/pwvucontrol-toggle.sh" = {
         source = getExe (
           pkgs.writeShellApplication {
-            name = "pavucontrol-toggle";
-            runtimeInputs = with pkgs; [ hyprland ];
-            text = readFile ./bin/pavucontrol-toggle.sh;
+            name = "pwvucontrol-toggle";
+            runtimeInputs = with pkgs; [ pwvucontrol ];
+            text = readFile ./bin/pwvucontrol-toggle.sh;
           }
         );
       };
@@ -61,7 +61,7 @@ in
         source = getExe (
           pkgs.writeShellApplication {
             name = "calcurse-toggle";
-            runtimeInputs = with pkgs; [ hyprland ];
+            runtimeInputs = with pkgs; [ calcurse ];
             text = readFile ./bin/calcurse-toggle.sh;
           }
         );

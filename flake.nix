@@ -109,19 +109,10 @@
 
     # Miscellaneous
     helix-flake.url = "github:helix-editor/helix";
-
     nvf.url = "github:notashelf/nvf";
-
-    nix-gaming = {
-      url = "github:fufexan/nix-gaming";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-      };
-    };
-
     anyrun.url = "github:anyrun-org/anyrun";
     agenix.url = "github:ryantm/agenix";
+    nix-gaming.url = "github:fufexan/nix-gaming";
 
     # Rust toolchain
     fenix = {
