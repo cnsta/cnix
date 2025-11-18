@@ -78,7 +78,7 @@ in {
 
           server = {
             DOMAIN = domain;
-            LANDING_PAGE = "home";
+            LANDING_PAGE = "explore";
             HTTP_PORT = cfg.port;
             ROOT_URL = "https://${domain}/";
           };
