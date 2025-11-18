@@ -1,35 +1,48 @@
 # cnix
 
-My NixOS daily driver. Built primarily for use with
-[Hyprland](https://hyprland.org/). Modules keep multiplying, but here are some
-prominent tools and apps:
+My NixOS daily driver. Started as a one machine desktop configuration with
+**[Hyprland](https://hyprland.org/)**. Soon modularity became the end goal as
+more machines and systems in my home looked primed for NixOS.
 
-- [Chaotic's Nyx](https://www.nyx.chaotic.cx/) **CachyOS kernel and mesa-git
-  things.**
-- [nh](https://github.com/viperML/nh) **A pretty cool "nix helper".**
-- [agenix](https://github.com/ryantm/agenix) **Age based encryption.**
-- [kanata](https://github.com/jtroo/kanata) **Keyboard mapping, good stuff.**
-- [waybar](https://github.com/Alexays/Waybar) **It's a wayland bar!**
-- [zen-browser](https://github.com/zen-browser/desktop) **Beta stage, firefox
-  based browser.**
-- [helix](https://github.com/helix-editor/helix) **Very quick editor, might
-  switch permanently!**
-- [tuirun](https://git.sr.ht/~canasta/tuirun) **Anyrun's applications plugin but
-  with tui. WIP, will add more documentation.**
-- [mako](https://github.com/emersion/mako) **Lightweight notifications.**
+Modules keep multiplying, but here are some tools and apps I use:
+
+- **[nh](https://github.com/viperML/nh)** A pretty cool "nix helper".
+- **[agenix](https://github.com/ryantm/agenix)** Age based encryption.
+- **[kanata](https://github.com/jtroo/kanata)** Keyboard mapping, good stuff.
+- **[waybar](https://github.com/Alexays/Waybar)** It's a wayland bar!
+- **[zen-browser](https://github.com/zen-browser/desktop)** Beta stage, firefox
+  based browser.
+- **[fuzzel](https://codeberg.org/dnkl/fuzzel)** App launcher, does what it
+  says!
+- **[helix](https://github.com/helix-editor/helix)** Neat vim-like editor.
+- **[dunst](https://github.com/dunst-project/dunst)** Lightweight notifications
+  daemon.
+- **[microfetch](https://github.com/NotAShelf/microfetch)** It's neofetch but
+  better.
+
+## Hosts
+
+- **`bunk`** Basic Thinkpad, L13 or something?
+- **`kima`** Main desktop, 9950x, 6950xt.
+- **`sobotka`** Server, 3950x, Intel B580, Radeon Pro W5700.
+- **`toothpc`** Brother's dekstop, Intel CPU, Nvidia GPU.
+- **`ziggy`** Raspberry Pi, running secondary pihole and unbound.
 
 ## Structure
 
 Here’s an overview of this repository. Might not be 100 % up to date.
 
-- **`hosts/`** Different hosts go here, easily scalable.
-- **`modules/`** Needlessly complicated module system, because it's fun!
-  - **`home/`** Home-manager modules.
-  - **`nixos/`** Core OS settings and system-wide modules.
-  - **`options/`** Options to be leveraged by other modules.
-- **`nix/`** Various settings not suitable for modularization, yet.
-- **`secrets/`** Agenix secrets.
-- **`users/`** Same as hosts but for users! 2:)
+```
+┌─╴hosts/       # Different hosts go here, easily scalable.
+├┬╴modules/     # Needlessly complicated module system, because it's fun!
+│├─╴home/       # Home-manager modules.
+│├─╴nixos/      # Core OS settings and system-wide modules.
+│├─╴server/     # All things homelab. Recent project, not operational yet.
+│└─╴settings/   # Options to be leveraged by other modules.
+├─╴nix/         # Various settings not suitable for modularization, yet.
+├─╴secrets/     # Agenix secrets.
+└─╴users/       # Same as hosts but for users! 2:)
+```
 
 ## Inspiration
 
