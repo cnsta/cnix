@@ -48,6 +48,7 @@
         ./home/services/mako
         ./home/services/nix-index
         ./home/services/syncthing
+        ./home/services/tailray
         ./home/services/udiskie
         ./home/services/xdg
       ];
