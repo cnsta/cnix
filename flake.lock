@@ -219,28 +219,6 @@
         "type": "github"
       }
     },
-    "fenix_2": {
-      "inputs": {
-        "nixpkgs": [
-          "lanzaboote",
-          "nixpkgs"
-        ],
-        "rust-analyzer-src": "rust-analyzer-src_2"
-      },
-      "locked": {
-        "lastModified": 1763361733,
-        "narHash": "sha256-ka7dpwH3HIXCyD2wl5F7cPLeRbqZoY2ullALsvxdPt8=",
-        "owner": "nix-community",
-        "repo": "fenix",
-        "rev": "6c8d48e3b0ae371b19ac1485744687b788e80193",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "fenix",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -841,11 +819,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1763427561,
-        "narHash": "sha256-jARAMSNHOZ5RNYlBZ2wlE2pdujedylA5QDBuaQs3Vrk=",
+        "lastModified": 1763484558,
+        "narHash": "sha256-/yIDQ43aqY1IaNgqwdRMlK6niSHSqT+gHjQZE01H54A=",
         "owner": "hyprwm",
         "repo": "hyprland",
-        "rev": "edc311544a54a06ce4acb759b4d9a30853695452",
+        "rev": "e4b40abce649dc64fd645cbc4226f47ac9d32bd9",
         "type": "github"
       },
       "original": {
@@ -1253,20 +1231,20 @@
     "lanzaboote": {
       "inputs": {
         "crane": "crane",
-        "fenix": "fenix_2",
         "flake-compat": "flake-compat_4",
         "flake-parts": "flake-parts_5",
         "nixpkgs": [
           "nixpkgs"
         ],
-        "pre-commit-hooks-nix": "pre-commit-hooks-nix"
+        "pre-commit-hooks-nix": "pre-commit-hooks-nix",
+        "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1763376718,
-        "narHash": "sha256-bIYjIla2w6bzozkohYxsU/BP0hLs9w48ZwxBfg3cShE=",
+        "lastModified": 1763485704,
+        "narHash": "sha256-3er/jo34r75PesrkI939JC0g1MqsMZQZgVtNzSKYoaE=",
         "owner": "nix-community",
         "repo": "lanzaboote",
-        "rev": "0859944b08039342a9bb069e7edc1e62bb4d0e65",
+        "rev": "1a6b487e3045b916240ca52c22ebb22263bf1cff",
         "type": "github"
       },
       "original": {
@@ -1669,29 +1647,13 @@
         "nixpkgs": "nixpkgs_8",
         "nvf": "nvf",
         "systems": "systems_6",
+        "tailray": "tailray",
         "treefmt-nix": "treefmt-nix",
         "tuirun": "tuirun",
         "zen-browser": "zen-browser"
       }
     },
     "rust-analyzer-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1762860488,
-        "narHash": "sha256-rMfWMCOo/pPefM2We0iMBLi2kLBAnYoB9thi4qS7uk4=",
-        "owner": "rust-lang",
-        "repo": "rust-analyzer",
-        "rev": "2efc80078029894eec0699f62ec8d5c1a56af763",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rust-lang",
-        "ref": "nightly",
-        "repo": "rust-analyzer",
-        "type": "github"
-      }
-    },
-    "rust-analyzer-src_2": {
       "flake": false,
       "locked": {
         "lastModified": 1762860488,
@@ -1721,6 +1683,27 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "1d7cbdaad90f8a5255a89a6eddd8af24dc89cafe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": [
+          "lanzaboote",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1763347184,
+        "narHash": "sha256-6QH8hpCYJxifvyHEYg+Da0BotUn03BwLIvYo3JAxuqQ=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "08895cce80433978d5bfd668efa41c5e24578cbd",
         "type": "github"
       },
       "original": {
@@ -1831,6 +1814,26 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "tailray": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754322522,
+        "narHash": "sha256-HTsqTMSScDCPW2PENbRysPth6bvlUciIvrjGzy9itts=",
+        "owner": "NotAShelf",
+        "repo": "tailray",
+        "rev": "ee5bef27364ad745dd179fb016cbcf00f4167758",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NotAShelf",
+        "repo": "tailray",
         "type": "github"
       }
     },

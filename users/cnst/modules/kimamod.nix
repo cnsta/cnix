@@ -134,6 +134,9 @@
       syncthing = {
         enable = false;
       };
+      tailray = {
+        enable = true;
+      };
       udiskie = {
         enable = true;
       };

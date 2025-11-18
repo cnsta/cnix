@@ -125,6 +125,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    tailray = {
+      url = "github:NotAShelf/tailray";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs = {
