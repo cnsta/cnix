@@ -2,7 +2,6 @@
   imports = [
     ./bazarr
     ./flaresolverr
-    ./gitea
     ./homepage-dashboard
     ./jellyfin
     ./jellyseerr

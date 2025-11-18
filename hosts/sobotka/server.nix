@@ -209,15 +209,6 @@
           category = "Services";
         };
       };
-      gitea = {
-        enable = false;
-        subdomain = "gitea";
-        exposure = "tunnel";
-        port = 5003;
-        cloudflared = {
-          tunnelId = "33e2fb8e-ecef-4d42-b845-6d15e216e448";
-          credentialsFile = config.age.secrets.giteaCloudflared.path;
-        };
         homepage = {
           name = "Gitea";
           description = "Git with a cup of tea";
