@@ -209,13 +209,6 @@
           category = "Services";
         };
       };
-        homepage = {
-          name = "Gitea";
-          description = "Git with a cup of tea";
-          icon = "gitea.svg";
-          category = "Services";
-        };
-      };
       vaultwarden = {
         enable = true;
         subdomain = "vault";
