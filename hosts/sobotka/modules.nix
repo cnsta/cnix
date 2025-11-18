@@ -3,8 +3,8 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = [ "amd" ];
-        extraKernelParams = [ ];
+        hardware = ["amd"];
+        extraKernelParams = [];
       };
       loader = {
         default = {
@@ -201,9 +201,6 @@
       };
       polkit = {
         enable = false;
-      };
-      power = {
-        powertop.enable = true;
       };
       samba = {
         enable = false;

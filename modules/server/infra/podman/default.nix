@@ -3,21 +3,17 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   infra = config.server.infra;
   cfg = config.server.services;
 
-  getPiholeSecret =
-    hostname:
-    if hostname == "ziggy" then
-      [ config.age.secrets.piholeZiggy.path ]
-    else if hostname == "sobotka" then
-      [ config.age.secrets.pihole.path ]
-    else
-      throw "Unknown hostname: ${hostname}";
-in
-{
+  getPiholeSecret = hostname:
+    if hostname == "ziggy"
+    then [config.age.secrets.piholeZiggy.path]
+    else if hostname == "sobotka"
+    then [config.age.secrets.pihole.path]
+    else throw "Unknown hostname: ${hostname}";
+in {
   options.server.infra = {
     podman.enable = lib.mkEnableOption "Enables Podman";
     gluetun.enable = lib.mkEnableOption "Enables gluetun";
@@ -47,7 +43,7 @@ in
     virtualisation.oci-containers.containers = lib.mkMerge [
       (lib.mkIf infra.gluetun.enable {
         gluetun = {
-          image = "qmcgaw/gluetun";
+          image = "qmcgaw/gluetun:latest";
           ports = [
             "8388:8388"
             "58846:58846"
@@ -56,12 +52,12 @@ in
             "5031:5031"
             "50300:50300"
           ];
-          devices = [ "/dev/net/tun:/dev/net/tun" ];
+          devices = ["/dev/net/tun:/dev/net/tun"];
           autoStart = true;
           extraOptions = [
             "--cap-add=NET_ADMIN"
           ];
-          volumes = [ "/var:/gluetun" ];
+          volumes = ["/var:/gluetun"];
           environmentFiles = [
             config.age.secrets.gluetunEnvironment.path
           ];
@@ -78,7 +74,7 @@ in
         qbittorrent = {
           image = "ghcr.io/hotio/qbittorrent:latest";
           autoStart = true;
-          dependsOn = [ "gluetun" ];
+          dependsOn = ["gluetun"];
           ports = [
             "8080:8080"
             "58846:58846"
@@ -106,7 +102,7 @@ in
         slskd = {
           image = "slskd/slskd:latest";
           autoStart = true;
-          dependsOn = [ "gluetun" ];
+          dependsOn = ["gluetun"];
           ports = [
             "5030:5030"
             "5031:5031"
@@ -161,6 +157,7 @@ in
           ];
         };
       })
+
       (lib.mkIf cfg.ollama.enable {
         intel-llm = {
           autoStart = true;
@@ -193,6 +190,7 @@ in
           ];
         };
       })
+
       (lib.mkIf cfg.tdarr.enable {
         tdarr = {
           image = "ghcr.io/haveagitgat/tdarr:latest";
@@ -211,7 +209,7 @@ in
             PGID = "993";
             TZ = "Europe/Stockholm";
           };
-          devices = [ "/dev/dri:/dev/dri" ];
+          devices = ["/dev/dri:/dev/dri"];
           ports = [
             "8265:8265"
             "8266:8266"
