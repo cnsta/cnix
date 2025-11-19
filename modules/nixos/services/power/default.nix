@@ -15,13 +15,14 @@ in
 {
   options = {
     nixos.services.power = {
-      enable = mkEnableOption "Enables power settings";
       cpuFreqGovernor = mkOption {
-        type = types.enum [
-          "ondemand"
-          "powersave"
-          "performance"
-        ];
+        type = types.nullOr (
+          types.enum [
+            "ondemand"
+            "powersave"
+            "performance"
+          ]
+        );
         description = "Selects governor mode";
         default = null;
       };
@@ -31,7 +32,7 @@ in
     };
   };
   config = {
-    powerManagement = mkIf cfg.enable {
+    powerManagement = {
       enable = true;
       cpuFreqGovernor = cfg.cpuFreqGovernor;
       powertop.enable = mkIf cfg.powertop.enable true;

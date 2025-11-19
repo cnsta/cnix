@@ -12,6 +12,10 @@ let
     mkOption
     mkDefault
     ;
+
+  system = pkgs.stdenv.hostPlatform.system;
+  hyprFlake = inputs.hyprland.packages.${system}.hyprland;
+  portalFlake = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
   cfg = config.nixos.programs.hyprland;
 in
 {
@@ -47,18 +51,9 @@ in
     programs = {
       hyprland = {
         enable = true;
+        withUWSM = true;
         package = pkgs.hyprland;
-        withUWSM = cfg.withUWSM;
-      };
-      uwsm = mkIf cfg.withUWSM {
-        enable = true;
-        waylandCompositors = {
-          hyprland = {
-            prettyName = "Hyprland";
-            comment = "Hyprland compositor managed by UWSM";
-            binPath = "/run/current-system/sw/bin/Hyprland";
-          };
-        };
+        portalPackage = pkgs.xdg-desktop-portal-hyprland;
       };
     };
 
