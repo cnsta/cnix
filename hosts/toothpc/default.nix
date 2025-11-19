@@ -26,7 +26,6 @@ in
       "network"
       "gamemode"
       "adbusers"
-      "rtkit"
       "users"
       "plocate"
     ];

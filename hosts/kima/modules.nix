@@ -209,11 +209,9 @@
         enable = true;
       };
       power = {
-        enable = false;
-        cpuFreqGovernor = "performance";
         powertop.enable = false;
         powerProfilesDaemon.enable = false;
-        upower.enable = false;
+        upower.enable = true;
       };
       psd = {
         enable = true;

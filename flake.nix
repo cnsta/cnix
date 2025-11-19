@@ -51,19 +51,13 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     hm = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-
-    authentik = {
-      url = "github:nix-community/authentik-nix/version/2025.8.4";
     };
 
     flake-compat.url = "github:edolstra/flake-compat";
@@ -112,16 +106,15 @@
     nvf.url = "github:notashelf/nvf";
     anyrun.url = "github:anyrun-org/anyrun";
     agenix.url = "github:ryantm/agenix";
-    nix-gaming.url = "github:fufexan/nix-gaming";
+    authentik.url = "github:nix-community/authentik-nix/version/2025.8.4";
 
-    # Rust toolchain
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake/beta";
+      url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
