@@ -30,8 +30,8 @@ in
       enable = true;
       xdgOpenUsePortal = cfg.xdgOpenUsePortal;
       config = {
-        common.default = [
-          "gtk"
+        preferred.default = [
+          "hyprland"
         ];
         hyprland.default = [
           "hyprland"

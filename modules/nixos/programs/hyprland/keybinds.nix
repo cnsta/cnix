@@ -111,8 +111,8 @@ in
     (mkIf (host == "kima") {
       programs.hyprland.settings = {
         "$terminal" = "alacritty";
-        "$browser" = "zen";
-        "$browserinc" = "zen --private-window";
+        "$browser" = "chromium";
+        "$browserinc" = "chromium --incognito";
         "$mod" = "SUPER";
         bind = [
           # Add more host-specific binds as needed
@@ -123,8 +123,8 @@ in
     (mkIf (host == "bunk") {
       programs.hyprland.settings = {
         "$terminal" = "alacritty";
-        "$browser" = "zen";
-        "$browserinc" = "zen --private-window";
+        "$browser" = "chromium";
+        "$browserinc" = "chromium --incognito";
         "$mod" = "ALT_L";
         bind = [
           # Add more host-specific binds as needed
