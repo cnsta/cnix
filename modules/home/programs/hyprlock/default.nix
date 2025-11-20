@@ -24,6 +24,10 @@ in
           ignore_empty_input = true;
           immediate_render = true;
         };
+        animation = [
+          "inputFieldDots, 1, 2, linear"
+          "fadeIn, 0"
+        ];
         background = [
           {
             monitor = "";

@@ -17,6 +17,7 @@ in
       enable = true;
       implementation = "broker";
       packages = with pkgs; [
+        gnome-settings-daemon
         gcr
       ];
     };
