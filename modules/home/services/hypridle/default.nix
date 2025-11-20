@@ -1,30 +1,43 @@
+# from fufexan
 {
   osConfig,
   lib,
+  config,
+  pkgs,
   ...
-}: let
-  inherit (lib) mkIf;
+}:
+let
+  inherit (lib) mkIf getExe;
+  lock = "${pkgs.systemd}/bin/loginctl lock-session";
+  brillo = lib.getExe pkgs.brillo;
+  timeout = 300;
   cfg = osConfig.nixos.programs.hyprland;
-in {
+in
+{
   config = mkIf cfg.enable {
     services.hypridle = {
       enable = true;
       settings = {
         general = {
-          lock_cmd = "hyprlock";
-          before_sleep_cmd = "$lock_cmd";
+          before_sleep_cmd = "loginctl lock-session";
           after_sleep_cmd = "hyprctl dispatch dpms on";
+          lock_cmd = "pgrep hyprlock || ${getExe config.programs.hyprlock.package}";
         };
 
         listener = [
           {
-            timeout = 900; # 15mins
-            on-timeout = "hyprlock";
+            timeout = timeout - 10;
+            on-timeout = "${brillo} -O; ${brillo} -u 500000 -S 10";
+            on-resume = "${brillo} -I -u 250000";
           }
           {
-            timeout = 1200; # 20mins
+            inherit timeout;
             on-timeout = "hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
+          }
+          {
+            timeout = timeout + 10;
+            on-timeout = lock;
           }
         ];
       };
