@@ -34,7 +34,8 @@ in
         bind = [
           "$mod, SPACE, exec, $launcher"
           "$mod, R, exec, $launcher"
-          "$mod, L, exec, ${toggle "nwg-bar"}"
+          "$mod, Escape, exec, ${toggle "nwg-bar"}"
+          "$mod, L, exec, loginctl lock-session"
           "$mod SHIFT, B, exec, pkill -SIGUSR2 waybar"
           "$mod, A, exec, pkill -SIGUSR1 waybar"
           "$mod, T, exec, $terminal"
