@@ -192,8 +192,8 @@
       polkit = {
         enable = true;
       };
-      powerd = {
-        enable = true;
+      power = {
+        upower.enable = true;
       };
       samba = {
         enable = false;
