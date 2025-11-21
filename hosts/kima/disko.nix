@@ -65,6 +65,7 @@
               type = "swap";
             };
             options = {
+              volmode = "dev";
               volblocksize = "4096";
               compression = "zle";
               logbias = "throughput";

@@ -41,6 +41,7 @@
         ./home/services/copyq
         ./home/services/dconf
         ./home/services/dunst
+        ./home/services/jellyfin-mpv-shim
         ./home/services/gpg
         ./home/services/gtk
         ./home/services/hypridle

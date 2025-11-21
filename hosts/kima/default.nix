@@ -43,7 +43,10 @@ in
     hostId = "723158aa";
   };
 
-  boot.zfs.package = pkgs.zfs_unstable;
+  boot = {
+    zfs.package = pkgs.zfs_unstable;
+    kernelPackages = lib.mkDefault config.boot.zfs.package.latestCompatibleLinuxPackages;
+  };
 
   environment.variables = {
     NH_FLAKE = "/home/cnst/.nix-config";

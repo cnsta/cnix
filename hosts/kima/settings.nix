@@ -10,10 +10,10 @@
         name = "DP-3";
         width = 2560;
         height = 1440;
-        refreshRate = "143.99";
+        refreshRate = "239.97";
         position = "0x0";
         transform = 0;
-        bitDepth = 10;
+        # bitDepth = 10;
         workspace = "1";
       }
       {
