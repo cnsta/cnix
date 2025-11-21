@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.nixos.services.tailscale;
-in {
+in
+{
   options.nixos.services.tailscale = {
     enable = mkEnableOption "Enable tailscale";
   };

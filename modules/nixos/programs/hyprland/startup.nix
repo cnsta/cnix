@@ -32,7 +32,6 @@ in
       programs.hyprland.settings.exec-once = [
         "uwsm app -- solaar -w hide -b regular"
         "uwsm app -- blueman-applet"
-        "uwsm app -- jellyfin-mpv-shim"
       ]
       ++ commonExecOnce;
     })
@@ -40,7 +39,6 @@ in
     (mkIf (host == "bunk") {
       programs.hyprland.settings.exec-once = [
         "uwsm app -- blueman-applet"
-        "uwsm app -- jellyfin-mpv-shim"
       ]
       ++ commonExecOnce;
     })

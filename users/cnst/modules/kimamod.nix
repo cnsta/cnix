@@ -125,6 +125,9 @@
       gtk = {
         enable = true;
       };
+      jellyfin-mpv-shim = {
+        enable = true;
+      };
       mako = {
         enable = false;
       };

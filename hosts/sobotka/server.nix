@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   server = {
     enable = true;
     email = "adam@cnst.dev";
@@ -204,7 +205,7 @@
         };
         homepage = {
           name = "Forgejo";
-          description = "Lightweight software forge";
+          description = "A painless, self-hosted Git service";
           icon = "forgejo.svg";
           category = "Services";
         };
