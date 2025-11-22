@@ -27,10 +27,39 @@
           };
         };
       };
+      root-mirror = {
+        type = "disk";
+        device = "/dev/nvme1n1";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "zroot";
+              };
+            };
+          };
+        };
+      };
     };
     zpool = {
       zroot = {
         type = "zpool";
+        mode = {
+          topology = {
+            vdev = [
+              {
+                members = [ "root" ];
+              }
+              {
+                mode = "mirror";
+                members = [ "root-mirror" ];
+              }
+            ];
+          };
+        };
         rootFsOptions = {
           mountpoint = "none";
           compression = "zstd";
