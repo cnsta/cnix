@@ -117,7 +117,7 @@
         };
       };
       dunst = {
-        enable = true;
+        enable = false;
       };
       gpg = {
         enable = true;
@@ -132,6 +132,9 @@
         enable = false;
       };
       nix-index = {
+        enable = true;
+      };
+      swaync = {
         enable = true;
       };
       syncthing = {
