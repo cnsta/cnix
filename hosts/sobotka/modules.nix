@@ -26,11 +26,9 @@
           "amd"
         ];
       };
-      logitech = {
-        enable = false;
-      };
       network = {
         enable = true;
+        tailscale.enable = false;
         interfaces = {
           "enp6s0" = {
             allowedTCPPorts = [
@@ -46,11 +44,19 @@
           };
         };
       };
+      peripherals = {
+        logitech.enable = false;
+        kanata.enable = false;
+        adb.enable = false;
+        yubikey = {
+          manager.enable = false;
+          touch-detector.enable = false;
+        };
+        pcscd.enable = true;
+        utils.enable = true;
+      };
     };
     programs = {
-      android = {
-        enable = false;
-      };
       beekeeper = {
         enable = false;
       };
@@ -134,9 +140,6 @@
       thunar = {
         enable = false;
       };
-      yubikey = {
-        enable = false;
-      };
       zsh = {
         enable = false;
       };
@@ -173,9 +176,6 @@
       gvfs = {
         enable = false;
       };
-      kanata = {
-        enable = false;
-      };
       locate = {
         enable = true;
       };
@@ -193,9 +193,6 @@
       openssh = {
         enable = true;
       };
-      pcscd = {
-        enable = false;
-      };
       pipewire = {
         enable = false;
       };
@@ -212,9 +209,6 @@
         enable = false;
         scheduler = "scx_lavd";
         flags = "--performance";
-      };
-      tailscale = {
-        enable = false;
       };
       udisks = {
         enable = true;

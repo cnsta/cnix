@@ -22,11 +22,9 @@
         enable = true;
         vendors = [ "amd" ];
       };
-      logitech = {
-        enable = false;
-      };
       network = {
         enable = true;
+        tailscale.enable = true;
         nameservers = [
           "192.168.88.1"
           "192.168.88.69"
@@ -44,11 +42,20 @@
           };
         };
       };
+      peripherals = {
+        logitech.enable = false;
+        kanata.enable = false;
+        adb.enable = true;
+        yubikey = {
+          manager.enable = true;
+          touch-detector.enable = true;
+        };
+        pcscd.enable = true;
+        utils.enable = true;
+      };
+
     };
     programs = {
-      android = {
-        enable = true;
-      };
       beekeeper = {
         enable = false;
       };
@@ -132,9 +139,6 @@
       thunar = {
         enable = false;
       };
-      yubikey = {
-        enable = false;
-      };
       zsh = {
         enable = false;
       };
@@ -168,9 +172,6 @@
       gvfs = {
         enable = true;
       };
-      kanata = {
-        enable = false;
-      };
       locate = {
         enable = true;
       };
@@ -181,9 +182,6 @@
         enable = false;
       };
       openssh = {
-        enable = true;
-      };
-      pcscd = {
         enable = true;
       };
       pipewire = {
@@ -198,9 +196,6 @@
       };
       samba = {
         enable = false;
-      };
-      tailscale = {
-        enable = true;
       };
       udisks = {
         enable = true;

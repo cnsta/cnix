@@ -26,6 +26,7 @@
       };
       network = {
         enable = true;
+        tailscale.enable = true;
         nameservers = [
           "192.168.88.1"
           "192.168.88.69"
@@ -220,9 +221,6 @@
         enable = true;
         scheduler = "scx_lavd";
         flags = "--performance";
-      };
-      tailscale = {
-        enable = true;
       };
       udisks = {
         enable = true;

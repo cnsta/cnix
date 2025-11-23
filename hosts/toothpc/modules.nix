@@ -26,11 +26,9 @@
           open = true;
         };
       };
-      logitech = {
-        enable = true;
-      };
       network = {
         enable = true;
+        tailscale.enable = true;
         interfaces = {
           "enp4s0" = {
             allowedTCPPorts = [
@@ -41,11 +39,19 @@
           };
         };
       };
+      peripherals = {
+        logitech.enable = true;
+        kanata.enable = false;
+        adb.enable = false;
+        yubikey = {
+          manager.enable = true;
+          touch-detector.enable = true;
+        };
+        pcscd.enable = true;
+        utils.enable = true;
+      };
     };
     programs = {
-      android = {
-        enable = true;
-      };
       beekeeper = {
         enable = false;
       };
@@ -123,9 +129,6 @@
       thunar = {
         enable = true;
       };
-      yubikey = {
-        enable = true;
-      };
       zsh = {
         enable = true;
       };
@@ -159,9 +162,6 @@
       gvfs = {
         enable = true;
       };
-      kanata = {
-        enable = false;
-      };
       locate = {
         enable = true;
       };
@@ -172,9 +172,6 @@
         enable = false;
       };
       openssh = {
-        enable = true;
-      };
-      pcscd = {
         enable = true;
       };
       pipewire = {

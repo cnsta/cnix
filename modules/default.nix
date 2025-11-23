@@ -112,7 +112,6 @@
         ./nixos/services/udisks
         ./nixos/services/xserver
         ./nixos/services/zram
-        ./nixos/services/tailscale
 
         ./nixos/system/fonts
         ./nixos/system/locale
