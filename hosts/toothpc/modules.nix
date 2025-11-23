@@ -183,7 +183,7 @@
       polkit = {
         enable = true;
       };
-      powerd = {
+      power = {
         enable = false;
       };
       samba = {

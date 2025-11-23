@@ -24,9 +24,6 @@
         enable = true;
         vendors = [ "amd" ];
       };
-      logitech = {
-        enable = true;
-      };
       network = {
         enable = true;
         nameservers = [
@@ -46,11 +43,19 @@
           };
         };
       };
+      peripherals = {
+        logitech.enable = true;
+        kanata.enable = true;
+        adb.enable = true;
+        yubikey = {
+          manager.enable = true;
+          touch-detector.enable = true;
+        };
+        pcscd.enable = true;
+        utils.enable = true;
+      };
     };
     programs = {
-      android = {
-        enable = true;
-      };
       beekeeper = {
         enable = false;
       };
@@ -137,9 +142,6 @@
       thunar = {
         enable = false;
       };
-      yubikey = {
-        enable = true;
-      };
       zsh = {
         enable = false;
       };
@@ -176,9 +178,6 @@
       gvfs = {
         enable = true;
       };
-      kanata = {
-        enable = true;
-      };
       virtualisation = {
         enable = false;
       };
@@ -199,9 +198,6 @@
       openssh = {
         enable = true;
       };
-      pcscd = {
-        enable = true;
-      };
       pipewire = {
         enable = true;
       };
@@ -209,6 +205,7 @@
         enable = true;
       };
       power = {
+        enable = true;
         powertop.enable = false;
         powerProfilesDaemon.enable = false;
         upower.enable = true;

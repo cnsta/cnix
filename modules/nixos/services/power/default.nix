@@ -15,6 +15,7 @@ in
 {
   options = {
     nixos.services.power = {
+      enable = mkEnableOption "Enables powerManagement";
       cpuFreqGovernor = mkOption {
         type = types.nullOr (
           types.enum [
@@ -32,7 +33,7 @@ in
     };
   };
   config = {
-    powerManagement = {
+    powerManagement = mkIf cfg.enable {
       enable = true;
       cpuFreqGovernor = cfg.cpuFreqGovernor;
       powertop.enable = mkIf cfg.powertop.enable true;
