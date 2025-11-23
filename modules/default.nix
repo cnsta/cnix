@@ -62,10 +62,9 @@
 
         ./nixos/hardware/bluetooth
         ./nixos/hardware/graphics
-        ./nixos/hardware/logitech
+        ./nixos/hardware/peripherals
         ./nixos/hardware/network
 
-        ./nixos/programs/android
         ./nixos/programs/beekeeper
         ./nixos/programs/blender
         ./nixos/programs/corectrl
@@ -87,7 +86,6 @@
         ./nixos/programs/obsidian
         ./nixos/programs/steam
         ./nixos/programs/thunar
-        ./nixos/programs/yubikey
         ./nixos/programs/zsh
 
         ./nixos/services/agenix
@@ -99,14 +97,12 @@
         ./nixos/services/gnome-keyring
         ./nixos/services/greetd
         ./nixos/services/gvfs
-        ./nixos/services/kanata
         ./nixos/services/virtualisation
         ./nixos/services/locate
         ./nixos/services/mullvad
         ./nixos/services/nfs
         ./nixos/services/nix-ld
         ./nixos/services/openssh
-        ./nixos/services/pcscd
         ./nixos/services/pipewire
         ./nixos/services/polkit
         ./nixos/services/power

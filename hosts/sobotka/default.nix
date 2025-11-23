@@ -59,8 +59,6 @@ in
     hostId = "784991aa";
   };
 
-  powerManagement.enable = false;
-
   swapDevices = [
     {
       device = "/var/lib/swapfile";

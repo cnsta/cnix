@@ -193,6 +193,7 @@
         enable = true;
       };
       power = {
+        enable = true;
         upower.enable = true;
       };
       samba = {
