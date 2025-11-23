@@ -16,7 +16,7 @@ in
 {
   config = mkIf cfg.enable {
     services.hypridle = {
-      enable = false;
+      enable = true;
       settings = {
         general = {
           before_sleep_cmd = "loginctl lock-session";
