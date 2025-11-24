@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -13,15 +14,11 @@ in
     home.services.swaync.enable = mkEnableOption "Enables ${unit}";
   };
   config = mkIf cfg.enable {
-    xdg.configFile."swaync/config.json".enable = false;
-    services.swaync = {
-      enable = true;
-    };
+    home.packages = with pkgs; [ swaynotificationcenter ];
     # configuration by @r4ppz
     home.file = {
       ".config/swaync/config.json".text = ''
         {
-          "$schema": "/etc/xdg/swaync/configSchema.json",
           "ignore-gtk-theme": true,
           "positionX": "right",
           "positionY": "top",
@@ -32,7 +29,7 @@ in
           "cssPriority": "user",
           "control-center-margin-top": 15,
           "control-center-margin-bottom": 15,
-          "control-center-margin-right": 15,
+          "control-center-margin-right": 0,
           "control-center-margin-left": 0,
           "notification-2fa-action": true,
           "notification-inline-replies": false,
@@ -119,19 +116,19 @@ in
           --bg-btn-hover: #5e5e5e;
           --text: #ebdbb2;
           --text-disabled: #5c554a;
-          --border: #504945;
+          --border: #4c7a5d;
           --pri-low: #ebdbb2;
           --pri-normal: #83a598;
           --pri-critical: #fb4934;
 
           /* Sizes */
-          --radius: 2px;
+          --radius: 0px;
           --border-width: 1px;
           --btn-size: 20px;
 
           /* Effects */
           --transition: 0.15s ease-in-out;
-          --shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+          /* --shadow: 0 4px 16px rgba(0, 0, 0, 0.5); */
         }
 
         /* Base styles */
@@ -412,6 +409,8 @@ in
           color: var(--text);
           border-radius: var(--radius);
           border: var(--border-width) solid var(--border);
+          border-left: 3px solid var(--border);
+          border-right: 0px;
           box-shadow: var(--shadow);
         }
 
