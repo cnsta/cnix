@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 let
@@ -41,6 +40,7 @@ in
           "$mod, T, exec, $terminal"
           "$mod, W, exec, $browser"
           "$mod, K, exec, keepassxc"
+          "$mod, N, exec, swaync-client -t -sw"
           "$mod SHIFT, W, exec, $browserinc"
           "$mod, Q, killactive,"
           "$mod, E, exec, $fileManager"
