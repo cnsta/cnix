@@ -34,7 +34,7 @@ in
 
     (mkIf swayncInstalled {
       programs.hyprland.settings.exec-once = [
-        "uwsm app -- swaync -c ~/.config/swaync/config.json"
+        "uwsm app -- swaync"
       ];
     })
 
