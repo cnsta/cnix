@@ -12,6 +12,7 @@
       };
       discord = {
         enable = true;
+        variant = "vesktop";
       };
       eza = {
         enable = true;
@@ -32,9 +33,6 @@
         enable = false;
       };
       helix = {
-        enable = true;
-      };
-      hyprlock = {
         enable = true;
       };
       jujutsu = {
@@ -67,7 +65,7 @@
         enable = true;
       };
       tuirun = {
-        enable = true;
+        enable = false;
       };
       vscode = {
         enable = true;
@@ -84,11 +82,14 @@
       zathura = {
         enable = true;
       };
+      zed-editor = {
+        enable = true;
+      };
       zellij = {
         enable = false;
       };
       zen = {
-        enable = false;
+        enable = true;
       };
       zsh = {
         enable = true;
@@ -107,7 +108,7 @@
         };
       };
       dunst = {
-        enable = true;
+        enable = false;
       };
       gpg = {
         enable = true;
@@ -115,10 +116,7 @@
       gtk = {
         enable = true;
       };
-      hypridle = {
-        enable = true;
-      };
-      hyprpaper = {
+      jellyfin-mpv-shim = {
         enable = true;
       };
       mako = {
@@ -127,8 +125,14 @@
       nix-index = {
         enable = true;
       };
+      swaync = {
+        enable = true;
+      };
       syncthing = {
         enable = false;
+      };
+      tailray = {
+        enable = true;
       };
       udiskie = {
         enable = true;
