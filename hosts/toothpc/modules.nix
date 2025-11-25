@@ -65,7 +65,7 @@
         enable = false;
       };
       gamemode = {
-        enable = true;
+        enable = false;
         optimizeGpu = {
           enable = false;
         };
