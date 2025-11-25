@@ -42,6 +42,7 @@ in
   environment.variables = {
     NH_FLAKE = "/home/toothpick/.nix-config";
     ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
+    AQ_DRM_DEVICES = "/dev/dri/card0";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

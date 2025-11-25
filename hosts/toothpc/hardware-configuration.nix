@@ -24,10 +24,7 @@
       kernelModules = [ ];
     };
     kernelModules = [ ];
-    kernelParams = [
-      "intel_pstate=active"
-      "nvidia_drm.modeset=1"
-    ];
+    kernelParams = [ ];
     extraModulePackages = [ ];
   };
 
