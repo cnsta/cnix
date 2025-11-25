@@ -14,7 +14,6 @@
     ];
 
     packages = with pkgs; [
-      filezilla
     ];
 
     sessionVariables = {
