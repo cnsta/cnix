@@ -21,7 +21,6 @@
         enable = true;
       };
       graphics = {
-        enable = true;
         vendors = [ "amd" ];
       };
       network = {

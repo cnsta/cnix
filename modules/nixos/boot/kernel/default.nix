@@ -84,7 +84,7 @@ in
       ]
       ++ (if hasHardware "amd" then [ ] else [ ])
       ++ (if hasHardware "intel" then [ ] else [ ])
-      ++ (if hasHardware "nvidia" then [ ] else [ ])
+      ++ (if hasHardware "nvidia" then [ "fbdev=1" ] else [ ])
       ++ cfg.extraKernelParams;
 
       blacklistedKernelModules =

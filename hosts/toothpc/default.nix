@@ -37,8 +37,6 @@ in
     ./settings.nix
   ];
 
-  boot.kernelParams = [ "fbdev=1" ];
-
   networking.hostName = "toothpc";
 
   environment = {
@@ -46,9 +44,6 @@ in
       NH_FLAKE = "/home/toothpick/.nix-config";
       ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
     };
-    systemPackages = with pkgs; [
-      mesa
-    ];
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
