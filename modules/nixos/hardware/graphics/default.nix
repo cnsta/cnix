@@ -43,6 +43,7 @@ let
   ];
 
   hasVendor = vendor: builtins.elem vendor cfg.vendors;
+  hasNonNvidia = builtins.any (v: v != "nvidia") cfg.vendors;
 in
 {
   options.nixos.hardware.graphics = {
@@ -79,8 +80,8 @@ in
     };
   };
 
-  config = mkIf cfg.enable (mkMerge [
-    {
+  config = mkMerge [
+    (mkIf (cfg.enable && hasNonNvidia) {
       hardware = {
         graphics = {
           enable = true;
@@ -99,19 +100,10 @@ in
                   intel-compute-runtime
                   intel-vaapi-driver
                 ])
-              else if vendor == "nvidia" then
-                commonPackages
-                ++ (with pkgs; [
-                  # nvidiaOffloadScript
-                  intel-media-driver
-                  nvidia-vaapi-driver
-                  vulkan-tools
-                ])
               else
                 [ ]
             ) cfg.vendors
           );
-
           extraPackages32 = flatten (concatMap (_: commonPackages32) cfg.vendors);
         };
       };
@@ -132,16 +124,18 @@ in
             [
               egl-wayland
               libGL
+              intel-media-driver
+              nvidia-vaapi-driver
+              vulkan-tools
             ]
           else
             [ ]
         ) cfg.vendors
       );
-    }
+    })
 
     (mkIf (hasVendor "nvidia") {
       hardware.nvidia = {
-        enabled = true;
         package =
           if cfg.nvidia.package == "beta" then
             config.boot.kernelPackages.nvidiaPackages.beta
@@ -159,5 +153,5 @@ in
         nvidiaSettings = true;
       };
     })
-  ]);
+  ];
 }
