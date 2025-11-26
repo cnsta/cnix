@@ -90,7 +90,7 @@ in
       blacklistedKernelModules =
         (if hasHardware "amd" then [ ] else [ ])
         ++ (if hasHardware "intel" then [ ] else [ ])
-        ++ (if hasHardware "nvidia" then [ "nouveau" ] else [ ])
+        ++ (if hasHardware "nvidia" then [ ] else [ ])
         ++ cfg.extraBlacklistedModules;
     };
     hardware.amdgpu.overdrive.enable = mkIf cfg.amdOverdrive.enable true;
