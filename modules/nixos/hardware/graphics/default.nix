@@ -44,12 +44,10 @@ let
   ];
 
   hasVendor = vendor: builtins.elem vendor cfg.vendors;
-  hasNonNvidia = builtins.any (v: v != "nvidia") cfg.vendors;
+  nonNvidia = builtins.any (v: v != "nvidia") cfg.vendors;
 in
 {
   options.nixos.hardware.graphics = {
-    enable = mkEnableOption "Enable general graphics support";
-
     vendors = mkOption {
       type = types.listOf (
         types.enum [
@@ -82,7 +80,7 @@ in
   };
 
   config = mkMerge [
-    (mkIf (cfg.enable && hasNonNvidia) {
+    (mkIf nonNvidia {
       hardware = {
         graphics = {
           enable = true;
@@ -137,7 +135,6 @@ in
 
     (mkIf (hasVendor "nvidia") {
       hardware.nvidia = {
-        enabled = mkForce true;
         package =
           if cfg.nvidia.package == "beta" then
             config.boot.kernelPackages.nvidiaPackages.beta
