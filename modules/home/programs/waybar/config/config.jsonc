@@ -4,7 +4,8 @@
     "layer": "top",
     "output": [
       "DP-3",
-      "eDP-1"
+      "eDP-1",
+      "DVI-D-1"
     ],
     "modules-left": [
       "group/system"
