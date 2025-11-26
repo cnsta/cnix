@@ -39,9 +39,14 @@ in
 
   networking.hostName = "toothpc";
 
-  environment.variables = {
-    NH_FLAKE = "/home/toothpick/.nix-config";
-    ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
+  environment = {
+    variables = {
+      NH_FLAKE = "/home/toothpick/.nix-config";
+      ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
+    };
+    systemPackages = with pkgs; [
+      mesa
+    ];
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
