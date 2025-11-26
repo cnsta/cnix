@@ -26,7 +26,6 @@ in
         default = false;
         description = "Whether to install common packages.";
       };
-
       desktop.enable = mkOption {
         type = types.bool;
         default = false;
