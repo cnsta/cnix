@@ -19,7 +19,6 @@
         enable = false;
       };
       graphics = {
-        enable = true;
         vendors = [ "nvidia" ];
         nvidia = {
           package = "latest";
