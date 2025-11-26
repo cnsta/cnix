@@ -8,9 +8,10 @@ let
   inherit (lib)
     mkEnableOption
     mkOption
-    types
     mkIf
     mkMerge
+    mkForce
+    types
     flatten
     concatMap
     ;
@@ -136,6 +137,7 @@ in
 
     (mkIf (hasVendor "nvidia") {
       hardware.nvidia = {
+        enabled = mkForce true;
         package =
           if cfg.nvidia.package == "beta" then
             config.boot.kernelPackages.nvidiaPackages.beta
