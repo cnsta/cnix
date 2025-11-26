@@ -22,7 +22,7 @@ in
           main = {
             layer = "overlay";
             font = "Input Sans Narrow Light:size=12";
-            # launch-prefix = "uwsm app --";
+            launch-prefix = "uwsm app --";
             lines = "8";
           };
           colors = {
@@ -46,10 +46,10 @@ in
       };
     }
     (mkIf (host == "kima") {
-      programs.fuzzel.settings.main.terminal = "${pkgs.ghostty}/bin/ghostty";
+      programs.fuzzel.settings.main.terminal = "${pkgs.ghostty}/bin/alacritty";
     })
     (mkIf (host == "bunk") {
-      programs.fuzzel.settings.main.terminal = "${pkgs.foot}/bin/foot";
+      programs.fuzzel.settings.main.terminal = "${pkgs.foot}/bin/alacritty";
     })
     (mkIf (host == "toothpc") {
       programs.fuzzel.settings.main.terminal = "${pkgs.alacritty}/bin/alacritty";

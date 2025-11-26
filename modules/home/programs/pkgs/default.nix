@@ -58,11 +58,9 @@ in
           cmatrix
           xcur2png
           nix-tree
-          wireguard-tools
         ]
 
         (mkIf cfg.common.enable [
-          usbimager
           nwg-look
           gnome-calculator
           slurp
@@ -74,7 +72,6 @@ in
           adwaita-icon-theme
           qt5.qtwayland
           qt6.qtwayland
-          wpa_supplicant
           material-icons
           material-symbols
           feh

@@ -22,9 +22,11 @@
       TERM = "xterm-256color";
       # STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/toothpick/.steam/root/compatibilitytools.d"; # proton and steam compat
       # LIBVA_DRIVER_NAME = "nvidia";
-      # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      # NVD_BACKEND = "direct";
-      # GBM_BACKEND = "nvidia-drm";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      NVD_BACKEND = "direct";
+      GBM_BACKEND = "nvidia-drm";
+      XDG_SESSION_TYPE = "wayland";
+      WLR_NO_HARDWARE_CURSORS = "1";
     };
   };
 

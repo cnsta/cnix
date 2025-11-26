@@ -7,6 +7,7 @@ let
   inherit (lib) mkIf mkEnableOption mkMerge;
   host = config.networking.hostName;
   cfg = config.nixos.programs.hyprland.rules;
+  preferred = [ ",preferred,auto,1" ];
 in
 {
   options = {
@@ -16,26 +17,28 @@ in
   config = mkIf cfg.enable (mkMerge [
     {
       programs.hyprland.settings = {
-        monitor = map (
-          m:
-          let
-            resolution =
-              if m.width != null && m.height != null then
-                "${toString m.width}x${toString m.height}@${m.refreshRate}"
-              else
-                "preferred";
+        monitor =
+          map (
+            m:
+            let
+              resolution =
+                if m.width != null && m.height != null then
+                  "${toString m.width}x${toString m.height}@${m.refreshRate}"
+                else
+                  "preferred";
 
-            position = m.position or "auto";
-            scale = m.scale;
+              position = m.position or "auto";
+              scale = m.scale;
 
-            transformStr = if m.transform != 0 then ",transform,${toString m.transform}" else "";
+              transformStr = if m.transform != 0 then ",transform,${toString m.transform}" else "";
 
-            bitdepthStr = if m.bitDepth != null then ",bitdepth,${toString m.bitDepth}" else "";
-          in
-          "${m.name},${
-            if m.enable then "${resolution},${position},${scale}${transformStr}${bitdepthStr}" else "disable"
-          }"
-        ) config.settings.monitors;
+              bitdepthStr = if m.bitDepth != null then ",bitdepth,${toString m.bitDepth}" else "";
+            in
+            "${m.name},${
+              if m.enable then "${resolution},${position},${scale}${transformStr}${bitdepthStr}" else ""
+            }"
+          ) config.settings.monitors
+          ++ preferred;
 
         workspace = map (m: "${m.workspace},monitor:${m.name}") (
           lib.filter (m: m.enable && m.workspace != null) config.settings.monitors

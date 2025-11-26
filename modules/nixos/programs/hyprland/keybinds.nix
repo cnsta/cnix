@@ -41,6 +41,7 @@ in
           "$mod, W, exec, $browser"
           "$mod, K, exec, keepassxc"
           "$mod, N, exec, swaync-client -t -sw"
+          "$mod, O, exec, uwsm app -- networkmanager_dmenu"
           "$mod SHIFT, W, exec, $browserinc"
           "$mod, Q, killactive,"
           "$mod, E, exec, $fileManager"
