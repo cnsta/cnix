@@ -8,6 +8,7 @@ let
   host = config.networking.hostName;
   cfg = config.nixos.programs.hyprland.rules;
   preferred = [ ",preferred,auto,1" ];
+  # unknown = if config.[ "Unknown-1, disable" ];
 in
 {
   options = {
@@ -39,6 +40,7 @@ in
             }"
           ) config.settings.monitors
           ++ preferred;
+        # ++ unknown;
 
         workspace = map (m: "${m.workspace},monitor:${m.name}") (
           lib.filter (m: m.enable && m.workspace != null) config.settings.monitors

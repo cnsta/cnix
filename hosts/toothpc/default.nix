@@ -37,6 +37,8 @@ in
     ./settings.nix
   ];
 
+  boot.kernelParams = [ "fbdev=1" ];
+
   networking.hostName = "toothpc";
 
   environment = {
