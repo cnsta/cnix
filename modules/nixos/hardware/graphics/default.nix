@@ -141,6 +141,7 @@ in
 
     (mkIf (hasVendor "nvidia") {
       hardware.nvidia = {
+        enabled = true;
         package =
           if cfg.nvidia.package == "beta" then
             config.boot.kernelPackages.nvidiaPackages.beta
