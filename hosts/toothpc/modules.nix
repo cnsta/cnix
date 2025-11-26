@@ -2,7 +2,7 @@
   nixos = {
     boot = {
       kernel = {
-        variant = "latest";
+        variant = "stable";
         hardware = [ "nvidia" ];
       };
       loader = {

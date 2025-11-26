@@ -1,5 +1,6 @@
 {
   config,
+  osConfig,
   lib,
   pkgs,
   ...
@@ -7,6 +8,7 @@
 let
   inherit (lib) mkIf mkEnableOption;
   unit = "swaync";
+  user = osConfig.settings.accounts.username;
   cfg = config.home.services.swaync;
 in
 {
@@ -15,6 +17,26 @@ in
   };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ swaynotificationcenter ];
+    systemd.user.services.swaync = {
+      Unit = {
+        description = "Swaync notification daemon";
+        documentation = "https://github.com/ErikReider/SwayNotificationCenter";
+        PartOf = "graphical-session.target";
+        After = "graphical-session.target";
+        ConditionEnvironment = "WAYLAND_DISPLAY";
+      };
+      Service = {
+        Type = "dbus";
+        BusName = "org.freedesktop.Notifications";
+        ExecStart = "/etc/profiles/per-user/${user}/bin/swaync";
+        ExecReload = "/etc/profiles/per-user/${user}/bin/swaync-client --reload-config ; /etc/profiles/per-user/${user}/bin/swaync-client --reload-css";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
+
     # configuration by @r4ppz
     home.file = {
       ".config/swaync/config.json".text = ''

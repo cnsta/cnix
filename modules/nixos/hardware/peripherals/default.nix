@@ -51,6 +51,7 @@ in
       with pkgs;
       mkIf cfg.utils.enable [
         usbutils
+        usbimager
       ];
   };
 }

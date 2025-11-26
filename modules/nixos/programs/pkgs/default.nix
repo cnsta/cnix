@@ -96,9 +96,9 @@ in
           imagemagick
           wl-screenrec
           libqalculate
-          fuzzel
           gnome-disk-utility
           networkmanagerapplet
+          networkmanager_dmenu
           inotify-tools
           wf-recorder
           nautilus

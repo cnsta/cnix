@@ -39,7 +39,7 @@
         enable = true;
       };
       ghostty = {
-        enable = true;
+        enable = false;
       };
       helix = {
         enable = true;

@@ -8,13 +8,8 @@ let
   cfg = config.nixos.programs.hyprland;
   host = config.networking.hostName;
 
-  hmUser = builtins.head (builtins.attrNames config.home-manager.users);
-  hmCfg = config.home-manager.users.${hmUser};
-  swayncInstalled = hmCfg.home.services.swaync.enable;
-
   commonExecOnce = [
     "sleep 3s && wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.5"
-    "uwsm app -- nm-applet --indicator"
   ];
 in
 {
@@ -32,23 +27,15 @@ in
       };
     }
 
-    (mkIf swayncInstalled {
-      programs.hyprland.settings.exec-once = [
-        "uwsm app -- swaync"
-      ];
-    })
-
     (mkIf (host == "kima") {
       programs.hyprland.settings.exec-once = [
         "uwsm app -- solaar -w hide -b regular"
-        "uwsm app -- blueman-applet"
       ]
       ++ commonExecOnce;
     })
 
     (mkIf (host == "bunk") {
       programs.hyprland.settings.exec-once = [
-        "uwsm app -- blueman-applet"
       ]
       ++ commonExecOnce;
     })
