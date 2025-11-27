@@ -2,6 +2,7 @@
   config,
   lib,
   osConfig,
+  pkgs,
   ...
 }:
 let
@@ -28,6 +29,7 @@ in
     home.services.xdg.enable = mkEnableOption "Enables XDG settings";
   };
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [ xdg-utils ];
     xresources.properties = {
       "Xcursor.size" = config.home.pointerCursor.size;
       "Xcursor.theme" = config.home.pointerCursor.name;
@@ -54,6 +56,8 @@ in
     };
 
     xdg = {
+      enable = true;
+      cacheHome = config.home.homeDirectory + "/.local/cache";
       userDirs = {
         enable = true;
         createDirectories = true;
