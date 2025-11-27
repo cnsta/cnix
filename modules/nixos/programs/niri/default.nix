@@ -23,7 +23,6 @@ in
         xwayland-satellite
         wl-clipboard
         wayland-utils
-        xdg-utils
       ];
     };
     systemd.user.services.niri-flake-polkit.enable = false;
