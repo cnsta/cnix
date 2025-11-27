@@ -3,8 +3,8 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = [ "amd" ];
-        extraKernelParams = [ ];
+        hardware = ["amd"];
+        extraKernelParams = [];
       };
       loader = {
         default = {
@@ -20,7 +20,6 @@
         enable = false;
       };
       graphics = {
-        enable = true;
         vendors = [
           "intel"
           "amd"
