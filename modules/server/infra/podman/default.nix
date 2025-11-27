@@ -63,9 +63,6 @@ in {
           ];
           environment = {
             DEV_MODE = "false";
-            VPN_SERVICE_PROVIDER = "mullvad";
-            VPN_TYPE = "wireguard";
-            SERVER_CITIES = "Stockholm";
           };
         };
       })
