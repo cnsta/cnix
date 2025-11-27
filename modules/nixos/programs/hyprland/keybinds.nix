@@ -13,9 +13,9 @@ let
     let
       prog = builtins.substring 0 14 program;
     in
-    "pkill ${prog} || uwsm app -- ${program}";
+    "pkill ${prog} || uwsm-app -- ${program}";
 
-  runOnce = program: "pgrep ${program} || uwsm app -- ${program}";
+  runOnce = program: "pgrep ${program} || uwsm-app -- ${program}";
 in
 {
   options = {
@@ -31,26 +31,25 @@ in
         "$launcher" = "fuzzel";
 
         bind = [
-          "$mod, SPACE, exec, $launcher"
-          "$mod, R, exec, $launcher"
+          "$mod, SPACE, exec, ${toggle "$launcher"}"
+          "$mod, R, exec, ${toggle "$launcher"}"
           "$mod, Escape, exec, ${toggle "nwg-bar"}"
           "$mod, L, exec, loginctl lock-session"
           "$mod SHIFT, B, exec, pkill -SIGUSR2 waybar"
           "$mod, A, exec, pkill -SIGUSR1 waybar"
-          "$mod, T, exec, $terminal"
-          "$mod, W, exec, $browser"
+          "$mod, T, exec, uwsm-app -- $terminal"
+          "$mod, W, exec, uwsm-app -- $browser"
+          "$mod SHIFT, W, exec, uwsm-app -- $browserinc"
           "$mod, K, exec, keepassxc"
-          "$mod, N, exec, swaync-client -t -sw"
-          "$mod, O, exec, uwsm app -- networkmanager_dmenu"
-          "$mod SHIFT, W, exec, $browserinc"
+          "$mod, N, exec, ${toggle "swaync-client -t -sw"}"
+          "$mod, O, exec, uwsm-app -- networkmanager_dmenu"
           "$mod, Q, killactive,"
-          "$mod, E, exec, $fileManager"
-          "$mod SHIFT, E, exec, $yazi"
+          "$mod, E, exec, uwsm-app -- $fileManager"
+          "$mod SHIFT, E, exec, uwsm-app -- $yazi"
           "$mod, F, fullscreen,"
           "$mod SHIFT, F, togglefloating,"
           "$mod, P, pseudo,"
           "$mod, J, togglesplit,"
-          "$mod, C, exec, hyprctl dispatch exec copyq toggle"
           "$mod SHIFT, 1, movetoworkspace, 1"
           "$mod SHIFT, 2, movetoworkspace, 2"
           "$mod SHIFT, 3, movetoworkspace, 3"
@@ -87,13 +86,13 @@ in
           "$mod CTRL, up, swapwindow, u"
           "$mod CTRL, down, swapwindow, d"
 
-          ",XF86AudioLowerVolume, exec, volume-control.sh --dec"
-          ",XF86AudioRaiseVolume, exec, volume-control.sh --inc"
-          ",XF86AudioMute, exec, volume-control.sh --toggle"
-          ",XF86AudioMicMute, exec, volume-control.sh --toggle-mic"
+          ",XF86AudioLowerVolume, exec, ${runOnce "volume-control.sh --dec"}"
+          ",XF86AudioRaiseVolume, exec, ${runOnce "volume-control.sh --inc"}"
+          ",XF86AudioMute, exec, ${runOnce "volume-control.sh --toggle"}"
+          ",XF86AudioMicMute, exec, ${runOnce "volume-control.sh --toggle-mic"}"
 
-          ",XF86MonBrightnessDown, exec, brightnessctl s 5%-"
-          ",XF86MonBrightnessUp, exec, brightnessctl s +5%"
+          ",XF86MonBrightnessDown, exec, ${runOnce "brightnessctl s 5%-"}"
+          ",XF86MonBrightnessUp, exec, ${runOnce "brightnessctl s +5%"}"
           "$mod, XF86MonBrightnessUp, exec, hyprctl dispatch dpms on"
           "$mod, XF86MonBrightnessDown, exec, hyprctl dispatch dpms off"
 

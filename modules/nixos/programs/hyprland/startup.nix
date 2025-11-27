@@ -29,7 +29,7 @@ in
 
     (mkIf (host == "kima") {
       programs.hyprland.settings.exec-once = [
-        "uwsm app -- solaar -w hide -b regular"
+        "uwsm-app -s b -- solaar -w hide -b regular"
       ]
       ++ commonExecOnce;
     })
@@ -42,8 +42,8 @@ in
 
     (mkIf (host == "toothpc") {
       programs.hyprland.settings.exec-once = [
-        "uwsm app -- mullvad-vpn"
-        "uwsm app -- solaar -w hide -b regular"
+        "uwsm-app -s b -- mullvad-vpn"
+        "uwsm-app -s b -- solaar -w hide -b regular"
       ]
       ++ commonExecOnce;
     })

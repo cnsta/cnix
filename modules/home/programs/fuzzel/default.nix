@@ -22,7 +22,7 @@ in
           main = {
             layer = "overlay";
             font = "Input Sans Narrow Light:size=12";
-            launch-prefix = "uwsm app --";
+            launch-prefix = "uwsm-app --";
             lines = "8";
           };
           colors = {
