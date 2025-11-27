@@ -26,21 +26,23 @@ in
   };
 
   config = mkIf cfg.enable {
-    xdg.portal = {
-      enable = true;
-      xdgOpenUsePortal = cfg.xdgOpenUsePortal;
-      config = {
-        preferred.default = [
-          "hyprland"
-        ];
-        hyprland.default = [
-          "hyprland"
-          "gtk"
+    xdg = {
+      portal = {
+        enable = true;
+        xdgOpenUsePortal = cfg.xdgOpenUsePortal;
+        config = {
+          preferred.default = [
+            "hyprland"
+          ];
+          hyprland.default = [
+            "hyprland"
+            "gtk"
+          ];
+        };
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
         ];
       };
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-      ];
     };
   };
 }

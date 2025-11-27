@@ -25,11 +25,13 @@ in
     systemd.user.services.waybar = {
       Unit = {
         Description = "Highly customizable Wayland bar for Sway and Wlroots based compositors.";
+        Documentation = "man:waybar(5)";
         After = [ "graphical-session.target" ];
       };
       Service = {
         Type = "exec";
         ExecStart = "${waybar} -c ${waybarAssets}/config.jsonc -s ${waybarAssets}/style.css";
+        ExecReload = "kill -SIGUSR2 $MAINPID";
         Restart = "on-failure";
         Slice = "app-graphical.slice";
       };
