@@ -2,7 +2,7 @@
   imports = [
     ./bazarr
     ./flaresolverr
-    ./homepage-dashboard
+    ./homepage
     ./jellyfin
     ./jellyseerr
     ./lidarr

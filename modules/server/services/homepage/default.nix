@@ -5,7 +5,7 @@
   clib,
   ...
 }: let
-  unit = "homepage-dashboard";
+  unit = "homepage";
   cfg = config.server.services.${unit};
   srv = config.server;
 in {
@@ -19,7 +19,7 @@ in {
     services = {
       glances.enable = true;
 
-      ${unit} = {
+      homepage-dashboard = {
         enable = true;
         environmentFile = config.age.secrets.homepageEnvironment.path;
 

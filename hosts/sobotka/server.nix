@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   server = {
     enable = true;
     email = "adam@cnst.dev";
@@ -56,7 +55,7 @@
     };
 
     services = {
-      homepage-dashboard = {
+      homepage = {
         enable = true;
         subdomain = "dash";
         exposure = "local";
@@ -160,8 +159,8 @@
       };
       jellyseerr = {
         enable = true;
-        subdomain = "jellyseerr";
-        exposure = "local";
+        subdomain = "seerr";
+        exposure = "tailscale";
         port = 5055;
         homepage = {
           name = "Jellyseerr";
