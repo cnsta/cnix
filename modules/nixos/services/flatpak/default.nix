@@ -13,6 +13,7 @@ in
     nixos.services.flatpak.enable = mkEnableOption "Enables flatpaks and gnome software";
   };
   config = mkIf cfg.enable {
+    environment.systemPackages = [ pkgs.bazaar ];
     services.flatpak.enable = true;
     systemd.services.flatpak-repo = {
       description = "Add flathub repository";
