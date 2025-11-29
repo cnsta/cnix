@@ -114,7 +114,7 @@
     };
 
     zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
+      url = "git+https://git.cnst.dev/cnst/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
