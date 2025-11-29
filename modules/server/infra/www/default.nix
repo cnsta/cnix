@@ -67,25 +67,38 @@ in {
             port = 8283;
           }
         ];
-        virtualHosts."webfinger" = {
-          forceSSL = false;
-          serverName = cfg.url;
-          root = "/var/www/webfinger";
+        virtualHosts = {
+          "www" = {
+            forceSSL = false;
+            serverName = cfg.url;
+            root = "/var/www";
 
-          locations."= /.well-known/webfinger" = {
-            root = "/var/www/webfinger";
-            extraConfig = ''
-              default_type application/jrd+json;
-              try_files /.well-known/webfinger =404;
-            '';
+            locations."= /.well-known/webfinger" = {
+              extraConfig = ''
+                default_type application/jrd+json;
+                try_files /.well-known/webfinger =404;
+              '';
+            };
+
+            locations."= /robots.txt" = {
+              extraConfig = ''
+                default_type text/plain;
+                try_files /robots.txt =404;
+              '';
+            };
           };
 
-          locations."= /robots.txt" = {
-            root = "/var/www/webfinger";
-            extraConfig = ''
-              default_type text/plain;
-              try_files /robots.txt =404;
-            '';
+          "ts" = {
+            forceSSL = false;
+            serverName = "ts.${cfg.url}";
+            root = "/var/www/ts";
+
+            locations."/" = {
+              extraConfig = ''
+                index index.html;
+                try_files $uri $uri/ =404;
+              '';
+            };
           };
         };
       };
@@ -100,36 +113,32 @@ in {
       };
     };
 
-    environment.etc = {
-      "webfinger/.well-known/webfinger".text = ''
-        {
-          "subject": "acct:adam@${cfg.url}",
-          "links": [
-            {
-              "rel": "http://openid.net/specs/connect/1.0/issuer",
-              "href": "https://auth.${cfg.url}/application/o/tailscale/"
-            }
-          ]
-        }
-      '';
-
-      "webfinger/robots.txt".text = ''
-        User-agent: *
-        Disallow: /
-      '';
-    };
-
     services.traefik.dynamicConfigOptions.http = {
-      routers.webfinger = {
-        entryPoints = ["websecure"];
-        rule = "Host(`${cfg.url}`) && Path(`/.well-known/webfinger`)";
-        service = "webfinger";
-        tls.certResolver = "letsencrypt";
+      routers = {
+        www = {
+          entryPoints = ["websecure"];
+          rule = "Host(`${cfg.url}`) && Path(`/.well-known/webfinger`)";
+          service = "www";
+          tls.certResolver = "letsencrypt";
+        };
+
+        ts = {
+          entryPoints = ["websecure"];
+          rule = "Host(`ts.${cfg.url}`)";
+          service = "ts";
+          tls.certResolver = "letsencrypt";
+        };
       };
 
-      services.webfinger.loadBalancer.servers = [
-        {url = "http://127.0.0.1:8283";}
-      ];
+      services = {
+        www.loadBalancer.servers = [
+          {url = "http://127.0.0.1:8283";}
+        ];
+
+        ts.loadBalancer.servers = [
+          {url = "http://127.0.0.1:8283";}
+        ];
+      };
     };
   };
 }
