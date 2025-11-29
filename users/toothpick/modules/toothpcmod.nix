@@ -20,6 +20,9 @@
       firefox = {
         enable = true;
       };
+      fish = {
+        enable = true;
+      };
       foot = {
         enable = true;
       };
@@ -92,7 +95,7 @@
         enable = true;
       };
       zsh = {
-        enable = true;
+        enable = false;
       };
     };
     services = {
