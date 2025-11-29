@@ -39,10 +39,10 @@ in
             monitor = "";
             size = "200, 50";
             outline_thickness = 0;
-            dots_size = 0.1;
-            dots_spacing = 0.3;
+            dots_size = 0.2;
+            dots_spacing = 0.5;
             dots_center = true;
-            dots_rounding = -1;
+            dots_rounding = 0;
             outer_color = "rgba(0,0,0,0)";
             inner_color = "rgba(0,0,0,0)";
             font_color = "rgba(FFFFFFFF)";
