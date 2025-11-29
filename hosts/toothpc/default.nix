@@ -10,7 +10,7 @@ in
 {
   users.users.toothpick = {
     isNormalUser = true;
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     # openssh.authorizedKeys.keys = [];
     extraGroups = ifTheyExist [
       "wheel"

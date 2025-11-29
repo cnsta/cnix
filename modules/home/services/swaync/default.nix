@@ -18,9 +18,9 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ swaynotificationcenter ];
     systemd.user.services.swaync = {
+      description = "Swaync notification daemon";
+      documentation = "https://github.com/ErikReider/SwayNotificationCenter";
       Unit = {
-        description = "Swaync notification daemon";
-        documentation = "https://github.com/ErikReider/SwayNotificationCenter";
         PartOf = "graphical-session.target";
         After = "graphical-session.target";
         ConditionEnvironment = "WAYLAND_DISPLAY";
