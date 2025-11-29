@@ -83,6 +83,9 @@ tooltip label {
   border-bottom: 3px solid #4c7a5d;
 }
 
+#custom-shutdown,
+#custom-reboot,
+#custom-lock,
 #pulseaudio,
 #custom-systemd,
 #custom-mail,
@@ -136,6 +139,19 @@ tooltip label {
   padding-right: 6px;
   padding-left: 4px;
   /* font-size: 14px; */
+}
+
+#custom-shutdown,
+#custom-reboot,
+#custom-lock {
+  color: #fbf1c7;
+  transition: color 0.15s ease;
+}
+
+#custom-shutdown:hover,
+#custom-reboot:hover,
+#custom-lock:hover {
+  color: #4c7a5d;
 }
 
 #tray menu * {

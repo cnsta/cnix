@@ -88,6 +88,21 @@
       "format": "󰅁",
       "tooltip": false
     },
+    "custom/shutdown": {
+      "format": "",
+      "on-click": "systemctl poweroff",
+      "tooltip": false
+    },
+    "custom/reboot": {
+      "on-click": "systemctl reboot",
+      "format": "",
+      "tooltip": false
+    },
+    "custom/lock": {
+      "on-click": "uwsm-app -- hyprlock",
+      "format": "",
+      "tooltip": false
+    },
     "disk": {
       "format": "<span foreground='#928374'></span> {percentage_free}%",
       "states": {
@@ -103,10 +118,9 @@
       },
       "modules": [
         "custom/logo",
-        "cpu",
-        "memory",
-        "disk",
-        "network"
+        "custom/shutdown",
+        "custom/reboot",
+        "custom/lock"
       ],
       "orientation": "inherit"
     },
