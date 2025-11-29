@@ -15,6 +15,10 @@ let
   uziggy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtL8uBsJ3UL4+scqjEcyXYQOVlKziJk9YJ78YP6jCxq cnst@nixos";
   rziggy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHnca8xg1MZ4Hx5k5SVFSxcPnWc1O6r7w7JGYzX9aQm8 root@nixos";
 
+  # --- Hosts: toothpc ---
+  utoothpc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGe3s7WbaM0aZTYHCE1ugiG/SxFXLSbWcLAWceFotpuh toothpick@nixos";
+  rtoothpc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzjuaOX94oRwWVsRjE4mo5QTw35lEmFKyHtlh2XCTBg root@toothpc";
+
   # --- Groups ---
   kima = [
     ukima
@@ -32,8 +36,14 @@ let
     uziggy
     rziggy
   ];
-  all = kima ++ bunk ++ sobotka ++ ziggy;
-in {
+  toothpc = [
+    utoothpc
+    rtoothpc
+  ];
+
+  all = kima ++ bunk ++ sobotka ++ ziggy ++ toothpc;
+in
+{
   "accessTokens.age".publicKeys = all;
 
   # Sobotka-specific

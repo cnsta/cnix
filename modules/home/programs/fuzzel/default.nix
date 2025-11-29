@@ -46,10 +46,10 @@ in
       };
     }
     (mkIf (host == "kima") {
-      programs.fuzzel.settings.main.terminal = "${pkgs.ghostty}/bin/alacritty";
+      programs.fuzzel.settings.main.terminal = "${pkgs.alacritty}/bin/alacritty";
     })
     (mkIf (host == "bunk") {
-      programs.fuzzel.settings.main.terminal = "${pkgs.foot}/bin/alacritty";
+      programs.fuzzel.settings.main.terminal = "${pkgs.alacritty}/bin/alacritty";
     })
     (mkIf (host == "toothpc") {
       programs.fuzzel.settings.main.terminal = "${pkgs.alacritty}/bin/alacritty";
