@@ -18,7 +18,10 @@
 
   environment.localBinInPath = true;
 
-  console.useXkbConfig = true;
+  console = {
+    keyMap = "sv-latin1";
+    font = "LatGrkCyr-8x16";
+  };
 
   nix =
     let

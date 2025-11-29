@@ -1,13 +1,13 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
   inherit (lib) mkIf mkEnableOption;
-  inherit (lib.meta) getExe;
-  inherit (pkgs) eza bat;
+  packageNames = map (p: p.pname or p.name or null) config.home.packages;
+  hasPackage = name: lib.any (x: x == name) packageNames;
+  hasEza = hasPackage "eza";
   cfg = config.home.programs.zsh;
 in
 {
@@ -20,33 +20,36 @@ in
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-
+      zsh-abbr = {
+        enable = true;
+        abbreviations = {
+          extract = "extract.sh";
+          nixclean = "nh clean all --keep 3";
+          nixdev = "nix develop ~/.nix-config -c $SHELL";
+          nixup = "nh os switch -H $HOST";
+          nixupn = "nh os switch -n -H $HOST";
+          nixupv = "nh os switch -v --show-trace -H $HOST";
+          nixupvn = "nh os switch -n -v --show-trace -H $HOST";
+          flakeup = "nix flake update";
+        };
+      };
       shellAliases = {
-        cat = "${getExe bat} --style=plain";
-        ls = "${getExe eza} -h --git --icons --color=auto --group-directories-first -s extension";
-        ll = "${getExe eza} -l --git --icons --color=auto --group-directories-first -s extension";
-        lat = "${getExe eza} -lah --tree";
-        la = "${getExe eza} -lah";
-        tree = "${getExe eza} --tree --icons=always";
-        extract = "extract.sh";
+        ".." = "cd ..";
+        "..." = "cd ../../";
+        "...." = "cd ../../../";
+        "....." = "cd ../../../../";
+        "......" = "cd ../../../../../";
+        nixconfig = "cd /home/$USER/.nix-config/";
         homemodules = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/{$HOST}mod.nix";
         hmod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/{$HOST}mod.nix";
         nixsettings = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/settings.nix";
         nset = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/settings.nix";
         nixosmodules = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
         nmod = "$EDITOR /home/$USER/.nix-config/hosts/$HOST/modules.nix";
-        nixcleanboot = "sudo nix run /home/$USER/.nix-config#cleanup-boot";
-        nixclean = "nh clean all --keep 3";
-        nixdev = "nix develop ~/.nix-config -c $SHELL";
-        nixconfig = "cd /home/$USER/.nix-config/";
-        nixup = "nh os switch -H $HOST";
-        nixupv = "nh os switch -v -H $HOST";
-        flakeup = "nix flake update";
-        ".." = "cd ..";
-        "..." = "cd ../../";
-        "...." = "cd ../../../";
-        "....." = "cd ../../../../";
-        "......" = "cd ../../../../../";
+        ls = mkIf hasEza "eza";
+        tree = mkIf hasEza "eza --tree --icons=always";
+        # Clear screen and scrollback
+        clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
       };
       history = {
         size = 1000;
