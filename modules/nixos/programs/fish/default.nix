@@ -3,11 +3,13 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption mkMerge;
 
   cfg = config.nixos.programs.fish;
-in {
+in
+{
   options = {
     nixos.programs.fish = {
       enable = mkEnableOption "Enables fish shell";
@@ -53,6 +55,7 @@ in {
           nset = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/settings.nix";
           nixosmodules = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
           nmod = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
+          nsrv = "$EDITOR /home/$USER/.nix-config/hosts/sobotka/server.nix";
           ls = lib.getExe pkgs.eza;
           tree = "${lib.getExe pkgs.eza} --tree --icons=always";
           # Clear screen and scrollback

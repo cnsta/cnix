@@ -20,7 +20,6 @@
 
   console = {
     keyMap = "sv-latin1";
-    font = "LatGrkCyr-8x16";
   };
 
   nix =
