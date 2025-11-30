@@ -117,7 +117,7 @@
         "resources": "uwsm-app -- resources",
         "lock": "uwsm-app -- hyprlock",
         "reboot": "systemctl reboot",
-        "shutdown": "systemctl shutdown"
+        "shutdown": "systemctl poweroff"
       }
     },
     "disk": {

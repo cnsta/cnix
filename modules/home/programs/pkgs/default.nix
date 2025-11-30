@@ -78,6 +78,7 @@ in
           material-icons
           material-symbols
           feh
+          finamp
         ])
 
         (mkIf cfg.desktop.enable [
