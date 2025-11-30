@@ -43,6 +43,7 @@ in
           "$mod, K, exec, keepassxc"
           "$mod, N, exec, ${toggle "swaync-client -t -sw"}"
           "$mod, O, exec, uwsm-app -- networkmanager_dmenu"
+          "$mod, I, exec, uwsm-app -- alacritty -T 'VPN Switcher' -e vpnswitcher.sh"
           "$mod, Q, killactive,"
           "$mod, E, exec, uwsm-app -- $fileManager"
           "$mod SHIFT, E, exec, uwsm-app -- $yazi"

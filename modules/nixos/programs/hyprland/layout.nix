@@ -51,10 +51,10 @@ in
           "move 100%-w-20 40, initialTitle:^(floatcal)$"
           "float, initialTitle:^(floatcal)$"
 
-          "size 600 300, title:^(tuirun)$"
-          "center, title:^(tuirun)$"
-          "noborder, title:^(tuirun)$"
-          "float, title:^(tuirun)$"
+          "size 450 300, title:^(VPN Switcher)$"
+          "center, title:^(VPN Switcher)$"
+          "noborder, title:^(VPN Switcher)$"
+          "float, title:^(VPN Switcher)$"
 
           "size 843 530, class:^(org.keepassxc.KeePassXC)$"
           "move 100%-w-20 40, class:^(org.keepassxc.KeePassXC)$"
