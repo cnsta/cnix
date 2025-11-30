@@ -64,10 +64,10 @@
       "restart-interval": 1,
       "tooltip": false
     },
-    "custom/logo": {
-      "format": "   ",
-      "tooltip": false
-    },
+    // "custom/logo": {
+    //   "format": "   ",
+    //   "tooltip": false
+    // },
     "custom/mako": {
       "exec": "mako.sh",
       "on-click": "mako-toggle.sh",
@@ -88,25 +88,37 @@
       "format": "󰅁",
       "tooltip": false
     },
-    "custom/shutdown": {
-      "format": "⏻",
-      "on-click": "systemctl poweroff",
+    "custom/discord": {
+      "format": "",
+      "on-click": "uwsm-app -- vesktop",
       "tooltip": false
     },
-    "custom/reboot": {
-      "on-click": "systemctl reboot",
-      "format": "",
+    "custom/steam": {
+      "on-click": "steam",
+      "format": "",
       "tooltip": false
     },
-    "custom/lock": {
-      "on-click": "uwsm-app -- hyprlock",
-      "format": "",
+    "custom/bazaar": {
+      "on-click": "uwsm-app -- bazaar",
+      "format": "",
       "tooltip": false
     },
-    "custom/task": {
-      "on-click": "uwsm-app -- resources",
-      "format": "󱝒",
+    "custom/finamp": {
+      "on-click": "uwsm-app -- finamp",
+      "format": "󰝚",
       "tooltip": false
+    },
+    "custom/logo": {
+      "format": "   ",
+      "tooltip": false,
+      "menu": "on-click",
+      "menu-file": "~/.nix-config/modules/home/programs/waybar/assets/power_menu.xml",
+      "menu-actions": {
+        "resources": "uwsm-app -- resources",
+        "lock": "uwsm-app -- hyprlock",
+        "reboot": "systemctl reboot",
+        "shutdown": "systemctl shutdown"
+      }
     },
     "disk": {
       "format": "<span foreground='#928374'></span> {percentage_free}%",
@@ -117,16 +129,15 @@
     },
     "group/system": {
       "drawer": {
-        "click-to-reveal": true,
         "transistion-left-to-right": true,
-        "transition-duration": 250
+        "transition-duration": 150
       },
       "modules": [
         "custom/logo",
-        "custom/task",
-        "custom/lock",
-        "custom/reboot",
-        "custom/shutdown"
+        "custom/bazaar",
+        "custom/discord",
+        "custom/finamp",
+        "custom/steam"
       ],
       "orientation": "inherit"
     },
