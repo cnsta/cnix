@@ -104,7 +104,7 @@
       };
       pkgs = {
         enable = true;
-        common = {
+        gui = {
           enable = true;
         };
         desktop = {

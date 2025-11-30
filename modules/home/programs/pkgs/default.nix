@@ -18,10 +18,10 @@ in
   options = {
     home.programs.pkgs = {
       enable = mkEnableOption "Enables miscellaneous utility apps";
-      common.enable = mkOption {
+      gui.enable = mkOption {
         type = types.bool;
         default = false;
-        description = "Whether to install common packages.";
+        description = "Whether to install gui-specific packages.";
       };
       desktop.enable = mkOption {
         type = types.bool;
@@ -58,18 +58,21 @@ in
           cmatrix
           xcur2png
           nix-tree
+          exiftool
         ]
 
-        (mkIf cfg.common.enable [
+        (mkIf cfg.gui.enable [
           nwg-look
           gnome-calculator
           slurp
           grimblast
           tesseract
-          exiftool
           hyprpicker
           loupe
           adwaita-icon-theme
+          wl-screenrec
+          wl-clipboard
+          wayland-utils
           qt5.qtwayland
           qt6.qtwayland
           material-icons

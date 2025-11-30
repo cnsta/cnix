@@ -46,7 +46,7 @@
       };
       pkgs = {
         enable = true;
-        common.enable = true;
+        gui.enable = true;
         desktop.enable = true;
       };
       mpv = {

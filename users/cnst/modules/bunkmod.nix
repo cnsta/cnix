@@ -64,7 +64,7 @@
       };
       pkgs = {
         enable = true;
-        common.enable = true;
+        gui.enable = true;
       };
       rofi = {
         enable = true;
