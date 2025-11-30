@@ -27,7 +27,10 @@ in
         source = getExe (
           pkgs.writeShellApplication {
             name = "vpnswitcher";
-            runtimeInputs = with pkgs; [ fzf ];
+            runtimeInputs = with pkgs; [
+              fzf
+              networkmanager
+            ];
             text = readFile ./bin/vpnswitcher.sh;
           }
         );
