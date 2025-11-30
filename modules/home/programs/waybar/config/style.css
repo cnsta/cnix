@@ -83,10 +83,10 @@ tooltip label {
   border-bottom: 3px solid #4c7a5d;
 }
 
-#custom-shutdown,
-#custom-task,
-#custom-reboot,
-#custom-lock,
+#custom-steam,
+#custom-discord,
+#custom-finamp,
+#custom-bazaar,
 #pulseaudio,
 #custom-systemd,
 #custom-mail,
@@ -142,19 +142,36 @@ tooltip label {
   /* font-size: 14px; */
 }
 
-#custom-shutdown,
-#custom-reboot,
-#custom-task,
-#custom-lock {
+#custom-steam,
+#custom-bazaar,
+#custom-finamp,
+#custom-discord {
   color: #fbf1c7;
   transition: color 0.15s ease;
 }
 
-#custom-shutdown:hover,
-#custom-task:hover,
-#custom-reboot:hover,
-#custom-lock:hover {
+#custom-steam:hover,
+#custom-finamp:hover,
+#custom-bazaar:hover,
+#custom-discord:hover {
   color: #4c7a5d;
+}
+
+menu {
+  border-radius: 5px;
+  background: rgba(50, 50, 50, 0.9);
+  padding: 5px 5px;
+  color: #fbf1c7;
+  transition: color 0.15s ease;
+}
+
+menuitem {
+  border-radius: 5px;
+}
+
+menuitem:hover {
+  color: #4c7a5d;
+  transition: color 0.15s ease;
 }
 
 #tray menu * {
