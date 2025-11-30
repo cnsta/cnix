@@ -3,8 +3,8 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = ["amd"];
-        extraKernelParams = [];
+        hardware = [ "amd" ];
+        extraKernelParams = [ ];
       };
       loader = {
         default = {
@@ -104,7 +104,7 @@
         desktop = {
           enable = false;
         };
-        common = {
+        gui = {
           enable = false;
         };
         laptop = {

@@ -21,10 +21,10 @@ in
         default = true;
         description = "Whether to install default core packages.";
       };
-      common.enable = mkOption {
+      gui.enable = mkOption {
         type = types.bool;
         default = false;
-        description = "Whether to install common packages.";
+        description = "Whether to install gui-specific packages.";
       };
       desktop.enable = mkOption {
         type = types.bool;
@@ -63,7 +63,6 @@ in
           socat
           jq
           fd
-          resources
           git
           stow
           tree
@@ -87,14 +86,14 @@ in
           file
           libnotify
           unrar
+          libqalculate
         ]
 
-        (mkIf cfg.common.enable [
+        (mkIf cfg.gui.enable [
+          resources
           swappy
           wayfreeze
           imagemagick
-          wl-screenrec
-          libqalculate
           gnome-disk-utility
           networkmanagerapplet
           networkmanager_dmenu

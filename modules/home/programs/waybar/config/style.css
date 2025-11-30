@@ -84,6 +84,7 @@ tooltip label {
 }
 
 #custom-shutdown,
+#custom-task,
 #custom-reboot,
 #custom-lock,
 #pulseaudio,
@@ -143,12 +144,14 @@ tooltip label {
 
 #custom-shutdown,
 #custom-reboot,
+#custom-task,
 #custom-lock {
   color: #fbf1c7;
   transition: color 0.15s ease;
 }
 
 #custom-shutdown:hover,
+#custom-task:hover,
 #custom-reboot:hover,
 #custom-lock:hover {
   color: #4c7a5d;

@@ -99,7 +99,7 @@
         desktop = {
           enable = false;
         };
-        common = {
+        gui = {
           enable = false;
         };
         laptop = {

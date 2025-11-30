@@ -110,7 +110,7 @@
         desktop = {
           enable = true;
         };
-        common = {
+        gui = {
           enable = true;
         };
         laptop = {

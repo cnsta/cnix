@@ -89,18 +89,23 @@
       "tooltip": false
     },
     "custom/shutdown": {
-      "format": "",
+      "format": "⏻",
       "on-click": "systemctl poweroff",
       "tooltip": false
     },
     "custom/reboot": {
       "on-click": "systemctl reboot",
-      "format": "",
+      "format": "",
       "tooltip": false
     },
     "custom/lock": {
       "on-click": "uwsm-app -- hyprlock",
       "format": "",
+      "tooltip": false
+    },
+    "custom/task": {
+      "on-click": "uwsm-app -- resources",
+      "format": "󱝒",
       "tooltip": false
     },
     "disk": {
@@ -118,9 +123,10 @@
       },
       "modules": [
         "custom/logo",
-        "custom/shutdown",
+        "custom/task",
+        "custom/lock",
         "custom/reboot",
-        "custom/lock"
+        "custom/shutdown"
       ],
       "orientation": "inherit"
     },
