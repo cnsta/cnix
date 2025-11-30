@@ -34,7 +34,7 @@ fi
     fi
   done
 
-  printf "❌ Disconnect All\tNONE\tdisconnect\n"
+  printf "  Disconnect All\tNONE\tdisconnect\n"
 
 } >"$MENU_FILE"
 
@@ -60,11 +60,11 @@ echo "---"
 # main logic
 disconnect_all() {
   if [[ -n "$CURRENT_WG" ]]; then
-    echo "⬇️  Disconnecting WireGuard ($CURRENT_WG)..."
+    echo "󰌙  Disconnecting WireGuard ($CURRENT_WG)..."
     nmcli connection down "$CURRENT_WG"
   fi
   if [ "$IS_TS_ACTIVE" = true ]; then
-    echo "⬇️  Stopping Tailscale..."
+    echo "󰌙  Stopping Tailscale..."
     sudo systemctl stop "$TAILSCALE_SERVICE"
   fi
 }
@@ -72,26 +72,26 @@ disconnect_all() {
 case "$TARGET_TYPE" in
 disconnect)
   disconnect_all
-  echo "✅ All disconnected."
+  echo "  All disconnected."
   ;;
 
 tailscale)
   # only restart if we aren't already running it exclusively
   if [ "$IS_TS_ACTIVE" = true ] && [[ -z "$CURRENT_WG" ]]; then
-    echo "✅ Tailscale is already the active VPN."
+    echo "  Tailscale is already active."
   else
     disconnect_all
-    echo "⬆️  Starting Tailscale..."
+    echo "󰌘  Starting Tailscale..."
     sudo systemctl start "$TAILSCALE_SERVICE"
   fi
   ;;
 
 wireguard)
   if [[ "$TARGET_NAME" == "$CURRENT_WG" ]] && [ "$IS_TS_ACTIVE" = false ]; then
-    echo "✅ $TARGET_NAME is already active."
+    echo "  $TARGET_NAME is already active."
   else
     disconnect_all
-    echo "⬆️  Connecting to $TARGET_NAME..."
+    echo "󰌘  Connecting to $TARGET_NAME..."
     nmcli connection up "$TARGET_NAME"
   fi
   ;;
