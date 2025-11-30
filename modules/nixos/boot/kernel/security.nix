@@ -44,7 +44,6 @@
   boot.kernelModules = [ "tcp_bbr" ];
 
   security = {
-    rtkit.enable = true;
     sudo.wheelNeedsPassword = false;
   };
 }

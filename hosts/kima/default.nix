@@ -44,7 +44,11 @@ in
   };
 
   boot = {
-    zfs.package = pkgs.zfs_unstable;
+    zfs = {
+      package = pkgs.zfs_unstable;
+      forceImportRoot = false;
+    };
+    supportedFilesystems = [ "zfs" ];
     kernelPackages = lib.mkDefault config.boot.zfs.package.latestCompatibleLinuxPackages;
   };
 
