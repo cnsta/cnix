@@ -17,8 +17,14 @@ in {
     };
 
     services = {
-      glances.enable = true;
-
+      glances = {
+        enable = false;
+        openFirewall = true;
+        extraArgs = [
+          "--webserver"
+          "--disable-webui"
+        ];
+      };
       homepage-dashboard = {
         enable = true;
         environmentFile = config.age.secrets.homepageEnvironment.path;
@@ -32,13 +38,6 @@ in {
           useEqualHeights = true;
 
           layout = [
-            {
-              Glances = {
-                header = false;
-                style = "row";
-                columns = 4;
-              };
-            }
             {
               Arr = {
                 header = true;
@@ -124,103 +123,7 @@ in {
                   siteMonitor = "https://${service.subdomain}.${domain}${x.homepage.path or ""}";
                 };
               });
-          })
-          ++ [
-            {
-              Glances = let
-                glancesShared = {
-                  type = "glances";
-                  url = "http://localhost:${toString config.services.glances.port}";
-                  chart = true;
-                  version = 4;
-                };
-              in [
-                {
-                  Memory = {
-                    widget =
-                      glancesShared
-                      // {
-                        metric = "memory";
-                        refreshInterval = 2000;
-                        pointsLimit = 30;
-                      };
-                  };
-                }
-                {
-                  "CPU Usage" = {
-                    widget =
-                      glancesShared
-                      // {
-                        metric = "cpu";
-                        refreshInterval = 2000;
-                        pointsLimit = 30;
-                      };
-                  };
-                }
-
-                {
-                  "CPU Temp" = {
-                    widget =
-                      glancesShared
-                      // {
-                        metric = "sensor:Tctl";
-                        refreshInterval = 5000;
-                        pointsLimit = 20;
-                      };
-                  };
-                }
-                {
-                  "GPU Radeon" = {
-                    widget =
-                      glancesShared
-                      // {
-                        metric = "sensor:junction";
-                      };
-                  };
-                }
-                {
-                  "GPU Intel" = {
-                    widget =
-                      glancesShared
-                      // {
-                        metric = "sensor:pkg";
-                      };
-                  };
-                }
-                {
-                  "ZFS Pool" = {
-                    widget =
-                      glancesShared
-                      // {
-                        metric = "fs:/mnt/data";
-                        refreshInterval = 30000;
-                        pointsLimit = 20;
-                        diskUnits = "bytes";
-                      };
-                  };
-                }
-
-                {
-                  Processes = {
-                    widget =
-                      glancesShared
-                      // {
-                        metric = "process";
-                      };
-                  };
-                }
-                {
-                  Network = {
-                    widget =
-                      glancesShared
-                      // {
-                        metric = "network:enp6s0";
-                      };
-                  };
-                }
-              ];
-            }
-          ];
+          });
       };
     };
   };
