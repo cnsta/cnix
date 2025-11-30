@@ -23,6 +23,16 @@ in
         );
       };
 
+      ".local/bin/vpnswitcher.sh" = {
+        source = getExe (
+          pkgs.writeShellApplication {
+            name = "vpnswitcher";
+            runtimeInputs = with pkgs; [ fzf ];
+            text = readFile ./bin/vpnswitcher.sh;
+          }
+        );
+      };
+
       ".local/bin/spawn-or-focus.sh" = {
         source = getExe (
           pkgs.writeShellApplication {
