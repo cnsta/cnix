@@ -8,7 +8,8 @@
       "DVI-D-1"
     ],
     "modules-left": [
-      "group/system"
+      "custom/logo",
+      "group/cnix"
     ],
     "modules-center": [
       "hyprland/workspaces"
@@ -88,6 +89,10 @@
       "format": "󰅁",
       "tooltip": false
     },
+    "custom/appicon": {
+      "format": "󰅂",
+      "tooltip": false
+    },
     "custom/discord": {
       "format": "",
       "on-click": "uwsm-app -- vesktop",
@@ -127,13 +132,14 @@
         "warning": 70
       }
     },
-    "group/system": {
+    "group/cnix": {
       "drawer": {
+        "click-to-reveal": true,
         "transistion-left-to-right": true,
         "transition-duration": 150
       },
       "modules": [
-        "custom/logo",
+        "custom/appicon",
         "custom/bazaar",
         "custom/discord",
         "custom/finamp",
@@ -144,7 +150,7 @@
     "group/trayGroup": {
       "drawer": {
         "click-to-reveal": true,
-        "transistion-duration": 250,
+        "transistion-duration": 150,
         "transition-left-to-right": false
       },
       "modules": [
