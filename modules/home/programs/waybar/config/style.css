@@ -48,6 +48,7 @@ tooltip label {
   background-size: 21px 18px;
 }
 
+#custom-appicon,
 #custom-trayicon {
   color: #fbf1c7;
   margin: 1px 0px 0px 0px;
