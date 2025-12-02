@@ -16,30 +16,32 @@ CURRENT_WG=$(nmcli -t -f NAME,TYPE connection show --active | grep ":wireguard$"
 IS_TS_ACTIVE=false
 if systemctl is-active --quiet "$TAILSCALE_SERVICE"; then
   IS_TS_ACTIVE=true
+  TAILNET="$(tailscale status --json | jq -r '.MagicDNSSuffix')"
 fi
 
 # menu generation
 {
   if [ "$IS_TS_ACTIVE" = true ]; then
-    printf "Tailscale (Service) [ACTIVE]\ttailscale\ttailscale\n"
+    printf "\033[32m\033[0m  Tailscale (%s)\ttailscale\ttailscale\n" "$TAILNET"
   else
-    printf "Tailscale (Service)\ttailscale\ttailscale\n"
+    printf "\033[31m\033[0m  Tailscale\ttailscale\ttailscale\n"
   fi
 
   nmcli -t -f NAME,TYPE connection show | grep ":wireguard$" | cut -d: -f1 | while read -r wg_name; do
     if [[ "$wg_name" == "$CURRENT_WG" ]]; then
-      printf "WireGuard (%s) [ACTIVE]\t%s\twireguard\n" "$wg_name" "$wg_name"
+      printf "\033[32m\033[0m  WireGuard (%s)\t%s\twireguard\n" "$wg_name" "$wg_name"
     else
-      printf "WireGuard (%s)\t%s\twireguard\n" "$wg_name" "$wg_name"
+      printf "\033[31m\033[0m  WireGuard (%s)\t%s\twireguard\n" "$wg_name" "$wg_name"
     fi
   done
 
-  printf "  Disconnect All\tNONE\tdisconnect\n"
+  printf "\033[31m\033[0m  Disconnect All\tNONE\tdisconnect\n"
 
 } >"$MENU_FILE"
 
 # fzf selection
 SELECTION=$(fzf \
+  --ansi \
   --reverse \
   --delimiter="\t" \
   --with-nth=1 \
