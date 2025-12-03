@@ -62,7 +62,7 @@
         port = 8082;
       };
       n8n = {
-        enable = true;
+        enable = false;
         subdomain = "n8n";
         exposure = "local";
         port = 5678;

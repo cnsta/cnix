@@ -3,8 +3,8 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = [ "amd" ];
-        extraKernelParams = [ ];
+        hardware = ["amd"];
+        extraKernelParams = [];
       };
       loader = {
         default = {
@@ -179,7 +179,7 @@
         enable = true;
       };
       mullvad = {
-        enable = true;
+        enable = false;
       };
       nfs = {
         enable = false;
