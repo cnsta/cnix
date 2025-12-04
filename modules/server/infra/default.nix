@@ -2,6 +2,7 @@
   imports = [
     ./authentik
     ./fail2ban
+    ./gluetun
     ./keepalived
     ./mysql
     ./podman

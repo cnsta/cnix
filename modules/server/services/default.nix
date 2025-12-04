@@ -10,10 +10,14 @@
     ./n8n
     ./nextcloud
     ./ollama
+    ./pihole
     ./prowlarr
     ./radarr
+    ./slskd
     ./sonarr
+    ./tdarr
     ./uptime-kuma
     ./vaultwarden
+    ./qbittorrent
   ];
 }
