@@ -121,6 +121,18 @@
           category = "Arr";
         };
       };
+      immich = {
+        enable = true;
+        subdomain = "immich";
+        exposure = "tailscale";
+        port = 2283;
+        homepage = {
+          name = "immich";
+          description = "Photo collection manager";
+          icon = "immich.svg";
+          category = "Services";
+        };
+      };
       lidarr = {
         enable = true;
         subdomain = "lidarr";
@@ -166,7 +178,7 @@
           name = "Jellyseerr";
           description = "Media request and discovery manager";
           icon = "jellyseerr.svg";
-          category = "Arr";
+          category = "Media";
         };
       };
       jellyfin = {
@@ -269,7 +281,7 @@
         homepage = {
           name = "Tdarr";
           description = "Media transcoding application";
-          icon = "tdarr.svg";
+          icon = "tdarr.webp";
           category = "Media";
         };
       };

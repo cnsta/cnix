@@ -3,6 +3,7 @@
     ./bazarr
     ./flaresolverr
     ./homepage
+    ./immich
     ./jellyfin
     ./jellyseerr
     ./lidarr
