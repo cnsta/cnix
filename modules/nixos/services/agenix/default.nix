@@ -5,17 +5,16 @@
   pkgs,
   self,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkEnableOption
     mkOption
     mkMerge
     ;
   cfg = config.nixos.services.agenix;
-in
-{
+in {
   options = {
     nixos.services.agenix = {
       enable = mkEnableOption "Enables agenix system environment";
@@ -74,7 +73,6 @@ in
           cloudflareDnsCredentials.file = "${self}/secrets/cloudflareDnsCredentials.age";
           wgCredentials.file = "${self}/secrets/wgCredentials.age";
           wgSobotkaPrivateKey.file = "${self}/secrets/wgSobotkaPrivateKey.age";
-          gluetunEnvironment.file = "${self}/secrets/gluetunEnvironment.age";
         };
       })
       (mkIf cfg.ziggy.enable {
