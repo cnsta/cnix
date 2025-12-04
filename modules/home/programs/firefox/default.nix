@@ -6,7 +6,7 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkEnableOption;
+  inherit (lib) mkIf mkEnableOption mkForce;
   cfg = config.home.programs.firefox;
 in
 {
@@ -24,23 +24,61 @@ in
         default = {
           search = {
             force = true;
-            default = "ddg";
-            privateDefault = "ddg";
+            default = "noaiddg";
+            privateDefault = "noaiddg";
             order = [
-              "ddg"
+              "noaiddg"
               "google"
             ];
+            engines = {
+              nix-packages = {
+                name = "Nix Packages";
+                urls = [
+                  {
+                    template = "https://search.nixos.org/packages";
+                    params = [
+                      {
+                        name = "type";
+                        value = "packages";
+                      }
+                      {
+                        name = "channel";
+                        value = "unstable";
+                      }
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                definedAliases = [ "@np" ];
+              };
+
+              nixos-wiki = {
+                name = "NixOS Wiki";
+                urls = [ { template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; } ];
+                iconMapObj."16" = "https://wiki.nixos.org/favicon.ico";
+                definedAliases = [ "@nw" ];
+              };
+
+              mynixos = {
+                name = "MyNixOS";
+                urls = [ { template = "https://mynixos.com/search?q={searchTerms}"; } ];
+                iconMapObj."16" = "https://mynixos.com/favicon.ico";
+                definedAliases = [ "@mn" ];
+              };
+
+              noaiddg = {
+                name = "noai.DuckDuckGo";
+                urls = [ { template = "https://noai.duckduckgo.com/?q={searchTerms}"; } ];
+                iconMapObj."16" = "https://duckduckgo.com/favicon.ico";
+                definedAliases = [ "@noaiddg" ];
+              };
+            };
           };
           bookmarks = { };
-          # extensions = with config.nur.repos.rycee.firefox-addons; [
-          #   ublock-origin
-          #   sponsorblock
-          #   clearurls
-          #   swedish-dictionary
-          #   reddit-enhancement-suite
-          #   return-youtube-dislikes
-          #   enhancer-for-youtube # unfree
-          # ];
           settings = {
             "apz.overscroll.enabled" = true;
             "browser.aboutConfig.showWarning" = false;
