@@ -26,7 +26,7 @@ in
         type = types.enum [
           "stable"
           "latest"
-          "cachyos"
+          "zfsLatest"
         ];
         default = "latest";
         description = "Kernel variant to use.";
@@ -73,8 +73,8 @@ in
           pkgs.linuxPackages
         else if variant == "latest" then
           pkgs.linuxPackages_latest
-        else if variant == "cachyos" then
-          pkgs.linuxPackages_cachyos
+        else if variant == "zfsLatest" then
+          pkgs.linuxPackages_6_17
         else
           throw "Unknown kernel variant: ${variant}";
 

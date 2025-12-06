@@ -49,7 +49,6 @@ in
       forceImportRoot = false;
     };
     supportedFilesystems = [ "zfs" ];
-    kernelPackages = lib.mkDefault config.boot.zfs.package.latestCompatibleLinuxPackages;
   };
 
   environment.variables = {

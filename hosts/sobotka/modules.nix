@@ -2,9 +2,9 @@
   nixos = {
     boot = {
       kernel = {
-        variant = "latest";
-        hardware = ["amd"];
-        extraKernelParams = [];
+        variant = "zfsLatest";
+        hardware = [ "amd" ];
+        extraKernelParams = [ ];
       };
       loader = {
         default = {
