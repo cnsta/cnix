@@ -133,6 +133,7 @@ in
           clang-tools
           marksman
           pyright
+          fish-lsp
 
           # Formatters
           nixfmt
