@@ -35,9 +35,6 @@
       ghostty = {
         enable = false;
       };
-      helix = {
-        enable = true;
-      };
       jujutsu = {
         enable = false;
       };
