@@ -87,7 +87,7 @@
         enable = false;
       };
       helix = {
-        enable = false;
+        enable = true;
       };
       hyprland = {
         enable = true;

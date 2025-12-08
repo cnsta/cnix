@@ -82,6 +82,9 @@
       gnome = {
         enable = false;
       };
+      helix = {
+        enable = true;
+      };
       hyprland = {
         enable = false;
       };
