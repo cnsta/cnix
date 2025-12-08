@@ -162,7 +162,6 @@
       };
       greetd = {
         enable = true;
-        user = "toothpick";
       };
       gvfs = {
         enable = true;

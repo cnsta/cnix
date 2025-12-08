@@ -169,7 +169,6 @@
       };
       greetd = {
         enable = true;
-        user = "cnst";
       };
       gvfs = {
         enable = true;
