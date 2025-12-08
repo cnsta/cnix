@@ -3,18 +3,22 @@
   lib,
   self,
   ...
-}: let
+}:
+let
   unit = "pihole";
   srv = config.server;
   cfg = config.server.services.${unit};
 
-  getPiholeSecret = hostname:
-    if hostname == "ziggy"
-    then [config.age.secrets.piholeZiggy.path]
-    else if hostname == "sobotka"
-    then [config.age.secrets.pihole.path]
-    else throw "Unknown hostname: ${hostname}";
-in {
+  getPiholeSecret =
+    hostname:
+    if hostname == "ziggy" then
+      [ config.age.secrets.piholeZiggy.path ]
+    else if hostname == "sobotka" then
+      [ config.age.secrets.pihole.path ]
+    else
+      throw "Unknown hostname: ${hostname}";
+in
+{
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
     age.secrets = {
       pihole.file = "${self}/secrets/${config.networking.hostName}Pihole.age";
@@ -32,7 +36,7 @@ in {
     virtualisation.oci-containers.containers = {
       ${unit} = {
         autoStart = true;
-        image = "pihole/pihole:2025.11.0";
+        image = "pihole/pihole:2025.11.1";
         volumes = [
           "/var/lib/pihole:/etc/pihole/"
           "/var/lib/dnsmasq.d:/etc/dnsmasq.d/"
