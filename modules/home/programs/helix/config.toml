@@ -1,0 +1,126 @@
+theme = "gruvbox_dark_hard"
+
+[editor]
+color-modes = true
+completion-replace = true
+cursorline = true
+gutters = ["diagnostics", "line-numbers", "spacer", "diff"]
+scrolloff = 0
+true-color = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+character = "┊"
+render = true
+
+[editor.inline-diagnostics]
+cursor-line = "disable"
+
+[editor.lsp]
+display-inlay-hints = true
+display-messages = true
+
+[editor.statusline]
+center = ["file-name"]
+left = [
+    "mode",
+    "selections",
+    "file-type",
+    "register",
+    "spinner",
+    "diagnostics",
+]
+right = ["file-encoding", "file-line-ending", "position", "separator", "total-line-numbers"]
+separator = "/"
+
+[editor.statusline.mode]
+insert = "INS"
+normal = "NOR"
+select = "SEL"
+
+[editor.whitespace.characters]
+newline = "↴"
+tab = "⇥"
+
+[keys.insert]
+C-c = "yank_to_clipboard"
+C-down = "move_visual_line_down"
+C-left = "move_prev_word_start"
+C-right = "move_next_word_start"
+C-up = "move_visual_line_up"
+C-v = "paste_clipboard_after"
+C-x = "completion"
+del = "delete_selection"
+esc = ["collapse_selection", "normal_mode"]
+
+[keys.normal]
+C-a = "select_all"
+C-down = "move_visual_line_down"
+C-left = "move_prev_word_start"
+C-right = "move_next_word_start"
+C-up = "move_visual_line_up"
+P = ["paste_clipboard_before", "collapse_selection"]
+Y = ["extend_to_line_end", "yank_main_selection_to_clipboard", "collapse_selection"]
+del = "delete_selection"
+p = ["paste_clipboard_after", "collapse_selection"]
+x = "delete_selection"
+
+[keys.normal.d]
+d = ["extend_to_line_bounds", "yank_main_selection_to_clipboard", "delete_selection"]
+s = ["surround_delete"]
+
+[keys.normal.space]
+P = "paste_before"
+R = "replace_with_yanked"
+c = "toggle_comments"
+f = ":format"
+n = "global_search"
+p = "paste_after"
+q = ":q"
+space = "file_picker"
+w = ":w"
+x = ":buffer-close"
+y = "yank"
+
+[keys.normal.space.t]
+d = "goto_type_definition"
+i = "goto_implementation"
+r = "goto_reference"
+t = "goto_definition"
+w = "trim_selections"
+
+[keys.normal.y]
+d = ":yank-diagnostic"
+y = ["extend_to_line_bounds", "yank_main_selection_to_clipboard", "normal_mode", "collapse_selection"]
+
+[keys.select]
+P = ["paste_clipboard_before"]
+Y = ["extend_to_line_bounds", "yank_main_selection_to_clipboard", "goto_line_start", "collapse_selection", "normal_mode"]
+d = ["yank_main_selection_to_clipboard", "delete_selection"]
+p = ["replace_selections_with_clipboard"]
+x = ["yank_main_selection_to_clipboard", "delete_selection"]
+y = ["yank_main_selection_to_clipboard", "normal_mode", "flip_selections", "collapse_selection"]
+
+[keys.select.space]
+P = "paste_before"
+R = "replace_with_yanked"
+c = "toggle_comments"
+f = ":format"
+n = "global_search"
+p = "paste_after"
+q = ":q"
+space = "file_picker"
+w = ":w"
+x = ":buffer-close"
+y = "yank"
+
+[keys.select.space.t]
+d = "goto_type_definition"
+i = "goto_implementation"
+r = "goto_reference"
+t = "goto_definition"
+w = "trim_selections"

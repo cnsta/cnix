@@ -5,17 +5,11 @@
   ...
 }:
 let
-  inherit (lib)
-    mkIf
-    mkEnableOption
-    mkOption
-    types
-    mkMerge
-    ;
   cfg = config.nixos.services.greetd;
   hyprcfg = config.nixos.programs.hyprland;
   niricfg = config.nixos.programs.niri;
 in
+with lib;
 {
   options = {
     nixos.services.greetd = {
@@ -23,11 +17,6 @@ in
         type = types.bool;
         default = false;
         description = "Enables the greetd service.";
-      };
-      user = mkOption {
-        type = types.str;
-        default = "cnst";
-        description = "The username to auto-login when autologin is enabled.";
       };
     };
   };
@@ -44,8 +33,8 @@ in
         services.greetd =
           let
             session = {
-              command = "${lib.getExe config.programs.uwsm.package} start hyprland-uwsm.desktop";
-              user = cfg.user;
+              command = "${getExe config.programs.uwsm.package} start hyprland-uwsm.desktop";
+              user = username;
             };
           in
           {
@@ -64,7 +53,7 @@ in
             tuigreet_session =
               let
                 session = "${pkgs.niri}/bin/niri-session";
-                tuigreet = "${lib.getExe pkgs.tuigreet}";
+                tuigreet = "${getExe pkgs.tuigreet}";
               in
               {
                 command = "${tuigreet} --time --remember --cmd ${session}";

@@ -65,6 +65,7 @@
         ./nixos/hardware/peripherals
         ./nixos/hardware/network
 
+        ./nixos/programs/helix
         ./nixos/programs/beekeeper
         ./nixos/programs/blender
         ./nixos/programs/corectrl

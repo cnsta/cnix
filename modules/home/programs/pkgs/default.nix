@@ -79,6 +79,7 @@ in
           material-symbols
           feh
           finamp
+          overskride
         ])
 
         (mkIf cfg.desktop.enable [

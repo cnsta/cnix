@@ -113,12 +113,10 @@ in
 
         (mkIf cfg.server.enable [
           nvtopPackages.intel
-          helix
           zfstools
         ])
 
         (mkIf cfg.dev.enable [
-          # lldb_20 # some biuld error atm
           sqlite
           nfs-utils
           gcc
@@ -127,8 +125,9 @@ in
           nixd
           nil
           php
+          phpactor
           vscode-langservers-extracted
-          # phpactor
+          nodePackages.typescript-language-server
           python313Packages.python-lsp-server
           bash-language-server
           clang-tools
@@ -136,14 +135,15 @@ in
           pyright
 
           # Formatters
-          alejandra
+          nixfmt
+          rustfmt
+          deno
           stylua
           nodejs_24
           fixjson
           sql-formatter
           nodePackages.prettier
           prettierd
-          # php84Packages.php-cs-fixer
           shfmt
           black
         ])
