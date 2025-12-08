@@ -86,6 +86,9 @@
       gnome = {
         enable = false;
       };
+      helix = {
+        enable = false;
+      };
       hyprland = {
         enable = true;
         withUWSM = true;
@@ -154,7 +157,7 @@
         };
       };
       blueman = {
-        enable = true;
+        enable = false;
       };
       dbus = {
         enable = true;
@@ -173,7 +176,6 @@
       };
       greetd = {
         enable = true;
-        user = "cnst";
       };
       gvfs = {
         enable = true;

@@ -1,0 +1,203 @@
+[[language]]
+auto-format = true
+name = "bash"
+
+[language.formatter]
+args = ["-i", "2"]
+command = "/run/current-system/sw/bin/shfmt"
+
+[[language]]
+auto-format = true
+name = "fish"
+
+[[language]]
+file-types = ["clj", "cljs", "cljc", "clje", "cljr", "cljx", "edn", "boot", "yuck"]
+injection-regex = "(clojure|clj|edn|boot|yuck)"
+name = "clojure"
+
+[[language]]
+auto-format = true
+language-servers = ["lua-language-server"]
+name = "lua"
+
+[language.formatter]
+command = "/run/current-system/sw/bin/stylua"
+
+[[language]]
+name = "json"
+
+[language.formatter]
+args = ["fmt", "-", "--ext", "json"]
+command = "/run/current-system/sw/bin/deno"
+
+[[language]]
+auto-format = true
+file-types = ["kbd"]
+name = "common-lisp"
+
+[[language]]
+auto-format = true
+name = "markdown"
+
+[language.formatter]
+args = ["fmt", "-", "--ext", "md"]
+command = "/run/current-system/sw/bin/deno"
+
+[[language]]
+auto-format = true
+language-servers = ["nil"]
+name = "nix"
+
+[language.formatter]
+args = ["-q"]
+command = "/run/current-system/sw/bin/nixfmt"
+
+[[language]]
+auto-format = true
+language-servers = ["qmlls"]
+name = "qml"
+
+[[language]]
+auto-format = true
+language-servers = ["vscode-css-language-server"]
+name = "css"
+
+[[language]]
+auto-format = true
+file-types = ["rs"]
+language-servers = ["rust-analyzer"]
+name = "rust"
+
+[language.formatter]
+command = "/run/current-system/sw/bin/rustfmt"
+
+[[language]]
+name = "css"
+
+[language.formatter]
+args = ["--parser", "css"]
+command = "prettier"
+
+[[language]]
+name = "scss"
+
+[language.formatter]
+args = ["--parser", "scss"]
+command = "prettier"
+
+[[language]]
+name = "html"
+
+[language.formatter]
+args = ["--parser", "html"]
+command = "prettier"
+
+[language-server.bash-language-server]
+args = ["start"]
+command = "/run/current-system/sw/bin/bash-language-server"
+
+[language-server.clangd]
+command = "/run/current-system/sw/bin/clangd"
+
+[language-server.clangd.clangd]
+fallbackFlags = ["-std=c++2b"]
+
+[language-server.deno-lsp]
+args = ["lsp"]
+command = "/run/current-system/sw/bin/deno"
+
+[language-server.deno-lsp.config.deno]
+enable = true
+lint = true
+unstable = true
+
+[language-server.deno-lsp.config.deno.inlayHints.enumMemberValues]
+enabled = true
+
+[language-server.deno-lsp.config.deno.inlayHints.functionLikeReturnTypes]
+enabled = true
+
+[language-server.deno-lsp.config.deno.inlayHints.parameterNames]
+enabled = "all"
+
+[language-server.deno-lsp.config.deno.inlayHints.parameterTypes]
+enabled = true
+
+[language-server.deno-lsp.config.deno.inlayHints.propertyDeclarationTypes]
+enabled = true
+
+[language-server.deno-lsp.config.deno.inlayHints.variableTypes]
+enabled = true
+
+[language-server.deno-lsp.config.deno.suggest]
+completeFunctionCalls = false
+
+[language-server.deno-lsp.config.deno.suggest.imports.hosts]
+"https://deno.land" = true
+
+[language-server.deno-lsp.environment]
+NO_COLOR = "1"
+
+[language-server.lua-language-server]
+command = "/run/current-system/sw/bin/lua-language-server"
+
+[language-server.phpactor]
+args = ["language-server"]
+command = "/run/current-system/sw/bin/phpactor"
+
+[language-server.qmlls]
+args = ["-E"]
+command = "/run/current-system/sw/bin/qmlls"
+
+[language-server.typescript-language-server]
+args = ["--stdio"]
+command = "/run/current-system/sw/bin/typescript-language-server"
+
+[language-server.typescript-language-server.config]
+hostInfo = "helix"
+
+[language-server.typescript-language-server.config.javascript.inlayHints]
+includeInlayEnumMemberValueHints = true
+includeInlayFunctionLikeReturnTypeHints = true
+includeInlayFunctionParameterTypeHints = true
+includeInlayParameterNameHints = "all"
+includeInlayParameterNameHintsWhenArgumentMatchesName = true
+includeInlayPropertyDeclarationTypeHints = true
+includeInlayVariableTypeHints = true
+
+[language-server.typescript-language-server.config.typescript.inlayHints]
+includeInlayEnumMemberValueHints = true
+includeInlayFunctionLikeReturnTypeHints = true
+includeInlayFunctionParameterTypeHints = true
+includeInlayParameterNameHints = "all"
+includeInlayParameterNameHintsWhenArgumentMatchesName = true
+includeInlayPropertyDeclarationTypeHints = true
+includeInlayVariableTypeHints = true
+
+[language-server.typescript-language-server.config.typescript-language-server.source.addMissingImports]
+ts = true
+
+[language-server.typescript-language-server.config.typescript-language-server.source.fixAll]
+ts = true
+
+[language-server.typescript-language-server.config.typescript-language-server.source.organizeImports]
+ts = true
+
+[language-server.typescript-language-server.config.typescript-language-server.source.removeUnusedImports]
+ts = true
+
+[language-server.typescript-language-server.config.typescript-language-server.source.sortImports]
+ts = true
+
+[language-server.vscode-css-language-server]
+args = ["--stdio"]
+command = "/run/current-system/sw/bin/vscode-css-language-server"
+
+[language-server.vscode-css-language-server.config]
+provideFormatter = true
+
+[language-server.vscode-css-language-server.config.css.validate]
+enable = true
+
+[language-server.vscode-css-language-server.config.scss.validate]
+enable = true

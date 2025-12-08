@@ -40,73 +40,58 @@ in
             }"
           ) config.settings.monitors
           ++ preferred;
-        # ++ unknown;
 
         workspace = map (m: "${m.workspace},monitor:${m.name}") (
           lib.filter (m: m.enable && m.workspace != null) config.settings.monitors
         );
 
         windowrule = [
-          "size 843 650, initialTitle:^(floatcal)$"
-          "move 100%-w-20 40, initialTitle:^(floatcal)$"
-          "float, initialTitle:^(floatcal)$"
+          "match:title ^(VPN Switcher)$, float on"
+          "match:title ^(VPN Switcher)$, size 18% 20%"
+          "match:title ^(VPN Switcher)$, center on"
 
-          "size 450 300, title:^(VPN Switcher)$"
-          "center, title:^(VPN Switcher)$"
-          "noborder, title:^(VPN Switcher)$"
-          "float, title:^(VPN Switcher)$"
+          "match:class ^(org.keepassxc.KeePassXC)$, float on"
+          "match:class ^(org.keepassxc.KeePassXC)$, size 843 540"
+          "match:class ^(org.keepassxc.KeePassXC)$, move 100%-w-20 40"
 
-          "size 843 530, class:^(org.keepassxc.KeePassXC)$"
-          "move 100%-w-20 40, class:^(org.keepassxc.KeePassXC)$"
-          "float, class:^(org.keepassxc.KeePassXC)$"
+          "match:class ^(net.nokyan.Resources)$, float on"
+          "match:class ^(net.nokyan.Resources)$, size 50% 70%"
+          "match:class ^(net.nokyan.Resources)$, center on"
 
-          "size 50% 70%, class:^(net.nokyan.Resources)$"
-          "center, class:^(net.nokyan.Resources)$"
-          "float, class:^(net.nokyan.Resources)$"
+          "match:class ^(nwg-look)$, center on"
+          "match:class ^(nwg-look)$, float on"
 
-          "suppressevent maximize, class:.*"
+          "match:class ^(oculante)$, center on"
+          "match:class ^(oculante)$, float on"
 
-          "center, class:^(nwg-look)$"
-          "float, class:^(nwg-look)$"
+          "match:class ^(pwvucontrol)$, move 100%-w-20 40"
+          "match:class ^(pwvucontrol)$, size 741 585"
+          "match:class ^(pwvucontrol)$, float on"
 
-          "center, class:^(oculante)$"
-          "float, class:^(oculante)$"
+          "match:class ^(org.gnome.FileRoller)$, float on"
+          "match:class ^(org.freedesktop.impl.portal.desktop.kde)$, float on"
+          "match:class ^(org.corectrl.CoreCtrl)$, float on"
+          "match:class ^(feh)$, float on"
+          "match:class ^(polkit-gnome-authentication-agent-1)$, float on"
+          "match:class ^(org.gnome.Calculator)$, float on"
+          "match:class ^(blueman-manager)$, float on"
 
-          "move 100%-w-20 40, class:^(pwvucontrol)$"
-          "size 741 585, class:^(pwvucontrol)$"
-          "float, class:^(pwvucontrol)$"
+          "match:class ^(discord)$, workspace 5 silent"
+          "match:class ^(vesktop)$, workspace 5 silent"
+          "match:class ^(steam_app_0)$, workspace 4 silent"
+          "match:title ^(World of Warcraft)$, workspace 4 silent"
 
-          "center, class:^(xarchiver)$"
-          "float, class:^(xarchiver)$"
-
-          "float, class:^(org.gnome.FileRoller)$"
-          "float, class:^(org.freedesktop.impl.portal.desktop.kde)$"
-          "float, class:^(org.corectrl.CoreCtrl)$"
-          "float, class:^(feh)$"
-          "float, class:^(polkit-gnome-authentication-agent-1)$"
-          "float, class:^(org.gnome.Calculator)$"
-          "float, class:^(com.github.hluk.copyq)$"
-          "float, class:^(blueman-manager)$"
-
-          "workspace 5 silent, class:^(discord)$"
-          "workspace 5 silent, class:^(vesktop)$"
-          "workspace 4 silent, class:^(steam_app_0)$"
-          "workspace 4 silent, title:^(World of Warcraft)$"
+          "match:xwayland true, rounding 0"
         ];
         layerrule = [
-          "animation fade,hyprpicker"
-          "animation fade,selection"
+          "match:namespace ^(waybar), blur true"
+          "match:namespace ^(waybar), blur_popups true"
+          "match:namespace ^(waybar), ignore_alpha 0.2"
+          "match:namespace ^(waybar), no_anim true"
 
-          "animation fade,waybar"
-          "ignorezero,waybar"
-          "ignorealpha 0.0,waybar"
-          "blur,waybar"
-
-          "blur,notifications"
-          "ignorezero,notifications"
-
-          "noanim,wallpaper"
-          "noanim,launcher"
+          "match:namespace ^(fuzzel), blur true"
+          "match:namespace ^(fuzzel), ignore_alpha 0.8"
+          "match:namespace ^(fuzzel), no_anim true"
         ];
       };
     }
