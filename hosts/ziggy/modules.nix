@@ -174,7 +174,6 @@
       };
       greetd = {
         enable = false;
-        user = "cnst";
       };
       gvfs = {
         enable = false;
