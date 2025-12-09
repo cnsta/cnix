@@ -63,28 +63,30 @@ C-down = "move_visual_line_down"
 C-left = "move_prev_word_start"
 C-right = "move_next_word_start"
 C-up = "move_visual_line_up"
-P = ["paste_clipboard_before", "collapse_selection"]
+p = ["paste_clipboard_after"]
+P = ["paste_clipboard_before"]
+y = ["yank_main_selection_to_clipboard"]
 Y = ["extend_to_line_end", "yank_main_selection_to_clipboard", "collapse_selection"]
+C-y = ":yank-diagnostic"
 del = "delete_selection"
-p = ["paste_clipboard_after", "collapse_selection"]
-x = "delete_selection"
-
-[keys.normal.d]
-d = ["extend_to_line_bounds", "yank_main_selection_to_clipboard", "delete_selection"]
-s = ["surround_delete"]
+d = "delete_selection"
+D = ["extend_to_line_bounds", "yank_main_selection_to_clipboard", "delete_selection"]
+x = "extend_line_below"
+X = "extend_to_line_bounds"
 
 [keys.normal.space]
-P = "paste_before"
-R = "replace_with_yanked"
-c = "toggle_comments"
-f = ":format"
-n = "global_search"
-p = "paste_after"
-q = ":q"
-space = "file_picker"
-w = ":w"
-x = ":buffer-close"
-y = "yank"
+f = "file_picker"
+F = "file_picker_in_current_directory"
+e = "file_explorer"
+E = "file_explorer_in_current_directory"
+b = "buffer_picker"
+j = "jumplist_picker"
+s = "lsp_or_syntax_symbol_picker"
+S = "lsp_or_syntax_workspace_symbol_picker"
+d = "diagnostics_picker"
+D = "workspace_diagnostics_picker"
+g = "changed_file_picker"
+a = "code_action"
 
 [keys.normal.space.t]
 d = "goto_type_definition"
@@ -92,10 +94,6 @@ i = "goto_implementation"
 r = "goto_reference"
 t = "goto_definition"
 w = "trim_selections"
-
-[keys.normal.y]
-d = ":yank-diagnostic"
-y = ["extend_to_line_bounds", "yank_main_selection_to_clipboard", "normal_mode", "collapse_selection"]
 
 [keys.select]
 P = ["paste_clipboard_before"]
