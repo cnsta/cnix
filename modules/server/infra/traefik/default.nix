@@ -2,32 +2,37 @@
   lib,
   clib,
   config,
-  pkgs,
   self,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.server.infra.traefik;
   srv = config.server;
 
-  generateRouters = services: config:
+  generateRouters =
+    services: config:
     lib.mapAttrs' (
       name: service:
-        lib.nameValuePair name {
-          entryPoints = ["websecure"];
-          rule = "Host(`${clib.server.mkFullDomain config service}`)";
-          service = name;
-          tls.certResolver = "letsencrypt";
-        }
+      lib.nameValuePair name {
+        entryPoints = [ "websecure" ];
+        rule = "Host(`${clib.server.mkFullDomain config service}`)";
+        service = name;
+        tls.certResolver = "letsencrypt";
+      }
     ) (lib.filterAttrs (_: s: s.enable) services);
 
-  generateServices = services:
-    lib.mapAttrs' (name: service:
+  generateServices =
+    services:
+    lib.mapAttrs' (
+      name: service:
       lib.nameValuePair name {
-        loadBalancer.servers = [{url = "http://localhost:${toString service.port}";}];
-      }) (lib.filterAttrs (name: service: service.enable) services);
-in {
+        loadBalancer.servers = [ { url = "http://localhost:${toString service.port}"; } ];
+      }
+    ) (lib.filterAttrs (name: service: service.enable) services);
+in
+{
   options.server.infra.traefik = {
     enable = mkEnableOption "Enable global Traefik reverse proxy with ACME";
   };
@@ -44,10 +49,13 @@ in {
 
     systemd.services.traefik = {
       serviceConfig = {
-        EnvironmentFile = [config.age.secrets.traefikEnv.path];
+        EnvironmentFile = [ config.age.secrets.traefikEnv.path ];
       };
     };
-    networking.firewall.allowedTCPPorts = [80 443];
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+    ];
 
     services = {
       tailscale.permitCertUid = "traefik";
@@ -59,16 +67,18 @@ in {
             level = "DEBUG";
           };
 
-          accesslog = {filepath = "/var/lib/traefik/logs/access.log";};
+          accesslog = {
+            filepath = "/var/lib/traefik/logs/access.log";
+          };
 
-          tracing = {};
+          tracing = { };
           api = {
             dashboard = true;
             insecure = false;
           };
 
           certificatesResolvers = {
-            vpn.tailscale = {};
+            vpn.tailscale = { };
             letsencrypt = {
               acme = {
                 email = "adam@cnst.dev";
@@ -85,12 +95,6 @@ in {
           };
 
           entryPoints = {
-            # redis = {
-            #   address = "0.0.0.0:6381";
-            # };
-            # postgres = {
-            #   address = "0.0.0.0:5433";
-            # };
             web = {
               address = ":80";
               forwardedHeaders.insecure = true;
@@ -109,11 +113,11 @@ in {
                 domains = [
                   {
                     main = "cnix.dev";
-                    sans = ["*.cnix.dev"];
+                    sans = [ "*.cnix.dev" ];
                   }
                   {
                     main = "ts.cnst.dev";
-                    sans = ["*ts.cnst.dev"];
+                    sans = [ "*ts.cnst.dev" ];
                   }
                 ];
               };
@@ -130,16 +134,14 @@ in {
           http = {
             services = generateServices srv.services;
 
-            routers =
-              (generateRouters srv.services config)
-              // {
-                api = {
-                  entryPoints = ["websecure"];
-                  rule = "Host(`traefik.${srv.domain}`)";
-                  service = "api@internal";
-                  tls.certResolver = "letsencrypt";
-                };
+            routers = (generateRouters srv.services config) // {
+              api = {
+                entryPoints = [ "websecure" ];
+                rule = "Host(`traefik.${srv.domain}`)";
+                service = "api@internal";
+                tls.certResolver = "letsencrypt";
               };
+            };
           };
         };
       };
