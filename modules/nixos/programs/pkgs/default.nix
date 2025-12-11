@@ -100,6 +100,7 @@ in
           inotify-tools
           wf-recorder
           nautilus
+          cosmic-files
         ])
 
         (mkIf cfg.desktop.enable [

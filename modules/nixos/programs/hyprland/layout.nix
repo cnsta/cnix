@@ -48,19 +48,13 @@ in
         windowrule = [
           "match:title ^(VPN Switcher)$, float on, center on, size 0.18*monitor_w 0.2*monitor_h"
 
-          "match:class ^(org.keepassxc.KeePassXC)$, float on"
-          "match:class ^(org.keepassxc.KeePassXC)$, size 843 540"
-          "match:class ^(org.keepassxc.KeePassXC)$, move 100%-w-20 40"
-
           "match:class ^(net.nokyan.Resources)$, float on, center on, size 0.5*monitor_w 0.7*monitor_h"
 
           "match:class ^(nwg-look)$, center on, float on"
 
           "match:class ^(oculante)$, float on, center on"
 
-          "match:class ^(com.saivert.pwvucontrol)$, move 100%-w-20 40"
-          "match:class ^(com.saivert.pwvucontrol)$, size 741 585"
-          "match:class ^(com.saivert.pwvucontrol)$, float on"
+          "match:class ^(com.saivert.pwvucontrol)$, center on, float on, size 0.3*monitor_w 0.4*monitor_h"
 
           "match:class ^(org.gnome.FileRoller)$, float on"
           "match:class ^(org.freedesktop.impl.portal.desktop.kde)$, float on"
