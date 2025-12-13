@@ -173,7 +173,7 @@
       jellyseerr = {
         enable = true;
         subdomain = "seerr";
-        exposure = "local";
+        exposure = "tailscale";
         port = 5055;
         homepage = {
           name = "Jellyseerr";
