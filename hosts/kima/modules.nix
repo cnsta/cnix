@@ -3,6 +3,7 @@
     boot = {
       kernel = {
         variant = "zfsLatest";
+        variant.custom = "6.12";
         hardware = [ "amd" ];
         extraKernelParams = [ ];
         amdOverdrive.enable = true;

@@ -4,11 +4,13 @@
   self,
   pkgs,
   ...
-}: let
+}:
+let
   unit = "forgejo";
   cfg = config.server.services.${unit};
   domain = "${cfg.subdomain}.${config.server.infra.www.url}";
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     age.secrets.forgejoCloudflared.file = "${self}/secrets/forgejoCloudflared.age";
 
@@ -37,10 +39,9 @@ in {
 
       forgejo = {
         enable = true;
-
         database.type = "postgres";
-
         lfs.enable = true;
+        package = pkgs.forgejo;
 
         settings = {
           overall = {
