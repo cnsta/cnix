@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   server = {
     enable = true;
     email = "adam@cnst.dev";
@@ -172,7 +173,7 @@
       jellyseerr = {
         enable = true;
         subdomain = "seerr";
-        exposure = "tailscale";
+        exposure = "local";
         port = 5055;
         homepage = {
           name = "Jellyseerr";
