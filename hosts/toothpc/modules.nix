@@ -170,7 +170,7 @@
         enable = true;
       };
       mullvad = {
-        enable = true;
+        enable = false;
       };
       nix-ld = {
         enable = false;
