@@ -136,13 +136,13 @@ in
           marksman
           pyright
           fish-lsp
+          nodejs_25
 
           # Formatters
           nixfmt
           rustfmt
           deno
           stylua
-          nodejs_24
           fixjson
           sql-formatter
           nodePackages.prettier

@@ -46,9 +46,6 @@
 
       # Cryptography
       openssl # TLS/SSL library for networking and encryption
-
-      # Nodejs stuff
-      nodejs_25
     ];
     shellHook = ''
       # Set LD_LIBRARY_PATH if needed (temporary fix)
