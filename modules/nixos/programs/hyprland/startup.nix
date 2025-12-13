@@ -42,7 +42,6 @@ in
 
     (mkIf (host == "toothpc") {
       programs.hyprland.settings.exec-once = [
-        "uwsm-app -s b -- mullvad-vpn"
         "uwsm-app -s b -- solaar -w hide -b regular"
       ]
       ++ commonExecOnce;
