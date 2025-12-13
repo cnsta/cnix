@@ -106,6 +106,7 @@ in
         (mkIf cfg.desktop.enable [
           geekbench
           unigine-heaven
+          obs-studio
         ])
 
         (mkIf cfg.laptop.enable [
