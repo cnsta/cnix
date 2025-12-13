@@ -65,7 +65,7 @@
         desktop.enable = true;
       };
       rofi = {
-        enable = true;
+        enable = false;
       };
       ssh = {
         enable = true;
