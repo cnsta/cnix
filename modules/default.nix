@@ -102,7 +102,7 @@
         ./nixos/services/mullvad
         ./nixos/services/nfs
         ./nixos/services/nix-ld
-        ./nixos/services/openssh
+        ./nixos/services/ssh
         ./nixos/services/pipewire
         ./nixos/services/polkit
         ./nixos/services/power
