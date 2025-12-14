@@ -70,9 +70,6 @@
       ssh = {
         enable = true;
       };
-      tuirun = {
-        enable = true;
-      };
       vscode = {
         enable = false;
       };

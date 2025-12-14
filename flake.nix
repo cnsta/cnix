@@ -136,12 +136,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Custom
-    tuirun = {
-      url = "git+https://git.sr.ht/~canasta/tuirun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    fonts.url = "git+https://git.sr.ht/~canasta/fonts";
+    fonts.url = "sourcehut:~canasta/fonts";
   };
 }

@@ -5,9 +5,9 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkEnableOption;
   cfg = config.home.services.tailray;
 in
+with lib;
 {
   imports = [
     inputs.tailray.homeManagerModules.default
@@ -19,6 +19,5 @@ in
     services.tailray = {
       enable = true;
     };
-    systemd.user.services.tailray.Unit.After = lib.mkForce "tailscaled.service";
   };
 }

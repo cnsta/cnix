@@ -25,7 +25,6 @@
         ./home/programs/pkgs
         ./home/programs/rofi
         ./home/programs/ssh
-        ./home/programs/tuirun
         ./home/programs/vscode
         ./home/programs/waybar
         ./home/programs/wezterm
