@@ -16,7 +16,7 @@ let
 in
 {
   options = {
-    nixos.services.openssh = {
+    nixos.services.ssh = {
       enable = mkEnableOption "Enables openssh";
     };
   };
