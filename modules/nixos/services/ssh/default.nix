@@ -8,7 +8,7 @@
 let
   hosts = lib.attrNames outputs.nixosConfigurations;
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.nixos.services.openssh;
+  cfg = config.nixos.services.ssh;
 
   hostsWithKeys = builtins.filter (
     hostname: builtins.pathExists "${self}/hosts/${hostname}/ssh_host_ed25519_key.pub"

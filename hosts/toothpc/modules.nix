@@ -175,7 +175,7 @@
       nix-ld = {
         enable = false;
       };
-      openssh = {
+      ssh = {
         enable = true;
       };
       pipewire = {
