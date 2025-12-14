@@ -26,14 +26,15 @@ in
         forgejo-cli
       ];
     };
-
     services = {
       cloudflared = {
         enable = true;
         tunnels.${cfg.cloudflared.tunnelId} = {
           credentialsFile = cfg.cloudflared.credentialsFile;
           default = "http_status:404";
-          ingress."${domain}".service = "http://localhost:${toString cfg.port}";
+          ingress = {
+            "${domain}".service = "http://localhost:${toString cfg.port}";
+          };
         };
       };
 
