@@ -21,9 +21,6 @@ with lib;
     };
     systemd.user.services.tailray = {
       Unit.After = lib.mkForce "graphical-session.target";
-      Service = {
-        ExecStartPre = "/run/current-system/sw/bin/sleep 5";
-      };
     };
   };
 }
