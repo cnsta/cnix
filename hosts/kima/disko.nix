@@ -74,7 +74,6 @@
             options = {
               encryption = "aes-256-gcm";
               keyformat = "passphrase";
-              #keylocation = "file:///tmp/secret.key";
               keylocation = "prompt";
             };
             mountpoint = "/";
@@ -86,7 +85,6 @@
             mountpoint = "/nix";
           };
 
-          # README MORE: https://wiki.archlinux.org/title/ZFS#Swap_volume
           "root/swap" = {
             type = "zfs_volume";
             size = "32G";
