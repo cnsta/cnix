@@ -262,6 +262,19 @@
           category = "Downloads";
         };
       };
+      home-assistant = {
+        enable = true;
+        subdomain = "ha";
+        exposure = "local";
+        port = 8123;
+        homepage = {
+          name = "Home Assistant";
+          description = "Awaken your home";
+          icon = "home-assistant.svg";
+          category = "Services";
+        };
+      };
+
       slskd = {
         enable = true;
         subdomain = "slskd";

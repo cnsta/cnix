@@ -20,5 +20,6 @@
     ./uptime-kuma
     ./vaultwarden
     ./qbittorrent
+    ./home-assistant
   ];
 }
