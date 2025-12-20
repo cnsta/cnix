@@ -3,11 +3,13 @@
   lib,
   self,
   ...
-}: let
+}:
+let
   unit = "slskd";
   srv = config.server;
   cfg = config.server.services.${unit};
-in {
+in
+{
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
     age.secrets = {
       slskd.file = "${self}/secrets/slskd.age";
@@ -16,7 +18,7 @@ in {
       ${unit} = {
         image = "slskd/slskd:latest";
         autoStart = true;
-        dependsOn = ["gluetun"];
+        dependsOn = [ "gluetun" ];
         ports = [
           "5030:5030"
           "5031:5031"
@@ -34,8 +36,8 @@ in {
         ];
         environment = {
           TZ = "Europe/Stockholm";
-          PUID = "981";
-          PGID = "982";
+          PUID = srv.user;
+          PGID = srv.group;
           SLSKD_REMOTE_CONFIGURATION = "true";
           SLSKD_REMOTE_FILE_MANAGEMENT = "true";
           SLSKD_DOWNLOADS_DIR = "/downloads";

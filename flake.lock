@@ -1954,15 +1954,15 @@
       "locked": {
         "lastModified": 1765714364,
         "narHash": "sha256-ZeMv92Qm+zAfTPON6QHUyd21zHcdatlPX2Z3A01GIEY=",
-        "ref": "refs/heads/main",
+        "owner": "cnsta",
+        "repo": "zen-browser-flake",
         "rev": "eaf683b533c83558261ceb021eeaf99ae0183d49",
-        "revCount": 159,
-        "type": "git",
-        "url": "https://git.cnst.dev/cnst/zen-browser-flake"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://git.cnst.dev/cnst/zen-browser-flake"
+        "owner": "cnsta",
+        "repo": "zen-browser-flake",
+        "type": "github"
       }
     }
   },
