@@ -3,12 +3,13 @@
   lib,
   self,
   pkgs,
+  clib,
   ...
 }:
 let
   unit = "forgejo";
   cfg = config.server.services.${unit};
-  domain = "${cfg.subdomain}.${config.server.infra.www.url}";
+  domain = clib.server.mkFullDomain config cfg;
 in
 {
   config = lib.mkIf cfg.enable {
@@ -27,16 +28,16 @@ in
       ];
     };
     services = {
-      cloudflared = {
-        enable = true;
-        tunnels.${cfg.cloudflared.tunnelId} = {
-          credentialsFile = cfg.cloudflared.credentialsFile;
-          default = "http_status:404";
-          ingress = {
-            "${domain}".service = "http://localhost:${toString cfg.port}";
-          };
-        };
-      };
+      # cloudflared = {
+      #   enable = true;
+      #   tunnels.${cfg.cloudflared.tunnelId} = {
+      #     credentialsFile = cfg.cloudflared.credentialsFile;
+      #     default = "http_status:404";
+      #     ingress = {
+      #       "${domain}".service = "http://localhost:${toString cfg.port}";
+      #     };
+      #   };
+      # };
 
       forgejo = {
         enable = true;

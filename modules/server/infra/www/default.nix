@@ -3,10 +3,17 @@
   config,
   self,
   ...
-}: let
-  inherit (lib) mkIf mkEnableOption mkOption types;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    mkOption
+    types
+    ;
   cfg = config.server.infra.www;
-in {
+in
+{
   options.server.infra.www = {
     enable = mkEnableOption {
       description = "Enable personal website";
@@ -91,11 +98,11 @@ in {
           "ts" = {
             forceSSL = false;
             serverName = "ts.${cfg.url}";
-            root = "/var/www/ts";
+            root = "/var/www";
 
             locations."/" = {
               extraConfig = ''
-                index index.html;
+                index ts.html;
                 try_files $uri $uri/ =404;
               '';
             };
@@ -116,14 +123,14 @@ in {
     services.traefik.dynamicConfigOptions.http = {
       routers = {
         www = {
-          entryPoints = ["websecure"];
+          entryPoints = [ "websecure" ];
           rule = "Host(`${cfg.url}`) && Path(`/.well-known/webfinger`)";
           service = "www";
           tls.certResolver = "letsencrypt";
         };
 
         ts = {
-          entryPoints = ["websecure"];
+          entryPoints = [ "websecure" ];
           rule = "Host(`ts.${cfg.url}`)";
           service = "ts";
           tls.certResolver = "letsencrypt";
@@ -132,11 +139,11 @@ in {
 
       services = {
         www.loadBalancer.servers = [
-          {url = "http://127.0.0.1:8283";}
+          { url = "http://127.0.0.1:8283"; }
         ];
 
         ts.loadBalancer.servers = [
-          {url = "http://127.0.0.1:8283";}
+          { url = "http://127.0.0.1:8283"; }
         ];
       };
     };
