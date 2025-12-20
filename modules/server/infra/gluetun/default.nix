@@ -3,9 +3,11 @@
   lib,
   self,
   ...
-}: let
+}:
+let
   infra = config.server.infra;
-in {
+in
+{
   options.server.infra = {
     gluetun.enable = lib.mkEnableOption "Enables gluetun";
   };
@@ -22,12 +24,12 @@ in {
         "5031:5031"
         "50300:50300"
       ];
-      devices = ["/dev/net/tun:/dev/net/tun"];
+      devices = [ "/dev/net/tun:/dev/net/tun" ];
       autoStart = true;
       extraOptions = [
         "--cap-add=NET_ADMIN"
       ];
-      volumes = ["/var:/gluetun"];
+      volumes = [ "/var:/gluetun" ];
       environmentFiles = [
         config.age.secrets.gluetunEnvironment.path
       ];

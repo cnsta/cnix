@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   unit = "prowlarr";
   cfg = config.server.services.${unit};
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     services = {
       ${unit} = {

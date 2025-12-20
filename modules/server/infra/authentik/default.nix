@@ -3,11 +3,13 @@
   lib,
   self,
   ...
-}: let
+}:
+let
   unit = "authentik";
   cfg = config.server.infra.${unit};
   srv = config.server.infra;
-in {
+in
+{
   options.server.infra.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
@@ -119,7 +121,7 @@ in {
 
             routers = {
               auth = {
-                entryPoints = ["websecure"];
+                entryPoints = [ "websecure" ];
                 rule = "Host(`${cfg.url}`) && PathPrefix(`/outpost.goauthentik.io/`)";
                 service = "auth";
                 tls.certResolver = "letsencrypt";

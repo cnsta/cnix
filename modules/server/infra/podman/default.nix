@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   infra = config.server.infra;
-in {
+in
+{
   options.server.infra = {
     podman.enable = lib.mkEnableOption "Enables Podman";
   };

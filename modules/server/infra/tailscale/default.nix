@@ -4,9 +4,11 @@
   self,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.server.infra.tailscale;
-in {
+in
+{
   options.server.infra.tailscale = {
     enable = mkEnableOption "Enable tailscale server configuration";
   };

@@ -4,11 +4,13 @@
   self,
   clib,
   ...
-}: let
+}:
+let
   unit = "homepage";
   cfg = config.server.services.${unit};
   srv = config.server;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     age.secrets = {
       homepageEnvironment = {
@@ -86,43 +88,42 @@ in {
           }
         ];
 
-        services = let
-          homepageCategories = [
-            "Arr"
-            "Media"
-            "Downloads"
-            "Services"
-          ];
-          allServices = srv.services;
+        services =
+          let
+            homepageCategories = [
+              "Arr"
+              "Media"
+              "Downloads"
+              "Services"
+            ];
+            allServices = srv.services;
 
-          getDomain = s: clib.server.mkHostDomain config s;
+            getDomain = s: clib.server.mkHostDomain config s;
 
-          homepageServicesFor = category:
-            lib.filterAttrs
-            (
-              name: value:
-                name
-                != unit
-                && value ? homepage
-                && value.homepage.category == category
-            )
-            allServices;
-        in
+            homepageServicesFor =
+              category:
+              lib.filterAttrs (
+                name: value: name != unit && value ? homepage && value.homepage.category == category
+              ) allServices;
+          in
           lib.lists.forEach homepageCategories (cat: {
             "${cat}" =
-              lib.lists.forEach
-              (lib.attrsets.mapAttrsToList (name: _value: name) (homepageServicesFor cat))
-              (x: let
-                service = allServices.${x};
-                domain = getDomain service;
-              in {
-                "${service.homepage.name}" = {
-                  icon = service.homepage.icon;
-                  description = service.homepage.description;
-                  href = "https://${service.subdomain}.${domain}${service.homepage.path or ""}";
-                  siteMonitor = "https://${service.subdomain}.${domain}${x.homepage.path or ""}";
-                };
-              });
+              lib.lists.forEach (lib.attrsets.mapAttrsToList (name: _value: name) (homepageServicesFor cat))
+                (
+                  x:
+                  let
+                    service = allServices.${x};
+                    domain = getDomain service;
+                  in
+                  {
+                    "${service.homepage.name}" = {
+                      icon = service.homepage.icon;
+                      description = service.homepage.description;
+                      href = "https://${service.subdomain}.${domain}${service.homepage.path or ""}";
+                      siteMonitor = "https://${service.subdomain}.${domain}${x.homepage.path or ""}";
+                    };
+                  }
+                );
           });
       };
     };

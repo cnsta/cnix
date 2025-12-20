@@ -2,17 +2,19 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   unit = "qbittorrent";
   srv = config.server;
   cfg = config.server.services.${unit};
-in {
+in
+{
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
     virtualisation.oci-containers.containers = {
       ${unit} = {
         image = "ghcr.io/hotio/qbittorrent:latest";
         autoStart = true;
-        dependsOn = ["gluetun"];
+        dependsOn = [ "gluetun" ];
         ports = [
           "8080:8080"
           "58846:58846"

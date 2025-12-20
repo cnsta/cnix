@@ -2,11 +2,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   unit = "sonarr";
   srv = config.server;
   cfg = config.server.services.${unit};
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     services.${unit} = {
       enable = true;

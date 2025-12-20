@@ -1,18 +1,14 @@
 {
-  inputs,
   pkgs,
   config,
   lib,
   ...
 }:
 let
-  inherit (lib) mkIf mkEnableOption mkForce;
   cfg = config.home.programs.firefox;
 in
+with lib;
 {
-  imports = [
-    # inputs.nur.hmModules.nur
-  ];
   options = {
     home.programs.firefox.enable = mkEnableOption "Enables firefox";
   };

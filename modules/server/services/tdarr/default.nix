@@ -2,11 +2,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   unit = "tdarr";
   srv = config.server;
   cfg = config.server.services.${unit};
-in {
+in
+{
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
     virtualisation.oci-containers.containers = {
       ${unit} = {
@@ -26,7 +28,7 @@ in {
           PGID = "993";
           TZ = "Europe/Stockholm";
         };
-        devices = ["/dev/dri:/dev/dri"];
+        devices = [ "/dev/dri:/dev/dri" ];
         ports = [
           "8265:8265"
           "8266:8266"

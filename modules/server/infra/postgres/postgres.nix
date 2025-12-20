@@ -4,51 +4,54 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) types mkOption;
 
   cfg = config.server.infra.postgresql;
 
-  database = {name, ...}: {
-    options = {
-      database = mkOption {
-        type = types.str;
-        description = "Database name";
-      };
+  database =
+    { name, ... }:
+    {
+      options = {
+        database = mkOption {
+          type = types.str;
+          description = "Database name";
+        };
 
-      extraUsers = mkOption {
-        type = types.listOf types.str;
-        default = [];
-        description = "List of extra users with access to this database.";
-      };
+        extraUsers = mkOption {
+          type = types.listOf types.str;
+          default = [ ];
+          description = "List of extra users with access to this database.";
+        };
 
-      extensions = mkOption {
-        type = types.listOf types.str;
-        default = [];
-        description = "List of extensions to install and enable.";
+        extensions = mkOption {
+          type = types.listOf types.str;
+          default = [ ];
+          description = "List of extensions to install and enable.";
+        };
       };
     };
-  };
-in {
+in
+{
   options = {
     server.infra.postgresql = {
       databases = mkOption {
         type = types.listOf (types.submodule database);
-        default = [];
+        default = [ ];
         description = "List of databases to set up.";
       };
     };
   };
 
-  config = lib.mkIf (cfg.databases != []) {
+  config = lib.mkIf (cfg.databases != [ ]) {
     services.postgresql = {
       enable = true;
       package = pkgs.postgresql_17;
       extensions = lib.filter (x: x != null) (
         lib.concatMap (
-          {extensions, ...}: map (ext: config.services.postgresql.package.pkgs.${ext} or null) extensions
-        )
-        cfg.databases
+          { extensions, ... }: map (ext: config.services.postgresql.package.pkgs.${ext} or null) extensions
+        ) cfg.databases
       );
       authentication = lib.mkForce ''
         local all postgres peer
@@ -56,65 +59,66 @@ in {
 
         # local peer access for extra users
         ${lib.concatMapStringsSep "\n" (
-            {
-              database,
-              extraUsers,
-              ...
-            }:
-              lib.concatMapStringsSep "\n" (user: "local ${database} ${user} peer") ([database] ++ extraUsers)
-          )
-          cfg.databases}
+          {
+            database,
+            extraUsers,
+            ...
+          }:
+          lib.concatMapStringsSep "\n" (user: "local ${database} ${user} peer") ([ database ] ++ extraUsers)
+        ) cfg.databases}
 
         # host access (TCP) for databases and their users
         ${lib.concatMapStringsSep "\n" (
+          {
+            database,
+            extraUsers,
+            ...
+          }:
+          lib.concatMapStringsSep "\n" (user: ''
+            host ${database} ${user} 127.0.0.1/32 trust
+            host ${database} ${user} ::1/128 trust
+          '') ([ database ] ++ extraUsers)
+        ) cfg.databases}
+      '';
+      ensureUsers =
+        let
+          dbToUsers =
             {
               database,
               extraUsers,
               ...
             }:
-              lib.concatMapStringsSep "\n" (user: ''
-                host ${database} ${user} 127.0.0.1/32 trust
-                host ${database} ${user} ::1/128 trust
-              '') ([database] ++ extraUsers)
-          )
-          cfg.databases}
-      '';
-      ensureUsers = let
-        dbToUsers = {
-          database,
-          extraUsers,
-          ...
-        }:
-        # we use same username as dbname
-          [database] ++ extraUsers;
-      in
-        map (name: {inherit name;}) (lib.unique (builtins.concatMap dbToUsers cfg.databases));
+            # we use same username as dbname
+            [ database ] ++ extraUsers;
+        in
+        map (name: { inherit name; }) (lib.unique (builtins.concatMap dbToUsers cfg.databases));
     };
 
     systemd.services = {
-      postgres-setup = let
-        pgsql = config.services.postgresql;
-      in {
-        after = ["postgresql.service"];
-        wantedBy = ["multi-user.target"];
-        path = [pgsql.package];
-        script =
-          lib.concatMapStringsSep "\n" (
+      postgres-setup =
+        let
+          pgsql = config.services.postgresql;
+        in
+        {
+          after = [ "postgresql.service" ];
+          wantedBy = [ "multi-user.target" ];
+          path = [ pgsql.package ];
+          script = lib.concatMapStringsSep "\n" (
             {
               database,
               extensions,
               extraUsers,
               ...
-            }: let
-              createExtensionsSql =
-                lib.concatMapStringsSep "; " (
-                  ext: ''CREATE EXTENSION IF NOT EXISTS "${ext}"''
-                )
-                extensions;
-              createExtensionsIfAny = lib.optionalString (extensions != []) ''
+            }:
+            let
+              createExtensionsSql = lib.concatMapStringsSep "; " (
+                ext: ''CREATE EXTENSION IF NOT EXISTS "${ext}"''
+              ) extensions;
+              createExtensionsIfAny = lib.optionalString (extensions != [ ]) ''
                 $PSQL -d '${database}' -c '${createExtensionsSql}'
               '';
-            in ''
+            in
+            ''
               set -eu
 
               PSQL="${pkgs.util-linux}/bin/runuser -u ${pgsql.superUser} -- psql --port=${toString pgsql.settings.port} --tuples-only --no-align"
@@ -123,23 +127,20 @@ in {
                   $PSQL -c 'CREATE DATABASE "${database}" WITH OWNER = "${database}"'
                   ${createExtensionsIfAny}
               fi
-              ${
-                lib.optionalString (extraUsers != [])
+              ${lib.optionalString (extraUsers != [ ])
                 "$PSQL '${database}' -c '${
                   lib.concatMapStringsSep "\n" (
                     user: "GRANT ALL ON ALL TABLES IN SCHEMA public TO ${user};"
-                  )
-                  extraUsers
+                  ) extraUsers
                 }'"
               }
             ''
-          )
-          cfg.databases;
+          ) cfg.databases;
 
-        serviceConfig = {
-          Type = "oneshot";
+          serviceConfig = {
+            Type = "oneshot";
+          };
         };
-      };
 
       postgresql.serviceConfig = {
         # Required by PLV8.
