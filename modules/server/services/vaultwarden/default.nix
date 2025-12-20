@@ -4,11 +4,13 @@
   lib,
   self,
   ...
-}: let
+}:
+let
   unit = "vaultwarden";
   cfg = config.server.services.${unit};
   domain = "${cfg.subdomain}.${config.server.infra.www.url}";
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     age.secrets = {
       vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";

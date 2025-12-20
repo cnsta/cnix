@@ -3,30 +3,37 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   unit = "unbound";
   cfg = config.server.infra.${unit};
   srv = config.server;
 
   svcNames = lib.attrNames srv.services;
 
-  localARecords = builtins.concatLists (map (
-      name: let
+  localARecords = builtins.concatLists (
+    map (
+      name:
+      let
         s = srv.services.${name};
       in
-        if s != null && s.enable && s.subdomain != null
-        then [''"${s.subdomain}.${srv.domain}. A ${srv.ip}"'']
-        else []
-    )
-    svcNames);
+      if s != null && s.enable && s.subdomain != null then
+        [ ''"${s.subdomain}.${srv.domain}. A ${srv.ip}"'' ]
+      else
+        [ ]
+    ) svcNames
+  );
 
-  hostIp = hostname:
-    if hostname == "ziggy"
-    then "192.168.88.12"
-    else if hostname == "sobotka"
-    then "192.168.88.14"
-    else throw "No IP defined for host ${hostname}";
-in {
+  hostIp =
+    hostname:
+    if hostname == "ziggy" then
+      "192.168.88.12"
+    else if hostname == "sobotka" then
+      "192.168.88.14"
+    else
+      throw "No IP defined for host ${hostname}";
+in
+{
   options.server.infra.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
@@ -111,11 +118,10 @@ in {
               "255.255.255.255/32"
               "2001:db8::/32"
             ];
-            local-data =
-              [
-                ''"traefik.${config.settings.accounts.domains.local}. A 192.168.88.14"''
-              ]
-              ++ localARecords;
+            local-data = [
+              ''"traefik.${config.settings.accounts.domains.local}. A 192.168.88.14"''
+            ]
+            ++ localARecords;
           };
         };
       };

@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   unit = "uptime-kuma";
   cfg = config.server.services.${unit};
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     services = {
       ${unit} = {

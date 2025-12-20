@@ -4,11 +4,13 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) types mkOption;
 
   cfg = config.server.infra.postgresql;
-in {
+in
+{
   options = {
     server.infra.postgresql = {
       upgradeTargetPackage = mkOption {

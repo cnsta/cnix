@@ -3,13 +3,15 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkEnableOption;
   packageNames = map (p: p.pname or p.name or null) config.home.packages;
   hasPackage = name: lib.any (x: x == name) packageNames;
   hasEza = hasPackage "eza";
   cfg = config.home.programs.fish;
-in {
+in
+{
   options = {
     home.programs.fish.enable = mkEnableOption "Enables fish home configuration";
   };

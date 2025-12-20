@@ -3,24 +3,27 @@
   config,
   self,
   ...
-}: let
+}:
+let
   unit = "keepalived";
   cfg = config.server.infra.${unit};
 
-  hostCfg = hostname:
-    if hostname == "sobotka"
-    then {
-      ip = "192.168.88.14";
-      priority = 20;
-      state = "MASTER";
-    }
-    else if hostname == "ziggy"
-    then {
-      ip = "192.168.88.12";
-      priority = 10;
-      state = "BACKUP";
-    }
-    else throw "No keepalived config defined for host ${hostname}";
+  hostCfg =
+    hostname:
+    if hostname == "sobotka" then
+      {
+        ip = "192.168.88.14";
+        priority = 20;
+        state = "MASTER";
+      }
+    else if hostname == "ziggy" then
+      {
+        ip = "192.168.88.12";
+        priority = 10;
+        state = "BACKUP";
+      }
+    else
+      throw "No keepalived config defined for host ${hostname}";
 
   _self = hostCfg config.networking.hostName;
 
@@ -31,7 +34,8 @@
 
   # Remove self from peers
   peers = builtins.filter (ip: ip != _self.ip) allPeers;
-in {
+in
+{
   options.server.infra.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";

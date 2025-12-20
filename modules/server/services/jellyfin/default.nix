@@ -3,11 +3,13 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   unit = "jellyfin";
   cfg = config.server.services.${unit};
   srv = config.server;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     services.${unit} = {
       enable = true;
