@@ -234,6 +234,18 @@
           category = "Services";
         };
       };
+      matrix-synapse = {
+        enable = true;
+        subdomain = "matrix";
+        exposure = "tailscale";
+        port = 11339;
+        homepage = {
+          name = "Synapse: Matrix homeserver";
+          description = "Matrix homeserver implementation developed by Element.";
+          icon = "matrix.svg";
+          category = "Services";
+        };
+      };
       nextcloud = {
         enable = true;
         subdomain = "cloud";
