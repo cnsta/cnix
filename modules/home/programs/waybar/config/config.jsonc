@@ -64,7 +64,6 @@
       "format": "",
       "exec": "cnix-update-available.sh",
       "tooltip-format": "cnix update available",
-      "return-type": "json",
       "signal": 7,
       "interval": 21600
     },
