@@ -63,7 +63,6 @@
     "custom/update": {
       "format": "",
       "exec": "cnix-update-available.sh",
-      // "on-click": "omarchy-launch-floating-terminal-with-presentation omarchy-update",
       "tooltip-format": "cnix update available",
       "return-type": "json",
       "signal": 7,
