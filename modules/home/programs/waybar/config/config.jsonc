@@ -9,6 +9,7 @@
     ],
     "modules-left": [
       "custom/logo",
+      "custom/update",
       "group/cnix"
     ],
     "modules-center": [
@@ -58,6 +59,15 @@
         "critical": 90,
         "warning": 70
       }
+    },
+    "custom/update": {
+      "format": "",
+      "exec": "cnix-update-available.sh",
+      // "on-click": "omarchy-launch-floating-terminal-with-presentation omarchy-update",
+      "tooltip-format": "cnix update available",
+      "return-type": "json",
+      "signal": 7,
+      "interval": 21600
     },
     "custom/dunst": {
       "exec": "dunst.sh",
