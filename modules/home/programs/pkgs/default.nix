@@ -80,6 +80,7 @@ in
           feh
           finamp
           overskride
+          fractal
         ])
 
         (mkIf cfg.desktop.enable [
