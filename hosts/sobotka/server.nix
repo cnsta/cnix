@@ -211,10 +211,6 @@
         subdomain = "git";
         exposure = "tailscale";
         port = 3031;
-        # cloudflared = {
-        #   tunnelId = "9ce34a38-7f0e-4a20-81db-00940bcced7e";
-        #   credentialsFile = config.age.secrets.forgejoCloudflared.path;
-        # };
         homepage = {
           name = "Forgejo";
           description = "A painless, self-hosted Git service";
@@ -263,7 +259,7 @@
         };
       };
       home-assistant = {
-        enable = true;
+        enable = false;
         subdomain = "ha";
         exposure = "local";
         port = 8123;
@@ -274,7 +270,6 @@
           category = "Services";
         };
       };
-
       slskd = {
         enable = true;
         subdomain = "slskd";
@@ -288,7 +283,7 @@
         };
       };
       tdarr = {
-        enable = true;
+        enable = false;
         subdomain = "tdarr";
         exposure = "local";
         port = 8265;
