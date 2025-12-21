@@ -28,10 +28,10 @@ in
         extract = "extract.sh";
         nixclean = "nh clean all --keep 3";
         nixdev = "nix develop ~/.nix-config -c $SHELL";
-        nixup = "nh os switch -H $hostname";
-        nixupn = "nh os switch -n -H $hostname";
-        nixupv = "nh os switch -v --show-trace -H $hostname";
-        nixupvn = "nh os switch -n -v --show-trace -H $hostname";
+        nixup = "nh os switch -H $hostname && pkill -RTMIN+7 waybar";
+        nixupn = "nh os switch -n -H $hostname && pkill -RTMIN+7 waybar";
+        nixupv = "nh os switch -v --show-trace -H $hostname && pkill -RTMIN+7 waybar";
+        nixupvn = "nh os switch -n -v --show-trace -H $hostname && pkill -RTMIN+7 waybar";
         flakeup = "nix flake update";
       };
       shellAliases = {
