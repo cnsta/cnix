@@ -36,6 +36,18 @@ in
         );
       };
 
+      ".local/bin/cnix-update-available.sh" = {
+        source = getExe (
+          pkgs.writeShellApplication {
+            name = "cnix-update-available";
+            runtimeInputs = with pkgs; [
+              waybar
+            ];
+            text = readFile ./bin/cnix-update-available.sh;
+          }
+        );
+      };
+
       ".local/bin/spawn-or-focus.sh" = {
         source = getExe (
           pkgs.writeShellApplication {
