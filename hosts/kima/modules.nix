@@ -172,7 +172,7 @@
         enable = true;
       };
       gnome-keyring = {
-        enable = false;
+        enable = true;
       };
       greetd = {
         enable = true;
