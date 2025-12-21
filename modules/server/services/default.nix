@@ -8,6 +8,7 @@
     ./jellyseerr
     ./lidarr
     ./forgejo
+    ./matrix-synapse
     ./n8n
     ./nextcloud
     ./ollama
