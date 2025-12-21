@@ -66,7 +66,6 @@ in
   "authentikEnv.age".publicKeys = sobotka;
   "authentikCloudflared.age".publicKeys = sobotka;
   "sobotkaTsAuth.age".publicKeys = sobotka;
-  "forgejoCloudflared.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

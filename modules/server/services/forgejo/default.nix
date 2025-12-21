@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  self,
   pkgs,
   clib,
   ...
@@ -13,8 +12,6 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    age.secrets.forgejoCloudflared.file = "${self}/secrets/forgejoCloudflared.age";
-
     server.infra = {
       fail2ban.jails.${unit} = {
         serviceName = "${unit}";
@@ -28,17 +25,6 @@ in
       ];
     };
     services = {
-      # cloudflared = {
-      #   enable = true;
-      #   tunnels.${cfg.cloudflared.tunnelId} = {
-      #     credentialsFile = cfg.cloudflared.credentialsFile;
-      #     default = "http_status:404";
-      #     ingress = {
-      #       "${domain}".service = "http://localhost:${toString cfg.port}";
-      #     };
-      #   };
-      # };
-
       forgejo = {
         enable = true;
         database.type = "postgres";
