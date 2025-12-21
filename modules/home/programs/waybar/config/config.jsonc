@@ -61,11 +61,10 @@
       }
     },
     "custom/update": {
-      "format": "",
+      "format": " ",
       "exec": "cnix-update-available.sh",
       "tooltip-format": "cnix update available",
-      "signal": 7,
-      "interval": 21600
+      "signal": 7
     },
     "custom/dunst": {
       "exec": "dunst.sh",
