@@ -81,6 +81,7 @@ in
           finamp
           overskride
           fractal
+          element-desktop
         ])
 
         (mkIf cfg.desktop.enable [
