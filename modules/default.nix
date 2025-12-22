@@ -17,6 +17,7 @@
         ./home/programs/git
         ./home/programs/hyprlock
         ./home/programs/jujutsu
+        ./home/programs/librewolf
         ./home/programs/kitty
         ./home/programs/mpv
         ./home/programs/neovim

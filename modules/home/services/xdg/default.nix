@@ -19,7 +19,7 @@ let
         "bunk"
       ]
     then
-      "zen.desktop"
+      "librewolf.desktop"
     else
       "firefox.desktop";
   cfg = config.home.services.xdg;
@@ -86,7 +86,7 @@ in
           "application/xhtml+xml" = browser;
           "application/json" = browser;
           "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
-          "inode/directory" = "thunar.desktop";
+          "inode/directory" = "com.system76.CosmicFiles.desktop";
 
           "image/apng" = "feh.desktop";
           "image/avif" = "feh.desktop";
