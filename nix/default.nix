@@ -4,7 +4,6 @@
   lib,
   config,
   pkgs,
-  self,
   ...
 }:
 {
@@ -13,8 +12,6 @@
     ./home-manager
     ./substituters
   ];
-
-  age.secrets.accessTokens.file = "${self}/secrets/accessTokens.age";
 
   environment.localBinInPath = true;
 
@@ -55,8 +52,5 @@
           "@wheel"
         ];
       };
-      extraOptions = ''
-        !include ${config.age.secrets.accessTokens.path}
-      '';
     };
 }

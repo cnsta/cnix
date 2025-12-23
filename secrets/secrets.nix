@@ -44,8 +44,6 @@ let
   all = kima ++ bunk ++ sobotka ++ ziggy ++ toothpc;
 in
 {
-  "accessTokens.age".publicKeys = all;
-
   # Sobotka-specific
   "cloudflareEnvironment.age".publicKeys = sobotka;
   "vaultwardenEnvironment.age".publicKeys = sobotka;
