@@ -54,7 +54,6 @@
           }
           self.modules.nixos
           self.modules.settings
-          inputs.disko.nixosModules.disko
           inputs.agenix.nixosModules.default
         ];
       };

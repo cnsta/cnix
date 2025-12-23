@@ -11,7 +11,7 @@
 
 window#waybar {
   color: #fbf1c7;
-  background-color: rgba(43, 45, 50, 0.5);
+  background-color: rgba(13, 17, 12, 0.72);
 }
 
 tooltip {
@@ -126,6 +126,7 @@ tooltip label {
 #custom-systemd,
 #custom-usbguard,
 #custom-yubikey,
+#custom-update,
 #disk,
 #memory,
 #mode,

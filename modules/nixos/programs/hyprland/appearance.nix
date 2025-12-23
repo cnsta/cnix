@@ -31,11 +31,11 @@ in
           enabled = true;
           brightness = 1.0;
           contrast = 1.0;
-          noise = 0.01;
+          noise = 0.0117;
           vibrancy = 0.15;
           vibrancy_darkness = 0.5;
-          passes = 1;
-          size = 3;
+          passes = 2;
+          size = 12;
           popups = true;
           popups_ignorealpha = 0.2;
         };
