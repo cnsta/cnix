@@ -31,7 +31,7 @@ in
     services.openssh = {
       enable = true;
       settings = {
-        AcceptEnv = "GIT_PROTOCOL";
+        # AcceptEnv = "GIT_PROTOCOL";
         GatewayPorts = "clientspecified";
         PasswordAuthentication = false;
         PermitRootLogin = "no";

@@ -2,7 +2,7 @@
   nixos = {
     boot = {
       kernel = {
-        variant = "zfsLatest";
+        variant = "latest";
         hardware = [ "amd" ];
         extraKernelParams = [ ];
         amdOverdrive.enable = true;

@@ -33,22 +33,12 @@ in
 
   imports = [
     ./hardware-configuration.nix
-    ./disko.nix
     ./modules.nix
     ./settings.nix
   ];
 
   networking = {
     hostName = "kima";
-    hostId = "723158aa";
-  };
-
-  boot = {
-    zfs = {
-      package = pkgs.zfs_unstable;
-      forceImportRoot = false;
-    };
-    supportedFilesystems = [ "zfs" ];
   };
 
   environment.variables = {
