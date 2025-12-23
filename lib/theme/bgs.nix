@@ -3,11 +3,13 @@ lib: {
     files = {
       wallpaper_1 = "~/media/images/backgrounds/bg_1.jpg";
       wallpaper_2 = "~/media/images/backgrounds/bg_2.jpg";
-      wallpaper_3 = "~/media/images/backgrounds/bg_3.jpg";
-      wallpaper_4 = "~/media/images/backgrounds/waterwindow.jpg";
-      wallpaper_5 = "~/media/images/backgrounds/barngreet.png";
-      "wallpaper_1.2" = "~/media/images/backgrounds/bg_1v2.jpg";
-      "wallpaper_2.2" = "~/media/images/backgrounds/bg_2v2.jpg";
+      wallpaper_3 = "~/media/images/backgrounds/bestlialis_1k.jpeg";
+      wallpaper_4 = "~/media/images/backgrounds/bestlialis_2k.jpeg";
+      wallpaper_5 = "~/media/images/backgrounds/genesis_1k.jpg";
+      wallpaper_6 = "~/media/images/backgrounds/genesis_2k.jpg";
+      wallpaper_7 = "~/media/images/backgrounds/pepe_vert.jpg";
+      wallpaper_8 = "~/media/images/backgrounds/resadversae_1k.jpg";
+      wallpaper_9 = "~/media/images/backgrounds/resadversae_2k.jpg";
     };
 
     list = builtins.attrNames files;
