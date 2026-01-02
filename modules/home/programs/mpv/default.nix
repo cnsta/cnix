@@ -67,6 +67,7 @@ in
         thumbfast
         sponsorblock
         autocrop
+        webtorrent-mpv-hook
       ];
     };
     programs.yt-dlp = {

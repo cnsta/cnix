@@ -89,9 +89,11 @@
     hyprpaper = {
       url = "github:hyprwm/hyprpaper";
       inputs = {
+        aquamarine.follows = "hyprland/aquamarine";
         hyprlang.follows = "hyprland/hyprlang";
         hyprutils.follows = "hyprland/hyprutils";
         hyprgraphics.follows = "hyprland/hyprgraphics";
+        hyprwire.follows = "hyprland/hyprwire";
         nixpkgs.follows = "hyprland/nixpkgs";
         systems.follows = "hyprland/systems";
       };
