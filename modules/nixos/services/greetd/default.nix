@@ -38,6 +38,8 @@ with lib;
             };
           in
           {
+            enable = true;
+            restart = false;
             settings = {
               terminal.vt = 1;
               default_session = session;

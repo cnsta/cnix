@@ -10,7 +10,7 @@
         name = "DP-3";
         width = 2560;
         height = 1440;
-        refreshRate = "239.97";
+        refreshRate = "143.99Hz";
         position = "0x0";
         transform = 0;
         # bitDepth = 10;

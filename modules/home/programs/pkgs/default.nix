@@ -78,7 +78,7 @@ in
           material-icons
           material-symbols
           feh
-          finamp
+          feishin
           overskride
           fractal
           element-desktop
