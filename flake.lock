@@ -183,11 +183,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1767539328,
-        "narHash": "sha256-WzPkwOGa00sZlI6RPgPUcPNYRB8M5LDaSWlyrLboha8=",
+        "lastModified": 1767541465,
+        "narHash": "sha256-CWrCMFEOEAfBDODvDuTLpG01yiXjiv1Y8Mp5eVWejrE=",
         "ref": "refs/heads/main",
-        "rev": "4da135531ac984602cedf874240be49fdf55be3c",
-        "revCount": 13,
+        "rev": "15ca8334653d84e6a36c408b6282efbdb50af011",
+        "revCount": 14,
         "type": "git",
         "url": "ssh://forgejo@git.ts.cnst.dev/cnst/dotfiles.git"
       },
