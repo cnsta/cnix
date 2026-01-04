@@ -35,8 +35,8 @@
     ];
     theme = {
       background = {
-        lockscreen = "wallpaper_8";
-        primary = "wallpaper_5";
+        lockscreen = "resadversae_2k";
+        primary = "genesis_2k";
       };
     };
   };

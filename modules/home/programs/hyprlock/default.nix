@@ -1,7 +1,7 @@
 {
   lib,
   osConfig,
-  clib,
+  bgs,
   ...
 }:
 let
@@ -9,7 +9,6 @@ let
   cfg = osConfig.nixos.programs.hyprland;
 
   bg = osConfig.settings.theme.background;
-  inherit (clib.theme.bgs) resolve;
 in
 {
   config = mkIf cfg.enable {
@@ -31,7 +30,7 @@ in
         background = [
           {
             monitor = "";
-            path = resolve bg.lockscreen;
+            path = bgs.resolve bg.lockscreen;
           }
         ];
         input-field = [
