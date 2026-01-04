@@ -8,17 +8,6 @@
 {
   flake.nixosConfigurations =
     let
-      clib = import ../lib inputs.nixpkgs.lib;
-      userConfig = "${self}/home";
-      systemConfig = "${self}/system";
-      hostConfig = "${self}/hosts";
-
-      cnstConfig = "${self}/users/cnst";
-      toothpickConfig = "${self}/users/toothpick";
-
-      umodPath = "${self}/modules/home";
-      smodPath = "${self}/modules/system";
-
       inherit (inputs.nixpkgs.lib) nixosSystem;
       inherit (self) outputs;
 
@@ -27,29 +16,20 @@
           inputs
           outputs
           self
-          userConfig
-          systemConfig
-          hostConfig
-          cnstConfig
-          toothpickConfig
-          umodPath
-          smodPath
           ;
-      };
-      specialArgsWithClib = specialArgs // {
-        inherit clib;
+        bgs = inputs.dotfiles.lib.bgs;
       };
     in
     {
       kima = nixosSystem {
-        specialArgs = specialArgsWithClib;
+        inherit specialArgs;
         modules = [
           ./kima
           "${self}/nix"
           {
             home-manager = {
               users.cnst.imports = homeImports."cnst@kima";
-              extraSpecialArgs = specialArgsWithClib;
+              extraSpecialArgs = specialArgs;
             };
           }
           self.modules.nixos
@@ -58,14 +38,14 @@
         ];
       };
       bunk = nixosSystem {
-        specialArgs = specialArgsWithClib;
+        inherit specialArgs;
         modules = [
           ./bunk
           "${self}/nix"
           {
             home-manager = {
               users.cnst.imports = homeImports."cnst@bunk";
-              extraSpecialArgs = specialArgsWithClib;
+              extraSpecialArgs = specialArgs;
             };
           }
           self.modules.nixos
@@ -97,14 +77,14 @@
         ];
       };
       toothpc = nixosSystem {
-        specialArgs = specialArgsWithClib;
+        inherit specialArgs;
         modules = [
           ./toothpc
           "${self}/nix"
           {
             home-manager = {
               users.toothpick.imports = homeImports."toothpick@toothpc";
-              extraSpecialArgs = specialArgsWithClib;
+              extraSpecialArgs = specialArgs;
             };
           }
           self.modules.nixos

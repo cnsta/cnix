@@ -1,7 +1,7 @@
 {
   lib,
   osConfig,
-  clib,
+  bgs,
   ...
 }:
 let
@@ -9,7 +9,6 @@ let
 
   cfg = osConfig.nixos.programs.hyprland;
   bg = osConfig.settings.theme.background;
-  bgs = clib.theme.bgs;
 
   monitorMappings = [
     {
@@ -38,10 +37,9 @@ in
       settings = {
         ipc = "on";
         splash = false;
-        splash_offset = 2.0;
 
         preload = bgs.all;
-        wallpaper = bgs.resolveList monitorMappings;
+        wallpaper = bgs.resolveWallpaperBlocks monitorMappings;
       };
     };
   };

@@ -1,32 +1,27 @@
-{ lib, ... }:
+{ lib, bgs, ... }:
 let
   inherit (lib) mkOption types;
-  bgList = [
-    "wallpaper_1"
-    "wallpaper_2"
-    "wallpaper_3"
-    "wallpaper_4"
-    "wallpaper_5"
-    "wallpaper_6"
-    "wallpaper_7"
-    "wallpaper_8"
-    "wallpaper_9"
-  ];
+
+  bgList = builtins.attrNames bgs.files;
 in
 {
   options.settings.theme.background = {
     lockscreen = mkOption {
       type = types.enum bgList;
-      example = "wallpaper_1";
+      example = builtins.head bgList;
+      description = "Wallpaper name used for the lockscreen";
     };
+
     primary = mkOption {
       type = types.enum bgList;
-      example = "wallpaper_2";
+      example = builtins.head bgList;
+      description = "Primary wallpaper";
     };
+
     secondary = mkOption {
       type = types.nullOr (types.enum bgList);
       default = null;
-      example = "wallpaper_3";
+      example = if builtins.length bgList > 1 then builtins.elemAt bgList 1 else null;
     };
   };
 }

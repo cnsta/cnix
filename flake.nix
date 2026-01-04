@@ -135,5 +135,10 @@
     };
 
     fonts.url = "sourcehut:~canasta/fonts";
+
+    # Custom
+    dotfiles = {
+      url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/dotfiles.git";
+    };
   };
 }
