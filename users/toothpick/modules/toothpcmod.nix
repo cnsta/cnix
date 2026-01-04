@@ -12,7 +12,7 @@
       };
       discord = {
         enable = true;
-        variant = "vesktop";
+        variant = "stable";
       };
       eza = {
         enable = true;
