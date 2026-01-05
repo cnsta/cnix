@@ -111,11 +111,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser = {
-      url = "github:cnsta/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     tailray = {
       url = "github:NotAShelf/tailray";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -134,11 +129,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    fonts.url = "sourcehut:~canasta/fonts";
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Custom
+    zen-browser = {
+      url = "github:cnsta/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     dotfiles = {
       url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/dotfiles.git";
     };
+
+    fonts.url = "sourcehut:~canasta/fonts";
   };
 }

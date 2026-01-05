@@ -77,7 +77,7 @@
         enable = false;
       };
       waybar = {
-        enable = true;
+        enable = false;
       };
       wezterm = {
         enable = false;

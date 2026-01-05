@@ -2,6 +2,8 @@
   lib,
   osConfig,
   bgs,
+  inputs,
+  pkgs,
   ...
 }:
 let
@@ -31,6 +33,7 @@ let
 in
 {
   config = mkIf cfg.enable {
+    home.packages = [ inputs.dotfiles.packages.${pkgs.stdenv.hostPlatform.system}.wppick ];
     services.hyprpaper = {
       enable = true;
 
