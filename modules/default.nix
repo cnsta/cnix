@@ -51,6 +51,7 @@
         ./home/services/swaync
         ./home/services/tailray
         ./home/services/udiskie
+        ./home/services/quickshell
         ./home/services/xdg
       ];
     };

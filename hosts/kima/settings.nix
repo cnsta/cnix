@@ -36,8 +36,8 @@
     theme = {
       background = {
         lockscreen = "resadversae_2k";
-        primary = "genesis_2k";
-        secondary = "pepe_vert";
+        primary = "ss_ladda_2k";
+        secondary = "ss_sladda_vert";
       };
     };
   };
