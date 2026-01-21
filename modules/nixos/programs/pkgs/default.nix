@@ -101,6 +101,9 @@ in
           wf-recorder
           nautilus
           cosmic-files
+          kdePackages.qt6ct
+          libsForQt5.qt5ct
+          brightnessctl
         ])
 
         (mkIf cfg.desktop.enable [
@@ -109,7 +112,6 @@ in
         ])
 
         (mkIf cfg.laptop.enable [
-          brightnessctl
         ])
 
         (mkIf cfg.server.enable [
@@ -136,6 +138,7 @@ in
           pyright
           fish-lsp
           nodejs_25
+          kdePackages.qtdeclarative
 
           # Formatters
           nixfmt

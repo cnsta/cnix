@@ -38,7 +38,7 @@ in
     };
     Service = {
       Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies} QML2_IMPORT_PATH=${QML2_IMPORT_PATH}";
-      ExecStart = lib.getExe quickshell;
+      ExecStart = "${lib.getExe quickshell} --path /home/cnst/.repositories/cnixshell/shell.qml";
       Restart = "on-failure";
     };
     Install.WantedBy = [ "graphical-session.target" ];

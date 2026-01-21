@@ -15,7 +15,7 @@
       };
       discord = {
         enable = true;
-        variant = "stable";
+        variant = "vesktop";
       };
       eza = {
         enable = true;
@@ -132,7 +132,7 @@
         enable = true;
       };
       swaync = {
-        enable = true;
+        enable = false;
       };
       syncthing = {
         enable = false;

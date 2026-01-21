@@ -43,15 +43,17 @@ in
       pcscd.enable = mkIf cfg.pcscd.enable true;
     };
     programs = {
-      adb.enable = mkIf cfg.adb.enable true;
       yubikey-manager.enable = mkIf cfg.yubikey.manager.enable true;
       yubikey-touch-detector.enable = mkIf cfg.yubikey.touch-detector.enable true;
     };
     environment.systemPackages =
       with pkgs;
-      mkIf cfg.utils.enable [
+      lib.optionals cfg.utils.enable [
         usbutils
         usbimager
+      ]
+      ++ lib.optionals cfg.adb.enable [
+        android-tools
       ];
   };
 }

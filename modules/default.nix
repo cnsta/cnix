@@ -30,6 +30,7 @@
         ./home/programs/waybar
         ./home/programs/wezterm
         ./home/programs/yazi
+        ./home/programs/qt
         ./home/programs/zathura
         ./home/programs/zed-editor
         ./home/programs/zellij

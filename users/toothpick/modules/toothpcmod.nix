@@ -12,7 +12,7 @@
       };
       discord = {
         enable = true;
-        variant = "stable";
+        variant = "vesktop";
       };
       eza = {
         enable = true;
@@ -68,7 +68,7 @@
         enable = true;
       };
       waybar = {
-        enable = true;
+        enable = false;
       };
       wezterm = {
         enable = false;
@@ -132,6 +132,9 @@
         enable = true;
       };
       udiskie = {
+        enable = true;
+      };
+      quickshell = {
         enable = true;
       };
       xdg = {
