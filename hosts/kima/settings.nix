@@ -36,7 +36,7 @@
     theme = {
       background = {
         lockscreen = "resadversae_2k";
-        primary = "ss_ladda_2k";
+        primary = "ss_parkerabro_2k";
         secondary = "ss_sladda_vert";
       };
     };
