@@ -164,8 +164,13 @@
       fwupd = {
         enable = true;
       };
-      gnome-keyring = {
-        enable = true;
+      gnome = {
+        keyring = {
+          enable = true;
+        };
+        evolution-data-server = {
+          enable = true;
+        };
       };
       greetd = {
         enable = true;
