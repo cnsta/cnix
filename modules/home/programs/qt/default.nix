@@ -10,7 +10,7 @@ let
     owner = "vinceliuice";
     repo = "Orchis-kde";
     rev = "b2a96919eee40264e79db402b915f926436100ad";
-    hash = "sha256-mO1AVrnXNdg3Rftj0cQWef/RrBgSDy5kaMHagwKywEo=";
+    hash = "sha256-C1eXHJdmqqOWFJUhTNhYWzjtCJrCkxS1DJlPtfD9gxE=";
     sparseCheckout = [ "Kvantum" ];
   };
 
