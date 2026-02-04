@@ -143,6 +143,9 @@
       udiskie = {
         enable = true;
       };
+      quickshell = {
+        enable = true;
+      };
       xdg = {
         enable = true;
       };

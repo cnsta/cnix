@@ -116,7 +116,7 @@
           enable = true;
         };
         dev = {
-          enable = true;
+          enable = false;
         };
       };
       mysql-workbench = {

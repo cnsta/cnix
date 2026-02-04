@@ -87,6 +87,9 @@ in
           libnotify
           unrar
           libqalculate
+          nixd
+          nil
+          nixfmt
         ]
 
         (mkIf cfg.gui.enable [
@@ -126,8 +129,6 @@ in
           gcc
           rust-analyzer
           lua-language-server
-          nixd
-          nil
           php
           phpactor
           vscode-langservers-extracted
@@ -142,7 +143,6 @@ in
           kdePackages.qtdeclarative
 
           # Formatters
-          nixfmt
           rustfmt
           deno
           stylua
