@@ -82,6 +82,11 @@ in
           "match:namespace ^(quickshell), ignore_alpha 0.2"
           "match:namespace ^(quickshell), no_anim true"
 
+          "match:namespace ^(cnixshell), blur true"
+          "match:namespace ^(cnixshell), blur_popups true"
+          "match:namespace ^(cnixshell), ignore_alpha 0.2"
+          "match:namespace ^(cnixshell), no_anim true"
+
           "match:namespace ^(fuzzel), blur true"
           "match:namespace ^(fuzzel), ignore_alpha 0.8"
           "match:namespace ^(fuzzel), no_anim true"

@@ -96,7 +96,7 @@
         ./nixos/services/dconf
         ./nixos/services/flatpak
         ./nixos/services/fwupd
-        ./nixos/services/gnome-keyring
+        ./nixos/services/gnome
         ./nixos/services/greetd
         ./nixos/services/gvfs
         ./nixos/services/virtualisation

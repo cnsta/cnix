@@ -28,6 +28,7 @@ in
       "users"
       "plocate"
       "fuse"
+      "i2c"
     ];
   };
 

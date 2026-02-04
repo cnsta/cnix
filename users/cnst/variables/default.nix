@@ -1,4 +1,8 @@
-{ osConfig, pkgs, ... }:
+{
+  osConfig,
+  pkgs,
+  ...
+}:
 let
   hostSpecificVariables =
     if osConfig.networking.hostName == "bunk" then

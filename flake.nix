@@ -134,6 +134,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    cnixshell = {
+      url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/cnixshell.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Custom
     zen-browser = {
       url = "github:cnsta/zen-browser-flake";

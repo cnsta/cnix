@@ -104,6 +104,7 @@ in
           kdePackages.qt6ct
           libsForQt5.qt5ct
           brightnessctl
+
         ])
 
         (mkIf cfg.desktop.enable [

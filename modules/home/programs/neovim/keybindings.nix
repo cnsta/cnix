@@ -1,7 +1,7 @@
 {
   config = {
     programs.neovim = {
-      extraLuaConfig =
+      initLua =
         # lua
         ''
           -- Key mappings for various commands and navigation
