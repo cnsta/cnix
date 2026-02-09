@@ -52,6 +52,7 @@
           self.modules.nixos
           self.modules.settings
           inputs.agenix.nixosModules.default
+          inputs.pulsar-x2-control.nixosModules.default
         ];
       };
       sobotka = nixosSystem {
@@ -64,6 +65,7 @@
           self.modules.server
           inputs.agenix.nixosModules.default
           inputs.authentik.nixosModules.default
+          inputs.pulsar-x2-control.nixosModules.default
         ];
       };
       ziggy = nixosSystem {
@@ -91,6 +93,7 @@
           self.modules.nixos
           self.modules.settings
           inputs.agenix.nixosModules.default
+          inputs.pulsar-x2-control.nixosModules.default
         ];
       };
     };
