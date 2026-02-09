@@ -44,7 +44,7 @@
         };
       };
       peripherals = {
-        logitech.enable = true;
+        logitech.enable = false;
         kanata.enable = true;
         adb.enable = true;
         yubikey = {
@@ -52,6 +52,7 @@
           touch-detector.enable = true;
         };
         pcscd.enable = true;
+        pulsar-x2.enable = true;
         utils.enable = true;
       };
     };
@@ -60,10 +61,7 @@
         enable = false;
       };
       blender = {
-        enable = false;
-        hip = {
-          enable = false;
-        };
+        enable = true;
       };
       corectrl = {
         enable = false;
@@ -121,6 +119,8 @@
         };
         dev = {
           enable = true;
+          rust.enable = true;
+          php.enable = false;
         };
       };
       mysql-workbench = {
@@ -198,9 +198,6 @@
         enable = false;
         server.enable = false;
         client.enable = false;
-      };
-      nix-ld = {
-        enable = false;
       };
       ssh = {
         enable = true;

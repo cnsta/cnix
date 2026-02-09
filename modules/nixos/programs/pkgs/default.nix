@@ -2,12 +2,14 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }:
 let
   inherit (lib)
     mkIf
     mkOption
+    mkEnableOption
     mkMerge
     types
     ;
@@ -41,10 +43,14 @@ in
         default = false;
         description = "Whether to install server-specific packages.";
       };
-      dev.enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to install development-specific packages.";
+      dev = {
+        enable = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Whether to install generic development-specific packages.";
+        };
+        rust.enable = mkEnableOption "Enables rust-specific packages";
+        php.enable = mkEnableOption "Enables php-specific packages";
       };
     };
   };
@@ -127,10 +133,7 @@ in
           sqlite
           nfs-utils
           gcc
-          rust-analyzer
           lua-language-server
-          php
-          phpactor
           vscode-langservers-extracted
           nodePackages.typescript-language-server
           python313Packages.python-lsp-server
@@ -141,9 +144,9 @@ in
           fish-lsp
           nodejs_25
           kdePackages.qtdeclarative
+          pkg-config
 
           # Formatters
-          rustfmt
           deno
           stylua
           fixjson
@@ -152,6 +155,23 @@ in
           prettierd
           shfmt
           black
+        ])
+
+        (mkIf cfg.dev.rust.enable [
+          (inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.withComponents [
+            "cargo"
+            "clippy"
+            "llvm-tools"
+            "rust-src"
+            "rustc"
+            "rustfmt"
+          ])
+          rust-analyzer
+        ])
+
+        (mkIf cfg.dev.php.enable [
+          php
+          phpactor
         ])
       ];
   };

@@ -102,7 +102,6 @@
     # Miscellaneous
     helix-flake.url = "github:helix-editor/helix";
     nvf.url = "github:notashelf/nvf";
-    anyrun.url = "github:anyrun-org/anyrun";
     agenix.url = "github:ryantm/agenix";
     authentik.url = "github:nix-community/authentik-nix/version/2025.8.4";
 
@@ -147,6 +146,11 @@
 
     dotfiles = {
       url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/dotfiles.git";
+    };
+
+    pulsar-x2-control = {
+      url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/pulsar-x2-control.git";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     fonts.url = "sourcehut:~canasta/fonts";

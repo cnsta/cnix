@@ -42,6 +42,7 @@ in
         (python3.withPackages (
           ps: with ps; [
             pygobject3
+            pyusb
           ]
         ))
         brightnessctl

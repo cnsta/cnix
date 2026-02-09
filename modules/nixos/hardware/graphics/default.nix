@@ -133,6 +133,10 @@ in
       );
     })
 
+    (mkIf (hasVendor "amd") {
+      nixpkgs.config.rocmSupport = true;
+    })
+
     (mkIf (hasVendor "nvidia") {
       hardware.nvidia = {
         package =
