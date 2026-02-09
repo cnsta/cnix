@@ -165,8 +165,13 @@
       fwupd = {
         enable = true;
       };
-      gnome-keyring = {
-        enable = false;
+      gnome = {
+        keyring = {
+          enable = false;
+        };
+        evolution-data-server = {
+          enable = false;
+        };
       };
       greetd = {
         enable = false;
@@ -184,9 +189,6 @@
         enable = false;
         server.enable = false;
         client.enable = false;
-      };
-      nix-ld = {
-        enable = false;
       };
       ssh = {
         enable = true;
