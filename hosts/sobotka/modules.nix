@@ -61,9 +61,6 @@
       };
       blender = {
         enable = false;
-        hip = {
-          enable = false;
-        };
       };
       corectrl = {
         enable = false;

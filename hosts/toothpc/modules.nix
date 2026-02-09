@@ -56,9 +56,6 @@
       };
       blender = {
         enable = false;
-        hip = {
-          enable = false;
-        };
       };
       corectrl = {
         enable = false;
@@ -110,6 +107,7 @@
         };
         dev = {
           enable = true;
+          php.enable = true;
         };
       };
       mysql-workbench = {

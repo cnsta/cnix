@@ -35,6 +35,7 @@
           self.modules.nixos
           self.modules.settings
           inputs.agenix.nixosModules.default
+          inputs.pulsar-x2-control.nixosModules.default
         ];
       };
       bunk = nixosSystem {

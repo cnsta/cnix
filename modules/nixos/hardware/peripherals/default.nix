@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -19,14 +20,18 @@ in
         touch-detector.enable = mkEnableOption "Enables yubikey touch detector";
       };
       pcscd.enable = mkEnableOption "Enables pcscd";
+      pulsar-x2.enable = mkEnableOption "Enables pulsar-x2-control";
       utils.enable = mkEnableOption "Miscellaneous utility packages";
     };
   };
   config = {
-    hardware = mkIf cfg.logitech.enable {
-      logitech.wireless = {
+    hardware = {
+      logitech.wireless = mkIf cfg.logitech.enable {
         enable = true;
         enableGraphical = true;
+      };
+      pulsar-x2 = mkIf cfg.pulsar-x2.enable {
+        enable = true;
       };
     };
     services = {

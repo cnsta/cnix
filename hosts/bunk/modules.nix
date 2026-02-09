@@ -60,9 +60,6 @@
       };
       blender = {
         enable = false;
-        hip = {
-          enable = false;
-        };
       };
       corectrl = {
         enable = false;
@@ -182,9 +179,6 @@
         enable = true;
       };
       mullvad = {
-        enable = false;
-      };
-      nix-ld = {
         enable = false;
       };
       ssh = {

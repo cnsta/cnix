@@ -29,7 +29,6 @@ in
 
     (mkIf (host == "kima") {
       programs.hyprland.settings.exec-once = [
-        "uwsm-app -s b -- solaar -w hide -b regular"
       ]
       ++ commonExecOnce;
     })
