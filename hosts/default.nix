@@ -1,4 +1,3 @@
-# Yanked from fufexan!
 {
   inputs,
   homeImports,
@@ -12,88 +11,76 @@
       inherit (self) outputs;
 
       specialArgs = {
-        inherit
-          inputs
-          outputs
-          self
-          ;
+        inherit inputs outputs self;
         bgs = inputs.dotfiles.lib.bgs;
       };
+
+      commonModules = [
+        "${self}/nix"
+        self.modules.nixos
+        self.modules.settings
+        inputs.agenix.nixosModules.default
+        inputs.nix-index-database.nixosModules.default
+      ];
     in
     {
       kima = nixosSystem {
         inherit specialArgs;
-        modules = [
+        modules = commonModules ++ [
           ./kima
-          "${self}/nix"
           {
             home-manager = {
               users.cnst.imports = homeImports."cnst@kima";
               extraSpecialArgs = specialArgs;
             };
           }
-          self.modules.nixos
-          self.modules.settings
-          inputs.agenix.nixosModules.default
-          inputs.pulsar-x2-control.nixosModules.default
+          inputs.pulsar-x2.nixosModules.default
         ];
       };
+
       bunk = nixosSystem {
         inherit specialArgs;
-        modules = [
+        modules = commonModules ++ [
           ./bunk
-          "${self}/nix"
           {
             home-manager = {
               users.cnst.imports = homeImports."cnst@bunk";
               extraSpecialArgs = specialArgs;
             };
           }
-          self.modules.nixos
-          self.modules.settings
-          inputs.agenix.nixosModules.default
-          inputs.pulsar-x2-control.nixosModules.default
+          inputs.pulsar-x2.nixosModules.default
         ];
       };
+
       sobotka = nixosSystem {
         inherit specialArgs;
-        modules = [
+        modules = commonModules ++ [
           ./sobotka
-          "${self}/nix"
-          self.modules.nixos
-          self.modules.settings
           self.modules.server
-          inputs.agenix.nixosModules.default
           inputs.authentik.nixosModules.default
-          inputs.pulsar-x2-control.nixosModules.default
+          inputs.pulsar-x2.nixosModules.default
         ];
       };
+
       ziggy = nixosSystem {
         inherit specialArgs;
-        modules = [
+        modules = commonModules ++ [
           ./ziggy
-          "${self}/nix"
-          self.modules.nixos
-          self.modules.settings
           self.modules.server
-          inputs.agenix.nixosModules.default
         ];
       };
+
       toothpc = nixosSystem {
         inherit specialArgs;
-        modules = [
+        modules = commonModules ++ [
           ./toothpc
-          "${self}/nix"
           {
             home-manager = {
               users.toothpick.imports = homeImports."toothpick@toothpc";
               extraSpecialArgs = specialArgs;
             };
           }
-          self.modules.nixos
-          self.modules.settings
-          inputs.agenix.nixosModules.default
-          inputs.pulsar-x2-control.nixosModules.default
+          inputs.pulsar-x2.nixosModules.default
         ];
       };
     };

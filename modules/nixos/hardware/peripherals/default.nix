@@ -20,7 +20,10 @@ in
         touch-detector.enable = mkEnableOption "Enables yubikey touch detector";
       };
       pcscd.enable = mkEnableOption "Enables pcscd";
-      pulsar-x2.enable = mkEnableOption "Enables pulsar-x2-control";
+      pulsar-x2 = {
+        enable = mkEnableOption "Enables pulsar-x2-control";
+        tray.enable = mkEnableOption "Enables tray module for pulsar-x2";
+      };
       utils.enable = mkEnableOption "Miscellaneous utility packages";
     };
   };
@@ -32,6 +35,11 @@ in
       };
       pulsar-x2 = mkIf cfg.pulsar-x2.enable {
         enable = true;
+        tray = mkIf cfg.pulsar-x2.tray.enable {
+          enable = true;
+          threshold = 15;
+          interval = 60;
+        };
       };
     };
     services = {

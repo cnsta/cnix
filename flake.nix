@@ -55,6 +55,10 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-compat.url = "github:edolstra/flake-compat";
 
@@ -148,7 +152,7 @@
       url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/dotfiles.git";
     };
 
-    pulsar-x2-control = {
+    pulsar-x2 = {
       url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/pulsar-x2-control.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };

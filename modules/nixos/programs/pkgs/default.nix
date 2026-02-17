@@ -51,6 +51,7 @@ in
         };
         rust.enable = mkEnableOption "Enables rust-specific packages";
         php.enable = mkEnableOption "Enables php-specific packages";
+        python.enable = mkEnableOption "Enables python-specific packages";
       };
     };
   };
@@ -136,11 +137,9 @@ in
           lua-language-server
           vscode-langservers-extracted
           nodePackages.typescript-language-server
-          python313Packages.python-lsp-server
           bash-language-server
           clang-tools
           marksman
-          pyright
           fish-lsp
           nodejs_25
           kdePackages.qtdeclarative
@@ -172,6 +171,14 @@ in
         (mkIf cfg.dev.php.enable [
           php
           phpactor
+        ])
+
+        (mkIf cfg.dev.python.enable [
+          pyright
+          python313Packages.python-lsp-server
+          python3
+          python3Packages.pyusb
+          python3Packages.pygobject3
         ])
       ];
   };

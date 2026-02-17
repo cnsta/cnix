@@ -52,7 +52,10 @@
           touch-detector.enable = true;
         };
         pcscd.enable = true;
-        pulsar-x2.enable = true;
+        pulsar-x2 = {
+          enable = false;
+          tray.enable = false;
+        };
         utils.enable = true;
       };
     };
@@ -67,10 +70,10 @@
         enable = false;
       };
       fish = {
-        enable = true;
+        enable = false;
       };
       gamemode = {
-        enable = true;
+        enable = false;
         optimizeGpu = {
           enable = true;
         };
@@ -121,6 +124,7 @@
           enable = true;
           rust.enable = true;
           php.enable = false;
+          python.enable = true;
         };
       };
       mysql-workbench = {
@@ -144,6 +148,9 @@
       };
       thunar = {
         enable = false;
+      };
+      wireshark = {
+        enable = true;
       };
       zsh = {
         enable = false;

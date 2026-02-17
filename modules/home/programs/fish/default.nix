@@ -12,18 +12,16 @@ let
   cfg = config.home.programs.fish;
 in
 {
+  imports = [
+    ./tide.nix
+    ./zoxide.nix
+  ];
   options = {
     home.programs.fish.enable = mkEnableOption "Enables fish home configuration";
   };
   config = mkIf cfg.enable {
     programs.fish = {
       enable = true;
-      plugins = [
-        {
-          name = "hydro";
-          src = pkgs.fishPlugins.hydro;
-        }
-      ];
       shellAbbrs = {
         extract = "extract.sh";
         nixclean = "nh clean all --keep 3";
@@ -52,6 +50,7 @@ in
         tree = mkIf hasEza "eza --tree --icons=always";
         # Clear screen and scrollback
         clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
+        fnix = "nix-shell --run fish -p";
       };
       functions = {
         # Disable greeting

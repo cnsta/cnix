@@ -27,7 +27,7 @@
         enable = true;
       };
       fish = {
-        enable = true;
+        enable = false;
       };
       foot = {
         enable = true;
@@ -58,6 +58,9 @@
       };
       nvf = {
         enable = false;
+      };
+      nushell = {
+        enable = true;
       };
       nwg-bar = {
         enable = true;
@@ -127,9 +130,6 @@
       };
       mako = {
         enable = false;
-      };
-      nix-index = {
-        enable = true;
       };
       swaync = {
         enable = false;
