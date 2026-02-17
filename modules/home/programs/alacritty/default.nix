@@ -1,17 +1,18 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.home.programs.alacritty;
+  cfg = config.home.programs;
 in
 {
   options = {
     home.programs.alacritty.enable = mkEnableOption "Enables firefox";
   };
-  config = mkIf cfg.enable {
+  config = mkIf cfg.alacritty.enable {
     programs.alacritty = {
       enable = true;
       theme = "afterglow";
@@ -54,6 +55,9 @@ in
             columns = 120;
             lines = 35;
           };
+        };
+        terminal.shell = mkIf cfg.fish.enable {
+          program = "${pkgs.fish}/bin/fish";
         };
       };
     };

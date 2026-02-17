@@ -22,6 +22,7 @@
         ./home/programs/mpv
         ./home/programs/neovim
         ./home/programs/nvf
+        ./home/programs/nushell
         ./home/programs/nwg-bar
         ./home/programs/pkgs
         ./home/programs/rofi
@@ -47,7 +48,6 @@
         ./home/services/hypridle
         ./home/services/hyprpaper
         ./home/services/mako
-        ./home/services/nix-index
         ./home/services/syncthing
         ./home/services/swaync
         ./home/services/tailray
@@ -88,6 +88,7 @@
         ./nixos/programs/obsidian
         ./nixos/programs/steam
         ./nixos/programs/thunar
+        ./nixos/programs/wireshark
         ./nixos/programs/zsh
 
         ./nixos/services/agenix

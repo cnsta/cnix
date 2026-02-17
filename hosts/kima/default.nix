@@ -10,7 +10,7 @@ in
 {
   users.users.cnst = {
     isNormalUser = true;
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
     extraGroups = ifTheyExist [
       "wheel"
       "networkmanager"
@@ -29,6 +29,7 @@ in
       "plocate"
       "fuse"
       "i2c"
+      "wireshark"
     ];
   };
 
@@ -44,7 +45,19 @@ in
 
   environment.variables = {
     NH_FLAKE = "/home/cnst/.nix-config";
+    GTK_THEME = "Adwaita:dark";
   };
+
+  services.udev.extraRules = ''
+    # Pulsar X2 CrazyLight (wired) - USB
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="3710", ATTRS{idProduct}=="3414", MODE="0666", TAG+="uaccess"
+    # Pulsar 8K Dongle (wireless) - USB
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="3710", ATTRS{idProduct}=="5406", MODE="0666", TAG+="uaccess"
+
+    # Pulsar X2 - hidraw (for non-blocking battery reading)
+    KERNEL=="hidraw*", ATTRS{idVendor}=="3710", ATTRS{idProduct}=="3414", MODE="0666", TAG+="uaccess"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="3710", ATTRS{idProduct}=="5406", MODE="0666", TAG+="uaccess"
+  '';
 
   system.stateVersion = lib.mkDefault "25.11";
 }

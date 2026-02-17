@@ -6,10 +6,21 @@
 let
   extraSpecialArgs = { inherit inputs self; };
 
+  sharedEnv = {
+    home.sessionVariables = {
+      NIX_AUTO_RUN = "1";
+      QT_QPA_PLATFORM = "wayland;xcb";
+      SDL_VIDEODRIVER = "wayland,x11,windows";
+      XDG_SESSION_TYPE = "wayland";
+      ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    };
+  };
+
   sharedImports = [
     "${self}/scripts"
     inputs.nvf.homeManagerModules.default
     self.modules.home
+    sharedEnv
   ];
 
   homeImports = {

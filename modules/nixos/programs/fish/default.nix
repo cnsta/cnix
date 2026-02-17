@@ -60,6 +60,7 @@ in
           tree = "${lib.getExe pkgs.eza} --tree --icons=always";
           # Clear screen and scrollback
           clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
+          fnix = "nix-shell --run fish -p";
         };
         interactiveShellInit =
           # fish

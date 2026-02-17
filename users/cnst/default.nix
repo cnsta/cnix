@@ -8,7 +8,7 @@
   home = {
     username = "cnst";
     homeDirectory = "/home/cnst";
-    stateVersion = "23.11";
+    stateVersion = "26.05";
     extraOutputsToInstall = [
       "doc"
       "devdoc"
