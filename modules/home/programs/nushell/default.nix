@@ -21,7 +21,7 @@ in
         buffer_editor = config.home.sessionVariables.EDITOR;
         show_banner = false;
         completions = {
-          algorithm = "fuzzy";
+          algorithm = "prefix";
           quick = true;
         };
       };
