@@ -56,8 +56,8 @@ in
             lines = 35;
           };
         };
-        terminal.shell = mkIf cfg.fish.enable {
-          program = "${pkgs.fish}/bin/fish";
+        terminal.shell = mkIf cfg.nushell.enable {
+          program = "${pkgs.nushell}/bin/nu";
         };
       };
     };
