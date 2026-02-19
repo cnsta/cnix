@@ -6,6 +6,7 @@
         ./home/programs/alacritty
         ./home/programs/bash
         ./home/programs/chromium
+        ./home/programs/direnv
         ./home/programs/discord
         ./home/programs/eza
         ./home/programs/floorp

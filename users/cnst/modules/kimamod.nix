@@ -8,7 +8,7 @@
         enable = true;
       };
       bash = {
-        enable = true;
+        enable = false;
       };
       chromium = {
         enable = true;
@@ -16,6 +16,9 @@
       discord = {
         enable = true;
         variant = "vesktop";
+      };
+      direnv = {
+        enable = true;
       };
       eza = {
         enable = true;
