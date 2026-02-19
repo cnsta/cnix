@@ -14,7 +14,10 @@ in
     home.programs.git.enable = mkEnableOption "Enables git";
   };
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.gh ];
+    home = {
+      packages = [ pkgs.gh ];
+      sessionVariables.DELTA_PAGER = "less -R";
+    };
     programs = {
       git = {
         enable = true;
@@ -51,8 +54,7 @@ in
         lfs.enable = true;
         ignores = [
           ".direnv"
-          "result"
-          ".jj"
+          "*result*"
         ];
       };
 
