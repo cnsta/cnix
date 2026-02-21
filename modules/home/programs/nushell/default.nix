@@ -25,7 +25,7 @@ in
           quick = true;
         };
       };
-      environmentVariables = {
+      environmentVariables = config.home.sessionVariables // {
         HOSTNAME = osConfig.networking.hostName;
       };
       extraConfig = /* nu */ ''

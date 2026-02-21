@@ -2,6 +2,7 @@
   config,
   lib,
   self,
+  inputs,
   ...
 }:
 let
@@ -10,6 +11,9 @@ let
   srv = config.server.infra;
 in
 {
+  imports = [
+    inputs.authentik.nixosModules.default
+  ];
   options.server.infra.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";

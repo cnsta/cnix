@@ -11,6 +11,9 @@ let
   cfg = config.home.programs.nvf;
 in
 {
+  imports = [
+    inputs.nvf.homeManagerModules.default
+  ];
   options = {
     home.programs.nvf.enable = mkEnableOption "Enables nvf (neovim)";
   };
