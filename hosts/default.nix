@@ -19,7 +19,6 @@
         "${self}/nix"
         self.modules.nixos
         self.modules.settings
-        inputs.agenix.nixosModules.default
         inputs.nix-index-database.nixosModules.default
       ];
     in
@@ -34,7 +33,6 @@
               extraSpecialArgs = specialArgs;
             };
           }
-          inputs.pulsar-x2.nixosModules.default
         ];
       };
 
@@ -48,7 +46,6 @@
               extraSpecialArgs = specialArgs;
             };
           }
-          inputs.pulsar-x2.nixosModules.default
         ];
       };
 
@@ -57,8 +54,6 @@
         modules = commonModules ++ [
           ./sobotka
           self.modules.server
-          inputs.authentik.nixosModules.default
-          inputs.pulsar-x2.nixosModules.default
         ];
       };
 
@@ -80,7 +75,6 @@
               extraSpecialArgs = specialArgs;
             };
           }
-          inputs.pulsar-x2.nixosModules.default
         ];
       };
     };

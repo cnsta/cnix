@@ -18,7 +18,6 @@ let
 
   sharedImports = [
     "${self}/scripts"
-    inputs.nvf.homeManagerModules.default
     self.modules.home
     sharedEnv
   ];

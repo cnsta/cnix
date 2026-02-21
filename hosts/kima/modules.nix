@@ -53,8 +53,11 @@
         };
         pcscd.enable = true;
         pulsar-x2 = {
-          enable = false;
-          tray.enable = false;
+          enable = true;
+          service = {
+            enable = true;
+            threshold = 20;
+          };
         };
         utils.enable = true;
       };

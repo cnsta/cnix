@@ -16,6 +16,9 @@ let
   cfg = config.nixos.services.agenix;
 in
 {
+  imports = [
+    inputs.agenix.nixosModules.default
+  ];
   options = {
     nixos.services.agenix = {
       enable = mkEnableOption "Enables agenix system environment";
