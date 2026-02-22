@@ -152,8 +152,8 @@
       url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/dotfiles.git";
     };
 
-    pulsar-x2 = {
-      url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/pulsar-x2-control.git";
+    lightcrazy = {
+      url = "github:cnsta/lightcrazy";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

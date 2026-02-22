@@ -7,13 +7,12 @@
 }:
 let
   inherit (lib) mkIf;
-  inherit (lib.options) mkEnableOption mkOption;
-  inherit (lib.types) int str;
+  inherit (lib.options) mkEnableOption;
   cfg = config.nixos.hardware.peripherals;
 in
 {
   imports = [
-    inputs.pulsar-x2.nixosModules.default
+    inputs.lightcrazy.nixosModules.default
   ];
   options = {
     nixos.hardware.peripherals = {
@@ -25,7 +24,7 @@ in
         touch-detector.enable = mkEnableOption "Enables yubikey touch detector";
       };
       pcscd.enable = mkEnableOption "Enables pcscd";
-      pulsar-x2 = {
+      lightcrazy = {
         enable = mkEnableOption "Enables pulsar-x2-control";
         service = {
           enable = mkEnableOption ''
@@ -37,35 +36,7 @@ in
 
             Requires `hardware.pulsar-x2.enable = true`.
           '';
-
-          threshold = mkOption {
-            type = int;
-            default = 10;
-            description = "Battery percentage threshold for low-battery desktop notifications.";
-          };
-
-          interval = mkOption {
-            type = int;
-            default = 60;
-            description = "Battery check interval in seconds.";
-          };
-
-          terminal = mkOption {
-            type = str;
-            default = "";
-            example = "foot";
-            description = ''
-              Terminal emulator to use when opening the settings panel from the tray icon.
-
-              When set, this takes priority over $TERMINAL and the built-in fallback
-              list (kitty, foot, alacritty, wezterm, ghostty, konsole, gnome-terminal, xterm).
-
-              The service sets TERMINAL in its environment so the tray process can
-              pick it up when launching `pulsar-x2 --options`.
-            '';
-          };
         };
-
       };
       utils.enable = mkEnableOption "Miscellaneous utility packages";
     };
@@ -76,9 +47,9 @@ in
         enable = true;
         enableGraphical = true;
       };
-      pulsar-x2 = mkIf cfg.pulsar-x2.enable {
+      lightcrazy = mkIf cfg.lightcrazy.enable {
         enable = true;
-        service = mkIf cfg.pulsar-x2.service.enable {
+        service = mkIf cfg.lightcrazy.service.enable {
           enable = true;
         };
       };
