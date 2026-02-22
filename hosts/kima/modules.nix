@@ -52,11 +52,10 @@
           touch-detector.enable = true;
         };
         pcscd.enable = true;
-        pulsar-x2 = {
+        lightcrazy = {
           enable = true;
           service = {
             enable = true;
-            threshold = 20;
           };
         };
         utils.enable = true;
@@ -101,7 +100,7 @@
         enable = true;
       };
       lact = {
-        enable = true;
+        enable = false;
       };
       lutris = {
         enable = false;
