@@ -29,7 +29,7 @@ in
       };
       homepage-dashboard = {
         enable = true;
-        environmentFile = config.age.secrets.homepageEnvironment.path;
+        environmentFiles = config.age.secrets.homepageEnvironment.path;
 
         settings = {
           color = "stone";
