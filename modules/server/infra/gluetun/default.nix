@@ -15,7 +15,7 @@ in
     age.secrets.gluetunEnvironment.file = "${self}/secrets/gluetunEnvironment.age";
 
     virtualisation.oci-containers.containers.gluetun = {
-      image = "qmcgaw/gluetun:latest";
+      image = "ghcr.io/qdm12/gluetun:latest";
       ports = [
         "8388:8388"
         "58846:58846"
