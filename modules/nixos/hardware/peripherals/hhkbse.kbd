@@ -32,7 +32,7 @@
 
 
 (deflayer level3
-  RA-2 RA-3 S-4 RA-5 S-¨ RA-7 RA-8 RA-9 RA-0 RA-+ ⇥ ⇤ S-'
+  RA-2 RA-3 S-4 RA-5 S-¨ RA-7 RA-8 RA-9 RA-0 RA-+ ⇥ ⇤ kp*
   RA-5 ▲ RA-¨
   ◀ ▼ ▶
   RA-<
@@ -40,6 +40,7 @@
 )
 
 (defoverrides
+  (lsft \) (lsft ´)
   (lsft 4) (ralt 4)
   (lsft pgdn) (ralt 7)
   (lsft pgup) (ralt 0)
