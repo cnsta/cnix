@@ -62,6 +62,10 @@ auto-format = true
 language-servers = ["vscode-css-language-server"]
 name = "css"
 
+[language.formatter]
+args = ["--parser", "css"]
+command = "prettier"
+
 [[language]]
 auto-format = true
 file-types = ["rs"]
@@ -70,13 +74,6 @@ name = "rust"
 
 [language.formatter]
 command = "/run/current-system/sw/bin/rustfmt"
-
-[[language]]
-name = "css"
-
-[language.formatter]
-args = ["--parser", "css"]
-command = "prettier"
 
 [[language]]
 name = "scss"
