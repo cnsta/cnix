@@ -48,6 +48,7 @@ in
     GTK_THEME = "Adwaita:dark";
   };
 
+  # Remove when 'finished' with lightcrazy dev work
   services.udev.extraRules = ''
     # Pulsar X2 CrazyLight (wired) - USB
     SUBSYSTEM=="usb", ATTRS{idVendor}=="3710", ATTRS{idProduct}=="3414", MODE="0666", TAG+="uaccess"

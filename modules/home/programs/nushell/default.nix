@@ -19,9 +19,15 @@ in
     programs = {
       nushell = {
         enable = true;
+
         settings = {
           buffer_editor = config.home.sessionVariables.EDITOR;
           show_banner = false;
+          edit_mode = "vi";
+          cursor_shape = {
+            vi_insert = "line";
+            vi_normal = "block";
+          };
           completions = {
             algorithm = "prefix";
             quick = true;
@@ -29,6 +35,8 @@ in
         };
         environmentVariables = config.home.sessionVariables // {
           HOSTNAME = osConfig.networking.hostName;
+          PROMPT_INDICATOR_VI_NORMAL = "";
+          PROMPT_INDICATOR_VI_INSERT = "";
         };
         extraConfig = /* nu */ ''
           let carapace_completer = {|spans|
