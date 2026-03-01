@@ -25,16 +25,16 @@ in
       };
       pcscd.enable = mkEnableOption "Enables pcscd";
       lightcrazy = {
-        enable = mkEnableOption "Enables pulsar-x2-control";
+        enable = mkEnableOption "Enables lightcrazy";
         service = {
           enable = mkEnableOption ''
-            Pulsar X2 systemd user service.
+            Lightcrazy systemd user service.
 
-            Runs `pulsar-x2` (tray mode) as a systemd user service that starts
+            Runs `lightcrazy` (tray mode) as a systemd user service that starts
             automatically with your graphical session. The tray icon gives access
             to battery status and can launch the settings panel via your terminal.
 
-            Requires `hardware.pulsar-x2.enable = true`.
+            Requires `hardware.lightcrazy.enable = true`.
           '';
         };
       };
@@ -61,6 +61,17 @@ in
         keyboards.default = {
           extraDefCfg = ''
             process-unmapped-keys yes
+
+            ;; Only grab the HHKB-Hybrid. Without this, kanata grabs every
+            ;; keyboard-class HID device including the Pulsar 8K Dongle's
+            ;; keyboard interface. When the dongle re-enumerates (which happens
+            ;; whenever the mouse enters or exits charging mode), kanata loses
+            ;; those event files and exits, dropping the HHKB keymap.
+            linux-dev-names-include (
+              "PFU Limited HHKB-Hybrid Keyboard"
+              "PFU Limited HHKB-Hybrid"
+              "PFU Limited HHKB-Hybrid Consumer Control"
+            )
           '';
           config = builtins.readFile (./. + "/hhkbse.kbd");
         };
