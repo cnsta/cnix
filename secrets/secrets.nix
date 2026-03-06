@@ -65,6 +65,9 @@ in
   "authentikCloudflared.age".publicKeys = sobotka;
   "sobotkaTsAuth.age".publicKeys = sobotka;
   "matrixShared.age".publicKeys = sobotka;
+  "lldapAdminPassword.age".publicKeys = sobotka;
+  "lldapJwt.age".publicKeys = sobotka;
+  "lldapKeySeed.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

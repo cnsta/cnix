@@ -6,6 +6,7 @@
     ./immich
     ./jellyfin
     ./jellyseerr
+    ./lldap
     ./lidarr
     ./forgejo
     ./matrix-synapse

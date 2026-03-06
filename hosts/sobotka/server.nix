@@ -206,6 +206,18 @@
           category = "Services";
         };
       };
+      lldap = {
+        enable = true;
+        subdomain = "lldap";
+        exposure = "local";
+        port = 17170;
+        homepage = {
+          name = "lldap";
+          description = "Light LDAP implementation for authentication";
+          icon = "lldap.svg";
+          category = "Services";
+        };
+      };
       forgejo = {
         enable = true;
         subdomain = "git";

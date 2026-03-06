@@ -1,50 +1,36 @@
-# taken from @jtojnar
+# follow steps in https://nixos.org/manual/nixos/unstable/#module-services-postgres-upgrading
 {
   config,
-  lib,
   pkgs,
+  lib,
   ...
 }:
-let
-  inherit (lib) types mkOption;
-
-  cfg = config.server.infra.postgresql;
-in
 {
-  options = {
-    server.infra.postgresql = {
-      upgradeTargetPackage = mkOption {
-        type = types.nullOr types.package;
-        default = null;
-        description = "PostgreSQL package that we want to upgrade to. When set, an update script will be installed.";
-      };
-    };
-  };
-
-  config = {
-    # https://nixos.org/manual/nixos/unstable/#module-services-postgres-upgrading
-    environment.systemPackages = lib.mkIf (cfg.upgradeTargetPackage != null) [
-      (pkgs.writeScriptBin "upgrade-pg-cluster" ''
+  environment.systemPackages = lib.mkIf config.services.postgresql.enable [
+    (
+      let
+        newPostgres = pkgs.postgresql_18.withPackages (pp: [ ]);
+        cfg = config.services.postgresql;
+      in
+      pkgs.writeScriptBin "upgrade-pg-cluster" ''
         set -eux
-        # XXX it's perhaps advisable to stop all services that depend on postgresql
         systemctl stop postgresql
 
-        export NEWDATA="/var/lib/postgresql/${cfg.upgradeTargetPackage.psqlSchema}"
+        export NEWDATA="/var/lib/postgresql/${newPostgres.psqlSchema}"
+        export NEWBIN="${newPostgres}/bin"
 
-        export NEWBIN="${cfg.upgradeTargetPackage}/bin"
-
-        export OLDDATA="${config.services.postgresql.dataDir}"
-        export OLDBIN="${config.services.postgresql.package}/bin"
+        export OLDDATA="${cfg.dataDir}"
+        export OLDBIN="${cfg.finalPackage}/bin"
 
         install -d -m 0700 -o postgres -g postgres "$NEWDATA"
         cd "$NEWDATA"
-        sudo -u postgres $NEWBIN/initdb -D "$NEWDATA"
+        sudo -u postgres "$NEWBIN/initdb" -D "$NEWDATA" --no-data-checksums
 
-        sudo -u postgres $NEWBIN/pg_upgrade \
+        sudo -u postgres "$NEWBIN/pg_upgrade" \
           --old-datadir "$OLDDATA" --new-datadir "$NEWDATA" \
-          --old-bindir $OLDBIN --new-bindir $NEWBIN \
+          --old-bindir "$OLDBIN" --new-bindir "$NEWBIN" \
           "$@"
-      '')
-    ];
-  };
+      ''
+    )
+  ];
 }
