@@ -47,7 +47,8 @@ in
   config = lib.mkIf (cfg.databases != [ ]) {
     services.postgresql = {
       enable = true;
-      package = pkgs.postgresql_17;
+      # follow steps in link before changing package, https://nixos.org/manual/nixos/unstable/#module-services-postgres-upgrading
+      package = pkgs.postgresql_18;
       extensions = lib.filter (x: x != null) (
         lib.concatMap (
           { extensions, ... }: map (ext: config.services.postgresql.package.pkgs.${ext} or null) extensions
