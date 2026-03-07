@@ -6,11 +6,9 @@
 }:
 let
   inherit (lib)
-    mkEnableOption
     mkOption
     mkIf
     mkMerge
-    mkForce
     types
     flatten
     concatMap
@@ -131,10 +129,6 @@ in
             [ ]
         ) cfg.vendors
       );
-    })
-
-    (mkIf (hasVendor "amd") {
-      nixpkgs.config.rocmSupport = true;
     })
 
     (mkIf (hasVendor "nvidia") {
