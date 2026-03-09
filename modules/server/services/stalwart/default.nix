@@ -1,3 +1,4 @@
+# A _slightly_ tweaked version of https://github.com/oddlama/nix-config/blob/main/hosts/envoy/stalwart-mail.nix
 {
   config,
   lib,

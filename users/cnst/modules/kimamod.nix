@@ -79,6 +79,9 @@
       ssh = {
         enable = true;
       };
+      thunderbird = {
+        enable = true;
+      };
       vscode = {
         enable = false;
       };
