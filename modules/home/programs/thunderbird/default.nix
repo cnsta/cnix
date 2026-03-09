@@ -1,13 +1,12 @@
 {
   config,
-  osConfig,
   lib,
   ...
 }:
 let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.thunderbird;
-  user = osConfig.users.users;
+  user = config.home.username;
 in
 {
   options = {
