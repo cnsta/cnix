@@ -76,6 +76,8 @@ in
   "autheliaOidcIssuerPem.age".publicKeys = sobotka;
   "stalwartFallback.age".publicKeys = sobotka;
   "stalwartCloudflare.age".publicKeys = sobotka;
+  "stalwartDkimRsa.age".publicKeys = sobotka;
+  "stalwartDkimEd.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;
