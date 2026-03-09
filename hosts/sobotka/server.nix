@@ -71,7 +71,7 @@
           name = "n8n";
           description = "A workflow automation platform";
           icon = "n8n.svg";
-          category = "Services";
+          category = "Automation";
         };
       };
       ollama = {
@@ -83,7 +83,7 @@
           name = "ollama";
           description = "AI platform";
           icon = "ollama.svg";
-          category = "Services";
+          category = "Automation";
         };
       };
       bazarr = {
@@ -95,7 +95,7 @@
           name = "Bazarr";
           description = "Subtitle manager";
           icon = "bazarr.svg";
-          category = "Arr";
+          category = "Media";
         };
       };
       prowlarr = {
@@ -107,7 +107,7 @@
           name = "Prowlarr";
           description = "PVR indexer";
           icon = "prowlarr.svg";
-          category = "Arr";
+          category = "Media";
         };
       };
       flaresolverr = {
@@ -119,7 +119,7 @@
           name = "FlareSolverr";
           description = "Proxy to bypass Cloudflare/DDoS-GUARD protection";
           icon = "flaresolverr.svg";
-          category = "Arr";
+          category = "Downloads";
         };
       };
       immich = {
@@ -131,7 +131,7 @@
           name = "immich";
           description = "Photo collection manager";
           icon = "immich.svg";
-          category = "Services";
+          category = "Cloud";
         };
       };
       lidarr = {
@@ -143,7 +143,7 @@
           name = "Lidarr";
           description = "Music collection manager";
           icon = "lidarr.svg";
-          category = "Arr";
+          category = "Media";
         };
       };
       sonarr = {
@@ -155,7 +155,7 @@
           name = "Sonarr";
           description = "Internet PVR for Usenet and Torrents";
           icon = "sonarr.svg";
-          category = "Arr";
+          category = "Media";
         };
       };
       radarr = {
@@ -167,7 +167,7 @@
           name = "Radarr";
           description = "Movie collection manager";
           icon = "radarr.svg";
-          category = "Arr";
+          category = "Media";
         };
       };
       jellyseerr = {
@@ -203,7 +203,7 @@
           name = "Uptime Kuma";
           description = "Service monitoring tool";
           icon = "uptime-kuma.svg";
-          category = "Services";
+          category = "Infra";
         };
       };
       lldap = {
@@ -215,7 +215,7 @@
           name = "lldap";
           description = "Light LDAP implementation for authentication";
           icon = "lldap.svg";
-          category = "Services";
+          category = "Infra";
         };
       };
       forgejo = {
@@ -227,7 +227,7 @@
           name = "Forgejo";
           description = "A painless, self-hosted Git service";
           icon = "forgejo.svg";
-          category = "Services";
+          category = "Dev";
         };
       };
       vaultwarden = {
@@ -243,7 +243,7 @@
           name = "Vaultwarden";
           description = "Password manager";
           icon = "vaultwarden-light.svg";
-          category = "Services";
+          category = "Cloud";
         };
       };
       matrix-synapse = {
@@ -252,10 +252,10 @@
         exposure = "tailscale";
         port = 11339;
         homepage = {
-          name = "Synapse: Matrix homeserver";
-          description = "Matrix homeserver implementation developed by Element.";
-          icon = "matrix.svg";
-          category = "Services";
+          name = "Synapse";
+          description = "Matrix homeserver implementation";
+          icon = "synapse.svg";
+          category = "Communication";
         };
       };
       nextcloud = {
@@ -267,7 +267,7 @@
           name = "Nextcloud";
           description = "A safe home for all your data";
           icon = "nextcloud.svg";
-          category = "Services";
+          category = "Cloud";
         };
       };
       qbittorrent = {
@@ -291,7 +291,7 @@
           name = "Home Assistant";
           description = "Awaken your home";
           icon = "home-assistant.svg";
-          category = "Services";
+          category = "Automation";
         };
       };
       slskd = {
@@ -304,6 +304,18 @@
           description = "Web-based Soulseek client";
           icon = "slskd.svg";
           category = "Downloads";
+        };
+      };
+      stalwart = {
+        enable = true;
+        subdomain = "mail";
+        exposure = "local";
+        port = 8050;
+        homepage = {
+          name = "Stalwart";
+          description = "Mail & collaboration server";
+          icon = "stalwart.svg";
+          category = "Communication";
         };
       };
       tdarr = {
@@ -327,8 +339,8 @@
           name = "PiHole";
           description = "Adblocking and DNS service";
           icon = "pi-hole.svg";
-          category = "Services";
           path = "/admin";
+          category = "Infra";
         };
       };
     };

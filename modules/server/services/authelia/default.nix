@@ -33,10 +33,10 @@ in
       #   group = "users";
       #   file = "${self}/secrets/fastmail.age";
       # };
-      postgresAuthelia = {
+      autheliaPostgres = {
         owner = unit;
         group = "users";
-        file = "${self}/secrets/postgresAuthelia.age";
+        file = "${self}/secrets/autheliaPostgres.age";
       };
       autheliaOidcHmac = {
         owner = unit;
@@ -182,7 +182,7 @@ in
           # server.endpoints.authz.forward-auth.implementation = "ForwardAuth";
         };
         environmentVariables = {
-          AUTHELIA_STORAGE_POSTGRES_PASSWORD_FILE = config.age.secrets.postgresAuthelia.path;
+          AUTHELIA_STORAGE_POSTGRES_PASSWORD_FILE = config.age.secrets.autheliaPostgres.path;
           AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE =
             config.age.secrets.lldapAdminPasswordAuthelia.path;
           # AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = config.age.secrets.autheliaSmtp.path;

@@ -91,10 +91,13 @@ in
         services =
           let
             homepageCategories = [
-              "Arr"
               "Media"
               "Downloads"
-              "Services"
+              "Cloud"
+              "Dev"
+              "Automation"
+              "Communication"
+              "Infra"
             ];
             allServices = srv.services;
 
