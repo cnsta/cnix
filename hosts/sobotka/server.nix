@@ -307,7 +307,7 @@
         };
       };
       stalwart = {
-        enable = true;
+        enable = false;
         subdomain = "mail";
         exposure = "local";
         port = 8050;

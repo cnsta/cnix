@@ -16,12 +16,25 @@ in
   config = mkIf cfg.enable {
     age.secrets = {
       stalwartFallback = {
+        file = "${self}/secrets/stalwartFallback.age";
         owner = "stalwart-mail";
         group = "stalwart-mail";
-        file = "${self}/secrets/stalwartFallback.age";
       };
+
       stalwartCloudflare = {
         file = "${self}/secrets/stalwartCloudflare.age";
+        owner = "stalwart-mail";
+        group = "stalwart-mail";
+      };
+
+      stalwartDkimEd = {
+        file = "${self}/secrets/stalwartDkimEd.age";
+        owner = "stalwart-mail";
+        group = "stalwart-mail";
+      };
+
+      stalwartDkimRsa = {
+        file = "${self}/secrets/stalwartDkimRsa.age";
         owner = "stalwart-mail";
         group = "stalwart-mail";
       };
@@ -31,8 +44,8 @@ in
       25 # smtp
       465 # smtp tls
       993 # imap tls
-      # 587 # smtp starttls
       4190 # manage sieve
+      # 587 # smtp starttls
       # 143 # imap starttls
     ];
 
@@ -58,10 +71,8 @@ in
           };
           otherwise = value: { "else" = value; };
           is-smtp = ifthen "listener = 'smtp'";
-          is-authenticated = data: {
-            "if" = "!is_empty(authenticated_as)";
-            "then" = data;
-          };
+          is-submissions = ifthen "listener = 'submissions'";
+          is-authenticated = ifthen "!is_empty(authenticated_as)";
         in
         {
           config.local-keys = [
@@ -91,13 +102,16 @@ in
             "imap.*"
             "session.*"
             "resolver.*"
+            "queue.*"
           ];
+
           resolver = {
             type = "cloudflare";
             concurrency = 2;
             timeout = "10s";
             attempts = 3;
           };
+
           server = {
             hostname = domain;
             tls = {
@@ -136,6 +150,7 @@ in
               };
             };
           };
+
           imap = {
             request.max-size = 52428800;
             auth = {
@@ -154,9 +169,71 @@ in
           };
 
           auth.dkim.sign = [
-            (ifthen "is_local_domain('*', sender_domain)" "['rsa-' + sender_domain, 'ed25519-' + sender_domain]")
+            (is-submissions "['rsa-' + sender_domain, 'ed25519-' + sender_domain]")
             (otherwise false)
           ];
+
+          signature = {
+            "ed25519-${srv.domain}" = {
+              private-key = "%{file:${config.age.secrets.stalwartDkimEd.path}}%";
+              selector = "ed_default";
+              domain = srv.domain;
+              headers = [
+                "From"
+                "To"
+                "Date"
+                "Subject"
+                "Message-ID"
+              ];
+              algorithm = "ed25519-sha256";
+              canonicalization = "relaxed/relaxed";
+              set-body-length = false;
+              report = true;
+            };
+
+            "rsa-${srv.domain}" = {
+              private-key = "%{file:${config.age.secrets.stalwartDkimRsa.path}}%";
+              selector = "rsa_default";
+              domain = srv.domain;
+              headers = [
+                "From"
+                "To"
+                "Date"
+                "Subject"
+                "Message-ID"
+              ];
+              algorithm = "rsa-sha256";
+              canonicalization = "relaxed/relaxed";
+              set-body-length = false;
+              report = true;
+            };
+          };
+
+          queue = {
+            virtual.outbound.threads-per-node = 8;
+
+            route = {
+              "mx" = {
+                type = "mx";
+                ip-lookup = "ipv4_then_ipv6";
+                limits = {
+                  mx = 5;
+                  multihomed = 2;
+                };
+              };
+              "local" = {
+                type = "local";
+              };
+            };
+
+            strategy = {
+              queue = "outbound";
+              route = [
+                (ifthen "is_local_domain('*', rcpt_domain)" "'local'")
+                (otherwise "'mx'")
+              ];
+            };
+          };
 
           session = {
             extensions = {
@@ -187,7 +264,7 @@ in
               ];
             };
 
-            mta-sts.mode = "testing";
+            mta-sts.mode = "testing"; # change to enforce
 
             ehlo = {
               require = true;
@@ -209,12 +286,6 @@ in
             rate-limit = {
               inbound = "100/1h";
               concurrent = 5;
-            };
-
-            timeout = {
-              command = "1m";
-              data = "5m";
-              idle = "5m";
             };
           };
 
