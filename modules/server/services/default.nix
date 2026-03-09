@@ -18,6 +18,7 @@
     ./radarr
     ./slskd
     ./sonarr
+    ./stalwart
     ./tdarr
     ./uptime-kuma
     ./vaultwarden

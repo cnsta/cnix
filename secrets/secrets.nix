@@ -68,6 +68,14 @@ in
   "lldapAdminPassword.age".publicKeys = sobotka;
   "lldapJwt.age".publicKeys = sobotka;
   "lldapKeySeed.age".publicKeys = sobotka;
+  "autheliaSession.age".publicKeys = sobotka;
+  "autheliaStorage.age".publicKeys = sobotka;
+  "autheliaJwt.age".publicKeys = sobotka;
+  "autheliaPostgres.age".publicKeys = sobotka;
+  "autheliaOidcHmac.age".publicKeys = sobotka;
+  "autheliaOidcIssuerPem.age".publicKeys = sobotka;
+  "stalwartFallback.age".publicKeys = sobotka;
+  "stalwartCloudflare.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;
