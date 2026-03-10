@@ -86,8 +86,8 @@ in
                 dnsChallenge = {
                   provider = "cloudflare";
                   resolvers = [
-                    "1.1.1.1:5353"
-                    "1.0.0.1:5353"
+                    "1.1.1.1:53"
+                    "1.0.0.1:53"
                   ];
                 };
               };
