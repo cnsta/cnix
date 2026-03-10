@@ -12,8 +12,15 @@ in
   };
   config = lib.mkIf infra.podman.enable {
     virtualisation = {
-      containers.enable = true;
       podman.enable = true;
+      containers = {
+        enable = true;
+        containersConf.settings = {
+          network = {
+            dns_bind_port = 5353;
+          };
+        };
+      };
     };
   };
 }

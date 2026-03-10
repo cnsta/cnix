@@ -62,6 +62,18 @@
         exposure = "local";
         port = 8082;
       };
+      affine = {
+        enable = true;
+        subdomain = "affine";
+        exposure = "tailscale";
+        port = 3010;
+        homepage = {
+          name = "AFFiNE";
+          description = "All In One KnowledgeOS";
+          icon = "affine.svg";
+          category = "Automation";
+        };
+      };
       n8n = {
         enable = false;
         subdomain = "n8n";
