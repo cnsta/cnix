@@ -70,7 +70,6 @@ in
           socat
           jq
           fd
-          git
           stow
           tree
           traceroute

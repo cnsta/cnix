@@ -21,6 +21,7 @@
     ./sonarr
     ./stalwart
     ./tdarr
+    ./turnstone
     ./uptime-kuma
     ./vaultwarden
     ./qbittorrent

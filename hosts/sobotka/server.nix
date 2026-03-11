@@ -342,6 +342,18 @@
           category = "Media";
         };
       };
+      turnstone = {
+        enable = false;
+        subdomain = "ts";
+        exposure = "tailscale";
+        port = 8098;
+        homepage = {
+          name = "Turnstone";
+          description = "Multi-node AI orchestration platform";
+          # icon = "turnstone.svg";
+          category = "Automation";
+        };
+      };
       pihole = {
         enable = true;
         subdomain = "pihole";

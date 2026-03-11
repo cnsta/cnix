@@ -84,6 +84,9 @@
       gnome = {
         enable = false;
       };
+      git = {
+        enable = true;
+      };
       helix = {
         enable = true;
       };
