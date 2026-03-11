@@ -79,6 +79,7 @@ in
   "stalwartDkimRsa.age".publicKeys = sobotka;
   "stalwartDkimEd.age".publicKeys = sobotka;
   "affineEnvironment.age".publicKeys = sobotka;
+  "turnstoneEnvironment.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;
