@@ -161,6 +161,7 @@ in
         environment = {
           REDIS_PORT = "6379";
           TURNSTONE_DB_BACKEND = "sqlite";
+          # LLM_BASE_URL=http://host.containers.internal:8000/v1
         };
         environmentFiles = [ config.age.secrets.turnstoneEnvironment.path ];
         dependsOn = [ "turnstone-redis" ];
