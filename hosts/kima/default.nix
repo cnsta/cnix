@@ -1,36 +1,8 @@
 {
   lib,
-  config,
   ...
 }:
-let
-  ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in
 {
-  users.users.cnst = {
-    isNormalUser = true;
-    extraGroups = ifTheyExist [
-      "wheel"
-      "networkmanager"
-      "audio"
-      "video"
-      "git"
-      "mysql"
-      "docker"
-      "libvirtd"
-      "qemu-libvirtd"
-      "kvm"
-      "network"
-      "gamemode"
-      "adbusers"
-      "users"
-      "plocate"
-      "fuse"
-      "i2c"
-      "wireshark"
-    ];
-  };
-
   imports = [
     ./hardware-configuration.nix
     ./modules.nix
@@ -39,13 +11,6 @@ in
 
   networking = {
     hostName = "kima";
-  };
-
-  environment = {
-    variables = {
-      NH_FLAKE = "/home/cnst/.nix-config";
-      GTK_THEME = "Adwaita:dark";
-    };
   };
 
   # Remove when 'finished' with lightcrazy dev work
