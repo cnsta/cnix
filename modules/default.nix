@@ -84,6 +84,7 @@
         ./nixos/programs/lutris
         ./nixos/programs/microfetch
         ./nixos/programs/niri
+        ./nixos/programs/nushell
         ./nixos/programs/pkgs
         ./nixos/programs/mysql-workbench
         ./nixos/programs/nh

@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 let
@@ -10,7 +9,6 @@ in
 {
   users.users.cnst = {
     isNormalUser = true;
-    shell = pkgs.nushell;
     extraGroups = ifTheyExist [
       "wheel"
       "networkmanager"
@@ -43,9 +41,11 @@ in
     hostName = "kima";
   };
 
-  environment.variables = {
-    NH_FLAKE = "/home/cnst/.nix-config";
-    GTK_THEME = "Adwaita:dark";
+  environment = {
+    variables = {
+      NH_FLAKE = "/home/cnst/.nix-config";
+      GTK_THEME = "Adwaita:dark";
+    };
   };
 
   # Remove when 'finished' with lightcrazy dev work

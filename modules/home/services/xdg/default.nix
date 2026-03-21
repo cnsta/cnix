@@ -12,6 +12,8 @@ let
     mkForce
     elem
     ;
+  fileManager = "org.gnome.Nautilus";
+  imageManager = "feh.desktop";
   browser =
     if
       elem osConfig.networking.hostName [
@@ -86,17 +88,17 @@ in
           "application/xhtml+xml" = browser;
           "application/json" = browser;
           "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
-          "inode/directory" = "com.system76.CosmicFiles.desktop";
+          "inode/directory" = fileManager;
 
-          "image/apng" = "feh.desktop";
-          "image/avif" = "feh.desktop";
-          "image/bmp" = "feh.desktop";
-          "image/gif" = "feh.desktop";
-          "image/jpeg" = "feh.desktop";
-          "image/png" = "feh.desktop";
-          "image/svg+xml" = "feh.desktop";
-          "image/tiff" = "feh.desktop";
-          "image/webp" = "feh.desktop";
+          "image/apng" = imageManager;
+          "image/avif" = imageManager;
+          "image/bmp" = imageManager;
+          "image/gif" = imageManager;
+          "image/jpeg" = imageManager;
+          "image/png" = imageManager;
+          "image/svg+xml" = imageManager;
+          "image/tiff" = imageManager;
+          "image/webp" = imageManager;
 
           "video/H264" = [
             "mpv.desktop"

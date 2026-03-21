@@ -26,7 +26,7 @@ in
     {
       programs.hyprland.settings = {
         # Common Keybind Variables
-        "$fileManager" = "cosmic-files";
+        "$fileManager" = "nautilus";
         "$yazi" = "foot -e yazi";
         "$launcher" = "fuzzel";
 
