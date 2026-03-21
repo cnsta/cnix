@@ -63,7 +63,7 @@
         enable = false;
       };
       nushell = {
-        enable = true;
+        enable = false;
       };
       nwg-bar = {
         enable = true;

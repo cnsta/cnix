@@ -109,7 +109,6 @@ in
           inotify-tools
           wf-recorder
           nautilus
-          cosmic-files
           kdePackages.qt6ct
           libsForQt5.qt5ct
           brightnessctl

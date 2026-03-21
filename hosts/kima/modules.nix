@@ -114,6 +114,9 @@
       niri = {
         enable = false;
       };
+      nushell = {
+        enable = true;
+      };
       pkgs = {
         enable = true;
         desktop = {

@@ -15,8 +15,8 @@ in
   config = mkIf cfg.enable {
     home = {
       pointerCursor = {
-        package = pkgs.cosmic-icons;
-        name = "Pop";
+        package = pkgs.adwaita-icon-theme;
+        name = "Adwaita";
         size = 32;
         gtk.enable = true;
         x11.enable = false;
@@ -26,16 +26,16 @@ in
     gtk = {
       enable = true;
       iconTheme = {
-        package = pkgs.cosmic-icons;
-        name = "Cosmic";
+        package = pkgs.adwaita-icon-theme;
+        name = "Adwaita";
       };
       font = {
         name = "Inter Light";
         size = 11;
       };
       cursorTheme = {
-        package = pkgs.cosmic-icons;
-        name = "Pop";
+        package = pkgs.adwaita-icon-theme;
+        name = "Adwaita";
         size = 32;
       };
 
