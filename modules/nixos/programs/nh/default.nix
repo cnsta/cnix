@@ -6,6 +6,7 @@
 let
   inherit (lib) mkIf mkEnableOption mkOption;
   cfg = config.nixos.programs.nh;
+  user = config.settings.accounts.username;
 in
 {
   options = {
@@ -22,6 +23,8 @@ in
     };
   };
   config = mkIf cfg.enable {
+    environment.variables.NH_FLAKE = "/home/${user}/.nix-config";
+
     programs = {
       nh = {
         enable = cfg.enable;
