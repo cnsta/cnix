@@ -16,7 +16,7 @@
       };
 
       commonModules = [
-        "${self}/nix"
+        "${self}/system"
         self.modules.nixos
         self.modules.settings
         inputs.nix-index-database.nixosModules.default
