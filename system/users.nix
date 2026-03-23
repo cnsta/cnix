@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   ...
 }:
 let
@@ -9,6 +10,7 @@ in
 {
   users.users.${user} = {
     isNormalUser = true;
+    shell = pkgs.bash;
     extraGroups = ifTheyExist [
       "wheel"
       "networkmanager"

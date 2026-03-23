@@ -13,7 +13,10 @@ let
   user = config.settings.accounts.username;
 
   hmVars =
-    if options ? home-manager then config.home-manager.users.${user}.home.sessionVariables else { };
+    if options ? home-manager && config.home-manager.users ? ${user} then
+      config.home-manager.users.${user}.home.sessionVariables
+    else
+      { };
 
   envVars =
     config.environment.variables
