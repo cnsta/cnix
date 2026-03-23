@@ -110,7 +110,7 @@
     authentik.url = "github:nix-community/authentik-nix/version/2025.8.4";
 
     fenix = {
-      url = "github:nix-community/fenix";
+      url = "github:nix-community/fenix/monthly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
