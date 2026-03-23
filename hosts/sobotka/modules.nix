@@ -66,8 +66,8 @@
         enable = false;
       };
       fish = {
-        enable = true;
-        homeless.enable = true;
+        enable = false;
+        homeless.enable = false;
       };
       gamemode = {
         enable = false;
@@ -100,6 +100,9 @@
         enable = false;
       };
       microfetch = {
+        enable = true;
+      };
+      nushell = {
         enable = true;
       };
       pkgs = {
