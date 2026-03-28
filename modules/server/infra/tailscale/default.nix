@@ -18,14 +18,20 @@ in
 
     environment.systemPackages = [ pkgs.ethtool ];
 
+    boot.initrd.systemd.network.wait-online.enable = false;
+
     networking.firewall = {
       enable = true;
       trustedInterfaces = [ "tailscale0" ];
       allowedUDPPorts = [ config.services.tailscale.port ];
     };
 
-    systemd.network.wait-online.enable = false;
-    boot.initrd.systemd.network.wait-online.enable = false;
+    systemd = {
+      network.wait-online.enable = false;
+      services.tailscaled.serviceConfig.Environment = [
+        "TS_DEBUG_FIREWALL_MODE=nftables"
+      ];
+    };
 
     services = {
       tailscale = {
