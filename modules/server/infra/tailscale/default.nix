@@ -2,6 +2,7 @@
   config,
   lib,
   self,
+  pkgs,
   ...
 }:
 with lib;
@@ -15,14 +16,37 @@ in
   config = mkIf cfg.enable {
     age.secrets.sobotkaTsAuth.file = "${self}/secrets/sobotkaTsAuth.age";
 
-    services.tailscale = {
+    environment.systemPackages = [ pkgs.ethtool ];
+
+    networking.firewall = {
       enable = true;
-      openFirewall = true;
-      useRoutingFeatures = "server";
-      authKeyFile = config.age.secrets.sobotkaTsAuth.path;
-      extraSetFlags = [
-        "--advertise-exit-node"
-      ];
+      trustedInterfaces = [ "tailscale0" ];
+      allowedUDPPorts = [ config.services.tailscale.port ];
+    };
+
+    systemd.network.wait-online.enable = false;
+    boot.initrd.systemd.network.wait-online.enable = false;
+
+    services = {
+      tailscale = {
+        enable = true;
+        openFirewall = true;
+        useRoutingFeatures = "server";
+        authKeyFile = config.age.secrets.sobotkaTsAuth.path;
+        extraSetFlags = [
+          "--advertise-exit-node"
+        ];
+      };
+
+      networkd-dispatcher = {
+        enable = true;
+        rules."50-tailscale-optimizations" = {
+          onState = [ "routable" ];
+          script = ''
+            ${pkgs.ethtool}/bin/ethtool -K enp6s0 rx-udp-gro-forwarding on rx-gro-list off
+          '';
+        };
+      };
     };
   };
 }
