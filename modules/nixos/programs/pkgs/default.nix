@@ -134,7 +134,6 @@ in
           gcc
           lua-language-server
           vscode-langservers-extracted
-          nodePackages.typescript-language-server
           bash-language-server
           clang-tools
           marksman
@@ -148,7 +147,6 @@ in
           stylua
           fixjson
           sql-formatter
-          nodePackages.prettier
           prettierd
           shfmt
           black

@@ -65,7 +65,7 @@
         enable = false;
       };
       fish = {
-        enable = true;
+        enable = false;
       };
       gamemode = {
         enable = false;
@@ -104,6 +104,9 @@
       niri = {
         enable = false;
       };
+      nushell = {
+        enable = true;
+      };
       pkgs = {
         enable = true;
         gui = {
@@ -136,7 +139,7 @@
         enable = true;
       };
       steam = {
-        enable = false;
+        enable = true;
       };
       thunar = {
         enable = false;

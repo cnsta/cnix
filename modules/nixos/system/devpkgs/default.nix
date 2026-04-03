@@ -36,13 +36,10 @@ in
       clang-tools
       marksman
       pyright
-      # nodePackages_latest.intelephense
 
       # Formatters
       alejandra
       stylua
-      # nodePackages_latest.fixjson
-      # nodePackages_latest.sql-formatter
       prettierd
       shfmt
       black
