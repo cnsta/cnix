@@ -7,24 +7,20 @@
   ...
 }:
 
-#  TLS certificate source:
-#  Traefik manages a wildcard cert for *.domain via its letsencrypt resolver
-#  and stores it in /var/lib/traefik/cert.json (base64-encoded PEM).
-#  A systemd path unit watches cert.json and re-extracts the PEM files to
-#  /run/mail-certs/ on every renewal, then reloads postfix and dovecot.
+# TLS certificate source:
+#   Traefik manages a wildcard cert for *.domain via its letsencrypt resolver
+#   and stores it in /var/lib/traefik/cert.json (base64-encoded PEM).
+#   A systemd path unit watches cert.json and re-extracts the PEM files to
+#   /run/mail-certs/ on every renewal, then reloads Postfix and Dovecot.
 #
 # PROXY protocol:
-# Traefik fronts all six mail ports as TCP proxies. Without PROXY protocol,
-# Postfix and Dovecot see every client as 127.0.0.1, defeating postscreen
-# DNSBL, per-IP rate limiting, fail2ban, and Rspamd IP reputation.
-# Every Traefik TCP service sends PROXY protocol v2 headers;
-# Postfix and Dovecot consume them.
+#   Traefik fronts all six mail ports as TCP proxies. Without PROXY protocol,
+#   Postfix and Dovecot see every client as 127.0.0.1, defeating postscreen
+#   DNSBL, per-IP rate limiting, fail2ban, and Rspamd IP reputation.
 #
 # Bind interfaces:
-# Postfix (inet_interfaces = 127.0.0.1) and Dovecot (listen = 127.0.0.1)
-# bind on loopback only. Traefik owns the public-facing ports and forwards
-# to localhost. Without this, Postfix/Dovecot and Traefik both try to bind
-# port 25/143/etc. on the public interface and one fails to start.
+#   Postfix (inet_interfaces = 127.0.0.1) and Dovecot (listen = 127.0.0.1)
+#   bind on loopback only. Traefik owns the public-facing ports.
 
 let
   unit = "mail";
@@ -33,6 +29,8 @@ let
 
   mailFqdn = "mail.${srv.domain}";
 
+  # Matches the base DN computation in lldap.nix.
+  # e.g. "example.com" → "dc=example,dc=com"
   lldapBaseDn = lib.concatMapStringsSep "," (dc: "dc=" + dc) (lib.splitString "." srv.domain);
 
   extractCerts = pkgs.writeShellApplication {
@@ -104,7 +102,11 @@ in
       type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
-            hashedPasswordFile = lib.mkOption { type = lib.types.path; };
+            # nullOr path — null when lldap.enable = true (auth goes through LDAP).
+            hashedPasswordFile = lib.mkOption {
+              type = lib.types.nullOr lib.types.path;
+              default = null;
+            };
             quota = lib.mkOption {
               type = lib.types.str;
               default = "2G";
@@ -220,6 +222,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+
     age.secrets = {
       mailRedisPw = {
         file = "${self}/secrets/mailRedisPw.age";
@@ -235,7 +238,7 @@ in
       };
     };
 
-    # Both postfix and dovecot2 read the private key extracted from Traefik.
+    # Both postfix and dovecot2 read the TLS private key extracted from Traefik.
     # A shared group with mode 640 avoids needing setfacl or toggling chown.
     users.groups.mail-cert = { };
     users.users.postfix.extraGroups = [ "mail-cert" ];
@@ -245,7 +248,6 @@ in
       "d /run/mail-certs 0750 root mail-cert - -"
     ];
 
-    # Watches Traefik's cert store and re-extracts on every write (i.e. renewal).
     systemd.paths.mail-cert-extract = {
       wantedBy = [ "multi-user.target" ];
       pathConfig = {
@@ -271,14 +273,17 @@ in
       };
     };
 
+    # requires (hard dep) rather than wants (soft dep): if cert extraction
+    # fails, Postfix and Dovecot should fail visibly rather than being silently
+    # skipped by ConditionPathExists with no indication of the root cause.
     systemd.services.postfix = {
       after = lib.mkAfter [ "mail-cert-extract.service" ];
-      wants = lib.mkAfter [ "mail-cert-extract.service" ];
+      requires = lib.mkAfter [ "mail-cert-extract.service" ];
       unitConfig.ConditionPathExists = "/run/mail-certs/fullchain.pem";
     };
     systemd.services.dovecot2 = {
       after = lib.mkAfter [ "mail-cert-extract.service" ];
-      wants = lib.mkAfter [ "mail-cert-extract.service" ];
+      requires = lib.mkAfter [ "mail-cert-extract.service" ];
       unitConfig.ConditionPathExists = "/run/mail-certs/fullchain.pem";
     };
 
@@ -333,6 +338,12 @@ in
           ;
       };
 
+      # lldap integration:
+      #   auth_bind = yes — Dovecot binds as the user directly; no service
+      #   account or bind password needed. staticUserdb = true because lldap
+      #   does not store homeDirectory/uidNumber/gidNumber.
+      #   Accounts in server.infra.mail.accounts still control which addresses
+      #   Postfix accepts and delivers — Postfix never talks to LDAP.
       ldap = lib.mkIf cfg.lldap.enable {
         enable = true;
         uri = "ldap://127.0.0.1:3890";
@@ -340,10 +351,10 @@ in
         userDnTemplate = "uid=%u,ou=people,${lldapBaseDn}";
         staticUserdb = true;
         passFilter = "(uid=%u)";
-        # No bindDN/bindPasswordFile: auth_bind_userdn constructs the DN
-        # directly, no initial search bind is required.
       };
     };
+
+    # ── Traefik ───────────────────────────────────────────────────────────────
 
     services.traefik.staticConfigOptions.entryPoints = {
       smtp.address = ":25";
@@ -354,10 +365,6 @@ in
       sieve.address = ":4190";
     };
 
-    # For TLS-passthrough routers (imaps, submissions): the PROXY header is
-    # sent at the TCP level before the TLS ClientHello. Postfix
-    # (smtpd_upstream_proxy_protocol=haproxy) and Dovecot (haproxy=yes on the
-    # listener) both consume the header before starting TLS negotiation.
     services.traefik.dynamicConfigOptions.tcp = {
       routers = {
         smtp-in = {
@@ -436,8 +443,6 @@ in
         ];
       }
 
-      # MTA-STS policy: routes to nginx on loopback, wildcard cert covers
-      # mta-sts.<domain> so no separate ACME cert is needed.
       (lib.mkIf cfg.mtaSts.enable {
         routers.mta-sts = {
           entryPoints = [ "websecure" ];

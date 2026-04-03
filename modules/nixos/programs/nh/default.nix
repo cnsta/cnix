@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -23,7 +24,14 @@ in
     };
   };
   config = mkIf cfg.enable {
-    environment.variables.NH_FLAKE = "/home/${user}/.nix-config";
+    environment = {
+      variables.NH_FLAKE = "/home/${user}/.nix-config";
+      systemPackages = with pkgs; [
+        nvd
+        dix
+        nix-output-monitor
+      ];
+    };
 
     programs = {
       nh = {

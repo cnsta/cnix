@@ -8,7 +8,7 @@
         enable = true;
       };
       bash = {
-        enable = true;
+        enable = false;
       };
       chromium = {
         enable = false;
@@ -27,7 +27,7 @@
         enable = true;
       };
       fish = {
-        enable = true;
+        enable = false;
       };
       foot = {
         enable = true;
