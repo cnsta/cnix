@@ -27,8 +27,8 @@ let
       OUT_DIR=/run/mail-certs
 
       if [[ ! -f "$CERT_JSON" ]]; then
-        echo "mail-cert-extract: $CERT_JSON not found — Traefik may not have issued a cert yet" >&2
-        exit 1
+        echo "mail-cert-extract: $CERT_JSON not found yet — waiting for Traefik" >&2
+        exit 0
       fi
 
       jq -r '
@@ -185,6 +185,10 @@ in
       pathConfig = {
         PathChanged = "/var/lib/traefik/cert.json";
         Unit = "mail-cert-extract.service";
+        # Traefik touches cert.json several times during renewal.
+        # Debounce so the path unit doesn't hit its own start limit.
+        TriggerLimitIntervalSec = 10;
+        TriggerLimitBurst = 3;
       };
     };
 
@@ -202,7 +206,11 @@ in
       serviceConfig = {
         Type = "oneshot";
         ExecStart = lib.getExe extractCerts;
+        # Brief pause before each run so rapid path triggers coalesce.
+        ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
       };
+      startLimitIntervalSec = 60;
+      startLimitBurst = 5;
     };
 
     # cnixpost module
@@ -304,27 +312,27 @@ in
 
       services = {
         postfix-smtp.loadBalancer = {
-          servers = [ { address = "127.0.0.1:25"; } ];
+          servers = [ { address = "127.0.0.1:10025"; } ];
           proxyProtocol.version = 2;
         };
         postfix-submission.loadBalancer = {
-          servers = [ { address = "127.0.0.1:587"; } ];
+          servers = [ { address = "127.0.0.1:10587"; } ];
           proxyProtocol.version = 2;
         };
         postfix-submissions.loadBalancer = {
-          servers = [ { address = "127.0.0.1:465"; } ];
+          servers = [ { address = "127.0.0.1:10465"; } ];
           proxyProtocol.version = 2;
         };
         dovecot-imap.loadBalancer = {
-          servers = [ { address = "127.0.0.1:143"; } ];
+          servers = [ { address = "127.0.0.1:10143"; } ];
           proxyProtocol.version = 2;
         };
         dovecot-imaps.loadBalancer = {
-          servers = [ { address = "127.0.0.1:993"; } ];
+          servers = [ { address = "127.0.0.1:10993"; } ];
           proxyProtocol.version = 2;
         };
         dovecot-sieve.loadBalancer = {
-          servers = [ { address = "127.0.0.1:4190"; } ];
+          servers = [ { address = "127.0.0.1:10419"; } ];
           proxyProtocol.version = 2;
         };
       };

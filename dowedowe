@@ -1,0 +1,376 @@
+apr 05 17:49:37 sobotka systemd[1]: Starting Dovecot IMAP/POP3 server...
+░░ Subject: A start job for unit dovecot.service has begun execution
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has begun execution.
+░░ 
+░░ The job identifier is 15542765.
+apr 05 17:49:37 sobotka dovecot-pre-start[147295]: doveconf: Fatal: Error in configuration file /etc/dovecot/dovecot.conf line 129: Garbage after '{'
+apr 05 17:49:37 sobotka systemd[1]: dovecot.service: Control process exited, code=exited, status=75/TEMPFAIL
+░░ Subject: Unit process exited
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ An ExecStartPre= process belonging to unit dovecot.service has exited.
+░░ 
+░░ The process' exit code is 'exited' and its exit status is 75.
+apr 05 17:49:37 sobotka systemd[1]: dovecot.service: Failed with result 'exit-code'.
+░░ Subject: Unit failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ The unit dovecot.service has entered the 'failed' state with result 'exit-code'.
+apr 05 17:49:37 sobotka systemd[1]: Failed to start Dovecot IMAP/POP3 server.
+░░ Subject: A start job for unit dovecot.service has failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has finished with a failure.
+░░ 
+░░ The job identifier is 15542765 and the job result is failed.
+apr 05 17:49:38 sobotka systemd[1]: dovecot.service: Scheduled restart job, restart counter is at 1.
+░░ Subject: Automatic restarting of a unit has been scheduled
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ Automatic restarting of the unit dovecot.service has been scheduled, as the result for
+░░ the configured Restart= setting for the unit.
+apr 05 17:49:38 sobotka systemd[1]: Starting Dovecot IMAP/POP3 server...
+░░ Subject: A start job for unit dovecot.service has begun execution
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has begun execution.
+░░ 
+░░ The job identifier is 15546612.
+apr 05 17:49:38 sobotka dovecot-pre-start[148367]: doveconf: Fatal: Error in configuration file /etc/dovecot/dovecot.conf line 129: Garbage after '{'
+apr 05 17:49:38 sobotka systemd[1]: dovecot.service: Control process exited, code=exited, status=75/TEMPFAIL
+░░ Subject: Unit process exited
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ An ExecStartPre= process belonging to unit dovecot.service has exited.
+░░ 
+░░ The process' exit code is 'exited' and its exit status is 75.
+apr 05 17:49:38 sobotka systemd[1]: dovecot.service: Failed with result 'exit-code'.
+░░ Subject: Unit failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ The unit dovecot.service has entered the 'failed' state with result 'exit-code'.
+apr 05 17:49:38 sobotka systemd[1]: Failed to start Dovecot IMAP/POP3 server.
+░░ Subject: A start job for unit dovecot.service has failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has finished with a failure.
+░░ 
+░░ The job identifier is 15546612 and the job result is failed.
+apr 05 17:49:39 sobotka systemd[1]: dovecot.service: Scheduled restart job, restart counter is at 2.
+░░ Subject: Automatic restarting of a unit has been scheduled
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ Automatic restarting of the unit dovecot.service has been scheduled, as the result for
+░░ the configured Restart= setting for the unit.
+apr 05 17:49:39 sobotka systemd[1]: Starting Dovecot IMAP/POP3 server...
+░░ Subject: A start job for unit dovecot.service has begun execution
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has begun execution.
+░░ 
+░░ The job identifier is 15546734.
+apr 05 17:49:39 sobotka dovecot-pre-start[148688]: doveconf: Fatal: Error in configuration file /etc/dovecot/dovecot.conf line 129: Garbage after '{'
+apr 05 17:49:39 sobotka systemd[1]: dovecot.service: Control process exited, code=exited, status=75/TEMPFAIL
+░░ Subject: Unit process exited
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ An ExecStartPre= process belonging to unit dovecot.service has exited.
+░░ 
+░░ The process' exit code is 'exited' and its exit status is 75.
+apr 05 17:49:39 sobotka systemd[1]: dovecot.service: Failed with result 'exit-code'.
+░░ Subject: Unit failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ The unit dovecot.service has entered the 'failed' state with result 'exit-code'.
+apr 05 17:49:39 sobotka systemd[1]: Failed to start Dovecot IMAP/POP3 server.
+░░ Subject: A start job for unit dovecot.service has failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has finished with a failure.
+░░ 
+░░ The job identifier is 15546734 and the job result is failed.
+apr 05 17:49:40 sobotka systemd[1]: dovecot.service: Scheduled restart job, restart counter is at 3.
+░░ Subject: Automatic restarting of a unit has been scheduled
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ Automatic restarting of the unit dovecot.service has been scheduled, as the result for
+░░ the configured Restart= setting for the unit.
+apr 05 17:49:40 sobotka systemd[1]: Starting Dovecot IMAP/POP3 server...
+░░ Subject: A start job for unit dovecot.service has begun execution
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has begun execution.
+░░ 
+░░ The job identifier is 15546856.
+apr 05 17:49:40 sobotka dovecot-pre-start[148841]: doveconf: Fatal: Error in configuration file /etc/dovecot/dovecot.conf line 129: Garbage after '{'
+apr 05 17:49:40 sobotka systemd[1]: dovecot.service: Control process exited, code=exited, status=75/TEMPFAIL
+░░ Subject: Unit process exited
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ An ExecStartPre= process belonging to unit dovecot.service has exited.
+░░ 
+░░ The process' exit code is 'exited' and its exit status is 75.
+apr 05 17:49:40 sobotka systemd[1]: dovecot.service: Failed with result 'exit-code'.
+░░ Subject: Unit failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ The unit dovecot.service has entered the 'failed' state with result 'exit-code'.
+apr 05 17:49:40 sobotka systemd[1]: Failed to start Dovecot IMAP/POP3 server.
+░░ Subject: A start job for unit dovecot.service has failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has finished with a failure.
+░░ 
+░░ The job identifier is 15546856 and the job result is failed.
+apr 05 17:49:42 sobotka systemd[1]: dovecot.service: Scheduled restart job, restart counter is at 4.
+░░ Subject: Automatic restarting of a unit has been scheduled
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ Automatic restarting of the unit dovecot.service has been scheduled, as the result for
+░░ the configured Restart= setting for the unit.
+apr 05 17:49:42 sobotka systemd[1]: Starting Dovecot IMAP/POP3 server...
+░░ Subject: A start job for unit dovecot.service has begun execution
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has begun execution.
+░░ 
+░░ The job identifier is 15546978.
+apr 05 17:49:42 sobotka dovecot-pre-start[148950]: doveconf: Fatal: Error in configuration file /etc/dovecot/dovecot.conf line 129: Garbage after '{'
+apr 05 17:49:42 sobotka systemd[1]: dovecot.service: Control process exited, code=exited, status=75/TEMPFAIL
+░░ Subject: Unit process exited
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ An ExecStartPre= process belonging to unit dovecot.service has exited.
+░░ 
+░░ The process' exit code is 'exited' and its exit status is 75.
+apr 05 17:49:42 sobotka systemd[1]: dovecot.service: Failed with result 'exit-code'.
+░░ Subject: Unit failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ The unit dovecot.service has entered the 'failed' state with result 'exit-code'.
+apr 05 17:49:42 sobotka systemd[1]: Failed to start Dovecot IMAP/POP3 server.
+░░ Subject: A start job for unit dovecot.service has failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has finished with a failure.
+░░ 
+░░ The job identifier is 15546978 and the job result is failed.
+apr 05 17:49:43 sobotka systemd[1]: dovecot.service: Scheduled restart job, restart counter is at 5.
+░░ Subject: Automatic restarting of a unit has been scheduled
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ Automatic restarting of the unit dovecot.service has been scheduled, as the result for
+░░ the configured Restart= setting for the unit.
+apr 05 17:49:43 sobotka systemd[1]: Dependency failed for Dovecot IMAP/POP3 server.
+░░ Subject: A start job for unit dovecot.service has failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has finished with a failure.
+░░ 
+░░ The job identifier is 15547101 and the job result is dependency.
+apr 05 17:49:43 sobotka systemd[1]: dovecot.service: Job dovecot.service/start failed with result 'dependency'.
+apr 05 18:12:32 sobotka systemd[1]: Stopped Dovecot IMAP/POP3 server.
+░░ Subject: A stop job for unit dovecot.service has finished
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A stop job for unit dovecot.service has finished.
+░░ 
+░░ The job identifier is 15576931 and the job result is done.
+apr 05 18:12:34 sobotka systemd[1]: Starting Dovecot IMAP/POP3 server...
+░░ Subject: A start job for unit dovecot.service has begun execution
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has begun execution.
+░░ 
+░░ The job identifier is 15577476.
+apr 05 18:12:34 sobotka dovecot-pre-start[162059]: doveconf: Fatal: Error in configuration file /etc/dovecot/dovecot.conf line 129: Garbage after '{'
+apr 05 18:12:34 sobotka systemd[1]: dovecot.service: Control process exited, code=exited, status=75/TEMPFAIL
+░░ Subject: Unit process exited
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ An ExecStartPre= process belonging to unit dovecot.service has exited.
+░░ 
+░░ The process' exit code is 'exited' and its exit status is 75.
+apr 05 18:12:34 sobotka systemd[1]: dovecot.service: Failed with result 'exit-code'.
+░░ Subject: Unit failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ The unit dovecot.service has entered the 'failed' state with result 'exit-code'.
+apr 05 18:12:34 sobotka systemd[1]: Failed to start Dovecot IMAP/POP3 server.
+░░ Subject: A start job for unit dovecot.service has failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has finished with a failure.
+░░ 
+░░ The job identifier is 15577476 and the job result is failed.
+apr 05 18:12:35 sobotka systemd[1]: dovecot.service: Scheduled restart job, restart counter is at 1.
+░░ Subject: Automatic restarting of a unit has been scheduled
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ Automatic restarting of the unit dovecot.service has been scheduled, as the result for
+░░ the configured Restart= setting for the unit.
+apr 05 18:12:35 sobotka systemd[1]: Starting Dovecot IMAP/POP3 server...
+░░ Subject: A start job for unit dovecot.service has begun execution
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has begun execution.
+░░ 
+░░ The job identifier is 15578634.
+apr 05 18:12:35 sobotka dovecot-pre-start[162427]: doveconf: Fatal: Error in configuration file /etc/dovecot/dovecot.conf line 129: Garbage after '{'
+apr 05 18:12:35 sobotka systemd[1]: dovecot.service: Control process exited, code=exited, status=75/TEMPFAIL
+░░ Subject: Unit process exited
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ An ExecStartPre= process belonging to unit dovecot.service has exited.
+░░ 
+░░ The process' exit code is 'exited' and its exit status is 75.
+apr 05 18:12:35 sobotka systemd[1]: dovecot.service: Failed with result 'exit-code'.
+░░ Subject: Unit failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ The unit dovecot.service has entered the 'failed' state with result 'exit-code'.
+apr 05 18:12:35 sobotka systemd[1]: Failed to start Dovecot IMAP/POP3 server.
+░░ Subject: A start job for unit dovecot.service has failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has finished with a failure.
+░░ 
+░░ The job identifier is 15578634 and the job result is failed.
+apr 05 18:12:36 sobotka systemd[1]: dovecot.service: Scheduled restart job, restart counter is at 2.
+░░ Subject: Automatic restarting of a unit has been scheduled
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ Automatic restarting of the unit dovecot.service has been scheduled, as the result for
+░░ the configured Restart= setting for the unit.
+apr 05 18:12:36 sobotka systemd[1]: Starting Dovecot IMAP/POP3 server...
+░░ Subject: A start job for unit dovecot.service has begun execution
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has begun execution.
+░░ 
+░░ The job identifier is 15578756.
+apr 05 18:12:36 sobotka dovecot-pre-start[162638]: doveconf: Fatal: Error in configuration file /etc/dovecot/dovecot.conf line 129: Garbage after '{'
+apr 05 18:12:36 sobotka systemd[1]: dovecot.service: Control process exited, code=exited, status=75/TEMPFAIL
+░░ Subject: Unit process exited
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ An ExecStartPre= process belonging to unit dovecot.service has exited.
+░░ 
+░░ The process' exit code is 'exited' and its exit status is 75.
+apr 05 18:12:36 sobotka systemd[1]: dovecot.service: Failed with result 'exit-code'.
+░░ Subject: Unit failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ The unit dovecot.service has entered the 'failed' state with result 'exit-code'.
+apr 05 18:12:36 sobotka systemd[1]: Failed to start Dovecot IMAP/POP3 server.
+░░ Subject: A start job for unit dovecot.service has failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has finished with a failure.
+░░ 
+░░ The job identifier is 15578756 and the job result is failed.
+apr 05 18:12:38 sobotka systemd[1]: dovecot.service: Scheduled restart job, restart counter is at 3.
+░░ Subject: Automatic restarting of a unit has been scheduled
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ Automatic restarting of the unit dovecot.service has been scheduled, as the result for
+░░ the configured Restart= setting for the unit.
+apr 05 18:12:38 sobotka systemd[1]: Dependency failed for Dovecot IMAP/POP3 server.
+░░ Subject: A start job for unit dovecot.service has failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has finished with a failure.
+░░ 
+░░ The job identifier is 15578878 and the job result is dependency.
+apr 05 18:12:38 sobotka systemd[1]: dovecot.service: Job dovecot.service/start failed with result 'dependency'.
+apr 05 18:42:01 sobotka systemd[1]: Stopped Dovecot IMAP/POP3 server.
+░░ Subject: A stop job for unit dovecot.service has finished
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A stop job for unit dovecot.service has finished.
+░░ 
+░░ The job identifier is 15618293 and the job result is done.
+apr 05 18:42:04 sobotka systemd[1]: Starting Dovecot IMAP/POP3 server...
+░░ Subject: A start job for unit dovecot.service has begun execution
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has begun execution.
+░░ 
+░░ The job identifier is 15618521.
+apr 05 18:42:04 sobotka dovecot-pre-start[181523]: doveconf: Fatal: Error in configuration file /etc/dovecot/dovecot.conf line 133: Garbage after '{'
+apr 05 18:42:04 sobotka systemd[1]: dovecot.service: Control process exited, code=exited, status=75/TEMPFAIL
+░░ Subject: Unit process exited
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ An ExecStartPre= process belonging to unit dovecot.service has exited.
+░░ 
+░░ The process' exit code is 'exited' and its exit status is 75.
+apr 05 18:42:04 sobotka systemd[1]: dovecot.service: Failed with result 'exit-code'.
+░░ Subject: Unit failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ The unit dovecot.service has entered the 'failed' state with result 'exit-code'.
+apr 05 18:42:04 sobotka systemd[1]: Failed to start Dovecot IMAP/POP3 server.
+░░ Subject: A start job for unit dovecot.service has failed
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ A start job for unit dovecot.service has finished with a failure.
+░░ 
+░░ The job identifier is 15618521 and the job result is failed.
+apr 05 18:42:06 sobotka systemd[1]: dovecot.service: Scheduled restart job, restart counter is at 1.
+░░ Subject: Automatic restarting of a unit has been scheduled
+░░ Defined-By: systemd
+░░ Support: https://lists.freedesktop.org/mailman/listinfo/systemd-devel
+░░ 
+░░ Automatic restarting of the unit dovecot.service has been scheduled, as the result for
+░░ the configured Restart= setting for the unit.

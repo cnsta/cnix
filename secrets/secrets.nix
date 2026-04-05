@@ -74,10 +74,6 @@ in
   "autheliaPostgres.age".publicKeys = sobotka;
   "autheliaOidcHmac.age".publicKeys = sobotka;
   "autheliaOidcIssuerPem.age".publicKeys = sobotka;
-  "stalwartFallback.age".publicKeys = sobotka;
-  "stalwartCloudflare.age".publicKeys = sobotka;
-  "stalwartDkimRsa.age".publicKeys = sobotka;
-  "stalwartDkimEd.age".publicKeys = sobotka;
   "affineEnvironment.age".publicKeys = sobotka;
   "turnstoneEnvironment.age".publicKeys = sobotka;
   "mailRedisPw.age".publicKeys = sobotka;
