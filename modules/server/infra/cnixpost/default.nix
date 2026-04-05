@@ -102,7 +102,7 @@ in
       type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
-            # nullOr path, null when lldap.enable = true.
+            # null when lldap.enable = true, auth goes through lldap.
             hashedPasswordFile = lib.mkOption {
               type = lib.types.nullOr lib.types.path;
               default = null;
