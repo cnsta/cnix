@@ -104,10 +104,22 @@
     };
 
     # Miscellaneous
-    helix-flake.url = "github:helix-editor/helix";
     nvf.url = "github:notashelf/nvf";
     agenix.url = "github:ryantm/agenix";
     authentik.url = "github:nix-community/authentik-nix/version/2025.8.4";
+
+    helix-flake = {
+      url = "github:helix-editor/helix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "rust-overlay";
+      };
+    };
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     fenix = {
       url = "github:nix-community/fenix/monthly";
