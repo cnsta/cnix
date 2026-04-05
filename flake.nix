@@ -160,6 +160,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    cnixpost = {
+      url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/cnixpost.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     dotfiles = {
       url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/dotfiles.git";
     };

@@ -11,6 +11,30 @@
     gid = 993;
 
     infra = {
+      cnixpost = {
+        enable = true;
+        lldap.enable = true;
+        clamav.enable = true;
+        accounts."cnst@cnix.dev" = {
+          quota = "10G";
+          aliases = [
+            "postmaster@cnix.dev"
+            "abuse@cnix.dev"
+            "tls-reports@cnix.dev"
+          ];
+        };
+        dkimSelector = "mail";
+        mtaSts = {
+          enable = true;
+          mode = "testing";
+          policyId = "20250101000000"; # TODO: update when policy content changes
+          mxHosts = [ "mail.cnix.dev" ];
+        };
+        spamScoreAddHeader = 4.0;
+        spamScoreGreylist = 6.0;
+        spamScoreReject = 15.0;
+      };
+
       authentik = {
         enable = true;
         url = "auth.cnst.dev";
@@ -20,30 +44,38 @@
           credentialsFile = config.age.secrets.authentikCloudflared.path;
         };
       };
+
       traefik = {
         enable = true;
       };
+
       tailscale = {
         enable = true;
       };
+
       unbound = {
         enable = true;
       };
+
       fail2ban = {
         enable = true;
         apiKeyFile = config.age.secrets.cloudflareFirewallApiKey.path;
         zoneId = "0027acdfb8bbe010f55b676ad8698dfb";
       };
+
       keepalived = {
         enable = true;
         interface = "enp6s0";
       };
+
       gluetun = {
         enable = true;
       };
+
       podman = {
         enable = true;
       };
+
       www = {
         enable = true;
         url = "cnst.dev";
