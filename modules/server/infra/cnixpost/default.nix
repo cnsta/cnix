@@ -7,21 +7,6 @@
   ...
 }:
 
-# TLS certificate source:
-#   Traefik manages a wildcard cert for *.domain via its letsencrypt resolver
-#   and stores it in /var/lib/traefik/cert.json.
-#   A systemd path unit watches cert.json and re-extracts the PEM files to
-#   /run/mail-certs/ on every renewal, then reloads postfix and dovecot.
-#
-# PROXY protocol:
-#   Traefik fronts all six mail ports as TCP proxies. Without PROXY protocol,
-#   postfix and dovecot see every client as 127.0.0.1, defeating postscreen
-#   DNSBL, per-IP rate limiting, fail2ban, and Rspamd IP reputation.
-#
-# Bind interfaces:
-#   Postfix (inet_interfaces = 127.0.0.1) and dovecot (listen = 127.0.0.1)
-#   bind on loopback only. Traefik owns the public-facing ports.
-
 let
   unit = "cnixpost";
   cfg = config.server.infra.${unit};
@@ -29,8 +14,6 @@ let
 
   mailFqdn = "mail.${srv.domain}";
 
-  # Matches the base DN computation in lldap.nix.
-  # e.g. "example.com" -> "dc=example,dc=com"
   lldapBaseDn = lib.concatMapStringsSep "," (dc: "dc=" + dc) (lib.splitString "." srv.domain);
 
   extractCerts = pkgs.writeShellApplication {
@@ -67,8 +50,8 @@ let
         chmod 644 "$OUT_DIR/fullchain.pem"
         chmod 640 "$OUT_DIR/privkey.pem"
         echo "mail-cert-extract: certificates updated"
-        systemctl is-active --quiet postfix  && systemctl reload postfix  || true
-        systemctl is-active --quiet dovecot2 && systemctl reload dovecot2 || true
+        systemctl is-active --quiet postfix && systemctl reload postfix  || true
+        systemctl is-active --quiet dovecot && systemctl reload dovecot  || true
       else
         echo "mail-cert-extract: extraction produced empty files, aborting" >&2
         rm -f "$OUT_DIR/fullchain.pem.tmp" "$OUT_DIR/privkey.pem.tmp"
@@ -84,25 +67,14 @@ in
   ];
 
   options.server.infra.${unit} = {
-
     enable = lib.mkEnableOption "mail server (Postfix + Dovecot + Rspamd + ClamAV)";
 
     accounts = lib.mkOption {
       default = { };
       description = "Virtual mail accounts. Keyed by full address (user@domain).";
-      example = lib.literalExpression ''
-        {
-          "alice@example.com" = {
-            hashedPasswordFile = config.age.secrets."mail-alice-pw".path;
-            quota              = "10G";
-            aliases            = [ "postmaster@example.com" "abuse@example.com" ];
-          };
-        }
-      '';
       type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
-            # null when lldap.enable = true, auth goes through lldap.
             hashedPasswordFile = lib.mkOption {
               type = lib.types.nullOr lib.types.path;
               default = null;
@@ -127,13 +99,11 @@ in
     extraDomains = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ];
-      description = "Additional virtual domains beyond the primary domain.";
     };
 
     dkimSelector = lib.mkOption {
       type = lib.types.str;
       default = "mail";
-      description = "DKIM selector. DNS: <selector>._domainkey.<domain>";
     };
 
     spamScoreAddHeader = lib.mkOption {
@@ -152,13 +122,11 @@ in
     messageSizeLimit = lib.mkOption {
       type = lib.types.int;
       default = 52428800;
-      description = "Max message size in bytes (default: 50 MiB).";
     };
 
     clamav.enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
-      description = "Enable ClamAV. Disable on hosts with < 1.5 GiB RAM.";
     };
 
     debug = lib.mkOption {
@@ -179,22 +147,14 @@ in
       policyId = lib.mkOption {
         type = lib.types.str;
         default = "";
-        example = "20240601120000";
-        description = "Increment on every policy change. Convention: YYYYMMDDHHMMSS.";
       };
       mxHosts = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [ ];
-        example = [ "mail.example.com" ];
-      };
-      maxAge = lib.mkOption {
-        type = lib.types.int;
-        default = 604800;
       };
       enableOutboundCheck = lib.mkOption {
         type = lib.types.bool;
         default = false;
-        description = "Enable postfix-mta-sts-resolver for outbound MTA-STS enforcement.";
       };
     };
 
@@ -203,6 +163,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    # Secrets
     age.secrets = {
       mailRedisPw = {
         file = "${self}/secrets/mailRedisPw.age";
@@ -218,16 +179,7 @@ in
       };
     };
 
-    # Both postfix and dovecot read the TLS private key extracted from traefik.
-    # A shared group with mode 640 avoids needing setfacl or toggling chown.
-    users.groups.mail-cert = { };
-    users.users.postfix.extraGroups = [ "mail-cert" ];
-    users.users.dovecot2.extraGroups = [ "mail-cert" ];
-
-    systemd.tmpfiles.rules = [
-      "d /run/mail-certs 0750 root mail-cert - -"
-    ];
-
+    # Cert extraction from Traefik
     systemd.paths.mail-cert-extract = {
       wantedBy = [ "multi-user.target" ];
       pathConfig = {
@@ -253,20 +205,7 @@ in
       };
     };
 
-    # "requires" rather than "wants": if cert extraction fails,
-    # postfix and dovecot should fail visibly rather than being silently
-    # skipped by ConditionPathExists with no indication of the root cause.
-    systemd.services.postfix = {
-      after = lib.mkAfter [ "mail-cert-extract.service" ];
-      requires = lib.mkAfter [ "mail-cert-extract.service" ];
-      unitConfig.ConditionPathExists = "/run/mail-certs/fullchain.pem";
-    };
-    systemd.services.dovecot2 = {
-      after = lib.mkAfter [ "mail-cert-extract.service" ];
-      requires = lib.mkAfter [ "mail-cert-extract.service" ];
-      unitConfig.ConditionPathExists = "/run/mail-certs/fullchain.pem";
-    };
-
+    # cnixpost module
     cnixpost = {
       enable = true;
       fqdn = mailFqdn;
@@ -275,20 +214,21 @@ in
 
       certificateFile = "/run/mail-certs/fullchain.pem";
       keyFile = "/run/mail-certs/privkey.pem";
+      certWatchService = "mail-cert-extract.service";
 
-      accounts = cfg.accounts;
-      dkimSelector = cfg.dkimSelector;
+      inherit (cfg)
+        accounts
+        dkimSelector
+        spamScoreAddHeader
+        spamScoreGreylist
+        spamScoreReject
+        messageSizeLimit
+        debug
+        ;
+      clamav.enable = cfg.clamav.enable;
 
       redisPasswordFile = config.age.secrets.mailRedisPw.path;
       rspamdControllerPasswordFile = config.age.secrets.mailRspamdCtrlPw.path;
-
-      spamScoreAddHeader = cfg.spamScoreAddHeader;
-      spamScoreGreylist = cfg.spamScoreGreylist;
-      spamScoreReject = cfg.spamScoreReject;
-
-      messageSizeLimit = cfg.messageSizeLimit;
-      clamav.enable = cfg.clamav.enable;
-      debug = cfg.debug;
 
       fail2ban = {
         enable = true;
@@ -303,7 +243,6 @@ in
           mode
           policyId
           mxHosts
-          maxAge
           enableOutboundCheck
           ;
       };
@@ -317,6 +256,7 @@ in
       };
     };
 
+    # Traefik
     services.traefik.staticConfigOptions.entryPoints = {
       smtp.address = ":25";
       submission.address = ":587";
@@ -416,7 +356,6 @@ in
         ];
       })
 
-      # Autoconfig (Thunderbird) and Autodiscover (Outlook)
       (lib.mkIf config.cnixpost.autoconfig.enable {
         routers.autoconfig = {
           entryPoints = [ "websecure" ];
