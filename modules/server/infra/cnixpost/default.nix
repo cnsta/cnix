@@ -415,6 +415,25 @@ in
           { url = "http://127.0.0.1:8089"; }
         ];
       })
+
+      # Autoconfig (Thunderbird) and Autodiscover (Outlook)
+      (lib.mkIf config.cnixpost.autoconfig.enable {
+        routers.autoconfig = {
+          entryPoints = [ "websecure" ];
+          rule = "Host(`autoconfig.${srv.domain}`)";
+          service = "autoconfig-svc";
+          tls.certResolver = "letsencrypt";
+        };
+        routers.autodiscover = {
+          entryPoints = [ "websecure" ];
+          rule = "Host(`autodiscover.${srv.domain}`)";
+          service = "autoconfig-svc";
+          tls.certResolver = "letsencrypt";
+        };
+        services.autoconfig-svc.loadBalancer.servers = [
+          { url = "http://127.0.0.1:8090"; }
+        ];
+      })
     ];
 
     environment.systemPackages = with pkgs; [
