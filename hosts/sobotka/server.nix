@@ -214,13 +214,13 @@
           category = "Media";
         };
       };
-      jellyseerr = {
+      seerr = {
         enable = true;
         subdomain = "seerr";
         exposure = "tailscale";
         port = 5055;
         homepage = {
-          name = "Jellyseerr";
+          name = "Seerr";
           description = "Media request and discovery manager";
           icon = "jellyseerr.svg";
           category = "Media";

@@ -4,7 +4,7 @@
   ...
 }:
 let
-  unit = "jellyseerr";
+  unit = "seerr";
   cfg = config.server.services.${unit};
 in
 {

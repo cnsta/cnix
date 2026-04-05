@@ -6,7 +6,7 @@
     ./homepage
     ./immich
     ./jellyfin
-    ./jellyseerr
+    ./seerr
     ./lldap
     ./lidarr
     ./forgejo

@@ -106,11 +106,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775383079,
-        "narHash": "sha256-XP6EX/peI4W4FTk5BczsG7YzwyFonOPZY6HeaIpCDOs=",
+        "lastModified": 1775403504,
+        "narHash": "sha256-5FX/0g9r08oLaDs6FXd2rZfmX5ehkYLi13y7te6Juug=",
         "ref": "refs/heads/main",
-        "rev": "b7e9e587c3e94e9dc3fb03f043af3bc7e5f580f1",
-        "revCount": 8,
+        "rev": "ea658dcc35572800c9f0cdbccd300952b449b965",
+        "revCount": 12,
         "type": "git",
         "url": "ssh://forgejo@git.ts.cnst.dev/cnst/cnixpost.git"
       },
@@ -526,11 +526,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775366361,
-        "narHash": "sha256-k0adDT3/jMptbcVRywNDwqRT7TUpItt6YqgaycgO/qU=",
+        "lastModified": 1775396817,
+        "narHash": "sha256-F1YgQKaE/4N585ghkNQRmNs0kSLWZlHMnX3ud9p+GJ4=",
         "owner": "helix-editor",
         "repo": "helix",
-        "rev": "0b9bd129c9bec7f00758d9605b319b9c4c2a6110",
+        "rev": "98ad5dbf5654f6ca02e504ebc695e3fdc5623afe",
         "type": "github"
       },
       "original": {
@@ -719,11 +719,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1775343634,
-        "narHash": "sha256-y5X04LWh/RDH7FE3y1xEDD+RP8mkfGGiXXZ9u0hky2g=",
+        "lastModified": 1775396924,
+        "narHash": "sha256-fne1hoKrECf3X/9qVgwa3oJZn6iSw0R5vHEgZLdK7uU=",
         "owner": "hyprwm",
         "repo": "hyprland",
-        "rev": "3a7bd8fea2ca9711da5523dc185c05ea30ec0f35",
+        "rev": "6983b1906caf31e89d9c92cd04d3b6dc69218bff",
         "type": "github"
       },
       "original": {
