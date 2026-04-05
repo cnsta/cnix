@@ -1,6 +1,7 @@
 {
   imports = [
     ./authentik
+    ./cnixpost
     ./fail2ban
     ./gluetun
     ./keepalived

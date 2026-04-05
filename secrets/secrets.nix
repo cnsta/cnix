@@ -80,6 +80,8 @@ in
   "stalwartDkimEd.age".publicKeys = sobotka;
   "affineEnvironment.age".publicKeys = sobotka;
   "turnstoneEnvironment.age".publicKeys = sobotka;
+  "mailRedisPw.age".publicKeys = sobotka;
+  "mailRspamdCtrlPw.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

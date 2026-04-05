@@ -7,13 +7,11 @@ let
   hostSpecificVariables =
     if osConfig.networking.hostName == "bunk" then
       {
-        EDITOR = "hx";
         VISUAL = "hx";
         DEFAULT_BROWSER = "${pkgs.librewolf}/bin/librewolf";
       }
     else
       {
-        EDITOR = "hx";
         VISUAL = "hx";
         DEFAULT_BROWSER = "${pkgs.librewolf}/bin/librewolf";
         # VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";

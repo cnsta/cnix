@@ -23,7 +23,7 @@
 #   bind on loopback only. Traefik owns the public-facing ports.
 
 let
-  unit = "mail";
+  unit = "cnixpost";
   cfg = config.server.infra.${unit};
   srv = config.server;
 
@@ -308,12 +308,11 @@ in
           ;
       };
 
-      ldap = lib.mkIf cfg.lldap.enable {
+      lldap = lib.mkIf cfg.lldap.enable {
         enable = true;
         uri = "ldap://127.0.0.1:3890";
         base = lldapBaseDn;
         userDnTemplate = "uid=%u,ou=people,${lldapBaseDn}";
-        staticUserdb = true;
         passFilter = "(uid=%u)";
       };
     };
@@ -398,7 +397,7 @@ in
           rule = "Host(`rspamd.${srv.domain}`)";
           service = "rspamd-svc";
           tls.certResolver = "letsencrypt";
-          middlewares = [ "authelia@file" ];
+          # middlewares = [ "authelia@file" ];
         };
         services.rspamd-svc.loadBalancer.servers = [
           { url = "http://localhost:11334"; }

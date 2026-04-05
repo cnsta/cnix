@@ -18,10 +18,14 @@ with lib;
   };
 
   config = mkIf cfg.enable {
-
-    environment.systemPackages = [
-      helixPkg
-    ];
+    environment = {
+      variables = {
+        EDITOR = "hx";
+      };
+      systemPackages = [
+        helixPkg
+      ];
+    };
 
     system.activationScripts.homelessHelix = {
       text = ''
