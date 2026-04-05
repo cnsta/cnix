@@ -19,7 +19,6 @@
     ./radarr
     ./slskd
     ./sonarr
-    ./stalwart
     ./tdarr
     ./turnstone
     ./uptime-kuma

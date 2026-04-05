@@ -12,7 +12,7 @@
 
     infra = {
       cnixpost = {
-        enable = true;
+        enable = false;
         lldap.enable = true;
         clamav.enable = true;
         accounts."cnst@cnix.dev" = {
@@ -95,7 +95,7 @@
         port = 8082;
       };
       affine = {
-        enable = true;
+        enable = false;
         subdomain = "affine";
         exposure = "tailscale";
         port = 3010;
@@ -291,7 +291,7 @@
         };
       };
       matrix-synapse = {
-        enable = true;
+        enable = false;
         subdomain = "matrix";
         exposure = "tailscale";
         port = 11339;
@@ -303,7 +303,7 @@
         };
       };
       nextcloud = {
-        enable = true;
+        enable = false;
         subdomain = "cloud";
         exposure = "local";
         port = 8182;
@@ -348,18 +348,6 @@
           description = "Web-based Soulseek client";
           icon = "slskd.svg";
           category = "Downloads";
-        };
-      };
-      stalwart = {
-        enable = false;
-        subdomain = "mail";
-        exposure = "local";
-        port = 8050;
-        homepage = {
-          name = "Stalwart";
-          description = "Mail & collaboration server";
-          icon = "stalwart.svg";
-          category = "Communication";
         };
       };
       tdarr = {
