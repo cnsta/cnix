@@ -9,17 +9,17 @@
 
 # TLS certificate source:
 #   Traefik manages a wildcard cert for *.domain via its letsencrypt resolver
-#   and stores it in /var/lib/traefik/cert.json (base64-encoded PEM).
+#   and stores it in /var/lib/traefik/cert.json.
 #   A systemd path unit watches cert.json and re-extracts the PEM files to
-#   /run/mail-certs/ on every renewal, then reloads Postfix and Dovecot.
+#   /run/mail-certs/ on every renewal, then reloads postfix and dovecot.
 #
 # PROXY protocol:
 #   Traefik fronts all six mail ports as TCP proxies. Without PROXY protocol,
-#   Postfix and Dovecot see every client as 127.0.0.1, defeating postscreen
+#   postfix and dovecot see every client as 127.0.0.1, defeating postscreen
 #   DNSBL, per-IP rate limiting, fail2ban, and Rspamd IP reputation.
 #
 # Bind interfaces:
-#   Postfix (inet_interfaces = 127.0.0.1) and Dovecot (listen = 127.0.0.1)
+#   Postfix (inet_interfaces = 127.0.0.1) and dovecot (listen = 127.0.0.1)
 #   bind on loopback only. Traefik owns the public-facing ports.
 
 let
@@ -30,7 +30,7 @@ let
   mailFqdn = "mail.${srv.domain}";
 
   # Matches the base DN computation in lldap.nix.
-  # e.g. "example.com" → "dc=example,dc=com"
+  # e.g. "example.com" -> "dc=example,dc=com"
   lldapBaseDn = lib.concatMapStringsSep "," (dc: "dc=" + dc) (lib.splitString "." srv.domain);
 
   extractCerts = pkgs.writeShellApplication {
@@ -44,8 +44,8 @@ let
       OUT_DIR=/run/mail-certs
 
       if [[ ! -f "$CERT_JSON" ]]; then
-        echo "mail-cert-extract: $CERT_JSON not found, skipping" >&2
-        exit 0
+        echo "mail-cert-extract: $CERT_JSON not found — Traefik may not have issued a cert yet" >&2
+        exit 1
       fi
 
       jq -r '
@@ -102,7 +102,7 @@ in
       type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
-            # nullOr path — null when lldap.enable = true (auth goes through LDAP).
+            # nullOr path, null when lldap.enable = true.
             hashedPasswordFile = lib.mkOption {
               type = lib.types.nullOr lib.types.path;
               default = null;
@@ -198,26 +198,6 @@ in
       };
     };
 
-    relay = {
-      enable = lib.mkEnableOption "relay outbound mail through a smarthost";
-      host = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-      };
-      port = lib.mkOption {
-        type = lib.types.port;
-        default = 587;
-      };
-      username = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-      };
-      passwordFile = lib.mkOption {
-        type = lib.types.nullOr lib.types.path;
-        default = null;
-      };
-    };
-
     lldap.enable = lib.mkEnableOption "authenticate mail users against the local lldap instance";
   };
 
@@ -238,7 +218,7 @@ in
       };
     };
 
-    # Both postfix and dovecot2 read the TLS private key extracted from Traefik.
+    # Both postfix and dovecot read the TLS private key extracted from traefik.
     # A shared group with mode 640 avoids needing setfacl or toggling chown.
     users.groups.mail-cert = { };
     users.users.postfix.extraGroups = [ "mail-cert" ];
@@ -273,8 +253,8 @@ in
       };
     };
 
-    # requires (hard dep) rather than wants (soft dep): if cert extraction
-    # fails, Postfix and Dovecot should fail visibly rather than being silently
+    # "requires" rather than "wants": if cert extraction fails,
+    # postfix and dovecot should fail visibly rather than being silently
     # skipped by ConditionPathExists with no indication of the root cause.
     systemd.services.postfix = {
       after = lib.mkAfter [ "mail-cert-extract.service" ];
@@ -328,22 +308,6 @@ in
           ;
       };
 
-      relay = {
-        inherit (cfg.relay)
-          enable
-          host
-          port
-          username
-          passwordFile
-          ;
-      };
-
-      # lldap integration:
-      #   auth_bind = yes — Dovecot binds as the user directly; no service
-      #   account or bind password needed. staticUserdb = true because lldap
-      #   does not store homeDirectory/uidNumber/gidNumber.
-      #   Accounts in server.infra.mail.accounts still control which addresses
-      #   Postfix accepts and delivers — Postfix never talks to LDAP.
       ldap = lib.mkIf cfg.lldap.enable {
         enable = true;
         uri = "ldap://127.0.0.1:3890";
@@ -353,8 +317,6 @@ in
         passFilter = "(uid=%u)";
       };
     };
-
-    # ── Traefik ───────────────────────────────────────────────────────────────
 
     services.traefik.staticConfigOptions.entryPoints = {
       smtp.address = ":25";
@@ -436,7 +398,7 @@ in
           rule = "Host(`rspamd.${srv.domain}`)";
           service = "rspamd-svc";
           tls.certResolver = "letsencrypt";
-          middlewares = [ "authentik@file" ];
+          middlewares = [ "authelia@file" ];
         };
         services.rspamd-svc.loadBalancer.servers = [
           { url = "http://localhost:11334"; }
