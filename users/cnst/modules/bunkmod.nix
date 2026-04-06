@@ -24,7 +24,7 @@
         enable = false;
       };
       firefox = {
-        enable = true;
+        enable = false;
       };
       fish = {
         enable = false;
@@ -94,7 +94,7 @@
         enable = false;
       };
       zen = {
-        enable = true;
+        enable = false;
       };
       zsh = {
         enable = false;
@@ -123,9 +123,6 @@
       };
       mako = {
         enable = false;
-      };
-      nix-index = {
-        enable = true;
       };
       swaync = {
         enable = true;
