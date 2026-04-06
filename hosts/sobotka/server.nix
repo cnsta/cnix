@@ -12,8 +12,7 @@
 
     infra = {
       cnixpost = {
-        enable = false;
-        lldap.enable = true;
+        enable = true;
         clamav.enable = true;
         accounts."cnst@cnix.dev" = {
           quota = "10G";
@@ -93,6 +92,22 @@
         subdomain = "dash";
         exposure = "local";
         port = 8082;
+      };
+      authelia = {
+        enable = true;
+        subdomain = "login";
+        exposure = "tunnel";
+        port = 3011;
+        cloudflared = {
+          tunnelId = "5c598772-1ea9-495f-bf3b-1feb064bfc29";
+          credentialsFile = config.age.secrets.autheliaCloudflared.path;
+        };
+        homepage = {
+          name = "Authelia";
+          description = "Authentication and authorization server";
+          icon = "authelia.svg";
+          category = "Infra";
+        };
       };
       affine = {
         enable = false;

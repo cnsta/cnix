@@ -1,5 +1,6 @@
 {
   lib,
+  clib,
   pkgs,
   config,
   ...
@@ -16,11 +17,9 @@ let
       name:
       let
         s = srv.services.${name};
+        fqdn = clib.server.mkFullDomain config s;
       in
-      if s != null && s.enable && s.subdomain != null then
-        [ ''"${s.subdomain}.${srv.domain}. A ${srv.ip}"'' ]
-      else
-        [ ]
+      if s != null && s.enable && s.subdomain != null then [ ''"${fqdn}. A ${srv.ip}"'' ] else [ ]
     ) svcNames
   );
 
@@ -118,8 +117,15 @@ in
               "255.255.255.255/32"
               "2001:db8::/32"
             ];
+            local-zone = [
+              ''"cnix.dev." transparent''
+              ''"cnst.dev." transparent''
+              ''"ts.cnst.dev." transparent''
+            ];
             local-data = [
               ''"traefik.${config.settings.accounts.domains.local}. A 192.168.88.14"''
+              ''"rspamd.${config.settings.accounts.domains.local}. A 192.168.88.14"''
+              ''"login.${config.settings.accounts.domains.local}. A 192.168.88.14"''
             ]
             ++ localARecords;
           };

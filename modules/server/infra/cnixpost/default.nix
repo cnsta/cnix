@@ -13,7 +13,6 @@ let
   srv = config.server;
 
   mailFqdn = "mail.${srv.domain}";
-
   lldapBaseDn = lib.concatMapStringsSep "," (dc: "dc=" + dc) (lib.splitString "." srv.domain);
 
   extractCerts = pkgs.writeShellApplication {
@@ -27,7 +26,7 @@ let
       OUT_DIR=/run/mail-certs
 
       if [[ ! -f "$CERT_JSON" ]]; then
-        echo "mail-cert-extract: $CERT_JSON not found yet — waiting for Traefik" >&2
+        echo "mail-cert-extract: $CERT_JSON not found yet" >&2
         exit 0
       fi
 
@@ -50,35 +49,26 @@ let
         chmod 644 "$OUT_DIR/fullchain.pem"
         chmod 640 "$OUT_DIR/privkey.pem"
         echo "mail-cert-extract: certificates updated"
-        systemctl is-active --quiet postfix && systemctl reload postfix  || true
-        systemctl is-active --quiet dovecot && systemctl reload dovecot  || true
       else
-        echo "mail-cert-extract: extraction produced empty files, aborting" >&2
+        echo "mail-cert-extract: extraction produced empty files" >&2
         rm -f "$OUT_DIR/fullchain.pem.tmp" "$OUT_DIR/privkey.pem.tmp"
         exit 1
       fi
     '';
   };
-
 in
 {
-  imports = [
-    inputs.cnixpost.nixosModules.default
-  ];
+  imports = [ inputs.cnixpost.nixosModules.default ];
 
   options.server.infra.${unit} = {
     enable = lib.mkEnableOption "mail server (Postfix + Dovecot + Rspamd + ClamAV)";
 
     accounts = lib.mkOption {
       default = { };
-      description = "Virtual mail accounts. Keyed by full address (user@domain).";
+      description = "Virtual mail accounts keyed by full address (user@domain).";
       type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
-            hashedPasswordFile = lib.mkOption {
-              type = lib.types.nullOr lib.types.path;
-              default = null;
-            };
             quota = lib.mkOption {
               type = lib.types.str;
               default = "2G";
@@ -157,13 +147,10 @@ in
         default = false;
       };
     };
-
-    lldap.enable = lib.mkEnableOption "authenticate mail users against the local lldap instance";
   };
 
   config = lib.mkIf cfg.enable {
 
-    # Secrets
     age.secrets = {
       mailRedisPw = {
         file = "${self}/secrets/mailRedisPw.age";
@@ -185,8 +172,6 @@ in
       pathConfig = {
         PathChanged = "/var/lib/traefik/cert.json";
         Unit = "mail-cert-extract.service";
-        # Traefik touches cert.json several times during renewal.
-        # Debounce so the path unit doesn't hit its own start limit.
         TriggerLimitIntervalSec = 10;
         TriggerLimitBurst = 3;
       };
@@ -206,14 +191,29 @@ in
       serviceConfig = {
         Type = "oneshot";
         ExecStart = lib.getExe extractCerts;
-        # Brief pause before each run so rapid path triggers coalesce.
-        ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
       };
       startLimitIntervalSec = 60;
       startLimitBurst = 5;
     };
 
-    # cnixpost module
+    systemd.services.mail-cert-reload = {
+      description = "Reload mail services after TLS cert update";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.systemd}/bin/systemctl reload-or-try-restart postfix dovecot2 || true'";
+      };
+    };
+
+    systemd.paths.mail-cert-reload = {
+      wantedBy = [ "multi-user.target" ];
+      pathConfig = {
+        PathModified = "/run/mail-certs/fullchain.pem";
+        Unit = "mail-cert-reload.service";
+        TriggerLimitIntervalSec = 30;
+        TriggerLimitBurst = 2;
+      };
+    };
+
     cnixpost = {
       enable = true;
       fqdn = mailFqdn;
@@ -255,8 +255,7 @@ in
           ;
       };
 
-      lldap = lib.mkIf cfg.lldap.enable {
-        enable = true;
+      lldap = {
         uri = "ldap://127.0.0.1:3890";
         base = lldapBaseDn;
         userDnTemplate = "uid=%u,ou=people,${lldapBaseDn}";
@@ -264,7 +263,7 @@ in
       };
     };
 
-    # Traefik
+    # Traefik TCP entrypoints and routing for mail
     services.traefik.staticConfigOptions.entryPoints = {
       smtp.address = ":25";
       submission.address = ":587";
@@ -345,7 +344,7 @@ in
           rule = "Host(`rspamd.${srv.domain}`)";
           service = "rspamd-svc";
           tls.certResolver = "letsencrypt";
-          # middlewares = [ "authelia@file" ];
+          middlewares = [ "authelia@file" ];
         };
         services.rspamd-svc.loadBalancer.servers = [
           { url = "http://localhost:11334"; }

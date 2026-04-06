@@ -1,16 +1,21 @@
 {
   config,
   lib,
+  clib,
   self,
   ...
 }:
 let
   unit = "authelia";
   cfg = config.server.services.${unit};
-  srv = config.server.infra;
-  domain = "${cfg.subdomain}.${config.server.infra.www.url}";
+  srv = config.server;
+  domain = clib.server.mkHostDomain config cfg;
 in
 {
+  imports = [
+    ./clients.nix
+  ];
+
   config = lib.mkIf cfg.enable {
     age.secrets = {
       autheliaSession = {
@@ -31,7 +36,7 @@ in
       # autheliaSmtp = {
       #   owner = unit;
       #   group = "users";
-      #   file = "${self}/secrets/fastmail.age";
+      #   file = "${self}/secrets/cnixpost.age";
       # };
       autheliaPostgres = {
         owner = unit;
@@ -53,6 +58,7 @@ in
         group = "users";
         file = "${self}/secrets/lldapAdminPassword.age";
       };
+      autheliaCloudflared.file = "${self}/secrets/autheliaCloudflared.age";
     };
 
     server.infra = {
@@ -69,14 +75,27 @@ in
     };
 
     services = {
-      # cloudflared = {
-      #   enable = true;
-      #   tunnels.${cfg.cloudflared.tunnelId} = {
-      #     credentialsFile = cfg.cloudflared.credentialsFile;
-      #     default = "http_status:404";
-      #     ingress."${domain}".service = "http://localhost:${toString cfg.port}";
-      #   };
-      # };
+      cloudflared = {
+        enable = true;
+        tunnels.${cfg.cloudflared.tunnelId} = {
+          credentialsFile = cfg.cloudflared.credentialsFile;
+          default = "http_status:404";
+          ingress."${cfg.subdomain}.${domain}".service = "http://localhost:${toString cfg.port}";
+        };
+      };
+
+      traefik.dynamicConfigOptions.http = {
+        middlewares.authelia.forwardAuth = {
+          address = "http://localhost:${toString cfg.port}/api/authz/forward-auth";
+          trustForwardHeader = true;
+          authResponseHeaders = [
+            "Remote-User"
+            "Remote-Groups"
+            "Remote-Email"
+            "Remote-Name"
+          ];
+        };
+      };
 
       authelia.instances.main = {
         enable = true;
@@ -97,11 +116,16 @@ in
           };
           session = {
             cookies = [
-              ({
-                domain = srv.www.url;
-                authelia_url = "https://${domain}";
-                default_redirection_url = "https://${srv.www.url}/reload";
-              })
+              {
+                domain = domain;
+                authelia_url = "https://${cfg.subdomain}.${domain}";
+                default_redirection_url = "https://${domain}";
+              }
+              {
+                domain = srv.domain;
+                authelia_url = "https://${cfg.subdomain}.${srv.domain}";
+                default_redirection_url = "https://${srv.domain}";
+              }
             ];
             redis.host = "/run/redis-authelia-main/redis.sock";
           };
@@ -109,7 +133,11 @@ in
             default_policy = "deny";
             rules = lib.mkAfter [
               {
-                domain = "*.${srv.www.url}";
+                domain = "*.${domain}";
+                policy = "one_factor";
+              }
+              {
+                domain = "*.${srv.domain}";
                 policy = "one_factor";
               }
             ];
@@ -138,6 +166,7 @@ in
             };
           };
           authentication_backend.ldap = {
+            implementation = "lldap";
             address = "ldap://localhost:${toString config.services.lldap.settings.ldap_port}";
             base_dn = config.services.lldap.settings.ldap_base_dn;
             users_filter = "(&({username_attribute}={input})(objectClass=person))";
@@ -148,6 +177,9 @@ in
             address = "unix:///run/postgresql";
             database = unit;
             username = unit;
+          };
+          notifier.filesystem = {
+            filename = "/var/lib/authelia-main/notifications.txt";
           };
           # notifier.smtp = {
           #   address = "${config.site.email.server}:${toString config.site.email.port}";
@@ -177,9 +209,6 @@ in
               ];
             };
           };
-          # Necessary for Caddy integration
-          # See https://www.authelia.com/integration/proxies/caddy/#implementation
-          # server.endpoints.authz.forward-auth.implementation = "ForwardAuth";
         };
         environmentVariables = {
           AUTHELIA_STORAGE_POSTGRES_PASSWORD_FILE = config.age.secrets.autheliaPostgres.path;

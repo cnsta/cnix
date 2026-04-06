@@ -1,6 +1,7 @@
 {
   imports = [
     ./affine
+    ./authelia
     ./bazarr
     ./flaresolverr
     ./homepage
