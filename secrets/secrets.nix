@@ -78,6 +78,9 @@ in
   "turnstoneEnvironment.age".publicKeys = sobotka;
   "mailRedisPw.age".publicKeys = sobotka;
   "mailRspamdCtrlPw.age".publicKeys = sobotka;
+  "immichOidcSecret.age".publicKeys = sobotka;
+  "autheliaCloudflared.age".publicKeys = sobotka;
+  "rspamdControllerPw.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

@@ -117,7 +117,7 @@ in
                   }
                   {
                     main = "ts.cnst.dev";
-                    sans = [ "*ts.cnst.dev" ];
+                    sans = [ "*.ts.cnst.dev" ];
                   }
                 ];
               };
@@ -139,6 +139,12 @@ in
                 entryPoints = [ "websecure" ];
                 rule = "Host(`traefik.${srv.domain}`)";
                 service = "api@internal";
+                tls.certResolver = "letsencrypt";
+              };
+              authelia-local = {
+                entryPoints = [ "websecure" ];
+                rule = "Host(`login.${srv.domain}`)";
+                service = "authelia";
                 tls.certResolver = "letsencrypt";
               };
             };
