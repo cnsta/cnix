@@ -20,6 +20,7 @@ let
 
   envVars =
     config.environment.variables
+    // config.environment.sessionVariables
     // hmVars
     // {
       HOSTNAME = config.networking.hostName;
@@ -78,9 +79,14 @@ let
     ${pkgs.starship}/bin/starship init nu > $out
   '';
 
-  carapaceInit = pkgs.runCommand "carapace-nushell-config.nu" { } ''
-    ${pkgs.carapace}/bin/carapace _carapace nushell > $out
-  '';
+  carapaceInit =
+    pkgs.runCommand "carapace-nushell-config.nu"
+      {
+        HOME = "/home/${user}";
+      }
+      ''
+        ${pkgs.carapace}/bin/carapace _carapace nushell > $out
+      '';
 
   # File builders
   envNu = pkgs.writeText "nushell-env-${user}.nu" ''
@@ -124,7 +130,6 @@ let
         $env.PATH
         | split row (char esep)
         | prepend $"($env.HOME)/.apps"
-        | append /usr/bin/env
     )
 
     def hmod [] {
