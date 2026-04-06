@@ -174,6 +174,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    fonts.url = "sourcehut:~canasta/fonts";
+    fonts.url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/fonts.git";
   };
 }
