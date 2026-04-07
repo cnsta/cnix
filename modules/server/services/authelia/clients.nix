@@ -32,6 +32,17 @@ let
     }:
     let
       baseUrl = clib.server.mkFullDomain config service;
+      allUrls =
+        if service.exposure == "tailscale" then
+          let
+            publicUrl = "${service.subdomain}.${config.settings.accounts.domains.public}";
+          in
+          [
+            baseUrl
+            publicUrl
+          ]
+        else
+          [ baseUrl ];
     in
     {
       inherit
@@ -49,10 +60,10 @@ let
       pkce_challenge_method = if require_pkce then "S256" else "";
       grant_types = [ "authorization_code" ];
       userinfo_signed_response_alg = "none";
-      redirect_uris = (map (p: "https://${baseUrl}/${p}") redirect_paths) ++ redirect_uris;
+      redirect_uris =
+        (lib.concatMap (url: map (p: "https://${url}/${p}") redirect_paths) allUrls) ++ redirect_uris;
     }
     // extra;
-
 in
 {
   services.authelia.instances.main.settings.identity_providers.oidc.clients = [
@@ -69,11 +80,20 @@ in
       token_endpoint_auth_method = "client_secret_post";
     })
 
-    # (mkClient {
-    #   client_id = "forgejo";
-    #   client_name = "Forgejo";
-    #   service = services.forgejo;
-    #   redirect_paths = [ "user/oauth2/authelia/callback" ];
-    # })
+    (mkClient {
+      client_id = "memos";
+      client_name = "Memos";
+      service = services.memos;
+      redirect_paths = [ "auth/callback" ];
+      require_pkce = false;
+      token_endpoint_auth_method = "client_secret_post";
+    })
+
+    (mkClient {
+      client_id = "forgejo";
+      client_name = "Forgejo";
+      service = services.forgejo;
+      redirect_paths = [ "user/oauth2/authelia/callback" ];
+    })
   ];
 }

@@ -79,6 +79,8 @@ in
   "mailRedisPw.age".publicKeys = sobotka;
   "mailRspamdCtrlPw.age".publicKeys = sobotka;
   "immichOidcSecret.age".publicKeys = sobotka;
+  "forgejoOidcSecret.age".publicKeys = sobotka;
+  "memosOidcSecret.age".publicKeys = sobotka;
   "autheliaCloudflared.age".publicKeys = sobotka;
 
   # Ziggy-specific
