@@ -401,15 +401,15 @@
       "locked": {
         "lastModified": 1753431871,
         "narHash": "sha256-U8EQf2CfWB5McI0R/73e+4p2Bc2i9Zibo3kfabrEhTs=",
-        "owner": "~canasta",
-        "repo": "fonts",
+        "ref": "refs/heads/main",
         "rev": "4eb88c420637d0ace5c398b7c0d8cf7934d35bb4",
-        "type": "sourcehut"
+        "revCount": 2,
+        "type": "git",
+        "url": "ssh://forgejo@git.ts.cnst.dev/cnst/fonts.git"
       },
       "original": {
-        "owner": "~canasta",
-        "repo": "fonts",
-        "type": "sourcehut"
+        "type": "git",
+        "url": "ssh://forgejo@git.ts.cnst.dev/cnst/fonts.git"
       }
     },
     "git-hooks": {

@@ -109,16 +109,16 @@
           category = "Infra";
         };
       };
-      affine = {
-        enable = false;
-        subdomain = "affine";
+      memos = {
+        enable = true;
+        subdomain = "memos";
         exposure = "tailscale";
-        port = 3010;
+        port = 5230;
         homepage = {
-          name = "AFFiNE";
-          description = "All In One KnowledgeOS";
-          icon = "affine.svg";
-          category = "Automation";
+          name = "Memos";
+          description = "Open-source, self-hosted note-taking";
+          icon = "memos.svg";
+          category = "Cloud";
         };
       };
       n8n = {

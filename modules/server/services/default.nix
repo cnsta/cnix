@@ -1,6 +1,5 @@
 {
   imports = [
-    ./affine
     ./authelia
     ./bazarr
     ./flaresolverr
@@ -12,6 +11,7 @@
     ./lidarr
     ./forgejo
     ./matrix-synapse
+    ./memos
     ./n8n
     ./nextcloud
     ./ollama
