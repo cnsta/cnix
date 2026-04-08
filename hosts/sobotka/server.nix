@@ -181,6 +181,18 @@
           category = "Downloads";
         };
       };
+      grafana = {
+        enable = true;
+        subdomain = "grafana";
+        exposure = "local";
+        port = 3002;
+        homepage = {
+          name = "Grafana";
+          description = "Full-stack observability";
+          icon = "grafana.svg";
+          category = "Infra";
+        };
+      };
       immich = {
         enable = true;
         subdomain = "immich";
