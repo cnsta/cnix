@@ -4,6 +4,7 @@
     ./bazarr
     ./flaresolverr
     ./homepage
+    ./grafana
     ./immich
     ./jellyfin
     ./seerr
@@ -16,6 +17,7 @@
     ./nextcloud
     ./ollama
     ./pihole
+    ./prometheus
     ./prowlarr
     ./radarr
     ./slskd

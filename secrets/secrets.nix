@@ -82,6 +82,7 @@ in
   "forgejoOidcSecret.age".publicKeys = sobotka;
   "memosOidcSecret.age".publicKeys = sobotka;
   "autheliaCloudflared.age".publicKeys = sobotka;
+  "grafanaSecretKey.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;
