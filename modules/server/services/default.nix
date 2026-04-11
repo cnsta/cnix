@@ -20,6 +20,7 @@
     ./prometheus
     ./prowlarr
     ./radarr
+    ./roundcube
     ./slskd
     ./sonarr
     ./tdarr

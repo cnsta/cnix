@@ -18,6 +18,19 @@ in
       };
       scrapeConfigs = [
         {
+          job_name = "postfix";
+          static_configs = [
+            { targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.postfix.port}" ]; }
+          ];
+        }
+        {
+          job_name = "rspamd";
+          metrics_path = "/metrics";
+          static_configs = [
+            { targets = [ "127.0.0.1:11334" ]; }
+          ];
+        }
+        {
           job_name = "node";
           static_configs = [
             { targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ]; }
@@ -31,6 +44,14 @@ in
         }
       ];
       exporters = {
+        postfix = {
+          enable = true;
+          listenAddress = "127.0.0.1";
+          port = 9154;
+          systemd.enable = true;
+          showqPath = "/var/lib/postfix/queue/public/showq";
+        };
+
         node = {
           enable = true;
           listenAddress = "127.0.0.1";

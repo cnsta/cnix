@@ -20,6 +20,16 @@ in
       };
     };
 
+    server.infra = {
+      fail2ban.jails.${unit} = {
+        serviceName = "${unit}";
+        failRegex = ".*(Failed authentication attempt|invalid credentials|Attempted access of unknown user).* from <HOST>";
+      };
+      postgresql.databases = [
+        { database = unit; }
+      ];
+    };
+
     services.${unit} = {
       enable = true;
       settings = {

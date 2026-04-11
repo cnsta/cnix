@@ -241,6 +241,18 @@
           category = "Media";
         };
       };
+      roundcube = {
+        enable = true;
+        subdomain = "mail";
+        exposure = "local";
+        port = 5679;
+        homepage = {
+          name = "Roundcube";
+          description = "Browser-based multilingual IMAP client";
+          icon = "roundcube.svg";
+          category = "Communication";
+        };
+      };
       seerr = {
         enable = true;
         subdomain = "seerr";

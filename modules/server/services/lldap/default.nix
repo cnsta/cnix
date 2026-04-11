@@ -33,6 +33,12 @@ in
       };
     };
 
+    server.infra.postgresql.databases = [
+      {
+        database = lldap-user;
+      }
+    ];
+
     services.lldap = {
       enable = true;
       settings = {
@@ -47,13 +53,6 @@ in
       };
       environmentFile = config.age.secrets.lldapKeySeed.path;
     };
-
-    server.infra.postgresql.databases = [
-      {
-        database = lldap-user;
-        extraUsers = [ lldap-user ];
-      }
-    ];
 
     systemd.services.lldap =
       let
