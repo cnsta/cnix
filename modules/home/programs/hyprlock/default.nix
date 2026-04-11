@@ -69,7 +69,7 @@ in
             shadow_boost = 0.5;
             color = "rgba(FFFFFFFF)";
             font_size = 25;
-            font_family = "DepartureMono Nerd Font Mono Regular";
+            font_family = "VCR OSD Mono";
             position = "0, 230";
             halign = "center";
             valign = "center";
@@ -82,7 +82,7 @@ in
             shadow_boost = 0.5;
             color = "rgba(FFFFFFFF)";
             font_size = 85;
-            font_family = "DepartureMono Nerd Font Mono Regular";
+            font_family = "VCR OSD Mono";
             position = "0, 300";
             halign = "center";
             valign = "center";
