@@ -1,4 +1,3 @@
-# taken from @jtojnar
 {
   config,
   lib,
@@ -47,7 +46,6 @@ in
   config = lib.mkIf (cfg.databases != [ ]) {
     services.postgresql = {
       enable = true;
-      # follow steps in link before changing package, https://nixos.org/manual/nixos/unstable/#module-services-postgres-upgrading
       package = pkgs.postgresql_18;
       extensions = lib.filter (x: x != null) (
         lib.concatMap (
@@ -56,9 +54,7 @@ in
       );
       authentication = lib.mkForce ''
         local all postgres peer
-        local sameuser all peer
 
-        # local peer access for extra users
         ${lib.concatMapStringsSep "\n" (
           {
             database,
@@ -66,19 +62,6 @@ in
             ...
           }:
           lib.concatMapStringsSep "\n" (user: "local ${database} ${user} peer") ([ database ] ++ extraUsers)
-        ) cfg.databases}
-
-        # host access (TCP) for databases and their users
-        ${lib.concatMapStringsSep "\n" (
-          {
-            database,
-            extraUsers,
-            ...
-          }:
-          lib.concatMapStringsSep "\n" (user: ''
-            host ${database} ${user} 127.0.0.1/32 trust
-            host ${database} ${user} ::1/128 trust
-          '') ([ database ] ++ extraUsers)
         ) cfg.databases}
       '';
       ensureUsers =
@@ -89,7 +72,6 @@ in
               extraUsers,
               ...
             }:
-            # we use same username as dbname
             [ database ] ++ extraUsers;
         in
         map (name: { inherit name; }) (lib.unique (builtins.concatMap dbToUsers cfg.databases));
@@ -118,23 +100,25 @@ in
               createExtensionsIfAny = lib.optionalString (extensions != [ ]) ''
                 $PSQL -d '${database}' -c '${createExtensionsSql}'
               '';
+              grantSql = lib.concatMapStringsSep "\n" (user: ''
+                $PSQL '${database}' -c 'GRANT ALL ON ALL TABLES IN SCHEMA public TO "${user}";'
+                $PSQL '${database}' -c 'GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO "${user}";'
+                $PSQL '${database}' -c 'ALTER DEFAULT PRIVILEGES FOR ROLE "${database}" IN SCHEMA public GRANT ALL ON TABLES TO "${user}";'
+                $PSQL '${database}' -c 'ALTER DEFAULT PRIVILEGES FOR ROLE "${database}" IN SCHEMA public GRANT ALL ON SEQUENCES TO "${user}";'
+              '') extraUsers;
             in
             ''
               set -eu
 
-              PSQL="${pkgs.util-linux}/bin/runuser -u ${pgsql.superUser} -- psql --port=${toString pgsql.settings.port} --tuples-only --no-align"
+              PSQL="${pkgs.util-linux}/bin/runuser -u ${pgsql.superUser} -- psql --port=${
+                toString (pgsql.settings.port or 5432)
+              } --tuples-only --no-align"
 
               if ! $PSQL -c "SELECT 1 FROM pg_database WHERE datname = '${database}'" | grep --quiet 1; then
-                  $PSQL -c 'CREATE DATABASE "${database}" WITH OWNER = "${database}"'
-                  ${createExtensionsIfAny}
+                $PSQL -c 'CREATE DATABASE "${database}" WITH OWNER = "${database}"'
+                ${createExtensionsIfAny}
               fi
-              ${lib.optionalString (extraUsers != [ ])
-                "$PSQL '${database}' -c '${
-                  lib.concatMapStringsSep "\n" (
-                    user: "GRANT ALL ON ALL TABLES IN SCHEMA public TO ${user};"
-                  ) extraUsers
-                }'"
-              }
+              ${grantSql}
             ''
           ) cfg.databases;
 
@@ -144,11 +128,7 @@ in
         };
 
       postgresql.serviceConfig = {
-        # Required by PLV8.
-        MemoryDenyWriteExecute = false;
-        SystemCallFilter = [
-          "@pkey"
-        ];
+        MemoryDenyWriteExecute = true;
       };
     };
   };

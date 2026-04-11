@@ -67,6 +67,11 @@ in
           };
         };
       };
+      postgresql.databases = [
+        {
+          database = unit;
+        }
+      ];
     };
 
     services = {

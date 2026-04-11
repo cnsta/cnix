@@ -106,11 +106,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775486398,
-        "narHash": "sha256-wAuu5nMER1Nqzmzwxazj1zfRynCmIMm0KhLlyubwVp8=",
+        "lastModified": 1775904895,
+        "narHash": "sha256-ln7zdwOvpg7rBNQR27FhyEx65v+tQNmCGS2jIznUTcw=",
         "ref": "refs/heads/main",
-        "rev": "835830c14e7e9bcf62b0f7f4ec0c4bda3403c3bd",
-        "revCount": 37,
+        "rev": "dd64651fa5326b8c831a6e0434e815b48959c969",
+        "revCount": 43,
         "type": "git",
         "url": "ssh://forgejo@git.ts.cnst.dev/cnst/cnixpost.git"
       },

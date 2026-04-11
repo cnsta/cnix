@@ -258,8 +258,8 @@ in
       lldap = {
         uri = "ldap://127.0.0.1:3890";
         base = lldapBaseDn;
-        userDnTemplate = "uid=%u,ou=people,${lldapBaseDn}";
-        passFilter = "(uid=%u)";
+        userDnTemplate = "uid=%n,ou=people,${lldapBaseDn}";
+        bindPasswordFile = config.age.secrets.lldapAdminPasswordAuthelia.path;
       };
     };
 

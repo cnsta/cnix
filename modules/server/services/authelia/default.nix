@@ -69,7 +69,6 @@ in
       postgresql.databases = [
         {
           database = unit;
-          extraUsers = [ unit ];
         }
       ];
     };
