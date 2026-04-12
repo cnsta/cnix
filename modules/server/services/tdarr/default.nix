@@ -18,8 +18,6 @@ in
           serverIP = "0.0.0.0";
           serverPort = "8266";
           webUIPort = "8265";
-          nodeName = "sobotkaNode";
-          internalNode = "true";
           inContainer = "true";
           ffmpegVersion = "7";
           auth = "false";
@@ -28,7 +26,6 @@ in
           PGID = "993";
           TZ = "Europe/Stockholm";
         };
-        devices = [ "/dev/dri:/dev/dri" ];
         ports = [
           "8265:8265"
           "8266:8266"
@@ -40,8 +37,30 @@ in
           "/var/lib/tdarr/server:/app/server"
           "/var/lib/tdarr/transcode_cache:/temp"
         ];
-        extraOptions = [
-          "--memory=5g"
+      };
+      node0 = {
+        image = "kfalabs/tdarr-battlemage:latest";
+        autoStart = true;
+        environment = {
+          serverIP = "host.containers.internal";
+          serverPort = "8266";
+          nodeIP = "0.0.0.0";
+          nodeID = "node0";
+          TZ = "Europe/Stockholm";
+        };
+        ports = [
+          "8267:8267"
+        ];
+        devices = [
+          "/dev/dri/card1:/dev/dri/card1"
+          "/dev/dri/renderD129:/dev/dri/renderD129"
+        ];
+        volumes = [
+          "/mnt/data/media:/media"
+          "/var/lib/tdarr/configs:/app/configs"
+          "/var/lib/tdarr/logs:/app/logs"
+          "/var/lib/tdarr/server:/app/server"
+          "/var/lib/tdarr/transcode_cache:/temp"
         ];
       };
     };
