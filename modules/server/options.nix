@@ -86,6 +86,14 @@ in
                 default = "local";
                 description = "Controls where the service is exposed";
               };
+              ingress = lib.mkOption {
+                type = lib.types.attrsOf lib.types.str;
+                default = { };
+                description = "Extra cloudflared ingress entries as subdomain -> service URL mappings.";
+                example = {
+                  "matrix" = "http://127.0.0.1:11338";
+                };
+              };
               port = lib.mkOption {
                 type = lib.types.int;
                 default = 80;
