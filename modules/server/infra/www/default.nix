@@ -58,7 +58,7 @@ in
           nginx-404 = {
             serviceName = "nginx";
             failRegex = ''^.*\[error\].*directory index of.* is forbidden.*client: <HOST>.*$'';
-            ignoreRegex = '''';
+            ignoreRegex = "";
             maxRetry = 5;
           };
         };
@@ -93,6 +93,40 @@ in
                 try_files /robots.txt =404;
               '';
             };
+
+            locations."= /.well-known/matrix/server" = {
+              extraConfig =
+                let
+                  matrixDomain = "${config.server.services.continuwuity.subdomain}.${cfg.url}";
+                in
+                ''
+                  default_type application/json;
+                  return 200 '{"m.server": "${matrixDomain}:443"}';
+                '';
+            };
+
+            locations."= /.well-known/matrix/client" = {
+              extraConfig =
+                let
+                  matrixDomain = "${config.server.services.continuwuity.subdomain}.${cfg.url}";
+                  clientConfig = builtins.toJSON {
+                    "m.homeserver" = {
+                      base_url = "https://${matrixDomain}";
+                    };
+                    "org.matrix.msc4143.rtc_foci" = [
+                      {
+                        type = "livekit";
+                        livekit_service_url = "https://${matrixDomain}/livekit/jwt";
+                      }
+                    ];
+                  };
+                in
+                ''
+                  default_type application/json;
+                  add_header Access-Control-Allow-Origin *;
+                  return 200 '${clientConfig}';
+                '';
+            };
           };
 
           "ts" = {
@@ -115,36 +149,59 @@ in
         tunnels.${cfg.cloudflared.tunnelId} = {
           credentialsFile = cfg.cloudflared.credentialsFile;
           default = "http_status:404";
-          ingress."${cfg.url}".service = "http://127.0.0.1:8283";
+          ingress =
+            let
+              # Auto-generate from services with exposure = "tunnel"
+              tunnelServices = lib.filterAttrs (
+                _: svc: svc.enable && svc.exposure == "tunnel" && svc.subdomain != ""
+              ) config.server.services;
+              autoIngress = lib.mapAttrs' (
+                _: svc:
+                lib.nameValuePair "${svc.subdomain}.${cfg.url}" {
+                  service = "http://127.0.0.1:${toString svc.port}";
+                }
+              ) tunnelServices;
+              # Collect extra ingress from all services
+              extraIngress = lib.foldlAttrs (
+                acc: _: svc:
+                acc
+                // lib.mapAttrs' (sub: url: lib.nameValuePair "${sub}.${cfg.url}" { service = url; }) svc.ingress
+              ) { } (lib.filterAttrs (_: svc: svc.enable) config.server.services);
+            in
+            autoIngress
+            // extraIngress
+            // {
+              "${cfg.url}".service = "http://127.0.0.1:8283";
+            };
         };
       };
-    };
 
-    services.traefik.dynamicConfigOptions.http = {
-      routers = {
-        www = {
-          entryPoints = [ "websecure" ];
-          rule = "Host(`${cfg.url}`) && Path(`/.well-known/webfinger`)";
-          service = "www";
-          tls.certResolver = "letsencrypt";
+      traefik.dynamicConfigOptions.http = {
+        routers = {
+          www = {
+            entryPoints = [ "websecure" ];
+            rule = "Host(`${cfg.url}`) && PathPrefix(`/.well-known/`)";
+            service = "www";
+            tls.certResolver = "letsencrypt";
+          };
+
+          ts = {
+            entryPoints = [ "websecure" ];
+            rule = "Host(`ts.${cfg.url}`)";
+            service = "ts";
+            tls.certResolver = "letsencrypt";
+          };
         };
 
-        ts = {
-          entryPoints = [ "websecure" ];
-          rule = "Host(`ts.${cfg.url}`)";
-          service = "ts";
-          tls.certResolver = "letsencrypt";
+        services = {
+          www.loadBalancer.servers = [
+            { url = "http://127.0.0.1:8283"; }
+          ];
+
+          ts.loadBalancer.servers = [
+            { url = "http://127.0.0.1:8283"; }
+          ];
         };
-      };
-
-      services = {
-        www.loadBalancer.servers = [
-          { url = "http://127.0.0.1:8283"; }
-        ];
-
-        ts.loadBalancer.servers = [
-          { url = "http://127.0.0.1:8283"; }
-        ];
       };
     };
   };

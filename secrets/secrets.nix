@@ -64,7 +64,6 @@ in
   "authentikEnv.age".publicKeys = sobotka;
   "authentikCloudflared.age".publicKeys = sobotka;
   "sobotkaTsAuth.age".publicKeys = sobotka;
-  "matrixShared.age".publicKeys = sobotka;
   "lldapAdminPassword.age".publicKeys = sobotka;
   "lldapJwt.age".publicKeys = sobotka;
   "lldapKeySeed.age".publicKeys = sobotka;
@@ -74,7 +73,6 @@ in
   "autheliaPostgres.age".publicKeys = sobotka;
   "autheliaOidcHmac.age".publicKeys = sobotka;
   "autheliaOidcIssuerPem.age".publicKeys = sobotka;
-  "affineEnvironment.age".publicKeys = sobotka;
   "turnstoneEnvironment.age".publicKeys = sobotka;
   "mailRedisPw.age".publicKeys = sobotka;
   "mailRspamdCtrlPw.age".publicKeys = sobotka;
@@ -83,6 +81,12 @@ in
   "memosOidcSecret.age".publicKeys = sobotka;
   "autheliaCloudflared.age".publicKeys = sobotka;
   "grafanaSecretKey.age".publicKeys = sobotka;
+  "matrixCloudflared.age".publicKeys = sobotka;
+  "continuwuityLiveKit.age".publicKeys = sobotka;
+  "continuwuityEnvironment.age".publicKeys = sobotka;
+  "continuwuityToml.age".publicKeys = sobotka;
+  "livekitEnvironment.age".publicKeys = sobotka;
+  "livekitYaml.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

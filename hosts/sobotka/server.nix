@@ -329,15 +329,27 @@
           category = "Cloud";
         };
       };
-      matrix-synapse = {
-        enable = false;
-        subdomain = "matrix";
-        exposure = "tailscale";
-        port = 11339;
+      element = {
+        enable = true;
+        subdomain = "element";
+        exposure = "tunnel";
+        port = 11341;
         homepage = {
-          name = "Synapse";
-          description = "Matrix homeserver implementation";
-          icon = "synapse.svg";
+          name = "Element";
+          description = "Element web UI";
+          icon = "element.svg";
+          category = "Communication";
+        };
+      };
+      continuwuity = {
+        enable = true;
+        subdomain = "matrix";
+        exposure = "tunnel";
+        port = 6167;
+        homepage = {
+          name = "Continuwuity";
+          description = "Continuwuity homeserver";
+          icon = "matrix.svg";
           category = "Communication";
         };
       };

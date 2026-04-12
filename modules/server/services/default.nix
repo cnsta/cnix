@@ -2,6 +2,8 @@
   imports = [
     ./authelia
     ./bazarr
+    ./continuwuity
+    ./element
     ./flaresolverr
     ./homepage
     ./grafana
@@ -11,7 +13,6 @@
     ./lldap
     ./lidarr
     ./forgejo
-    ./matrix-synapse
     ./memos
     ./n8n
     ./nextcloud
