@@ -18,7 +18,7 @@ in
       implementation = "broker";
       packages = with pkgs; [
         gnome-settings-daemon
-        gcr
+        gcr_4
       ];
     };
   };

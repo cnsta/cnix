@@ -31,7 +31,14 @@ in
     home.services.xdg.enable = mkEnableOption "Enables XDG settings";
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ xdg-utils ];
+    home = {
+      sessionVariables = mkIf (cfg.enable && osConfig.programs.hyprland.enable) {
+        XDG_CURRENT_DESKTOP = "Hyprland";
+        XDG_SESSION_DESKTOP = "Hyprland";
+        XDG_SESSION_TYPE = "wayland";
+      };
+      packages = with pkgs; [ xdg-utils ];
+    };
     xresources.properties = {
       "Xcursor.size" = config.home.pointerCursor.size;
       "Xcursor.theme" = config.home.pointerCursor.name;

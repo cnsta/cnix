@@ -20,6 +20,9 @@
       direnv = {
         enable = true;
       };
+      element-desktop = {
+        enable = true;
+      };
       eza = {
         enable = true;
       };

@@ -9,6 +9,8 @@ let
   host = config.networking.hostName;
 
   commonExecOnce = [
+    "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+    "gnome-keyring-daemon --start --components=secrets"
     "sleep 3s && wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.5"
   ];
 in

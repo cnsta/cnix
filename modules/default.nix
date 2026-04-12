@@ -8,6 +8,7 @@
         ./home/programs/chromium
         ./home/programs/direnv
         ./home/programs/discord
+        ./home/programs/element-desktop
         ./home/programs/eza
         ./home/programs/floorp
         ./home/programs/firefox
