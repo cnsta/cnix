@@ -84,7 +84,6 @@ in
       lk-jwt-service = {
         autoStart = true;
         image = "ghcr.io/element-hq/lk-jwt-service:latest";
-        # dependsOn = [ "stoat-redis" ];
         ports = [
           "8083:8083"
         ];
