@@ -127,6 +127,24 @@ in
                   return 200 '${clientConfig}';
                 '';
             };
+
+            locations."= /.well-known/matrix/support" = {
+              extraConfig = ''
+                default_type application/json;
+                add_header Access-Control-Allow-Origin *;
+                return 200 '${
+                  builtins.toJSON {
+                    contacts = [
+                      {
+                        email_address = "cnst@cnix.dev";
+                        matrix_id = "@cnst:cnst.dev";
+                        role = "m.role.admin";
+                      }
+                    ];
+                  }
+                }';
+              '';
+            };
           };
 
           "ts" = {
