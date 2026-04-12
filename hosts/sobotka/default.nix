@@ -34,6 +34,10 @@
     };
   };
 
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  };
+
   services.zfs = {
     autoSnapshot.enable = true;
     autoScrub.enable = true;

@@ -36,7 +36,7 @@ in
     virtualisation.oci-containers.containers = {
       ${unit} = {
         autoStart = true;
-        image = "pihole/pihole:2026.02.0";
+        image = "pihole/pihole:2026.04.0";
         volumes = [
           "/var/lib/pihole:/etc/pihole/"
           "/var/lib/dnsmasq.d:/etc/dnsmasq.d/"

@@ -402,7 +402,7 @@
         };
       };
       tdarr = {
-        enable = false;
+        enable = true;
         subdomain = "tdarr";
         exposure = "local";
         port = 8265;
