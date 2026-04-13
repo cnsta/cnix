@@ -87,6 +87,7 @@ in
   "continuwuityToml.age".publicKeys = sobotka;
   "livekitEnvironment.age".publicKeys = sobotka;
   "livekitYaml.age".publicKeys = sobotka;
+  "cinnyJson.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

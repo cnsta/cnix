@@ -2,6 +2,7 @@
   imports = [
     ./authelia
     ./bazarr
+    ./cinny
     ./continuwuity
     ./element
     ./flaresolverr

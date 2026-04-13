@@ -109,6 +109,18 @@
           category = "Infra";
         };
       };
+      cinny = {
+        enable = true;
+        subdomain = "cinny";
+        exposure = "tunnel";
+        port = 8088;
+        homepage = {
+          name = "Cinny";
+          description = "Matrix client";
+          icon = "cinny.svg";
+          category = "Communication";
+        };
+      };
       memos = {
         enable = true;
         subdomain = "memos";
