@@ -112,7 +112,6 @@ in
           kdePackages.qt6ct
           libsForQt5.qt5ct
           brightnessctl
-
         ])
 
         (mkIf cfg.desktop.enable [
@@ -150,6 +149,8 @@ in
           prettierd
           shfmt
           black
+          nufmt
+          nu-lint
         ])
 
         (mkIf cfg.dev.rust.enable [

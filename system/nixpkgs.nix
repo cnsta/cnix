@@ -4,7 +4,8 @@
       allowUnfree = true;
       input-fonts.acceptLicense = true;
       permittedInsecurePackages = [
-        "electron-38.8.4"
+        "electron"
+        "olm-3.2.16"
       ];
     };
 

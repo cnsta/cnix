@@ -91,7 +91,7 @@ in
                --dry-run (-n)
                --verbose (-v)
            ] {
-               mut args = ["os" "switch" "-H" $env.HOSTNAME]
+               mut args = ["os" "switch" "-d" "always" "-H" $env.HOSTNAME]
 
                if $dry_run {
                    $args = ($args | append "-n")
