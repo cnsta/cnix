@@ -7,9 +7,10 @@ let
   unit = "tdarr";
   srv = config.server;
   cfg = config.server.services.${unit};
+  arr = config.server.services.arr;
 in
 {
-  config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
+  config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
     virtualisation.oci-containers.containers = {
       ${unit} = {
         image = "ghcr.io/haveagitgat/tdarr:latest";

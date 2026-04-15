@@ -93,6 +93,10 @@
         exposure = "local";
         port = 8082;
       };
+      arr = {
+        enable = true;
+        routed = false;
+      };
       authelia = {
         enable = true;
         subdomain = "login";

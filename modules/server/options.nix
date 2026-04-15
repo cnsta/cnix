@@ -72,6 +72,11 @@ in
           {
             options = {
               enable = lib.mkEnableOption "the service";
+              routed = lib.mkOption {
+                type = lib.types.bool;
+                default = true;
+                description = "Whether this service is included in automated reverse proxy routing and DNS records.";
+              };
               subdomain = lib.mkOption {
                 type = lib.types.str;
                 default = "";
@@ -124,6 +129,7 @@ in
                 description = "Cloudflare tunnel configuration for this service.";
               };
               homepage = lib.mkOption {
+                default = { };
                 type = lib.types.submodule {
                   options = {
                     name = lib.mkOption {
