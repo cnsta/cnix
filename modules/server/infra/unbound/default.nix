@@ -19,7 +19,10 @@ let
         s = srv.services.${name};
         fqdn = clib.server.mkFullDomain config s;
       in
-      if s != null && s.enable && s.subdomain != null then [ ''"${fqdn}. A ${srv.ip}"'' ] else [ ]
+      if s != null && s.enable && s.routed && s.subdomain != null then
+        [ ''"${fqdn}. A ${srv.ip}"'' ]
+      else
+        [ ]
     ) svcNames
   );
 

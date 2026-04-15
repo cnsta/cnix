@@ -21,7 +21,7 @@ let
         service = name;
         tls.certResolver = "letsencrypt";
       }
-    ) (lib.filterAttrs (_: s: s.enable) services);
+    ) (lib.filterAttrs (_: s: s.enable && s.routed) services);
 
   generateServices =
     services:
@@ -30,7 +30,7 @@ let
       lib.nameValuePair name {
         loadBalancer.servers = [ { url = "http://localhost:${toString service.port}"; } ];
       }
-    ) (lib.filterAttrs (name: service: service.enable) services);
+    ) (lib.filterAttrs (_: s: s.enable && s.routed) services);
 in
 {
   options.server.infra.traefik = {

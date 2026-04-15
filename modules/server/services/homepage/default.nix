@@ -106,7 +106,8 @@ in
             homepageServicesFor =
               category:
               lib.filterAttrs (
-                name: value: name != unit && value ? homepage && value.homepage.category == category
+                name: value:
+                name != unit && value.enable && value.homepage.category != "" && value.homepage.category == category
               ) allServices;
           in
           lib.lists.forEach homepageCategories (cat: {

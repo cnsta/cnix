@@ -63,6 +63,7 @@ in
         [
           pciutils
           wireguard-tools
+          parted
           ddcutil
           app2unit
           cava
@@ -75,7 +76,6 @@ in
           traceroute
           progress
           git-crypt
-          gparted
           ntfs3g
           cloudflared
           libargon2
@@ -112,6 +112,7 @@ in
           kdePackages.qt6ct
           libsForQt5.qt5ct
           brightnessctl
+          gparted
         ])
 
         (mkIf cfg.desktop.enable [

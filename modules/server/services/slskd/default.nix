@@ -8,9 +8,10 @@ let
   unit = "slskd";
   srv = config.server;
   cfg = config.server.services.${unit};
+  arr = config.server.services.arr;
 in
 {
-  config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
+  config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
     age.secrets = {
       slskd.file = "${self}/secrets/slskd.age";
     };
@@ -29,7 +30,7 @@ in
         ];
         volumes = [
           "/var/lib/slskd:/app:rw"
-          "/mnt/data/media/downloads:/downloads:rw"
+          "/mnt/data/downloads:/downloads:rw"
         ];
         environmentFiles = [
           config.age.secrets.slskd.path
