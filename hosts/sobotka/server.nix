@@ -12,7 +12,7 @@
 
     infra = {
       cnixpost = {
-        enable = true;
+        enable = false;
         clamav.enable = true;
         accounts."cnst@cnix.dev" = {
           quota = "10G";
