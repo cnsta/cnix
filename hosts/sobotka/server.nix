@@ -149,6 +149,18 @@
           category = "Automation";
         };
       };
+      freshrss = {
+        enable = true;
+        subdomain = "rss";
+        exposure = "local";
+        port = 8002;
+        homepage = {
+          name = "FreshRSS";
+          description = "Self-hosted RSS and Atom feed aggregator";
+          icon = "freshrss.svg";
+          category = "Media";
+        };
+      };
       ollama = {
         enable = false;
         subdomain = "ai";
