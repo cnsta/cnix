@@ -2,10 +2,10 @@
   nixos = {
     boot = {
       kernel = {
-        variant = "latest";
+        variant = "zfsLatest";
         hardware = [ "amd" ];
         extraKernelParams = [ ];
-        amdOverdrive.enable = true;
+        amdOverdrive.enable = false;
       };
       loader = {
         default = {
@@ -72,7 +72,7 @@
         enable = false;
       };
       fish = {
-        enable = false;
+        enable = true;
       };
       gamemode = {
         enable = false;
@@ -115,7 +115,7 @@
         enable = false;
       };
       nushell = {
-        enable = true;
+        enable = false;
       };
       pkgs = {
         enable = true;

@@ -67,7 +67,7 @@ in
     (mkIf (host == "kima") {
       programs.hyprland.settings = {
         render = {
-          direct_scanout = 1;
+          direct_scanout = 0;
         };
         cursor = {
           no_hardware_cursors = 2;

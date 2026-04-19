@@ -113,6 +113,15 @@ let
             vi_insert: "line"
             vi_normal: "block"
         }
+        table: {
+          mode: "light"
+          index_mode: "auto"
+          abbreviated_row_count: 3
+          trim: {
+            methodology: "truncating"
+            truncating_suffix: "…"
+          }
+        }
         completions: {
             algorithm: "prefix"
             case_sensitive: false
