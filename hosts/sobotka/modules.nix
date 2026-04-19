@@ -66,8 +66,8 @@
         enable = false;
       };
       fish = {
-        enable = false;
-        homeless.enable = false;
+        enable = true;
+        homeless.enable = true;
       };
       gamemode = {
         enable = false;
@@ -103,7 +103,7 @@
         enable = true;
       };
       nushell = {
-        enable = true;
+        enable = false;
       };
       pkgs = {
         enable = true;

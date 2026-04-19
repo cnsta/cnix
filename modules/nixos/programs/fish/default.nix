@@ -6,15 +6,13 @@
 }:
 let
   inherit (lib) mkIf mkEnableOption mkMerge;
-
+  common = import ./common.nix { inherit lib; };
   cfg = config.nixos.programs.fish;
 in
 {
-  options = {
-    nixos.programs.fish = {
-      enable = mkEnableOption "Enables fish shell";
-      homeless.enable = mkEnableOption "Enables features for homeless environments";
-    };
+  options.nixos.programs.fish = {
+    enable = mkEnableOption "system-level fish";
+    homeless.enable = mkEnableOption "full fish config at system level (no home-manager)";
   };
 
   config = mkMerge [
@@ -31,79 +29,24 @@ in
     })
 
     (mkIf cfg.homeless.enable {
+      environment.systemPackages = with pkgs; [
+        eza
+        carapace
+      ];
+
+      programs.starship.enable = true;
+
       programs.fish = {
-        shellAbbrs = {
-          extract = "extract.sh";
-          nixclean = "nh clean all --keep 3";
-          nixdev = "nix develop ~/.nix-config -c $SHELL";
-          nixup = "nh os switch -H $hostname";
-          nixupn = "nh os switch -n -H $hostname";
-          nixupv = "nh os switch -v --show-trace -H $hostname";
-          nixupvn = "nh os switch -n -v --show-trace -H $hostname";
-          flakeup = "nix flake update";
-        };
-        shellAliases = {
-          ".." = "cd ..";
-          "..." = "cd ../../";
-          "...." = "cd ../../../";
-          "....." = "cd ../../../../";
-          "......" = "cd ../../../../../";
-          nixconfig = "cd /home/$USER/.nix-config/";
-          homemodules = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/{$hostname}mod.nix";
-          hmod = "$EDITOR /home/$USER/.nix-config/users/$USER/modules/{$hostname}mod.nix";
-          nixsettings = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/settings.nix";
-          nset = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/settings.nix";
-          nixosmodules = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
-          nmod = "$EDITOR /home/$USER/.nix-config/hosts/$hostname/modules.nix";
-          nsrv = "$EDITOR /home/$USER/.nix-config/hosts/sobotka/server.nix";
+        shellAbbrs = common.abbrs;
+        shellAliases = common.aliases // {
           ls = lib.getExe pkgs.eza;
           tree = "${lib.getExe pkgs.eza} --tree --icons=always";
-          # Clear screen and scrollback
-          clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
-          fnix = "nix-shell --run fish -p";
         };
-        interactiveShellInit =
-          # fish
-          ''
-            # Open command buffer in vim when alt+e is pressed
-            bind \ee edit_command_buffer
 
-            # Use vim bindings and cursors
-            fish_vi_key_bindings
-            set fish_cursor_default     block      blink
-            set fish_cursor_insert      line       blink
-            set fish_cursor_replace_one underscore blink
-            set fish_cursor_visual      block
+        interactiveShellInit = common.interactiveInit + ''
 
-            # Use terminal colors
-            set -x fish_color_autosuggestion      brblack
-            set -x fish_color_cancel              -r
-            set -x fish_color_command             brgreen
-            set -x fish_color_comment             brmagenta
-            set -x fish_color_cwd                 green
-            set -x fish_color_cwd_root            red
-            set -x fish_color_end                 brmagenta
-            set -x fish_color_error               brred
-            set -x fish_color_escape              brcyan
-            set -x fish_color_history_current     --bold
-            set -x fish_color_host                normal
-            set -x fish_color_host_remote         yellow
-            set -x fish_color_match               --background=brblue
-            set -x fish_color_normal              normal
-            set -x fish_color_operator            cyan
-            set -x fish_color_param               brblue
-            set -x fish_color_quote               yellow
-            set -x fish_color_redirection         bryellow
-            set -x fish_color_search_match        'bryellow' '--background=brblack'
-            set -x fish_color_selection           'white' '--bold' '--background=brblack'
-            set -x fish_color_status              red
-            set -x fish_color_user                brgreen
-            set -x fish_color_valid_path          --underline
-            set -x fish_pager_color_completion    normal
-            set -x fish_pager_color_description   yellow
-            set -x fish_pager_color_prefix        'white' '--bold' '--underline'
-            set -x fish_pager_color_progress      'brwhite' '--background=cyan'
-          '';
+          ${pkgs.carapace}/bin/carapace _carapace fish | source
+        '';
       };
     })
   ];

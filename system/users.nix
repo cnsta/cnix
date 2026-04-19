@@ -10,7 +10,7 @@ in
 {
   users.users.${user} = {
     isNormalUser = true;
-    shell = pkgs.bash;
+    shell = pkgs.fish;
     extraGroups = ifTheyExist [
       "wheel"
       "networkmanager"

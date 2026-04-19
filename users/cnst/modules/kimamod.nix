@@ -33,7 +33,7 @@
         enable = true;
       };
       fish = {
-        enable = false;
+        enable = true;
       };
       foot = {
         enable = true;
@@ -135,7 +135,7 @@
         enable = true;
       };
       jellyfin-mpv-shim = {
-        enable = true;
+        enable = false;
       };
       mako = {
         enable = false;

@@ -50,7 +50,7 @@ in
         Type = "simple";
         Restart = "on-failure";
         StandardError = "journal";
-        ExecStart = "/bin/sh -c 'exec /run/current-system/sw/bin/${cfg.scheduler} ${cfg.flags} '";
+        ExecStart = "/run/current-system/sw/bin/${cfg.scheduler} ${cfg.flags}";
       };
     };
   };

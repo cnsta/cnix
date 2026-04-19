@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ osConfig, ... }:
+let
+  user = osConfig.settings.accounts.username;
+in
 {
   imports = [
     ./modules
@@ -6,15 +9,12 @@
   ];
 
   home = {
-    username = "cnst";
-    homeDirectory = "/home/cnst";
+    username = user;
+    homeDirectory = "/home/${user}";
     stateVersion = "26.05";
     extraOutputsToInstall = [
       "doc"
       "devdoc"
-    ];
-    packages = with pkgs; [
-      bun
     ];
   };
 
