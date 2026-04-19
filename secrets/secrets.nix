@@ -79,6 +79,7 @@ in
   "immichOidcSecret.age".publicKeys = sobotka;
   "forgejoOidcSecret.age".publicKeys = sobotka;
   "memosOidcSecret.age".publicKeys = sobotka;
+  "freshrssOidcSecret.age".publicKeys = sobotka;
   "autheliaCloudflared.age".publicKeys = sobotka;
   "grafanaSecretKey.age".publicKeys = sobotka;
   "matrixCloudflared.age".publicKeys = sobotka;

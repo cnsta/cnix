@@ -6,9 +6,7 @@
 }:
 let
   inherit (lib) types mkOption;
-
   cfg = config.server.infra.postgresql;
-
   database =
     { name, ... }:
     {
@@ -17,13 +15,11 @@ let
           type = types.str;
           description = "Database name";
         };
-
         extraUsers = mkOption {
           type = types.listOf types.str;
           default = [ ];
           description = "List of extra users with access to this database.";
         };
-
         extensions = mkOption {
           type = types.listOf types.str;
           default = [ ];
@@ -31,16 +27,16 @@ let
         };
       };
     };
+
+  allUsers = lib.unique (
+    lib.concatMap ({ database, extraUsers, ... }: [ database ] ++ extraUsers) cfg.databases
+  );
 in
 {
-  options = {
-    server.infra.postgresql = {
-      databases = mkOption {
-        type = types.listOf (types.submodule database);
-        default = [ ];
-        description = "List of databases to set up.";
-      };
-    };
+  options.server.infra.postgresql.databases = mkOption {
+    type = types.listOf (types.submodule database);
+    default = [ ];
+    description = "List of databases to set up.";
   };
 
   config = lib.mkIf (cfg.databases != [ ]) {
@@ -54,39 +50,24 @@ in
       );
       authentication = lib.mkForce ''
         local all postgres peer
-
         ${lib.concatMapStringsSep "\n" (
-          {
-            database,
-            extraUsers,
-            ...
-          }:
-          lib.concatMapStringsSep "\n" (user: "local ${database} ${user} peer") ([ database ] ++ extraUsers)
+          { database, extraUsers, ... }:
+          lib.concatMapStringsSep "\n" (u: "local ${database} ${u} peer") ([ database ] ++ extraUsers)
         ) cfg.databases}
       '';
-      ensureUsers =
-        let
-          dbToUsers =
-            {
-              database,
-              extraUsers,
-              ...
-            }:
-            [ database ] ++ extraUsers;
-        in
-        map (name: { inherit name; }) (lib.unique (builtins.concatMap dbToUsers cfg.databases));
     };
 
     systemd.services = {
       postgres-setup =
         let
           pgsql = config.services.postgresql;
-        in
-        {
-          after = [ "postgresql.service" ];
-          wantedBy = [ "multi-user.target" ];
-          path = [ pgsql.package ];
-          script = lib.concatMapStringsSep "\n" (
+
+          createRoles = lib.concatMapStringsSep "\n" (user: ''
+            $PSQL -tAc "SELECT 1 FROM pg_roles WHERE rolname='${user}'" | grep -q 1 \
+              || $PSQL -c 'CREATE USER "${user}"'
+          '') allUsers;
+
+          setupDb =
             {
               database,
               extensions,
@@ -101,35 +82,44 @@ in
                 $PSQL -d '${database}' -c '${createExtensionsSql}'
               '';
               grantSql = lib.concatMapStringsSep "\n" (user: ''
-                $PSQL '${database}' -c 'GRANT ALL ON ALL TABLES IN SCHEMA public TO "${user}";'
-                $PSQL '${database}' -c 'GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO "${user}";'
-                $PSQL '${database}' -c 'ALTER DEFAULT PRIVILEGES FOR ROLE "${database}" IN SCHEMA public GRANT ALL ON TABLES TO "${user}";'
-                $PSQL '${database}' -c 'ALTER DEFAULT PRIVILEGES FOR ROLE "${database}" IN SCHEMA public GRANT ALL ON SEQUENCES TO "${user}";'
+                $PSQL -d '${database}' -c 'GRANT ALL ON ALL TABLES IN SCHEMA public TO "${user}";'
+                $PSQL -d '${database}' -c 'GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO "${user}";'
+                $PSQL -d '${database}' -c 'ALTER DEFAULT PRIVILEGES FOR ROLE "${database}" IN SCHEMA public GRANT ALL ON TABLES TO "${user}";'
+                $PSQL -d '${database}' -c 'ALTER DEFAULT PRIVILEGES FOR ROLE "${database}" IN SCHEMA public GRANT ALL ON SEQUENCES TO "${user}";'
               '') extraUsers;
             in
             ''
-              set -eu
-
-              PSQL="${pkgs.util-linux}/bin/runuser -u ${pgsql.superUser} -- psql --port=${
-                toString (pgsql.settings.port or 5432)
-              } --tuples-only --no-align"
-
               if ! $PSQL -c "SELECT 1 FROM pg_database WHERE datname = '${database}'" | grep --quiet 1; then
                 $PSQL -c 'CREATE DATABASE "${database}" WITH OWNER = "${database}"'
                 ${createExtensionsIfAny}
               fi
               ${grantSql}
-            ''
-          ) cfg.databases;
+            '';
+        in
+        {
+          after = [ "postgresql.service" ];
+          requires = [ "postgresql.service" ];
+          wantedBy = [ "multi-user.target" ];
+          path = [ pgsql.package ];
+
+          script = ''
+            set -eu
+            PSQL="${pkgs.util-linux}/bin/runuser -u ${pgsql.superUser} -- psql --port=${
+              toString (pgsql.settings.port or 5432)
+            } --tuples-only --no-align"
+
+            ${createRoles}
+
+            ${lib.concatMapStringsSep "\n" setupDb cfg.databases}
+          '';
 
           serviceConfig = {
             Type = "oneshot";
+            RemainAfterExit = true;
           };
         };
 
-      postgresql.serviceConfig = {
-        MemoryDenyWriteExecute = true;
-      };
+      postgresql.serviceConfig.MemoryDenyWriteExecute = true;
     };
   };
 }

@@ -14,6 +14,7 @@
     ./lldap
     ./lidarr
     ./forgejo
+    ./freshrss
     ./memos
     ./n8n
     ./nextcloud

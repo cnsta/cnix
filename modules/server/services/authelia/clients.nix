@@ -1,3 +1,4 @@
+# Heavily influenced by @tecosaur's https://github.com/tecosaur/golgi/blob/master/modules/auth/clients.nix
 {
   config,
   lib,

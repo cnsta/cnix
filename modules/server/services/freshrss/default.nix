@@ -2,53 +2,77 @@
   config,
   lib,
   clib,
-  self,
   ...
 }:
 let
   unit = "freshrss";
   cfg = config.server.services.${unit};
-  autheliaUrl = clib.server.mkFullDomain config config.server.services.authelia;
+  authelia = config.server.services.authelia;
+  domain = clib.server.mkFullDomain config cfg;
 in
 {
   config = lib.mkIf cfg.enable {
-    age.secrets = {
-      freshrssOidc = {
-        owner = "freshrss";
-        group = "users";
-        file = (self + "/secrets/freshrssOidcSecret.age");
-      };
-    };
-
     server.infra = {
-      fail2ban.jails.${unit} = {
-        serviceName = "${unit}";
-        failRegex = ".*(Failed authentication attempt|invalid credentials|Attempted access of unknown user).* from <HOST>";
-      };
       postgresql.databases = [
         { database = unit; }
       ];
     };
 
-    services.${unit} = {
+    services.freshrss = {
       enable = true;
-      settings = {
-        server.externalDomain = "https://${clib.server.mkFullDomain config cfg}";
-        oauth = {
-          enabled = true;
-          autoLaunch = true;
-          autoRegister = true;
-          buttonText = "Login";
-          clientId = "immich";
-          clientSecret._secret = config.age.secrets.immichOidc.path;
-          defaultStorageQuota = 0;
-          issuerUrl = "https://${autheliaUrl}/.well-known/openid-configuration";
-          scope = "openid email profile";
-          signingAlgorithm = "RS256";
-          profileSigningAlgorithm = "none";
-          storageLabelClaim = "preferred_username";
-          storageQuotaClaim = "immich_quota";
-        };
+      authType = "http_auth";
+      api.enable = true;
+      virtualHost = domain;
+      baseUrl = "https://${domain}";
+      defaultUser = "admin";
+      language = "en";
+      database = {
+        type = "pgsql";
+        host = "/run/postgresql";
+        port = null;
+        user = "freshrss";
+        name = "freshrss";
+        passFile = null;
+      };
+    };
+
+    services.nginx.virtualHosts.${domain} = {
+      listen = lib.mkForce [
+        {
+          addr = "127.0.0.1";
+          port = cfg.port;
+          ssl = false;
+        }
+      ];
+
+      extraConfig = ''
+        auth_request_set $redirection_url $upstream_http_location;
+        error_page 401 =302 $redirection_url;
+      '';
+
+      locations."~ ^.+?\\.php(/.*)?$".extraConfig = ''
+        auth_request /authelia;
+        auth_request_set $user $upstream_http_remote_user;
+        fastcgi_param REMOTE_USER $user;
+      '';
+
+      locations."/authelia" = {
+        proxyPass = "http://127.0.0.1:${toString authelia.port}/api/authz/auth-request";
+        extraConfig = ''
+          internal;
+          proxy_pass_request_body off;
+          proxy_set_header Content-Length "";
+          proxy_set_header X-Original-URL https://$http_host$request_uri;
+          proxy_set_header X-Original-Method $request_method;
+          proxy_set_header X-Forwarded-Method $request_method;
+          proxy_set_header X-Forwarded-Proto https;
+          proxy_set_header X-Forwarded-Host $http_host;
+          proxy_set_header X-Forwarded-Uri $request_uri;
+          proxy_set_header X-Forwarded-For $remote_addr;
+          proxy_connect_timeout 5s;
+          proxy_send_timeout 5s;
+          proxy_read_timeout 5s;
+        '';
       };
     };
   };
