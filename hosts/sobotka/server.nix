@@ -161,6 +161,18 @@
           category = "Media";
         };
       };
+      searxng = {
+        enable = false;
+        subdomain = "search";
+        exposure = "local";
+        port = 8084;
+        homepage = {
+          name = "SearXNG";
+          description = "Internet metasearch engine";
+          icon = "searxng.svg";
+          category = "cloud";
+        };
+      };
       ollama = {
         enable = false;
         subdomain = "ai";
