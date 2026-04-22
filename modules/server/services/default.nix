@@ -24,6 +24,7 @@
     ./prowlarr
     ./radarr
     ./roundcube
+    ./searxng
     ./slskd
     ./sonarr
     ./tdarr
