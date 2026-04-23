@@ -53,7 +53,7 @@ in
         extraOptions = [
           "--cap-add=NET_ADMIN"
         ];
-        volumes = [ "/var/lib/gluetun:/gluetun" ];
+        volumes = [ "/var/lib/gluetun-searxng:/gluetun" ];
         environmentFiles = [
           config.age.secrets.gluetunSearxngEnvironment.path
         ];
