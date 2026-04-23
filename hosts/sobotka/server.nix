@@ -162,7 +162,7 @@
         };
       };
       searxng = {
-        enable = false;
+        enable = true;
         subdomain = "search";
         exposure = "local";
         port = 8084;
@@ -170,7 +170,7 @@
           name = "SearXNG";
           description = "Internet metasearch engine";
           icon = "searxng.svg";
-          category = "cloud";
+          category = "Cloud";
         };
       };
       ollama = {
