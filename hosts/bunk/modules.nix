@@ -2,7 +2,7 @@
   nixos = {
     boot = {
       kernel = {
-        variant = "latest";
+        variant = "zfsLatest";
         hardware = [ "amd" ];
       };
       loader = {
@@ -65,7 +65,7 @@
         enable = false;
       };
       fish = {
-        enable = false;
+        enable = true;
       };
       gamemode = {
         enable = false;
@@ -105,7 +105,7 @@
         enable = false;
       };
       nushell = {
-        enable = true;
+        enable = false;
       };
       pkgs = {
         enable = true;
