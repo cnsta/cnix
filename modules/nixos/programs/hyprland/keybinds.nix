@@ -136,8 +136,8 @@ in
     (mkIf (host == "toothpc") {
       programs.hyprland.settings = {
         "$terminal" = "alacritty";
-        "$browser" = "firefox";
-        "$browserinc" = "firefox --private-window";
+        "$browser" = "librewolf";
+        "$browserinc" = "librewolf --private-window";
         "$mod" = "ALT_L";
         bind = [
           # Add more host-specific binds as needed
