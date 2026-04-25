@@ -58,6 +58,7 @@ in
   "wgSobotkaPrivateKey.age".publicKeys = sobotka;
   "gluetunEnvironment.age".publicKeys = sobotka;
   "gluetunSearxngEnvironment.age".publicKeys = sobotka;
+  "gluetunArrEnvironment.age".publicKeys = sobotka;
   "sobotkaPihole.age".publicKeys = sobotka;
   "slskd.age".publicKeys = sobotka;
   "traefikEnv.age".publicKeys = sobotka;
@@ -90,6 +91,11 @@ in
   "livekitYaml.age".publicKeys = sobotka;
   "cinnyJson.age".publicKeys = sobotka;
   "searxngEnvironment.age".publicKeys = sobotka;
+  "flaresolverrEnvironment.age".publicKeys = sobotka;
+  "prowlarrEnvironment.age".publicKeys = sobotka;
+  "sonarrEnvironment.age".publicKeys = sobotka;
+  "radarrEnvironment.age".publicKeys = sobotka;
+  "lidarrEnvironment.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;
