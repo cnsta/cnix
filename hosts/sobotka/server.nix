@@ -149,6 +149,18 @@
           category = "Automation";
         };
       };
+      hoppscotch = {
+        enable = true;
+        subdomain = "hoppscotch";
+        exposure = "local";
+        port = 3080;
+        homepage = {
+          name = "Hoppscotch";
+          description = "API Development Ecosystem";
+          icon = "hoppscotch.svg";
+          category = "Dev";
+        };
+      };
       freshrss = {
         enable = true;
         subdomain = "rss";
@@ -414,6 +426,18 @@
           name = "qBittorrent";
           description = "Torrent client";
           icon = "qbittorrent.svg";
+          category = "Downloads";
+        };
+      };
+      qui = {
+        enable = true;
+        subdomain = "qui";
+        exposure = "local";
+        port = 7476;
+        homepage = {
+          name = "qui";
+          description = "A web interface for qBittorrent";
+          icon = "qui.svg";
           category = "Downloads";
         };
       };

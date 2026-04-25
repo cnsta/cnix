@@ -11,6 +11,7 @@ in
     podman.enable = lib.mkEnableOption "Enables Podman";
   };
   config = lib.mkIf infra.podman.enable {
+    networking.firewall.trustedInterfaces = [ "podman0" ];
     virtualisation = {
       podman.enable = true;
       containers = {

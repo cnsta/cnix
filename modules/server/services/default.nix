@@ -7,6 +7,7 @@
     ./element
     ./flaresolverr
     ./homepage
+    ./hoppscotch
     ./grafana
     ./immich
     ./jellyfin

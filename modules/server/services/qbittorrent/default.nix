@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  self,
   ...
 }:
 let
@@ -11,15 +12,21 @@ let
 in
 {
   config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
+    age.secrets = {
+      qbtEnvironment.file = (self + "/secrets/qbtEnvironment.age");
+      quiEnvironment.file = (self + "/secrets/quiEnvironment.age");
+    };
+
+    systemd.tmpfiles.rules = [
+      "d /var/lib/qbittorrent 0755 share share - -"
+      "d /var/lib/qui 0755 share share - -"
+    ];
+
     virtualisation.oci-containers.containers = {
       ${unit} = {
         image = "ghcr.io/hotio/qbittorrent:latest";
         autoStart = true;
         dependsOn = [ "gluetun" ];
-        ports = [
-          "8080:8080"
-          "58846:58846"
-        ];
         extraOptions = [
           "--network=container:gluetun"
         ];
@@ -27,12 +34,20 @@ in
           "/var/lib/qbittorrent:/config:rw"
           "/mnt/data/downloads:/downloads:rw"
         ];
-        environment = {
-          PUID = "994";
-          PGID = "993";
-          TZ = "Europe/Stockholm";
-          WEBUI_PORT = "${builtins.toString cfg.port}";
-        };
+        environmentFiles = [ config.age.secrets.qbtEnvironment.path ];
+      };
+
+      qui = {
+        image = "ghcr.io/hotio/qui:latest";
+        autoStart = true;
+        dependsOn = [ "gluetun-arr" ];
+        extraOptions = [
+          "--network=container:gluetun-arr"
+        ];
+        volumes = [
+          "/var/lib/qui:/config"
+        ];
+        environmentFiles = [ config.age.secrets.quiEnvironment.path ];
       };
     };
   };

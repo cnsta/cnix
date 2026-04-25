@@ -80,6 +80,7 @@ in
           feh
           feishin
           overskride
+          hoppscotch
         ])
 
         (mkIf cfg.desktop.enable [
