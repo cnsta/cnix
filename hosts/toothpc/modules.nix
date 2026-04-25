@@ -2,7 +2,7 @@
   nixos = {
     boot = {
       kernel = {
-        variant = "latest";
+        variant = "zfsLatest";
         hardware = [ "nvidia" ];
       };
       loader = {
@@ -114,7 +114,7 @@
         };
       };
       mysql-workbench = {
-        enable = true;
+        enable = false;
       };
       nh = {
         enable = true;

@@ -96,6 +96,10 @@ in
   "sonarrEnvironment.age".publicKeys = sobotka;
   "radarrEnvironment.age".publicKeys = sobotka;
   "lidarrEnvironment.age".publicKeys = sobotka;
+  "qbtEnvironment.age".publicKeys = sobotka;
+  "quiEnvironment.age".publicKeys = sobotka;
+  "hoppscotchEnvironment.age".publicKeys = sobotka;
+  "hoppscotchPgPwd.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

@@ -82,6 +82,12 @@ in
                 default = "";
                 description = "The subdomain for the service (e.g., 'jellyfin')";
               };
+              path = lib.mkOption {
+                type = lib.types.str;
+                default = "";
+                example = "/admin";
+                description = "Optional path suffix for homepage links (e.g. /admin).";
+              };
               exposure = lib.mkOption {
                 type = lib.types.enum [
                   "local"

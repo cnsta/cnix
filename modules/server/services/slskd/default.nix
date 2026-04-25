@@ -13,18 +13,14 @@ in
 {
   config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
     age.secrets = {
-      slskd.file = "${self}/secrets/slskd.age";
+      slskd.file = (self + "/secrets/slskd.age");
     };
+
     virtualisation.oci-containers.containers = {
       ${unit} = {
         image = "slskd/slskd:latest";
         autoStart = true;
         dependsOn = [ "gluetun" ];
-        ports = [
-          "5030:5030"
-          "5031:5031"
-          "50300:50300"
-        ];
         extraOptions = [
           "--network=container:gluetun"
         ];
