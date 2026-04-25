@@ -105,7 +105,7 @@ in
             julia.enable = false;
             clang = {
               enable = true;
-              lsp.server = "clangd";
+              lsp.servers = [ "clangd" ];
             };
 
             rust = {
