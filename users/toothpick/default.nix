@@ -7,13 +7,10 @@
   home = {
     username = "toothpick";
     homeDirectory = "/home/toothpick";
-    stateVersion = "23.11";
+    stateVersion = "26.05";
     extraOutputsToInstall = [
       "doc"
       "devdoc"
-    ];
-
-    packages = with pkgs; [
     ];
 
     sessionVariables = {
