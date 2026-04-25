@@ -21,8 +21,9 @@ in
 {
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
     age.secrets = {
-      pihole.file = "${self}/secrets/${config.networking.hostName}Pihole.age";
+      pihole.file = (self + "/secrets/${config.networking.hostName}Pihole.age");
     };
+
     networking.firewall = {
       allowedTCPPorts = [
         53
@@ -33,6 +34,7 @@ in
         5335
       ];
     };
+
     virtualisation.oci-containers.containers = {
       ${unit} = {
         autoStart = true;
