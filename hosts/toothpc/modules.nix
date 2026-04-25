@@ -178,9 +178,6 @@
       mullvad = {
         enable = false;
       };
-      nix-ld = {
-        enable = false;
-      };
       ssh = {
         enable = true;
       };
