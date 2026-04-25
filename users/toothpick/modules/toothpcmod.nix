@@ -86,7 +86,7 @@
         enable = false;
       };
       zen = {
-        enable = true;
+        enable = false;
       };
       zsh = {
         enable = false;
@@ -114,7 +114,7 @@
         enable = true;
       };
       jellyfin-mpv-shim = {
-        enable = true;
+        enable = false;
       };
       mako = {
         enable = false;
@@ -132,7 +132,7 @@
         enable = true;
       };
       quickshell = {
-        enable = true;
+        enable = false;
       };
       xdg = {
         enable = true;
