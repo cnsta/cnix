@@ -78,6 +78,10 @@ in
             install_url = amo "sponsorblock";
             installation_mode = "force_installed";
           };
+          "{d07ccf11-c0cd-4938-a265-2a4d6ad01189}" = {
+            install_url = amo "view-page-archive";
+            installation_mode = "force_installed";
+          };
         };
       };
     };
