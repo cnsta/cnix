@@ -119,9 +119,6 @@
       mako = {
         enable = false;
       };
-      nix-index = {
-        enable = true;
-      };
       swaync = {
         enable = true;
       };
