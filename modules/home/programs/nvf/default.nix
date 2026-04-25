@@ -78,31 +78,37 @@ in
             enableTreesitter = true;
             enableExtraDiagnostics = true;
             nim.enable = false;
-            nix.enable = true;
-            markdown = {
-              enable = true;
-              # format.extraFiletypes = ["quarto" "rmarkdown"];
-            };
-            html.enable = true;
-            css.enable = true;
-            r.enable = false;
-            sql.enable = true;
             java.enable = false;
-            ts.enable = true;
             svelte.enable = false;
             vala.enable = false;
-            go.enable = false;
-            elixir.enable = false;
-            zig.enable = false;
-            ocaml.enable = false;
-            nu.enable = false;
-            python.enable = false; # pyright wont build
             dart.enable = false;
+            elixir.enable = false;
+            haskell.enable = true;
+            nix.enable = true;
+            markdown.enable = true;
+            html.enable = true;
+            css.enable = true;
+            r = {
+              enable = true;
+              format.type = [ "styler" ];
+            };
+            sql.enable = true;
+            typescript = {
+              enable = true;
+              extraDiagnostics.enable = false;
+            };
+            go.enable = true;
+            zig.enable = true;
+            ocaml.enable = true;
+            nu.enable = true;
+            python = {
+              enable = true;
+              lsp.servers = [ "pyright" ];
+            };
             lua.enable = true;
             bash.enable = true;
-            tailwind.enable = false;
-            typst.enable = false;
-            julia.enable = false;
+            typst.enable = true;
+            julia.enable = true;
             clang = {
               enable = true;
               lsp.servers = [ "clangd" ];
@@ -110,7 +116,7 @@ in
 
             rust = {
               enable = true;
-              crates.enable = true;
+              extensions.crates-nvim.enable = true;
             };
           };
 
@@ -140,12 +146,6 @@ in
               };
             };
           };
-
-          # luaConfigRC.basic = ''
-          #   -- vim.opt.undofile = true
-          # vim.g.nvim_ghost_use_script = 1
-          # vim.g.nvim_ghost_python_executable = 'python'
-          # '';
 
           theme.enable = false;
 
