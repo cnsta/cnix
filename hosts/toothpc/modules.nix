@@ -133,7 +133,7 @@
         enable = true;
       };
       thunar = {
-        enable = true;
+        enable = false;
       };
       zsh = {
         enable = false;
