@@ -38,6 +38,9 @@
       jujutsu = {
         enable = false;
       };
+      librewolf = {
+        enable = true;
+      };
       kitty = {
         enable = true;
       };
