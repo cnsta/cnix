@@ -63,6 +63,7 @@ in
         nixd
         nil
         nixfmt
+        htop
       ])
       (mkIf cfg.gui.enable [
         resources

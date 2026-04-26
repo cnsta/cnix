@@ -4,62 +4,30 @@
   lib,
   ...
 }:
+with lib;
 let
-  inherit (lib)
-    mkIf
-    mkEnableOption
-    mkOption
-    types
-    mkMerge
-    ;
   cfg = config.home.programs.pkgs;
 in
 {
   options = {
     home.programs.pkgs = {
-      enable = mkEnableOption "Enables miscellaneous utility apps";
-      gui.enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to install gui-specific packages.";
-      };
-      desktop.enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to install desktop-specific packages.";
-      };
-      laptop.enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to install laptop-specific packages.";
-      };
-      dev.enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to install development-specific packages.";
-      };
+      common.enable = mkEnableOption "core packages";
+      gui.enable = mkEnableOption "gui-specific packages";
+      desktop.enable = mkEnableOption "desktop-specific packages";
+      laptop.enable = mkEnableOption "laptop-specific packages";
+      dev.enable = mkEnableOption "dev-specific packages";
     };
   };
-  config = mkIf cfg.enable {
-    programs = {
-      btop = {
-        enable = true;
-        package = pkgs.btop.override { rocmSupport = true; };
-        settings = {
-          color_theme = "gruvbox_material_dark";
-        };
-      };
-    };
-
+  config = {
     home.packages =
       with pkgs;
       mkMerge [
-        [
+        (mkIf cfg.common.enable [
           cmatrix
           xcur2png
           nix-tree
           exiftool
-        ]
+        ])
 
         (mkIf cfg.gui.enable [
           nwg-look
