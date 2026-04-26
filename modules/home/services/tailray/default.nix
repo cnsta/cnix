@@ -31,10 +31,6 @@ with lib;
           "waybar.service"
         ];
       };
-      Service = {
-        Restart = "on-failure";
-        RestartSec = 2;
-      };
     };
   };
 }
