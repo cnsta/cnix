@@ -1,9 +1,17 @@
 {
+  self,
+  lib,
+  ...
+}:
+let
+  clib = import (self + "/lib") { inherit lib; };
+in
+{
   imports = [
-    ./boot
-    ./hardware
+    {
+      _module.args.clib = clib;
+    }
     ./programs
     ./services
-    ./system
   ];
 }

@@ -12,11 +12,11 @@ let
     mkMerge
     mkForce
     ;
-  cfg = config.nixos.boot.loader;
+  cfg = config.settings.boot.loader;
 in
 {
   options = {
-    nixos.boot.loader = {
+    settings.boot.loader = {
       default = {
         enable = mkEnableOption "Enable default boot loader configuration.";
       };

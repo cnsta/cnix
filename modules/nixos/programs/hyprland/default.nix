@@ -57,6 +57,25 @@ in
       };
     };
 
+    xdg = {
+      portal = {
+        enable = true;
+        xdgOpenUsePortal = true;
+        config = {
+          preferred.default = [
+            "hyprland"
+          ];
+          hyprland.default = [
+            "hyprland"
+            "gtk"
+          ];
+        };
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
+        ];
+      };
+    };
+
     environment.variables.NIXOS_OZONE_WL = "1";
   };
 }

@@ -12,9 +12,9 @@
     "....." = "cd ../../../../";
     "......" = "cd ../../../../../";
     nixconfig = "cd $NH_FLAKE/";
-    hmod = "$EDITOR $NH_FLAKE/users/$USER/modules/{$hostname}mod.nix";
+    hmod = "$EDITOR $NH_FLAKE/users/modules.nix";
     nset = "$EDITOR $NH_FLAKE/hosts/$hostname/settings.nix";
-    nmod = "$EDITOR $NH_FLAKE/hosts/$hostname/modules.nix";
+    nmod = "$EDITOR $NH_FLAKE/hosts/modules.nix";
     nsrv = "$EDITOR $NH_FLAKE/hosts/sobotka/server.nix";
     fnix = "nix-shell --run fish -p";
     extract = "extract.sh";

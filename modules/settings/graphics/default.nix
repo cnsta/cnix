@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  cfg = config.nixos.hardware.graphics;
+  cfg = config.settings.graphics;
 
   commonPackages = with pkgs; [
     libva-vdpau-driver
@@ -23,7 +23,7 @@ let
   hasVendor = vendor: builtins.elem vendor cfg.vendors;
 in
 {
-  options.nixos.hardware.graphics = {
+  options.settings.graphics = {
     vendors = mkOption {
       type = types.listOf (
         types.enum [

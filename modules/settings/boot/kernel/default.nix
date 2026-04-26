@@ -11,7 +11,7 @@ let
     mkEnableOption
     mkIf
     ;
-  cfg = config.nixos.boot.kernel;
+  cfg = config.settings.boot.kernel;
 
   hasHardware = hw: builtins.elem hw cfg.hardware;
 in
@@ -21,7 +21,7 @@ in
   ];
 
   options = {
-    nixos.boot.kernel = {
+    settings.boot.kernel = {
       variant = mkOption {
         type = types.enum [
           "stable"
