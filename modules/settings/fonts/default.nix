@@ -7,11 +7,11 @@
 }:
 let
   inherit (lib) mkIf mkOption types;
-  cfg = config.nixos.system.fonts;
+  cfg = config.settings.fonts;
 in
 {
   options = {
-    nixos.system.fonts = {
+    settings.fonts = {
       enable = mkOption {
         type = types.bool;
         default = true;

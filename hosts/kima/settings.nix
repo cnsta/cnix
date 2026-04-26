@@ -5,6 +5,39 @@
       mail = "adam@cnst.dev";
       sshUser = "kima";
     };
+
+    boot = {
+      kernel = {
+        variant = "zfsLatest";
+        hardware = [ "amd" ];
+        extraKernelParams = [ ];
+        amdOverdrive.enable = false;
+      };
+      loader = {
+        default = {
+          enable = false;
+        };
+        lanzaboote = {
+          enable = true;
+        };
+      };
+    };
+
+    fonts = {
+      enable = true;
+    };
+
+    graphics = {
+      vendors = [ "amd" ];
+    };
+
+    locale = {
+      enable = true;
+      defaultLocale = "en_US.UTF-8";
+      extraLocale = "sv_SE.UTF-8";
+      timeZone = "Europe/Stockholm";
+    };
+
     monitors = [
       {
         name = "DP-3";
@@ -33,6 +66,47 @@
         workspace = "1";
       }
     ];
+
+    network = {
+      enable = true;
+      tailscale.enable = true;
+      bluetooth.enable = true;
+      nameservers = [
+        "192.168.88.1"
+        "192.168.88.69"
+      ];
+      search = [
+        "taila7448a.ts.net"
+      ];
+      interfaces = {
+        "eno1" = {
+          allowedTCPPorts = [
+            22
+            80
+            443
+          ];
+        };
+      };
+    };
+
+    peripherals = {
+      logitech.enable = false;
+      kanata.enable = true;
+      adb.enable = true;
+      yubikey = {
+        manager.enable = true;
+        touch-detector.enable = true;
+      };
+      pcscd.enable = true;
+      lightcrazy = {
+        enable = true;
+        service = {
+          enable = true;
+        };
+      };
+      utils.enable = true;
+    };
+
     theme = {
       background = {
         lockscreen = "resadversae_2k";

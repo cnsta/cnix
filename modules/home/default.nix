@@ -4,7 +4,7 @@
   ...
 }:
 let
-  clib = import (self + "/lib/home") { inherit lib; };
+  clib = import (self + "/lib") { inherit lib; };
 in
 {
   imports = [

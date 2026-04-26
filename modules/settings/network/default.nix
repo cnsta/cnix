@@ -10,13 +10,14 @@ let
     mkOption
     types
     ;
-  cfg = config.nixos.hardware.network;
+  cfg = config.settings.network;
 in
 {
   options = {
-    nixos.hardware.network = {
+    settings.network = {
       enable = mkEnableOption "Enable the custom networking module";
       tailscale.enable = mkEnableOption "Enable tailscale client service";
+      bluetooth.enable = mkEnableOption "Enables bluetooth";
       nameservers = mkOption {
         type = types.listOf types.str;
         default = [ ];
@@ -81,5 +82,12 @@ in
     };
 
     services.tailscale.enable = mkIf cfg.tailscale.enable true;
+
+    hardware = mkIf cfg.bluetooth.enable {
+      bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+      };
+    };
   };
 }

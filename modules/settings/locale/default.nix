@@ -10,7 +10,7 @@ let
     mkDefault
     types
     ;
-  cfg = config.nixos.system.locale;
+  cfg = config.settings.locale;
   defaultCategories = [
     "LC_ADDRESS"
     "LC_IDENTIFICATION"
@@ -25,7 +25,7 @@ let
 in
 {
   options = {
-    nixos.system.locale = {
+    settings.locale = {
       enable = mkOption {
         type = types.bool;
         default = true;

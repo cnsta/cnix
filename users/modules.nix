@@ -1,8 +1,8 @@
 { osConfig, clib, ... }:
 let
   host = osConfig.networking.hostName;
-  en = clib.home.mkEn host;
-  when = clib.home.mkWhen host;
+  en = clib.mkEn host;
+  when = clib.mkWhen host;
 in
 {
   home.programs = {

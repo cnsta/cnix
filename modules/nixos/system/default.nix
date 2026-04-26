@@ -1,7 +1,0 @@
-{
-  imports = [
-    ./fonts
-    ./locale
-    ./xdg
-  ];
-}
