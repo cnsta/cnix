@@ -86,7 +86,6 @@ in
         (mkIf cfg.desktop.enable [
           protontricks
           monero-gui
-          lutris
         ])
 
         (mkIf cfg.laptop.enable [
