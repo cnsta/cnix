@@ -11,6 +11,7 @@ in
     {
       _module.args.clib = clib;
     }
+    ./modules.nix
     ./programs
     ./services
   ];

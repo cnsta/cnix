@@ -25,7 +25,6 @@ let
     (self + "/scripts")
     self.modules.home
     sharedEnv
-    ./modules.nix
   ];
 
   homeImports = {

@@ -16,7 +16,6 @@
       };
 
       commonModules = [
-        ./modules.nix
         "${self}/system"
         self.modules.nixos
         self.modules.settings
