@@ -20,7 +20,21 @@ with lib;
       enable = true;
     };
     systemd.user.services.tailray = {
-      Unit.After = lib.mkForce "graphical-session.target";
+      Unit = {
+        After = lib.mkForce [
+          "graphical-session.target"
+          "quickshell.service"
+          "waybar.service"
+        ];
+        Wants = [
+          "quickshell.service"
+          "waybar.service"
+        ];
+      };
+      Service = {
+        Restart = "on-failure";
+        RestartSec = 2;
+      };
     };
   };
 }
