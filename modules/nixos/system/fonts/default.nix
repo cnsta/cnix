@@ -22,33 +22,39 @@ in
 
   config = mkIf cfg.enable {
     fonts = {
-      packages = with pkgs; [
-        inputs.fonts.packages.${pkgs.stdenv.hostPlatform.system}.vcr-mono
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-color-emoji
-        liberation_ttf
-        fira-code-symbols
-        font-awesome
-        recursive
-        input-fonts
-        source-code-pro
-        ibm-plex
-        nerd-fonts.jetbrains-mono
-        nerd-fonts.departure-mono
-        nerd-fonts.fira-code
-        nerd-fonts.fira-mono
-        nerd-fonts.iosevka
-        nerd-fonts._3270
-        nerd-fonts.droid-sans-mono
-        nerd-fonts.ubuntu-mono
-        nerd-fonts.overpass
-        nerd-fonts.monoid
-        nerd-fonts.mononoki
-        nerd-fonts.hack
-        nerd-fonts.tinos
-        inter
-      ];
+      packages =
+        (with pkgs; [
+          noto-fonts
+          noto-fonts-cjk-sans
+          noto-fonts-color-emoji
+          liberation_ttf
+          fira-code-symbols
+          font-awesome
+          recursive
+          input-fonts
+          source-code-pro
+          ibm-plex
+          inter
+        ])
+        ++ (with pkgs.nerd-fonts; [
+          jetbrains-mono
+          departure-mono
+          fira-code
+          fira-mono
+          iosevka
+          _3270
+          droid-sans-mono
+          ubuntu-mono
+          overpass
+          monoid
+          mononoki
+          hack
+          tinos
+          symbols-only
+        ])
+        ++ [
+          inputs.fonts.packages.${pkgs.stdenv.hostPlatform.system}.vcr-mono
+        ];
 
       fontconfig.defaultFonts = {
         serif = [ "Tinos" ];

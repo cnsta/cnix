@@ -4,45 +4,23 @@
   pkgs,
   ...
 }:
+with lib;
 let
-  inherit (lib)
-    mkOption
-    mkIf
-    mkMerge
-    types
-    flatten
-    concatMap
-    ;
-
   cfg = config.nixos.hardware.graphics;
 
   commonPackages = with pkgs; [
-    libva
     libva-vdpau-driver
     libvdpau-va-gl
-  ];
-
-  commonPackages32 = with pkgs.pkgsi686Linux; [
-    libva
-    libva-vdpau-driver
-    libvdpau-va-gl
-  ];
-
-  mesaVulkanPackages = with pkgs; [
-    vulkan-loader
-    vulkan-validation-layers
-    vulkan-extension-layer
-    vulkan-utility-libraries
   ];
 
   tools = with pkgs; [
+    libva
     vulkan-tools
     wayland
     wayland-protocols
   ];
 
   hasVendor = vendor: builtins.elem vendor cfg.vendors;
-  nonNvidia = builtins.any (v: v != "nvidia") cfg.vendors;
 in
 {
   options.nixos.hardware.graphics = {
@@ -78,77 +56,50 @@ in
   };
 
   config = mkMerge [
-    (mkIf nonNvidia {
-      hardware = {
-        graphics = {
-          enable = true;
-          enable32Bit = true;
-          extraPackages = flatten (
-            concatMap (
-              vendor:
-              if vendor == "amd" then
-                commonPackages ++ mesaVulkanPackages
-              else if vendor == "intel" then
-                commonPackages
-                ++ mesaVulkanPackages
-                ++ (with pkgs; [
-                  vpl-gpu-rt
-                  intel-media-driver
-                  intel-compute-runtime
-                  intel-vaapi-driver
-                ])
-              else
-                [ ]
-            ) cfg.vendors
-          );
-          extraPackages32 = flatten (concatMap (_: commonPackages32) cfg.vendors);
-        };
-      };
-
-      environment.systemPackages = flatten (
-        concatMap (
+    (mkIf (cfg.vendors != [ ]) {
+      hardware.graphics = {
+        enable = true;
+        enable32Bit = true;
+        extraPackages = concatMap (
           vendor:
           if vendor == "amd" then
-            tools
-            ++ (with pkgs; [
-              # rocmPackages.rpp
-              # rocmPackages.clr
-            ])
+            commonPackages
           else if vendor == "intel" then
-            tools
-          else if vendor == "nvidia" then
-            with pkgs;
-            [
-              egl-wayland
-              libGL
+            commonPackages
+            ++ (with pkgs; [
+              vpl-gpu-rt
               intel-media-driver
-              nvidia-vaapi-driver
-              vulkan-tools
-            ]
+              intel-compute-runtime
+              intel-vaapi-driver
+            ])
+          else if vendor == "nvidia" then
+            (with pkgs; [ nvidia-vaapi-driver ])
           else
             [ ]
-        ) cfg.vendors
-      );
+        ) cfg.vendors;
+      };
+
+      environment.systemPackages =
+        tools
+        ++ concatMap (
+          vendor:
+          if vendor == "nvidia" then
+            (with pkgs; [
+              egl-wayland
+              libGL
+            ])
+          else
+            [ ]
+        ) cfg.vendors;
     })
 
     (mkIf (hasVendor "nvidia") {
       hardware.nvidia = {
-        package =
-          if cfg.nvidia.package == "beta" then
-            config.boot.kernelPackages.nvidiaPackages.beta
-          else if cfg.nvidia.package == "latest" then
-            config.boot.kernelPackages.nvidiaPackages.latest
-          else if cfg.nvidia.package == "production" then
-            config.boot.kernelPackages.nvidiaPackages.production
-          else
-            config.boot.kernelPackages.nvidiaPackages.stable;
-
-        modesetting.enable = true;
-        powerManagement.enable = false;
-        powerManagement.finegrained = false;
+        package = config.boot.kernelPackages.nvidiaPackages.${cfg.nvidia.package};
         open = cfg.nvidia.open;
         nvidiaSettings = true;
       };
+      services.xserver.videoDrivers = mkDefault [ "nvidia" ];
     })
   ];
 }

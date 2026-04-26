@@ -71,6 +71,9 @@
       corectrl = {
         enable = false;
       };
+      emacs = {
+        enable = true;
+      };
       fish = {
         enable = true;
       };

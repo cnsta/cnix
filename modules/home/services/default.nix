@@ -1,0 +1,20 @@
+{
+  imports = [
+    ./blueman-applet
+    ./copyq
+    ./dconf
+    ./dunst
+    ./jellyfin-mpv-shim
+    ./gpg
+    ./gtk
+    ./hypridle
+    ./hyprpaper
+    ./mako
+    ./syncthing
+    ./swaync
+    ./tailray
+    ./udiskie
+    ./quickshell
+    ./xdg
+  ];
+}

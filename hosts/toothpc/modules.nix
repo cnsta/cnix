@@ -196,10 +196,6 @@
       udisks = {
         enable = true;
       };
-      xserver = {
-        videoDrivers = [ "nvidia" ];
-        xkbLayout = "se";
-      };
       zram = {
         enable = true;
       };
