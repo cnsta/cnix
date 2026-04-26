@@ -13,14 +13,12 @@ Some tools and apps I use:
 - **[kanata](https://github.com/jtroo/kanata)** _Keyboard mapping, good stuff._
 - **[quickshell](https://quickshell.outfoxxed.me/)** _Wayland shell, replaced
   waybar._
-- **[zen-browser](https://github.com/zen-browser/desktop)** _Beta-stage
-  Firefox-based browser._
 - **[fuzzel](https://codeberg.org/dnkl/fuzzel)** _App launcher, does what it
   says._
 - **[helix](https://github.com/helix-editor/helix)** _Neat vim-like editor._
 - **[microfetch](https://github.com/NotAShelf/microfetch)** _It's neofetch but
   better._
-- **[tailscale](https://tailscale.com/)** _Mesh VPN holding the fleet together._
+- **[tailscale](https://tailscale.com/)** _Mesh VPN, you know what it is._
 
 ## Hosts
 
