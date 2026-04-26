@@ -1,26 +1,26 @@
-{ pkgs, ... }:
-{
-  imports = [
-    ./modules
-  ];
+{ osConfig, pkgs, ... }:
+let
+  user = osConfig.settings.accounts.username;
 
+  variables = {
+    VISUAL = "hx";
+    DEFAULT_BROWSER = (pkgs.librewolf + "/bin/librewolf");
+    LIBVA_DRIVER_NAME = "nvidia";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  };
+in
+{
   home = {
-    username = "toothpick";
-    homeDirectory = "/home/toothpick";
+    username = user;
+    homeDirectory = ("/home/" + user);
     stateVersion = "26.05";
+    sessionVariables = variables;
     extraOutputsToInstall = [
       "doc"
       "devdoc"
     ];
-
-    sessionVariables = {
-      BROWSER = "zen";
-      EDITOR = "nvim";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      NVD_BACKEND = "direct";
-      GBM_BACKEND = "nvidia-drm";
-      WLR_NO_HARDWARE_CURSORS = "1";
-    };
   };
 
   manual = {

@@ -1,0 +1,7 @@
+{
+  imports = [
+    ./fonts
+    ./locale
+    ./xdg
+  ];
+}

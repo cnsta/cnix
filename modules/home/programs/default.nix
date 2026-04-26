@@ -1,0 +1,42 @@
+{
+  imports = [
+    ./aerc
+    ./alacritty
+    ./bash
+    ./chromium
+    ./direnv
+    ./discord
+    ./element-desktop
+    ./eza
+    ./floorp
+    ./firefox
+    ./fish
+    ./foot
+    ./fuzzel
+    ./ghostty
+    ./git
+    ./hyprlock
+    ./jujutsu
+    ./librewolf
+    ./kitty
+    ./mpv
+    ./neovim
+    ./nvf
+    ./nushell
+    ./nwg-bar
+    ./pkgs
+    ./rofi
+    ./ssh
+    ./thunderbird
+    ./vscode
+    ./waybar
+    ./wezterm
+    ./yazi
+    ./qt
+    ./zathura
+    ./zed-editor
+    ./zellij
+    ./zen
+    ./zsh
+  ];
+}

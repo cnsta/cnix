@@ -154,6 +154,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Custom
     zen-browser = {
       url = "github:cnsta/zen-browser-flake";

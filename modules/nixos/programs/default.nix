@@ -1,0 +1,31 @@
+{
+  imports = [
+    ./helix
+    ./beekeeper
+    ./blender
+    ./corectrl
+    ./emacs
+    ./fish
+    ./gamemode
+    ./gamescope
+    ./git
+    ./gimp
+    ./gnome
+    ./hyprland
+    ./inkscape
+    ./lact
+    ./lutris
+    ./microfetch
+    ./niri
+    ./nushell
+    ./pkgs
+    ./mysql-workbench
+    ./nh
+    ./npm
+    ./obsidian
+    ./steam
+    ./thunar
+    ./wireshark
+    ./zsh
+  ];
+}

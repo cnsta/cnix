@@ -1,0 +1,26 @@
+{
+  imports = [
+    ./agenix
+    ./blueman
+    ./dbus
+    ./dconf
+    ./flatpak
+    ./fwupd
+    ./gnome
+    ./greetd
+    ./gvfs
+    ./virtualisation
+    ./locate
+    ./mullvad
+    ./nfs
+    ./ssh
+    ./pipewire
+    ./polkit
+    ./power
+    ./psd
+    ./samba
+    ./scx
+    ./udisks
+    ./zram
+  ];
+}

@@ -1,17 +1,27 @@
-{ osConfig, ... }:
+{ osConfig, pkgs, ... }:
 let
   user = osConfig.settings.accounts.username;
+
+  hostSpecificVariables = {
+    VISUAL = "hx";
+    DEFAULT_BROWSER = (pkgs.librewolf + "/bin/librewolf");
+  }
+  // (
+    if osConfig.networking.hostName == "bunk" then
+      { }
+    else
+      {
+        GDK_BACKEND = "wayland,x11";
+        CLUTTER_BACKEND = "wayland";
+      }
+  );
 in
 {
-  imports = [
-    ./modules
-    ./variables
-  ];
-
   home = {
     username = user;
-    homeDirectory = "/home/${user}";
+    homeDirectory = ("/home/" + user);
     stateVersion = "26.05";
+    sessionVariables = hostSpecificVariables;
     extraOutputsToInstall = [
       "doc"
       "devdoc"

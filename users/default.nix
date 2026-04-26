@@ -17,14 +17,15 @@ let
       ELECTRON_ENABLE_DARK_MODE = "1";
       ELECTRON_USE_SYSTEM_THEME = "1";
       ELECTRON_DISABLE_DEFAULT_MENU_BAR = "1";
-      SSH_ASKPASS = lib.mkForce "${pkgs.gcr_4}/libexec/gcr4-ssh-askpass";
+      SSH_ASKPASS = lib.mkForce (pkgs.gcr_4 + "/libexec/gcr4-ssh-askpass");
     };
   };
 
   sharedImports = [
-    "${self}/scripts"
+    (self + "/scripts")
     self.modules.home
     sharedEnv
+    ./modules.nix
   ];
 
   homeImports = {
