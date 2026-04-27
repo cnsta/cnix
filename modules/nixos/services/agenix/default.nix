@@ -18,7 +18,7 @@ let
     };
     sobotka = {
       cloudflareFirewallApiKey.file = (self + "/secrets/cloudflareFirewallApiKey.age");
-      cloudflareDnsApiToken.file = (self + "$/secrets/cloudflareDnsApiToken.age");
+      cloudflareDnsApiToken.file = (self + "/secrets/cloudflareDnsApiToken.age");
       cloudflareDnsCredentials.file = (self + "/secrets/cloudflareDnsCredentials.age");
       wgCredentials.file = (self + "/secrets/wgCredentials.age");
       wgSobotkaPrivateKey.file = (self + "/secrets/wgSobotkaPrivateKey.age");
