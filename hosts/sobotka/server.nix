@@ -152,7 +152,7 @@
       hoppscotch = {
         enable = true;
         subdomain = "hoppscotch";
-        exposure = "local";
+        exposure = "tunnel";
         port = 3080;
         homepage = {
           name = "Hoppscotch";
