@@ -8,7 +8,7 @@
 
     boot = {
       kernel = {
-        variant = "zfsLatest";
+        variant = "latest";
         hardware = [ "amd" ];
         extraKernelParams = [ ];
         amdOverdrive.enable = false;
