@@ -2,7 +2,7 @@
   settings = {
     accounts = {
       username = "toothpick";
-      mail = "place@holder";
+      mail = "fredrik@libellux";
       sshUser = "toothpc";
     };
 

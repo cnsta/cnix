@@ -3,13 +3,8 @@
   lib,
   ...
 }:
+with lib;
 let
-  inherit (lib)
-    mkIf
-    mkOption
-    mkDefault
-    types
-    ;
   cfg = config.settings.locale;
   defaultCategories = [
     "LC_ADDRESS"
