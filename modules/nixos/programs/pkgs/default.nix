@@ -64,6 +64,8 @@ in
         nil
         nixfmt
         htop
+        lshw
+        dmidecode
       ])
       (mkIf cfg.gui.enable [
         resources
