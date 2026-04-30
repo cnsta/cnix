@@ -150,7 +150,7 @@
         };
       };
       hoppscotch = {
-        enable = true;
+        enable = false;
         subdomain = "hoppscotch";
         exposure = "tunnel";
         port = 3080;
