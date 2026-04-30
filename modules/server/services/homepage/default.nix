@@ -9,6 +9,27 @@ let
   unit = "homepage";
   cfg = config.server.services.${unit};
   srv = config.server;
+
+  wanIP =
+    {
+      url,
+    }:
+    {
+      icon = "sh-mikrotik";
+      href = url;
+      widget = {
+        type = "customapi";
+        url = "https://api.ipify.org?format=json";
+        method = "GET";
+        refreshInterval = 100000;
+        mappings = [
+          {
+            field = "ip";
+            format = "text";
+          }
+        ];
+      };
+    };
 in
 {
   config = lib.mkIf cfg.enable {
@@ -41,7 +62,13 @@ in
 
           layout = [
             {
-              Arr = {
+              Monitor = {
+                header = true;
+                style = "row";
+              };
+            }
+            {
+              Media = {
                 header = true;
                 style = "column";
               };
@@ -53,13 +80,31 @@ in
               };
             }
             {
-              Media = {
+              Cloud = {
                 header = true;
                 style = "column";
               };
             }
             {
-              Services = {
+              Dev = {
+                header = true;
+                style = "column";
+              };
+            }
+            {
+              Automation = {
+                header = true;
+                style = "column";
+              };
+            }
+            {
+              Communication = {
+                header = true;
+                style = "column";
+              };
+            }
+            {
+              Infra = {
                 header = true;
                 style = "column";
               };
@@ -79,6 +124,13 @@ in
             };
           }
           {
+            search = {
+              provider = "custom";
+              url = "https://search.cnix.dev/search?q=";
+              target = "_blank";
+            };
+          }
+          {
             resources = {
               label = "SYSTEM";
               memory = true;
@@ -91,6 +143,7 @@ in
         services =
           let
             homepageCategories = [
+              "Monitor"
               "Media"
               "Downloads"
               "Cloud"
@@ -109,25 +162,30 @@ in
                 name: value:
                 name != unit && value.enable && value.homepage.category != "" && value.homepage.category == category
               ) allServices;
+
+            automatedEntries =
+              cat:
+              lib.attrsets.mapAttrsToList (name: service: {
+                "${service.homepage.name}" = {
+                  icon = service.homepage.icon;
+                  description = service.homepage.description;
+                  href = "https://${service.subdomain}.${getDomain service}${service.homepage.path or ""}";
+                  siteMonitor = "https://${service.subdomain}.${getDomain service}${service.homepage.path or ""}";
+                };
+              }) (homepageServicesFor cat);
+
+            customEntries = {
+              Monitor = [
+                { "WAN IP" = wanIP { url = "https://192.168.88.1"; }; }
+              ];
+              # Add more categories here as needed, e.g.:
+              # Media = [ { "Some Service" = { ... }; } ];
+            };
+
+            entriesFor = cat: (automatedEntries cat) ++ (customEntries.${cat} or [ ]);
           in
           lib.lists.forEach homepageCategories (cat: {
-            "${cat}" =
-              lib.lists.forEach (lib.attrsets.mapAttrsToList (name: _value: name) (homepageServicesFor cat))
-                (
-                  x:
-                  let
-                    service = allServices.${x};
-                    domain = getDomain service;
-                  in
-                  {
-                    "${service.homepage.name}" = {
-                      icon = service.homepage.icon;
-                      description = service.homepage.description;
-                      href = "https://${service.subdomain}.${domain}${service.homepage.path or ""}";
-                      siteMonitor = "https://${service.subdomain}.${domain}${x.homepage.path or ""}";
-                    };
-                  }
-                );
+            "${cat}" = entriesFor cat;
           });
       };
     };
