@@ -20,26 +20,18 @@ in
       ${unit} = {
         image = "slskd/slskd:latest";
         autoStart = true;
-        dependsOn = [ "gluetun" ];
+        dependsOn = [ "gluetun-slskd" ];
         extraOptions = [
-          "--network=container:gluetun"
+          "--network=container:gluetun-slskd"
         ];
         volumes = [
           "/var/lib/slskd:/app:rw"
           "/mnt/data/downloads:/downloads:rw"
+          "/mnt/data/media/music:/music:rw"
         ];
         environmentFiles = [
           config.age.secrets.slskd.path
         ];
-        environment = {
-          TZ = "Europe/Stockholm";
-          PUID = srv.user;
-          PGID = srv.group;
-          SLSKD_REMOTE_CONFIGURATION = "true";
-          SLSKD_REMOTE_FILE_MANAGEMENT = "true";
-          SLSKD_DOWNLOADS_DIR = "/downloads";
-          SLSKD_UMASK = "022";
-        };
       };
     };
   };

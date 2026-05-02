@@ -56,7 +56,8 @@ in
   "cloudflareDnsCredentials.age".publicKeys = sobotka;
   "wgCredentials.age".publicKeys = sobotka;
   "wgSobotkaPrivateKey.age".publicKeys = sobotka;
-  "gluetunEnvironment.age".publicKeys = sobotka;
+  "gluetunQbtEnvironment.age".publicKeys = sobotka;
+  "gluetunSlskdEnvironment.age".publicKeys = sobotka;
   "gluetunSearxngEnvironment.age".publicKeys = sobotka;
   "gluetunArrEnvironment.age".publicKeys = sobotka;
   "sobotkaPihole.age".publicKeys = sobotka;

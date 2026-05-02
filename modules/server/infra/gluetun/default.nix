@@ -15,21 +15,18 @@ in
   };
   config = lib.mkIf infra.gluetun.enable {
     age.secrets = {
-      gluetunEnvironment.file = (self + "/secrets/gluetunEnvironment.age");
+      gluetunQbtEnvironment.file = (self + "/secrets/gluetunQbtEnvironment.age");
       gluetunSearxngEnvironment.file = (self + "/secrets/gluetunSearxngEnvironment.age");
+      gluetunSlskdEnvironment.file = (self + "/secrets/gluetunSlskdEnvironment.age");
       gluetunArrEnvironment.file = (self + "/secrets/gluetunArrEnvironment.age");
     };
 
     virtualisation.oci-containers.containers = {
-      gluetun = {
+      gluetun-qbt = lib.mkIf cfg.qbittorrent.enable {
         image = "ghcr.io/qdm12/gluetun:latest";
         ports = [
-          "8388:8388"
           "58846:58846"
           "8080:8080"
-          "5030:5030"
-          "5031:5031"
-          "50300:50300"
         ];
         devices = [ "/dev/net/tun:/dev/net/tun" ];
         autoStart = true;
@@ -37,9 +34,9 @@ in
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
         ];
-        volumes = [ "/var/lib/gluetun:/gluetun" ];
+        volumes = [ "/var/lib/gluetun-qbt:/gluetun" ];
         environmentFiles = [
-          config.age.secrets.gluetunEnvironment.path
+          config.age.secrets.gluetunQbtEnvironment.path
         ];
         environment = {
           DEV_MODE = "false";
@@ -60,6 +57,29 @@ in
         volumes = [ "/var/lib/gluetun-searxng:/gluetun" ];
         environmentFiles = [
           config.age.secrets.gluetunSearxngEnvironment.path
+        ];
+        environment = {
+          DEV_MODE = "false";
+        };
+      };
+
+      gluetun-slskd = lib.mkIf cfg.slskd.enable {
+        image = "ghcr.io/qdm12/gluetun:latest";
+        ports = [
+          "8388:8388"
+          "5030:5030"
+          "5031:5031"
+          "50323:50323"
+        ];
+        devices = [ "/dev/net/tun:/dev/net/tun" ];
+        autoStart = true;
+        extraOptions = [
+          "--cap-add=NET_ADMIN"
+          "--cap-add=NET_RAW"
+        ];
+        volumes = [ "/var/lib/gluetun-slskd:/gluetun" ];
+        environmentFiles = [
+          config.age.secrets.gluetunSlskdEnvironment.path
         ];
         environment = {
           DEV_MODE = "false";
