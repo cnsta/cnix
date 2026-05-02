@@ -454,7 +454,7 @@
         };
       };
       slskd = {
-        enable = true;
+        enable = false;
         subdomain = "slskd";
         exposure = "local";
         port = 5030;

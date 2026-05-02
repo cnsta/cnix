@@ -26,9 +26,9 @@ in
       ${unit} = {
         image = "ghcr.io/hotio/qbittorrent:latest";
         autoStart = true;
-        dependsOn = [ "gluetun" ];
+        dependsOn = [ "gluetun-qbt" ];
         extraOptions = [
-          "--network=container:gluetun"
+          "--network=container:gluetun-qbt"
         ];
         volumes = [
           "/var/lib/qbittorrent:/config:rw"
