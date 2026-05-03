@@ -56,7 +56,7 @@ in
       };
       steam = en "kt";
       thunar = none;
-      wireshark = en "k";
+      wireshark = none;
       zsh = none;
     };
 

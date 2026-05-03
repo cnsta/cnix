@@ -20,6 +20,7 @@ with lib;
       enable = true;
     };
     systemd.user.services.tailray = {
+      Service.Environment = "TAILRAY_THEME=dark";
       Unit = {
         After = lib.mkForce [
           "graphical-session.target"
