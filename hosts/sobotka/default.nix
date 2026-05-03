@@ -55,6 +55,7 @@
     zfs = {
       package = pkgs.zfs_unstable;
       extraPools = [ "data" ];
+      forceImportRoot = "false";
     };
   };
 
