@@ -101,6 +101,8 @@ in
   "quiEnvironment.age".publicKeys = sobotka;
   "hoppscotchEnvironment.age".publicKeys = sobotka;
   "hoppscotchPgPwd.age".publicKeys = sobotka;
+  "minifluxEnvironment.age".publicKeys = sobotka;
+  "minifluxPgPwd.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

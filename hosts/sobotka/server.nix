@@ -162,7 +162,7 @@
         };
       };
       freshrss = {
-        enable = true;
+        enable = false;
         subdomain = "rss";
         exposure = "local";
         port = 8002;
@@ -402,6 +402,18 @@
           name = "Continuwuity";
           description = "Continuwuity homeserver";
           icon = "matrix.svg";
+          category = "Communication";
+        };
+      };
+      miniflux = {
+        enable = true;
+        subdomain = "feed";
+        exposure = "local";
+        port = 8087;
+        homepage = {
+          name = "Miniflux";
+          description = "A minimalist and opinionated feed reader";
+          icon = "miniflux.svg";
           category = "Communication";
         };
       };
