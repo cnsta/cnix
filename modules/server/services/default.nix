@@ -17,6 +17,7 @@
     ./forgejo
     ./freshrss
     ./memos
+    ./miniflux
     ./n8n
     ./nextcloud
     ./ollama
