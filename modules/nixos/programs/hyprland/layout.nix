@@ -66,11 +66,12 @@ in
 
           "match:class ^(discord)$, workspace 5 silent"
           "match:class ^(vesktop)$, workspace 5 silent"
-          "match:class ^(steam_app_0)$, workspace 4 silent"
-          "match:title ^(World of Warcraft)$, workspace 4 silent"
 
+          "match:class ^(steam_app_.*)$, workspace 4 silent"
+          "match:title ^(World of Warcraft)$, workspace 4 silent"
           "match:xwayland true, rounding 0"
         ];
+
         layerrule = [
           "match:namespace ^(waybar), blur true"
           "match:namespace ^(waybar), blur_popups true"
@@ -95,16 +96,16 @@ in
     }
     (mkIf (host == "kima") {
       programs.hyprland.settings.workspace = [
-        "name:1,monitor:DP-3"
-        "name:2,monitor:DP-3"
-        "name:3,monitor:DP-3"
-        "name:4,monitor:DP-3"
-        "name:5,monitor:HDMI-A-1"
-        "name:6,monitor:DP-3"
-        "name:7,monitor:DP-3"
-        "name:8,monitor:DP-3"
-        "name:9,monitor:DP-3"
-        "name:10,monitor:DP-3"
+        "1,monitor:DP-3"
+        "2,monitor:DP-3"
+        "3,monitor:DP-3"
+        "4,monitor:DP-3"
+        "5,monitor:HDMI-A-1"
+        "6,monitor:DP-3"
+        "7,monitor:DP-3"
+        "8,monitor:DP-3"
+        "9,monitor:DP-3"
+        "10,monitor:DP-3"
       ];
     })
   ]);
