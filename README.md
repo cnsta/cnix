@@ -1,35 +1,35 @@
 # cnix
 
+> [!NOTE]
 > This repository's listed contributors are bugged after I accidentally force
 > pushed a cloned repo here.
 
 My NixOS daily driver. Started as a single-machine
-**[Hyprland](https://hyprland.org/)** desktop and grew sideways, more
-workstations, a Raspberry Pi, and a homelab server. The configuration leans on
-small per-tool modules with a tiny custom helper (`clib`) for host-scoped
-enables.
+**[Hyprland](https://hypr.land/)** desktop and grew sideways, more workstations,
+a Raspberry Pi, and a homelab server. The configuration leans on small per-tool
+modules with a tiny custom helper (`clib`) for host-scoped enables.
 
 Some tools and apps I use:
 
-- **[nh](https://github.com/viperML/nh)** _A pretty cool "nix helper"._
-- **[agenix](https://github.com/ryantm/agenix)** _Age-based encryption._
-- **[kanata](https://github.com/jtroo/kanata)** _Keyboard mapping, good stuff._
-- **[quickshell](https://quickshell.outfoxxed.me/)** _Wayland shell, replaced
-  waybar._
-- **[fuzzel](https://codeberg.org/dnkl/fuzzel)** _App launcher, does what it
-  says._
-- **[helix](https://github.com/helix-editor/helix)** _Neat vim-like editor._
-- **[microfetch](https://github.com/NotAShelf/microfetch)** _It's neofetch but
-  better._
-- **[tailscale](https://tailscale.com/)** _Mesh VPN, you know what it is._
+- **[nh](https://github.com/viperML/nh)**: A pretty cool "nix helper".
+- **[agenix](https://github.com/ryantm/agenix)**: Age-based encryption.
+- **[hjem](https://github.com/feel-co/hjem)**: Nix home management.
+- **[helix](https://github.com/helix-editor/helix)**: Neat vim-like editor.
+- **[kanata](https://github.com/jtroo/kanata)**: Keyboard mapping, good stuff.
+- **[quickshell](https://quickshell.outfoxxed.me/)**: Wayland shell, replaced
+  waybar.
+- **[fuzzel](https://codeberg.org/dnkl/fuzzel)**: App launcher, does what it
+  says.
+- **[microfetch](https://github.com/NotAShelf/microfetch)**: It's neofetch but
+  better.
 
 ## Hosts
 
-- **bunk** _Thinkpad, L13 or thereabouts._
-- **kima** _Main desktop. 9950X, 6950 XT._
-- **sobotka** _Homelab server. 3950X, Intel B580, Radeon Pro W5700._
-- **toothpc** _Brother's desktop. Intel CPU, Nvidia GPU._
-- **ziggy** _Raspberry Pi running secondary pihole and unbound._
+- **bunk**: Thinkpad, L13 or thereabouts.
+- **kima**: Main desktop. 9950X, 6950 XT.
+- **sobotka**: Homelab server. 3950X, Intel B580, Radeon Pro W5700.
+- **toothpc**: Brother's desktop. Intel CPU, Nvidia GPU.
+- **ziggy**: Raspberry Pi running secondary pihole and unbound.
 
 ## Structure
 
