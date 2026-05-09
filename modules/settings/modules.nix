@@ -47,6 +47,7 @@ in
         enable = true;
         primary = true;
       };
+      lutris = en "k";
       chromium = en "kt";
       direnv = en "kbt";
       discord = when "kbt" {
