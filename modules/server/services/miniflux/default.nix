@@ -23,7 +23,7 @@ in
       };
     };
 
-    srv.postgresql.databases = [
+    cnix.server.infra.postgresql.databases = [
       {
         database = unit;
         passwordFile = config.age.secrets.minifluxPgPwd.path;

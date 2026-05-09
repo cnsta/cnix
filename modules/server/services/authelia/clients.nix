@@ -7,7 +7,7 @@
   ...
 }:
 let
-  services = config.server.services;
+  services = config.cnix.server.services;
 
   readSecret =
     name: lib.removeSuffix "\n" (builtins.readFile (self + "/secrets/${name}OidcSecret.txt"));
@@ -36,7 +36,7 @@ let
       allUrls =
         if service.exposure == "tailscale" then
           let
-            publicUrl = "${service.subdomain}.${config.settings.accounts.domains.public}";
+            publicUrl = "${service.subdomain}.${config.cnix.settings.accounts.domains.public}";
           in
           [
             baseUrl

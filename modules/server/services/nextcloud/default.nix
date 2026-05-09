@@ -17,7 +17,7 @@ in
       nextcloudCloudflared.file = "${self}/secrets/nextcloudCloudflared.age";
     };
 
-    srv.infra.fail2ban.jails.nextcloud = {
+    cnix.server.infra.fail2ban.jails.nextcloud = {
       serviceName = "${unit}";
       _groupsre = ''(?:(?:,?\s*"\w+":(?:"[^"]+"|\w+))*)'';
       failRegex = ''
@@ -90,7 +90,7 @@ in
       };
     };
 
-    srv.infra.postgresql.databases = [
+    cnix.server.infra.postgresql.databases = [
       {
         database = "nextcloud";
       }

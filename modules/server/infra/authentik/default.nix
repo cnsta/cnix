@@ -58,7 +58,7 @@ in
       };
     };
 
-    srv = {
+    cnix.server.infra = {
       fail2ban = {
         jails = {
           authentik = {

@@ -1,5 +1,5 @@
 {
-  settings = {
+  cnix.settings = {
     accounts = {
       username = "cnst";
       mail = "adam@cnst.dev";

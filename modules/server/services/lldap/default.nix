@@ -33,7 +33,7 @@ in
       };
     };
 
-    srv.postgresql.databases = [
+    cnix.server.infra.postgresql.databases = [
       {
         database = lldap-user;
       }

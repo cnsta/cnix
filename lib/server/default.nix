@@ -4,8 +4,8 @@ let
     mkDomain =
       config: service:
       let
-        localDomain = config.settings.accounts.domains.local;
-        publicDomain = config.settings.accounts.domains.public;
+        localDomain = config.cnix.settings.accounts.domains.local;
+        publicDomain = config.cnix.settings.accounts.domains.public;
         tailscaleDomain = "ts.${publicDomain}";
       in
       if service.exposure == "tunnel" then
