@@ -8,8 +8,8 @@
 with lib;
 let
   unit = "turnstone";
-  srv = config.server;
-  cfg = config.server.services.${unit};
+  srv = config.cnix.server;
+  cfg = config.cnix.server.services.${unit};
   tsImage = "localhost/turnstone:latest";
 in
 {

@@ -7,8 +7,8 @@
 }:
 let
   unit = "unbound";
-  cfg = config.server.infra.${unit};
-  srv = config.server;
+  cfg = config.cnix.server.infra.${unit};
+  srv = config.cnix.server;
 
   svcNames = lib.attrNames srv.services;
 
@@ -36,7 +36,7 @@ let
       throw "No IP defined for host ${hostname}";
 in
 {
-  options.server.infra.${unit} = {
+  options.cnix.server.infra.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
     };

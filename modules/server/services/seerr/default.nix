@@ -5,8 +5,8 @@
 }:
 let
   unit = "seerr";
-  cfg = config.server.services.${unit};
-  arr = config.server.services.arr;
+  cfg = config.cnix.server.services.${unit};
+  arr = config.cnix.server.services.arr;
 in
 {
   config = lib.mkIf (arr.enable && cfg.enable) {

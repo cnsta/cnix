@@ -9,8 +9,8 @@
 
 let
   unit = "cnixpost";
-  cfg = config.server.infra.${unit};
-  srv = config.server;
+  cfg = config.cnix.server.infra.${unit};
+  srv = config.cnix.server;
 
   mailFqdn = "mail.${srv.domain}";
   lldapBaseDn = lib.concatMapStringsSep "," (dc: "dc=" + dc) (lib.splitString "." srv.domain);
@@ -60,7 +60,7 @@ in
 {
   imports = [ inputs.cnixpost.nixosModules.default ];
 
-  options.server.infra.${unit} = {
+  options.cnix.server.infra.${unit} = {
     enable = lib.mkEnableOption "mail server (Postfix + Dovecot + Rspamd + ClamAV)";
 
     accounts = lib.mkOption {

@@ -7,11 +7,11 @@
 }:
 let
   inherit (lib) mkIf mkOption types;
-  cfg = config.settings.fonts;
+  cfg = config.cnix.settings.fonts;
 in
 {
   options = {
-    settings.fonts = {
+    cnix.settings.fonts = {
       enable = mkOption {
         type = types.bool;
         default = true;

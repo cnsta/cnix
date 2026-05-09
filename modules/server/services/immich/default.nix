@@ -7,8 +7,8 @@
 }:
 let
   unit = "immich";
-  cfg = config.server.services.${unit};
-  autheliaUrl = clib.server.mkFullDomain config config.server.services.authelia;
+  cfg = config.cnix.server.services.${unit};
+  autheliaUrl = clib.server.mkFullDomain config config.cnix.server.services.authelia;
 in
 {
   config = lib.mkIf cfg.enable {
@@ -20,7 +20,7 @@ in
       };
     };
 
-    server.infra = {
+    cnix.server.infra = {
       fail2ban.jails.${unit} = {
         serviceName = "${unit}";
         failRegex = ".*(Failed authentication attempt|invalid credentials|Attempted access of unknown user).* from <HOST>";

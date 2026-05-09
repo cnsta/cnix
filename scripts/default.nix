@@ -1,174 +1,109 @@
-# yanked from https://github.com/NotAShelf/nyx/
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ pkgs, ... }:
+with builtins;
 let
-  inherit (lib) getExe;
-  inherit (builtins) readFile;
+  mkScript =
+    {
+      name,
+      runtimeInputs,
+      file,
+    }:
+    pkgs.writeShellApplication {
+      name = "${name}.sh";
+      inherit runtimeInputs;
+      text = readFile file;
+    };
+
+  scripts = with pkgs; [
+    (mkScript {
+      name = "spawn";
+      runtimeInputs = [ niri ];
+      file = ./bin/spawn.sh;
+    })
+    (mkScript {
+      name = "spawn-or-focus";
+      runtimeInputs = [ niri ];
+      file = ./bin/spawn-or-focus.sh;
+    })
+    (mkScript {
+      name = "vpnswitcher";
+      runtimeInputs = [
+        fzf
+        networkmanager
+      ];
+      file = ./bin/vpnswitcher.sh;
+    })
+    (mkScript {
+      name = "cnix-update-available";
+      runtimeInputs = [ waybar ];
+      file = ./bin/cnix-update-available.sh;
+    })
+    (mkScript {
+      name = "choosepaper";
+      runtimeInputs = [
+        fzf
+        swaybg
+        pistol
+      ];
+      file = ./bin/choosepaper.sh;
+    })
+    (mkScript {
+      name = "pwvucontrol-toggle";
+      runtimeInputs = [ pwvucontrol ];
+      file = ./bin/pwvucontrol-toggle.sh;
+    })
+    (mkScript {
+      name = "calcurse-toggle";
+      runtimeInputs = [ calcurse ];
+      file = ./bin/calcurse-toggle.sh;
+    })
+    (mkScript {
+      name = "volume-control";
+      runtimeInputs = [
+        wireplumber
+        libnotify
+      ];
+      file = ./bin/volume-control.sh;
+    })
+    (mkScript {
+      name = "extract";
+      runtimeInputs = [
+        zip
+        unzip
+        gnutar
+        p7zip
+      ];
+      file = ./bin/extract.sh;
+    })
+    (mkScript {
+      name = "waybar-systemd";
+      runtimeInputs = [ hyprland ];
+      file = ./bin/waybar-systemd.sh;
+    })
+    (mkScript {
+      name = "waybar-progress";
+      runtimeInputs = [ hyprland ];
+      file = ./bin/waybar-progress.sh;
+    })
+    (mkScript {
+      name = "dunst";
+      runtimeInputs = [
+        hyprland
+        dbus
+      ];
+      file = ./bin/dunst.sh;
+    })
+    (mkScript {
+      name = "mako";
+      runtimeInputs = [ hyprland ];
+      file = ./bin/mako.sh;
+    })
+    (mkScript {
+      name = "mako-toggle";
+      runtimeInputs = [ hyprland ];
+      file = ./bin/mako-toggle.sh;
+    })
+  ];
 in
 {
-  home = {
-    sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
-    file = {
-      ".local/bin/spawn.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "spawn";
-            runtimeInputs = with pkgs; [ niri ];
-            text = readFile ./bin/spawn.sh;
-          }
-        );
-      };
-
-      ".local/bin/vpnswitcher.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "vpnswitcher";
-            runtimeInputs = with pkgs; [
-              fzf
-              networkmanager
-            ];
-            text = readFile ./bin/vpnswitcher.sh;
-          }
-        );
-      };
-
-      ".local/bin/cnix-update-available.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "cnix-update-available";
-            runtimeInputs = with pkgs; [
-              waybar
-            ];
-            text = readFile ./bin/cnix-update-available.sh;
-          }
-        );
-      };
-
-      ".local/bin/spawn-or-focus.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "spawn-or-focus";
-            runtimeInputs = with pkgs; [ niri ];
-            text = readFile ./bin/spawn-or-focus.sh;
-          }
-        );
-      };
-
-      ".local/bin/choosepaper.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "spawn";
-            runtimeInputs = with pkgs; [
-              fzf
-              swaybg
-              pistol
-            ];
-            text = readFile ./bin/choosepaper.sh;
-          }
-        );
-      };
-
-      ".local/bin/pwvucontrol-toggle.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "pwvucontrol-toggle";
-            runtimeInputs = with pkgs; [ pwvucontrol ];
-            text = readFile ./bin/pwvucontrol-toggle.sh;
-          }
-        );
-      };
-
-      ".local/bin/calcurse-toggle.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "calcurse-toggle";
-            runtimeInputs = with pkgs; [ calcurse ];
-            text = readFile ./bin/calcurse-toggle.sh;
-          }
-        );
-      };
-
-      ".local/bin/volume-control.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "volume-control";
-            runtimeInputs = with pkgs; [
-              wireplumber
-              libnotify
-            ];
-            text = readFile ./bin/volume-control.sh;
-          }
-        );
-      };
-
-      ".local/bin/extract.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "extract";
-            runtimeInputs = with pkgs; [
-              zip
-              unzip
-              gnutar
-              p7zip
-            ];
-            text = readFile ./bin/extract.sh;
-          }
-        );
-      };
-      # WAYBAR
-      ".local/bin/waybar-systemd.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "waybar-systemd";
-            runtimeInputs = with pkgs; [ hyprland ];
-            text = readFile ./bin/waybar-systemd.sh;
-          }
-        );
-      };
-      ".local/bin/waybar-progress.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "waybar-progress";
-            runtimeInputs = with pkgs; [ hyprland ];
-            text = readFile ./bin/waybar-progress.sh;
-          }
-        );
-      };
-      ".local/bin/dunst.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "dunst";
-            runtimeInputs = with pkgs; [
-              hyprland
-              dbus
-            ];
-            text = readFile ./bin/dunst.sh;
-          }
-        );
-      };
-
-      ".local/bin/mako.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "mako";
-            runtimeInputs = with pkgs; [ hyprland ];
-            text = readFile ./bin/mako.sh;
-          }
-        );
-      };
-      ".local/bin/mako-toggle.sh" = {
-        source = getExe (
-          pkgs.writeShellApplication {
-            name = "mako-toggle";
-            runtimeInputs = with pkgs; [ hyprland ];
-            text = readFile ./bin/mako-toggle.sh;
-          }
-        );
-      };
-    };
-  };
+  environment.systemPackages = scripts;
 }

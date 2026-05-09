@@ -9,9 +9,9 @@
 {
   imports = [
     ./nixpkgs.nix
-    ./hm.nix
     ./substituters.nix
     ./users.nix
+    ./variables.nix
   ];
 
   environment.localBinInPath = true;

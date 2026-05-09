@@ -1,9 +1,4 @@
-{
-  inputs,
-  homeImports,
-  self,
-  ...
-}:
+{ inputs, self, ... }:
 {
   flake.nixosConfigurations =
     let
@@ -16,66 +11,56 @@
       };
 
       commonModules = [
-        "${self}/system"
-        self.modules.nixos
-        self.modules.settings
+        { _module.args.clib = self.lib.clib; }
+        (self + "/system")
+        self.modules.cnix.programs
+        self.modules.cnix.services
+        self.modules.cnix.settings
         inputs.nix-index-database.nixosModules.default
       ];
+
+      userModule =
+        { config, ... }:
+        let
+          user = config.cnix.settings.accounts.username;
+        in
+        {
+          cnix.settings.accounts.defaultUsers = [ user ];
+
+          hjem.users.${user} = {
+            inherit user;
+            directory = ("/home/" + user);
+          };
+        };
+
+      workstationModules = [
+        inputs.hjem.nixosModules.default
+        (self + "/scripts")
+        userModule
+      ];
+
+      mkWorkstation =
+        host:
+        nixosSystem {
+          inherit specialArgs;
+          modules = commonModules ++ [ host ] ++ workstationModules;
+        };
+
+      mkServer =
+        host:
+        nixosSystem {
+          inherit specialArgs;
+          modules = commonModules ++ [
+            host
+            self.modules.cnix.server
+          ];
+        };
     in
     {
-      kima = nixosSystem {
-        inherit specialArgs;
-        modules = commonModules ++ [
-          ./kima
-          {
-            home-manager = {
-              users.cnst.imports = homeImports."cnst@kima";
-              extraSpecialArgs = specialArgs;
-            };
-          }
-        ];
-      };
-
-      bunk = nixosSystem {
-        inherit specialArgs;
-        modules = commonModules ++ [
-          ./bunk
-          {
-            home-manager = {
-              users.cnst.imports = homeImports."cnst@bunk";
-              extraSpecialArgs = specialArgs;
-            };
-          }
-        ];
-      };
-
-      sobotka = nixosSystem {
-        inherit specialArgs;
-        modules = commonModules ++ [
-          ./sobotka
-          self.modules.server
-        ];
-      };
-
-      ziggy = nixosSystem {
-        inherit specialArgs;
-        modules = commonModules ++ [
-          ./ziggy
-          self.modules.server
-        ];
-      };
-
-      toothpc = nixosSystem {
-        inherit specialArgs;
-        modules = commonModules ++ [
-          ./toothpc
-          {
-            home-manager = {
-              users.toothpick.imports = homeImports."toothpick@toothpc";
-              extraSpecialArgs = specialArgs;
-            };
-          }
-        ];
-      };
+      kima = mkWorkstation ./kima;
+      bunk = mkWorkstation ./bunk;
+      toothpc = mkWorkstation ./toothpc;
+      sobotka = mkServer ./sobotka;
+      ziggy = mkServer ./ziggy;
     };
 }

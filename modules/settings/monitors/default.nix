@@ -4,7 +4,7 @@ let
   inherit (lib) mkOption types;
 in
 {
-  options.settings.monitors = mkOption {
+  options.cnix.settings.monitors = mkOption {
     type = types.listOf (
       types.submodule {
         options = {

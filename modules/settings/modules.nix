@@ -1,0 +1,147 @@
+{
+  config,
+  clib,
+  ...
+}:
+let
+  host = config.networking.hostName;
+  en = clib.mkEn host;
+  when = clib.mkWhen host;
+  all = clib.mkAllEn host;
+  allWhen = clib.mkAll host;
+  none = clib.mkNone host;
+in
+{
+  config.cnix = {
+    programs = {
+      beekeeper = none;
+      blender = en "k";
+      corectrl = none;
+      emacs = en "k";
+      gamemode = none;
+      gamescope = none;
+      gimp = en "k";
+      gnome = none;
+      hyprland = when "kbt" {
+        enable = true;
+        withUWSM = true;
+      };
+      hyprlock = en "kbt";
+      inkscape = en "k";
+      lact = none;
+      mysql-workbench = none;
+      nh = allWhen {
+        enable = true;
+        clean = {
+          enable = true;
+          extraArgs = "--keep 3 --keep-since 21d";
+        };
+      };
+      niri = none;
+      npm = none;
+      obsidian = none;
+      steam = en "kt";
+      thunar = none;
+      wireshark = none;
+      alacritty = when "kbt" {
+        enable = true;
+        primary = true;
+      };
+      chromium = en "kt";
+      direnv = en "kbt";
+      discord = when "kbt" {
+        enable = true;
+        variant = "vesktop";
+      };
+      element-desktop = en "k";
+      firefox = en "k";
+      floorp = none;
+      foot = en "kbt";
+      fuzzel = en "kbt";
+      ghostty = none;
+      librewolf = en "kbt";
+      mpv = en "kbt";
+      nvf = en "t";
+      # nwg-bar = en "kbt";
+      # rofi = none;
+      # thunderbird = en "kbt";
+      # vscode = en "t";
+      # wezterm = none;
+      # yazi = en "kbt";
+      # zathura = en "kbt";
+      zed-editor = none;
+      # zellij = none;
+      # zen = none;
+      # zsh = none;
+      bash = none;
+      fish = when "kbtsz" {
+        enable = true;
+        homeless = en "sz";
+      };
+      git = en "kbt";
+      helix = all;
+      microfetch = all;
+      # ssh = en "kbt";
+
+      # bundles
+      pkgs = {
+        common = all;
+        desktop = en "kbt";
+        gui = en "kbt";
+        dev = {
+          common = en "k";
+          rust = en "k";
+          python = en "k";
+        };
+      };
+    };
+
+    services = {
+      agenix = all;
+      blueman = none;
+      dbus = all;
+      flatpak = en "kbt";
+      fwupd = all;
+      gnome = when "kbt" {
+        keyring.enable = true;
+        evolution-data-server.enable = true;
+      };
+      greetd = en "kbt";
+      gvfs = en "kbt";
+      locate = all;
+      mullvad = none;
+      nfs = none;
+      pipewire = en "kbt";
+      polkit = en "kbt";
+      power = when "kbt" {
+        enable = true;
+        upower.enable = true;
+      };
+      psd = en "k";
+      samba = none;
+      scx = when "k" {
+        enable = true;
+        scheduler = "scx_lavd";
+        flags = "--performance";
+      };
+      ssh = all;
+      udisks = en "kbt";
+      virtualisation = none;
+      zram = all;
+      hypridle = en "kbt";
+      hyprpaper = en "kbt";
+      jellyfin-mpv-shim = none;
+      # mako = none;
+      quickshell = en "k";
+      # swaync = en "bt";
+      syncthing = none;
+      tailray = en "kbt";
+      udiskie = en "kbt";
+      dconf = en "kbt";
+      gpg = en "kbt";
+      gtk = en "kbt";
+      waybar = en "bt";
+      xdg = en "kbt";
+    };
+  };
+}

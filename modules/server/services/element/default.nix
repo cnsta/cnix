@@ -6,8 +6,8 @@
 }:
 let
   unit = "element";
-  domain = config.server.infra.www.url;
-  cfg = config.server.services.${unit};
+  domain = config.cnix.server.infra.www.url;
+  cfg = config.cnix.server.services.${unit};
 
   elementConfig = {
     default_server_name = domain;

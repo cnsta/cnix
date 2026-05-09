@@ -8,14 +8,14 @@
 let
   inherit (lib) mkIf;
   inherit (lib.options) mkEnableOption;
-  cfg = config.settings.peripherals;
+  cfg = config.cnix.settings.peripherals;
 in
 {
   imports = [
     inputs.lightcrazy.nixosModules.default
   ];
   options = {
-    settings.peripherals = {
+    cnix.settings.peripherals = {
       logitech.enable = mkEnableOption "Enables support for wireless logitech devices";
       kanata.enable = mkEnableOption "Enables kanata and hhkb keymaps";
       adb.enable = mkEnableOption "Whether to configure system to use Android Debug Bridge";

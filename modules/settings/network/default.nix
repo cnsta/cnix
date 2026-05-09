@@ -10,11 +10,11 @@ let
     mkOption
     types
     ;
-  cfg = config.settings.network;
+  cfg = config.cnix.settings.network;
 in
 {
   options = {
-    settings.network = {
+    cnix.settings.network = {
       enable = mkEnableOption "Enable the custom networking module";
       tailscale.enable = mkEnableOption "Enable tailscale client service";
       bluetooth.enable = mkEnableOption "Enables bluetooth";

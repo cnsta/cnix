@@ -8,8 +8,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.server.infra.traefik;
-  srv = config.server;
+  cfg = config.cnix.server.infra.traefik;
+  srv = config.cnix.server;
 
   generateRouters =
     services: config:
@@ -33,7 +33,7 @@ let
     ) (lib.filterAttrs (_: s: s.enable && s.routed) services);
 in
 {
-  options.server.infra.traefik = {
+  options.cnix.server.infra.traefik = {
     enable = mkEnableOption "Enable global Traefik reverse proxy with ACME";
   };
 

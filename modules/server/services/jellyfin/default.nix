@@ -6,8 +6,8 @@
 }:
 let
   unit = "jellyfin";
-  cfg = config.server.services.${unit};
-  srv = config.server;
+  cfg = config.cnix.server.services.${unit};
+  srv = config.cnix.server;
 in
 {
   config = lib.mkIf cfg.enable {

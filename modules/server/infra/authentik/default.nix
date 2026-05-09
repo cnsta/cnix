@@ -7,14 +7,14 @@
 }:
 let
   unit = "authentik";
-  cfg = config.server.infra.${unit};
-  srv = config.server.infra;
+  cfg = config.cnix.server.infra.${unit};
+  srv = config.cnix.server.infra;
 in
 {
   imports = [
     inputs.authentik.nixosModules.default
   ];
-  options.server.infra.${unit} = {
+  options.cnix.server.infra.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
     };
@@ -58,7 +58,7 @@ in
       };
     };
 
-    server.infra = {
+    srv = {
       fail2ban = {
         jails = {
           authentik = {

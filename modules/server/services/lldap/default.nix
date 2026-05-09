@@ -8,10 +8,10 @@ with lib;
 let
   lldap-user = "lldap";
   lldap-base-dn = lib.strings.concatMapStringsSep "," (dc: "dc=" + dc) (
-    lib.splitString "." config.server.domain
+    lib.splitString "." config.cnix.server.domain
   );
-  cfg = config.server.services.lldap;
-  srv = config.server.infra;
+  cfg = config.cnix.server.services.lldap;
+  srv = config.cnix.server.infra;
 in
 {
   config = mkIf cfg.enable {
@@ -33,7 +33,7 @@ in
       };
     };
 
-    server.infra.postgresql.databases = [
+    srv.postgresql.databases = [
       {
         database = lldap-user;
       }

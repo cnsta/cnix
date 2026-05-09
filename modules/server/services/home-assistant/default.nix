@@ -5,8 +5,8 @@
 }:
 let
   unit = "home-assistant";
-  srv = config.server;
-  cfg = config.server.services.${unit};
+  srv = config.cnix.server;
+  cfg = config.cnix.server.services.${unit};
 in
 {
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {

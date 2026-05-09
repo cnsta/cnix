@@ -5,12 +5,12 @@
   ...
 }:
 let
-  infra = config.server.infra;
-  cfg = config.server.services;
-  arr = config.server.services.arr;
+  infra = config.cnix.server.infra;
+  cfg = config.cnix.server.services;
+  arr = config.cnix.server.services.arr;
 in
 {
-  options.server.infra = {
+  options.cnix.server.infra = {
     gluetun.enable = lib.mkEnableOption "Enables gluetun";
   };
   config = lib.mkIf infra.gluetun.enable {

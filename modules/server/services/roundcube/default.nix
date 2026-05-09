@@ -7,12 +7,12 @@
 }:
 let
   unit = "roundcube";
-  cfg = config.server.services.${unit};
+  cfg = config.cnix.server.services.${unit};
   domain = clib.server.mkFullDomain config cfg;
 in
 {
   config = lib.mkIf cfg.enable {
-    server.infra = {
+    cnix.server.infra = {
       fail2ban.jails.${unit} = {
         serviceName = "${unit}";
         failRegex = ".*(Failed authentication attempt|invalid credentials|Attempted access of unknown user).* from <HOST>";

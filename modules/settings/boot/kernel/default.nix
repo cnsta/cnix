@@ -11,7 +11,7 @@ let
     mkEnableOption
     mkIf
     ;
-  cfg = config.settings.boot.kernel;
+  cfg = config.cnix.settings.boot.kernel;
 
   hasHardware = hw: builtins.elem hw cfg.hardware;
 in
@@ -21,7 +21,7 @@ in
   ];
 
   options = {
-    settings.boot.kernel = {
+    cnix.settings.boot.kernel = {
       variant = mkOption {
         type = types.enum [
           "stable"

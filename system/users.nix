@@ -6,7 +6,7 @@
   ...
 }:
 let
-  user = config.settings.accounts.username;
+  user = config.cnix.settings.accounts.username;
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in
 {

@@ -6,7 +6,7 @@
 }:
 let
   inherit (lib) types mkOption;
-  cfg = config.server.infra.postgresql;
+  cfg = config.cnix.server.infra.postgresql;
 
   database =
     { name, ... }:
@@ -46,7 +46,7 @@ let
   needsTCP = dbsWithPassword != [ ];
 in
 {
-  options.server.infra.postgresql = {
+  options.cnix.server.infra.postgresql = {
     databases = mkOption {
       type = types.listOf (types.submodule database);
       default = [ ];

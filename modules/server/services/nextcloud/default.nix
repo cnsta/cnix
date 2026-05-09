@@ -7,8 +7,8 @@
 }:
 let
   unit = "nextcloud";
-  cfg = config.server.services.${unit};
-  srv = config.server;
+  cfg = config.cnix.server.services.${unit};
+  srv = config.cnix.server;
 in
 {
   config = lib.mkIf cfg.enable {
@@ -17,7 +17,7 @@ in
       nextcloudCloudflared.file = "${self}/secrets/nextcloudCloudflared.age";
     };
 
-    server.infra.fail2ban.jails.nextcloud = {
+    srv.infra.fail2ban.jails.nextcloud = {
       serviceName = "${unit}";
       _groupsre = ''(?:(?:,?\s*"\w+":(?:"[^"]+"|\w+))*)'';
       failRegex = ''
@@ -90,7 +90,7 @@ in
       };
     };
 
-    server.infra.postgresql.databases = [
+    srv.infra.postgresql.databases = [
       {
         database = "nextcloud";
       }

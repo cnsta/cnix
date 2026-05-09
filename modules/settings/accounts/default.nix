@@ -3,9 +3,8 @@
   config,
   ...
 }:
+with lib;
 let
-  inherit (lib) mkOption types;
-
   sshKeys = {
     bunk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXCjkKouZrsMoswMIeueO8X/c3kuY3Gb0E9emvkqwUv cnst@cnixpad";
     sobotka = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICiNcNex+/hrEQJYJJTj89uPXocSfChU38E5TujWdxaM cnstlab@cnixlab";
@@ -13,7 +12,7 @@ let
     toothpc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGu5vZbb5ExampleKeyHereGfDF9c5 toothpick@toothpc";
   };
 
-  keyName = config.settings.accounts.sshUser or null;
+  keyName = config.cnix.settings.accounts.sshUser or null;
 
   selectedKey =
     if keyName != null then
@@ -24,7 +23,7 @@ let
       builtins.abort "No accounts.sshUser provided, cannot select SSH key.";
 in
 {
-  options.settings.accounts = {
+  options.cnix.settings.accounts = {
     username = mkOption {
       type = types.str;
       default = "cnst";
@@ -34,6 +33,17 @@ in
       type = types.str;
       default = "adam@cnst.dev";
       description = "Set the desired email";
+    };
+    terminal = mkOption {
+      type = types.nullOr types.package;
+      default = null;
+      description = "Primary terminal package for the host";
+    };
+    defaultUsers = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Users that hjem manages on this host";
+      example = [ "cnst" ];
     };
     sshKey = lib.mkOption {
       type = lib.types.str;
@@ -62,5 +72,9 @@ in
         };
       };
     };
+  };
+
+  config = mkIf (config.cnix.settings.accounts.terminal != null) {
+    environment.sessionVariables.TERMINAL = lib.getExe config.cnix.settings.accounts.terminal;
   };
 }

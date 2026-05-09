@@ -4,10 +4,10 @@
   ...
 }:
 let
-  infra = config.server.infra;
+  infra = config.cnix.server.infra;
 in
 {
-  options.server.infra = {
+  options.cnix.server.infra = {
     podman.enable = lib.mkEnableOption "Enables Podman";
   };
   config = lib.mkIf infra.podman.enable {

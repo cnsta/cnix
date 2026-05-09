@@ -5,7 +5,7 @@ let
   bgList = builtins.attrNames bgs.files;
 in
 {
-  options.settings.theme.background = {
+  options.cnix.settings.theme.background = {
     lockscreen = mkOption {
       type = types.enum bgList;
       example = builtins.head bgList;

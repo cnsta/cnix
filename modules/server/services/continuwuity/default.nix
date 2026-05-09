@@ -7,8 +7,8 @@
 }:
 let
   unit = "continuwuity";
-  cfg = config.server.services.${unit};
-  domain = config.server.infra.www.url;
+  cfg = config.cnix.server.services.${unit};
+  domain = config.cnix.server.infra.www.url;
 in
 {
   config = lib.mkIf cfg.enable {

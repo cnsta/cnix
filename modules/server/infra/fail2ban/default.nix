@@ -6,10 +6,10 @@
   ...
 }:
 let
-  cfg = config.server.infra.fail2ban;
+  cfg = config.cnix.server.infra.fail2ban;
 in
 {
-  options.server.infra.fail2ban = {
+  options.cnix.server.infra.fail2ban = {
     enable = lib.mkEnableOption {
       description = "Enable cloudflare fail2ban";
     };

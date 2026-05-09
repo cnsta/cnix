@@ -7,8 +7,8 @@
 }:
 let
   unit = "homepage";
-  cfg = config.server.services.${unit};
-  srv = config.server;
+  cfg = config.cnix.server.services.${unit};
+  srv = config.cnix.server;
 
   wanIP =
     {
