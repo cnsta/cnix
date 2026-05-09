@@ -7,10 +7,10 @@
 }:
 with lib;
 let
-  cfg = config.server.infra.tailscale;
+  cfg = config.cnix.server.infra.tailscale;
 in
 {
-  options.server.infra.tailscale = {
+  options.cnix.server.infra.tailscale = {
     enable = mkEnableOption "Enable tailscale server configuration";
   };
   config = mkIf cfg.enable {

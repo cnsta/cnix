@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.server.infra.headscale;
+  cfg = config.cnix.server.infra.headscale;
 in
 {
-  options.server.infra.headscale = {
+  options.cnix.server.infra.headscale = {
     enable = mkEnableOption "Enable headscale server configuration";
   };
   config = mkIf cfg.enable {

@@ -7,8 +7,8 @@
 }:
 let
   unit = "vaultwarden";
-  cfg = config.server.services.${unit};
-  domain = "${cfg.subdomain}.${config.server.infra.www.url}";
+  cfg = config.cnix.server.services.${unit};
+  domain = "${cfg.subdomain}.${config.cnix.server.infra.www.url}";
 in
 {
   config = lib.mkIf cfg.enable {
@@ -17,7 +17,7 @@ in
       vaultwardenEnvironment.file = "${self}/secrets/vaultwardenEnvironment.age";
     };
 
-    server.infra.fail2ban.jails.${unit} = {
+    cnix.server.infra.fail2ban.jails.${unit} = {
       serviceName = "${unit}";
       failRegex = ''^.*?Username or password is incorrect\. Try again\. IP: <ADDR>\. Username:.*$'';
     };

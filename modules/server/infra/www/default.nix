@@ -11,10 +11,10 @@ let
     mkOption
     types
     ;
-  cfg = config.server.infra.www;
+  cfg = config.cnix.server.infra.www;
 in
 {
-  options.server.infra.www = {
+  options.cnix.server.infra.www = {
     enable = mkEnableOption {
       description = "Enable personal website";
     };
@@ -97,7 +97,7 @@ in
             locations."= /.well-known/matrix/server" = {
               extraConfig =
                 let
-                  matrixDomain = "${config.server.services.continuwuity.subdomain}.${cfg.url}";
+                  matrixDomain = "${config.cnix.server.services.continuwuity.subdomain}.${cfg.url}";
                 in
                 ''
                   default_type application/json;
@@ -108,7 +108,7 @@ in
             locations."= /.well-known/matrix/client" = {
               extraConfig =
                 let
-                  matrixDomain = "${config.server.services.continuwuity.subdomain}.${cfg.url}";
+                  matrixDomain = "${config.cnix.server.services.continuwuity.subdomain}.${cfg.url}";
                   clientConfig = builtins.toJSON {
                     "m.homeserver" = {
                       base_url = "https://${matrixDomain}";
@@ -172,7 +172,7 @@ in
               # Auto-generate from services with exposure = "tunnel"
               tunnelServices = lib.filterAttrs (
                 _: svc: svc.enable && svc.exposure == "tunnel" && svc.subdomain != ""
-              ) config.server.services;
+              ) config.cnix.server.services;
               autoIngress = lib.mapAttrs' (
                 _: svc:
                 lib.nameValuePair "${svc.subdomain}.${cfg.url}" {
@@ -184,7 +184,7 @@ in
                 acc: _: svc:
                 acc
                 // lib.mapAttrs' (sub: url: lib.nameValuePair "${sub}.${cfg.url}" { service = url; }) svc.ingress
-              ) { } (lib.filterAttrs (_: svc: svc.enable) config.server.services);
+              ) { } (lib.filterAttrs (_: svc: svc.enable) config.cnix.server.services);
             in
             autoIngress
             // extraIngress

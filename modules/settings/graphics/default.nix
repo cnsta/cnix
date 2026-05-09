@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  cfg = config.settings.graphics;
+  cfg = config.cnix.settings.graphics;
 
   commonPackages = with pkgs; [
     libva-vdpau-driver
@@ -23,7 +23,7 @@ let
   hasVendor = vendor: builtins.elem vendor cfg.vendors;
 in
 {
-  options.settings.graphics = {
+  options.cnix.settings.graphics = {
     vendors = mkOption {
       type = types.listOf (
         types.enum [

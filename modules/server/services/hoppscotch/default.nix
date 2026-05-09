@@ -7,8 +7,8 @@
 }:
 let
   unit = "hoppscotch";
-  srv = config.server;
-  cfg = config.server.services.${unit};
+  srv = config.cnix.server;
+  cfg = config.cnix.server.services.${unit};
 in
 {
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
@@ -25,7 +25,7 @@ in
       };
     };
 
-    server.infra.postgresql.databases = [
+    srv.infra.postgresql.databases = [
       {
         database = unit;
         passwordFile = lib.removeSuffix "\n" config.age.secrets.hoppscotchPgPwd.path;

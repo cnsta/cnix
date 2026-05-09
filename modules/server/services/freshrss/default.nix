@@ -7,15 +7,15 @@
 }:
 let
   unit = "freshrss";
-  cfg = config.server.services.${unit};
-  authelia = config.server.services.authelia;
+  cfg = config.cnix.server.services.${unit};
+  authelia = config.cnix.server.services.authelia;
   domain = clib.server.mkFullDomain config cfg;
   hostDomain = clib.server.mkHostDomain config cfg;
   buildExt = pkgs.freshrss-extensions.buildFreshRssExtension;
 in
 {
   config = lib.mkIf cfg.enable {
-    server.infra = {
+    cnix.server.infra = {
       postgresql.databases = [
         { database = unit; }
       ];

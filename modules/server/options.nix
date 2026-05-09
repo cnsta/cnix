@@ -6,10 +6,10 @@
 let
   inherit (lib) mkOption types;
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-  cfg = config.server;
+  cfg = config.cnix.server;
 in
 {
-  options.server = {
+  options.cnix.server = {
     enable = lib.mkEnableOption "The server services and configuration variables";
     email = mkOption {
       default = "";

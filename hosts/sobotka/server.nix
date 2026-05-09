@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  server = {
+  cnix.server = {
     enable = true;
     email = "adam@cnst.dev";
     domain = "cnix.dev";

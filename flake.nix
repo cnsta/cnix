@@ -10,7 +10,6 @@
       ];
 
       imports = [
-        ./users
         ./hosts
         ./modules
         ./pkgs
@@ -47,10 +46,6 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hm = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -61,6 +56,11 @@
     };
 
     flake-compat.url = "github:edolstra/flake-compat";
+
+    hjem = {
+      url = "github:feel-co/hjem";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Hyprland environment
     hyprland.url = "github:hyprwm/hyprland";

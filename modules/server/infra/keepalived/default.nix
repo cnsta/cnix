@@ -6,7 +6,7 @@
 }:
 let
   unit = "keepalived";
-  cfg = config.server.infra.${unit};
+  cfg = config.cnix.server.infra.${unit};
 
   hostCfg =
     hostname:
@@ -36,7 +36,7 @@ let
   peers = builtins.filter (ip: ip != _self.ip) allPeers;
 in
 {
-  options.server.infra.${unit} = {
+  options.cnix.server.infra.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
     };

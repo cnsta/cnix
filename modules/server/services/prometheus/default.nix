@@ -4,7 +4,7 @@
   ...
 }:
 let
-  cfg = config.server.services.grafana;
+  cfg = config.cnix.server.services.grafana;
 in
 {
   config = lib.mkIf cfg.enable {

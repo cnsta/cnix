@@ -1,5 +1,6 @@
 {
   imports = [
+    ./modules.nix
     ./accounts
     ./boot
     ./fonts

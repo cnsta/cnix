@@ -12,11 +12,11 @@ let
     mkMerge
     mkForce
     ;
-  cfg = config.settings.boot.loader;
+  cfg = config.cnix.settings.boot.loader;
 in
 {
   options = {
-    settings.boot.loader = {
+    cnix.settings.boot.loader = {
       default = {
         enable = mkEnableOption "Enable default boot loader configuration.";
       };

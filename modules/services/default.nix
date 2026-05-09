@@ -1,0 +1,37 @@
+{
+  imports = [
+    ./agenix
+    ./blueman
+    ./dbus
+    ./dconf
+    ./gnupg
+    ./flatpak
+    ./jellyfin-mpv-shim
+    ./fwupd
+    ./gnome
+    ./greetd
+    ./gvfs
+    ./gtk
+    ./hypridle
+    ./hyprpaper
+    ./virtualisation
+    ./locate
+    ./mullvad
+    ./nfs
+    ./ssh
+    ./syncthing
+    ./pipewire
+    ./polkit
+    ./power
+    ./psd
+    ./samba
+    ./scx
+    ./udisks
+    ./tailray
+    ./udiskie
+    ./quickshell
+    ./waybar
+    ./xdg
+    ./zram
+  ];
+}
