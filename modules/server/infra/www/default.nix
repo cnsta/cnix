@@ -52,7 +52,7 @@ in
       wwwCloudflared.file = "${self}/secrets/wwwCloudflared.age";
     };
 
-    server.infra = {
+    cnix.server.infra = {
       fail2ban = {
         jails = {
           nginx-404 = {

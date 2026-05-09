@@ -78,7 +78,7 @@ in
         enable = true;
         homeless = en "sz";
       };
-      git = en "kbt";
+      git = all;
       helix = all;
       microfetch = all;
       # ssh = en "kbt";
@@ -88,9 +88,11 @@ in
         common = all;
         desktop = en "kbt";
         gui = en "kbt";
+        server = en "sz";
         dev = {
           common = en "k";
           rust = en "k";
+          php = en "t";
           python = en "k";
         };
       };

@@ -126,9 +126,9 @@ in
               ''"ts.cnst.dev." transparent''
             ];
             local-data = [
-              ''"traefik.${config.settings.accounts.domains.local}. A 192.168.88.14"''
-              ''"rspamd.${config.settings.accounts.domains.local}. A 192.168.88.14"''
-              ''"login.${config.settings.accounts.domains.local}. A 192.168.88.14"''
+              ''"traefik.${config.cnix.settings.accounts.domains.local}. A 192.168.88.14"''
+              ''"rspamd.${config.cnix.settings.accounts.domains.local}. A 192.168.88.14"''
+              ''"login.${config.cnix.settings.accounts.domains.local}. A 192.168.88.14"''
             ]
             ++ localARecords;
           };

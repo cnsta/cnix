@@ -8,7 +8,7 @@
 let
   unit = "grafana";
   cfg = config.cnix.server.services.${unit};
-  domain = clib.cnix.server.mkFullDomain config cfg;
+  domain = clib.server.mkFullDomain config cfg;
 in
 {
   config = lib.mkIf cfg.enable {

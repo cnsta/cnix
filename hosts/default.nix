@@ -17,6 +17,7 @@
         self.modules.cnix.services
         self.modules.cnix.settings
         inputs.nix-index-database.nixosModules.default
+        inputs.hjem.nixosModules.default
       ];
 
       userModule =
@@ -34,7 +35,6 @@
         };
 
       workstationModules = [
-        inputs.hjem.nixosModules.default
         (self + "/scripts")
         userModule
       ];

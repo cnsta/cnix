@@ -25,7 +25,7 @@ in
       };
     };
 
-    srv.infra.postgresql.databases = [
+    cnix.server.infra.postgresql.databases = [
       {
         database = unit;
         passwordFile = lib.removeSuffix "\n" config.age.secrets.hoppscotchPgPwd.path;

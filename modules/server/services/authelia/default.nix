@@ -61,7 +61,7 @@ in
       autheliaCloudflared.file = "${self}/secrets/autheliaCloudflared.age";
     };
 
-    server.infra = {
+    cnix.server.infra = {
       fail2ban.jails.${unit} = {
         serviceName = "${unit}";
         failRegex = ''^.*?Username or password is incorrect\. Try again\. IP: <ADDR>\. Username:.*$'';
