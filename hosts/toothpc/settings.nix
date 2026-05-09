@@ -1,5 +1,5 @@
 {
-  settings = {
+  cnix.settings = {
     accounts = {
       username = "toothpick";
       mail = "fredrik@libellux";
