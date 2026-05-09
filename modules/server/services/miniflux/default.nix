@@ -7,8 +7,8 @@
 with lib;
 let
   unit = "miniflux";
-  srv = config.server;
-  cfg = config.server.services.${unit};
+  srv = config.cnix.server;
+  cfg = config.cnix.server.services.${unit};
 in
 {
   config = mkIf (srv.infra.podman.enable && cfg.enable) {
@@ -23,7 +23,7 @@ in
       };
     };
 
-    server.infra.postgresql.databases = [
+    srv.postgresql.databases = [
       {
         database = unit;
         passwordFile = config.age.secrets.minifluxPgPwd.path;
