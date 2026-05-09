@@ -1,5 +1,8 @@
 # cnix
 
+> This repository's listed contributors are bugged after I accidentally force
+> pushed a cloned repo here.
+
 My NixOS daily driver. Started as a single-machine
 **[Hyprland](https://hyprland.org/)** desktop and grew sideways, more
 workstations, a Raspberry Pi, and a homelab server. The configuration leans on
@@ -33,23 +36,22 @@ Some tools and apps I use:
 Quick map of the repository. Might not be 100% up to date.
 
 ```
-hosts/        # Per-host configs (hardware, settings)
+hosts/        # Per-host configs (hardware, settings, hjem)
 lib/          # Custom helpers etc
 modules/
-├ home/       # Home-manager modules
-├ nixos/      # Core OS and system-wide modules
+├ programs/   # Various program modules
+├ services/   # Various service modules
 ├ server/     # Homelab modules, sobotka and ziggy exclusive
 └ settings/   # Cross-cutting option declarations
 pkgs/         # Custom packages
 scripts/      # Shell scripts
 secrets/      # Agenix-encrypted secrets
-system/       # Flake-level wiring (users, home-manager, substituters)
-users/        # Per-user HM configs
+system/       # Flake-level wiring (users, variables, substituters)
 ```
 
-The shared `modules.nix` files in `modules/nixos/` and `modules/home/` are
-frequent edit points. Every supported module appears once, host-scoped via
-single-letter shorthands (`k` = kima, `s` = sobotka, etc.).
+The shared `modules.nix` file in `modules/settings/` is a frequent edit point.
+Every supported module appears once, host-scoped via single-letter shorthands
+(`k` = kima, `s` = sobotka, etc.).
 
 ## Inspiration
 
