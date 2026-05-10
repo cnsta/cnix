@@ -4,6 +4,7 @@
     ./blueman
     ./dbus
     ./dconf
+    ./dunst
     ./gnupg
     ./flatpak
     ./jellyfin-mpv-shim

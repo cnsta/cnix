@@ -79,13 +79,13 @@ in
 
     systemd.user.services."gtk-color-scheme" = {
       description = "Apply GNOME color-scheme preference (prefer-dark)";
-      wantedBy = [ "graphical-session.target" ];
       partOf = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ]; # ← was missing
+      after = [ "graphical-session.target" ];
+      wantedBy = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "oneshot";
         ExecStart =
-          "${pkgs.glib}/bin/gsettings set " + "org.gnome.desktop.interface color-scheme 'prefer-dark'";
+          "${pkgs.dconf}/bin/dconf write " + "/org/gnome/desktop/interface/color-scheme \"'prefer-dark'\"";
       };
     };
 
