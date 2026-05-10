@@ -71,6 +71,9 @@ in
         cursor = {
           no_hardware_cursors = 2;
         };
+        input = {
+          kb_options = "altwin:swap_lalt_lwin";
+        };
         general = {
           allow_tearing = false;
         };

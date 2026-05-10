@@ -1,3 +1,4 @@
+{ pkgs, lib, ... }:
 {
   abbrs = {
     us = "systemctl --user";
@@ -5,6 +6,8 @@
   };
 
   aliases = {
+    ls = "${lib.getExe pkgs.eza} -l -g --group-directories-first";
+    tree = "${lib.getExe pkgs.eza} --tree --icons=always";
     ".." = "cd ..";
     "..." = "cd ../../";
     "...." = "cd ../../../";
