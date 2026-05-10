@@ -134,6 +134,7 @@ in
       hypridle = en "kbt";
       hyprpaper = en "kbt";
       jellyfin-mpv-shim = none;
+      dunst = en "bt";
       # mako = none;
       quickshell = en "k";
       # swaync = en "bt";
