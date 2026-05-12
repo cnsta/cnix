@@ -454,7 +454,7 @@
         };
       };
       home-assistant = {
-        enable = false;
+        enable = true;
         subdomain = "ha";
         exposure = "local";
         port = 8123;
