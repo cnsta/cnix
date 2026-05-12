@@ -22,7 +22,7 @@ in
         "col.active_border" = "rgb(4c7a5d)"; # rgba(b16286ee) 45deg
         "col.inactive_border" = "rgb(504945)";
         layout = "dwindle";
-        resize_on_border = true;
+        resize_on_border = false;
       };
       decoration = {
         rounding = 0;
