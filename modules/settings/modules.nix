@@ -72,7 +72,6 @@ in
       # zathura = en "kbt";
       zed-editor = none;
       # zellij = none;
-      # zen = none;
       # zsh = none;
       bash = none;
       fish = when "kbtsz" {

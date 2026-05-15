@@ -121,11 +121,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    fenix = {
-      url = "github:nix-community/fenix/monthly";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     tailray = {
       url = "github:NotAShelf/tailray";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -160,11 +155,6 @@
     };
 
     # Custom
-    zen-browser = {
-      url = "github:cnsta/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     cnixpost = {
       url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/cnixpost.git";
       inputs.nixpkgs.follows = "nixpkgs";

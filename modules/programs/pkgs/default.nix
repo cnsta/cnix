@@ -2,13 +2,11 @@
   pkgs,
   config,
   lib,
-  inputs,
   ...
 }:
 let
   inherit (lib) mkIf mkEnableOption mkMerge;
   cfg = config.cnix.programs.pkgs;
-
   hardware = with pkgs; [
     pciutils
     ddcutil
@@ -41,9 +39,7 @@ let
     progress
   ];
   nixTooling = with pkgs; [
-    nixd
     nil
-    nixfmt
     nix-tree
   ];
   security = with pkgs; [
@@ -63,7 +59,6 @@ let
     ocl-icd
     xmrig
   ];
-
   common =
     hardware
     ++ network
@@ -74,7 +69,6 @@ let
     ++ monitoring
     ++ audio
     ++ miscCommon;
-
   # gui
   guiSystem = with pkgs; [
     resources
@@ -120,7 +114,6 @@ let
     feishin
     nautilus
   ];
-
   gui = guiSystem ++ guiCapture ++ guiImage ++ guiTheming ++ guiWayland ++ guiMedia;
 
   # desktop/laptop/server
@@ -134,58 +127,33 @@ let
     nvtopPackages.intel
     zfstools
   ];
-
   # dev
   devLsps = with pkgs; [
-    lua-language-server
-    vscode-langservers-extracted
-    bash-language-server
     marksman
-    fish-lsp
   ];
   devBuild = with pkgs; [
     gcc
-    clang-tools
     pkg-config
   ];
   devRuntimes = with pkgs; [
     nodejs_25
-    deno
   ];
   devDbs = with pkgs; [ sqlite ];
   devFormatters = with pkgs; [
-    stylua
     fixjson
     sql-formatter
     prettierd
-    shfmt
     black
     nufmt
     nu-lint
   ];
   devOther = with pkgs; [
     nfs-utils
-    kdePackages.qtdeclarative
   ];
-
   devCommon = devLsps ++ devBuild ++ devRuntimes ++ devDbs ++ devFormatters ++ devOther;
-
-  rustToolchain = inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete.withComponents [
-    "cargo"
-    "clippy"
-    "llvm-tools"
-    "rust-src"
-    "rustc"
-    "rustfmt"
-  ];
-
-  devRust = [
-    rustToolchain
-    pkgs.rust-analyzer
-  ];
+  devRust = [ ];
   devPhp = with pkgs; [
     php
-    phpactor
   ];
   devPython = with pkgs; [
     pyright
@@ -202,7 +170,6 @@ in
     gui.enable = mkEnableOption "gui-specific packages";
     laptop.enable = mkEnableOption "laptop-specific packages";
     server.enable = mkEnableOption "server-specific packages";
-
     dev = {
       common.enable = mkEnableOption "generic development packages";
       rust.enable = mkEnableOption "rust packages";
@@ -210,7 +177,6 @@ in
       python.enable = mkEnableOption "python packages";
     };
   };
-
   config.environment.systemPackages = mkMerge [
     (mkIf cfg.common.enable common)
     (mkIf cfg.gui.enable gui)

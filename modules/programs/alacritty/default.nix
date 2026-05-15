@@ -50,6 +50,31 @@ let
         key = "V";
         mods = "Command";
       }
+      {
+        action = "SearchForward";
+        key = "F";
+        mods = "Control";
+      }
+      {
+        action = "ScrollHalfPageUp";
+        key = "PageUp";
+        mods = "Control";
+      }
+      {
+        action = "ScrollHalfPageDown";
+        key = "PageDown";
+        mods = "Control";
+      }
+      {
+        action = "ScrollToBottom";
+        key = "End";
+        mods = "Control";
+      }
+      {
+        action = "ScrollToTop";
+        key = "Home";
+        mods = "Control";
+      }
     ];
 
     window = {
