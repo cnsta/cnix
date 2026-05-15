@@ -5,8 +5,9 @@ color-modes = true
 completion-replace = true
 cursorline = true
 gutters = ["diagnostics", "line-numbers", "spacer", "diff"]
-scrolloff = 0
+scrolloff = 3
 true-color = true
+line-number = "relative"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -23,6 +24,9 @@ cursor-line = "disable"
 [editor.lsp]
 display-inlay-hints = true
 display-messages = true
+
+[editor.soft-wrap]
+enable = true
 
 [editor.statusline]
 center = ["file-name"]

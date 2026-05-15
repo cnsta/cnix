@@ -8,6 +8,7 @@ command = "/run/current-system/sw/bin/shfmt"
 
 [[language]]
 auto-format = true
+language-servers = ["fish-lsp"]
 name = "fish"
 
 [[language]]
@@ -31,12 +32,12 @@ args = ["fmt", "-", "--ext", "json"]
 command = "/run/current-system/sw/bin/deno"
 
 [[language]]
-auto-format = true
-file-types = ["kbd"]
+auto-format = false
 name = "common-lisp"
 
 [[language]]
 auto-format = true
+language-servers = ["markdown-oxide"]
 name = "markdown"
 
 [language.formatter]
@@ -45,7 +46,7 @@ command = "/run/current-system/sw/bin/deno"
 
 [[language]]
 auto-format = true
-language-servers = ["nil"]
+language-servers = ["nixd"]
 name = "nix"
 
 [language.formatter]
@@ -135,8 +136,15 @@ completeFunctionCalls = false
 [language-server.deno-lsp.environment]
 NO_COLOR = "1"
 
+[language-server.fish-lsp]
+args = ["start"]
+command = "/run/current-system/sw/bin/fish-lsp"
+
 [language-server.lua-language-server]
 command = "/run/current-system/sw/bin/lua-language-server"
+
+[language-server.markdown-oxide]
+command = "/run/current-system/sw/bin/markdown-oxide"
 
 [language-server.phpactor]
 args = ["language-server"]
@@ -145,6 +153,9 @@ command = "/run/current-system/sw/bin/phpactor"
 [language-server.qmlls]
 args = ["-E"]
 command = "/run/current-system/sw/bin/qmlls"
+
+[language-server.rust-analyzer]
+command = "/run/current-system/sw/bin/rust-analyzer"
 
 [language-server.typescript-language-server]
 args = ["--stdio"]
