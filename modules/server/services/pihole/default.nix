@@ -38,7 +38,8 @@ in
     virtualisation.oci-containers.containers = {
       ${unit} = {
         autoStart = true;
-        image = "pihole/pihole:2026.04.0";
+        image = "docker.io/pihole/pihole:latest";
+        pull = "newer";
         volumes = [
           "/var/lib/pihole:/etc/pihole/"
           "/var/lib/dnsmasq.d:/etc/dnsmasq.d/"
@@ -58,6 +59,7 @@ in
           "--cap-add=NET_ADMIN"
           "--cap-add=SYS_NICE"
           "--cap-add=SYS_TIME"
+          "--label=io.containers.autoupdate=registry"
         ];
       };
     };

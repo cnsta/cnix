@@ -25,13 +25,15 @@ in
 
     virtualisation.oci-containers.containers = {
       ${unit} = {
-        image = "flaresolverr/flaresolverr:latest";
+        image = "docker.io/flaresolverr/flaresolverr:latest";
+        pull = "newer";
         autoStart = true;
         dependsOn = [ "gluetun-arr" ];
         extraOptions = [
           "--network=container:gluetun-arr"
           "--sysctl=net.ipv6.conf.all.disable_ipv6=1"
           "--sysctl=net.ipv6.conf.default.disable_ipv6=1"
+          "--label=io.containers.autoupdate=registry"
         ];
         volumes = [
           "/var/lib/flaresolverr:/config"
