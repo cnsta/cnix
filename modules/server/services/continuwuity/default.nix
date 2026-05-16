@@ -68,8 +68,9 @@ in
 
     virtualisation.oci-containers.containers = {
       continuwuity = {
-        autoStart = true;
         image = "forgejo.ellis.link/continuwuation/continuwuity:latest";
+        pull = "newer";
+        autoStart = true;
         volumes = [
           "db:/var/lib/continuwuity"
           "${config.age.secrets.continuwuityToml.path}:/etc/continuwuity.toml:ro"
@@ -78,21 +79,27 @@ in
         extraOptions = [
           "--net=host"
           "--ulimit=nofile=1048567:1048567"
+          "--label=io.containers.autoupdate=registry"
         ];
       };
 
       lk-jwt-service = {
-        autoStart = true;
         image = "ghcr.io/element-hq/lk-jwt-service:latest";
+        pull = "newer";
+        autoStart = true;
         ports = [
           "8083:8083"
+        ];
+        extraOptions = [
+          "--label=io.containers.autoupdate=registry"
         ];
         environmentFiles = [ config.age.secrets.livekitEnvironment.path ];
       };
 
       livekit = {
+        image = "docker.io/livekit/livekit-server:latest";
+        pull = "newer";
         autoStart = true;
-        image = "livekit/livekit-server:latest";
         dependsOn = [ "lk-jwt-service" ];
         cmd = [
           "--config"
@@ -101,6 +108,7 @@ in
         volumes = [ "${config.age.secrets.livekitYaml.path}:/etc/livekit.yaml:ro" ];
         extraOptions = [
           "--net=host"
+          "--label=io.containers.autoupdate=registry"
         ];
       };
     };
