@@ -133,9 +133,9 @@ in
       hypridle = en "kbt";
       hyprpaper = en "kbt";
       jellyfin-mpv-shim = none;
-      dunst = en "bt";
+      dunst = en "b";
       # mako = none;
-      quickshell = en "k";
+      quickshell = en "kt";
       # swaync = en "bt";
       syncthing = none;
       tailray = en "kbt";
@@ -143,7 +143,7 @@ in
       dconf = en "kbt";
       gpg = en "kbt";
       gtk = en "kbt";
-      waybar = en "bt";
+      waybar = en "b";
       xdg = en "kbt";
     };
   };
