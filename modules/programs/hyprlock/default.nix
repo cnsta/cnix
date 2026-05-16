@@ -13,27 +13,26 @@ let
 
   settings = {
     general = {
-      hide_cursor = true;
+      hide_cursor = false;
       ignore_empty_input = true;
       immediate_render = true;
-      text_trim = false;
+      text_trim = true;
     };
 
     animations = {
       enabled = true;
       bezier = [
-        "linear,       1.0, 1.0, 0.0, 0.0"
+        "linear, 1, 1, 0, 0"
         "easeOutQuart, 0.25, 1.0, 0.5, 1.0"
-        "easeInOut,    0.45, 0.0, 0.55, 1.0"
+        "easeInOut, 0.45, 0.0, 0.55, 1.0"
       ];
-
       animation = [
-        "fadeIn,           1, 4, easeOutQuart"
-        "fadeOut,          1, 4, easeOutQuart"
-        "inputFieldDots,   1, 2, easeInOut"
+        "fadeIn, 1, 4, easeOutQuart"
+        "fadeOut, 1, 4, easeOutQuart"
+        "inputFieldDots, 1, 2, easeInOut"
         "inputFieldColors, 1, 3, easeInOut"
-        "inputFieldWidth,  1, 4, easeOutQuart"
-        "inputFieldFade,   1, 4, easeOutQuart"
+        "inputFieldWidth, 1, 4, easeOutQuart"
+        "inputFieldFade, 1, 4, easeOutQuart"
       ];
     };
 
@@ -47,8 +46,8 @@ let
     input-field = [
       {
         monitor = "";
-        size = "260, 55";
-        outline_thickness = 2;
+        size = "300, 50";
+        outline_thickness = 0;
         dots_size = 0.22;
         dots_spacing = 0.5;
         dots_center = true;
@@ -58,21 +57,18 @@ let
         inner_color = "rgba(00000040)";
         font_color = "rgba(FFFFFFFF)";
 
-        # While PAM is checking
-        check_color = "rgba(FFD479FF) rgba(FFAF40FF) 45deg";
         check_text = "<i>verifying…</i>";
 
         fail_color = "rgba(FF4D4DFF) rgba(C9184AFF) 45deg";
         fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
-        fail_transition = 300;
         swap_font_color = true;
-
+        ignore_empty_input = true;
         fade_on_empty = false;
         fade_timeout = 0;
         placeholder_text = "";
         hide_input = false;
         rounding = 0;
-        position = "0, 20";
+        position = "25, 20";
         halign = "center";
         valign = "center";
         font_family = "DepartureMono Nerd Font Mono Italic";
@@ -93,7 +89,7 @@ let
         color = "rgba(FFFFFFFF)";
         font_size = 25;
         font_family = "VCR OSD Mono";
-        position = "0, 230";
+        position = "0, 220";
         halign = "center";
         valign = "center";
       }
@@ -109,15 +105,27 @@ let
         halign = "center";
         valign = "center";
       }
+    ];
+
+    image = [
       {
         monitor = "";
-        text = "$ATTEMPTS[]";
-        color = "rgba(FF4D4DFF)";
-        font_size = 14;
-        font_family = "DepartureMono Nerd Font Mono Italic";
-        position = "0, -40";
+        path = "/home/$USER/.face";
+        size = 47;
+        rounding = -1;
+        position = "-160, 20";
         halign = "center";
         valign = "center";
+        border_size = 3;
+      }
+      {
+        monitor = "";
+        path = "/home/$USER/.os";
+        size = 50;
+        position = "-30, 30";
+        halign = "right";
+        valign = "bottom";
+        border_size = 0;
       }
     ];
   };
