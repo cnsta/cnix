@@ -25,10 +25,12 @@ in
     virtualisation.oci-containers.containers = {
       ${unit} = {
         image = "ghcr.io/hotio/qbittorrent:latest";
+        pull = "newer";
         autoStart = true;
         dependsOn = [ "gluetun-qbt" ];
         extraOptions = [
           "--network=container:gluetun-qbt"
+          "--label=io.containers.autoupdate=registry"
         ];
         volumes = [
           "/var/lib/qbittorrent:/config:rw"
@@ -39,10 +41,12 @@ in
 
       qui = {
         image = "ghcr.io/hotio/qui:latest";
+        pull = "newer";
         autoStart = true;
         dependsOn = [ "gluetun-arr" ];
         extraOptions = [
           "--network=container:gluetun-arr"
+          "--label=io.containers.autoupdate=registry"
         ];
         volumes = [
           "/var/lib/qui:/config"

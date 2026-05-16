@@ -14,7 +14,8 @@ in
     virtualisation.oci-containers.containers = {
       ${unit} = {
         autoStart = true;
-        image = "homeassistant/home-assistant:stable";
+        image = "docker.io/homeassistant/home-assistant:stable";
+        pull = "newer";
         volumes = [
           "/var/lib/home-assistant:/config"
           "/run/dbus:/run/dbus:ro"
@@ -27,6 +28,7 @@ in
         extraOptions = [
           "--network=host"
           "--privileged"
+          "--label=io.containers.autoupdate=registry"
         ];
       };
     };

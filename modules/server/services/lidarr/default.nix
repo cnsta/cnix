@@ -23,10 +23,12 @@ in
     virtualisation.oci-containers.containers = {
       ${unit} = {
         image = "ghcr.io/hotio/lidarr:latest";
+        pull = "newer";
         autoStart = true;
         dependsOn = [ "gluetun-arr" ];
         extraOptions = [
           "--network=container:gluetun-arr"
+          "--label=io.containers.autoupdate=registry"
         ];
         volumes = [
           "/var/lib/lidarr:/config"

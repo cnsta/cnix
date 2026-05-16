@@ -28,12 +28,16 @@ in
     virtualisation.oci-containers.containers = {
       ${unit} = {
         image = "docker.io/searxng/searxng:latest";
+        pull = "newer";
         autoStart = true;
         dependsOn = [
           "gluetun-searxng"
           "valkey-searxng"
         ];
-        extraOptions = [ "--network=container:gluetun-searxng" ];
+        extraOptions = [
+          "--network=container:gluetun-searxng"
+          "--label=io.containers.autoupdate=registry"
+        ];
         environmentFiles = [ config.age.secrets.searxngEnvironment.path ];
         volumes = [
           "/var/lib/searxng:/etc/searxng"

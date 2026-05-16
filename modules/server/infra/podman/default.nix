@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -20,6 +21,25 @@ in
           network = {
             dns_bind_port = 5353;
           };
+        };
+      };
+    };
+
+    systemd = {
+      services.podman-auto-update = {
+        wants = [ "network-online.target" ];
+        after = [ "network-online.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.podman}/bin/podman auto-update";
+          ExecStartPost = "${pkgs.podman}/bin/podman image prune -f";
+        };
+      };
+      timers.podman-auto-update = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "03:30";
+          Persistent = true;
         };
       };
     };

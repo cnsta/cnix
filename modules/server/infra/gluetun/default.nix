@@ -24,6 +24,7 @@ in
     virtualisation.oci-containers.containers = {
       gluetun-qbt = lib.mkIf cfg.qbittorrent.enable {
         image = "ghcr.io/qdm12/gluetun:latest";
+        pull = "newer";
         ports = [
           "58846:58846"
           "8080:8080"
@@ -33,6 +34,7 @@ in
         extraOptions = [
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
+          "--label=io.containers.autoupdate=registry"
         ];
         volumes = [ "/var/lib/gluetun-qbt:/gluetun" ];
         environmentFiles = [
@@ -45,6 +47,7 @@ in
 
       gluetun-searxng = lib.mkIf cfg.searxng.enable {
         image = "ghcr.io/qdm12/gluetun:latest";
+        pull = "newer";
         ports = [
           "8084:8084"
         ];
@@ -53,6 +56,7 @@ in
         extraOptions = [
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
+          "--label=io.containers.autoupdate=registry"
         ];
         volumes = [ "/var/lib/gluetun-searxng:/gluetun" ];
         environmentFiles = [
@@ -65,6 +69,7 @@ in
 
       gluetun-slskd = lib.mkIf cfg.slskd.enable {
         image = "ghcr.io/qdm12/gluetun:latest";
+        pull = "newer";
         ports = [
           "8388:8388"
           "5030:5030"
@@ -76,6 +81,7 @@ in
         extraOptions = [
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
+          "--label=io.containers.autoupdate=registry"
         ];
         volumes = [ "/var/lib/gluetun-slskd:/gluetun" ];
         environmentFiles = [
@@ -88,6 +94,7 @@ in
 
       gluetun-arr = lib.mkIf arr.enable {
         image = "ghcr.io/qdm12/gluetun:latest";
+        pull = "newer";
         ports = [
           "8191:8191"
           "9696:9696"
@@ -103,6 +110,7 @@ in
           "--cap-add=NET_RAW"
           "--sysctl=net.ipv6.conf.all.disable_ipv6=1"
           "--sysctl=net.ipv6.conf.default.disable_ipv6=1"
+          "--label=io.containers.autoupdate=registry"
         ];
         volumes = [ "/var/lib/gluetun-arr:/gluetun" ];
         environmentFiles = [

@@ -18,11 +18,13 @@ in
 
     virtualisation.oci-containers.containers = {
       ${unit} = {
-        image = "slskd/slskd:latest";
+        image = "docker.io/slskd/slskd:latest";
+        pull = "newer";
         autoStart = true;
         dependsOn = [ "gluetun-slskd" ];
         extraOptions = [
           "--network=container:gluetun-slskd"
+          "--label=io.containers.autoupdate=registry"
         ];
         volumes = [
           "/var/lib/slskd:/app:rw"
