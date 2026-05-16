@@ -47,9 +47,13 @@ in
 
       valkey-searxng = {
         image = "docker.io/valkey/valkey:9-alpine";
+        pull = "newer";
         autoStart = true;
         dependsOn = [ "gluetun-searxng" ];
-        extraOptions = [ "--network=container:gluetun-searxng" ];
+        extraOptions = [
+          "--network=container:gluetun-searxng"
+          "--label=io.containers.autoupdate=registry"
+        ];
         cmd = [
           "valkey-server"
           "--save"
