@@ -90,10 +90,10 @@ in
         gui = en "kbt";
         server = en "sz";
         dev = {
-          common = en "k";
+          common = en "kt";
           rust = en "k";
           php = en "t";
-          python = en "k";
+          python = en "kt";
         };
       };
     };
