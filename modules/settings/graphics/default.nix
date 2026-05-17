@@ -8,14 +8,14 @@ with lib;
 let
   cfg = config.cnix.settings.graphics;
 
-  commonPackages = with pkgs; [
+  commonDrivers = with pkgs; [
     libva-vdpau-driver
     libvdpau-va-gl
   ];
 
-  tools = with pkgs; [
-    libva
-    vulkan-tools
+  userTools = with pkgs; [
+    libva # vainfo
+    vulkan-tools # vulkaninfo, vkcube
     wayland
     wayland-protocols
   ];
@@ -35,7 +35,6 @@ in
       default = [ "amd" ];
       description = "List of GPU vendors to configure support for.";
     };
-
     nvidia = {
       open = mkOption {
         type = lib.types.bool;
@@ -50,7 +49,7 @@ in
           "latest"
         ];
         default = "stable";
-        description = "NVidia driver package to use.";
+        description = "Nvidia driver package to use.";
       };
     };
   };
@@ -63,9 +62,9 @@ in
         extraPackages = concatMap (
           vendor:
           if vendor == "amd" then
-            commonPackages
+            commonDrivers
           else if vendor == "intel" then
-            commonPackages
+            commonDrivers
             ++ (with pkgs; [
               vpl-gpu-rt
               intel-media-driver
@@ -73,25 +72,16 @@ in
               intel-vaapi-driver
             ])
           else if vendor == "nvidia" then
-            (with pkgs; [ nvidia-vaapi-driver ])
+            (with pkgs; [
+              nvidia-vaapi-driver
+              egl-wayland
+            ])
           else
             [ ]
         ) cfg.vendors;
       };
 
-      environment.systemPackages =
-        tools
-        ++ concatMap (
-          vendor:
-          if vendor == "nvidia" then
-            (with pkgs; [
-              egl-wayland
-              libGL
-              nvidia-vaapi-driver
-            ])
-          else
-            [ ]
-        ) cfg.vendors;
+      environment.systemPackages = userTools;
     })
 
     (mkIf (hasVendor "nvidia") {
