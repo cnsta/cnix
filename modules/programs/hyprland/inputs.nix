@@ -79,7 +79,6 @@ in
         };
         misc = {
           vrr = 0;
-          vfr = true;
         };
       };
     })
@@ -94,7 +93,6 @@ in
         };
         misc = {
           vrr = 0;
-          vfr = true;
         };
       };
     })
