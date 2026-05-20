@@ -46,10 +46,13 @@ in
 
         windowrule = [
           "match:title ^(VPN Switcher)$, float on, center on, size 0.18*monitor_w 0.2*monitor_h"
+          "match:title ^(Import VPN configuration)$, float on, center on, size 0.26*monitor_w 0.32*monitor_h"
+          "match:title ^(byt)$, float on, center on, size 0.22*monitor_w 0.3*monitor_h"
 
           "match:class ^(net.nokyan.Resources)$, float on, center on, size 0.5*monitor_w 0.7*monitor_h"
 
           "match:class ^(nwg-look)$, center on, float on"
+          "match:class ^(feh)$, center on, float on"
 
           "match:class ^(oculante)$, float on, center on"
 
@@ -58,7 +61,6 @@ in
           "match:class ^(org.gnome.FileRoller)$, float on"
           "match:class ^(org.freedesktop.impl.portal.desktop.kde)$, float on"
           "match:class ^(org.corectrl.CoreCtrl)$, float on"
-          "match:class ^(feh)$, float on"
           "match:class ^(polkit-gnome-authentication-agent-1)$, float on"
           "match:class ^(org.gnome.Calculator)$, float on"
           "match:class ^(blueman-manager)$, float on"

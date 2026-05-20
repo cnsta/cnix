@@ -17,8 +17,6 @@ in
         gaps_in = 2;
         gaps_out = "4, 4, 4, 4";
         border_size = 3;
-        #col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-        #col.inactive_border = rgba(595959aa)
         "col.active_border" = "rgb(4c7a5d)"; # rgba(b16286ee) 45deg
         "col.inactive_border" = "rgb(504945)";
         layout = "dwindle";
@@ -41,7 +39,6 @@ in
         shadow = {
           enabled = false;
           color = "rgba(00000025)";
-          ignore_window = true;
           offset = "0 5";
           range = 45;
           render_power = 2;
@@ -59,13 +56,10 @@ in
         "windowsOut,1,3,easeout,slide"
         "windowsMove,1,3,easeoutback"
         "windowsIn,1,3,easeoutback,slide"
-        # "windows, 1, 2.5, default"
         "workspaces, 1, 2, default, slide"
       ];
       dwindle = {
-        # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-        pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-        preserve_split = true; # you probably want this
+        preserve_split = true;
       };
     };
   };

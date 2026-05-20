@@ -68,7 +68,7 @@ let
         placeholder_text = "";
         hide_input = false;
         rounding = 0;
-        position = "25, 20";
+        position = "0, 0";
         halign = "center";
         valign = "center";
         font_family = "DepartureMono Nerd Font Mono Italic";
@@ -111,9 +111,9 @@ let
       {
         monitor = "";
         path = "/home/$USER/.face";
-        size = 47;
+        size = 57;
         rounding = -1;
-        position = "-160, 20";
+        position = "0, 80";
         halign = "center";
         valign = "center";
         border_size = 3;

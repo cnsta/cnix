@@ -169,6 +169,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    byt = {
+      url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/byt.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     fonts.url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/fonts.git";
   };
 }
