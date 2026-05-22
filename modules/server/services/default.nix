@@ -18,6 +18,7 @@
     ./freshrss
     ./memos
     ./miniflux
+    ./navidrome
     ./n8n
     ./nextcloud
     ./ollama

@@ -293,6 +293,18 @@
           category = "Media";
         };
       };
+      navidrome = {
+        enable = true;
+        subdomain = "music";
+        exposure = "tunnel";
+        port = 4533;
+        homepage = {
+          name = "Navidrome";
+          description = "Music streaming service";
+          icon = "navidrome.svg";
+          category = "Media";
+        };
+      };
       roundcube = {
         enable = true;
         subdomain = "mail";
