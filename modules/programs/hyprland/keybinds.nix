@@ -21,7 +21,7 @@ let
       browserinc = "librewolf --private-window";
     };
     bunk = {
-      mod = "ALT_L";
+      mod = "SUPER";
       terminal = "alacritty";
       browser = "librewolf";
       browserinc = "librewolf --private-window";
@@ -63,14 +63,9 @@ let
     (exec "${mod} + R" (toggle launcher))
     (exec "${mod} + Escape" (toggle "nwg-bar"))
     (exec "${mod} + L" "loginctl lock-session")
-    (exec "${mod} + SHIFT + B" "pkill -SIGUSR2 waybar")
-    (exec "${mod} + A" "pkill -SIGUSR1 waybar")
     (exec "${mod} + T" "uwsm-app -- ${terminal}")
     (exec "${mod} + W" "uwsm-app -- ${browser}")
     (exec "${mod} + SHIFT + W" "uwsm-app -- ${browserinc}")
-    (exec "${mod} + K" "keepassxc")
-    (exec "${mod} + N" (toggle "swaync-client -t -sw"))
-    (exec "${mod} + O" "uwsm-app -- networkmanager_dmenu")
     (exec "${mod} + I" "uwsm-app -- byt")
     {
       key = "${mod} + Q";
