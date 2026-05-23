@@ -26,8 +26,7 @@ in
         image = "ghcr.io/qdm12/gluetun:latest";
         pull = "newer";
         ports = [
-          "58846:58846"
-          "8080:8080"
+          "8081:8081"
         ];
         devices = [ "/dev/net/tun:/dev/net/tun" ];
         autoStart = true;
@@ -35,6 +34,10 @@ in
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
           "--label=io.containers.autoupdate=registry"
+          "--health-cmd=wget -qO- https://ipinfo.io/ip || exit 1"
+          "--health-interval=10s"
+          "--health-retries=6"
+          "--health-start-period=30s"
         ];
         volumes = [ "/var/lib/gluetun-qbt:/gluetun" ];
         environmentFiles = [

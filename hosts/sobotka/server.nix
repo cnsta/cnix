@@ -445,7 +445,7 @@
         enable = true;
         subdomain = "qbt";
         exposure = "local";
-        port = 8080;
+        port = 8081;
         homepage = {
           name = "qBittorrent";
           description = "Torrent client";
