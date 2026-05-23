@@ -80,6 +80,7 @@ in
     (mkIf (host == "toothpc") {
       cnix.programs.hyprland.lua.configParts = [
         {
+          input.kb_options = "altwin:swap_lalt_lwin";
           render.direct_scanout = 0;
           cursor.no_hardware_cursors = true;
           general.allow_tearing = false;

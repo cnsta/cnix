@@ -27,7 +27,7 @@ let
       browserinc = "librewolf --private-window";
     };
     toothpc = {
-      mod = "ALT_L";
+      mod = "SUPER";
       terminal = "alacritty";
       browser = "librewolf";
       browserinc = "librewolf --private-window";
