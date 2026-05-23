@@ -31,10 +31,11 @@ in
         extraOptions = [
           "--network=container:gluetun-qbt"
           "--label=io.containers.autoupdate=registry"
+          "--requires=gluetun-qbt"
         ];
         volumes = [
           "/var/lib/qbittorrent:/config:rw"
-          "/mnt/data/downloads:/downloads:rw"
+          "/mnt/data/downloads:/data:rw"
         ];
         environmentFiles = [ config.age.secrets.qbtEnvironment.path ];
       };
