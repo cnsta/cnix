@@ -16,7 +16,7 @@ in
     programs = {
       beekeeper = none;
       blender = en "k";
-      byt = en "k";
+      byt = en "kbt";
       corectrl = none;
       emacs = en "k";
       gamemode = none;
