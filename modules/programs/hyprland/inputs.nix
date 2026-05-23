@@ -70,7 +70,7 @@ in
     (mkIf (host == "bunk") {
       cnix.programs.hyprland.lua.configParts = [
         {
-          input.kb_options = "ctrl:swapcaps";
+          input.kb_options = "ctrl:swapcaps,altwin:swap_lalt_lwin";
           general.allow_tearing = false;
           misc.vrr = 0;
         }
