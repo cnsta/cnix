@@ -41,6 +41,9 @@ in
   mkAllEn = _host: { enable = true; };
   mkNone = _host: lib.mkIf false { enable = true; };
 
+  # hyprland-specific
+  inherit (import ./hyprlua.nix { inherit lib; }) toHyprlua;
+
   toHyprconf =
     let
       inherit (builtins)

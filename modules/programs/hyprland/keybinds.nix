@@ -4,9 +4,46 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkEnableOption mkMerge;
+  inherit (lib)
+    mkIf
+    mkEnableOption
+    range
+    concatMap
+    ;
   cfg = config.cnix.programs.hyprland;
   host = config.networking.hostName;
+
+  hostVars = {
+    kima = {
+      mod = "SUPER";
+      terminal = "alacritty";
+      browser = "librewolf";
+      browserinc = "librewolf --private-window";
+    };
+    bunk = {
+      mod = "ALT_L";
+      terminal = "alacritty";
+      browser = "librewolf";
+      browserinc = "librewolf --private-window";
+    };
+    toothpc = {
+      mod = "ALT_L";
+      terminal = "alacritty";
+      browser = "librewolf";
+      browserinc = "librewolf --private-window";
+    };
+  };
+  v = hostVars.${host} or hostVars.kima;
+  inherit (v)
+    mod
+    terminal
+    browser
+    browserinc
+    ;
+
+  launcher = "fuzzel";
+  fileManager = "nautilus";
+  yazi = "foot -e yazi";
 
   toggle =
     program:
@@ -14,133 +51,148 @@ let
       prog = builtins.substring 0 14 program;
     in
     "pkill ${prog} || uwsm-app -- ${program}";
-
   runOnce = program: "pgrep ${program} || uwsm-app -- ${program}";
+
+  exec = key: arg: {
+    inherit key arg;
+    dispatcher = "exec";
+  };
+
+  staticBinds = [
+    (exec "${mod} + SPACE" (toggle launcher))
+    (exec "${mod} + R" (toggle launcher))
+    (exec "${mod} + Escape" (toggle "nwg-bar"))
+    (exec "${mod} + L" "loginctl lock-session")
+    (exec "${mod} + SHIFT + B" "pkill -SIGUSR2 waybar")
+    (exec "${mod} + A" "pkill -SIGUSR1 waybar")
+    (exec "${mod} + T" "uwsm-app -- ${terminal}")
+    (exec "${mod} + W" "uwsm-app -- ${browser}")
+    (exec "${mod} + SHIFT + W" "uwsm-app -- ${browserinc}")
+    (exec "${mod} + K" "keepassxc")
+    (exec "${mod} + N" (toggle "swaync-client -t -sw"))
+    (exec "${mod} + O" "uwsm-app -- networkmanager_dmenu")
+    (exec "${mod} + I" "uwsm-app -- byt")
+    {
+      key = "${mod} + Q";
+      dispatcher = "killactive";
+    }
+    (exec "${mod} + E" "uwsm-app -- ${fileManager}")
+    (exec "${mod} + SHIFT + E" "uwsm-app -- ${yazi}")
+    {
+      key = "${mod} + F";
+      dispatcher = "fullscreen";
+    }
+    {
+      key = "${mod} + SHIFT + F";
+      dispatcher = "togglefloating";
+    }
+    {
+      key = "${mod} + P";
+      dispatcher = "pseudo";
+    }
+    (exec "CTRL + SHIFT + Escape" (runOnce "resources"))
+
+    (exec "${mod} + XF86MonBrightnessUp" "hyprctl dispatch dpms on")
+    (exec "${mod} + XF86MonBrightnessDown" "hyprctl dispatch dpms off")
+
+    (exec "XF86AudioLowerVolume" (runOnce "volume-control.sh --dec"))
+    (exec "XF86AudioRaiseVolume" (runOnce "volume-control.sh --inc"))
+    (exec "XF86AudioMute" (runOnce "volume-control.sh --toggle"))
+    (exec "XF86AudioMicMute" (runOnce "volume-control.sh --toggle-mic"))
+    (exec "XF86MonBrightnessDown" (runOnce "brightnessctl s 5%-"))
+    (exec "XF86MonBrightnessUp" (runOnce "brightnessctl s +5%"))
+
+    (exec "Insert" "${runOnce "grimblast"} --notify --freeze copysave area")
+    (exec "SHIFT + Insert" "${runOnce "grimblast"} --notify --freeze copysave output")
+    (exec "ALT + Insert" "${runOnce "grimblast"} --freeze save area - | ${runOnce "tesseract"} - - | wl-copy && ${runOnce "notify-send"} -t 3000 'OCR result copied to buffer'")
+  ];
+
+  wsBinds = concatMap (
+    n:
+    let
+      key = if n == 10 then "0" else toString n;
+    in
+    [
+      {
+        key = "${mod} + ${key}";
+        dispatcher = "workspace";
+        arg = n;
+      }
+      {
+        key = "${mod} + SHIFT + ${key}";
+        dispatcher = "movetoworkspace";
+        arg = n;
+      }
+    ]
+  ) (range 1 10);
+
+  dirs = [
+    {
+      arrow = "left";
+      letter = "l";
+      x = "-20";
+      y = "0";
+      relative = "true";
+    }
+    {
+      arrow = "right";
+      letter = "r";
+      x = "20";
+      y = "0";
+      relative = "true";
+    }
+    {
+      arrow = "up";
+      letter = "u";
+      x = "0";
+      y = "-20";
+      relative = "true";
+    }
+    {
+      arrow = "down";
+      letter = "d";
+      x = "0";
+      y = "20";
+      relative = "true";
+    }
+  ];
+  dirBinds = concatMap (d: [
+    {
+      key = "${mod} + ${d.arrow}";
+      dispatcher = "movefocus";
+      arg = d.letter;
+    }
+    {
+      key = "${mod} + SHIFT + ${d.arrow}";
+      raw = "hl.dsp.window.resize({ x = \"${d.x}\", y = \"${d.y}\", relative = \"${d.relative}\" })";
+    }
+    {
+      key = "${mod} + CTRL + ${d.arrow}";
+      raw = "hl.dsp.window.swap({ direction = \"${d.letter}\" })";
+    }
+  ]) dirs;
+
+  mouseBinds = [
+    {
+      key = "${mod} + mouse:272";
+      dispatcher = "movewindow";
+      flags = {
+        mouse = true;
+      };
+    }
+    {
+      key = "${mod} + mouse:273";
+      dispatcher = "resizewindow";
+      flags = {
+        mouse = true;
+      };
+    }
+  ];
 in
 {
   options.cnix.programs.hyprland.keybinds.enable =
     mkEnableOption "Enables keybind settings in Hyprland";
-
-  config = mkIf cfg.keybinds.enable (mkMerge [
-    {
-      programs.hyprland.settings = {
-        # Common Keybind Variables
-        "$fileManager" = "nautilus";
-        "$yazi" = "foot -e yazi";
-        "$launcher" = "fuzzel";
-
-        bind = [
-          "$mod, SPACE, exec, ${toggle "$launcher"}"
-          "$mod, R, exec, ${toggle "$launcher"}"
-          "$mod, Escape, exec, ${toggle "nwg-bar"}"
-          "$mod, L, exec, loginctl lock-session"
-          "$mod SHIFT, B, exec, pkill -SIGUSR2 waybar"
-          "$mod, A, exec, pkill -SIGUSR1 waybar"
-          "$mod, T, exec, uwsm-app -- $terminal"
-          "$mod, W, exec, uwsm-app -- $browser"
-          "$mod SHIFT, W, exec, uwsm-app -- $browserinc"
-          "$mod, K, exec, keepassxc"
-          "$mod, N, exec, ${toggle "swaync-client -t -sw"}"
-          "$mod, O, exec, uwsm-app -- networkmanager_dmenu"
-          "$mod, I, exec, uwsm-app -- byt"
-          "$mod, Q, killactive,"
-          "$mod, E, exec, uwsm-app -- $fileManager"
-          "$mod SHIFT, E, exec, uwsm-app -- $yazi"
-          "$mod, F, fullscreen,"
-          "$mod SHIFT, F, togglefloating,"
-          "$mod, P, pseudo,"
-          "$mod SHIFT, 1, movetoworkspace, 1"
-          "$mod SHIFT, 2, movetoworkspace, 2"
-          "$mod SHIFT, 3, movetoworkspace, 3"
-          "$mod SHIFT, 4, movetoworkspace, 4"
-          "$mod SHIFT, 5, movetoworkspace, 5"
-          "$mod SHIFT, 6, movetoworkspace, 6"
-          "$mod SHIFT, 7, movetoworkspace, 7"
-          "$mod SHIFT, 8, movetoworkspace, 8"
-          "$mod SHIFT, 9, movetoworkspace, 9"
-          "$mod SHIFT, 0, movetoworkspace, 10"
-          "CTRL SHIFT, Escape, exec, ${runOnce "resources"}"
-
-          "$mod, 1, workspace, 1"
-          "$mod, 2, workspace, 2"
-          "$mod, 3, workspace, 3"
-          "$mod, 4, workspace, 4"
-          "$mod, 5, workspace, 5"
-          "$mod, 6, workspace, 6"
-          "$mod, 7, workspace, 7"
-          "$mod, 8, workspace, 8"
-          "$mod, 9, workspace, 9"
-          "$mod, 0, workspace, 10"
-
-          "$mod, left, movefocus, l"
-          "$mod, right, movefocus, r"
-          "$mod, up, movefocus, u"
-          "$mod, down, movefocus, d"
-          "$mod SHIFT, left, resizeactive, -20 0"
-          "$mod SHIFT, right, resizeactive, 20 0"
-          "$mod SHIFT, up, resizeactive, 0 -20"
-          "$mod SHIFT, down, resizeactive, 0 20"
-          "$mod CTRL, left, swapwindow, l"
-          "$mod CTRL, right, swapwindow, r"
-          "$mod CTRL, up, swapwindow, u"
-          "$mod CTRL, down, swapwindow, d"
-
-          ",XF86AudioLowerVolume, exec, ${runOnce "volume-control.sh --dec"}"
-          ",XF86AudioRaiseVolume, exec, ${runOnce "volume-control.sh --inc"}"
-          ",XF86AudioMute, exec, ${runOnce "volume-control.sh --toggle"}"
-          ",XF86AudioMicMute, exec, ${runOnce "volume-control.sh --toggle-mic"}"
-
-          ",XF86MonBrightnessDown, exec, ${runOnce "brightnessctl s 5%-"}"
-          ",XF86MonBrightnessUp, exec, ${runOnce "brightnessctl s +5%"}"
-          "$mod, XF86MonBrightnessUp, exec, hyprctl dispatch dpms on"
-          "$mod, XF86MonBrightnessDown, exec, hyprctl dispatch dpms off"
-
-          ",Insert, exec, ${runOnce "grimblast"} --notify --freeze copysave area"
-          "SHIFT, Insert, exec, ${runOnce "grimblast"} --notify --freeze copysave output"
-          "ALT, Insert, exec, ${runOnce "grimblast"} --freeze save area - | ${runOnce "tesseract"} - - | wl-copy && ${runOnce "notify-send"} -t 3000 'OCR result copied to buffer'"
-        ];
-
-        bindm = [
-          "$mod, mouse:272, movewindow"
-          "$mod, mouse:273, resizewindow"
-        ];
-      };
-    }
-
-    (mkIf (host == "kima") {
-      programs.hyprland.settings = {
-        "$terminal" = "alacritty";
-        "$browser" = "librewolf";
-        "$browserinc" = "librewolf --private-window";
-        "$mod" = "SUPER";
-        bind = [
-          # Add more host-specific binds as needed
-        ];
-      };
-    })
-
-    (mkIf (host == "bunk") {
-      programs.hyprland.settings = {
-        "$terminal" = "alacritty";
-        "$browser" = "librewolf";
-        "$browserinc" = "librewolf --private-window";
-        "$mod" = "ALT_L";
-        bind = [
-          # Add more host-specific binds as needed
-        ];
-      };
-    })
-
-    (mkIf (host == "toothpc") {
-      programs.hyprland.settings = {
-        "$terminal" = "alacritty";
-        "$browser" = "librewolf";
-        "$browserinc" = "librewolf --private-window";
-        "$mod" = "ALT_L";
-        bind = [
-          # Add more host-specific binds as needed
-        ];
-      };
-    })
-  ]);
+  config = mkIf cfg.keybinds.enable {
+    cnix.programs.hyprland.lua.binds = staticBinds ++ wsBinds ++ dirBinds ++ mouseBinds;
+  };
 }
