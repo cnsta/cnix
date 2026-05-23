@@ -8,7 +8,9 @@ let
   cfg = config.cnix.programs.hyprland;
   host = config.networking.hostName;
 
-  commonExecOnce = [
+  baseStartup = [
+    "uwsm finalize"
+    "hyprlock"
     "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
     "gnome-keyring-daemon --start --components=secrets"
     "sleep 3s && wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.5"
@@ -17,34 +19,13 @@ in
 {
   options.cnix.programs.hyprland.startup.enable =
     mkEnableOption "Enables startup settings in Hyprland";
-
   config = mkIf cfg.startup.enable (mkMerge [
-    {
-      programs.hyprland.settings = {
-        execr-once = [
-          "uwsm finalize"
-          "hyprlock"
-        ];
-      };
-    }
-
-    (mkIf (host == "kima") {
-      programs.hyprland.settings.exec-once = [
-      ]
-      ++ commonExecOnce;
-    })
-
-    (mkIf (host == "bunk") {
-      programs.hyprland.settings.exec-once = [
-      ]
-      ++ commonExecOnce;
-    })
+    { cnix.programs.hyprland.lua.startup = baseStartup; }
 
     (mkIf (host == "toothpc") {
-      programs.hyprland.settings.exec-once = [
+      cnix.programs.hyprland.lua.startup = [
         "uwsm-app -s b -- solaar -w hide -b regular"
-      ]
-      ++ commonExecOnce;
+      ];
     })
   ]);
 }

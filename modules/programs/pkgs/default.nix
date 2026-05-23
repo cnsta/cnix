@@ -136,7 +136,7 @@ let
     pkg-config
   ];
   devRuntimes = with pkgs; [
-    nodejs_25
+    nodejs
   ];
   devDbs = with pkgs; [ sqlite ];
   devFormatters = with pkgs; [
@@ -157,7 +157,7 @@ let
   ];
   devPython = with pkgs; [
     pyright
-    python313Packages.python-lsp-server
+    python314Packages.python-lsp-server
     python3
     python3Packages.pyusb
     python3Packages.pygobject3
