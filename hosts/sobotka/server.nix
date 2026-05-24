@@ -94,6 +94,26 @@
         port = 8082;
       };
 
+      hydra = {
+        enable = true;
+        subdomain = "hydra";
+        exposure = "local";
+        port = 3000;
+        homepage = {
+          name = "Hydra";
+          description = "Nix continuous integration";
+          icon = "hydra.svg";
+          category = "Dev";
+        };
+      };
+
+      harmonia = {
+        enable = true;
+        subdomain = "cache";
+        exposure = "local";
+        port = 5000;
+      };
+
       arr = {
         enable = true;
         routed = false;

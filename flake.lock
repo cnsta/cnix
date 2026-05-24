@@ -113,11 +113,11 @@
         "rev": "40b7e5d4e81b6b11701981126046ef5f11ba2161",
         "revCount": 50,
         "type": "git",
-        "url": "ssh://forgejo@git.ts.cnst.dev/cnst/byt.git"
+        "url": "ssh://forgejo@git.cnst.dev/cnst/byt.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@git.ts.cnst.dev/cnst/byt.git"
+        "url": "ssh://forgejo@git.cnst.dev/cnst/byt.git"
       }
     },
     "cnixpost": {
@@ -133,11 +133,11 @@
         "rev": "dd64651fa5326b8c831a6e0434e815b48959c969",
         "revCount": 43,
         "type": "git",
-        "url": "ssh://forgejo@git.ts.cnst.dev/cnst/cnixpost.git"
+        "url": "ssh://forgejo@git.cnst.dev/cnst/cnixpost.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@git.ts.cnst.dev/cnst/cnixpost.git"
+        "url": "ssh://forgejo@git.cnst.dev/cnst/cnixpost.git"
       }
     },
     "cnixshell": {
@@ -153,11 +153,11 @@
         "rev": "4bdde7082a86a99a70d9605ea7fa4f625ba6bde0",
         "revCount": 8,
         "type": "git",
-        "url": "ssh://forgejo@git.ts.cnst.dev/cnst/cnixshell.git"
+        "url": "ssh://forgejo@git.cnst.dev/cnst/cnixshell.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@git.ts.cnst.dev/cnst/cnixshell.git"
+        "url": "ssh://forgejo@git.cnst.dev/cnst/cnixshell.git"
       }
     },
     "crane": {
@@ -208,11 +208,11 @@
         "rev": "6274c749a58a194729639bc980227dcae0e273ac",
         "revCount": 20,
         "type": "git",
-        "url": "ssh://forgejo@git.ts.cnst.dev/cnst/dotfiles.git"
+        "url": "ssh://forgejo@git.cnst.dev/cnst/dotfiles.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@git.ts.cnst.dev/cnst/dotfiles.git"
+        "url": "ssh://forgejo@git.cnst.dev/cnst/dotfiles.git"
       }
     },
     "emacs-overlay": {
@@ -425,11 +425,11 @@
         "rev": "4eb88c420637d0ace5c398b7c0d8cf7934d35bb4",
         "revCount": 2,
         "type": "git",
-        "url": "ssh://forgejo@git.ts.cnst.dev/cnst/fonts.git"
+        "url": "ssh://forgejo@git.cnst.dev/cnst/fonts.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@git.ts.cnst.dev/cnst/fonts.git"
+        "url": "ssh://forgejo@git.cnst.dev/cnst/fonts.git"
       }
     },
     "git-hooks": {
