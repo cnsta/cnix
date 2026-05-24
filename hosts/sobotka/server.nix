@@ -379,7 +379,7 @@
       forgejo = {
         enable = true;
         subdomain = "git";
-        exposure = "tailscale";
+        exposure = "tunnel";
         port = 3031;
         homepage = {
           name = "Forgejo";
