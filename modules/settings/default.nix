@@ -8,6 +8,7 @@
     ./locale
     ./monitors
     ./network
+    ./nix
     ./peripherals
     ./theme
   ];

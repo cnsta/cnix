@@ -16,7 +16,7 @@
     nixconfig = "cd $NH_FLAKE/";
     nset = "$EDITOR $NH_FLAKE/hosts/$hostname/settings.nix";
     nmod = "$EDITOR $NH_FLAKE/modules/settings/modules.nix";
-    nsrv = "$EDITOR $NH_FLAKE/hosts/sobotka/server.nix";
+    nsrv = "$EDITOR $NH_FLAKE/modules/server/modules.nix";
     fnix = "nix-shell --run fish -p";
     extract = "extract.sh";
     flakeup = "nix flake update";

@@ -9,6 +9,7 @@ let
   unit = "unbound";
   cfg = config.cnix.server.infra.${unit};
   srv = config.cnix.server;
+  ip = config.cnix.settings.network.localIp;
 
   svcNames = lib.attrNames srv.services;
 
@@ -19,10 +20,7 @@ let
         s = srv.services.${name};
         fqdn = clib.server.mkFullDomain config s;
       in
-      if s != null && s.enable && s.routed && s.subdomain != null then
-        [ ''"${fqdn}. A ${srv.ip}"'' ]
-      else
-        [ ]
+      if s != null && s.enable && s.routed && s.subdomain != null then [ ''"${fqdn}. A ${ip}"'' ] else [ ]
     ) svcNames
   );
 
