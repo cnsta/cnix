@@ -56,6 +56,7 @@ in
             access-control = [
               "127.0.0.0/8 allow"
               "::1 allow"
+              "10.88.0.0/24 allow"
               "0.0.0.0/0 refuse"
               "::0/0 refuse"
             ];
@@ -83,6 +84,7 @@ in
             interface = [
               "127.0.0.1@5335"
               "::1@5335"
+              "${hostIp config.networking.hostName}@5335"
             ];
             key-cache-slabs = 8;
             msg-cache-size = "256m";
