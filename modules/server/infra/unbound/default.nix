@@ -55,9 +55,9 @@ in
           server = {
             access-control = [
               "127.0.0.0/8 allow"
-              "10.88.0.0/24 allow"
               "::1 allow"
-              "192.168.88.0/24 allow"
+              "0.0.0.0/0 refuse"
+              "::0/0 refuse"
             ];
             aggressive-nsec = true;
             cache-max-ttl = 86400;
@@ -77,11 +77,12 @@ in
             harden-glue = true;
             harden-large-queries = true;
             harden-short-bufsize = true;
+            hide-identity = true;
+            hide-version = true;
             infra-cache-slabs = 8;
             interface = [
               "127.0.0.1@5335"
-              "${hostIp config.networking.hostName}@5335"
-              "::@5335"
+              "::1@5335"
             ];
             key-cache-slabs = 8;
             msg-cache-size = "256m";
@@ -97,13 +98,15 @@ in
             rrset-cache-slabs = 8;
             rrset-roundrobin = true;
             serve-expired = true;
+            serve-expired-ttl = 86400;
+            serve-expired-client-timeout = 1800;
             so-rcvbuf = "2m";
             so-reuseport = true;
             so-sndbuf = "2m";
             statistics-cumulative = true;
             statistics-interval = 0;
             tls-cert-bundle = "/etc/ssl/certs/ca-certificates.crt";
-            unwanted-reply-threshold = 100000;
+            unwanted-reply-threshold = 10000000;
             use-caps-for-id = false;
             verbosity = 1;
             private-address = [
@@ -126,9 +129,9 @@ in
               ''"ts.cnst.dev." transparent''
             ];
             local-data = [
-              ''"traefik.${config.cnix.settings.accounts.domains.local}. A 192.168.88.14"''
-              ''"rspamd.${config.cnix.settings.accounts.domains.local}. A 192.168.88.14"''
-              ''"login.${config.cnix.settings.accounts.domains.local}. A 192.168.88.14"''
+              ''"traefik.${config.cnix.settings.accounts.domains.local}. A ${hostIp config.networking.hostName}"''
+              ''"rspamd.${config.cnix.settings.accounts.domains.local}. A ${hostIp config.networking.hostName}"''
+              ''"login.${config.cnix.settings.accounts.domains.local}. A ${hostIp config.networking.hostName}"''
             ]
             ++ localARecords;
           };
