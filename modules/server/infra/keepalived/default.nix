@@ -51,6 +51,7 @@ in
     age.secrets.keepalived.file = "${self}/secrets/keepalived.age";
     services.keepalived = {
       enable = true;
+      secretFile = config.age.secrets.keepalived.path;
       vrrpInstances.VI = {
         state = _self.state;
         interface = cfg.interface;
@@ -66,7 +67,7 @@ in
         extraConfig = ''
           authentication {
             auth_type PASS
-            auth_pass ${config.age.secrets.keepalived.path}
+            auth_pass ''${KEEPALIVED_AUTH_PASS}
           }
         '';
       };
