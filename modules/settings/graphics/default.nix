@@ -58,7 +58,7 @@ in
     (mkIf (cfg.vendors != [ ]) {
       hardware.graphics = {
         enable = true;
-        enable32Bit = true;
+        enable32Bit = pkgs.stdenv.hostPlatform.isx86_64;
         extraPackages = concatMap (
           vendor:
           if vendor == "amd" then
