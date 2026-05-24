@@ -65,6 +65,17 @@
       };
     };
 
+    nix = {
+      enable = true;
+      cpuWeight = 30;
+      ioWeight = 30;
+      cpuQuota = "2400%";
+      memoryHigh = "32G";
+      memoryMax = "40G";
+      maxJobs = 4;
+      cores = 6;
+    };
+
     peripherals = {
       logitech.enable = false;
       kanata.enable = false;

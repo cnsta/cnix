@@ -26,6 +26,11 @@ in
 
     systemd.services.hydra-evaluator.environment.GC_DONT_GC = "true";
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+    systemd.services.hydra-evaluator.serviceConfig = {
+      MemoryHigh = "8G";
+      MemoryMax = "12G";
+      CPUWeight = 30;
+    };
     services.hydra = {
       enable = true;
       package = pkgs.hydra;
@@ -38,6 +43,7 @@ in
       extraConfig = ''
         max_unsupported_time = 30
         allow_import_from_derivation = true
+        max_concurrent_evals = 1
       '';
       extraEnv = {
         HYDRA_DISALLOW_UNFREE = "0";
