@@ -43,6 +43,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      (quickshell.override { stdenv = pkgs.clangStdenv; })
       (python3.withPackages (
         ps: with ps; [
           pygobject3
@@ -57,7 +58,6 @@ in
       wl-clipboard
       imagemagick
       wget
-      quickshell
       kdePackages.qtmultimedia
       kdePackages.qtquick3d
       kdePackages.qtsvg

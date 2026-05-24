@@ -60,5 +60,17 @@
         };
       };
     };
+
+    peripherals = {
+      logitech.enable = false;
+      kanata.enable = false;
+      adb.enable = false;
+      yubikey = {
+        manager.enable = false;
+        touch-detector.enable = false;
+      };
+      pcscd.enable = true;
+      utils.enable = true;
+    };
   };
 }
