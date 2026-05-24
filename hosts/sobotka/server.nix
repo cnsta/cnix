@@ -110,7 +110,7 @@
       harmonia = {
         enable = true;
         subdomain = "cache";
-        exposure = "local";
+        exposure = "tunnel";
         port = 5000;
       };
 

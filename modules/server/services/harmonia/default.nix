@@ -15,9 +15,11 @@ in
     };
 
     services.harmonia = {
-      enable = true;
-      signKeyPaths = [ config.age.secrets.harmoniaSignKey.path ];
-      settings.bind = "127.0.0.1:${toString cfg.port}";
+      cache = {
+        enable = true;
+        signKeyPaths = [ config.age.secrets.harmoniaSignKey.path ];
+        settings.bind = "127.0.0.1:${toString cfg.port}";
+      };
     };
   };
 }

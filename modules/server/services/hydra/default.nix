@@ -12,7 +12,18 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    # https://github.com/NixOS/nix/issues/4178#issuecomment-738886808
+    cnix.server.infra.postgresql.databases = [
+      {
+        database = "hydra";
+        identUsers = [
+          "hydra"
+          "hydra-queue-runner"
+          "hydra-www"
+          "root"
+        ];
+      }
+    ];
+
     systemd.services.hydra-evaluator.environment.GC_DONT_GC = "true";
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
     services.hydra = {
