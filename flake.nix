@@ -164,15 +164,15 @@
     #   url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/dotfiles.git";
     # };
 
-    # lightcrazy = {
-    #   url = "github:cnsta/lightcrazy";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    lightcrazy = {
+      url = "github:cnsta/lightcrazy";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    # byt = {
-    #   url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/byt.git";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    byt = {
+      url = "github:cnsta/byt";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # fonts.url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/fonts.git";
   };

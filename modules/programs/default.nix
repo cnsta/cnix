@@ -4,7 +4,7 @@
     ./bash
     ./beekeeper
     ./blender
-    ./byt
+    # ./byt
     ./chromium
     ./direnv
     ./discord
