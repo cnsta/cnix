@@ -7,11 +7,11 @@
 }:
 let
   unit = "forgejo";
-  cfg = config.cnix.server.services.${unit} or { };
+  cfg = config.cnix.server.services.${unit};
   domain = clib.server.mkFullDomain config cfg;
 in
 {
-  config = lib.mkIf (cfg.enable or false) {
+  config = lib.mkIf cfg.enable {
     cnix.server.infra = {
       fail2ban.jails.${unit} = {
         serviceName = "${unit}";
