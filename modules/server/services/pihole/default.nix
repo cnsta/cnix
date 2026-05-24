@@ -8,15 +8,6 @@ let
   unit = "pihole";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
-
-  getPiholeSecret =
-    hostname:
-    if hostname == "ziggy" then
-      [ config.age.secrets.piholeZiggy.path ]
-    else if hostname == "sobotka" then
-      [ config.age.secrets.pihole.path ]
-    else
-      throw "Unknown hostname: ${hostname}";
 in
 {
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
@@ -49,7 +40,7 @@ in
           CUSTOM_CACHE_SIZE = "0";
           WEBTHEME = "default-darker";
         };
-        environmentFiles = getPiholeSecret config.networking.hostName;
+        environmentFiles = [ config.age.secrets.pihole.path ];
         ports = [
           "53:53/tcp"
           "53:53/udp"

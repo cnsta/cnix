@@ -29,11 +29,6 @@
       enable = false;
     };
 
-    graphics = {
-      enable = false;
-      vendors = [ ];
-    };
-
     locale = {
       enable = true;
       defaultLocale = "en_US.UTF-8";
@@ -70,7 +65,7 @@
         touch-detector.enable = false;
       };
       pcscd.enable = true;
-      utils.enable = true;
+      utils.enable = false;
     };
   };
 }
