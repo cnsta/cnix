@@ -87,6 +87,13 @@
       };
     };
 
+    nix = {
+      enable = true;
+      cpuWeight = 20;
+      ioWeight = 20;
+      allowedCPUs = "0-5";
+    };
+
     peripherals = {
       logitech.enable = false;
       kanata.enable = false;
