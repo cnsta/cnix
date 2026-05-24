@@ -13,6 +13,7 @@
         ./hosts
         ./modules
         ./pkgs
+        ./hydra.nix
         ./fmt-hooks.nix
       ];
 

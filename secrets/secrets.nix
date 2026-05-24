@@ -103,6 +103,7 @@ in
   "hoppscotchPgPwd.age".publicKeys = sobotka;
   "minifluxEnvironment.age".publicKeys = sobotka;
   "minifluxPgPwd.age".publicKeys = sobotka;
+  "harmoniaSignKey.age".publicKeys = sobotka;
 
   # Ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

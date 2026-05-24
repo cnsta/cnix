@@ -6,7 +6,9 @@
     ./continuwuity
     ./element
     ./flaresolverr
+    ./harmonia
     ./homepage
+    ./hydra
     ./grafana
     ./immich
     ./jellyfin
