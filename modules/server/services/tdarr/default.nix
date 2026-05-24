@@ -30,7 +30,6 @@ in
     virtualisation.oci-containers.containers = {
       ${unit} = {
         image = "ghcr.io/haveagitgat/tdarr:latest";
-        pull = "newer";
         autoStart = true;
         environment = {
           serverIP = "0.0.0.0";
@@ -48,15 +47,11 @@ in
           "8265:8265"
           "8266:8266"
         ];
-        extraOptions = [
-          "--label=io.containers.autoupdate=registry"
-        ];
         volumes = sharedVolumes;
       };
 
       node0 = {
         image = "ghcr.io/kfalabs/tdarr-battlemage:latest";
-        pull = "newer";
         autoStart = true;
         environment = {
           serverIP = "host.containers.internal";
@@ -73,9 +68,6 @@ in
         devices = [
           "/dev/dri/card1:/dev/dri/card1"
           "/dev/dri/renderD129:/dev/dri/renderD129"
-        ];
-        extraOptions = [
-          "--label=io.containers.autoupdate=registry"
         ];
         volumes = sharedVolumes;
       };

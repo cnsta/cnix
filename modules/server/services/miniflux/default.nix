@@ -33,7 +33,6 @@ in
     virtualisation.oci-containers.containers = {
       miniflux = {
         image = "docker.io/miniflux/miniflux:latest";
-        pull = "newer";
         autoStart = true;
         ports = [
           "${toString cfg.port}:8080"
@@ -41,7 +40,6 @@ in
         environmentFiles = [ config.age.secrets.minifluxEnvironment.path ];
         extraOptions = [
           "--add-host=host.containers.internal:host-gateway"
-          "--label=io.containers.autoupdate=registry"
         ];
       };
     };

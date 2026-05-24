@@ -23,12 +23,10 @@ in
     virtualisation.oci-containers.containers = {
       ${unit} = {
         image = "ghcr.io/hotio/prowlarr:latest";
-        pull = "newer";
         autoStart = true;
         dependsOn = [ "gluetun-arr" ];
         extraOptions = [
           "--network=container:gluetun-arr"
-          "--label=io.containers.autoupdate=registry"
         ];
         volumes = [
           "/var/lib/prowlarr:/config"

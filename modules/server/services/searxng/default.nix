@@ -28,7 +28,6 @@ in
     virtualisation.oci-containers.containers = {
       ${unit} = {
         image = "docker.io/searxng/searxng:latest";
-        pull = "newer";
         autoStart = true;
         dependsOn = [
           "gluetun-searxng"
@@ -36,7 +35,6 @@ in
         ];
         extraOptions = [
           "--network=container:gluetun-searxng"
-          "--label=io.containers.autoupdate=registry"
         ];
         environmentFiles = [ config.age.secrets.searxngEnvironment.path ];
         volumes = [
@@ -47,12 +45,10 @@ in
 
       valkey-searxng = {
         image = "docker.io/valkey/valkey:9-alpine";
-        pull = "newer";
         autoStart = true;
         dependsOn = [ "gluetun-searxng" ];
         extraOptions = [
           "--network=container:gluetun-searxng"
-          "--label=io.containers.autoupdate=registry"
         ];
         cmd = [
           "valkey-server"
