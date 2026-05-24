@@ -21,6 +21,7 @@ let
     traceroute
     dig
     cloudflared
+    sniffnet
   ];
   archives = with pkgs; [
     unzip

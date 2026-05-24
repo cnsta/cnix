@@ -93,10 +93,12 @@
         exposure = "local";
         port = 8082;
       };
+
       arr = {
         enable = true;
         routed = false;
       };
+
       authelia = {
         enable = true;
         subdomain = "login";
@@ -113,6 +115,7 @@
           category = "Infra";
         };
       };
+
       cinny = {
         enable = true;
         subdomain = "cinny";
@@ -125,6 +128,7 @@
           category = "Communication";
         };
       };
+
       memos = {
         enable = true;
         subdomain = "memos";
@@ -137,6 +141,7 @@
           category = "Cloud";
         };
       };
+
       n8n = {
         enable = false;
         subdomain = "n8n";
@@ -149,18 +154,7 @@
           category = "Automation";
         };
       };
-      hoppscotch = {
-        enable = false;
-        subdomain = "hoppscotch";
-        exposure = "tunnel";
-        port = 3080;
-        homepage = {
-          name = "Hoppscotch";
-          description = "API Development Ecosystem";
-          icon = "hoppscotch.svg";
-          category = "Dev";
-        };
-      };
+
       freshrss = {
         enable = false;
         subdomain = "rss";
@@ -173,6 +167,7 @@
           category = "Media";
         };
       };
+
       searxng = {
         enable = true;
         subdomain = "search";
@@ -185,6 +180,7 @@
           category = "Cloud";
         };
       };
+
       ollama = {
         enable = false;
         subdomain = "ai";
@@ -197,6 +193,7 @@
           category = "Automation";
         };
       };
+
       bazarr = {
         enable = true;
         subdomain = "bazarr";
@@ -209,6 +206,7 @@
           category = "Media";
         };
       };
+
       prowlarr = {
         enable = true;
         subdomain = "prowlarr";
@@ -221,6 +219,7 @@
           category = "Media";
         };
       };
+
       flaresolverr = {
         enable = true;
         subdomain = "flaresolverr";
@@ -233,6 +232,7 @@
           category = "Downloads";
         };
       };
+
       grafana = {
         enable = true;
         subdomain = "grafana";
@@ -245,6 +245,7 @@
           category = "Infra";
         };
       };
+
       immich = {
         enable = true;
         subdomain = "immich";
@@ -257,6 +258,7 @@
           category = "Cloud";
         };
       };
+
       lidarr = {
         enable = true;
         subdomain = "lidarr";
@@ -269,6 +271,7 @@
           category = "Media";
         };
       };
+
       sonarr = {
         enable = true;
         subdomain = "sonarr";
@@ -281,6 +284,7 @@
           category = "Media";
         };
       };
+
       radarr = {
         enable = true;
         subdomain = "radarr";
@@ -293,6 +297,7 @@
           category = "Media";
         };
       };
+
       navidrome = {
         enable = true;
         subdomain = "music";
@@ -305,6 +310,7 @@
           category = "Media";
         };
       };
+
       roundcube = {
         enable = true;
         subdomain = "mail";
@@ -317,6 +323,7 @@
           category = "Communication";
         };
       };
+
       seerr = {
         enable = true;
         subdomain = "seerr";
@@ -329,6 +336,7 @@
           category = "Media";
         };
       };
+
       jellyfin = {
         enable = true;
         subdomain = "fin";
@@ -341,6 +349,7 @@
           category = "Media";
         };
       };
+
       uptime-kuma = {
         enable = true;
         subdomain = "uptime";
@@ -353,6 +362,7 @@
           category = "Infra";
         };
       };
+
       lldap = {
         enable = true;
         subdomain = "lldap";
@@ -365,6 +375,7 @@
           category = "Infra";
         };
       };
+
       forgejo = {
         enable = true;
         subdomain = "git";
@@ -377,6 +388,7 @@
           category = "Dev";
         };
       };
+
       vaultwarden = {
         enable = true;
         subdomain = "vault";
@@ -393,6 +405,7 @@
           category = "Cloud";
         };
       };
+
       element = {
         enable = true;
         subdomain = "element";
@@ -405,6 +418,7 @@
           category = "Communication";
         };
       };
+
       continuwuity = {
         enable = true;
         subdomain = "matrix";
@@ -417,6 +431,7 @@
           category = "Communication";
         };
       };
+
       miniflux = {
         enable = true;
         subdomain = "feed";
@@ -429,6 +444,7 @@
           category = "Communication";
         };
       };
+
       nextcloud = {
         enable = false;
         subdomain = "cloud";
@@ -441,6 +457,7 @@
           category = "Cloud";
         };
       };
+
       qbittorrent = {
         enable = true;
         subdomain = "qbt";
@@ -453,6 +470,7 @@
           category = "Downloads";
         };
       };
+
       qui = {
         enable = true;
         subdomain = "qui";
@@ -465,6 +483,7 @@
           category = "Downloads";
         };
       };
+
       home-assistant = {
         enable = true;
         subdomain = "ha";
@@ -477,6 +496,7 @@
           category = "Automation";
         };
       };
+
       slskd = {
         enable = false;
         subdomain = "slskd";
@@ -489,6 +509,7 @@
           category = "Downloads";
         };
       };
+
       tdarr = {
         enable = true;
         subdomain = "tdarr";
@@ -501,6 +522,7 @@
           category = "Media";
         };
       };
+
       turnstone = {
         enable = false;
         subdomain = "ts";
@@ -513,6 +535,7 @@
           category = "Automation";
         };
       };
+
       pihole = {
         enable = true;
         subdomain = "pihole";

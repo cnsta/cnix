@@ -1,67 +1,36 @@
-{ config, ... }:
 {
-  server = {
+  cnix.server = {
     enable = true;
     email = "adam@cnst.dev";
     domain = "ziggy.local";
+    ip = "192.168.88.12";
     user = "share";
     group = "share";
-    uid = 974;
-    gid = 973;
+    uid = 994;
+    gid = 993;
 
-    unbound = {
-      enable = true;
-    };
-    homepage-dashboard = {
-      enable = false;
-    };
-    bazarr = {
-      enable = false;
-    };
-    prowlarr = {
-      enable = false;
-    };
-    lidarr = {
-      enable = false;
-    };
-    sonarr = {
-      enable = false;
-    };
-    radarr = {
-      enable = false;
-    };
-    jellyseerr = {
-      enable = false;
-    };
-    jellyfin = {
-      enable = false;
-    };
-    uptime-kuma = {
-      enable = false;
-    };
-    vaultwarden = {
-      enable = false;
-    };
-    fail2ban = {
-      enable = false;
-    };
-    keepalived = {
-      enable = true;
-      interface = "enu1u1";
-    };
-    podman = {
-      enable = true;
-      gluetun.enable = false;
-      qbittorrent = {
-        enable = false;
-        port = 8080;
+    infra = {
+      traefik.enable = true;
+      unbound.enable = true;
+      podman.enable = true;
+      keepalived = {
+        enable = true;
+        interface = "enu1u1";
       };
-      slskd = {
-        enable = false;
-      };
+    };
+    services = {
       pihole = {
         enable = true;
+        subdomain = "pihole";
+        exposure = "local";
         port = 8053;
+        homepage = {
+          name = "PiHole";
+          description = "Adblocking and DNS service";
+          icon = "pi-hole.svg";
+          path = "/admin";
+          category = "Infra";
+        };
       };
     };
   };
