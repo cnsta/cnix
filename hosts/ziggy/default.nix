@@ -6,7 +6,6 @@
   imports = [
     ./hardware-configuration.nix
     ./settings.nix
-    ./server.nix
   ];
 
   networking = {

@@ -11,7 +11,7 @@ let
   none = clib.mkNone host;
 in
 {
-  config.cnix.server = when "sz" {
+  config.cnix.server = {
     enable = true;
     email = "adam@cnst.dev";
     domain = "cnix.dev";
@@ -22,6 +22,12 @@ in
     gid = 993;
 
     infra = {
+      traefik = en "sz";
+      tailscale = en "s";
+      unbound = en "sz";
+      gluetun = en "s";
+      podman = en "sz";
+
       cnixpost = {
         enable = none;
         clamav.enable = true;
@@ -55,18 +61,6 @@ in
         };
       };
 
-      traefik = {
-        enable = en "sz";
-      };
-
-      tailscale = {
-        enable = en "s";
-      };
-
-      unbound = {
-        enable = en "sz";
-      };
-
       fail2ban = when "s" {
         enable = true;
         apiKeyFile = config.age.secrets.cloudflareFirewallApiKey.path;
@@ -76,14 +70,6 @@ in
       keepalived = when "s" {
         enable = true;
         interface = "enp6s0";
-      };
-
-      gluetun = {
-        enable = en "s";
-      };
-
-      podman = {
-        enable = en "sz";
       };
 
       www = when "s" {
