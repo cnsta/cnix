@@ -144,10 +144,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    cnixshell = {
-      url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/cnixshell.git";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # cnixshell = {
+    #   url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/cnixshell.git";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
@@ -155,25 +155,25 @@
     };
 
     # Custom
-    cnixpost = {
-      url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/cnixpost.git";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # cnixpost = {
+    #   url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/cnixpost.git";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    dotfiles = {
-      url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/dotfiles.git";
-    };
+    # dotfiles = {
+    #   url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/dotfiles.git";
+    # };
 
-    lightcrazy = {
-      url = "github:cnsta/lightcrazy";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # lightcrazy = {
+    #   url = "github:cnsta/lightcrazy";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    byt = {
-      url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/byt.git";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # byt = {
+    #   url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/byt.git";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    fonts.url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/fonts.git";
+    # fonts.url = "git+ssh://forgejo@git.ts.cnst.dev/cnst/fonts.git";
   };
 }
