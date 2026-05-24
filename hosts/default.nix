@@ -52,6 +52,7 @@
           inherit specialArgs;
           modules = commonModules ++ [
             host
+            userModule
             self.modules.cnix.server
           ];
         };

@@ -14,13 +14,9 @@ in
     virtualisation.oci-containers.containers = {
       ${unit} = {
         image = "docker.io/deluan/navidrome:latest";
-        pull = "newer";
         autoStart = true;
         ports = [
           "${toString cfg.port}:${toString cfg.port}"
-        ];
-        extraOptions = [
-          "--label=io.containers.autoupdate=registry"
         ];
         volumes = [
           "/mnt/data:/data"
