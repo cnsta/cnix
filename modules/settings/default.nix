@@ -3,12 +3,12 @@
     ./modules.nix
     ./accounts
     ./boot
-    ./fonts
+    # ./fonts
     ./graphics
     ./locale
     ./monitors
     ./network
-    ./peripherals
-    ./theme
+    # ./peripherals
+    # ./theme
   ];
 }
