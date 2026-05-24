@@ -71,6 +71,7 @@
       enable = true;
       tailscale.enable = true;
       bluetooth.enable = true;
+      localIp = "192.168.88.13";
       nameservers = [
         "192.168.88.1"
         "192.168.88.69"

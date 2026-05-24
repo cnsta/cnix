@@ -1,7 +1,8 @@
 {
   imports = [
-    ./options.nix
     ./infra
     ./services
+    ./modules.nix
+    ./options.nix
   ];
 }

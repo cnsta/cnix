@@ -28,6 +28,11 @@ in
         default = [ ];
         description = "Domain search paths";
       };
+      localIp = lib.mkOption {
+        type = lib.types.str;
+        default = "127.0.0.1";
+        description = "The local IP of the service.";
+      };
       interfaces = mkOption {
         type = types.attrsOf (
           types.submodule {
