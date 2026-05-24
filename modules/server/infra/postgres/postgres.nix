@@ -21,6 +21,15 @@ let
           default = [ ];
           description = "List of extra users with access to this database.";
         };
+        identUsers = mkOption {
+          type = types.listOf types.str;
+          default = [ ];
+          description = ''
+            Extra OS users allowed to connect as this database's role over the
+            local socket via a pg_ident map. For services that run under
+            several system users but share one DB role (e.g. Hydra).
+          '';
+        };
         extensions = mkOption {
           type = types.listOf types.str;
           default = [ ];
@@ -44,6 +53,13 @@ let
 
   dbsWithPassword = lib.filter (db: db.passwordFile != null) cfg.databases;
   needsTCP = dbsWithPassword != [ ];
+
+  identMapLines = lib.concatMapStringsSep "\n" (
+    { database, identUsers, ... }:
+    lib.concatMapStringsSep "\n" (osUser: "${database}-map ${osUser} ${database}") (
+      lib.unique ([ database ] ++ identUsers)
+    )
+  ) (lib.filter (db: db.identUsers != [ ]) cfg.databases);
 in
 {
   options.cnix.server.infra.postgresql = {
@@ -76,11 +92,21 @@ in
         ) cfg.databases
       );
 
+      identMap = identMapLines;
+
       authentication = lib.mkForce (
         let
-          localPeer = lib.concatMapStringsSep "\n" (
-            { database, extraUsers, ... }:
-            lib.concatMapStringsSep "\n" (u: "local ${database} ${u} peer") ([ database ] ++ extraUsers)
+          localAuth = lib.concatMapStringsSep "\n" (
+            {
+              database,
+              extraUsers,
+              identUsers,
+              ...
+            }:
+            if identUsers != [ ] then
+              "local ${database} all ident map=${database}-map"
+            else
+              lib.concatMapStringsSep "\n" (u: "local ${database} ${u} peer") ([ database ] ++ extraUsers)
           ) cfg.databases;
 
           tcpPassword = lib.concatMapStringsSep "\n" (
@@ -95,7 +121,7 @@ in
         in
         ''
           local all postgres peer
-          ${localPeer}
+          ${localAuth}
           ${tcpPassword}
         ''
       );

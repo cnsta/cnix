@@ -1,0 +1,14 @@
+{
+  "main": {
+    "enabled": 1,
+    "type": 1,
+    "hidden": false,
+    "description": "Build main branch",
+    "flake": "git+https://git.cnst.dev/cnst/cnix?ref=main",
+    "checkinterval": 300,
+    "schedulingshares": 100,
+    "enableemail": false,
+    "emailoverride": "",
+    "keepnr": 3
+  }
+}
