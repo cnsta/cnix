@@ -48,6 +48,7 @@
       enable = true;
       tailscale.enable = false;
       bluetooth.enable = false;
+      localIp = "192.168.88.14";
       interfaces = {
         "enp6s0" = {
           allowedTCPPorts = [
