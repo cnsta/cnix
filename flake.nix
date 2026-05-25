@@ -146,7 +146,7 @@
     };
 
     cnixshell = {
-      url = "git+ssh://forgejo@git.cnst.dev/cnst/cnixshell.git";
+      url = "git+https://git.cnst.dev/cnst/cnixshell.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -157,12 +157,12 @@
 
     # Custom
     cnixpost = {
-      url = "git+ssh://forgejo@git.cnst.dev/cnst/cnixpost.git";
+      url = "git+https://git.cnst.dev/cnst/cnixpost.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     dotfiles = {
-      url = "git+ssh://forgejo@git.cnst.dev/cnst/dotfiles.git";
+      url = "git+https://git.cnst.dev/cnst/dotfiles.git";
     };
 
     lightcrazy = {
@@ -171,10 +171,10 @@
     };
 
     byt = {
-      url = "git+ssh://forgejo@git.cnst.dev/cnst/byt.git";
+      url = "git+https://git.cnst.dev/cnst/byt.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    fonts.url = "git+ssh://forgejo@git.cnst.dev/cnst/fonts.git";
+    fonts.url = "git+https://git.cnst.dev/cnst/fonts.git";
   };
 }
