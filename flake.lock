@@ -113,11 +113,11 @@
         "rev": "40b7e5d4e81b6b11701981126046ef5f11ba2161",
         "revCount": 50,
         "type": "git",
-        "url": "ssh://forgejo@git.cnst.dev/cnst/byt.git"
+        "url": "https://git.cnst.dev/cnst/byt.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@git.cnst.dev/cnst/byt.git"
+        "url": "https://git.cnst.dev/cnst/byt.git"
       }
     },
     "cnixpost": {
@@ -133,11 +133,11 @@
         "rev": "dd64651fa5326b8c831a6e0434e815b48959c969",
         "revCount": 43,
         "type": "git",
-        "url": "ssh://forgejo@git.cnst.dev/cnst/cnixpost.git"
+        "url": "https://git.cnst.dev/cnst/cnixpost.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@git.cnst.dev/cnst/cnixpost.git"
+        "url": "https://git.cnst.dev/cnst/cnixpost.git"
       }
     },
     "cnixshell": {
@@ -153,11 +153,11 @@
         "rev": "4bdde7082a86a99a70d9605ea7fa4f625ba6bde0",
         "revCount": 8,
         "type": "git",
-        "url": "ssh://forgejo@git.cnst.dev/cnst/cnixshell.git"
+        "url": "https://git.cnst.dev/cnst/cnixshell.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@git.cnst.dev/cnst/cnixshell.git"
+        "url": "https://git.cnst.dev/cnst/cnixshell.git"
       }
     },
     "crane": {
@@ -208,11 +208,11 @@
         "rev": "6274c749a58a194729639bc980227dcae0e273ac",
         "revCount": 20,
         "type": "git",
-        "url": "ssh://forgejo@git.cnst.dev/cnst/dotfiles.git"
+        "url": "https://git.cnst.dev/cnst/dotfiles.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@git.cnst.dev/cnst/dotfiles.git"
+        "url": "https://git.cnst.dev/cnst/dotfiles.git"
       }
     },
     "emacs-overlay": {
@@ -223,11 +223,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1779596433,
-        "narHash": "sha256-6TvFGQgNKR/ILKMpluwRCdKwG7mavNug6HSWPnYWxVU=",
+        "lastModified": 1779680625,
+        "narHash": "sha256-36kEw5iLOlNWTUyJosgHMzQAwXxhD6NcUBVykMQv09g=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "1dc69d6661320f9490c01f417f4ec16ef2cf7af5",
+        "rev": "1aea2ff63be429967f9cfad026b2b9e7734cdd64",
         "type": "github"
       },
       "original": {
@@ -425,11 +425,11 @@
         "rev": "4eb88c420637d0ace5c398b7c0d8cf7934d35bb4",
         "revCount": 2,
         "type": "git",
-        "url": "ssh://forgejo@git.cnst.dev/cnst/fonts.git"
+        "url": "https://git.cnst.dev/cnst/fonts.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@git.cnst.dev/cnst/fonts.git"
+        "url": "https://git.cnst.dev/cnst/fonts.git"
       }
     },
     "git-hooks": {
@@ -740,11 +740,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1779565977,
-        "narHash": "sha256-OCzhgY7kXuFLczKPf7KjMFS04CPXMAdaiQ+M1kFJVT8=",
+        "lastModified": 1779622215,
+        "narHash": "sha256-Xct/RO79Cx0ySpjBX9Wc6ofx9jU+Y188NBvzv8Lsa88=",
         "owner": "hyprwm",
         "repo": "hyprland",
-        "rev": "abd4abb5e654707edba6f527058292333149f90f",
+        "rev": "2dcb10a4c03a4d2ae96eb74b74209419020e0ba7",
         "type": "github"
       },
       "original": {
@@ -1427,11 +1427,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1779102034,
-        "narHash": "sha256-vZJZjLo513IeI8hjzHFc6TDezUd4uCE2Eq4SNO3DNNg=",
+        "lastModified": 1779467186,
+        "narHash": "sha256-nOesoDCiXcUftqbRBMz9tt4blI5PvljMWbm3kuCA+0s=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "687f05a9184cad4eaf905c48b63649e3a86f5433",
+        "rev": "b77b3de8775677f84492abe84635f87b0e153f0f",
         "type": "github"
       },
       "original": {
@@ -1758,11 +1758,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779592685,
-        "narHash": "sha256-p9d56GezhHRf4QfANxwa1d+fvwShvjB5XUhdIl7WEd0=",
+        "lastModified": 1779679233,
+        "narHash": "sha256-qSIAAfK66X6waos6alIYxVze1ZU3C/WPp7NlN4ooP54=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "3a58b199e7c83a80b85c28044f808085ba7e941c",
+        "rev": "47ab6c7b3c6a68beac60067490240efa32ae344c",
         "type": "github"
       },
       "original": {
