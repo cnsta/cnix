@@ -10,6 +10,7 @@ let
     sobotka = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICiNcNex+/hrEQJYJJTj89uPXocSfChU38E5TujWdxaM cnstlab@cnixlab";
     kima = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEUub8vbzUn2f39ILhAJ2QeH8xxLSjiyUuo8xvHGx/VB adam@cnst.dev";
     toothpc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGu5vZbb5ExampleKeyHereGfDF9c5 toothpick@toothpc";
+    ziggy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtL8uBsJ3UL4+scqjEcyXYQOVlKziJk9YJ78YP6jCxq cnst@nixos";
   };
 
   keyName = config.cnix.settings.accounts.sshUser or null;
@@ -18,9 +19,9 @@ let
     if keyName != null then
       lib.attrByPath [
         keyName
-      ] (builtins.abort "No SSH key defined for hostname/key '${toString keyName}'") sshKeys
+      ] (abort "Accounts Module: No SSH key defined for hostname/key '${toString keyName}'") sshKeys
     else
-      builtins.abort "No accounts.sshUser provided, cannot select SSH key.";
+      abort "No accounts.sshUser provided, cannot select SSH key.";
 in
 {
   options.cnix.settings.accounts = {
