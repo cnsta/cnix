@@ -7,10 +7,6 @@ let
   inherit (lib) mkOption types;
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
   cfg = config.cnix.server;
-
-  serviceNames = builtins.attrNames (
-    lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./services)
-  );
 in
 {
   options.cnix.server = {
@@ -178,42 +174,38 @@ in
       );
     };
   };
-  config = lib.mkMerge [
 
-    { cnix.server.services = lib.genAttrs serviceNames (_: { }); }
-
-    (lib.mkIf cfg.enable {
-      users = {
-        groups.${cfg.group} = {
-          gid = cfg.gid;
-        };
-        users.${cfg.user} = {
-          uid = cfg.uid;
-          isSystemUser = true;
-          group = cfg.group;
-          extraGroups = ifTheyExist [
-            "audio"
-            "video"
-            "docker"
-            "libvirtd"
-            "qemu-libvirtd"
-            "fail2ban"
-            "vaultwarden"
-            "qbittorrent"
-            "lidarr"
-            "prowlarr"
-            "bazarr"
-            "sonarr"
-            "radarr"
-            "media"
-            "share"
-            "render"
-            "input"
-            "authentik"
-            "traefik"
-          ];
-        };
+  config = lib.mkIf cfg.enable {
+    users = {
+      groups.${cfg.group} = {
+        gid = cfg.gid;
       };
-    })
-  ];
+      users.${cfg.user} = {
+        uid = cfg.uid;
+        isSystemUser = true;
+        group = cfg.group;
+        extraGroups = ifTheyExist [
+          "audio"
+          "video"
+          "docker"
+          "libvirtd"
+          "qemu-libvirtd"
+          "fail2ban"
+          "vaultwarden"
+          "qbittorrent"
+          "lidarr"
+          "prowlarr"
+          "bazarr"
+          "sonarr"
+          "radarr"
+          "media"
+          "share"
+          "render"
+          "input"
+          "authentik"
+          "traefik"
+        ];
+      };
+    };
+  };
 }
