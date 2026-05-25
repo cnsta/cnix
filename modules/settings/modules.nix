@@ -80,16 +80,21 @@ in
         homeless = en "sz";
       };
       git = all;
-      helix = all;
+      helix = {
+        enable = true;
+        languages = en "kbt";
+        rust = en "kb";
+        frontend = en "kt";
+      };
       microfetch = all;
       # ssh = en "kbt";
-
       # bundles
       pkgs = {
-        common = all;
+        minimal = en "z";
+        common = en "kbts";
         desktop = en "kbt";
         gui = en "kbt";
-        server = en "sz";
+        server = en "s";
         dev = {
           common = en "kt";
           rust = en "k";
