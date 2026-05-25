@@ -24,6 +24,14 @@ let
     ];
   };
 
+  frontendToolchain = with pkgs; [
+    phpactor
+    typescript-language-server
+    vscode-langservers-extracted
+    kdePackages.qtdeclarative
+    deno
+  ];
+
   languageServers = with pkgs; [
     bash-language-server
     clang-tools
@@ -31,29 +39,37 @@ let
     lua-language-server
     markdown-oxide
     nixd
-    phpactor
-    typescript-language-server
-    vscode-langservers-extracted
-    kdePackages.qtdeclarative
   ];
 
   formatters = with pkgs; [
-    deno
     nixfmt
     prettier
     shfmt
     stylua
   ];
-
-  languagePkgs = [ rustToolchain ] ++ languageServers ++ formatters;
 in
 {
-  options.cnix.programs.helix.enable = mkEnableOption "the Helix editor";
+  options.cnix.programs.helix = {
+    enable = mkEnableOption "the Helix editor";
+    languages.enable = mkEnableOption "Helix language servers and formatters";
+    rust.enable = mkEnableOption "the Rust toolchain (rust-analyzer, rust-src)";
+    frontend.enable = mkEnableOption "the frontend toolchain (TS, PHP, QML, Deno)";
+  };
+
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = [ helixPkg ] ++ languagePkgs;
+      environment.systemPackages = [ helixPkg ];
       environment.variables.EDITOR = "hx";
     }
+    (mkIf cfg.languages.enable {
+      environment.systemPackages = languageServers ++ formatters;
+    })
+    (mkIf cfg.rust.enable {
+      environment.systemPackages = [ rustToolchain ];
+    })
+    (mkIf cfg.frontend.enable {
+      environment.systemPackages = frontendToolchain;
+    })
     (mkIf (acct.defaultUsers != [ ]) {
       hjem.users = genAttrs acct.defaultUsers (_: {
         xdg.config.files = {

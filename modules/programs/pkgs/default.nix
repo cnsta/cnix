@@ -21,7 +21,6 @@ let
     traceroute
     dig
     cloudflared
-    sniffnet
   ];
   archives = with pkgs; [
     unzip
@@ -49,7 +48,6 @@ let
     git-crypt
   ];
   monitoring = with pkgs; [ htop ];
-  audio = with pkgs; [ cava ];
   miscCommon = with pkgs; [
     stow
     socat
@@ -58,7 +56,20 @@ let
     exiftool
     app2unit
     ocl-icd
-    xmrig
+  ];
+  minimal = with pkgs; [
+    htop
+    jq
+    ripgrep
+    fd
+    file
+    tree
+    unzip
+    gnutar
+    gnused
+    openssl
+    dig
+    traceroute
   ];
   common =
     hardware
@@ -68,7 +79,6 @@ let
     ++ nixTooling
     ++ security
     ++ monitoring
-    ++ audio
     ++ miscCommon;
   # gui
   guiSystem = with pkgs; [
@@ -91,6 +101,8 @@ let
     wl-screenrec
     wl-clipboard
     hyprpicker
+    cava
+    sniffnet
   ];
   guiImage = with pkgs; [
     imagemagick
@@ -166,6 +178,7 @@ let
 in
 {
   options.cnix.programs.pkgs = {
+    minimal.enable = mkEnableOption "bare-essential packages";
     common.enable = mkEnableOption "core packages";
     desktop.enable = mkEnableOption "desktop-specific packages";
     gui.enable = mkEnableOption "gui-specific packages";
@@ -179,6 +192,7 @@ in
     };
   };
   config.environment.systemPackages = mkMerge [
+    (mkIf cfg.minimal.enable minimal)
     (mkIf cfg.common.enable common)
     (mkIf cfg.gui.enable gui)
     (mkIf cfg.desktop.enable desktop)
