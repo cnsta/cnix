@@ -82,7 +82,7 @@ in
       git = all;
       helix = {
         enable = true;
-        languages = en "kbt";
+        languages = en "kbts";
         rust = en "kb";
         frontend = en "kt";
       };
