@@ -11,7 +11,7 @@
     ];
 
     trusted-public-keys = [
-      "cache.cnst.dev-1:lNAQQ3eMk4F0fu/PZimhWHApf4eVEBNABJggW32aWus="
+      "cache.cnst.dev-1:3yhqzi3xAXkgMsnsxyZVuB23ynVtoZm/J9fI9omutqU="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
