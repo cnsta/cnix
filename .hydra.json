@@ -4,7 +4,7 @@
     "type": 1,
     "hidden": false,
     "description": "Build main branch",
-    "flake": "git+https://git.cnst.dev/cnst/cnix/src/branch/main",
+    "flake": "git+https://git.cnst.dev/cnst/cnix",
     "checkinterval": 300,
     "schedulingshares": 100,
     "enableemail": false,
