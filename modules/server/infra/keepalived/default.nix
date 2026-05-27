@@ -65,6 +65,8 @@ in
 
     services.keepalived = {
       enable = true;
+      enableScriptSecurity = true;
+      extraGlobalDefs = "max_auto_priority";
       secretFile = config.age.secrets.keepalived.path;
 
       vrrpScripts = lib.optionalAttrs hasCheck {
