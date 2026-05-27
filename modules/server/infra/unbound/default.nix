@@ -9,7 +9,9 @@ let
   unit = "unbound";
   cfg = config.cnix.server.infra.${unit};
   srv = config.cnix.server;
-  ip = config.cnix.settings.network.localIp;
+  vip = "192.168.88.69";
+  domain = config.cnix.server.domain;
+  localIp = config.cnix.settings.network.localIp;
 
   svcNames = lib.attrNames srv.services;
 
@@ -20,18 +22,12 @@ let
         s = srv.services.${name};
         fqdn = clib.server.mkFullDomain config s;
       in
-      if s != null && s.enable && s.routed && s.subdomain != null then [ ''"${fqdn}. A ${ip}"'' ] else [ ]
+      if s != null && s.enable && s.routed && s.subdomain != null then
+        [ ''"${fqdn}. A ${vip}"'' ]
+      else
+        [ ]
     ) svcNames
   );
-
-  hostIp =
-    hostname:
-    if hostname == "ziggy" then
-      "192.168.88.12"
-    else if hostname == "sobotka" then
-      "192.168.88.14"
-    else
-      throw "No IP defined for host ${hostname}";
 in
 {
   options.cnix.server.infra.${unit} = {
@@ -82,7 +78,7 @@ in
             interface = [
               "127.0.0.1@5335"
               "::1@5335"
-              "${hostIp config.networking.hostName}@5335"
+              "${localIp config.networking.hostName}@5335"
             ];
             key-cache-slabs = 8;
             msg-cache-size = "256m";
@@ -129,9 +125,9 @@ in
               ''"ts.cnst.dev." transparent''
             ];
             local-data = [
-              ''"traefik.${config.cnix.settings.accounts.domains.local}. A ${hostIp config.networking.hostName}"''
-              ''"rspamd.${config.cnix.settings.accounts.domains.local}. A ${hostIp config.networking.hostName}"''
-              ''"login.${config.cnix.settings.accounts.domains.local}. A ${hostIp config.networking.hostName}"''
+              ''"traefik.${domain}. A ${vip}"''
+              ''"rspamd.${domain}. A ${vip}"''
+              ''"login.${domain}. A ${vip}"''
             ]
             ++ localARecords;
           };
