@@ -37,6 +37,7 @@ let
     file
     tree
     progress
+    vim
   ];
   nixTooling = with pkgs; [
     nil
@@ -70,16 +71,10 @@ let
     openssl
     dig
     traceroute
+    vim
   ];
   common =
-    hardware
-    ++ network
-    ++ archives
-    ++ textTools
-    ++ nixTooling
-    ++ security
-    ++ monitoring
-    ++ miscCommon;
+    hardware ++ network ++ archives ++ textTools ++ nixTooling ++ security ++ monitoring ++ miscCommon;
   # gui
   guiSystem = with pkgs; [
     resources
