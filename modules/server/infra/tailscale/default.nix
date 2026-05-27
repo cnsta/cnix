@@ -8,13 +8,14 @@
 with lib;
 let
   cfg = config.cnix.server.infra.tailscale;
+  iface = builtins.head (builtins.attrNames config.cnix.settings.network.interfaces);
 in
 {
   options.cnix.server.infra.tailscale = {
     enable = mkEnableOption "Enable tailscale server configuration";
   };
   config = mkIf cfg.enable {
-    age.secrets.sobotkaTsAuth.file = "${self}/secrets/sobotkaTsAuth.age";
+    age.secrets.tsAuth.file = "${self}/secrets/tsAuth.age";
 
     environment.systemPackages = [ pkgs.ethtool ];
 
@@ -38,7 +39,7 @@ in
         enable = true;
         openFirewall = true;
         useRoutingFeatures = "server";
-        authKeyFile = config.age.secrets.sobotkaTsAuth.path;
+        authKeyFile = config.age.secrets.tsAuth.path;
         extraSetFlags = [
           "--advertise-exit-node"
         ];
@@ -49,7 +50,7 @@ in
         rules."50-tailscale-optimizations" = {
           onState = [ "routable" ];
           script = ''
-            ${pkgs.ethtool}/bin/ethtool -K enp6s0 rx-udp-gro-forwarding on rx-gro-list off
+            ${pkgs.ethtool}/bin/ethtool -K ${iface} rx-udp-gro-forwarding on rx-gro-list off
           '';
         };
       };
