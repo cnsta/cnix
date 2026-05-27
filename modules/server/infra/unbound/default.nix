@@ -78,7 +78,7 @@ in
             interface = [
               "127.0.0.1@5335"
               "::1@5335"
-              "${localIp config.networking.hostName}@5335"
+              "${toString localIp}@5335"
             ];
             key-cache-slabs = 8;
             msg-cache-size = "256m";
