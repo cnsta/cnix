@@ -1,7 +1,7 @@
 {
   nix.settings = {
     substituters = [
-      "https://cache.cnst.dev?priority=5"
+      "https://cache.cnst.dev?priority=20"
       "https://cache.nixos.org?priority=10"
       "https://helix.cachix.org"
       "https://hyprland.cachix.org"

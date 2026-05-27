@@ -80,7 +80,7 @@ in
         homeless = en "sz";
       };
       git = all;
-      helix = {
+      helix = when "kbts" {
         enable = true;
         languages = en "kbts";
         rust = en "kb";
