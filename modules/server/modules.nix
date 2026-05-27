@@ -2,9 +2,11 @@
   config,
   clib,
   lib,
+  pkgs,
   ...
 }:
 let
+  inherit (lib) mkMerge genAttrs;
   host = config.networking.hostName;
   ip = config.cnix.settings.network.localIp;
   en = clib.mkEn host;
@@ -553,9 +555,13 @@ in
         zoneId = "0027acdfb8bbe010f55b676ad8698dfb";
       };
 
-      keepalived = when "s" {
+      keepalived = when "sz" {
         enable = true;
-        interface = "enp6s0";
+        healthCheck = "${pkgs.systemd}/bin/systemctl is-active --quiet traefik.service";
+        interface = mkMerge [
+          (when "s" "enp6s0")
+          (when "z" "enu1u1")
+        ];
       };
 
       www = when "s" {
@@ -569,8 +575,8 @@ in
       };
     };
 
-    services = lib.mkMerge [
-      (lib.genAttrs (builtins.attrNames serviceDefs) (_: { }))
+    services = mkMerge [
+      (genAttrs (builtins.attrNames serviceDefs) (_: { }))
       serviceDefs
     ];
   };
