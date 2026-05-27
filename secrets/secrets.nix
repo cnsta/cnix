@@ -56,11 +56,9 @@ in
   "gluetunArrEnvironment.age".publicKeys = sobotka;
   "sobotkaPihole.age".publicKeys = sobotka;
   "slskd.age".publicKeys = sobotka;
-  "traefikEnv.age".publicKeys = sobotka;
   "wwwCloudflared.age".publicKeys = sobotka;
   "authentikEnv.age".publicKeys = sobotka;
   "authentikCloudflared.age".publicKeys = sobotka;
-  "sobotkaTsAuth.age".publicKeys = sobotka;
   "lldapAdminPassword.age".publicKeys = sobotka;
   "lldapJwt.age".publicKeys = sobotka;
   "lldapKeySeed.age".publicKeys = sobotka;
@@ -105,4 +103,6 @@ in
 
   # sobotka + ziggy
   "keepalived.age".publicKeys = sobotka ++ ziggy;
+  "tsAuth.age".publicKeys = sobotka ++ ziggy;
+  "traefikEnv.age".publicKeys = sobotka ++ ziggy;
 }
