@@ -56,6 +56,13 @@ in
   config = lib.mkIf cfg.enable {
     age.secrets.keepalived.file = "${self}/secrets/keepalived.age";
 
+    users.users.keepalived_script = {
+      isSystemUser = true;
+      group = "keepalived_script";
+      description = "keepalived health-check script user";
+    };
+    users.groups.keepalived_script = { };
+
     services.keepalived = {
       enable = true;
       secretFile = config.age.secrets.keepalived.path;
