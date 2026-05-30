@@ -91,6 +91,7 @@ in
               exposure = lib.mkOption {
                 type = lib.types.enum [
                   "local"
+                  "public"
                   "tunnel"
                   "tailscale"
                 ];

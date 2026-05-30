@@ -13,7 +13,10 @@ in
   config = lib.mkIf infra.podman.enable {
     networking.firewall.trustedInterfaces = [ "podman0" ];
     virtualisation = {
-      podman.enable = true;
+      podman = {
+        enable = true;
+        autoPrune.enable = true;
+      };
       containers = {
         enable = true;
         containersConf.settings = {
