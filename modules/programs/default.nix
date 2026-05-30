@@ -45,6 +45,7 @@
     ./steam
     ./pkgs
     ./thunar
+    ./tmux
     ./wireshark
     ./zathura
     ./zed-editor

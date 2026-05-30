@@ -42,6 +42,7 @@ in
       npm = none;
       obsidian = none;
       steam = en "kt";
+      tmux = en "ks";
       thunar = none;
       wireshark = none;
       alacritty = when "kbt" {
