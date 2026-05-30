@@ -15,6 +15,7 @@ in
     services.locate = {
       enable = true;
       package = pkgs.plocate;
+      interval = "daily";
     };
   };
 }

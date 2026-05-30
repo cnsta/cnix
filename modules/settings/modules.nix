@@ -109,7 +109,7 @@ in
       blueman = none;
       dbus = all;
       flatpak = en "kbt";
-      fwupd = all;
+      fwupd = en "kbts";
       gnome = when "kbt" {
         keyring.enable = true;
         evolution-data-server.enable = true;
