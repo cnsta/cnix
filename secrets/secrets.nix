@@ -89,6 +89,8 @@ in
   "sonarrEnvironment.age".publicKeys = sobotka;
   "radarrEnvironment.age".publicKeys = sobotka;
   "lidarrEnvironment.age".publicKeys = sobotka;
+  "sportarrEnvironment.age".publicKeys = sobotka;
+  "sabnzbdEnvironment.age".publicKeys = sobotka;
   "qbtEnvironment.age".publicKeys = sobotka;
   "quiEnvironment.age".publicKeys = sobotka;
   "hoppscotchEnvironment.age".publicKeys = sobotka;

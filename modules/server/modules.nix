@@ -232,6 +232,32 @@ let
       };
     };
 
+    sportarr = when "s" {
+      enable = true;
+      subdomain = "sportarr";
+      exposure = "local";
+      port = 1867;
+      homepage = {
+        name = "Sportarr";
+        description = "Sports PVR for Usenet and Torrents";
+        icon = "sportarr.svg";
+        category = "Media";
+      };
+    };
+
+    sabnzbd = when "s" {
+      enable = true;
+      subdomain = "sabnzbd";
+      exposure = "local";
+      port = 8085;
+      homepage = {
+        name = "SABnzbd";
+        description = "Free and easy binary newsreader";
+        icon = "sabnzbd.svg";
+        category = "Downloads";
+      };
+    };
+
     radarr = when "s" {
       enable = true;
       subdomain = "radarr";
@@ -419,7 +445,7 @@ let
     };
 
     qui = when "s" {
-      enable = true;
+      enable = false;
       subdomain = "qui";
       exposure = "local";
       port = 7476;

@@ -105,6 +105,8 @@ in
           "7878:7878"
           "8686:8686"
           "7476:7476"
+          "1867:1867"
+          "8085:8085"
         ];
         devices = [ "/dev/net/tun:/dev/net/tun" ];
         autoStart = true;

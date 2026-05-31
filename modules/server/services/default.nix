@@ -31,6 +31,8 @@
     ./searxng
     ./slskd
     ./sonarr
+    ./sportarr
+    ./sabnzbd
     ./tdarr
     ./turnstone
     ./uptime-kuma
