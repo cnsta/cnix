@@ -47,7 +47,7 @@
     network = {
       enable = true;
       tailscale.enable = false;
-      bluetooth.enable = false;
+      bluetooth.enable = true;
       localIp = "192.168.88.14";
       interfaces = {
         "enp6s0" = {
