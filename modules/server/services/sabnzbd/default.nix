@@ -30,7 +30,7 @@ in
         ];
         volumes = [
           "/var/lib/sabnzbd:/config:rw"
-          "/mnt/data/downloads:/data:rw"
+          "/mnt/data:/data:rw"
         ];
         environmentFiles = [ config.age.secrets.sabnzbdEnvironment.path ];
       };

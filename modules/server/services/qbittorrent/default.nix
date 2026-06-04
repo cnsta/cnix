@@ -33,7 +33,7 @@ in
         ];
         volumes = [
           "/var/lib/qbittorrent:/config:rw"
-          "/mnt/data/downloads:/data:rw"
+          "/mnt/data:/data:rw"
         ];
         environmentFiles = [ config.age.secrets.qbtEnvironment.path ];
       };
