@@ -77,7 +77,7 @@
         "192.168.88.69"
       ];
       search = [
-        "taila7448a.ts.net"
+        "stalk-regulus.ts.net"
       ];
       interfaces = {
         "eno1" = {
