@@ -93,8 +93,6 @@ in
   "sabnzbdEnvironment.age".publicKeys = sobotka;
   "qbtEnvironment.age".publicKeys = sobotka;
   "quiEnvironment.age".publicKeys = sobotka;
-  "hoppscotchEnvironment.age".publicKeys = sobotka;
-  "hoppscotchPgPwd.age".publicKeys = sobotka;
   "minifluxEnvironment.age".publicKeys = sobotka;
   "minifluxPgPwd.age".publicKeys = sobotka;
   "harmoniaSignKey.age".publicKeys = sobotka;
