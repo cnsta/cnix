@@ -1,3 +1,4 @@
+# taken and modified from @Misterio77
 {
   config,
   lib,
@@ -77,6 +78,7 @@ in
             uri = "localhost";
             systems = [
               "x86_64-linux"
+              "i686-linux"
               "aarch64-linux"
             ];
             maxJobs = 8;
