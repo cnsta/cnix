@@ -45,7 +45,7 @@ in
       tmux = en "ks";
       thunar = none;
       wireshark = none;
-      alacritty = when "kbt" {
+      alacritty = when "bt" {
         enable = true;
         primary = true;
       };
@@ -61,7 +61,10 @@ in
       floorp = none;
       foot = en "kbt";
       fuzzel = en "kbt";
-      ghostty = none;
+      ghostty = when "k" {
+        enable = true;
+        primary = true;
+      };
       librewolf = en "kbt";
       mpv = en "kbt";
       nvf = en "t";

@@ -16,7 +16,7 @@ let
   hostVars = {
     kima = {
       mod = "SUPER";
-      terminal = "alacritty";
+      terminal = "ghostty +new-window";
       browser = "librewolf";
       browserinc = "librewolf --private-window";
     };
