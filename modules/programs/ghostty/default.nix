@@ -82,7 +82,6 @@ in
         packages = [ pkgs.ghostty ];
         xdg.config.files."ghostty/config".source = pkgs.writeText "ghostty-config" ghosttyConfig;
       });
-      environment.systemPackages = [ pkgs.ghostty.terminfo ];
     }
 
     (mkIf cfg.primary {

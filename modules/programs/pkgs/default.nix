@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }:
 let
@@ -106,6 +107,7 @@ let
     tesseract
   ];
   guiTheming = with pkgs; [
+    inputs.ashell.packages.${pkgs.stdenv.hostPlatform.system}.default
     kdePackages.qt6ct
     libsForQt5.qt5ct
     nwg-look

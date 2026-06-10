@@ -13,6 +13,7 @@ let
     "hyprlock"
     "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
     "gnome-keyring-daemon --start --components=secrets"
+    "ashell"
     "sleep 3s && wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.5"
   ];
 in

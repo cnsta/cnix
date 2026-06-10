@@ -91,7 +91,7 @@ in
         frontend = en "kt";
       };
       microfetch = all;
-      # ssh = en "kbt";
+      ssh = en "kbt";
       # bundles
       pkgs = {
         minimal = en "z";
@@ -144,7 +144,7 @@ in
       hyprpaper = en "kbt";
       jellyfin-mpv-shim = none;
       dunst = none;
-      quickshell = en "kbt";
+      quickshell = none;
       syncthing = none;
       tailray = en "kbt";
       udiskie = en "kbt";

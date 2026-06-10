@@ -9,39 +9,55 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
+    mkMerge
     concatStringsSep
-    flatten
+    genAttrs
     ;
+
   cfg = config.cnix.programs.ssh;
+  acct = config.cnix.settings.accounts;
 
-  hostnames = builtins.attrNames outputs.nixosConfigurations;
-  hostPatterns = concatStringsSep " " (
-    flatten (
-      map (h: [
-        h
-        "${h}.local"
-      ]) hostnames
-    )
+  hostnames = builtins.filter (h: h != config.networking.hostName) (
+    builtins.attrNames outputs.nixosConfigurations
   );
+  hostPatterns = concatStringsSep "," hostnames;
 
-  matchBlock = ''
+  sshConfig = ''
     Match host ${hostPatterns}
-        StreamLocalBindUnlink yes
-        ForwardAgent yes
-        ForwardX11 yes
-        ForwardX11Trusted yes
-        SetEnv WAYLAND_DISPLAY=wayland-waypipe
-        SetEnv TERM=xterm-256color
+      StreamLocalBindUnlink yes
+      ForwardAgent yes
+      SetEnv WAYLAND_DISPLAY=wayland-waypipe TERM=xterm-256color
+
+    Host *
+      ServerAliveInterval 60
+      ServerAliveCountMax 3
+      HashKnownHosts no
+      UserKnownHostsFile ~/.ssh/known_hosts
+      AddKeysToAgent yes
+      IdentitiesOnly yes
+      ControlMaster auto
+      ControlPath ~/.ssh/sockets/%r@%h-%p
+      ControlPersist 10m
+      SetEnv TERM=xterm-256color
   '';
 in
 {
   options.cnix.programs.ssh.enable = mkEnableOption "ssh client config";
 
-  config = mkIf cfg.enable {
-    programs.ssh = {
-      extraConfig = matchBlock;
-      enableAskPassword = true;
-      askPassword = "${pkgs.gcr_4}/libexec/gcr4-ssh-askpass";
-    };
-  };
+  config = mkIf cfg.enable (mkMerge [
+    {
+      programs.ssh = {
+        enableAskPassword = true;
+        askPassword = "${pkgs.gcr_4}/libexec/gcr4-ssh-askpass";
+      };
+    }
+
+    (mkIf (acct.defaultUsers != [ ]) {
+      hjem.users = genAttrs acct.defaultUsers (_: {
+        files = {
+          ".ssh/config".text = sshConfig;
+        };
+      });
+    })
+  ]);
 }
