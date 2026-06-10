@@ -85,6 +85,7 @@ in
   "cinnyJson.age".publicKeys = sobotka;
   "searxngEnvironment.age".publicKeys = sobotka;
   "flaresolverrEnvironment.age".publicKeys = sobotka;
+  "octofiestaEnvironment.age".publicKeys = sobotka;
   "prowlarrEnvironment.age".publicKeys = sobotka;
   "sonarrEnvironment.age".publicKeys = sobotka;
   "radarrEnvironment.age".publicKeys = sobotka;
@@ -96,6 +97,8 @@ in
   "minifluxEnvironment.age".publicKeys = sobotka;
   "minifluxPgPwd.age".publicKeys = sobotka;
   "harmoniaSignKey.age".publicKeys = sobotka;
+  "headscaleOidc.age".publicKeys = sobotka;
+  "headplaneEnv.age".publicKeys = sobotka;
 
   # ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

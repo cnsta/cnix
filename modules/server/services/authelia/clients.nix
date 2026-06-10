@@ -96,5 +96,15 @@ in
       service = services.forgejo;
       redirect_paths = [ "user/oauth2/authelia/callback" ];
     })
+
+    (mkClient {
+      client_id = "headscale";
+      client_name = "Headscale";
+      service = services.headscale;
+      redirect_paths = [
+        "oidc/callback"
+        "admin/oidc/callback"
+      ];
+    })
   ];
 }

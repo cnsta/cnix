@@ -7,6 +7,7 @@
     ./element
     ./flaresolverr
     ./harmonia
+    ./headscale
     ./homepage
     ./hydra
     ./grafana
@@ -22,6 +23,7 @@
     ./navidrome
     ./n8n
     ./nextcloud
+    ./octo-fiesta
     ./ollama
     ./pihole
     ./prometheus

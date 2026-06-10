@@ -31,10 +31,11 @@ let
         ForwardX11 yes
         ForwardX11Trusted yes
         SetEnv WAYLAND_DISPLAY=wayland-waypipe
+        SetEnv TERM=xterm-256color
   '';
 in
 {
-  options.cnix.programs.ssh.enable = mkEnableOption "ssh client config for cross-host connections";
+  options.cnix.programs.ssh.enable = mkEnableOption "ssh client config";
 
   config = mkIf cfg.enable {
     programs.ssh = {

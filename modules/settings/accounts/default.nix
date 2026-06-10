@@ -76,6 +76,8 @@ in
   };
 
   config = mkIf (config.cnix.settings.accounts.terminal != null) {
-    environment.sessionVariables.TERMINAL = lib.getExe config.cnix.settings.accounts.terminal;
+    environment.sessionVariables = {
+      TERMINAL = lib.getExe config.cnix.settings.accounts.terminal;
+    };
   };
 }

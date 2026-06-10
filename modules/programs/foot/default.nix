@@ -109,7 +109,7 @@ in
           # long-press-delay=400
         };
 
-        colors = {
+        colors-dark = {
           alpha = "0.9";
           background = "282828";
           foreground = "ebdbb2";

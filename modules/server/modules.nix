@@ -26,6 +26,20 @@ let
       routed = false;
     };
 
+    headscale = when "s" {
+      enable = false;
+      subdomain = "hs";
+      exposure = "tailscale";
+      port = 3003;
+      homepage = {
+        name = "Headscale";
+        description = "Self-hosted implementation of the Tailscale control server";
+        icon = "headscale.svg";
+        path = "/admin";
+        category = "Infra";
+      };
+    };
+
     hydra = when "s" {
       enable = true;
       subdomain = "hydra";
@@ -273,12 +287,25 @@ let
 
     navidrome = when "s" {
       enable = true;
-      subdomain = "music";
-      exposure = "tunnel";
+      subdomain = "navidrome";
+      exposure = "local";
       port = 4533;
       homepage = {
         name = "Navidrome";
         description = "Music streaming service";
+        icon = "navidrome.svg";
+        category = "Media";
+      };
+    };
+
+    octo-fiesta = when "s" {
+      enable = true;
+      subdomain = "music";
+      exposure = "tunnel";
+      port = 8089;
+      homepage = {
+        name = "Octo-Fiesta";
+        description = "Subsonic proxy";
         icon = "navidrome.svg";
         category = "Media";
       };
