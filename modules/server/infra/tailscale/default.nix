@@ -15,7 +15,7 @@ in
     enable = mkEnableOption "Enable tailscale server configuration";
   };
   config = mkIf cfg.enable {
-    age.secrets.tsAuth.file = "${self}/secrets/tsAuth.age";
+    age.secrets.hsPreauth.file = "${self}/secrets/hsPreauth.age";
 
     environment.systemPackages = [ pkgs.ethtool ];
 
@@ -29,9 +29,29 @@ in
 
     systemd = {
       network.wait-online.enable = false;
-      services.tailscaled.serviceConfig.Environment = [
-        "TS_DEBUG_FIREWALL_MODE=nftables"
-      ];
+      services = {
+        tailscaled.serviceConfig.Environment = [
+          "TS_DEBUG_FIREWALL_MODE=nftables"
+        ];
+
+        tailscaled-autoconnect = {
+          after = [
+            "headscale.service"
+            "traefik.service"
+          ];
+          wants = [ "headscale.service" ];
+        };
+
+        tailscale-udp-gro = {
+          wantedBy = [ "multi-user.target" ];
+          after = [ "network.target" ];
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+            ExecStart = "${pkgs.ethtool}/bin/ethtool -K ${iface} rx-udp-gro-forwarding on rx-gro-list off";
+          };
+        };
+      };
     };
 
     services = {
@@ -39,20 +59,15 @@ in
         enable = true;
         openFirewall = true;
         useRoutingFeatures = "server";
-        authKeyFile = config.age.secrets.tsAuth.path;
+        authKeyFile = config.age.secrets.hsPreauth.path;
+        extraUpFlags = [
+          "--login-server=https://hs.cnst.dev"
+          "--accept-dns=false"
+        ];
         extraSetFlags = [
           "--advertise-exit-node"
+          "--advertise-routes=192.168.88.69/32"
         ];
-      };
-
-      networkd-dispatcher = {
-        enable = true;
-        rules."50-tailscale-optimizations" = {
-          onState = [ "routable" ];
-          script = ''
-            ${pkgs.ethtool}/bin/ethtool -K ${iface} rx-udp-gro-forwarding on rx-gro-list off
-          '';
-        };
       };
     };
   };

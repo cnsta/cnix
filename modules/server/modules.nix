@@ -27,13 +27,13 @@ let
     };
 
     headscale = when "s" {
-      enable = false;
+      enable = true;
       subdomain = "hs";
-      exposure = "tailscale";
-      port = 3003;
+      exposure = "public";
+      port = 3004;
       homepage = {
         name = "Headscale";
-        description = "Self-hosted implementation of the Tailscale control server";
+        description = "Coordination server for Tailscale";
         icon = "headscale.svg";
         path = "/admin";
         category = "Infra";

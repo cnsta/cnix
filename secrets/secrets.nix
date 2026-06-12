@@ -103,6 +103,7 @@ in
   # ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;
   "ziggyPihole.age".publicKeys = ziggy;
+  "hsPreauth.age".publicKeys = sobotka;
 
   # sobotka + ziggy
   "keepalived.age".publicKeys = sobotka ++ ziggy;

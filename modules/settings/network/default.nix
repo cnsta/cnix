@@ -86,7 +86,11 @@ in
       after = [ "nftables.service" ];
     };
 
-    services.tailscale.enable = mkIf cfg.tailscale.enable true;
+    services.tailscale = mkIf cfg.tailscale.enable {
+      enable = true;
+      extraUpFlags = [ "--login-server=https://hs.cnst.dev" ];
+      extraSetFlags = [ "--accept-routes" ];
+    };
 
     hardware = mkIf cfg.bluetooth.enable {
       bluetooth = {

@@ -13,9 +13,11 @@ let
   domain = clib.server.mkHostDomain config cfg;
   fqdn = "${cfg.subdomain}.${domain}";
 
-  autheliaUrl = "https://login.${srv.domain}";
+  autheliaUrl = "https://login.${domain}";
 
-  headplanePort = 3004;
+  headplanePort = 3005;
+
+  sobotkaTailnetIp = "100.64.88.1";
 
   headplaneConfig = (pkgs.formats.yaml { }).generate "headplane-config.yaml" {
     server = {
@@ -31,12 +33,20 @@ let
       url = "http://127.0.0.1:${toString cfg.port}";
       public_url = "https://${fqdn}";
       config_path = "/etc/headscale/config.yaml";
-      config_strict = false;
+      config_strict = true;
     };
     integration = {
-      agent.enabled = false;
+      agent = {
+        enabled = false;
+        pre_authkey = "unused";
+        host_name = "headplane-agent";
+      };
       docker.enabled = false;
-      kubernetes.enabled = false;
+      kubernetes = {
+        enabled = false;
+        validate_manifest = true;
+        pod_name = "headscale";
+      };
       proc.enabled = false;
     };
     oidc = {
@@ -44,7 +54,7 @@ let
       client_id = unit;
       use_pkce = true;
       token_endpoint_auth_method = "client_secret_basic";
-      disable_api_key_login = false;
+      disable_api_key_login = true;
     };
   };
 in
@@ -58,6 +68,8 @@ in
       };
       headplaneEnv.file = "${self}/secrets/headplaneEnv.age";
     };
+
+    networking.firewall.allowedUDPPorts = [ 3478 ];
 
     services.${unit} = {
       enable = true;
@@ -75,12 +87,17 @@ in
         };
 
         prefixes = {
-          v4 = "100.64.0.0/10";
-          v6 = "fd7a:115c:a1e0::/48";
+          v4 = "100.64.88.0/24";
+          v6 = "fd7a:115c:a1e0:88::/64";
           allocation = "sequential";
         };
 
         derp = {
+          server = {
+            enable = true;
+            region_id = 999;
+            stun_listen_addr = "0.0.0.0:3478";
+          };
           urls = [ "https://controlplane.tailscale.com/derpmap/default" ];
           auto_update_enabled = true;
           update_frequency = "24h";
@@ -91,6 +108,16 @@ in
           base_domain = "ts.cnst.dev";
           nameservers.global = [ "192.168.88.69" ];
           search_domains = [ ];
+          extra_records = lib.concatLists (
+            lib.mapAttrsToList (
+              _: s:
+              lib.optional (s.enable && s.routed && s.subdomain != null && s.exposure == "tailscale") {
+                type = "A";
+                name = clib.server.mkFullDomain config s;
+                value = sobotkaTailnetIp;
+              }
+            ) srv.services
+          );
         };
 
         policy.mode = "database";
@@ -121,11 +148,10 @@ in
       volumes = [
         "${headplaneConfig}:/etc/headplane/config.yaml:ro"
         "/var/lib/headplane:/var/lib/headplane"
-        "/etc/headscale/config.yaml:/etc/headscale/config.yaml:ro"
+        "${config.services.headscale.configFile}:/etc/headscale/config.yaml:ro"
       ];
       environment = {
         TZ = "Europe/Stockholm";
-        HEADPLANE_LOAD_ENV_OVERRIDES = "true";
       };
       environmentFiles = [ config.age.secrets.headplaneEnv.path ];
       extraOptions = [ "--network=host" ];
@@ -133,9 +159,22 @@ in
 
     systemd = {
       tmpfiles.rules = [ "d /var/lib/headplane 0750 root root -" ];
-      services."podman-headplane" = {
-        after = [ "headscale.service" ];
-        requires = [ "headscale.service" ];
+      services = {
+        "headscale" = {
+          after = [
+            "traefik.service"
+            "authelia-main.service"
+          ];
+          wants = [
+            "traefik.service"
+            "authelia-main.service"
+          ];
+        };
+
+        "podman-headplane" = {
+          after = [ "headscale.service" ];
+          requires = [ "headscale.service" ];
+        };
       };
     };
 
