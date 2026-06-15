@@ -17,7 +17,7 @@ let
 
   headplanePort = 3005;
 
-  sobotkaTailnetIp = "100.64.88.1";
+  sobotkaTailnetIp = "100.64.88.2";
 
   headplaneConfig = (pkgs.formats.yaml { }).generate "headplane-config.yaml" {
     server = {

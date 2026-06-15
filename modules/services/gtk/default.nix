@@ -23,7 +23,6 @@ let
     gtk-cursor-theme-name = cursorTheme;
     gtk-cursor-theme-size = cursorSize;
     gtk-font-name = "${fontName} ${toString fontSize}";
-    gtk-application-prefer-dark-theme = true;
     gtk-decoration-layout = "appmenu:none";
     gtk-error-bell = 0;
     gtk-enable-event-sounds = 0;
@@ -34,6 +33,7 @@ let
   };
 
   gtk3Settings = baseSettings // {
+    gtk-application-prefer-dark-theme = true;
     gtk-toolbar-style = "GTK_TOOLBAR_BOTH";
     gtk-toolbar-icon-size = "GTK_ICON_SIZE_LARGE_TOOLBAR";
     gtk-button-images = 1;
@@ -41,9 +41,7 @@ let
     gtk-xft-rgba = "rgb";
   };
 
-  gtk4Settings = baseSettings // {
-    gtk-interface-color-scheme = 2;
-  };
+  gtk4Settings = baseSettings;
 
   gtkCss = ''
     window { border-radius: 0; }

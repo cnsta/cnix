@@ -332,7 +332,7 @@ let
       homepage = {
         name = "Seerr";
         description = "Media request and discovery manager";
-        icon = "jellyseerr.svg";
+        icon = "seerr.svg";
         category = "Media";
       };
     };
@@ -590,16 +590,6 @@ in
         spamScoreAddHeader = 4.0;
         spamScoreGreylist = 6.0;
         spamScoreReject = 15.0;
-      };
-
-      authentik = when "s" {
-        enable = true;
-        url = "auth.cnst.dev";
-        port = 9000;
-        cloudflared = {
-          tunnelId = "b66f9368-db9e-4302-8b48-527cda34a635";
-          credentialsFile = config.age.secrets.authentikCloudflared.path;
-        };
       };
 
       fail2ban = when "s" {

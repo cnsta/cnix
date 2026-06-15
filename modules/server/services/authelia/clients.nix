@@ -106,5 +106,19 @@ in
         "admin/oidc/callback"
       ];
     })
+
+    (mkClient {
+      client_id = "tailscale";
+      client_name = "Tailscale";
+      service = services.headscale;
+      redirect_paths = [ ];
+      redirect_uris = [ "https://login.tailscale.com/a/oauth_response" ];
+      require_pkce = false;
+      scopes = [
+        "openid"
+        "email"
+        "profile"
+      ];
+    })
   ];
 }

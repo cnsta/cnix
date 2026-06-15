@@ -31,6 +31,26 @@ in
         #   ];
         # }
         {
+          job_name = "hydra";
+          scheme = "https";
+          static_configs = [ { targets = [ "hydra.cnix.dev" ]; } ];
+        }
+        {
+          job_name = "headscale";
+          scheme = "https";
+          static_configs = [ { targets = [ "hs.cnst.dev" ]; } ];
+        }
+        {
+          job_name = "grafana";
+          scheme = "https";
+          static_configs = [ { targets = [ "grafana.cnix.dev" ]; } ];
+        }
+        {
+          job_name = "jellyfin";
+          scheme = "https";
+          static_configs = [ { targets = [ "fin.ts.cnst.dev" ]; } ];
+        }
+        {
           job_name = "node";
           static_configs = [
             { targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ]; }

@@ -56,8 +56,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-compat.url = "github:edolstra/flake-compat";
-
     hjem = {
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -107,7 +105,6 @@
     # Miscellaneous
     nvf.url = "github:notashelf/nvf";
     agenix.url = "github:ryantm/agenix";
-    authentik.url = "github:nix-community/authentik-nix/version/2025.8.4";
 
     helix-flake = {
       url = "github:helix-editor/helix";
@@ -131,7 +128,6 @@
       url = "github:cachix/git-hooks.nix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
       };
     };
 
@@ -147,11 +143,6 @@
 
     quickshell = {
       url = "github:quickshell-mirror/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    cnixshell = {
-      url = "git+https://git.cnst.dev/cnst/cnixshell.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

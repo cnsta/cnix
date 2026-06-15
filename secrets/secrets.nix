@@ -99,6 +99,7 @@ in
   "harmoniaSignKey.age".publicKeys = sobotka;
   "headscaleOidc.age".publicKeys = sobotka;
   "headplaneEnv.age".publicKeys = sobotka;
+  "tailscaleOidcSecret.age".publicKeys = sobotka;
 
   # ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

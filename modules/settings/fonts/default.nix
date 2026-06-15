@@ -42,6 +42,7 @@ in
           fira-code
           fira-mono
           iosevka
+          iosevko-term-slab
           _3270
           droid-sans-mono
           ubuntu-mono
