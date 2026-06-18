@@ -57,7 +57,7 @@ in
         variant = "vesktop";
       };
       element-desktop = en "k";
-      firefox = en "k";
+      firefox = en "kt";
       floorp = none;
       foot = en "kbt";
       fuzzel = en "kbt";
@@ -65,7 +65,7 @@ in
         enable = true;
         primary = true;
       };
-      librewolf = en "kbt";
+      librewolf = none;
       mpv = en "kbt";
       nvf = en "t";
       # nwg-bar = en "kbt";
@@ -92,6 +92,7 @@ in
       };
       microfetch = all;
       ssh = en "kbt";
+      zen-browser = en "kbt";
       # bundles
       pkgs = {
         minimal = en "z";

@@ -18,7 +18,7 @@ let
         "bunk"
       ]
     then
-      "librewolf.desktop"
+      "zen.desktop"
     else
       "firefox.desktop";
 

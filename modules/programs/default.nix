@@ -50,5 +50,6 @@
     ./zathura
     ./zed-editor
     ./zsh
+    ./zen-browser
   ];
 }

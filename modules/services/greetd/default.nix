@@ -28,7 +28,7 @@ in
     (mkIf (cfg.enable && hyprcfg.enable) (
       let
         session = {
-          command = "${getExe config.programs.uwsm.package} start hyprland-uwsm.desktop";
+          command = "${getExe config.programs.uwsm.package} start hyprland.desktop";
           user = username;
         };
       in

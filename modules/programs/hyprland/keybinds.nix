@@ -17,20 +17,20 @@ let
     kima = {
       mod = "SUPER";
       terminal = "ghostty +new-window";
-      browser = "librewolf";
-      browserinc = "librewolf --private-window";
+      browser = "zen";
+      browserinc = "zen --private-window";
     };
     bunk = {
       mod = "SUPER";
       terminal = "alacritty";
-      browser = "librewolf";
-      browserinc = "librewolf --private-window";
+      browser = "zen";
+      browserinc = "zen --private-window";
     };
     toothpc = {
       mod = "SUPER";
       terminal = "alacritty";
-      browser = "librewolf";
-      browserinc = "librewolf --private-window";
+      browser = "firefox";
+      browserinc = "firefox --private-window";
     };
   };
   v = hostVars.${host} or hostVars.kima;
