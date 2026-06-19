@@ -71,7 +71,7 @@ let
         position = "0, 0";
         halign = "center";
         valign = "center";
-        font_family = "DepartureMono Nerd Font Mono Italic";
+        font_family = "IosevkaTermSlab Nerd Font Mono Italic";
 
         shadow_size = 4;
         shadow_passes = 2;
@@ -88,7 +88,7 @@ let
         shadow_boost = 0.5;
         color = "rgba(FFFFFFFF)";
         font_size = 25;
-        font_family = "VCR OSD Mono";
+        font_family = "IosevkaTermSlab Nerd Font Mono Light";
         position = "0, 220";
         halign = "center";
         valign = "center";
