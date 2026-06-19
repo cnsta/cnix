@@ -125,14 +125,14 @@ let
     {
       arrow = "left";
       letter = "l";
-      x = "-20";
+      x = "-40";
       y = "0";
       relative = "true";
     }
     {
       arrow = "right";
       letter = "r";
-      x = "20";
+      x = "40";
       y = "0";
       relative = "true";
     }
@@ -140,14 +140,14 @@ let
       arrow = "up";
       letter = "u";
       x = "0";
-      y = "-20";
+      y = "-40";
       relative = "true";
     }
     {
       arrow = "down";
       letter = "d";
       x = "0";
-      y = "20";
+      y = "40";
       relative = "true";
     }
   ];

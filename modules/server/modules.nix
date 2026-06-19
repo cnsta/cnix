@@ -156,7 +156,7 @@ let
     };
 
     bazarr = when "s" {
-      enable = true;
+      enable = false;
       subdomain = "bazarr";
       exposure = "local";
       port = 6767;
@@ -247,7 +247,7 @@ let
     };
 
     sportarr = when "s" {
-      enable = true;
+      enable = false;
       subdomain = "sportarr";
       exposure = "local";
       port = 1867;
