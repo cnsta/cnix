@@ -54,7 +54,7 @@ in {
 
     sshKeys = mkOption {
       type = types.attrsOf types.str;
-      default = hostKeys;
+      default = userKeys;
       readOnly = true;
       description = "All hosts' SSH public keys, keyed by host directory name";
     };
