@@ -9,6 +9,12 @@ with lib; let
   cfg = config.cnix.programs.git;
   acct = config.cnix.settings.accounts;
 
+  allowedSigners =
+    concatMapStringsSep "\n"
+    (key: ''${acct.mail} namespaces="git" ${key}'')
+    (attrValues acct.sshKeys)
+    + "\n";
+
   treefmt =
     (self.inputs.treefmt-nix.lib.evalModule pkgs (import "${self}/treefmt.nix")).config.build.wrapper;
 
@@ -106,9 +112,7 @@ in {
               *result*
             '';
 
-            "git/allowed_signers".text = ''
-              ${acct.mail} namespaces="git" ${acct.sshKey}
-            '';
+            "git/allowed_signers".text = allowedSigners;
           };
         }
       );

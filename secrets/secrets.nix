@@ -1,43 +1,24 @@
 let
-  ukima = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmCpN9bDtv7Wr4MYn3zf10yivAENDynFTq0y3M+c85X cnst@kima";
-  rkima = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHUx5j5tTgRMmLB/DC1nmRdPeNZC04UQiF3aDowhd+kn root@nixos";
+  hostsDir = ./hosts;
 
-  ubunk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHd48tFwqAKAoE+37zDsTGQTrBS/6cQ+kQQw3596XsdY cnst@bunk";
-  rbunk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGwhIj0kRDt3WbpBPF/JbQsrLWIVGWjfz78p8L0ij16M root@bunk";
+  readKey = path: builtins.replaceStrings ["\n"] [""] (builtins.readFile path);
+  keyIfPresent = path:
+    if builtins.pathExists path
+    then [(readKey path)]
+    else [];
 
-  usobotka = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG5ydTeaWcowmNXdDNqIa/lb5l9w5CAzyF2Kg6U5PSSu cnst@sobotka";
-  rsobotka = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJWLTYWowtpGmGolmkCE7+l9jr5QEnDqRxoezNqAIe+j root@nixos";
+  keysFor = host:
+    keyIfPresent (hostsDir + "/${host}/id_ed25519.pub")
+    ++ keyIfPresent (hostsDir + "/${host}/ssh_host_ed25519_key.pub");
 
-  uziggy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtL8uBsJ3UL4+scqjEcyXYQOVlKziJk9YJ78YP6jCxq cnst@nixos";
-  rziggy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHnca8xg1MZ4Hx5k5SVFSxcPnWc1O6r7w7JGYzX9aQm8 root@nixos";
-
-  utoothpc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGe3s7WbaM0aZTYHCE1ugiG/SxFXLSbWcLAWceFotpuh toothpick@nixos";
-  rtoothpc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOzjuaOX94oRwWVsRjE4mo5QTw35lEmFKyHtlh2XCTBg root@toothpc";
-
-  kima = [
-    ukima
-    rkima
-  ];
-  bunk = [
-    ubunk
-    rbunk
-  ];
-  sobotka = [
-    usobotka
-    rsobotka
-  ];
-  ziggy = [
-    uziggy
-    rziggy
-  ];
-  toothpc = [
-    utoothpc
-    rtoothpc
-  ];
+  kima = keysFor "kima";
+  bunk = keysFor "bunk";
+  sobotka = keysFor "sobotka";
+  ziggy = keysFor "ziggy";
+  toothpc = keysFor "toothpc";
 
   all = kima ++ bunk ++ sobotka ++ ziggy ++ toothpc;
-in
-{
+in {
   # sobotka-specific
   "cloudflareEnvironment.age".publicKeys = sobotka;
   "vaultwardenEnvironment.age".publicKeys = sobotka;

@@ -1,72 +1,87 @@
 {
   lib,
   config,
+  self,
   ...
 }:
-with lib;
-let
-  sshKeys = {
-    bunk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXCjkKouZrsMoswMIeueO8X/c3kuY3Gb0E9emvkqwUv cnst@cnixpad";
-    sobotka = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICiNcNex+/hrEQJYJJTj89uPXocSfChU38E5TujWdxaM cnstlab@cnixlab";
-    kima = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEUub8vbzUn2f39ILhAJ2QeH8xxLSjiyUuo8xvHGx/VB adam@cnst.dev";
-    toothpc = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGu5vZbb5ExampleKeyHereGfDF9c5 toothpick@toothpc";
-    ziggy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtL8uBsJ3UL4+scqjEcyXYQOVlKziJk9YJ78YP6jCxq cnst@nixos";
-  };
+with lib; let
+  cfg = config.cnix.settings.accounts;
 
-  keyName = config.cnix.settings.accounts.sshUser or null;
+  hostsDir = "${self}/hosts";
+
+  hostKeys = pipe (builtins.readDir hostsDir) [
+    (filterAttrs (_: t: t == "directory"))
+    attrNames
+    (filter (h: builtins.pathExists "${hostsDir}/${h}/id_ed25519.pub"))
+    (map (h: nameValuePair h (removeSuffix "\n" (builtins.readFile "${hostsDir}/${h}/id_ed25519.pub"))))
+    listToAttrs
+  ];
+
+  keyName =
+    if cfg.sshUser != null
+    then cfg.sshUser
+    else config.networking.hostName;
 
   selectedKey =
-    if keyName != null then
-      lib.attrByPath [
-        keyName
-      ] (abort "Accounts Module: No SSH key defined for hostname/key '${toString keyName}'") sshKeys
-    else
-      abort "No accounts.sshUser provided, cannot select SSH key.";
-in
-{
+    hostKeys.${keyName}
+      or (abort "accounts: no hosts/${keyName}/id_ed25519.pub (set cnix.settings.accounts.sshUser to override)");
+in {
   options.cnix.settings.accounts = {
     username = mkOption {
       type = types.str;
       default = "cnst";
       description = "Set the desired username";
     };
+
     mail = mkOption {
       type = types.str;
       default = "adam@cnst.dev";
       description = "Set the desired email";
     };
+
     terminal = mkOption {
       type = types.nullOr types.package;
       default = null;
       description = "Primary terminal package for the host";
     };
+
     defaultUsers = mkOption {
       type = types.listOf types.str;
-      default = [ ];
+      default = [];
       description = "Users that hjem manages on this host";
-      example = [ "cnst" ];
+      example = ["cnst"];
     };
-    sshKey = lib.mkOption {
-      type = lib.types.str;
+
+    sshKey = mkOption {
+      type = types.str;
       default = selectedKey;
-      description = "Host-specific SSH key";
       readOnly = true;
+      description = "This host's SSH public key, read from hosts/<name>/id_ed25519.pub";
     };
-    sshUser = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
+
+    sshKeys = mkOption {
+      type = types.attrsOf types.str;
+      default = hostKeys;
+      readOnly = true;
+      description = "All hosts' SSH public keys, keyed by host directory name";
+    };
+
+    sshUser = mkOption {
+      type = types.nullOr types.str;
       default = null;
-      description = "Optional override for selecting an SSH key by name";
+      description = "Override which hosts/<name> key to use (defaults to networking.hostName)";
     };
-    domains = lib.mkOption {
-      type = lib.types.submodule {
+
+    domains = mkOption {
+      type = types.submodule {
         options = {
-          local = lib.mkOption {
-            type = lib.types.str;
+          local = mkOption {
+            type = types.str;
             default = "127.0.0.1";
             description = "The local domain of the host";
           };
-          public = lib.mkOption {
-            type = lib.types.str;
+          public = mkOption {
+            type = types.str;
             default = "example.com";
             description = "The public domain of the host";
           };
@@ -75,9 +90,7 @@ in
     };
   };
 
-  config = mkIf (config.cnix.settings.accounts.terminal != null) {
-    environment.sessionVariables = {
-      TERMINAL = lib.getExe config.cnix.settings.accounts.terminal;
-    };
+  config = mkIf (cfg.terminal != null) {
+    environment.sessionVariables.TERMINAL = getExe cfg.terminal;
   };
 }
