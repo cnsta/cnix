@@ -1,27 +1,4 @@
-{ inputs, ... }:
-{
-  imports = [
-    inputs.git-hooks.flakeModule
-    inputs.treefmt-nix.flakeModule
-  ];
-
-  perSystem = {
-    pre-commit.settings = {
-      excludes = [ "flake.lock" ];
-      hooks.treefmt.enable = true;
-    };
-
-    treefmt.programs = {
-      alejandra.enable = true;
-
-      prettier = {
-        enable = true;
-        excludes = [
-          ".js"
-          ".md"
-          ".ts"
-        ];
-      };
-    };
-  };
+{inputs, ...}: {
+  imports = [inputs.treefmt-nix.flakeModule];
+  perSystem.treefmt.imports = [./treefmt.nix];
 }

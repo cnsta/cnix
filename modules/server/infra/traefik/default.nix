@@ -4,35 +4,31 @@
   config,
   self,
   ...
-}:
-let
+}: let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.cnix.server.infra.traefik;
   srv = config.cnix.server;
 
-  generateRouters =
-    services: config:
+  generateRouters = services: config:
     lib.mapAttrs' (
       name: service:
-      lib.nameValuePair name {
-        entryPoints = [ "websecure" ];
-        rule = "Host(`${clib.server.mkFullDomain config service}`)";
-        service = name;
-        tls.certResolver = "letsencrypt";
-      }
+        lib.nameValuePair name {
+          entryPoints = ["websecure"];
+          rule = "Host(`${clib.server.mkFullDomain config service}`)";
+          service = name;
+          tls.certResolver = "letsencrypt";
+        }
     ) (lib.filterAttrs (_: s: s.enable && s.routed) services);
 
-  generateServices =
-    services:
+  generateServices = services:
     lib.mapAttrs' (
       name: service:
-      lib.nameValuePair name {
-        loadBalancer.servers = [ { url = "http://localhost:${toString service.port}"; } ];
-      }
+        lib.nameValuePair name {
+          loadBalancer.servers = [{url = "http://localhost:${toString service.port}";}];
+        }
     ) (lib.filterAttrs (_: s: s.enable && s.routed) services);
-in
-{
+in {
   options.cnix.server.infra.traefik = {
     enable = mkEnableOption "Enable global Traefik reverse proxy with ACME";
   };
@@ -49,7 +45,7 @@ in
 
     systemd.services.traefik = {
       serviceConfig = {
-        EnvironmentFile = [ config.age.secrets.traefikEnv.path ];
+        EnvironmentFile = [config.age.secrets.traefikEnv.path];
       };
     };
     networking.firewall.allowedTCPPorts = [
@@ -71,14 +67,14 @@ in
             filepath = "/var/lib/traefik/logs/access.log";
           };
 
-          tracing = { };
+          tracing = {};
           api = {
             dashboard = true;
             insecure = false;
           };
 
           certificatesResolvers = {
-            vpn.tailscale = { };
+            vpn.tailscale = {};
             letsencrypt = {
               acme = {
                 email = "adam@cnst.dev";
@@ -113,11 +109,11 @@ in
                 domains = [
                   {
                     main = "cnix.dev";
-                    sans = [ "*.cnix.dev" ];
+                    sans = ["*.cnix.dev"];
                   }
                   {
                     main = "ts.cnst.dev";
-                    sans = [ "*.ts.cnst.dev" ];
+                    sans = ["*.ts.cnst.dev"];
                   }
                 ];
               };
@@ -134,20 +130,22 @@ in
           http = {
             services = generateServices srv.services;
 
-            routers = (generateRouters srv.services config) // {
-              api = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`traefik.${srv.domain}`)";
-                service = "api@internal";
-                tls.certResolver = "letsencrypt";
+            routers =
+              (generateRouters srv.services config)
+              // {
+                api = {
+                  entryPoints = ["websecure"];
+                  rule = "Host(`traefik.${srv.domain}`)";
+                  service = "api@internal";
+                  tls.certResolver = "letsencrypt";
+                };
+                authelia-local = {
+                  entryPoints = ["websecure"];
+                  rule = "Host(`login.${srv.domain}`)";
+                  service = "authelia";
+                  tls.certResolver = "letsencrypt";
+                };
               };
-              authelia-local = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`login.${srv.domain}`)";
-                service = "authelia";
-                tls.certResolver = "letsencrypt";
-              };
-            };
           };
         };
       };
