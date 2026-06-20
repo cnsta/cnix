@@ -42,7 +42,7 @@ let
   ];
 
   formatters = with pkgs; [
-    nixfmt
+    alejandra
     prettier
     shfmt
     stylua

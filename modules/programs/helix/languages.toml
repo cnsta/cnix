@@ -51,7 +51,7 @@ name = "nix"
 
 [language.formatter]
 args = ["-q"]
-command = "/run/current-system/sw/bin/nixfmt"
+command = "/run/current-system/sw/bin/alejandra"
 
 [[language]]
 auto-format = true
