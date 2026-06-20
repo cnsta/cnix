@@ -47,8 +47,11 @@ in {
     {
       programs.git = {
         enable = true;
-        package = pkgs.git.override {withLibsecret = true;};
         lfs.enable = true;
+        package = pkgs.git.override {
+          withLibsecret = true;
+          doInstallCheck = false;
+        };
       };
 
       environment.systemPackages = [pkgs.delta treefmt];

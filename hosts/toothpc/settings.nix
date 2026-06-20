@@ -8,8 +8,8 @@
 
     boot = {
       kernel = {
-        variant = "latest";
-        hardware = [ "nvidia" ];
+        variant = "zfsLatest";
+        hardware = ["nvidia"];
       };
       loader = {
         default = {
@@ -26,7 +26,7 @@
     };
 
     graphics = {
-      vendors = [ "nvidia" ];
+      vendors = ["nvidia"];
       nvidia = {
         package = "beta";
         open = true;
