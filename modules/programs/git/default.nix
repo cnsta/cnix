@@ -63,7 +63,7 @@ in {
                 user = {
                   name = acct.username;
                   email = acct.mail;
-                  signingkey = "${home}/.ssh/id_ed25519.pub"; # the key, not allowed_signers
+                  signingkey = "${home}/.ssh/id_ed25519.pub";
                 };
                 gpg = {
                   format = "ssh";
