@@ -1,21 +1,12 @@
 let
-  hostsDir = ./hosts;
+  keys = import ./keys.nix;
+  forHost = h: builtins.attrValues (keys.${h} or {});
 
-  readKey = path: builtins.replaceStrings ["\n"] [""] (builtins.readFile path);
-  keyIfPresent = path:
-    if builtins.pathExists path
-    then [(readKey path)]
-    else [];
-
-  keysFor = host:
-    keyIfPresent (hostsDir + "/${host}/id_ed25519.pub")
-    ++ keyIfPresent (hostsDir + "/${host}/ssh_host_ed25519_key.pub");
-
-  kima = keysFor "kima";
-  bunk = keysFor "bunk";
-  sobotka = keysFor "sobotka";
-  ziggy = keysFor "ziggy";
-  toothpc = keysFor "toothpc";
+  kima = forHost "kima";
+  bunk = forHost "bunk";
+  sobotka = forHost "sobotka";
+  ziggy = forHost "ziggy";
+  toothpc = forHost "toothpc";
 
   all = kima ++ bunk ++ sobotka ++ ziggy ++ toothpc;
 in {

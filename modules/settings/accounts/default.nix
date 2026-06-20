@@ -7,15 +7,8 @@
 with lib; let
   cfg = config.cnix.settings.accounts;
 
-  hostsDir = "${self}/hosts";
-
-  hostKeys = pipe (builtins.readDir hostsDir) [
-    (filterAttrs (_: t: t == "directory"))
-    attrNames
-    (filter (h: builtins.pathExists "${hostsDir}/${h}/id_ed25519.pub"))
-    (map (h: nameValuePair h (removeSuffix "\n" (builtins.readFile "${hostsDir}/${h}/id_ed25519.pub"))))
-    listToAttrs
-  ];
+  keys = import "${self}/secrets/keys.nix";
+  userKeys = mapAttrs (_: v: v.user) (filterAttrs (_: v: v ? user) keys);
 
   keyName =
     if cfg.sshUser != null
@@ -23,8 +16,8 @@ with lib; let
     else config.networking.hostName;
 
   selectedKey =
-    hostKeys.${keyName}
-      or (abort "accounts: no hosts/${keyName}/id_ed25519.pub (set cnix.settings.accounts.sshUser to override)");
+    userKeys.${keyName}
+      or (abort "accounts: no user key for ${keyName} in secrets/keys.nix");
 in {
   options.cnix.settings.accounts = {
     username = mkOption {
