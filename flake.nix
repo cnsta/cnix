@@ -13,7 +13,7 @@
         ./modules
         ./pkgs
         ./hydra.nix
-        ./fmt-hooks.nix
+        inputs.treefmt-nix.flakeModule
       ];
 
       perSystem = {
@@ -21,6 +21,7 @@
         pkgs,
         ...
       }: {
+        treefmt.imports = [./treefmt.nix];
         devShells.default = pkgs.mkShell {
           name = "dots";
           packages = [pkgs.git config.packages.repl];

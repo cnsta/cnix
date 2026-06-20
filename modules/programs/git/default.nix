@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  self,
   ...
 }:
 with lib; let
@@ -62,18 +63,18 @@ in {
                 user = {
                   name = acct.username;
                   email = acct.mail;
-                  signingkey = "${home}/.config/git/allowed_signers";
+                  signingkey = "${home}/.ssh/id_ed25519.pub"; # the key, not allowed_signers
                 };
-                signing = {
+                gpg = {
                   format = "ssh";
-                  key = "${home}/.ssh/id_ed25519";
-                  signByDefault = true;
+                  ssh.allowedSignersFile = "${home}/.config/git/allowed_signers";
                 };
-                gpg.ssh.allowedSignersFile = "${home}/.config/git/allowed_signers";
                 commit = {
                   verbose = true;
-                  gpgSign = false;
+                  gpgsign = true;
                 };
+                tag.gpgsign = true;
+                credential.helper = "libsecret";
                 init.defaultBranch = "main";
                 merge.conflictStyle = "diff3";
                 diff.algorithm = "histogram";
@@ -86,7 +87,6 @@ in {
                   excludesFile = "${home}/.config/git/ignore";
                   hooksPath = "${gitHooks}";
                 };
-
                 pager = {
                   diff = "delta";
                   log = "delta";
