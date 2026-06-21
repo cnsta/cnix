@@ -70,6 +70,7 @@ in {
   "headscaleOidc.age".publicKeys = sobotka;
   "headplaneEnv.age".publicKeys = sobotka;
   "tailscaleOidcSecret.age".publicKeys = sobotka;
+  "jellyfinEnvironment.age".publicKeys = sobotka;
 
   # ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;
