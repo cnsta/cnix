@@ -4,8 +4,7 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkMerge genAttrs;
   host = config.networking.hostName;
   ip = config.cnix.settings.network.localIp;
@@ -78,7 +77,7 @@ let
     };
 
     cinny = when "s" {
-      enable = true;
+      enable = false;
       subdomain = "cinny";
       exposure = "tunnel";
       port = 8088;
@@ -130,7 +129,7 @@ let
     };
 
     searxng = when "s" {
-      enable = true;
+      enable = false;
       subdomain = "search";
       exposure = "local";
       port = 8084;
@@ -407,7 +406,7 @@ let
     };
 
     element = when "s" {
-      enable = true;
+      enable = false;
       subdomain = "element";
       exposure = "tunnel";
       port = 11341;
@@ -420,7 +419,7 @@ let
     };
 
     continuwuity = when "s" {
-      enable = true;
+      enable = false;
       subdomain = "matrix";
       exposure = "tunnel";
       port = 6167;
@@ -550,8 +549,7 @@ let
       };
     };
   };
-in
-{
+in {
   config.cnix.server = {
     enable = true;
     email = "adam@cnst.dev";
@@ -585,7 +583,7 @@ in
           enable = true;
           mode = "testing";
           policyId = "20250101000000"; # TODO: update when policy content changes
-          mxHosts = [ "mail.cnix.dev" ];
+          mxHosts = ["mail.cnix.dev"];
         };
         spamScoreAddHeader = 4.0;
         spamScoreGreylist = 6.0;
@@ -619,7 +617,7 @@ in
     };
 
     services = mkMerge [
-      (genAttrs (builtins.attrNames serviceDefs) (_: { }))
+      (genAttrs (builtins.attrNames serviceDefs) (_: {}))
       serviceDefs
     ];
   };
