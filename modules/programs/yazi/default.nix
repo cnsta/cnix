@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.yazi;
-in
-{
+in {
   imports = [
     ./theme
   ];

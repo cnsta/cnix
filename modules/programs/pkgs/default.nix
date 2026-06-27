@@ -4,8 +4,7 @@
   lib,
   inputs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption mkMerge;
   cfg = config.cnix.programs.pkgs;
   hardware = with pkgs; [
@@ -49,7 +48,7 @@ let
     openssl
     git-crypt
   ];
-  monitoring = with pkgs; [ htop ];
+  monitoring = with pkgs; [htop];
   miscCommon = with pkgs; [
     stow
     socat
@@ -132,7 +131,7 @@ let
     obs-studio
     protontricks
   ];
-  laptop = [ ];
+  laptop = [];
   server = with pkgs; [
     nvtopPackages.intel
     zfstools
@@ -148,7 +147,7 @@ let
   devRuntimes = with pkgs; [
     nodejs
   ];
-  devDbs = with pkgs; [ sqlite ];
+  devDbs = with pkgs; [sqlite];
   devFormatters = with pkgs; [
     fixjson
     sql-formatter
@@ -161,7 +160,7 @@ let
     nfs-utils
   ];
   devCommon = devLsps ++ devBuild ++ devRuntimes ++ devDbs ++ devFormatters ++ devOther;
-  devRust = [ ];
+  devRust = [];
   devPhp = with pkgs; [
     php
   ];
@@ -172,8 +171,7 @@ let
     python3Packages.pyusb
     python3Packages.pygobject3
   ];
-in
-{
+in {
   options.cnix.programs.pkgs = {
     minimal.enable = mkEnableOption "bare-essential packages";
     common.enable = mkEnableOption "core packages";

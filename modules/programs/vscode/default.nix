@@ -3,12 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.vscode;
-in
-{
+in {
   options = {
     cnix.programs.vscode.enable = mkEnableOption "Enables vscode";
   };

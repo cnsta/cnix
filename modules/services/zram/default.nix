@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.zram;
-in
-{
+in {
   options.cnix.services.zram.enable = mkEnableOption "Enables zram";
 
   config = mkIf cfg.enable {

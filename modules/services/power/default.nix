@@ -2,17 +2,16 @@
   config,
   lib,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     types
     mkIf
     mkEnableOption
     mkOption
     ;
   cfg = config.cnix.services.power;
-in
-{
+in {
   options = {
     cnix.services.power = {
       enable = mkEnableOption "Enables powerManagement";

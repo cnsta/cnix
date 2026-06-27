@@ -1,10 +1,12 @@
-{ lib, bgs, ... }:
-let
+{
+  lib,
+  bgs,
+  ...
+}: let
   inherit (lib) mkOption types;
 
   bgList = builtins.attrNames bgs.files;
-in
-{
+in {
   options.cnix.settings.theme.background = {
     lockscreen = mkOption {
       type = types.enum bgList;
@@ -21,7 +23,10 @@ in
     secondary = mkOption {
       type = types.nullOr (types.enum bgList);
       default = null;
-      example = if builtins.length bgList > 1 then builtins.elemAt bgList 1 else null;
+      example =
+        if builtins.length bgList > 1
+        then builtins.elemAt bgList 1
+        else null;
     };
   };
 }

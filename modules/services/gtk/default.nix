@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkEnableOption mkIf genAttrs;
   cfg = config.cnix.services.gtk;
   acct = config.cnix.settings.accounts;
@@ -32,14 +31,16 @@ let
     gtk-xft-hintstyle = "hintslight";
   };
 
-  gtk3Settings = baseSettings // {
-    gtk-application-prefer-dark-theme = true;
-    gtk-toolbar-style = "GTK_TOOLBAR_BOTH";
-    gtk-toolbar-icon-size = "GTK_ICON_SIZE_LARGE_TOOLBAR";
-    gtk-button-images = 1;
-    gtk-menu-images = 1;
-    gtk-xft-rgba = "rgb";
-  };
+  gtk3Settings =
+    baseSettings
+    // {
+      gtk-application-prefer-dark-theme = true;
+      gtk-toolbar-style = "GTK_TOOLBAR_BOTH";
+      gtk-toolbar-icon-size = "GTK_ICON_SIZE_LARGE_TOOLBAR";
+      gtk-button-images = 1;
+      gtk-menu-images = 1;
+      gtk-xft-rgba = "rgb";
+    };
 
   gtk4Settings = baseSettings;
 
@@ -58,16 +59,15 @@ let
     gtk-xft-rgba="rgb"
   '';
 
-  toGtkIni = lib.generators.toINI { };
-in
-{
+  toGtkIni = lib.generators.toINI {};
+in {
   options.cnix.services.gtk.enable = mkEnableOption "GTK theming, cursors, and dark color-scheme";
 
   config = mkIf cfg.enable {
     programs.dconf.enable = lib.mkDefault true;
 
     environment = {
-      systemPackages = [ pkgs.gsettings-desktop-schemas ];
+      systemPackages = [pkgs.gsettings-desktop-schemas];
       sessionVariables = {
         XCURSOR_THEME = cursorTheme;
         XCURSOR_SIZE = toString cursorSize;
@@ -77,9 +77,9 @@ in
 
     systemd.user.services."gtk-color-scheme" = {
       description = "Apply GNOME color-scheme preference (prefer-dark)";
-      partOf = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      wantedBy = [ "graphical-session.target" ];
+      partOf = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+      wantedBy = ["graphical-session.target"];
       serviceConfig = {
         Type = "oneshot";
         ExecStart =

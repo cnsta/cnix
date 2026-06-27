@@ -4,14 +4,12 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.floorp;
-in
-{
+in {
   options.cnix.programs.floorp.enable = mkEnableOption "Enables floorp browser";
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.floorp ];
+    environment.systemPackages = [pkgs.floorp];
   };
 }

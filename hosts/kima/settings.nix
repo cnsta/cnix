@@ -9,8 +9,8 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = [ "amd" ];
-        extraKernelParams = [ ];
+        hardware = ["amd"];
+        extraKernelParams = [];
         amdOverdrive.enable = false;
       };
       loader = {
@@ -28,7 +28,7 @@
     };
 
     graphics = {
-      vendors = [ "amd" ];
+      vendors = ["amd"];
     };
 
     locale = {

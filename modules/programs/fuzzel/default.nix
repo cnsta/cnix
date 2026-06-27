@@ -4,8 +4,7 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.fuzzel;
   acct = config.cnix.settings.accounts;
 
@@ -34,15 +33,14 @@ let
       radius = 0;
     };
   };
-in
-{
+in {
   options.cnix.programs.fuzzel.enable = mkEnableOption "fuzzel";
 
   config = mkIf cfg.enable {
     hjem.users = genAttrs acct.defaultUsers (_: {
-      packages = [ pkgs.fuzzel ];
+      packages = [pkgs.fuzzel];
       xdg.config.files."fuzzel/fuzzel.ini" = {
-        generator = lib.generators.toINI { };
+        generator = lib.generators.toINI {};
         value = settings;
       };
     });

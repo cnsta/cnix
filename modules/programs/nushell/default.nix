@@ -4,8 +4,7 @@
   pkgs,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.nushell;
 
@@ -13,10 +12,9 @@ let
   user = config.settings.accounts.username;
 
   hmVars =
-    if options ? home-manager && config.home-manager.users ? ${user} then
-      config.home-manager.users.${user}.home.sessionVariables
-    else
-      { };
+    if options ? home-manager && config.home-manager.users ? ${user}
+    then config.home-manager.users.${user}.home.sessionVariables
+    else {};
 
   envVars =
     config.environment.variables
@@ -29,64 +27,68 @@ let
     };
 
   # toNushell serializer, from home-manager lib/nushell.nix
-  toNushell =
-    {
-      indent ? "",
-      multiline ? true,
-    }@args:
-    v:
-    let
-      innerIndent = "${indent}    ";
-      introSpace = if multiline then "\n${innerIndent}" else " ";
-      outroSpace = if multiline then "\n${indent}" else " ";
-      innerArgs = args // {
+  toNushell = {
+    indent ? "",
+    multiline ? true,
+  } @ args: v: let
+    innerIndent = "${indent}    ";
+    introSpace =
+      if multiline
+      then "\n${innerIndent}"
+      else " ";
+    outroSpace =
+      if multiline
+      then "\n${indent}"
+      else " ";
+    innerArgs =
+      args
+      // {
         indent = innerIndent;
       };
-      concatItems = lib.concatStringsSep introSpace;
-      recurse = toNushell innerArgs;
-    in
-    if v == null then
-      "null"
-    else if lib.isInt v || lib.isFloat v || lib.isBool v || lib.isString v then
-      lib.strings.toJSON v
-    else if lib.isList v then
-      if v == [ ] then "[]" else "[${introSpace}${concatItems (map recurse v)}${outroSpace}]"
-    else if lib.isAttrs v then
-      if lib.isDerivation v then
-        toString v
-      else if v == { } then
-        "{}"
-      else
-        "{${introSpace}${
-          concatItems (lib.mapAttrsToList (k: v: "${lib.strings.toJSON k}: ${recurse v}") v)
-        }${outroSpace}}"
-    else
-      throw "toNushell: unsupported type ${lib.typeOf v}";
+    concatItems = lib.concatStringsSep introSpace;
+    recurse = toNushell innerArgs;
+  in
+    if v == null
+    then "null"
+    else if lib.isInt v || lib.isFloat v || lib.isBool v || lib.isString v
+    then lib.strings.toJSON v
+    else if lib.isList v
+    then
+      if v == []
+      then "[]"
+      else "[${introSpace}${concatItems (map recurse v)}${outroSpace}]"
+    else if lib.isAttrs v
+    then
+      if lib.isDerivation v
+      then toString v
+      else if v == {}
+      then "{}"
+      else "{${introSpace}${
+        concatItems (lib.mapAttrsToList (k: v: "${lib.strings.toJSON k}: ${recurse v}") v)
+      }${outroSpace}}"
+    else throw "toNushell: unsupported type ${lib.typeOf v}";
 
-  mkLoadEnv =
-    vars:
-    let
-      pairs = lib.mapAttrsToList (k: v: "    ${lib.strings.toJSON k}: ${toNushell { } v}") vars;
-    in
-    ''
-      load-env {
-      ${lib.concatStringsSep "\n" pairs}
-      }
-    '';
+  mkLoadEnv = vars: let
+    pairs = lib.mapAttrsToList (k: v: "    ${lib.strings.toJSON k}: ${toNushell {} v}") vars;
+  in ''
+    load-env {
+    ${lib.concatStringsSep "\n" pairs}
+    }
+  '';
 
   # Integration scripts
-  starshipInit = pkgs.runCommand "starship-nushell-config.nu" { } ''
+  starshipInit = pkgs.runCommand "starship-nushell-config.nu" {} ''
     ${pkgs.starship}/bin/starship init nu > $out
   '';
 
   carapaceInit =
     pkgs.runCommand "carapace-nushell-config.nu"
-      {
-        HOME = "/home/${user}";
-      }
-      ''
-        ${pkgs.carapace}/bin/carapace _carapace nushell > $out
-      '';
+    {
+      HOME = "/home/${user}";
+    }
+    ''
+      ${pkgs.carapace}/bin/carapace _carapace nushell > $out
+    '';
 
   # File builders
   envNu = pkgs.writeText "nushell-env-${user}.nu" ''
@@ -217,14 +219,12 @@ let
         }
     )
   '';
-
-in
-{
+in {
   options.cnix.programs.nushell.enable = mkEnableOption "system-level nushell configuration";
 
   config = mkIf cfg.enable {
     environment = {
-      shells = [ pkgs.nushell ];
+      shells = [pkgs.nushell];
       systemPackages = [
         pkgs.nushell
         pkgs.carapace

@@ -4,11 +4,9 @@
   lib,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.byt;
-in
-{
+in {
   imports = [
     inputs.byt.nixosModules.default
   ];

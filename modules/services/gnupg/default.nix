@@ -4,11 +4,9 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.services.gpg;
-in
-{
+in {
   options.cnix.services.gpg.enable =
     mkEnableOption "GnuPG with SSH agent emulation and gnome3 pinentry";
 
@@ -19,6 +17,6 @@ in
       pinentryPackage = pkgs.pinentry-gnome3;
     };
 
-    environment.systemPackages = [ pkgs.gnupg ];
+    environment.systemPackages = [pkgs.gnupg];
   };
 }

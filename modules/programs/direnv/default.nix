@@ -3,11 +3,9 @@
   lib,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs;
-in
-{
+in {
   options.cnix.programs.direnv.enable = mkEnableOption "Enables direnv";
 
   config = mkIf cfg.direnv.enable {

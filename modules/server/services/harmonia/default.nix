@@ -3,12 +3,10 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   unit = "harmonia";
   cfg = config.cnix.server.services.${unit};
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     age.secrets.harmoniaSignKey = {
       file = "${self}/secrets/harmoniaSignKey.age";
@@ -18,7 +16,7 @@ in
     services.harmonia = {
       cache = {
         enable = true;
-        signKeyPaths = [ config.age.secrets.harmoniaSignKey.path ];
+        signKeyPaths = [config.age.secrets.harmoniaSignKey.path];
         settings.bind = "127.0.0.1:${toString cfg.port}";
       };
     };

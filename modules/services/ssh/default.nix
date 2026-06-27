@@ -4,17 +4,17 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   hosts = lib.attrNames outputs.nixosConfigurations;
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.ssh;
 
-  hostsWithKeys = builtins.filter (
-    hostname: builtins.pathExists "${self}/hosts/${hostname}/ssh_host_ed25519_key.pub"
-  ) hosts;
-in
-{
+  hostsWithKeys =
+    builtins.filter (
+      hostname: builtins.pathExists "${self}/hosts/${hostname}/ssh_host_ed25519_key.pub"
+    )
+    hosts;
+in {
   options.cnix.services.ssh.enable = mkEnableOption "Enables openssh";
 
   config = mkIf cfg.enable {

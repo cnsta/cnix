@@ -4,13 +4,11 @@
   clib,
   self,
   ...
-}:
-let
+}: let
   unit = "grafana";
   cfg = config.cnix.server.services.${unit};
   domain = clib.server.mkFullDomain config cfg;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
       grafanaSecretKey = {

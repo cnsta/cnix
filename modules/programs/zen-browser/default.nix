@@ -4,12 +4,10 @@
   inputs,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.zen-browser;
-in
-{
+in {
   options.cnix.programs.zen-browser.enable = mkEnableOption "Enables zen-browser";
 
   config = mkIf cfg.enable {

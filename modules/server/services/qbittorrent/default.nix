@@ -3,18 +3,16 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   unit = "qbittorrent";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
   arr = config.cnix.server.services.arr;
-in
-{
+in {
   config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
     age.secrets = {
-      qbtEnvironment.file = (self + "/secrets/qbtEnvironment.age");
-      quiEnvironment.file = (self + "/secrets/quiEnvironment.age");
+      qbtEnvironment.file = self + "/secrets/qbtEnvironment.age";
+      quiEnvironment.file = self + "/secrets/quiEnvironment.age";
     };
 
     systemd.tmpfiles.rules = [
@@ -26,7 +24,7 @@ in
       ${unit} = {
         image = "ghcr.io/hotio/qbittorrent:latest";
         autoStart = true;
-        dependsOn = [ "gluetun-qbt" ];
+        dependsOn = ["gluetun-qbt"];
         extraOptions = [
           "--network=container:gluetun-qbt"
           "--requires=gluetun-qbt"
@@ -35,20 +33,20 @@ in
           "/var/lib/qbittorrent:/config:rw"
           "/mnt/data:/data:rw"
         ];
-        environmentFiles = [ config.age.secrets.qbtEnvironment.path ];
+        environmentFiles = [config.age.secrets.qbtEnvironment.path];
       };
 
       qui = {
         image = "ghcr.io/hotio/qui:latest";
         autoStart = true;
-        dependsOn = [ "gluetun-arr" ];
+        dependsOn = ["gluetun-arr"];
         extraOptions = [
           "--network=container:gluetun-arr"
         ];
         volumes = [
           "/var/lib/qui:/config"
         ];
-        environmentFiles = [ config.age.secrets.quiEnvironment.path ];
+        environmentFiles = [config.age.secrets.quiEnvironment.path];
       };
     };
   };

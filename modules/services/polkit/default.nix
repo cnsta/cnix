@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.polkit;
-in
-{
+in {
   options.cnix.services.polkit.enable = mkEnableOption "Enables polkit";
 
   config = mkIf cfg.enable {
@@ -22,9 +20,9 @@ in
         TimeoutStopSec = 10;
       };
 
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
     };
   };
 }

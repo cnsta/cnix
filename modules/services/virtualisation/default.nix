@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.virtualisation;
-in
-{
+in {
   options.cnix.services.virtualisation.enable = mkEnableOption "Enables virtualisation";
 
   imports = [
@@ -16,7 +14,7 @@ in
   ];
 
   config = mkIf cfg.enable {
-    networking.firewall.trustedInterfaces = [ "virbr0" ];
+    networking.firewall.trustedInterfaces = ["virbr0"];
     environment.systemPackages = with pkgs; [
       virt-manager
       virt-viewer
@@ -30,7 +28,7 @@ in
         qemu = {
           ovmf = {
             enable = true;
-            packages = [ pkgs.OVMFFull.fd ];
+            packages = [pkgs.OVMFFull.fd];
           };
         };
       };

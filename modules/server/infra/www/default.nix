@@ -3,17 +3,16 @@
   config,
   self,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkEnableOption
     mkOption
     types
     ;
   cfg = config.cnix.server.infra.www;
-in
-{
+in {
   options.cnix.server.infra.www = {
     enable = mkEnableOption {
       description = "Enable personal website";
@@ -95,37 +94,33 @@ in
             };
 
             locations."= /.well-known/matrix/server" = {
-              extraConfig =
-                let
-                  matrixDomain = "${config.cnix.server.services.continuwuity.subdomain}.${cfg.url}";
-                in
-                ''
-                  default_type application/json;
-                  return 200 '{"m.server": "${matrixDomain}:443"}';
-                '';
+              extraConfig = let
+                matrixDomain = "${config.cnix.server.services.continuwuity.subdomain}.${cfg.url}";
+              in ''
+                default_type application/json;
+                return 200 '{"m.server": "${matrixDomain}:443"}';
+              '';
             };
 
             locations."= /.well-known/matrix/client" = {
-              extraConfig =
-                let
-                  matrixDomain = "${config.cnix.server.services.continuwuity.subdomain}.${cfg.url}";
-                  clientConfig = builtins.toJSON {
-                    "m.homeserver" = {
-                      base_url = "https://${matrixDomain}";
-                    };
-                    "org.matrix.msc4143.rtc_foci" = [
-                      {
-                        type = "livekit";
-                        livekit_service_url = "https://${matrixDomain}/livekit/jwt";
-                      }
-                    ];
+              extraConfig = let
+                matrixDomain = "${config.cnix.server.services.continuwuity.subdomain}.${cfg.url}";
+                clientConfig = builtins.toJSON {
+                  "m.homeserver" = {
+                    base_url = "https://${matrixDomain}";
                   };
-                in
-                ''
-                  default_type application/json;
-                  add_header Access-Control-Allow-Origin *;
-                  return 200 '${clientConfig}';
-                '';
+                  "org.matrix.msc4143.rtc_foci" = [
+                    {
+                      type = "livekit";
+                      livekit_service_url = "https://${matrixDomain}/livekit/jwt";
+                    }
+                  ];
+                };
+              in ''
+                default_type application/json;
+                add_header Access-Control-Allow-Origin *;
+                return 200 '${clientConfig}';
+              '';
             };
 
             locations."= /.well-known/matrix/support" = {
@@ -167,25 +162,28 @@ in
         tunnels.${cfg.cloudflared.tunnelId} = {
           credentialsFile = cfg.cloudflared.credentialsFile;
           default = "http_status:404";
-          ingress =
-            let
-              # Auto-generate from services with exposure = "tunnel"
-              tunnelServices = lib.filterAttrs (
+          ingress = let
+            # Auto-generate from services with exposure = "tunnel"
+            tunnelServices =
+              lib.filterAttrs (
                 _: svc: svc.enable && svc.exposure == "tunnel" && svc.subdomain != ""
-              ) config.cnix.server.services;
-              autoIngress = lib.mapAttrs' (
+              )
+              config.cnix.server.services;
+            autoIngress =
+              lib.mapAttrs' (
                 _: svc:
-                lib.nameValuePair "${svc.subdomain}.${cfg.url}" {
-                  service = "http://127.0.0.1:${toString svc.port}";
-                }
-              ) tunnelServices;
-              # Collect extra ingress from all services
-              extraIngress = lib.foldlAttrs (
-                acc: _: svc:
+                  lib.nameValuePair "${svc.subdomain}.${cfg.url}" {
+                    service = "http://127.0.0.1:${toString svc.port}";
+                  }
+              )
+              tunnelServices;
+            # Collect extra ingress from all services
+            extraIngress = lib.foldlAttrs (
+              acc: _: svc:
                 acc
-                // lib.mapAttrs' (sub: url: lib.nameValuePair "${sub}.${cfg.url}" { service = url; }) svc.ingress
-              ) { } (lib.filterAttrs (_: svc: svc.enable) config.cnix.server.services);
-            in
+                // lib.mapAttrs' (sub: url: lib.nameValuePair "${sub}.${cfg.url}" {service = url;}) svc.ingress
+            ) {} (lib.filterAttrs (_: svc: svc.enable) config.cnix.server.services);
+          in
             autoIngress
             // extraIngress
             // {
@@ -197,14 +195,14 @@ in
       traefik.dynamicConfigOptions.http = {
         routers = {
           www = {
-            entryPoints = [ "websecure" ];
+            entryPoints = ["websecure"];
             rule = "Host(`${cfg.url}`) && PathPrefix(`/.well-known/`)";
             service = "www";
             tls.certResolver = "letsencrypt";
           };
 
           ts = {
-            entryPoints = [ "websecure" ];
+            entryPoints = ["websecure"];
             rule = "Host(`ts.${cfg.url}`)";
             service = "ts";
             tls.certResolver = "letsencrypt";
@@ -213,11 +211,11 @@ in
 
         services = {
           www.loadBalancer.servers = [
-            { url = "http://127.0.0.1:8283"; }
+            {url = "http://127.0.0.1:8283";}
           ];
 
           ts.loadBalancer.servers = [
-            { url = "http://127.0.0.1:8283"; }
+            {url = "http://127.0.0.1:8283";}
           ];
         };
       };

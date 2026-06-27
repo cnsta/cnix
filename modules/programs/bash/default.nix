@@ -3,11 +3,9 @@
   lib,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.bash;
-in
-{
+in {
   options.cnix.programs.bash.enable = mkEnableOption "Enables bash";
 
   config = mkIf cfg.enable {

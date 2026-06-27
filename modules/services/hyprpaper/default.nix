@@ -7,8 +7,7 @@
   clib,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.services.hyprpaper;
   acct = config.cnix.settings.accounts;
   bg = config.cnix.settings.theme.background;
@@ -38,16 +37,15 @@ let
     preload = bgs.all;
     wallpaper = bgs.resolveWallpaperBlocks monitorMappings;
   };
-in
-{
+in {
   options.cnix.services.hyprpaper.enable = mkEnableOption "hyprpaper (Hyprland's wallpaper daemon)";
 
   config = mkIf cfg.enable {
     systemd.user.services.hyprpaper = {
       description = "Hyprland wallpaper daemon";
-      wantedBy = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
+      wantedBy = ["graphical-session.target"];
+      partOf = ["graphical-session.target"];
+      after = ["graphical-session.target"];
       serviceConfig = {
         ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
         Restart = "on-failure";

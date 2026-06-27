@@ -5,8 +5,7 @@
   self,
   pkgs,
   ...
-}:
-let
+}: let
   unit = "headscale";
   cfg = config.cnix.server.services.${unit};
   srv = config.cnix.server;
@@ -19,7 +18,7 @@ let
 
   sobotkaTailnetIp = "100.64.88.2";
 
-  headplaneConfig = (pkgs.formats.yaml { }).generate "headplane-config.yaml" {
+  headplaneConfig = (pkgs.formats.yaml {}).generate "headplane-config.yaml" {
     server = {
       host = "127.0.0.1";
       port = headplanePort;
@@ -57,8 +56,7 @@ let
       disable_api_key_login = true;
     };
   };
-in
-{
+in {
   config = lib.mkIf (cfg.enable && srv.infra.podman.enable) {
     age.secrets = {
       headscaleOidc = {
@@ -69,7 +67,7 @@ in
       headplaneEnv.file = "${self}/secrets/headplaneEnv.age";
     };
 
-    networking.firewall.allowedUDPPorts = [ 3478 ];
+    networking.firewall.allowedUDPPorts = [3478];
 
     services.${unit} = {
       enable = true;
@@ -98,7 +96,7 @@ in
             region_id = 999;
             stun_listen_addr = "0.0.0.0:3478";
           };
-          urls = [ "https://controlplane.tailscale.com/derpmap/default" ];
+          urls = ["https://controlplane.tailscale.com/derpmap/default"];
           auto_update_enabled = true;
           update_frequency = "24h";
         };
@@ -106,17 +104,18 @@ in
         dns = {
           magic_dns = true;
           base_domain = "ts.cnst.dev";
-          nameservers.global = [ "192.168.88.69" ];
-          search_domains = [ ];
+          nameservers.global = ["100.64.88.2"];
+          search_domains = [];
           extra_records = lib.concatLists (
             lib.mapAttrsToList (
               _: s:
-              lib.optional (s.enable && s.routed && s.subdomain != null && s.exposure == "tailscale") {
-                type = "A";
-                name = clib.server.mkFullDomain config s;
-                value = sobotkaTailnetIp;
-              }
-            ) srv.services
+                lib.optional (s.enable && s.routed && s.subdomain != null && s.exposure == "tailscale") {
+                  type = "A";
+                  name = clib.server.mkFullDomain config s;
+                  value = sobotkaTailnetIp;
+                }
+            )
+            srv.services
           );
         };
 
@@ -153,12 +152,12 @@ in
       environment = {
         TZ = "Europe/Stockholm";
       };
-      environmentFiles = [ config.age.secrets.headplaneEnv.path ];
-      extraOptions = [ "--network=host" ];
+      environmentFiles = [config.age.secrets.headplaneEnv.path];
+      extraOptions = ["--network=host"];
     };
 
     systemd = {
-      tmpfiles.rules = [ "d /var/lib/headplane 0750 root root -" ];
+      tmpfiles.rules = ["d /var/lib/headplane 0750 root root -"];
       services = {
         "headscale" = {
           after = [
@@ -172,46 +171,46 @@ in
         };
 
         "podman-headplane" = {
-          after = [ "headscale.service" ];
-          requires = [ "headscale.service" ];
+          after = ["headscale.service"];
+          requires = ["headscale.service"];
         };
       };
     };
 
     services.traefik.dynamicConfigOptions.http = {
       routers = {
-        headscale.middlewares = [ "headscale-cors" ];
+        headscale.middlewares = ["headscale-cors"];
 
         headplane = {
-          entryPoints = [ "websecure" ];
+          entryPoints = ["websecure"];
           rule = "Host(`${fqdn}`) && PathPrefix(`/admin`)";
           service = "headplane";
           tls.certResolver = "letsencrypt";
         };
 
         headscale-root = {
-          entryPoints = [ "websecure" ];
+          entryPoints = ["websecure"];
           rule = "Host(`${fqdn}`) && Path(`/`)";
           service = unit;
-          middlewares = [ "headscale-rewrite" ];
+          middlewares = ["headscale-rewrite"];
           tls.certResolver = "letsencrypt";
         };
       };
 
       services.headplane.loadBalancer.servers = [
-        { url = "http://127.0.0.1:${toString headplanePort}"; }
+        {url = "http://127.0.0.1:${toString headplanePort}";}
       ];
 
       middlewares = {
         headscale-rewrite.addPrefix.prefix = "/admin";
         headscale-cors.headers = {
-          accessControlAllowHeaders = [ "*" ];
+          accessControlAllowHeaders = ["*"];
           accessControlAllowMethods = [
             "GET"
             "POST"
             "PUT"
           ];
-          accessControlAllowOriginList = [ "https://${fqdn}" ];
+          accessControlAllowOriginList = ["https://${fqdn}"];
           accessControlMaxAge = 100;
           addVaryHeader = true;
         };

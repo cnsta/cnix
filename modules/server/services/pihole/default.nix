@@ -3,16 +3,14 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   unit = "pihole";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
-in
-{
+in {
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
     age.secrets = {
-      pihole.file = (self + "/secrets/${config.networking.hostName}Pihole.age");
+      pihole.file = self + "/secrets/${config.networking.hostName}Pihole.age";
     };
 
     networking.firewall = {
@@ -39,7 +37,7 @@ in
           CUSTOM_CACHE_SIZE = "0";
           WEBTHEME = "default-darker";
         };
-        environmentFiles = [ config.age.secrets.pihole.path ];
+        environmentFiles = [config.age.secrets.pihole.path];
         ports = [
           "53:53/tcp"
           "53:53/udp"

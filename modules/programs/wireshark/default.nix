@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.wireshark;
-in
-{
+in {
   options.cnix.programs.wireshark.enable = mkEnableOption "Enables wireshark";
 
   config = mkIf cfg.enable {

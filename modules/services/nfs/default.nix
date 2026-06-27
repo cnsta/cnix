@@ -2,17 +2,16 @@
   config,
   lib,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkEnableOption
     mkOption
     types
     ;
   cfg = config.cnix.services.nfs;
-in
-{
+in {
   options.cnix.services.nfs = {
     enable = mkEnableOption "Enable NFS support";
 
@@ -44,14 +43,14 @@ in
       };
       options = mkOption {
         type = types.listOf types.str;
-        default = [ "x-systemd.automount" ];
+        default = ["x-systemd.automount"];
         description = "Mount options";
       };
     };
   };
 
   config = mkIf cfg.enable {
-    boot.supportedFilesystems = [ "nfs" ];
+    boot.supportedFilesystems = ["nfs"];
     services.rpcbind.enable = true;
     networking.firewall = {
       allowedTCPPorts = [

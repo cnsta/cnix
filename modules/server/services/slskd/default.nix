@@ -3,17 +3,15 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   unit = "slskd";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
   arr = config.cnix.server.services.arr;
-in
-{
+in {
   config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
     age.secrets = {
-      slskd.file = (self + "/secrets/slskd.age");
+      slskd.file = self + "/secrets/slskd.age";
     };
 
     virtualisation.oci-containers.containers = {
@@ -21,7 +19,7 @@ in
         image = "docker.io/slskd/slskd:latest";
         pull = "newer";
         autoStart = true;
-        dependsOn = [ "gluetun-slskd" ];
+        dependsOn = ["gluetun-slskd"];
         extraOptions = [
           "--network=container:gluetun-slskd"
           "--label=io.containers.autoupdate=registry"

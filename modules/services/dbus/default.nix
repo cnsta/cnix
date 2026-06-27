@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.dbus;
-in
-{
+in {
   options.cnix.services.dbus.enable = mkEnableOption "Enables dbus";
 
   config = mkIf cfg.enable {

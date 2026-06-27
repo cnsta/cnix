@@ -14,7 +14,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "nofail" ];
+                mountOptions = ["nofail"];
               };
             };
             zfs = {
@@ -51,11 +51,11 @@
           topology = {
             vdev = [
               {
-                members = [ "root" ];
+                members = ["root"];
               }
               {
                 mode = "mirror";
-                members = [ "root-mirror" ];
+                members = ["root-mirror"];
               }
             ];
           };
@@ -77,7 +77,6 @@
               keylocation = "prompt";
             };
             mountpoint = "/";
-
           };
           "root/nix" = {
             type = "zfs_fs";

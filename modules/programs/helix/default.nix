@@ -4,9 +4,9 @@
   pkgs,
   inputs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkIf
     mkMerge
@@ -47,8 +47,7 @@ let
     shfmt
     stylua
   ];
-in
-{
+in {
   options.cnix.programs.helix = {
     enable = mkEnableOption "the Helix editor";
     languages.enable = mkEnableOption "Helix language servers and formatters";
@@ -58,19 +57,19 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = [ helixPkg ];
+      environment.systemPackages = [helixPkg];
       environment.variables.EDITOR = "hx";
     }
     (mkIf cfg.languages.enable {
       environment.systemPackages = languageServers ++ formatters;
     })
     (mkIf cfg.rust.enable {
-      environment.systemPackages = [ rustToolchain ];
+      environment.systemPackages = [rustToolchain];
     })
     (mkIf cfg.frontend.enable {
       environment.systemPackages = frontendToolchain;
     })
-    (mkIf (acct.defaultUsers != [ ]) {
+    (mkIf (acct.defaultUsers != []) {
       hjem.users = genAttrs acct.defaultUsers (_: {
         xdg.config.files = {
           "helix/config.toml".source = ./config.toml;

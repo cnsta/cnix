@@ -6,20 +6,18 @@
   lib,
   inputs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.emacs;
-  emacs =
-    with pkgs;
+  emacs = with pkgs;
     (emacsPackagesFor emacs-git-pgtk).emacsWithPackages (
-      epkgs: with epkgs; [
-        vterm
-        mu4e
-      ]
+      epkgs:
+        with epkgs; [
+          vterm
+          mu4e
+        ]
     );
-in
-{
+in {
   options = {
     cnix.programs.emacs.enable = mkEnableOption "Enables anyrun";
   };
@@ -50,11 +48,12 @@ in
       isync
       # :checkers spell
       (aspellWithDicts (
-        ds: with ds; [
-          en
-          en-computers
-          en-science
-        ]
+        ds:
+          with ds; [
+            en
+            en-computers
+            en-science
+          ]
       ))
       # :emacs dired +dirvish
       ffmpegthumbnailer
@@ -74,6 +73,6 @@ in
       ty
     ];
 
-    environment.variables.PATH = [ "$XDG_CONFIG_HOME/emacs/bin" ];
+    environment.variables.PATH = ["$XDG_CONFIG_HOME/emacs/bin"];
   };
 }

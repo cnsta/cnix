@@ -3,13 +3,11 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption mkOption;
   cfg = config.cnix.programs.nh;
   user = config.cnix.settings.accounts.username;
-in
-{
+in {
   options.cnix.programs.nh = {
     enable = mkEnableOption "Enables nix helper";
     clean = {

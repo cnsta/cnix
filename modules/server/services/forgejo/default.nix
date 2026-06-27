@@ -4,13 +4,11 @@
   pkgs,
   clib,
   ...
-}:
-let
+}: let
   unit = "forgejo";
   cfg = config.cnix.server.services.${unit};
   domain = clib.server.mkFullDomain config cfg;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     cnix.server.infra = {
       fail2ban.jails.${unit} = {
@@ -20,7 +18,7 @@ in
       postgresql.databases = [
         {
           database = unit;
-          extraUsers = [ "cnst" ];
+          extraUsers = ["cnst"];
         }
       ];
     };

@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.beekeeper;
-in
-{
+in {
   options = {
     cnix.programs.beekeeper.enable = mkEnableOption "Enables Beekeeper Studio";
   };

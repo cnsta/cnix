@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.dconf;
-in
-{
+in {
   options.cnix.services.dconf.enable = mkEnableOption "Enables dconf";
 
   config = mkIf cfg.enable {

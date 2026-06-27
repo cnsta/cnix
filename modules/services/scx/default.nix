@@ -4,11 +4,9 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.services.scx;
-in
-{
+in {
   options = {
     cnix.services.scx = {
       enable = mkEnableOption "Enables scx scheduler";
@@ -34,7 +32,7 @@ in
     ];
     systemd.services.scx = {
       enable = true;
-      wantedBy = [ "multi-user.target" ];
+      wantedBy = ["multi-user.target"];
       unitConfig = {
         Description = "Start scx_scheduler";
         ConditionPathIsDirectory = "/sys/kernel/sched_ext";

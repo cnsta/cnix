@@ -3,12 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.obsidian;
-in
-{
+in {
   options = {
     cnix.programs.obsidian.enable = mkEnableOption "Enables obsidian";
   };

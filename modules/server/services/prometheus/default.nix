@@ -2,11 +2,9 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.cnix.server.services.grafana;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     services.prometheus = {
       enable = true;
@@ -33,33 +31,33 @@ in
         {
           job_name = "hydra";
           scheme = "https";
-          static_configs = [ { targets = [ "hydra.cnix.dev" ]; } ];
+          static_configs = [{targets = ["hydra.cnix.dev"];}];
         }
         {
           job_name = "headscale";
           scheme = "https";
-          static_configs = [ { targets = [ "hs.cnst.dev" ]; } ];
+          static_configs = [{targets = ["hs.cnst.dev"];}];
         }
         {
           job_name = "grafana";
           scheme = "https";
-          static_configs = [ { targets = [ "grafana.cnix.dev" ]; } ];
+          static_configs = [{targets = ["grafana.cnix.dev"];}];
         }
         {
           job_name = "jellyfin";
           scheme = "https";
-          static_configs = [ { targets = [ "fin.ts.cnst.dev" ]; } ];
+          static_configs = [{targets = ["fin.ts.cnst.dev"];}];
         }
         {
           job_name = "node";
           static_configs = [
-            { targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ]; }
+            {targets = ["127.0.0.1:${toString config.services.prometheus.exporters.node.port}"];}
           ];
         }
         {
           job_name = "systemd";
           static_configs = [
-            { targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.systemd.port}" ]; }
+            {targets = ["127.0.0.1:${toString config.services.prometheus.exporters.systemd.port}"];}
           ];
         }
       ];

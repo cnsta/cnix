@@ -4,14 +4,12 @@
   clib,
   self,
   ...
-}:
-let
+}: let
   unit = "authelia";
   cfg = config.cnix.server.services.${unit};
   srv = config.cnix.server;
   domain = clib.server.mkHostDomain config cfg;
-in
-{
+in {
   imports = [
     ./clients.nix
   ];
@@ -231,24 +229,22 @@ in
         };
       };
 
-      systemd.services."authelia-main" =
-        let
-          dependencies = [
-            "postgresql.service"
-            "lldap.service"
-          ];
-        in
-        {
-          after = dependencies;
-          requires = dependencies;
-        };
+      systemd.services."authelia-main" = let
+        dependencies = [
+          "postgresql.service"
+          "lldap.service"
+        ];
+      in {
+        after = dependencies;
+        requires = dependencies;
+      };
 
       users = {
         users.${unit} = {
           group = unit;
           isSystemUser = true;
         };
-        groups.${unit} = { };
+        groups.${unit} = {};
       };
     })
   ];

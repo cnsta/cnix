@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.anyrun;
-in
-{
+in {
   options = {
     cnix.programs.anyrun.enable = mkEnableOption "Enables anyrun";
   };

@@ -3,9 +3,9 @@
   lib,
   config,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkOption
     types
     mkEnableOption
@@ -14,8 +14,7 @@ let
   cfg = config.cnix.settings.boot.kernel;
 
   hasHardware = hw: builtins.elem hw cfg.hardware;
-in
-{
+in {
   imports = [
     ./security.nix
   ];
@@ -40,22 +39,21 @@ in
             "nvidia"
           ]
         );
-        default = [ ];
+        default = [];
         description = "List of hardware types (e.g. GPU and CPU vendors) to configure kernel settings for.";
-
       };
 
       amdOverdrive.enable = mkEnableOption "Enable AMD pstate/overdrive";
 
       extraKernelParams = mkOption {
         type = types.listOf types.str;
-        default = [ ];
+        default = [];
         description = "Additional kernel parameters.";
       };
 
       extraBlacklistedModules = mkOption {
         type = types.listOf types.str;
-        default = [ ];
+        default = [];
         description = "Additional kernel modules to blacklist.";
       };
     };
@@ -69,32 +67,55 @@ in
     boot = {
       consoleLogLevel = 3;
 
-      kernelPackages =
-        let
-          variant = cfg.variant or "latest";
-        in
-        if variant == "stable" then
-          pkgs.linuxPackages
-        else if variant == "latest" then
-          pkgs.linuxPackages_latest
-        else if variant == "zfsLatest" then
-          pkgs.linuxPackages_6_18
-        else
-          throw "Unknown kernel variant: ${variant}";
+      kernelPackages = let
+        variant = cfg.variant or "latest";
+      in
+        if variant == "stable"
+        then pkgs.linuxPackages
+        else if variant == "latest"
+        then pkgs.linuxPackages_latest
+        else if variant == "zfsLatest"
+        then pkgs.linuxPackages_6_18
+        else throw "Unknown kernel variant: ${variant}";
 
-      kernelParams = [
-        "quiet"
-        "splash"
-      ]
-      ++ (if hasHardware "amd" then [ ] else [ ])
-      ++ (if hasHardware "intel" then [ ] else [ ])
-      ++ (if hasHardware "nvidia" then [ "fbdev=1" ] else [ ])
-      ++ cfg.extraKernelParams;
+      kernelParams =
+        [
+          "quiet"
+          "splash"
+        ]
+        ++ (
+          if hasHardware "amd"
+          then []
+          else []
+        )
+        ++ (
+          if hasHardware "intel"
+          then []
+          else []
+        )
+        ++ (
+          if hasHardware "nvidia"
+          then ["fbdev=1"]
+          else []
+        )
+        ++ cfg.extraKernelParams;
 
       blacklistedKernelModules =
-        (if hasHardware "amd" then [ ] else [ ])
-        ++ (if hasHardware "intel" then [ ] else [ ])
-        ++ (if hasHardware "nvidia" then [ ] else [ ])
+        (
+          if hasHardware "amd"
+          then []
+          else []
+        )
+        ++ (
+          if hasHardware "intel"
+          then []
+          else []
+        )
+        ++ (
+          if hasHardware "nvidia"
+          then []
+          else []
+        )
         ++ cfg.extraBlacklistedModules;
     };
     hardware.amdgpu.overdrive.enable = mkIf cfg.amdOverdrive.enable true;

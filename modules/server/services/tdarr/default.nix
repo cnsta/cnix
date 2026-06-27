@@ -2,8 +2,7 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   unit = "tdarr";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
@@ -17,8 +16,7 @@ let
     "/var/lib/tdarr/server:/app/server"
     "/var/lib/tdarr/transcode_cache:/temp"
   ];
-in
-{
+in {
   config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
     systemd.tmpfiles.rules = [
       "d /var/lib/tdarr/transcode_cache 0755 root root - -"

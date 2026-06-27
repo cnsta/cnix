@@ -5,26 +5,24 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.server.infra.tailscale;
   iface = builtins.head (builtins.attrNames config.cnix.settings.network.interfaces);
-in
-{
+in {
   options.cnix.server.infra.tailscale = {
     enable = mkEnableOption "Enable tailscale server configuration";
   };
   config = mkIf cfg.enable {
     age.secrets.hsPreauth.file = "${self}/secrets/hsPreauth.age";
 
-    environment.systemPackages = [ pkgs.ethtool ];
+    environment.systemPackages = [pkgs.ethtool];
 
     boot.initrd.systemd.network.wait-online.enable = false;
 
     networking.firewall = {
       enable = true;
-      trustedInterfaces = [ "tailscale0" ];
-      allowedUDPPorts = [ config.services.tailscale.port ];
+      trustedInterfaces = ["tailscale0"];
+      allowedUDPPorts = [config.services.tailscale.port];
     };
 
     systemd = {
@@ -39,12 +37,12 @@ in
             "headscale.service"
             "traefik.service"
           ];
-          wants = [ "headscale.service" ];
+          wants = ["headscale.service"];
         };
 
         tailscale-udp-gro = {
-          wantedBy = [ "multi-user.target" ];
-          after = [ "network.target" ];
+          wantedBy = ["multi-user.target"];
+          after = ["network.target"];
           serviceConfig = {
             Type = "oneshot";
             RemainAfterExit = true;
@@ -66,7 +64,6 @@ in
         ];
         extraSetFlags = [
           "--advertise-exit-node"
-          "--advertise-routes=192.168.88.69/32"
         ];
       };
     };

@@ -4,9 +4,9 @@
   pkgs,
   outputs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkIf
     mkMerge
@@ -40,8 +40,7 @@ let
       ControlPersist 10m
       SetEnv TERM=xterm-256color
   '';
-in
-{
+in {
   options.cnix.programs.ssh.enable = mkEnableOption "ssh client config";
 
   config = mkIf cfg.enable (mkMerge [
@@ -52,7 +51,7 @@ in
       };
     }
 
-    (mkIf (acct.defaultUsers != [ ]) {
+    (mkIf (acct.defaultUsers != []) {
       hjem.users = genAttrs acct.defaultUsers (_: {
         files = {
           ".ssh/config".text = sshConfig;

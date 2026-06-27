@@ -7,9 +7,7 @@
   pkgs,
   modulesPath,
   ...
-}:
-
-{
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -22,17 +20,16 @@
     "usb_storage"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     device = "/dev/mapper/luks-9e7336d1-190e-447e-a5db-2541c74c4d6e";
     fsType = "xfs";
   };
 
-  boot.initrd.luks.devices."luks-9e7336d1-190e-447e-a5db-2541c74c4d6e".device =
-    "/dev/disk/by-uuid/9e7336d1-190e-447e-a5db-2541c74c4d6e";
+  boot.initrd.luks.devices."luks-9e7336d1-190e-447e-a5db-2541c74c4d6e".device = "/dev/disk/by-uuid/9e7336d1-190e-447e-a5db-2541c74c4d6e";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/C455-BE5D";
@@ -48,10 +45,9 @@
     fsType = "xfs";
   };
 
-  boot.initrd.luks.devices."luks-49e04615-805e-4a08-a625-c6e464e02697".device =
-    "/dev/disk/by-uuid/49e04615-805e-4a08-a625-c6e464e02697";
+  boot.initrd.luks.devices."luks-49e04615-805e-4a08-a625-c6e464e02697".device = "/dev/disk/by-uuid/49e04615-805e-4a08-a625-c6e464e02697";
 
-  swapDevices = [ ];
+  swapDevices = [];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

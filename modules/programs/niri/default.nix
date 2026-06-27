@@ -3,12 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.niri;
-in
-{
+in {
   options.cnix.programs.niri.enable = mkEnableOption "Enables niri";
 
   config = mkIf cfg.enable {

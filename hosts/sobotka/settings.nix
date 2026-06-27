@@ -13,8 +13,8 @@
     boot = {
       kernel = {
         variant = "zfsLatest";
-        hardware = [ "amd" ];
-        extraKernelParams = [ ];
+        hardware = ["amd"];
+        extraKernelParams = [];
       };
       loader = {
         default = {

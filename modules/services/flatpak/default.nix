@@ -3,22 +3,20 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.flatpak;
-in
-{
+in {
   options.cnix.services.flatpak.enable = mkEnableOption "Enables flatpaks and gnome software";
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.bazaar ];
+    environment.systemPackages = [pkgs.bazaar];
     services.flatpak.enable = true;
     systemd.services.flatpak-repo = {
       description = "Add flathub repository";
-      after = [ "network-online.target" ];
-      wants = [ "network-online.target" ];
-      path = [ pkgs.flatpak ];
+      after = ["network-online.target"];
+      wants = ["network-online.target"];
+      path = [pkgs.flatpak];
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
@@ -26,7 +24,7 @@ in
         Restart = "on-failure";
         RestartSec = "5s";
       };
-      wantedBy = [ "multi-user.target" ];
+      wantedBy = ["multi-user.target"];
     };
   };
 }

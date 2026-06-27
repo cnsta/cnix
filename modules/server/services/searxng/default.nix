@@ -3,13 +3,11 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   unit = "searxng";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
-in
-{
+in {
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
     age.secrets = {
       searxngEnvironment = {
@@ -36,7 +34,7 @@ in
         extraOptions = [
           "--network=container:gluetun-searxng"
         ];
-        environmentFiles = [ config.age.secrets.searxngEnvironment.path ];
+        environmentFiles = [config.age.secrets.searxngEnvironment.path];
         volumes = [
           "/var/lib/searxng:/etc/searxng"
           "/var/cache/searxng:/var/cache/searxng"
@@ -46,7 +44,7 @@ in
       valkey-searxng = {
         image = "docker.io/valkey/valkey:9-alpine";
         autoStart = true;
-        dependsOn = [ "gluetun-searxng" ];
+        dependsOn = ["gluetun-searxng"];
         extraOptions = [
           "--network=container:gluetun-searxng"
         ];
@@ -58,7 +56,7 @@ in
           "--loglevel"
           "warning"
         ];
-        volumes = [ "/var/lib/valkey-searxng:/data" ];
+        volumes = ["/var/lib/valkey-searxng:/data"];
       };
     };
   };

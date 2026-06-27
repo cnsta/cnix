@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.mullvad;
-in
-{
+in {
   options.cnix.services.mullvad.enable = mkEnableOption "Enables mullvad";
 
   config = mkIf cfg.enable {

@@ -4,11 +4,9 @@
   lib,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.foot;
-in
-{
+in {
   options.cnix.programs.foot.enable = mkEnableOption "Enables foot programs";
 
   config = mkIf cfg.enable {

@@ -3,12 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.pipewire;
-in
-{
+in {
   options.cnix.services.pipewire.enable = mkEnableOption "Enables pipewire";
 
   config = mkIf cfg.enable {

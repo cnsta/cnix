@@ -3,22 +3,20 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   infra = config.cnix.server.infra;
   cfg = config.cnix.server.services;
   arr = config.cnix.server.services.arr;
-in
-{
+in {
   options.cnix.server.infra = {
     gluetun.enable = lib.mkEnableOption "Enables gluetun";
   };
   config = lib.mkIf infra.gluetun.enable {
     age.secrets = {
-      gluetunQbtEnvironment.file = (self + "/secrets/gluetunQbtEnvironment.age");
-      gluetunSearxngEnvironment.file = (self + "/secrets/gluetunSearxngEnvironment.age");
-      gluetunSlskdEnvironment.file = (self + "/secrets/gluetunSlskdEnvironment.age");
-      gluetunArrEnvironment.file = (self + "/secrets/gluetunArrEnvironment.age");
+      gluetunQbtEnvironment.file = self + "/secrets/gluetunQbtEnvironment.age";
+      gluetunSearxngEnvironment.file = self + "/secrets/gluetunSearxngEnvironment.age";
+      gluetunSlskdEnvironment.file = self + "/secrets/gluetunSlskdEnvironment.age";
+      gluetunArrEnvironment.file = self + "/secrets/gluetunArrEnvironment.age";
     };
 
     virtualisation.oci-containers.containers = {
@@ -28,7 +26,7 @@ in
         ports = [
           "8081:8081"
         ];
-        devices = [ "/dev/net/tun:/dev/net/tun" ];
+        devices = ["/dev/net/tun:/dev/net/tun"];
         autoStart = true;
         extraOptions = [
           "--cap-add=NET_ADMIN"
@@ -39,7 +37,7 @@ in
           "--health-retries=6"
           "--health-start-period=30s"
         ];
-        volumes = [ "/var/lib/gluetun-qbt:/gluetun" ];
+        volumes = ["/var/lib/gluetun-qbt:/gluetun"];
         environmentFiles = [
           config.age.secrets.gluetunQbtEnvironment.path
         ];
@@ -54,14 +52,14 @@ in
         ports = [
           "8084:8084"
         ];
-        devices = [ "/dev/net/tun:/dev/net/tun" ];
+        devices = ["/dev/net/tun:/dev/net/tun"];
         autoStart = true;
         extraOptions = [
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
           "--label=io.containers.autoupdate=registry"
         ];
-        volumes = [ "/var/lib/gluetun-searxng:/gluetun" ];
+        volumes = ["/var/lib/gluetun-searxng:/gluetun"];
         environmentFiles = [
           config.age.secrets.gluetunSearxngEnvironment.path
         ];
@@ -79,14 +77,14 @@ in
           "5031:5031"
           "50323:50323"
         ];
-        devices = [ "/dev/net/tun:/dev/net/tun" ];
+        devices = ["/dev/net/tun:/dev/net/tun"];
         autoStart = true;
         extraOptions = [
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
           "--label=io.containers.autoupdate=registry"
         ];
-        volumes = [ "/var/lib/gluetun-slskd:/gluetun" ];
+        volumes = ["/var/lib/gluetun-slskd:/gluetun"];
         environmentFiles = [
           config.age.secrets.gluetunSlskdEnvironment.path
         ];
@@ -109,7 +107,7 @@ in
           "8085:8085"
           "8089:8089"
         ];
-        devices = [ "/dev/net/tun:/dev/net/tun" ];
+        devices = ["/dev/net/tun:/dev/net/tun"];
         autoStart = true;
         extraOptions = [
           "--cap-add=NET_ADMIN"
@@ -118,7 +116,7 @@ in
           "--sysctl=net.ipv6.conf.default.disable_ipv6=1"
           "--label=io.containers.autoupdate=registry"
         ];
-        volumes = [ "/var/lib/gluetun-arr:/gluetun" ];
+        volumes = ["/var/lib/gluetun-arr:/gluetun"];
         environmentFiles = [
           config.age.secrets.gluetunArrEnvironment.path
         ];

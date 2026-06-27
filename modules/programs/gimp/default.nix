@@ -3,12 +3,10 @@
   pkgs,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.gimp;
-in
-{
+in {
   options = {
     cnix.programs.gimp.enable = mkEnableOption "Enables gimp";
   };

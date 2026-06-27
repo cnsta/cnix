@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   abbrs = {
     us = "systemctl --user";
     rs = "sudo systemctl";

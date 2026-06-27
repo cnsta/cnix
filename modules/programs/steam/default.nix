@@ -3,12 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.steam;
-in
-{
+in {
   options.cnix.programs.steam.enable = mkEnableOption "Enables steam";
 
   config = mkIf cfg.enable {

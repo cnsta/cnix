@@ -4,12 +4,10 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.tuirun;
-in
-{
+in {
   imports = [
     inputs.tuirun.homeManagerModules.default
   ];

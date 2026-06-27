@@ -5,9 +5,7 @@
   pkgs,
   inputs,
   ...
-}:
-
-let
+}: let
   unit = "cnixpost";
   cfg = config.cnix.server.infra.${unit};
   srv = config.cnix.server;
@@ -56,15 +54,14 @@ let
       fi
     '';
   };
-in
-{
-  imports = [ inputs.cnixpost.nixosModules.default ];
+in {
+  imports = [inputs.cnixpost.nixosModules.default];
 
   options.cnix.server.infra.${unit} = {
     enable = lib.mkEnableOption "mail server (Postfix + Dovecot + Rspamd + ClamAV)";
 
     accounts = lib.mkOption {
-      default = { };
+      default = {};
       description = "Virtual mail accounts keyed by full address (user@domain).";
       type = lib.types.attrsOf (
         lib.types.submodule {
@@ -75,7 +72,7 @@ in
             };
             aliases = lib.mkOption {
               type = lib.types.listOf lib.types.str;
-              default = [ ];
+              default = [];
             };
             sendOnly = lib.mkOption {
               type = lib.types.bool;
@@ -88,7 +85,7 @@ in
 
     extraDomains = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ ];
+      default = [];
     };
 
     dkimSelector = lib.mkOption {
@@ -140,7 +137,7 @@ in
       };
       mxHosts = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [ ];
+        default = [];
       };
       enableOutboundCheck = lib.mkOption {
         type = lib.types.bool;
@@ -150,7 +147,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-
     age.secrets = {
       mailRedisPw = {
         file = "${self}/secrets/mailRedisPw.age";
@@ -168,7 +164,7 @@ in
 
     # Cert extraction from Traefik
     systemd.paths.mail-cert-extract = {
-      wantedBy = [ "multi-user.target" ];
+      wantedBy = ["multi-user.target"];
       pathConfig = {
         PathChanged = "/var/lib/traefik/cert.json";
         Unit = "mail-cert-extract.service";
@@ -187,7 +183,7 @@ in
         "traefik.service"
         "network-online.target"
       ];
-      wantedBy = [ "multi-user.target" ];
+      wantedBy = ["multi-user.target"];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = lib.getExe extractCerts;
@@ -205,7 +201,7 @@ in
     };
 
     systemd.paths.mail-cert-reload = {
-      wantedBy = [ "multi-user.target" ];
+      wantedBy = ["multi-user.target"];
       pathConfig = {
         PathModified = "/run/mail-certs/fullchain.pem";
         Unit = "mail-cert-reload.service";
@@ -224,7 +220,8 @@ in
       keyFile = "/run/mail-certs/privkey.pem";
       certWatchService = "mail-cert-extract.service";
 
-      inherit (cfg)
+      inherit
+        (cfg)
         accounts
         dkimSelector
         spamScoreAddHeader
@@ -246,7 +243,8 @@ in
       };
 
       mtaSts = {
-        inherit (cfg.mtaSts)
+        inherit
+          (cfg.mtaSts)
           enable
           mode
           policyId
@@ -276,34 +274,34 @@ in
     services.traefik.dynamicConfigOptions.tcp = {
       routers = {
         smtp-in = {
-          entryPoints = [ "smtp" ];
+          entryPoints = ["smtp"];
           rule = "HostSNI(`*`)";
           service = "postfix-smtp";
         };
         submission-starttls = {
-          entryPoints = [ "submission" ];
+          entryPoints = ["submission"];
           rule = "HostSNI(`*`)";
           service = "postfix-submission";
         };
         submissions = {
-          entryPoints = [ "submissions" ];
+          entryPoints = ["submissions"];
           rule = "HostSNI(`${mailFqdn}`)";
           service = "postfix-submissions";
           tls.passthrough = true;
         };
         imap-starttls = {
-          entryPoints = [ "imap" ];
+          entryPoints = ["imap"];
           rule = "HostSNI(`*`)";
           service = "dovecot-imap";
         };
         imaps = {
-          entryPoints = [ "imaps" ];
+          entryPoints = ["imaps"];
           rule = "HostSNI(`${mailFqdn}`)";
           service = "dovecot-imaps";
           tls.passthrough = true;
         };
         sieve-tcp = {
-          entryPoints = [ "sieve" ];
+          entryPoints = ["sieve"];
           rule = "HostSNI(`*`)";
           service = "dovecot-sieve";
         };
@@ -311,27 +309,27 @@ in
 
       services = {
         postfix-smtp.loadBalancer = {
-          servers = [ { address = "127.0.0.1:10025"; } ];
+          servers = [{address = "127.0.0.1:10025";}];
           proxyProtocol.version = 2;
         };
         postfix-submission.loadBalancer = {
-          servers = [ { address = "127.0.0.1:10587"; } ];
+          servers = [{address = "127.0.0.1:10587";}];
           proxyProtocol.version = 2;
         };
         postfix-submissions.loadBalancer = {
-          servers = [ { address = "127.0.0.1:10465"; } ];
+          servers = [{address = "127.0.0.1:10465";}];
           proxyProtocol.version = 2;
         };
         dovecot-imap.loadBalancer = {
-          servers = [ { address = "127.0.0.1:10143"; } ];
+          servers = [{address = "127.0.0.1:10143";}];
           proxyProtocol.version = 2;
         };
         dovecot-imaps.loadBalancer = {
-          servers = [ { address = "127.0.0.1:10993"; } ];
+          servers = [{address = "127.0.0.1:10993";}];
           proxyProtocol.version = 2;
         };
         dovecot-sieve.loadBalancer = {
-          servers = [ { address = "127.0.0.1:10419"; } ];
+          servers = [{address = "127.0.0.1:10419";}];
           proxyProtocol.version = 2;
         };
       };
@@ -340,44 +338,44 @@ in
     services.traefik.dynamicConfigOptions.http = lib.mkMerge [
       {
         routers.rspamd = {
-          entryPoints = [ "websecure" ];
+          entryPoints = ["websecure"];
           rule = "Host(`rspamd.${srv.domain}`)";
           service = "rspamd-svc";
           tls.certResolver = "letsencrypt";
-          middlewares = [ "authelia@file" ];
+          middlewares = ["authelia@file"];
         };
         services.rspamd-svc.loadBalancer.servers = [
-          { url = "http://localhost:11334"; }
+          {url = "http://localhost:11334";}
         ];
       }
 
       (lib.mkIf cfg.mtaSts.enable {
         routers.mta-sts = {
-          entryPoints = [ "websecure" ];
+          entryPoints = ["websecure"];
           rule = "Host(`mta-sts.${srv.domain}`)";
           service = "mta-sts-svc";
           tls.certResolver = "letsencrypt";
         };
         services.mta-sts-svc.loadBalancer.servers = [
-          { url = "http://127.0.0.1:8089"; }
+          {url = "http://127.0.0.1:8089";}
         ];
       })
 
       (lib.mkIf config.cnixpost.autoconfig.enable {
         routers.autoconfig = {
-          entryPoints = [ "websecure" ];
+          entryPoints = ["websecure"];
           rule = "Host(`autoconfig.${srv.domain}`)";
           service = "autoconfig-svc";
           tls.certResolver = "letsencrypt";
         };
         routers.autodiscover = {
-          entryPoints = [ "websecure" ];
+          entryPoints = ["websecure"];
           rule = "Host(`autodiscover.${srv.domain}`)";
           service = "autoconfig-svc";
           tls.certResolver = "letsencrypt";
         };
         services.autoconfig-svc.loadBalancer.servers = [
-          { url = "http://127.0.0.1:8090"; }
+          {url = "http://127.0.0.1:8090";}
         ];
       })
     ];

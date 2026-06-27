@@ -4,21 +4,17 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.fish;
   acct = config.cnix.settings.accounts;
-  common = import ./common.nix { inherit pkgs lib; };
+  common = import ./common.nix {inherit pkgs lib;};
 
-  abbrsToFish =
-    abbrs: concatStringsSep "\n" (mapAttrsToList (n: v: "abbr -a ${n} -- ${escapeShellArg v}") abbrs);
+  abbrsToFish = abbrs: concatStringsSep "\n" (mapAttrsToList (n: v: "abbr -a ${n} -- ${escapeShellArg v}") abbrs);
 
-  aliasesToFish =
-    aliases: concatStringsSep "\n" (mapAttrsToList (n: v: "alias ${n} ${escapeShellArg v}") aliases);
+  aliasesToFish = aliases: concatStringsSep "\n" (mapAttrsToList (n: v: "alias ${n} ${escapeShellArg v}") aliases);
 
-  hasUsers = acct.defaultUsers != [ ];
-in
-{
+  hasUsers = acct.defaultUsers != [];
+in {
   options.cnix.programs.fish = {
     enable = mkEnableOption "fish (system-wide)";
     homeless.enable = mkEnableOption "system-level fish dotfiles for hosts without per-user config";

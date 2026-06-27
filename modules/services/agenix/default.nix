@@ -5,8 +5,7 @@
   pkgs,
   self,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.agenix;
   host = config.networking.hostName;
@@ -17,21 +16,20 @@ let
     bunk = {
     };
     sobotka = {
-      cloudflareFirewallApiKey.file = (self + "/secrets/cloudflareFirewallApiKey.age");
-      cloudflareDnsApiToken.file = (self + "/secrets/cloudflareDnsApiToken.age");
-      cloudflareDnsCredentials.file = (self + "/secrets/cloudflareDnsCredentials.age");
-      wgCredentials.file = (self + "/secrets/wgCredentials.age");
-      wgSobotkaPrivateKey.file = (self + "/secrets/wgSobotkaPrivateKey.age");
+      cloudflareFirewallApiKey.file = self + "/secrets/cloudflareFirewallApiKey.age";
+      cloudflareDnsApiToken.file = self + "/secrets/cloudflareDnsApiToken.age";
+      cloudflareDnsCredentials.file = self + "/secrets/cloudflareDnsCredentials.age";
+      wgCredentials.file = self + "/secrets/wgCredentials.age";
+      wgSobotkaPrivateKey.file = self + "/secrets/wgSobotkaPrivateKey.age";
     };
     ziggy = {
-      cloudflareDnsCredentialsZiggy.file = (self + "/secrets/cloudflareDnsCredentialsZiggy.age");
+      cloudflareDnsCredentialsZiggy.file = self + "/secrets/cloudflareDnsCredentialsZiggy.age";
     };
     toothpc = {
     };
   };
-in
-{
-  imports = [ inputs.agenix.nixosModules.default ];
+in {
+  imports = [inputs.agenix.nixosModules.default];
 
   options.cnix.services.agenix.enable = mkEnableOption "agenix system environment";
 

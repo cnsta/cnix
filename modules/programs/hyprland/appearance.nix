@@ -2,12 +2,10 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.hyprland;
-in
-{
+in {
   options.cnix.programs.hyprland.appearance.enable =
     mkEnableOption "Enables appearance settings in Hyprland";
   config = mkIf cfg.appearance.enable {

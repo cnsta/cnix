@@ -6,6 +6,6 @@
     active = {
       fg = "#fe8019";
     };
-    inactive = { };
+    inactive = {};
   };
 }

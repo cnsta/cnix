@@ -5,8 +5,7 @@
   clib,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.hyprlock;
   acct = config.cnix.settings.accounts;
   bg = config.cnix.settings.theme.background;
@@ -129,8 +128,7 @@ let
       }
     ];
   };
-in
-{
+in {
   options.cnix.programs.hyprlock.enable = mkEnableOption "hyprlock (Hyprland's lockscreen)";
   config = mkIf cfg.enable {
     programs.hyprlock.enable = true;

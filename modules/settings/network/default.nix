@@ -2,17 +2,16 @@
   config,
   lib,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkEnableOption
     mkOption
     types
     ;
   cfg = config.cnix.settings.network;
-in
-{
+in {
   options = {
     cnix.settings.network = {
       enable = mkEnableOption "Enable the custom networking module";
@@ -20,12 +19,12 @@ in
       bluetooth.enable = mkEnableOption "Enables bluetooth";
       nameservers = mkOption {
         type = types.listOf types.str;
-        default = [ ];
+        default = [];
         description = "The list of nameservers ";
       };
       search = mkOption {
         type = types.listOf types.str;
-        default = [ ];
+        default = [];
         description = "Domain search paths";
       };
       localIp = lib.mkOption {
@@ -39,18 +38,18 @@ in
             options = {
               allowedTCPPorts = mkOption {
                 type = types.listOf types.int;
-                default = [ ];
+                default = [];
                 description = "List of allowed TCP ports for this interface.";
               };
               allowedUDPPorts = mkOption {
                 type = types.listOf types.int;
-                default = [ ];
+                default = [];
                 description = "List of allowed UDP ports for this interface.";
               };
             };
           }
         );
-        default = { };
+        default = {};
         description = "Network interface configurations.";
       };
       extraHosts = mkOption {
@@ -64,7 +63,7 @@ in
   config = mkIf cfg.enable {
     assertions = [
       {
-        assertion = cfg.interfaces != { } -> config.networking.networkmanager.enable;
+        assertion = cfg.interfaces != {} -> config.networking.networkmanager.enable;
         message = "Network interfaces configured but NetworkManager is not enabled";
       }
     ];
@@ -82,14 +81,14 @@ in
     };
 
     systemd.services.NetworkManager = {
-      wants = [ "nftables.service" ];
-      after = [ "nftables.service" ];
+      wants = ["nftables.service"];
+      after = ["nftables.service"];
     };
 
     services.tailscale = mkIf cfg.tailscale.enable {
       enable = true;
-      extraUpFlags = [ "--login-server=https://hs.cnst.dev" ];
-      extraSetFlags = [ "--accept-routes" ];
+      extraUpFlags = ["--login-server=https://hs.cnst.dev"];
+      extraSetFlags = ["--accept-routes"];
     };
 
     hardware = mkIf cfg.bluetooth.enable {

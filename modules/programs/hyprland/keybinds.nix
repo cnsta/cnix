@@ -2,9 +2,9 @@
   lib,
   config,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkEnableOption
     range
@@ -34,7 +34,8 @@ let
     };
   };
   v = hostVars.${host} or hostVars.kima;
-  inherit (v)
+  inherit
+    (v)
     mod
     terminal
     browser
@@ -45,12 +46,9 @@ let
   fileManager = "nautilus";
   yazi = "foot -e yazi";
 
-  toggle =
-    program:
-    let
-      prog = builtins.substring 0 14 program;
-    in
-    "pkill ${prog} || uwsm-app -- ${program}";
+  toggle = program: let
+    prog = builtins.substring 0 14 program;
+  in "pkill ${prog} || uwsm-app -- ${program}";
   runOnce = program: "pgrep ${program} || uwsm-app -- ${program}";
 
   exec = key: arg: {
@@ -103,11 +101,12 @@ let
   ];
 
   wsBinds = concatMap (
-    n:
-    let
-      key = if n == 10 then "0" else toString n;
-    in
-    [
+    n: let
+      key =
+        if n == 10
+        then "0"
+        else toString n;
+    in [
       {
         key = "${mod} + ${key}";
         dispatcher = "workspace";
@@ -151,21 +150,23 @@ let
       relative = "true";
     }
   ];
-  dirBinds = concatMap (d: [
-    {
-      key = "${mod} + ${d.arrow}";
-      dispatcher = "movefocus";
-      arg = d.letter;
-    }
-    {
-      key = "${mod} + SHIFT + ${d.arrow}";
-      raw = "hl.dsp.window.resize({ x = \"${d.x}\", y = \"${d.y}\", relative = \"${d.relative}\" })";
-    }
-    {
-      key = "${mod} + CTRL + ${d.arrow}";
-      raw = "hl.dsp.window.swap({ direction = \"${d.letter}\" })";
-    }
-  ]) dirs;
+  dirBinds =
+    concatMap (d: [
+      {
+        key = "${mod} + ${d.arrow}";
+        dispatcher = "movefocus";
+        arg = d.letter;
+      }
+      {
+        key = "${mod} + SHIFT + ${d.arrow}";
+        raw = "hl.dsp.window.resize({ x = \"${d.x}\", y = \"${d.y}\", relative = \"${d.relative}\" })";
+      }
+      {
+        key = "${mod} + CTRL + ${d.arrow}";
+        raw = "hl.dsp.window.swap({ direction = \"${d.letter}\" })";
+      }
+    ])
+    dirs;
 
   mouseBinds = [
     {
@@ -183,8 +184,7 @@ let
       };
     }
   ];
-in
-{
+in {
   options.cnix.programs.hyprland.keybinds.enable =
     mkEnableOption "Enables keybind settings in Hyprland";
   config = mkIf cfg.keybinds.enable {

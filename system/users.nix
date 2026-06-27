@@ -4,15 +4,13 @@
   pkgs,
   lib,
   ...
-}:
-let
+}: let
   user = config.cnix.settings.accounts.username;
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in
-{
+in {
   options.user = lib.mkOption {
     type = lib.types.attrs;
-    default = { };
+    default = {};
     description = "Polymorphic alias for users.users.${user}. @hlissner™";
   };
   config = {

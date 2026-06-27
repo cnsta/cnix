@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.psd;
-in
-{
+in {
   options.cnix.services.psd.enable = mkEnableOption "Enables Profile Sync Daemon";
 
   config = mkIf cfg.enable {

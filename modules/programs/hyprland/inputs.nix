@@ -2,9 +2,9 @@
   lib,
   config,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkEnableOption
     mkMerge
@@ -13,8 +13,7 @@ let
   cfg = config.cnix.programs.hyprland;
   host = config.networking.hostName;
   acct = config.cnix.settings.accounts;
-in
-{
+in {
   options.cnix.programs.hyprland.inputs.enable = mkEnableOption "Enables input settings in Hyprland";
   config = mkIf cfg.inputs.enable (mkMerge [
     {

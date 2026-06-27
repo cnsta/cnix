@@ -3,9 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkIf
     mkMerge
@@ -16,8 +16,7 @@ let
   hyprcfg = config.cnix.programs.hyprland;
   niricfg = config.cnix.programs.niri;
   username = config.cnix.settings.accounts.username;
-in
-{
+in {
   options.cnix.services.greetd.enable = mkEnableOption "greetd display manager";
 
   config = mkMerge [
@@ -31,8 +30,7 @@ in
           command = "${getExe config.programs.uwsm.package} start hyprland.desktop";
           user = username;
         };
-      in
-      {
+      in {
         services.greetd = {
           restart = false;
           settings = {
@@ -50,8 +48,7 @@ in
           command = "${getExe pkgs.tuigreet} --time --remember --cmd ${pkgs.niri}/bin/niri-session";
           user = "greeter";
         };
-      in
-      {
+      in {
         services.greetd.settings.default_session = session;
       }
     ))

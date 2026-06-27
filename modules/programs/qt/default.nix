@@ -4,14 +4,13 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   Orchis-kde = pkgs.fetchFromGitHub {
     owner = "vinceliuice";
     repo = "Orchis-kde";
     rev = "b2a96919eee40264e79db402b915f926436100ad";
     hash = "sha256-C1eXHJdmqqOWFJUhTNhYWzjtCJrCkxS1DJlPtfD9gxE=";
-    sparseCheckout = [ "Kvantum" ];
+    sparseCheckout = ["Kvantum"];
   };
 
   qtctConf = {
@@ -25,8 +24,7 @@ let
 
   defaultFont = "${config.gtk.font.name},${builtins.toString config.gtk.font.size}";
 
-  themeScript =
-    theme:
+  themeScript = theme:
     pkgs.writeShellScript "theme-start-${theme}" ''
       ${lib.getExe pkgs.dconf} write /org/gnome/desktop/interface/color-scheme "'prefer-${theme}'"
       cat <<EOF > ${config.xdg.configHome}/Kvantum/kvantum.kvconfig
@@ -34,8 +32,7 @@ let
       theme=Orchis${lib.optionalString (theme == "dark") "Dark"}
       EOF
     '';
-in
-{
+in {
   qt = {
     enable = true;
     platformTheme.name = "qtct";
@@ -50,11 +47,10 @@ in
     };
 
     # qtct config
-    "qt5ct/qt5ct.conf".text =
-      let
-        default = ''"${defaultFont},-1,5,50,0,0,0,0,0"'';
-      in
-      lib.generators.toINI { } (
+    "qt5ct/qt5ct.conf".text = let
+      default = ''"${defaultFont},-1,5,50,0,0,0,0,0"'';
+    in
+      lib.generators.toINI {} (
         qtctConf
         // {
           Fonts = {
@@ -64,11 +60,10 @@ in
         }
       );
 
-    "qt6ct/qt6ct.conf".text =
-      let
-        default = ''"${defaultFont},-1,5,400,0,0,0,0,0,0,0,0,0,0,1,Regular"'';
-      in
-      lib.generators.toINI { } (
+    "qt6ct/qt6ct.conf".text = let
+      default = ''"${defaultFont},-1,5,400,0,0,0,0,0,0,0,0,0,0,1,Regular"'';
+    in
+      lib.generators.toINI {} (
         qtctConf
         // {
           Fonts = {

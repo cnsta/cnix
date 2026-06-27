@@ -4,16 +4,14 @@
   self,
   ...
 }:
-with lib;
-let
+with lib; let
   lldap-user = "lldap";
   lldap-base-dn = lib.strings.concatMapStringsSep "," (dc: "dc=" + dc) (
     lib.splitString "." config.cnix.server.domain
   );
   cfg = config.cnix.server.services.lldap;
   srv = config.cnix.server.infra;
-in
-{
+in {
   config = mkIf cfg.enable {
     age.secrets = {
       lldapAdminPassword = {
@@ -54,23 +52,21 @@ in
       environmentFile = config.age.secrets.lldapKeySeed.path;
     };
 
-    systemd.services.lldap =
-      let
-        dependencies = [
-          "postgresql.service"
-        ];
-      in
-      {
-        after = dependencies;
-        requires = dependencies;
-      };
+    systemd.services.lldap = let
+      dependencies = [
+        "postgresql.service"
+      ];
+    in {
+      after = dependencies;
+      requires = dependencies;
+    };
 
     users = {
       users.${lldap-user} = {
         group = lldap-user;
         isSystemUser = true;
       };
-      groups.${lldap-user} = { };
+      groups.${lldap-user} = {};
     };
   };
 }

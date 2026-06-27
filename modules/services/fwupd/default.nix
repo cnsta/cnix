@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.fwupd;
-in
-{
+in {
   options.cnix.services.fwupd.enable = mkEnableOption "Enables fwupd";
 
   config = mkIf cfg.enable {

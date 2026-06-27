@@ -5,9 +5,9 @@
   pkgs,
   clib,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkEnableOption
     mkOption
@@ -16,8 +16,7 @@ let
     ;
   cfg = config.cnix.programs.hyprland;
   acct = config.cnix.settings.accounts;
-in
-{
+in {
   imports = [
     inputs.hyprland.nixosModules.default
     ./appearance.nix
@@ -38,47 +37,47 @@ in
     lua = {
       configParts = mkOption {
         type = types.listOf types.anything;
-        default = [ ];
+        default = [];
       };
       env = mkOption {
         type = types.attrsOf types.str;
-        default = { };
+        default = {};
       };
       monitors = mkOption {
         type = types.listOf types.anything;
-        default = [ ];
+        default = [];
       };
       workspaceRules = mkOption {
         type = types.listOf types.anything;
-        default = [ ];
+        default = [];
       };
       windowRules = mkOption {
         type = types.listOf types.anything;
-        default = [ ];
+        default = [];
       };
       layerRules = mkOption {
         type = types.listOf types.anything;
-        default = [ ];
+        default = [];
       };
       curves = mkOption {
         type = types.listOf types.anything;
-        default = [ ];
+        default = [];
       };
       animations = mkOption {
         type = types.listOf types.anything;
-        default = [ ];
+        default = [];
       };
       gestures = mkOption {
         type = types.listOf types.anything;
-        default = [ ];
+        default = [];
       };
       binds = mkOption {
         type = types.listOf types.anything;
-        default = [ ];
+        default = [];
       };
       startup = mkOption {
         type = types.listOf types.str;
-        default = [ ];
+        default = [];
       };
     };
   };
@@ -103,21 +102,22 @@ in
       enable = true;
       xdgOpenUsePortal = true;
       config = {
-        preferred.default = [ "hyprland" ];
+        preferred.default = ["hyprland"];
         hyprland.default = [
           "hyprland"
           "gtk"
         ];
       };
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
 
     environment.variables.NIXOS_OZONE_WL = "1";
 
     hjem.users = lib.genAttrs acct.defaultUsers (_: {
       xdg.config.files."hypr/hyprland.lua".text = clib.toHyprlua {
-        config = lib.foldl' lib.recursiveUpdate { } cfg.lua.configParts;
-        inherit (cfg.lua)
+        config = lib.foldl' lib.recursiveUpdate {} cfg.lua.configParts;
+        inherit
+          (cfg.lua)
           env
           monitors
           workspaceRules

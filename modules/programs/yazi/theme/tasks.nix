@@ -3,7 +3,7 @@
     border = {
       fg = "#504945";
     };
-    title = { };
+    title = {};
     hovered = {
       underline = true;
     };

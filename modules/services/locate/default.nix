@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.locate;
-in
-{
+in {
   options.cnix.services.locate.enable = mkEnableOption "Enables plocate";
 
   config = mkIf cfg.enable {

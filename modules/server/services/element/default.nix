@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   unit = "element";
   domain = config.cnix.server.infra.www.url;
   cfg = config.cnix.server.services.${unit};
@@ -31,11 +30,11 @@ let
     default_country_code = "PT";
 
     show_labs_settings = true;
-    features = { };
+    features = {};
     default_federate = true;
     default_theme = "dark";
     room_directory = {
-      servers = [ domain ];
+      servers = [domain];
     };
     setting_defaults = {
       breadcrumbs = true;
@@ -50,24 +49,21 @@ let
     };
     map_style_url = "https://api.maptiler.com/maps/streets/style.json?key=fU3vlMsMn4Jb6dnEIFsx";
   };
-in
-{
+in {
   config = lib.mkIf cfg.enable {
-    services.nginx.virtualHosts."element" =
-      let
-        elementPkg = pkgs.element-web.override {
-          conf = elementConfig;
-        };
-      in
-      {
-        root = elementPkg;
-        forceSSL = false;
-        listen = [
-          {
-            addr = "127.0.0.1";
-            port = cfg.port;
-          }
-        ];
+    services.nginx.virtualHosts."element" = let
+      elementPkg = pkgs.element-web.override {
+        conf = elementConfig;
       };
+    in {
+      root = elementPkg;
+      forceSSL = false;
+      listen = [
+        {
+          addr = "127.0.0.1";
+          port = cfg.port;
+        }
+      ];
+    };
   };
 }

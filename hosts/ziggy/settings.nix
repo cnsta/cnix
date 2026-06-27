@@ -9,8 +9,8 @@
     boot = {
       kernel = {
         variant = "zfsLatest";
-        hardware = [ ];
-        extraKernelParams = [ ];
+        hardware = [];
+        extraKernelParams = [];
       };
       loader = {
         default = {

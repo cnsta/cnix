@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.rofi;
-in
-{
+in {
   options = {
     home.programs.rofi.enable = mkEnableOption "Enables firefox";
   };

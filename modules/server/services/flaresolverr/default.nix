@@ -3,18 +3,16 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   unit = "flaresolverr";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
   arr = config.cnix.server.services.arr;
-in
-{
+in {
   config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
     age.secrets = {
       flaresolverrEnvironment = {
-        file = (self + "/secrets/flaresolverrEnvironment.age");
+        file = self + "/secrets/flaresolverrEnvironment.age";
         mode = "0444";
       };
     };
@@ -27,7 +25,7 @@ in
       ${unit} = {
         image = "docker.io/flaresolverr/flaresolverr:latest";
         autoStart = true;
-        dependsOn = [ "gluetun-arr" ];
+        dependsOn = ["gluetun-arr"];
         extraOptions = [
           "--network=container:gluetun-arr"
           "--sysctl=net.ipv6.conf.all.disable_ipv6=1"
@@ -36,7 +34,7 @@ in
         volumes = [
           "/var/lib/flaresolverr:/config"
         ];
-        environmentFiles = [ config.age.secrets.flaresolverrEnvironment.path ];
+        environmentFiles = [config.age.secrets.flaresolverrEnvironment.path];
       };
     };
   };

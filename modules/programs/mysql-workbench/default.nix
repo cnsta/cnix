@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.mysql-workbench;
-in
-{
+in {
   options.cnix.programs.mysql-workbench.enable = mkEnableOption "Enables MySQL Workbench";
 
   config = mkIf cfg.enable {

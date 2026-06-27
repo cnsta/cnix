@@ -3,17 +3,15 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   unit = "sonarr";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
   arr = config.cnix.server.services.arr;
-in
-{
+in {
   config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
     age.secrets = {
-      sonarrEnvironment.file = (self + "/secrets/sonarrEnvironment.age");
+      sonarrEnvironment.file = self + "/secrets/sonarrEnvironment.age";
     };
 
     systemd.tmpfiles.rules = [
@@ -24,7 +22,7 @@ in
       ${unit} = {
         image = "ghcr.io/hotio/sonarr:latest";
         autoStart = true;
-        dependsOn = [ "gluetun-arr" ];
+        dependsOn = ["gluetun-arr"];
         extraOptions = [
           "--network=container:gluetun-arr"
         ];
@@ -32,7 +30,7 @@ in
           "/var/lib/sonarr:/config"
           "/mnt/data:/data"
         ];
-        environmentFiles = [ config.age.secrets.sonarrEnvironment.path ];
+        environmentFiles = [config.age.secrets.sonarrEnvironment.path];
       };
     };
   };

@@ -6,11 +6,9 @@
   inputs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.nvf;
-in
-{
+in {
   imports = [
     inputs.nvf.nixosModules.default
   ];
@@ -89,7 +87,7 @@ in
             css.enable = true;
             r = {
               enable = true;
-              format.type = [ "styler" ];
+              format.type = ["styler"];
             };
             sql.enable = true;
             typescript = {
@@ -102,7 +100,7 @@ in
             nu.enable = true;
             python = {
               enable = true;
-              lsp.servers = [ "pyright" ];
+              lsp.servers = ["pyright"];
             };
             lua.enable = true;
             bash.enable = true;
@@ -110,7 +108,7 @@ in
             julia.enable = true;
             clang = {
               enable = true;
-              lsp.servers = [ "clangd" ];
+              lsp.servers = ["clangd"];
             };
 
             rust = {

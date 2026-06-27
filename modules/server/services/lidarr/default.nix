@@ -3,17 +3,15 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   unit = "lidarr";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
   arr = config.cnix.server.services.arr;
-in
-{
+in {
   config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
     age.secrets = {
-      lidarrEnvironment.file = (self + "/secrets/lidarrEnvironment.age");
+      lidarrEnvironment.file = self + "/secrets/lidarrEnvironment.age";
     };
 
     systemd.tmpfiles.rules = [
@@ -24,7 +22,7 @@ in
       ${unit} = {
         image = "ghcr.io/hotio/lidarr:latest";
         autoStart = true;
-        dependsOn = [ "gluetun-arr" ];
+        dependsOn = ["gluetun-arr"];
         extraOptions = [
           "--network=container:gluetun-arr"
         ];
@@ -32,7 +30,7 @@ in
           "/var/lib/lidarr:/config"
           "/mnt/data:/data"
         ];
-        environmentFiles = [ config.age.secrets.lidarrEnvironment.path ];
+        environmentFiles = [config.age.secrets.lidarrEnvironment.path];
       };
     };
   };

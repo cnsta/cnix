@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.thunderbird;
-in
-{
+in {
   options = {
     cnix.programs.thunderbird.enable = mkEnableOption "Enables thunderbird mail client";
   };

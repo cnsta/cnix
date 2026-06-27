@@ -3,25 +3,22 @@
   config,
   self,
   ...
-}:
-let
+}: let
   unit = "keepalived";
   cfg = config.cnix.server.infra.${unit};
 
-  hostCfg =
-    hostname:
-    if hostname == "sobotka" then
-      {
-        ip = "192.168.88.14";
-        priority = 20;
-      }
-    else if hostname == "ziggy" then
-      {
-        ip = "192.168.88.12";
-        priority = 10;
-      }
-    else
-      throw "No keepalived config defined for host ${hostname}";
+  hostCfg = hostname:
+    if hostname == "sobotka"
+    then {
+      ip = "192.168.88.14";
+      priority = 20;
+    }
+    else if hostname == "ziggy"
+    then {
+      ip = "192.168.88.12";
+      priority = 10;
+    }
+    else throw "No keepalived config defined for host ${hostname}";
 
   _self = hostCfg config.networking.hostName;
 
@@ -32,8 +29,7 @@ let
   peers = builtins.filter (ip: ip != _self.ip) allPeers;
 
   hasCheck = cfg.healthCheck != null;
-in
-{
+in {
   options.cnix.server.infra.${unit} = {
     enable = lib.mkEnableOption "Enable ${unit}";
     interface = lib.mkOption {
@@ -61,7 +57,7 @@ in
       group = "keepalived_script";
       description = "keepalived health-check script user";
     };
-    users.groups.keepalived_script = { };
+    users.groups.keepalived_script = {};
 
     services.keepalived = {
       enable = true;
@@ -87,8 +83,8 @@ in
         priority = _self.priority;
         unicastSrcIp = _self.ip;
         unicastPeers = peers;
-        virtualIps = [ { addr = "192.168.88.69/24"; } ];
-        trackScripts = lib.optionals hasCheck [ "chk_service" ];
+        virtualIps = [{addr = "192.168.88.69/24";}];
+        trackScripts = lib.optionals hasCheck ["chk_service"];
         extraConfig = ''
           garp_master_refresh 5
           authentication {

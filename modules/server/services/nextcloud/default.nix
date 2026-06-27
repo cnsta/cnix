@@ -4,13 +4,11 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   unit = "nextcloud";
   cfg = config.cnix.server.services.${unit};
   srv = config.cnix.server;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
       nextcloudAdminPass.file = "${self}/secrets/nextcloudAdminPass.age";
@@ -47,7 +45,7 @@ in
             "127.0.0.1"
             "::1"
           ];
-          trusted_domains = [ "cloud.${srv.domain}" ];
+          trusted_domains = ["cloud.${srv.domain}"];
           overwriteprotocol = "https";
           enabledPreviewProviders = [
             "OC\\Preview\\BMP"
@@ -96,8 +94,8 @@ in
       }
     ];
     systemd.services."nextcloud-setup" = {
-      requires = [ "postgresql.service" ];
-      after = [ "postgresql.service" ];
+      requires = ["postgresql.service"];
+      after = ["postgresql.service"];
     };
   };
 }

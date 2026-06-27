@@ -3,9 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkIf
     genAttrs
@@ -20,8 +20,8 @@ let
 
   iconPath = concatStringsSep ":" (
     concatMap
-      (
-        size:
+    (
+      size:
         map (cat: "${iconThemePkg}/share/icons/${iconThemeName}/${size}/${cat}") [
           "actions"
           "applications"
@@ -33,23 +33,26 @@ let
           "places"
           "status"
         ]
-      )
-      [
-        "16x16"
-        "32x32"
-      ]
+    )
+    [
+      "16x16"
+      "32x32"
+    ]
   );
 
   toDunstIni = lib.generators.toINI {
     mkKeyValue = lib.generators.mkKeyValueDefault {
-      mkValueString =
-        v:
-        if builtins.isInt v then
-          toString v
-        else if builtins.isBool v then
-          (if v then "true" else "false")
-        else
-          "\"${toString v}\"";
+      mkValueString = v:
+        if builtins.isInt v
+        then toString v
+        else if builtins.isBool v
+        then
+          (
+            if v
+            then "true"
+            else "false"
+          )
+        else "\"${toString v}\"";
     } "=";
   };
 
@@ -77,8 +80,7 @@ let
       foreground = "#c14a4a";
     };
   };
-in
-{
+in {
   options.cnix.services.dunst.enable = mkEnableOption "dunst notification daemon";
 
   config = mkIf cfg.enable {
@@ -89,9 +91,9 @@ in
 
     systemd.user.services.dunst = {
       description = "Dunst notification daemon";
-      partOf = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      wantedBy = [ "graphical-session.target" ];
+      partOf = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+      wantedBy = ["graphical-session.target"];
       serviceConfig = {
         Type = "dbus";
         BusName = "org.freedesktop.Notifications";

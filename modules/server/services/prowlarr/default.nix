@@ -3,17 +3,15 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   unit = "prowlarr";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
   arr = config.cnix.server.services.arr;
-in
-{
+in {
   config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
     age.secrets = {
-      prowlarrEnvironment.file = (self + "/secrets/prowlarrEnvironment.age");
+      prowlarrEnvironment.file = self + "/secrets/prowlarrEnvironment.age";
     };
 
     systemd.tmpfiles.rules = [
@@ -24,14 +22,14 @@ in
       ${unit} = {
         image = "ghcr.io/hotio/prowlarr:latest";
         autoStart = true;
-        dependsOn = [ "gluetun-arr" ];
+        dependsOn = ["gluetun-arr"];
         extraOptions = [
           "--network=container:gluetun-arr"
         ];
         volumes = [
           "/var/lib/prowlarr:/config"
         ];
-        environmentFiles = [ config.age.secrets.prowlarrEnvironment.path ];
+        environmentFiles = [config.age.secrets.prowlarrEnvironment.path];
       };
     };
   };

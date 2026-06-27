@@ -4,20 +4,18 @@
   clib,
   pkgs,
   ...
-}:
-let
+}: let
   unit = "freshrss";
   cfg = config.cnix.server.services.${unit};
   authelia = config.cnix.server.services.authelia;
   domain = clib.server.mkFullDomain config cfg;
   hostDomain = clib.server.mkHostDomain config cfg;
   buildExt = pkgs.freshrss-extensions.buildFreshRssExtension;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     cnix.server.infra = {
       postgresql.databases = [
-        { database = unit; }
+        {database = unit;}
       ];
     };
 
@@ -37,8 +35,7 @@ in
         name = "freshrss";
         passFile = null;
       };
-      extensions =
-        with pkgs.freshrss-extensions;
+      extensions = with pkgs.freshrss-extensions;
         [
           youtube
         ]

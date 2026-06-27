@@ -5,14 +5,12 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   unit = "turnstone";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
   tsImage = "localhost/turnstone:latest";
-in
-{
+in {
   config = mkIf (srv.infra.podman.enable && cfg.enable) {
     age.secrets = {
       turnstoneEnvironment.file = "${self}/secrets/turnstoneEnvironment.age";
@@ -24,7 +22,7 @@ in
 
     systemd.services = {
       "podman-network-turnstone-net" = {
-        path = [ pkgs.podman ];
+        path = [pkgs.podman];
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = true;
@@ -33,8 +31,8 @@ in
         script = ''
           podman network inspect turnstone-net || podman network create turnstone-net
         '';
-        partOf = [ "podman-compose-turnstone-root.target" ];
-        wantedBy = [ "podman-compose-turnstone-root.target" ];
+        partOf = ["podman-compose-turnstone-root.target"];
+        wantedBy = ["podman-compose-turnstone-root.target"];
       };
 
       "podman-turnstone-redis" = {
@@ -44,10 +42,10 @@ in
           RestartSec = lib.mkOverride 90 "100ms";
           RestartSteps = lib.mkOverride 90 9;
         };
-        after = [ "podman-network-turnstone-net.service" ];
-        requires = [ "podman-network-turnstone-net.service" ];
-        partOf = [ "podman-compose-turnstone-root.target" ];
-        wantedBy = [ "podman-compose-turnstone-root.target" ];
+        after = ["podman-network-turnstone-net.service"];
+        requires = ["podman-network-turnstone-net.service"];
+        partOf = ["podman-compose-turnstone-root.target"];
+        wantedBy = ["podman-compose-turnstone-root.target"];
       };
 
       "podman-turnstone-server" = {
@@ -65,8 +63,8 @@ in
           "podman-network-turnstone-net.service"
           "podman-turnstone-redis.service"
         ];
-        partOf = [ "podman-compose-turnstone-root.target" ];
-        wantedBy = [ "podman-compose-turnstone-root.target" ];
+        partOf = ["podman-compose-turnstone-root.target"];
+        wantedBy = ["podman-compose-turnstone-root.target"];
       };
 
       "podman-turnstone-bridge" = {
@@ -86,8 +84,8 @@ in
           "podman-turnstone-server.service"
           "podman-turnstone-redis.service"
         ];
-        partOf = [ "podman-compose-turnstone-root.target" ];
-        wantedBy = [ "podman-compose-turnstone-root.target" ];
+        partOf = ["podman-compose-turnstone-root.target"];
+        wantedBy = ["podman-compose-turnstone-root.target"];
       };
 
       "podman-turnstone-console" = {
@@ -105,21 +103,20 @@ in
           "podman-network-turnstone-net.service"
           "podman-turnstone-redis.service"
         ];
-        partOf = [ "podman-compose-turnstone-root.target" ];
-        wantedBy = [ "podman-compose-turnstone-root.target" ];
+        partOf = ["podman-compose-turnstone-root.target"];
+        wantedBy = ["podman-compose-turnstone-root.target"];
       };
 
       "podman-compose-turnstone-root" = {
         unitConfig.Description = "Root target for Turnstone podman stack";
-        wantedBy = [ "multi-user.target" ];
+        wantedBy = ["multi-user.target"];
       };
     };
 
     virtualisation.oci-containers.containers = {
-
       turnstone-redis = {
         image = "redis:7.4-alpine";
-        ports = [ "127.0.0.1:36379:6379" ];
+        ports = ["127.0.0.1:36379:6379"];
         cmd = [
           "sh"
           "-c"
@@ -128,7 +125,7 @@ in
         volumes = [
           "${cfg.configDir}/redis:/data"
         ];
-        environmentFiles = [ config.age.secrets.turnstoneEnvironment.path ];
+        environmentFiles = [config.age.secrets.turnstoneEnvironment.path];
         extraOptions = [
           "--health-cmd=redis-cli ping | grep -q PONG"
           "--health-interval=5s"
@@ -154,7 +151,7 @@ in
               ''${SKIP_PERMISSIONS:+--skip-permissions}
           ''
         ];
-        ports = [ "127.0.0.1:${toString cfg.port}:${toString cfg.port}" ];
+        ports = ["127.0.0.1:${toString cfg.port}:${toString cfg.port}"];
         volumes = [
           "${cfg.configDir}/data:/data"
         ];
@@ -163,8 +160,8 @@ in
           TURNSTONE_DB_BACKEND = "sqlite";
           # LLM_BASE_URL=http://host.containers.internal:8000/v1
         };
-        environmentFiles = [ config.age.secrets.turnstoneEnvironment.path ];
-        dependsOn = [ "turnstone-redis" ];
+        environmentFiles = [config.age.secrets.turnstoneEnvironment.path];
+        dependsOn = ["turnstone-redis"];
         extraOptions = [
           "--health-cmd=python /usr/local/bin/healthcheck.py http://127.0.0.1:${toString cfg.port}/health"
           "--health-interval=10s"
@@ -189,7 +186,7 @@ in
           REDIS_PORT = "6379";
           TURNSTONE_DB_BACKEND = "sqlite";
         };
-        environmentFiles = [ config.age.secrets.turnstoneEnvironment.path ];
+        environmentFiles = [config.age.secrets.turnstoneEnvironment.path];
         dependsOn = [
           "turnstone-server"
           "turnstone-redis"
@@ -209,13 +206,13 @@ in
           "--redis-host=redis"
           "--poll-interval=10"
         ];
-        ports = [ "127.0.0.1:8099:8099" ];
+        ports = ["127.0.0.1:8099:8099"];
         environment = {
           REDIS_PORT = "6379";
           TURNSTONE_DB_BACKEND = "sqlite";
         };
-        environmentFiles = [ config.age.secrets.turnstoneEnvironment.path ];
-        dependsOn = [ "turnstone-redis" ];
+        environmentFiles = [config.age.secrets.turnstoneEnvironment.path];
+        dependsOn = ["turnstone-redis"];
         extraOptions = [
           "--health-cmd=python /usr/local/bin/healthcheck.py http://127.0.0.1:8099/health"
           "--health-interval=10s"

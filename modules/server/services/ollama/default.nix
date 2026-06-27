@@ -3,12 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   unit = "ollama";
   cfg = config.cnix.server.services.${unit};
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       ollama

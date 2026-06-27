@@ -4,8 +4,7 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   unit = "unbound";
   cfg = config.cnix.server.infra.${unit};
   srv = config.cnix.server;
@@ -17,19 +16,17 @@ let
 
   localARecords = builtins.concatLists (
     map (
-      name:
-      let
+      name: let
         s = srv.services.${name};
         fqdn = clib.server.mkFullDomain config s;
       in
-      if s != null && s.enable && s.routed && s.subdomain != null then
-        [ ''"${fqdn}. A ${vip}"'' ]
-      else
-        [ ]
-    ) svcNames
+        if s != null && s.enable && s.routed && s.subdomain != null
+        then [''"${fqdn}. A ${vip}"'']
+        else []
+    )
+    svcNames
   );
-in
-{
+in {
   options.cnix.server.infra.${unit} = {
     enable = lib.mkEnableOption {
       description = "Enable ${unit}";
@@ -52,6 +49,8 @@ in
               "::1 allow"
               "10.88.0.0/24 allow"
               "192.168.88.0/24 allow"
+              "100.64.88.0/24 allow"
+              "fd7a:115c:a1e0:88::/64 allow"
               "0.0.0.0/0 refuse"
               "::0/0 refuse"
             ];
@@ -125,12 +124,13 @@ in
               ''"cnst.dev." transparent''
               ''"ts.cnst.dev." transparent''
             ];
-            local-data = [
-              ''"traefik.${domain}. A ${vip}"''
-              ''"rspamd.${domain}. A ${vip}"''
-              ''"login.${domain}. A ${vip}"''
-            ]
-            ++ localARecords;
+            local-data =
+              [
+                ''"traefik.${domain}. A ${vip}"''
+                ''"rspamd.${domain}. A ${vip}"''
+                ''"login.${domain}. A ${vip}"''
+              ]
+              ++ localARecords;
           };
         };
       };

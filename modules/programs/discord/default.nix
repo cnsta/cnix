@@ -4,8 +4,7 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.discord;
   acct = config.cnix.settings.accounts;
 
@@ -23,7 +22,7 @@ let
     };
     canary = {
       dir = "discordcanary";
-      package = pkgs.discord-canary.override { withOpenASAR = true; };
+      package = pkgs.discord-canary.override {withOpenASAR = true;};
     };
     vesktop = {
       dir = "vesktop";
@@ -32,8 +31,7 @@ let
   };
 
   selected = variants.${cfg.variant};
-in
-{
+in {
   options.cnix.programs.discord = {
     enable = mkEnableOption "Discord";
 
@@ -46,7 +44,7 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = [ selected.package ];
+      environment.systemPackages = [selected.package];
 
       environment.sessionVariables.DISCORD_USER_DATA_DIR = "$HOME/.config/${selected.dir}";
     }

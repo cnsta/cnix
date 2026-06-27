@@ -2,16 +2,14 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   infra = config.cnix.server.infra;
-in
-{
+in {
   options.cnix.server.infra = {
     podman.enable = lib.mkEnableOption "Enables Podman";
   };
   config = lib.mkIf infra.podman.enable {
-    networking.firewall.trustedInterfaces = [ "podman0" ];
+    networking.firewall.trustedInterfaces = ["podman0"];
     virtualisation = {
       podman = {
         enable = true;

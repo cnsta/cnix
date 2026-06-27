@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.samba;
-in
-{
+in {
   options.cnix.services.samba.enable = mkEnableOption "Enables samba";
 
   config = mkIf cfg.enable {

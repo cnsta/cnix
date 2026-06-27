@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.gnome;
-in
-{
+in {
   options = {
     cnix.programs.gnome.enable = mkEnableOption "Enables gnome";
   };

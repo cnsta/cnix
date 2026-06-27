@@ -4,13 +4,11 @@
   clib,
   pkgs,
   ...
-}:
-let
+}: let
   unit = "roundcube";
   cfg = config.cnix.server.services.${unit};
   domain = clib.server.mkFullDomain config cfg;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     cnix.server.infra = {
       fail2ban.jails.${unit} = {
@@ -18,7 +16,7 @@ in
         failRegex = ".*(Failed authentication attempt|invalid credentials|Attempted access of unknown user).* from <HOST>";
       };
       postgresql.databases = [
-        { database = unit; }
+        {database = unit;}
       ];
     };
 

@@ -4,17 +4,16 @@
   config,
   inputs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkEnableOption
     mkMerge
     mkForce
     ;
   cfg = config.cnix.settings.boot.loader;
-in
-{
+in {
   options = {
     cnix.settings.boot.loader = {
       default = {
@@ -42,7 +41,8 @@ in
               cfg.default.enable
               cfg.lanzaboote.enable
               cfg.extlinux.enable
-            ]) <= 1;
+            ])
+            <= 1;
           message = "Only one of nixos.boot.loader.{default,lanzaboote,extlinux}.enable can be set to true.";
         }
       ];
@@ -71,7 +71,7 @@ in
         };
         loader.systemd-boot.enable = mkForce false;
       };
-      environment.systemPackages = [ pkgs.sbctl ];
+      environment.systemPackages = [pkgs.sbctl];
     })
   ];
 }

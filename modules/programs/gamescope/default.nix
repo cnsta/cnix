@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.gamescope;
-in
-{
+in {
   options = {
     cnix.programs.gamescope.enable = mkEnableOption "Enables gamescope";
   };

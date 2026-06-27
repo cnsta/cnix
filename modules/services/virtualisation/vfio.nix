@@ -1,15 +1,17 @@
-{ lib, config, ... }:
-let
+{
+  lib,
+  config,
+  ...
+}: let
   gpuIDs = [
     "1002:13c0"
     "1002:1640"
   ];
 
   vfioIds = "vfio-pci.ids=" + lib.concatStringsSep "," gpuIDs;
-  baseBootKernelParams = config.boot.kernelParams or [ ];
+  baseBootKernelParams = config.boot.kernelParams or [];
   cfg = config.cnix.services.virtualisation.vfio;
-in
-{
+in {
   options.cnix.services.virtualisation.vfio.enable =
     lib.mkEnableOption "Enable VFIO passthrough for the iGPU";
 
@@ -21,18 +23,19 @@ in
         "vfio_iommu_type1"
       ];
 
-      kernelParams = [
-        "amd_iommu=on"
-        "iommu=pt"
-      ]
-      ++ [ vfioIds ];
+      kernelParams =
+        [
+          "amd_iommu=on"
+          "iommu=pt"
+        ]
+        ++ [vfioIds];
     };
 
     specialisation.vfio.configuration = {
-      system.nixos.tags = [ "vfio" ];
+      system.nixos.tags = ["vfio"];
       boot = {
-        kernelParams = baseBootKernelParams ++ [ vfioIds ];
-        blacklistedKernelModules = [ "amdgpu:0f:00.0" ];
+        kernelParams = baseBootKernelParams ++ [vfioIds];
+        blacklistedKernelModules = ["amdgpu:0f:00.0"];
       };
     };
   };

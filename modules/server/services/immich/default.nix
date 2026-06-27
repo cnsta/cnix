@@ -4,19 +4,17 @@
   clib,
   self,
   ...
-}:
-let
+}: let
   unit = "immich";
   cfg = config.cnix.server.services.${unit};
   autheliaUrl = clib.server.mkFullDomain config config.cnix.server.services.authelia;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
       immichOidc = {
         owner = "immich";
         group = "users";
-        file = (self + "/secrets/immichOidcSecret.age");
+        file = self + "/secrets/immichOidcSecret.age";
       };
     };
 
@@ -26,7 +24,7 @@ in
         failRegex = ".*(Failed authentication attempt|invalid credentials|Attempted access of unknown user).* from <HOST>";
       };
       postgresql.databases = [
-        { database = unit; }
+        {database = unit;}
       ];
     };
 

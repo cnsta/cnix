@@ -3,17 +3,15 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   unit = "sabnzbd";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
   arr = config.cnix.server.services.arr;
-in
-{
+in {
   config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
     age.secrets = {
-      sabnzbdEnvironment.file = (self + "/secrets/sabnzbdEnvironment.age");
+      sabnzbdEnvironment.file = self + "/secrets/sabnzbdEnvironment.age";
     };
 
     systemd.tmpfiles.rules = [
@@ -24,7 +22,7 @@ in
       ${unit} = {
         image = "ghcr.io/hotio/sabnzbd:latest";
         autoStart = true;
-        dependsOn = [ "gluetun-arr" ];
+        dependsOn = ["gluetun-arr"];
         extraOptions = [
           "--network=container:gluetun-arr"
         ];
@@ -32,7 +30,7 @@ in
           "/var/lib/sabnzbd:/config:rw"
           "/mnt/data:/data:rw"
         ];
-        environmentFiles = [ config.age.secrets.sabnzbdEnvironment.path ];
+        environmentFiles = [config.age.secrets.sabnzbdEnvironment.path];
       };
     };
   };

@@ -4,8 +4,7 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.librewolf;
   acct = config.cnix.settings.accounts;
 
@@ -72,14 +71,13 @@ let
     StartWithLastProfile=1
     Version=2
   '';
-in
-{
+in {
   options.cnix.programs.librewolf.enable = mkEnableOption "LibreWolf";
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.librewolf ];
+    environment.systemPackages = [pkgs.librewolf];
 
-    environment.etc."librewolf/policies/policies.json".text = builtins.toJSON { inherit policies; };
+    environment.etc."librewolf/policies/policies.json".text = builtins.toJSON {inherit policies;};
 
     hjem.users = genAttrs acct.defaultUsers (_: {
       files = {

@@ -9,7 +9,7 @@
     boot = {
       kernel = {
         variant = "latest";
-        hardware = [ "amd" ];
+        hardware = ["amd"];
       };
       loader = {
         default = {
@@ -26,7 +26,7 @@
     };
 
     graphics = {
-      vendors = [ "amd" ];
+      vendors = ["amd"];
     };
 
     locale = {

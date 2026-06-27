@@ -3,12 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.thunar;
-in
-{
+in {
   options.cnix.programs.thunar.enable = mkEnableOption "Enables thunar file manager";
 
   config = mkIf cfg.enable {

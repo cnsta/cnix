@@ -4,8 +4,7 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.settings.graphics;
 
   commonDrivers = with pkgs; [
@@ -21,8 +20,7 @@ let
   ];
 
   hasVendor = vendor: builtins.elem vendor cfg.vendors;
-in
-{
+in {
   options.cnix.settings.graphics = {
     vendors = mkOption {
       type = types.listOf (
@@ -32,7 +30,7 @@ in
           "nvidia"
         ]
       );
-      default = [ "amd" ];
+      default = ["amd"];
       description = "List of GPU vendors to configure support for.";
     };
     nvidia = {
@@ -55,30 +53,33 @@ in
   };
 
   config = mkMerge [
-    (mkIf (cfg.vendors != [ ]) {
+    (mkIf (cfg.vendors != []) {
       hardware.graphics = {
         enable = true;
         enable32Bit = pkgs.stdenv.hostPlatform.isx86_64;
-        extraPackages = concatMap (
-          vendor:
-          if vendor == "amd" then
-            commonDrivers
-          else if vendor == "intel" then
-            commonDrivers
-            ++ (with pkgs; [
-              vpl-gpu-rt
-              intel-media-driver
-              intel-compute-runtime
-              intel-vaapi-driver
-            ])
-          else if vendor == "nvidia" then
-            (with pkgs; [
-              nvidia-vaapi-driver
-              egl-wayland
-            ])
-          else
-            [ ]
-        ) cfg.vendors;
+        extraPackages =
+          concatMap (
+            vendor:
+              if vendor == "amd"
+              then commonDrivers
+              else if vendor == "intel"
+              then
+                commonDrivers
+                ++ (with pkgs; [
+                  vpl-gpu-rt
+                  intel-media-driver
+                  intel-compute-runtime
+                  intel-vaapi-driver
+                ])
+              else if vendor == "nvidia"
+              then
+                (with pkgs; [
+                  nvidia-vaapi-driver
+                  egl-wayland
+                ])
+              else []
+          )
+          cfg.vendors;
       };
 
       environment.systemPackages = userTools;
@@ -90,7 +91,7 @@ in
         open = cfg.nvidia.open;
         nvidiaSettings = true;
       };
-      services.xserver.videoDrivers = mkDefault [ "nvidia" ];
+      services.xserver.videoDrivers = mkDefault ["nvidia"];
       environment.sessionVariables = {
         LIBVA_DRIVER_NAME = "nvidia";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";

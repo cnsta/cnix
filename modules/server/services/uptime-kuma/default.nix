@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   unit = "uptime-kuma";
   cfg = config.cnix.server.services.${unit};
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     services = {
       ${unit} = {

@@ -4,8 +4,7 @@
   clib,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.services.hypridle;
   acct = config.cnix.settings.accounts;
 
@@ -34,8 +33,7 @@ let
       }
     ];
   };
-in
-{
+in {
   options.cnix.services.hypridle.enable = mkEnableOption "hypridle (Hyprland's idle daemon)";
   config = mkIf cfg.enable {
     services.hypridle.enable = true;

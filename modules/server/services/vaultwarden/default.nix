@@ -4,13 +4,11 @@
   lib,
   self,
   ...
-}:
-let
+}: let
   unit = "vaultwarden";
   cfg = config.cnix.server.services.${unit};
   domain = "${cfg.subdomain}.${config.cnix.server.infra.www.url}";
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
       vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";

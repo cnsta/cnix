@@ -4,9 +4,9 @@
   lib,
   config,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkIf
     getExe
@@ -27,8 +27,7 @@ let
   ];
 
   GI_TYPELIB_PATH = makeSearchPath "lib/girepository-1.0" (
-    with pkgs;
-    [
+    with pkgs; [
       evolution-data-server
       libical
       glib.out
@@ -37,18 +36,18 @@ let
       gobject-introspection
     ]
   );
-in
-{
+in {
   options.cnix.services.quickshell.enable = mkEnableOption "quickshell";
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      (quickshell.override { stdenv = pkgs.clangStdenv; })
+      (quickshell.override {stdenv = pkgs.clangStdenv;})
       (python3.withPackages (
-        ps: with ps; [
-          pygobject3
-          pyusb
-        ]
+        ps:
+          with ps; [
+            pygobject3
+            pyusb
+          ]
       ))
       brightnessctl
       cava
@@ -71,8 +70,8 @@ in
         "tray.target"
         "graphical-session.target"
       ];
-      after = [ "graphical-session.target" ];
-      wantedBy = [ "graphical-session.target" ];
+      after = ["graphical-session.target"];
+      wantedBy = ["graphical-session.target"];
 
       path = dependencies;
       environment = {

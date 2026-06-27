@@ -4,13 +4,11 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf;
   inherit (lib.options) mkEnableOption;
   cfg = config.cnix.settings.peripherals;
-in
-{
+in {
   imports = [
     inputs.lightcrazy.nixosModules.default
   ];
@@ -82,8 +80,7 @@ in
       yubikey-manager.enable = mkIf cfg.yubikey.manager.enable true;
       yubikey-touch-detector.enable = mkIf cfg.yubikey.touch-detector.enable true;
     };
-    environment.systemPackages =
-      with pkgs;
+    environment.systemPackages = with pkgs;
       lib.optionals cfg.utils.enable [
         usbutils
         usbimager

@@ -3,8 +3,7 @@
   lib,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.settings.locale;
   defaultCategories = [
     "LC_ADDRESS"
@@ -17,8 +16,7 @@ let
     "LC_TELEPHONE"
     "LC_TIME"
   ];
-in
-{
+in {
   options = {
     cnix.settings.locale = {
       enable = mkOption {
@@ -60,7 +58,7 @@ in
     time.timeZone = mkDefault cfg.timeZone;
     i18n.defaultLocale = mkDefault cfg.defaultLocale;
     i18n.extraLocaleSettings = mkIf (cfg.extraLocale != null) (
-      lib.foldl' (attrs: lc: attrs // { "${lc}" = cfg.extraLocale; }) { } cfg.categories
+      lib.foldl' (attrs: lc: attrs // {"${lc}" = cfg.extraLocale;}) {} cfg.categories
     );
   };
 }

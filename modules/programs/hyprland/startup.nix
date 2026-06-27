@@ -2,8 +2,7 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption mkMerge;
   cfg = config.cnix.programs.hyprland;
   host = config.networking.hostName;
@@ -16,12 +15,11 @@ let
     "ashell"
     "sleep 3s && wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.5"
   ];
-in
-{
+in {
   options.cnix.programs.hyprland.startup.enable =
     mkEnableOption "Enables startup settings in Hyprland";
   config = mkIf cfg.startup.enable (mkMerge [
-    { cnix.programs.hyprland.lua.startup = baseStartup; }
+    {cnix.programs.hyprland.lua.startup = baseStartup;}
 
     (mkIf (host == "toothpc") {
       cnix.programs.hyprland.lua.startup = [

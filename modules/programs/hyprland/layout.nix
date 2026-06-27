@@ -2,9 +2,9 @@
   lib,
   config,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkEnableOption
     mkMerge
@@ -12,8 +12,7 @@ let
     ;
   host = config.networking.hostName;
   cfg = config.cnix.programs.hyprland.rules;
-in
-{
+in {
   options.cnix.programs.hyprland.rules.enable =
     mkEnableOption "Enables window rule settings in Hyprland";
   config = mkIf cfg.enable (mkMerge [
@@ -21,26 +20,26 @@ in
       cnix.programs.hyprland.lua = {
         monitors =
           (map (
-            m:
-            if m.enable then
-              {
-                output = m.name;
-                mode =
-                  if m.width != null && m.height != null then
-                    "${toString m.width}x${toString m.height}@${m.refreshRate}"
-                  else
-                    "preferred";
-                position = m.position or "auto";
-                scale = m.scale;
-              }
-              // optionalAttrs (m.transform != 0) { transform = m.transform; }
-              // optionalAttrs (m.bitDepth != null) { bitdepth = m.bitDepth; }
-            else
-              {
-                output = m.name;
-                disabled = true;
-              }
-          ) config.cnix.settings.monitors)
+              m:
+                if m.enable
+                then
+                  {
+                    output = m.name;
+                    mode =
+                      if m.width != null && m.height != null
+                      then "${toString m.width}x${toString m.height}@${m.refreshRate}"
+                      else "preferred";
+                    position = m.position or "auto";
+                    scale = m.scale;
+                  }
+                  // optionalAttrs (m.transform != 0) {transform = m.transform;}
+                  // optionalAttrs (m.bitDepth != null) {bitdepth = m.bitDepth;}
+                else {
+                  output = m.name;
+                  disabled = true;
+                }
+            )
+            config.cnix.settings.monitors)
           ++ [
             {
               output = "";

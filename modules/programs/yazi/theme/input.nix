@@ -3,8 +3,8 @@
     border = {
       fg = "#bdae93";
     };
-    title = { };
-    value = { };
+    title = {};
+    value = {};
     selected = {
       reversed = true;
     };

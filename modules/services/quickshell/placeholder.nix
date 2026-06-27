@@ -2,12 +2,9 @@
   pkgs,
   inputs,
   ...
-}:
-
-let
+}: let
   cnixshell = inputs.cnixshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
-in
-{
+in {
   imports = [
     inputs.cnixshell.homeModules.default
   ];

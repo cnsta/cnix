@@ -4,14 +4,12 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.zed-editor;
-in
-{
+in {
   options.cnix.programs.zed-editor.enable = mkEnableOption "Enables zed-editor";
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.zed-editor ];
+    environment.systemPackages = [pkgs.zed-editor];
   };
 }

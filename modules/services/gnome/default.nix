@@ -3,13 +3,11 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.gnome;
   srv = config.cnix.services;
-in
-{
+in {
   options = {
     cnix.services.gnome = {
       keyring.enable = mkEnableOption "Enables gnome-keyring";

@@ -3,12 +3,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.blender;
-in
-{
+in {
   options = {
     cnix.programs.blender = {
       enable = mkEnableOption "Enables Blender";

@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.home.programs.zathura;
 
@@ -49,12 +48,11 @@ let
     recolor = true;
     recolor-keephue = true;
   };
-in
-{
+in {
   options = {
     home.programs.zathura.enable = mkEnableOption "Enables zathura";
   };
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.zathura ];
+    environment.systemPackages = [pkgs.zathura];
   };
 }

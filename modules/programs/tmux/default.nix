@@ -3,15 +3,14 @@
   lib,
   pkgs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkEnableOption
     mkIf
     ;
   cfg = config.cnix.programs.tmux;
-in
-{
+in {
   options.cnix.programs.tmux.enable = mkEnableOption "tmux, terminal multiplexer";
 
   config = mkIf cfg.enable {

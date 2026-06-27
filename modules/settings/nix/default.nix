@@ -2,9 +2,9 @@
   config,
   lib,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkEnableOption
     mkOption
@@ -13,8 +13,7 @@ let
   cfg = config.cnix.settings.nix;
 
   dropNull = lib.filterAttrs (_: v: v != null);
-in
-{
+in {
   options = {
     cnix.settings.nix = {
       enable = mkEnableOption ''
@@ -108,7 +107,10 @@ in
       AllowedCPUs = cfg.allowedCPUs;
       MemoryHigh = cfg.memoryHigh;
       MemoryMax = cfg.memoryMax;
-      ManagedOOMMemoryPressure = if cfg.manageOOM then "kill" else null;
+      ManagedOOMMemoryPressure =
+        if cfg.manageOOM
+        then "kill"
+        else null;
     };
 
     nix.settings = dropNull {

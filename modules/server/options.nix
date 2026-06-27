@@ -2,13 +2,11 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   inherit (lib) mkOption types;
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
   cfg = config.cnix.server;
-in
-{
+in {
   options.cnix.server = {
     enable = lib.mkEnableOption "The server services and configuration variables";
     email = mkOption {
@@ -68,8 +66,7 @@ in
     services = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule (
-          { name, ... }:
-          {
+          {name, ...}: {
             options = {
               enable = lib.mkEnableOption "the service";
               routed = lib.mkOption {
@@ -100,7 +97,7 @@ in
               };
               ingress = lib.mkOption {
                 type = lib.types.attrsOf lib.types.str;
-                default = { };
+                default = {};
                 description = "Extra cloudflared ingress entries as subdomain -> service URL mappings.";
                 example = {
                   "matrix" = "http://127.0.0.1:11338";
@@ -136,7 +133,7 @@ in
                 description = "Cloudflare tunnel configuration for this service.";
               };
               homepage = lib.mkOption {
-                default = { };
+                default = {};
                 type = lib.types.submodule {
                   options = {
                     name = lib.mkOption {

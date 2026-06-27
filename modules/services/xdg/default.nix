@@ -4,8 +4,7 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.services.xdg;
   acct = config.cnix.settings.accounts;
 
@@ -17,10 +16,8 @@ let
         "kima"
         "bunk"
       ]
-    then
-      "zen.desktop"
-    else
-      "firefox.desktop";
+    then "zen.desktop"
+    else "firefox.desktop";
 
   videoApps = [
     "mpv.desktop"
@@ -73,15 +70,16 @@ let
     "application/gzip" = archiveApp;
   };
 
-  mimeValueString =
-    v:
-    let
-      items = if builtins.isList v then v else [ v ];
-    in
+  mimeValueString = v: let
+    items =
+      if builtins.isList v
+      then v
+      else [v];
+  in
     concatStringsSep ";" items + ";";
 
   toMimeAppsList = generators.toINI {
-    mkKeyValue = generators.mkKeyValueDefault { mkValueString = mimeValueString; } "=";
+    mkKeyValue = generators.mkKeyValueDefault {mkValueString = mimeValueString;} "=";
   };
 
   userDirsText = ''
@@ -107,14 +105,13 @@ let
     "%h/media/videos"
     "%h/.local/cache"
   ];
-in
-{
+in {
   options.cnix.services.xdg.enable =
     mkEnableOption "XDG base dirs, user dirs, MIME defaults, and session vars";
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = [ pkgs.xdg-utils ];
+      environment.systemPackages = [pkgs.xdg-utils];
       environment.sessionVariables.XDG_CACHE_HOME = "$HOME/.local/cache";
       systemd.user.tmpfiles.rules = userDirRules;
 

@@ -2,15 +2,13 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   unit = "home-assistant";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
-in
-{
+in {
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
-    systemd.tmpfiles.rules = [ "d /var/lib/home-assistant 0775 ${srv.user} ${srv.group} - -" ];
+    systemd.tmpfiles.rules = ["d /var/lib/home-assistant 0775 ${srv.user} ${srv.group} - -"];
     virtualisation.oci-containers.containers = {
       ${unit} = {
         autoStart = true;

@@ -3,12 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkEnableOption mkOption;
   cfg = config.cnix.programs.gamemode;
-in
-{
+in {
   options = {
     cnix.programs.gamemode = {
       enable = mkEnableOption "Enables gamemode";

@@ -1,12 +1,10 @@
-{ pkgs, ... }:
-with builtins;
-let
-  mkScript =
-    {
-      name,
-      runtimeInputs,
-      file,
-    }:
+{pkgs, ...}:
+with builtins; let
+  mkScript = {
+    name,
+    runtimeInputs,
+    file,
+  }:
     pkgs.writeShellApplication {
       name = "${name}.sh";
       inherit runtimeInputs;
@@ -16,12 +14,12 @@ let
   scripts = with pkgs; [
     (mkScript {
       name = "spawn";
-      runtimeInputs = [ niri ];
+      runtimeInputs = [niri];
       file = ./bin/spawn.sh;
     })
     (mkScript {
       name = "spawn-or-focus";
-      runtimeInputs = [ niri ];
+      runtimeInputs = [niri];
       file = ./bin/spawn-or-focus.sh;
     })
     (mkScript {
@@ -34,7 +32,7 @@ let
     })
     (mkScript {
       name = "cnix-update-available";
-      runtimeInputs = [ waybar ];
+      runtimeInputs = [waybar];
       file = ./bin/cnix-update-available.sh;
     })
     (mkScript {
@@ -48,12 +46,12 @@ let
     })
     (mkScript {
       name = "pwvucontrol-toggle";
-      runtimeInputs = [ pwvucontrol ];
+      runtimeInputs = [pwvucontrol];
       file = ./bin/pwvucontrol-toggle.sh;
     })
     (mkScript {
       name = "calcurse-toggle";
-      runtimeInputs = [ calcurse ];
+      runtimeInputs = [calcurse];
       file = ./bin/calcurse-toggle.sh;
     })
     (mkScript {
@@ -76,12 +74,12 @@ let
     })
     (mkScript {
       name = "waybar-systemd";
-      runtimeInputs = [ hyprland ];
+      runtimeInputs = [hyprland];
       file = ./bin/waybar-systemd.sh;
     })
     (mkScript {
       name = "waybar-progress";
-      runtimeInputs = [ hyprland ];
+      runtimeInputs = [hyprland];
       file = ./bin/waybar-progress.sh;
     })
     (mkScript {
@@ -94,16 +92,15 @@ let
     })
     (mkScript {
       name = "mako";
-      runtimeInputs = [ hyprland ];
+      runtimeInputs = [hyprland];
       file = ./bin/mako.sh;
     })
     (mkScript {
       name = "mako-toggle";
-      runtimeInputs = [ hyprland ];
+      runtimeInputs = [hyprland];
       file = ./bin/mako-toggle.sh;
     })
   ];
-in
-{
+in {
   environment.systemPackages = scripts;
 }
