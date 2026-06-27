@@ -2,16 +2,14 @@
   config,
   clib,
   ...
-}:
-let
+}: let
   host = config.networking.hostName;
   en = clib.mkEn host;
   when = clib.mkWhen host;
   all = clib.mkAllEn host;
   allWhen = clib.mkAll host;
   none = clib.mkNone host;
-in
-{
+in {
   config.cnix = {
     programs = {
       beekeeper = none;
@@ -143,7 +141,6 @@ in
       zram = all;
       hypridle = en "kbt";
       hyprpaper = en "kbt";
-      jellyfin-mpv-shim = none;
       dunst = none;
       quickshell = none;
       syncthing = none;

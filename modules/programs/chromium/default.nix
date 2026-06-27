@@ -1,16 +1,16 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.chromium;
-in
-{
+in {
   options.cnix.programs.chromium.enable = mkEnableOption "Enables chromium";
 
   config = mkIf cfg.enable {
+    environment.systemPackages = [pkgs.chromium];
     programs.chromium = {
       enable = true;
     };

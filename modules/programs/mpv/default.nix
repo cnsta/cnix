@@ -4,8 +4,7 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.cnix.programs.mpv;
   acct = config.cnix.settings.accounts;
 
@@ -22,16 +21,22 @@ let
 
   fsrShader = "${pkgs.mpv-shim-default-shaders}/share/mpv-shim-default-shaders/shaders/FSR.glsl";
 
-  mpvConfFromAttrs =
-    settings:
+  mpvConfFromAttrs = settings:
     concatStringsSep "\n" (
       mapAttrsToList (
-        k: v:
-        let
-          s = if builtins.isBool v then (if v then "yes" else "no") else toString v;
-        in
-        "${k}=${s}"
-      ) settings
+        k: v: let
+          s =
+            if builtins.isBool v
+            then
+              (
+                if v
+                then "yes"
+                else "no"
+              )
+            else toString v;
+        in "${k}=${s}"
+      )
+      settings
     );
 
   inputConfFromAttrs = bindings: concatStringsSep "\n" (mapAttrsToList (k: v: "${k} ${v}") bindings);
@@ -74,23 +79,22 @@ let
   mpvBindings = {
     "ctrl+a" = "script-message osc-visibility cycle";
   };
-in
-{
+in {
   options.cnix.programs.mpv.enable = mkEnableOption "mpv";
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ mpvWithScripts ];
+    environment.systemPackages = [mpvWithScripts];
 
     hjem.users = genAttrs acct.defaultUsers (user: {
       packages = [
-        pkgs.jellyfin-mpv-shim
+        # pkgs.jellyfin-mpv-shim
         pkgs.yt-dlp
       ];
 
       xdg.config.files = {
         "mpv/mpv.conf".text = mpvConfFromAttrs (mpvSettings user);
         "mpv/input.conf".text = inputConfFromAttrs mpvBindings;
-        "mpv/shaders/FSR.glsl".source = fsrShader;
+        # "mpv/shaders/FSR.glsl".source = fsrShader;
         "yt-dlp/config".text = ''
           -o /home/${user}/media/videos/youtube/%(title)s.%(ext)s
         '';

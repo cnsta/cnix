@@ -7,7 +7,6 @@
     ./dunst
     ./gnupg
     ./flatpak
-    ./jellyfin-mpv-shim
     ./fwupd
     ./gnome
     ./greetd
