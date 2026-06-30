@@ -104,7 +104,7 @@ in {
         dns = {
           magic_dns = true;
           base_domain = "ts.cnst.dev";
-          nameservers.global = ["100.64.88.2"];
+          nameservers.global = ["192.168.88.69"];
           search_domains = [];
           extra_records = lib.concatLists (
             lib.mapAttrsToList (
