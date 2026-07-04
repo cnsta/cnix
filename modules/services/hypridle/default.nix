@@ -2,34 +2,36 @@
   config,
   lib,
   clib,
+  pkgs,
   ...
 }:
 with lib; let
   cfg = config.cnix.services.hypridle;
   acct = config.cnix.settings.accounts;
 
-  lockTimeout = 300;
-  dpmsTimeout = 360;
+  lock = "${pkgs.systemd}/bin/loginctl lock-session";
+  wlopm = pkgs.wlopm;
+  timeout = 300;
 
   hyprlock = getExe config.programs.hyprlock.package;
 
   settings = {
     general = {
       lock_cmd = "pgrep -x hyprlock || ${hyprlock}";
-      before_sleep_cmd = "loginctl lock-session";
-      after_sleep_cmd = "hyprctl dispatch dpms on";
+      before_sleep_cmd = lock;
+      after_sleep_cmd = "${wlopm} --on";
       ignore_dbus_inhibit = false;
       ignore_systemd_inhibit = false;
     };
     listener = [
       {
-        timeout = lockTimeout;
-        on-timeout = "loginctl lock-session";
+        timeout = timeout;
+        on-timeout = lock;
       }
       {
-        timeout = dpmsTimeout;
-        on-timeout = "hyprctl dispatch dpms off";
-        on-resume = "hyprctl dispatch dpms on";
+        timeout = timeout + 20;
+        on-timeout = "${wlopm} --off";
+        on-resume = "${wlopm} --on";
       }
     ];
   };

@@ -27,7 +27,7 @@ in {
       };
       hyprlock = en "kbt";
       inkscape = en "k";
-      lact = none;
+      lact = en "k";
       mysql-workbench = none;
       nh = allWhen {
         enable = true;
@@ -50,10 +50,11 @@ in {
       lutris = en "k";
       chromium = en "kt";
       direnv = en "kbt";
-      discord = when "kbt" {
-        enable = true;
-        variant = "vesktop";
-      };
+      ## pnpm unsafe, install flatpak
+      # discord = when "kbt" {
+      #   enable = true;
+      #   variant = "vesktop";
+      # };
       element-desktop = en "k";
       firefox = en "kt";
       floorp = none;

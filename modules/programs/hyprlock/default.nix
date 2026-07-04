@@ -64,7 +64,7 @@ with lib; let
         ignore_empty_input = true;
         fade_on_empty = false;
         fade_timeout = 0;
-        placeholder_text = "";
+        placeholder_text = "<i> </i>";
         hide_input = false;
         rounding = 0;
         position = "0, 0";

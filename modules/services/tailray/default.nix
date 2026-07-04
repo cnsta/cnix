@@ -25,7 +25,10 @@ in {
         Restart = "on-failure";
         RestartSec = "10";
       };
-      environment.TAILRAY_THEME = "dark";
+      environment = {
+        TAILRAY_THEME = "dark";
+        TAILRAY_ADMIN_URL = "https://hs.cnst.dev/admin";
+      };
     };
   };
 }

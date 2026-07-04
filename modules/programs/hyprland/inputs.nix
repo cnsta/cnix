@@ -33,8 +33,8 @@ in {
             };
           };
           misc = {
-            mouse_move_enables_dpms = 1;
-            key_press_enables_dpms = 0;
+            mouse_move_enables_dpms = true;
+            key_press_enables_dpms = true;
             force_default_wallpaper = 0;
             disable_hyprland_logo = true;
             disable_splash_rendering = true;
