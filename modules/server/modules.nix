@@ -567,28 +567,28 @@ in {
       gluetun = en "s";
       podman = en "sz";
 
-      cnixpost = {
-        enable = none;
-        clamav.enable = true;
-        accounts."cnst@cnix.dev" = {
-          quota = "10G";
-          aliases = [
-            "postmaster@cnix.dev"
-            "abuse@cnix.dev"
-            "tls-reports@cnix.dev"
-          ];
-        };
-        dkimSelector = "mail";
-        mtaSts = {
-          enable = true;
-          mode = "testing";
-          policyId = "20250101000000"; # TODO: update when policy content changes
-          mxHosts = ["mail.cnix.dev"];
-        };
-        spamScoreAddHeader = 4.0;
-        spamScoreGreylist = 6.0;
-        spamScoreReject = 15.0;
-      };
+      # cnixpost = {
+      #   enable = none;
+      #   clamav.enable = true;
+      #   accounts."cnst@cnix.dev" = {
+      #     quota = "10G";
+      #     aliases = [
+      #       "postmaster@cnix.dev"
+      #       "abuse@cnix.dev"
+      #       "tls-reports@cnix.dev"
+      #     ];
+      #   };
+      #   dkimSelector = "mail";
+      #   mtaSts = {
+      #     enable = true;
+      #     mode = "testing";
+      #     policyId = "20250101000000"; # TODO: update when policy content changes
+      #     mxHosts = ["mail.cnix.dev"];
+      #   };
+      #   spamScoreAddHeader = 4.0;
+      #   spamScoreGreylist = 6.0;
+      #   spamScoreReject = 15.0;
+      # };
 
       fail2ban = when "s" {
         enable = true;
