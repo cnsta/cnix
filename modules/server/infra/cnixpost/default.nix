@@ -28,19 +28,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    age.secrets = {
-      mailRedisPw = {
-        file = "${self}/secrets/mailRedisPw.age";
-        owner = "rspamd";
-        group = "rspamd";
-        mode = "0440";
-      };
-      mailRspamdCtrlPw = {
-        file = "${self}/secrets/mailRspamdCtrlPw.age";
-        owner = "rspamd";
-        group = "rspamd";
-        mode = "0440";
-      };
+    # the rspamd controller password (bcrypt hash).
+    age.secrets.mailRspamdCtrlPw = {
+      file = self + "/secrets/mailRspamdCtrlPw.age";
+      owner = "rspamd";
+      group = "rspamd";
+      mode = "0440";
     };
 
     cnixpost = lib.mkMerge [
@@ -49,7 +42,6 @@ in {
         fqdn = "mail.${srv.domain}";
         primaryDomain = srv.domain;
 
-        redisPasswordFile = config.age.secrets.mailRedisPw.path;
         rspamdControllerPasswordFile = config.age.secrets.mailRspamdCtrlPw.path;
 
         lldap = {
