@@ -97,14 +97,7 @@
     # Miscellaneous
     nvf.url = "github:notashelf/nvf";
     agenix.url = "github:ryantm/agenix";
-
-    helix-flake = {
-      url = "github:helix-editor/helix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        rust-overlay.follows = "rust-overlay";
-      };
-    };
+    helix-flake.url = "github:helix-editor/helix";
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -130,7 +123,6 @@
 
     ashell = {
       url = "github:MalpenZibo/ashell";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     quickshell = {
