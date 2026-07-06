@@ -80,4 +80,7 @@ in {
   "keepalived.age".publicKeys = sobotka ++ ziggy;
   "tsAuth.age".publicKeys = sobotka ++ ziggy;
   "traefikEnv.age".publicKeys = sobotka ++ ziggy;
+
+  # toothpc-specific
+  "smb-credentials.age".publicKeys = toothpc;
 }
