@@ -1,15 +1,13 @@
 # cnix fresh-install guide
 
 Template for wiping any host and reinstalling straight from the flake, no
-intermediate "throwaway" NixOS install, no first-boot rebuild, and the very
-first build pulls from cache.cnst.dev.
+intermediate "throwaway" NixOS install, and the very first build pulls from
+cache.cnst.dev.
 
 Throughout this guide, `$HOST` is the host being installed and `$USER` is your
 username. Examples use `bunk` (laptop, LUKS + XFS). Commands prefixed `desktop$`
 run on another machine (e.g. kima); `iso$` runs in the live environment over
 SSH.
-
----
 
 ## 0. Before you wipe (do this on the old install!)
 
@@ -54,8 +52,8 @@ hibernation, smaller otherwise).
 ```bash
 export HOST=bunk
 export USER=cnst
-export DISK=/dev/nvme0n1   # verify with lsblk! SATA disks are /dev/sdX
-                           # and partitions are ${DISK}1 not ${DISK}p1
+export DISK=/dev/nvme0n1 # verify with lsblk! SATA disks are /dev/sdX
+                         # and partitions are ${DISK}1 not ${DISK}p1
 
 # GPT: 1 = ESP 1G, 2 = swap (e.g. 16G), 3 = rest for root
 parted "$DISK" -- mklabel gpt
@@ -80,9 +78,6 @@ mount /dev/mapper/cryptroot /mnt
 mkdir -p /mnt/boot
 mount -o fmask=0077,dmask=0077 "${DISK}p1" /mnt/boot
 swapon /dev/mapper/cryptswap
-
-# Set password for user
-passwd $USER
 ```
 
 For an unencrypted host, skip the `cryptsetup` steps and run `mkfs.xfs` /
@@ -133,19 +128,37 @@ _install itself_ pull your Hydra-built closure instead of building or hitting
 only cache.nixos.org:
 
 ```bash
-nixos-install --no-root-passwd --flake /mnt/home/$USER/cnix#$HOST \
+nixos-install --flake /mnt/home/$USER/cnix#$HOST \
   --option extra-substituters "https://cache.cnst.dev" \
   --option extra-trusted-public-keys "cache.cnst.dev-1:3yhqzi3xAXkgMsnsxyZVuB23ynVtoZm/J9fI9omutqU="
 ```
 
 Notes:
 
-- `--no-root-passwd` works if your config declares user passwords
-  (hashedPassword / agenix secret). If not, drop the flag and set root's
-  password when prompted.
 - Flake support is handled by `nixos-install` itself, no need to enable
   experimental features first. If your ISO is old and complains, prefix with
   `NIX_CONFIG="experimental-features = nix-command flakes"`.
+
+## 6.5 Set user password
+
+The config doesn't declare a password for `$USER` (`system/users.nix` has no
+`hashedPassword`), and `users.mutableUsers` defaults to true, so passwords are
+state in `/etc/shadow` and were lost in the wipe. Set them now, inside the
+installed system, before rebooting:
+
+```bash
+nixos-enter --root /mnt -c "passwd $USER"
+# optional but wise as a fallback:
+nixos-enter --root /mnt -c "passwd root"
+```
+
+Skipping this leaves $USER with a locked password: SSH keys work, but console
+login and sudo won't.
+
+> Declarative alternative: add
+> `users.users.$USER.hashedPasswordFile = config.age.secrets.userPwd.path;`
+> (hash generated with `mkpasswd -m sha-512`, stored as an agenix secret). Then
+> this step disappears and `--no-root-passwd` is fully hands-off.
 
 ## 7. First boot and cleanup
 
@@ -199,23 +212,3 @@ git commit -am "$HOST: new host key after reinstall" && git push
 Then on the host: pull and `nh os switch`. Until this is done, anything
 depending on agenix secrets (wifi passwords, tokens…) will fail on that host,
 which is why step 0 exists.
-
-## Appendix B: Future upgrade, disko + nixos-anywhere
-
-The manual partitioning in step 2 is the last hand-driven part. If you encode
-the disk layout in a `disko.nix` per host, the whole guide collapses to:
-
-```bash
-desktop$ nix run github:nix-community/nixos-anywhere -- \
-  --flake .#$HOST --target-host nixos@<ip> \
-  --disk-encryption-keys /tmp/secret.key <(echo -n "$LUKS_PASSPHRASE") \
-  --extra-files ~/keys-$HOST   # injects the host SSH key pre-boot
-```
-
-nixos-anywhere kexecs into an installer, runs disko to partition/format, copies
-the closure (from your substituters, including cache.cnst.dev), places extra
-files like `/etc/ssh/ssh_host_ed25519_key`, and reboots into the final system.
-One command, fully reproducible, and hardware-configuration.nix stops drifting
-because the disk layout is declarative. A simple LUKS + XFS layout is about the
-easiest possible disko config, so this is a low-effort upgrade, worth doing
-before the _next_ reinstall.
