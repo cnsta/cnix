@@ -14,6 +14,12 @@ in {
       jellyfinEnvironment.file = self + "/secrets/jellyfinEnvironment.age";
     };
 
+    # This is needed for LAN access
+    networking.firewall = {
+      allowedTCPPorts = [8096];
+      allowedUDPPorts = [1900 7359];
+    };
+
     virtualisation.oci-containers.containers = {
       ${unit} = {
         image = "ghcr.io/hotio/jellyfin:latest";
