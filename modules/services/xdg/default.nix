@@ -10,6 +10,7 @@ with lib; let
 
   fileManager = "org.gnome.Nautilus.desktop";
   imageManager = "feh.desktop";
+  textEditor = "Helix.desktop";
   browser =
     if
       builtins.elem config.networking.hostName [
@@ -25,50 +26,104 @@ with lib; let
   ];
   archiveApp = "org.gnome.FileRoller.desktop";
 
-  defaultApplications = {
-    "text/html" = browser;
-    "text/xml" = browser;
-    "x-scheme-handler/http" = browser;
-    "x-scheme-handler/https" = browser;
-    "x-scheme-handler/chrome" = browser;
-    "application/x-extension-htm" = browser;
-    "application/x-extension-html" = browser;
-    "application/x-extension-shtml" = browser;
-    "application/x-extension-xhtml" = browser;
-    "application/x-extension-xht" = browser;
-    "application/xhtml+xml" = browser;
-    "application/json" = browser;
-    "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
-    "inode/directory" = fileManager;
+  textEditorMimeTypes = [
+    "text/plain"
+    "text/markdown"
+    "text/x-markdown"
+    "text/csv"
+    "text/css"
+    "text/x-log"
+    "text/x-readme"
+    "text/x-makefile"
+    "text/x-cmake"
+    "text/x-python"
+    "text/x-script.python"
+    "text/x-shellscript"
+    "text/x-c"
+    "text/x-c++"
+    "text/x-csrc"
+    "text/x-c++src"
+    "text/x-chdr"
+    "text/x-c++hdr"
+    "text/x-java"
+    "text/x-go"
+    "text/x-rust"
+    "text/x-lua"
+    "text/x-perl"
+    "text/x-ruby"
+    "text/x-php"
+    "text/x-haskell"
+    "text/x-nix"
+    "text/x-tex"
+    "text/x-diff"
+    "text/x-patch"
+    "text/x-ini"
+    "text/x-properties"
+    "text/x-yaml"
+    "text/yaml"
+    "text/toml"
+    "text/x-toml"
+    "application/x-yaml"
+    "application/yaml"
+    "application/toml"
+    "application/x-shellscript"
+    "application/javascript"
+    "application/x-javascript"
+    "application/typescript"
+    "application/x-perl"
+    "application/x-php"
+    "application/x-ruby"
+    "application/sql"
+    "application/x-desktop"
+    "application/x-nix"
+  ];
 
-    "image/apng" = imageManager;
-    "image/avif" = imageManager;
-    "image/bmp" = imageManager;
-    "image/gif" = imageManager;
-    "image/jpeg" = imageManager;
-    "image/png" = imageManager;
-    "image/svg+xml" = imageManager;
-    "image/tiff" = imageManager;
-    "image/webp" = imageManager;
+  defaultApplications =
+    {
+      "text/html" = browser;
+      "text/xml" = browser;
+      "x-scheme-handler/http" = browser;
+      "x-scheme-handler/https" = browser;
+      "x-scheme-handler/chrome" = browser;
+      "application/x-extension-htm" = browser;
+      "application/x-extension-html" = browser;
+      "application/x-extension-shtml" = browser;
+      "application/x-extension-xhtml" = browser;
+      "application/x-extension-xht" = browser;
+      "application/xhtml+xml" = browser;
+      "application/json" = browser;
+      "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
+      "inode/directory" = fileManager;
 
-    "video/H264" = videoApps;
-    "video/x-msvideo" = videoApps;
-    "video/mp4" = videoApps;
-    "video/mpeg" = videoApps;
-    "video/ogg" = videoApps;
-    "video/mp2t" = videoApps;
-    "video/webm" = videoApps;
-    "video/3gpp" = videoApps;
-    "video/3gpp2" = videoApps;
+      "image/apng" = imageManager;
+      "image/avif" = imageManager;
+      "image/bmp" = imageManager;
+      "image/gif" = imageManager;
+      "image/jpeg" = imageManager;
+      "image/png" = imageManager;
+      "image/svg+xml" = imageManager;
+      "image/tiff" = imageManager;
+      "image/webp" = imageManager;
 
-    "application/x-7z-compressed" = archiveApp;
-    "application/zip" = archiveApp;
-    "application/vnd.rar" = archiveApp;
-    "application/x-bzip" = archiveApp;
-    "application/x-bzip2" = archiveApp;
-    "application/x-tar" = archiveApp;
-    "application/gzip" = archiveApp;
-  };
+      "video/H264" = videoApps;
+      "video/x-msvideo" = videoApps;
+      "video/mp4" = videoApps;
+      "video/mpeg" = videoApps;
+      "video/ogg" = videoApps;
+      "video/mp2t" = videoApps;
+      "video/webm" = videoApps;
+      "video/3gpp" = videoApps;
+      "video/3gpp2" = videoApps;
+
+      "application/x-7z-compressed" = archiveApp;
+      "application/zip" = archiveApp;
+      "application/vnd.rar" = archiveApp;
+      "application/x-bzip" = archiveApp;
+      "application/x-bzip2" = archiveApp;
+      "application/x-tar" = archiveApp;
+      "application/gzip" = archiveApp;
+    }
+    // genAttrs textEditorMimeTypes (_: textEditor);
 
   mimeValueString = v: let
     items =

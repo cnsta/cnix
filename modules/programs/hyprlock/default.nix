@@ -99,7 +99,7 @@ with lib; let
         shadow_boost = 0.5;
         color = "rgba(FFFFFFFF)";
         font_size = 85;
-        font_family = "VCR OSD Mono";
+        font_family = "IosevkaTermSlab Nerd Font Mono Light";
         position = "0, 300";
         halign = "center";
         valign = "center";
