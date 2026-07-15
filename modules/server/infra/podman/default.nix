@@ -19,7 +19,7 @@ in {
         enable = true;
         containersConf.settings = {
           network = {
-            dns_bind_port = 5353;
+            dns_bind_port = 5533;
           };
         };
       };

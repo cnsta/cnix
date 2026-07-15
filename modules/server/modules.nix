@@ -76,6 +76,19 @@
       };
     };
 
+    fluxer = when "s" {
+      enable = true;
+      subdomain = "chat";
+      exposure = "tailscale";
+      port = 8480;
+      homepage = {
+        name = "Fluxer";
+        description = "Open source chat for friends and communities";
+        icon = "fluxer.svg";
+        category = "Communication";
+      };
+    };
+
     cinny = when "s" {
       enable = false;
       subdomain = "cinny";

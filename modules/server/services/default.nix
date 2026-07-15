@@ -6,6 +6,7 @@
     ./continuwuity
     ./element
     ./flaresolverr
+    ./fluxer
     ./harmonia
     ./headscale
     ./homepage
