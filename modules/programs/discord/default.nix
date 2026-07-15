@@ -51,7 +51,10 @@ in {
 
     (mkIf (cfg.variant == "vesktop") {
       hjem.users = genAttrs acct.defaultUsers (_: {
-        xdg.config.files."vesktop/themes/base16.css".source = ./base16.css;
+        files.".config/vesktop/themes/base16.css" = {
+          source = ./base16.css;
+          clobber = true;
+        };
       });
     })
   ]);

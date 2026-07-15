@@ -65,8 +65,8 @@ in {
         in {
           packages = [pkgs.gh];
 
-          xdg.config.files = {
-            "git/config" = {
+          files = {
+            ".config/git/config" = {
               generator = lib.generators.toGitINI;
               value = {
                 user = {
@@ -108,14 +108,21 @@ in {
                   navigate = true;
                 };
               };
+              clobber = true;
             };
 
-            "git/ignore".text = ''
-              .direnv
-              *result*
-            '';
+            ".config/git/ignore" = {
+              text = ''
+                .direnv
+                *result*
+              '';
+              clobber = true;
+            };
 
-            "git/allowed_signers".text = allowedSigners;
+            ".config/git/allowed_signers" = {
+              text = allowedSigners;
+              clobber = true;
+            };
           };
         }
       );

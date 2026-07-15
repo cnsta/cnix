@@ -103,9 +103,10 @@ in {
     };
 
     hjem.users = genAttrs acct.defaultUsers (_: {
-      xdg.config.files."dunst/dunstrc" = {
+      files.".config/dunst/dunstrc" = {
         generator = toDunstIni;
         value = settings;
+        clobber = true;
       };
     });
   };

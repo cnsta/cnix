@@ -99,7 +99,7 @@ with lib; let
         shadow_boost = 0.5;
         color = "rgba(FFFFFFFF)";
         font_size = 85;
-        font_family = "IosevkaTermSlab Nerd Font Mono Light";
+        font_family = "IosevkaTermSlab Nerd Font Mono ExtraBold";
         position = "0, 300";
         halign = "center";
         valign = "center";
@@ -133,7 +133,10 @@ in {
   config = mkIf cfg.enable {
     programs.hyprlock.enable = true;
     hjem.users = genAttrs acct.defaultUsers (_: {
-      xdg.config.files."hypr/hyprlock.conf".text = clib.toHyprconf settings;
+      files.".config/hypr/hyprlock.conf" = {
+        text = clib.toHyprconf settings;
+        clobber = true;
+      };
     });
   };
 }

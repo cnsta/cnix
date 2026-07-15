@@ -112,7 +112,10 @@ in {
     {
       hjem.users = genAttrs acct.defaultUsers (_: {
         packages = [pkgs.alacritty];
-        xdg.config.files."alacritty/alacritty.toml".source = tomlFormat.generate "alacritty.toml" settings;
+        files.".config/alacritty/alacritty.toml" = {
+          source = tomlFormat.generate "alacritty.toml" settings;
+          clobber = true;
+        };
       });
     }
 

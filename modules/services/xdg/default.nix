@@ -171,10 +171,13 @@ in {
       systemd.user.tmpfiles.rules = userDirRules;
 
       hjem.users = genAttrs acct.defaultUsers (_: {
-        xdg.config.files = {
-          "user-dirs.dirs".text = userDirsText;
+        files = {
+          ".config/user-dirs.dirs" = {
+            text = userDirsText;
+            clobber = true;
+          };
 
-          "mimeapps.list" = {
+          ".config/mimeapps.list" = {
             generator = toMimeAppsList;
             value = {
               "Default Applications" = defaultApplications;

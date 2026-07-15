@@ -57,29 +57,44 @@ in {
           carapace
           starship
         ];
-        xdg.config.files = {
-          "fish/config.fish".text = ''
-            ${abbrsToFish common.abbrs}
-            ${aliasesToFish common.aliases}
-            if status is-interactive
-            ${common.interactiveInit}
-                starship init fish | source
-                carapace _carapace fish | source
-            end
-          '';
-          "fish/functions/up-or-search.fish".source = ./up-or-search.fish;
-          "fish/functions/fish_greeting.fish".text = ''
-            function fish_greeting
-            end
-          '';
-          "fish/functions/nix-inspect.fish".text = ''
-            function nix-inspect
-                set -s PATH | grep "PATH\[.*/nix/store" | cut -d '|' -f2 \
-                    | grep -v -e "-man" -e "-terminfo" \
-                    | perl -pe 's:^/nix/store/\w{32}-([^/]*)/bin$:\1:' \
-                    | sort | uniq
-            end
-          '';
+        files = {
+          ".config/fish/config.fish" = {
+            text = ''
+              ${abbrsToFish common.abbrs}
+              ${aliasesToFish common.aliases}
+              if status is-interactive
+              ${common.interactiveInit}
+                  starship init fish | source
+                  carapace _carapace fish | source
+              end
+            '';
+            clobber = true;
+          };
+
+          ".config/fish/functions/up-or-search.fish" = {
+            source = ./up-or-search.fish;
+            clobber = true;
+          };
+
+          ".config/fish/functions/fish_greeting.fish" = {
+            text = ''
+              function fish_greeting
+              end
+            '';
+            clobber = true;
+          };
+
+          ".config/fish/functions/nix-inspect.fish" = {
+            text = ''
+              function nix-inspect
+                  set -s PATH | grep "PATH\[.*/nix/store" | cut -d '|' -f2 \
+                      | grep -v -e "-man" -e "-terminfo" \
+                      | perl -pe 's:^/nix/store/\w{32}-([^/]*)/bin$:\1:' \
+                      | sort | uniq
+              end
+            '';
+            clobber = true;
+          };
         };
       });
     })

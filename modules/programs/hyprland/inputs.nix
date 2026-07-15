@@ -47,10 +47,13 @@ in {
       ];
 
       hjem.users = genAttrs acct.defaultUsers (_: {
-        xdg.config.files."uwsm/env".text = ''
-          export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-          export GRIMBLAST_NO_CURSOR=0
-        '';
+        files.".config/uwsm/env" = {
+          text = ''
+            export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+            export GRIMBLAST_NO_CURSOR=0
+          '';
+          clobber = true;
+        };
       });
     }
 

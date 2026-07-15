@@ -39,9 +39,10 @@ in {
   config = mkIf cfg.enable {
     hjem.users = genAttrs acct.defaultUsers (_: {
       packages = [pkgs.fuzzel];
-      xdg.config.files."fuzzel/fuzzel.ini" = {
+      files.".config/fuzzel/fuzzel.ini" = {
         generator = lib.generators.toINI {};
         value = settings;
+        clobber = true;
       };
     });
   };

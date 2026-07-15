@@ -57,7 +57,10 @@ in {
         pkgs.hyprpaper
         inputs.dotfiles.packages.${pkgs.stdenv.hostPlatform.system}.wppick
       ];
-      xdg.config.files."hypr/hyprpaper.conf".text = clib.toHyprconf settings;
+      files.".config/hypr/hyprpaper.conf" = {
+        text = clib.toHyprconf settings;
+        clobber = true;
+      };
     });
   };
 }

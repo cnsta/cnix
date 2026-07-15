@@ -91,13 +91,28 @@ in {
         pkgs.yt-dlp
       ];
 
-      xdg.config.files = {
-        "mpv/mpv.conf".text = mpvConfFromAttrs (mpvSettings user);
-        "mpv/input.conf".text = inputConfFromAttrs mpvBindings;
-        # "mpv/shaders/FSR.glsl".source = fsrShader;
-        "yt-dlp/config".text = ''
-          -o /home/${user}/media/videos/youtube/%(title)s.%(ext)s
-        '';
+      files = {
+        ".config/mpv/mpv.conf" = {
+          text = mpvConfFromAttrs (mpvSettings user);
+          clobber = true;
+        };
+
+        ".config/mpv/input.conf" = {
+          text = inputConfFromAttrs mpvBindings;
+          clobber = true;
+        };
+
+        # ".config/mpv/shaders/FSR.glsl" = {
+        #   source = fsrShader;
+        #   clobber = true;
+        # };
+
+        ".config/yt-dlp/config" = {
+          text = ''
+            -o /home/${user}/media/videos/youtube/%(title)s.%(ext)s
+          '';
+          clobber = true;
+        };
       };
     });
   };

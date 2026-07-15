@@ -94,31 +94,47 @@ in {
         fontPkg
       ];
 
-      files.".icons/default/index.theme".text = ''
-        [Icon Theme]
-        Name=Default
-        Comment=Default cursor theme
-        Inherits=${cursorTheme}
-      '';
+      files = {
+        ".icons/default/index.theme" = {
+          text = ''
+            [Icon Theme]
+            Name=Default
+            Comment=Default cursor theme
+            Inherits=${cursorTheme}
+          '';
+          clobber = true;
+        };
 
-      xdg.config.files = {
-        "gtk-2.0/gtkrc".text = gtk2Rc;
+        ".config/gtk-2.0/gtkrc" = {
+          text = gtk2Rc;
+          clobber = true;
+        };
 
-        "gtk-3.0/settings.ini" = {
+        ".config/gtk-3.0/settings.ini" = {
           generator = toGtkIni;
           value = {
             Settings = gtk3Settings;
           };
+          clobber = true;
         };
-        "gtk-3.0/gtk.css".text = gtkCss;
 
-        "gtk-4.0/settings.ini" = {
+        ".config/gtk-3.0/gtk.css" = {
+          text = gtkCss;
+          clobber = true;
+        };
+
+        ".config/gtk-4.0/settings.ini" = {
           generator = toGtkIni;
           value = {
             Settings = gtk4Settings;
           };
+          clobber = true;
         };
-        "gtk-4.0/gtk.css".text = gtkCss;
+
+        ".config/gtk-4.0/gtk.css" = {
+          text = gtkCss;
+          clobber = true;
+        };
       };
     });
   };

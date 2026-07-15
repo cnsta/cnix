@@ -71,9 +71,15 @@ in {
     })
     (mkIf (acct.defaultUsers != []) {
       hjem.users = genAttrs acct.defaultUsers (_: {
-        xdg.config.files = {
-          "helix/config.toml".source = ./config.toml;
-          "helix/languages.toml".source = ./languages.toml;
+        files = {
+          ".config/helix/config.toml" = {
+            source = ./config.toml;
+            clobber = true;
+          };
+          ".config/helix/languages.toml" = {
+            source = ./languages.toml;
+            clobber = true;
+          };
         };
       });
     })

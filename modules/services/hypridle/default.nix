@@ -40,7 +40,10 @@ in {
   config = mkIf cfg.enable {
     services.hypridle.enable = true;
     hjem.users = genAttrs acct.defaultUsers (_: {
-      xdg.config.files."hypr/hypridle.conf".text = clib.toHyprconf settings;
+      files.".config/hypr/hypridle.conf" = {
+        text = clib.toHyprconf settings;
+        clobber = true;
+      };
     });
   };
 }

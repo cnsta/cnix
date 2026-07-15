@@ -114,21 +114,24 @@ in {
     environment.variables.NIXOS_OZONE_WL = "1";
 
     hjem.users = lib.genAttrs acct.defaultUsers (_: {
-      xdg.config.files."hypr/hyprland.lua".text = clib.toHyprlua {
-        config = lib.foldl' lib.recursiveUpdate {} cfg.lua.configParts;
-        inherit
-          (cfg.lua)
-          env
-          monitors
-          workspaceRules
-          windowRules
-          layerRules
-          curves
-          animations
-          gestures
-          binds
-          startup
-          ;
+      files.".config/hypr/hyprland.lua" = {
+        text = clib.toHyprlua {
+          config = lib.foldl' lib.recursiveUpdate {} cfg.lua.configParts;
+          inherit
+            (cfg.lua)
+            env
+            monitors
+            workspaceRules
+            windowRules
+            layerRules
+            curves
+            animations
+            gestures
+            binds
+            startup
+            ;
+        };
+        clobber = true;
       };
     });
   };
