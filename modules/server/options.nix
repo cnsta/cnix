@@ -90,6 +90,7 @@ in {
                   "local"
                   "public"
                   "tunnel"
+                  "dedicated-tunnel"
                   "tailscale"
                 ];
                 default = "local";

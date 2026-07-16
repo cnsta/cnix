@@ -18,7 +18,7 @@
     ./locate
     ./mullvad
     ./nfs
-    ./ssh
+    ./openssh
     ./syncthing
     ./pipewire
     ./polkit

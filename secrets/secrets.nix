@@ -43,6 +43,7 @@ in {
   "mailRspamdCtrlPw.age".publicKeys = sobotka;
   "immichOidcSecret.age".publicKeys = sobotka;
   "forgejoOidcSecret.age".publicKeys = sobotka;
+  "forgejoCloudflared.age".publicKeys = sobotka;
   "memosOidcSecret.age".publicKeys = sobotka;
   "autheliaCloudflared.age".publicKeys = sobotka;
   "grafanaSecretKey.age".publicKeys = sobotka;

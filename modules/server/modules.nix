@@ -391,8 +391,11 @@
     forgejo = when "s" {
       enable = true;
       subdomain = "git";
-      exposure = "tunnel";
+      exposure = "dedicated-tunnel";
       port = 3031;
+      ingress = {
+        "ssh.git" = "ssh://localhost:22";
+      };
       homepage = {
         name = "Forgejo";
         description = "A painless, self-hosted Git service";

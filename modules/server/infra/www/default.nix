@@ -13,6 +13,8 @@
     ;
   cfg = config.cnix.server.infra.www;
 in {
+  imports = [./dedicated-tunnels.nix];
+
   options.cnix.server.infra.www = {
     enable = mkEnableOption {
       description = "Enable personal website";
@@ -182,7 +184,7 @@ in {
               acc: _: svc:
                 acc
                 // lib.mapAttrs' (sub: url: lib.nameValuePair "${sub}.${cfg.url}" {service = url;}) svc.ingress
-            ) {} (lib.filterAttrs (_: svc: svc.enable) config.cnix.server.services);
+            ) {} (lib.filterAttrs (_: svc: svc.enable && svc.exposure != "dedicated-tunnel") config.cnix.server.services);
           in
             autoIngress
             // extraIngress

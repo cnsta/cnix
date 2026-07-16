@@ -5,7 +5,7 @@
       publicDomain = config.cnix.settings.accounts.domains.public;
       tailscaleDomain = "ts.${publicDomain}";
     in
-      if service.exposure == "tunnel" || service.exposure == "public"
+      if service.exposure == "tunnel" || service.exposure == "dedicated-tunnel" || service.exposure == "public"
       then publicDomain
       else if service.exposure == "tailscale"
       then tailscaleDomain

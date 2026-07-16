@@ -7,7 +7,7 @@
 }: let
   hosts = lib.attrNames outputs.nixosConfigurations;
   inherit (lib) mkIf mkEnableOption;
-  cfg = config.cnix.services.ssh;
+  cfg = config.cnix.services.openssh;
 
   hostsWithKeys =
     builtins.filter (
@@ -15,7 +15,7 @@
     )
     hosts;
 in {
-  options.cnix.services.ssh.enable = mkEnableOption "Enables openssh";
+  options.cnix.services.openssh.enable = mkEnableOption "Enables openssh";
 
   config = mkIf cfg.enable {
     programs.ssh = {

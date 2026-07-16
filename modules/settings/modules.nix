@@ -123,6 +123,7 @@ in {
       locate = all;
       mullvad = none;
       nfs = none;
+      openssh = all;
       pipewire = en "kbt";
       polkit = en "kbt";
       power = when "kbt" {
@@ -136,7 +137,6 @@ in {
         scheduler = "scx_lavd";
         flags = "--performance";
       };
-      ssh = all;
       udisks = en "kbt";
       virtualisation = none;
       zram = all;
