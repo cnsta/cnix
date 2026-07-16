@@ -8,7 +8,7 @@
 }: let
   services = config.cnix.server.services;
 
-  readSecret = name: lib.removeSuffix "\n" (builtins.readFile (self + "/secrets/${name}OidcSecret.txt"));
+  readSecret = name: lib.trim (builtins.readFile (self + "/secrets/${name}OidcSecret.txt"));
 
   mkClient = {
     client_id,
