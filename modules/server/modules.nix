@@ -305,7 +305,7 @@
       homepage = {
         name = "Navidrome";
         description = "Music streaming service";
-        icon = "navidrome.svg";
+        icon = "navidrome.webp";
         category = "Media";
       };
     };
@@ -318,7 +318,7 @@
       homepage = {
         name = "Octo-Fiesta";
         description = "Subsonic proxy";
-        icon = "navidrome.svg";
+        icon = "navidrome.webp";
         category = "Media";
       };
     };
