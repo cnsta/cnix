@@ -614,7 +614,7 @@ in {
 
       keepalived = when "sz" {
         enable = true;
-        healthCheck = "${pkgs.systemd}/bin/systemctl is-active --quiet traefik.service";
+        healthCheck = "${pkgs.ldns}/bin/drill -Q -p 5335 @127.0.0.1 . SOA";
         interface = mkMerge [
           (when "s" "enp6s0")
           (when "z" "enu1u1")

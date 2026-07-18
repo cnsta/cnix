@@ -68,11 +68,11 @@ in {
       vrrpScripts = lib.optionalAttrs hasCheck {
         chk_service = {
           script = cfg.healthCheck;
-          interval = 2;
-          timeout = 3;
+          interval = 5;
+          timeout = 4;
           rise = 2;
-          fall = 2;
-          weight = -20;
+          fall = 3;
+          weight = -15;
         };
       };
 

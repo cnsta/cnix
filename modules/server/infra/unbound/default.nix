@@ -8,7 +8,7 @@
   unit = "unbound";
   cfg = config.cnix.server.infra.${unit};
   srv = config.cnix.server;
-  vip = "192.168.88.69";
+  webIp = "192.168.88.14";
   domain = config.cnix.server.domain;
   localIp = config.cnix.settings.network.localIp;
 
@@ -21,7 +21,7 @@
         fqdn = clib.server.mkFullDomain config s;
       in
         if s != null && s.enable && s.routed && s.subdomain != null
-        then [''"${fqdn}. A ${vip}"'']
+        then [''"${fqdn}. A ${webIp}"'']
         else []
     )
     svcNames
@@ -126,9 +126,9 @@ in {
             ];
             local-data =
               [
-                ''"traefik.${domain}. A ${vip}"''
-                ''"rspamd.${domain}. A ${vip}"''
-                ''"login.${domain}. A ${vip}"''
+                ''"traefik.${domain}. A ${webIp}"''
+                ''"rspamd.${domain}. A ${webIp}"''
+                ''"login.${domain}. A ${webIp}"''
               ]
               ++ localARecords;
           };
