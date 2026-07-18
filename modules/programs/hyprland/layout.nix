@@ -96,14 +96,7 @@ in {
           }
           {
             match = {
-              class = "^(feh)$";
-            };
-            float = true;
-            center = true;
-          }
-          {
-            match = {
-              class = "^(oculante)$";
+              class = "^(swayimg)$";
             };
             float = true;
             center = true;

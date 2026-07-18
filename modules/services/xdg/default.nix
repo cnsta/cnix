@@ -9,7 +9,7 @@ with lib; let
   acct = config.cnix.settings.accounts;
 
   fileManager = "org.gnome.Nautilus.desktop";
-  imageManager = "feh.desktop";
+  imageManager = "swayimg.desktop";
   textEditor = "Helix.desktop";
   browser =
     if

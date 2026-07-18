@@ -98,8 +98,8 @@ with lib; let
         shadow_passes = 1;
         shadow_boost = 0.5;
         color = "rgba(FFFFFFFF)";
-        font_size = 85;
-        font_family = "IosevkaTermSlab Nerd Font Mono ExtraBold";
+        font_size = 80;
+        font_family = "OverpassM Nerd Font Mono Light";
         position = "0, 300";
         halign = "center";
         valign = "center";

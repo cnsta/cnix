@@ -86,6 +86,7 @@
     brightnessctl
     gnome-calculator
     overskride
+    nwg-bar
   ];
   guiCapture = with pkgs; [
     swappy
@@ -101,8 +102,7 @@
   ];
   guiImage = with pkgs; [
     imagemagick
-    feh
-    loupe
+    swayimg
     tesseract
   ];
   guiTheming = with pkgs; [
@@ -122,6 +122,8 @@
   guiMedia = with pkgs; [
     feishin
     nautilus
+    file-roller
+    xdg-terminal-exec # needed for launching tui apps (helix) through nautilus
   ];
   gui = guiSystem ++ guiCapture ++ guiImage ++ guiTheming ++ guiWayland ++ guiMedia;
 
