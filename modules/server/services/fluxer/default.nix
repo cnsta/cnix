@@ -491,6 +491,14 @@ in {
           base "media-proxy"
           // {
             image = img "media-proxy";
+            extraOptions =
+              netOpts "media-proxy"
+              ++ [
+                "--health-cmd=bash -c 'for i in 1 2 3 4 5 6 7 8 9 10; do (exec 3<>/dev/tcp/127.0.0.1/8080 && printf \"GET /_health HTTP/1.0\\r\\n\\r\\n\" >&3 && grep -q 200 <&3) 2>/dev/null && exit 0; sleep 1; done; exit 1'"
+                "--health-interval=30s"
+                "--health-retries=3"
+                "--health-timeout=15s"
+              ];
             environment =
               commonEnv
               // {
@@ -512,6 +520,14 @@ in {
           base "app-proxy"
           // {
             image = img "app-proxy-self-hosted";
+            extraOptions =
+              netOpts "app-proxy"
+              ++ [
+                "--health-cmd=sh -c 'for i in 1 2 3 4 5 6 7 8 9 10; do curl -sf http://localhost:8080/_health && exit 0; sleep 1; done; exit 1'"
+                "--health-interval=30s"
+                "--health-retries=3"
+                "--health-timeout=15s"
+              ];
             environment = {
               FLUXER_APP_PROXY_HOST = "0.0.0.0";
               FLUXER_APP_PROXY_PORT = "8080";
