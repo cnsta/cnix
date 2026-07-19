@@ -15,6 +15,7 @@
     commonModules = [
       {_module.args.clib = self.lib.clib;}
       (self + "/system")
+      (self + "/scripts")
       self.modules.cnix.programs
       self.modules.cnix.services
       self.modules.cnix.settings
@@ -34,7 +35,6 @@
     };
 
     workstationModules = [
-      (self + "/scripts")
       userModule
     ];
 
