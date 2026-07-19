@@ -153,5 +153,22 @@ in {
       waybar = none;
       xdg = en "kbt";
     };
+
+    scripts = {
+      spawn = none;
+      spawn-or-focus = none;
+      vpnswitcher = none;
+      cnix-update-available = none;
+      choosepaper = en "kbt";
+      pwvucontrol-toggle = en "kbt";
+      calcurse-toggle = en "k";
+      volume-control = none;
+      extract = all;
+      waybar-systemd = none;
+      waybar-progress = none;
+      dunst = none;
+      mako = none;
+      mako-toggle = none;
+    };
   };
 }

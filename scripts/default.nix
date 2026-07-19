@@ -1,69 +1,73 @@
-{pkgs, ...}:
-with builtins; let
-  mkScript = {
-    name,
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.cnix.scripts;
+
+  mkScript = name: {
     runtimeInputs,
     file,
   }:
     pkgs.writeShellApplication {
       name = "${name}.sh";
       inherit runtimeInputs;
-      text = readFile file;
+      text = builtins.readFile file;
     };
 
-  scripts = with pkgs; [
-    (mkScript {
-      name = "spawn";
+  scriptDefs = with pkgs; {
+    spawn = {
       runtimeInputs = [niri];
       file = ./bin/spawn.sh;
-    })
-    (mkScript {
-      name = "spawn-or-focus";
+    };
+
+    spawn-or-focus = {
       runtimeInputs = [niri];
       file = ./bin/spawn-or-focus.sh;
-    })
-    (mkScript {
-      name = "vpnswitcher";
+    };
+
+    vpnswitcher = {
       runtimeInputs = [
         fzf
         networkmanager
       ];
       file = ./bin/vpnswitcher.sh;
-    })
-    (mkScript {
-      name = "cnix-update-available";
+    };
+
+    cnix-update-available = {
       runtimeInputs = [waybar];
       file = ./bin/cnix-update-available.sh;
-    })
-    (mkScript {
-      name = "choosepaper";
+    };
+
+    choosepaper = {
       runtimeInputs = [
         fzf
         swaybg
         pistol
       ];
       file = ./bin/choosepaper.sh;
-    })
-    (mkScript {
-      name = "pwvucontrol-toggle";
+    };
+
+    pwvucontrol-toggle = {
       runtimeInputs = [pwvucontrol];
       file = ./bin/pwvucontrol-toggle.sh;
-    })
-    (mkScript {
-      name = "calcurse-toggle";
+    };
+
+    calcurse-toggle = {
       runtimeInputs = [calcurse];
       file = ./bin/calcurse-toggle.sh;
-    })
-    (mkScript {
-      name = "volume-control";
+    };
+
+    volume-control = {
       runtimeInputs = [
         wireplumber
         libnotify
       ];
       file = ./bin/volume-control.sh;
-    })
-    (mkScript {
-      name = "extract";
+    };
+
+    extract = {
       runtimeInputs = [
         zip
         unzip
@@ -71,36 +75,45 @@ with builtins; let
         p7zip
       ];
       file = ./bin/extract.sh;
-    })
-    (mkScript {
-      name = "waybar-systemd";
+    };
+
+    waybar-systemd = {
       runtimeInputs = [hyprland];
       file = ./bin/waybar-systemd.sh;
-    })
-    (mkScript {
-      name = "waybar-progress";
+    };
+
+    waybar-progress = {
       runtimeInputs = [hyprland];
       file = ./bin/waybar-progress.sh;
-    })
-    (mkScript {
-      name = "dunst";
+    };
+
+    dunst = {
       runtimeInputs = [
         hyprland
         dbus
       ];
       file = ./bin/dunst.sh;
-    })
-    (mkScript {
-      name = "mako";
+    };
+
+    mako = {
       runtimeInputs = [hyprland];
       file = ./bin/mako.sh;
-    })
-    (mkScript {
-      name = "mako-toggle";
+    };
+
+    mako-toggle = {
       runtimeInputs = [hyprland];
       file = ./bin/mako-toggle.sh;
-    })
-  ];
+    };
+  };
 in {
-  environment.systemPackages = scripts;
+  options.cnix.scripts =
+    lib.mapAttrs (name: _: {
+      enable = lib.mkEnableOption "${name} script";
+    })
+    scriptDefs;
+
+  config.environment.systemPackages = lib.pipe scriptDefs [
+    (lib.filterAttrs (name: _: cfg.${name}.enable))
+    (lib.mapAttrsToList mkScript)
+  ];
 }
