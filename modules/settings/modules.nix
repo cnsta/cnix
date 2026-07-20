@@ -164,6 +164,7 @@ in {
       calcurse-toggle = en "k";
       volume-control = none;
       extract = all;
+      update-images = en "sz";
       waybar-systemd = none;
       waybar-progress = none;
       dunst = none;

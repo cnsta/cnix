@@ -69,12 +69,23 @@
 
     extract = {
       runtimeInputs = [
-        zip
-        unzip
         gnutar
+        gzip
+        bzip2
+        xz
+        unzip
+        unrar
         p7zip
+        cpio
+        cabextract
+        qpdf
       ];
       file = ./bin/extract.sh;
+    };
+
+    update-images = {
+      runtimeInputs = [podman];
+      file = ./bin/update-images.sh;
     };
 
     waybar-systemd = {

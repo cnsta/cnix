@@ -1,52 +1,77 @@
-#!/usr/bin/env bash
-# yanked from NotAShelf
-SAVEIFS=$IFS
-IFS="$(printf '\n\t')"
-
-function extract {
+# Based on @NotAShelf's extract script
+extract() {
   if [ $# -eq 0 ]; then
-    # display usage if no parameters given
-    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz|.zlib|.cso>"
-    echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
+    echo "Usage: extract <archive> [archive ...]" >&2
+    echo "Each archive is unpacked into a directory named after the file." >&2
+    return 1
   fi
+
+  local n abs base target i rc=0
+
   for n in "$@"; do
     if [ ! -f "$n" ]; then
-      echo "'$n' - file doesn't exist"
-      return 1
+      echo "extract: '$n' - file doesn't exist" >&2
+      rc=1
+      continue
     fi
 
-    case "''${n%,}" in
-    *.cbt | *.tar.bz2 | *.tar.gz | *.tar.xz | *.tbz2 | *.tgz | *.txz | *.tar)
-      tar zxvf "$n"
-      ;;
-    *.lzma) unlzma ./"$n" ;;
-    *.bz2) bunzip2 ./"$n" ;;
-    *.cbr | *.rar) unrar x -ad ./"$n" ;;
-    *.gz) gunzip ./"$n" ;;
-    *.cbz | *.epub | *.zip) unzip ./"$n" ;;
-    *.z) uncompress ./"$n" ;;
-    *.7z | *.apk | *.arj | *.cab | *.cb7 | *.chm | *.deb | *.iso | *.lzh | *.msi | *.pkg | *.rpm | *.udf | *.wim | *.xar | *.vhd)
-      7z x ./"$n"
-      ;;
-    *.xz) unxz ./"$n" ;;
-    *.exe) cabextract ./"$n" ;;
-    *.cpio) cpio -id <./"$n" ;;
-    *.cba | *.ace) unace x ./"$n" ;;
-    *.zpaq) zpaq x ./"$n" ;;
-    *.arc) arc e ./"$n" ;;
-    *.cso) ciso 0 ./"$n" ./"$n.iso" &&
-      extract "$n.iso" && \rm -f "$n" ;;
-    *.zlib) zlib-flate -uncompress <./"$n" >./"$n.tmp" &&
-      mv ./"$n.tmp" ./"''${n%.*zlib}" && rm -f "$n" ;;
-    *.dmg)
-      hdiutil mount ./"$n" -mountpoint "./$n.mounted"
-      ;;
-    *)
-      echo "extract: '$n' - unknown archive method"
-      return 1
-      ;;
-    esac
-  done
-}
+    # Absolute path to the archive, so tools can run from inside the target dir
+    abs=$(cd "$(dirname -- "$n")" && pwd)/$(basename -- "$n")
+    base=$(basename -- "$n")
 
-IFS=$SAVEIFS
+    # Directory name = file name minus its archive extension(s)
+    case "$base" in
+    *.tar.bz2 | *.tar.gz | *.tar.xz | *.tar.zst) target=${base%.tar.*} ;;
+    *.*) target=${base%.*} ;;
+    *) target=${base}.extracted ;;
+    esac
+
+    # Never clobber an existing file or directory
+    if [ -e "$target" ]; then
+      i=1
+      while [ -e "${target}_$i" ]; do i=$((i + 1)); done
+      target="${target}_$i"
+    fi
+
+    mkdir -p -- "$target" || {
+      rc=1
+      continue
+    }
+    echo "extract: '$n' -> '$target/'"
+
+    case "$base" in
+    *.cbt | *.tar.bz2 | *.tar.gz | *.tar.xz | *.tar.zst | *.tbz2 | *.tgz | *.txz | *.tar)
+      tar xvf "$abs" -C "$target"
+      ;; # tar auto-detects compression
+    *.lzma) unlzma -c -- "$abs" >"$target/${base%.lzma}" ;;
+    *.bz2) bunzip2 -c -- "$abs" >"$target/${base%.bz2}" ;;
+    *.gz) gunzip -c -- "$abs" >"$target/${base%.gz}" ;;
+    *.xz) unxz -c -- "$abs" >"$target/${base%.xz}" ;;
+    *.z | *.Z) gunzip -c -- "$abs" >"$target/${base%.*}" ;;
+    *.cbr | *.rar) unrar x -- "$abs" "$target/" ;;
+    *.cbz | *.epub | *.zip | *.jar | *.whl) unzip -q -- "$abs" -d "$target" ;;
+    *.7z | *.apk | *.arj | *.cab | *.cb7 | *.chm | *.deb | *.iso | *.lzh | *.msi | *.pkg | *.rpm | *.udf | *.wim | *.xar | *.vhd)
+      7z x "$abs" -o"$target"
+      ;;
+    *.exe) cabextract -d "$target" -- "$abs" ;;
+    *.cpio) (cd "$target" && cpio -idv <"$abs") ;;
+    *.cba | *.ace) unace x "$abs" "$target/" ;;
+    *.zpaq) zpaq x "$abs" -to "$target" ;;
+    *.arc) (cd "$target" && arc e "$abs") ;;
+    *.cso) ciso 0 "$abs" "$target/${base%.cso}.iso" ;;
+    *.zlib) zlib-flate -uncompress <"$abs" >"$target/${base%.zlib}" ;;
+    *.dmg) hdiutil attach -- "$abs" -mountpoint "$target" ;;
+    *)
+      echo "extract: '$n' - unknown archive type" >&2
+      rmdir -- "$target" 2>/dev/null || true
+      rc=1
+      continue
+      ;;
+    esac || {
+      echo "extract: '$n' - extraction failed" >&2
+      rc=1
+    }
+  done
+
+  return "$rc"
+}
