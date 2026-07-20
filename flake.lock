@@ -82,11 +82,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1779385255,
-        "narHash": "sha256-bAabZxYba5VCaBGuDWzsqUTkgsUntPVWQJahEvV/otI=",
+        "lastModified": 1784554247,
+        "narHash": "sha256-lo7+MAOvCQa9NUfVJ51kZHs9jZ/QiAUkE819cdbBnWc=",
         "ref": "refs/heads/main",
-        "rev": "40b7e5d4e81b6b11701981126046ef5f11ba2161",
-        "revCount": 50,
+        "rev": "555f89c580570d0b36273cf080b3e187ee1f845a",
+        "revCount": 53,
         "type": "git",
         "url": "https://git.cnst.dev/cnst/byt.git"
       },

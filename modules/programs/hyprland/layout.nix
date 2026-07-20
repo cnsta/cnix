@@ -65,7 +65,7 @@ in {
           }
           {
             match = {
-              title = "^(Import VPN configuration)$";
+              title = "^(Import VPN configurations)$";
             };
             float = true;
             center = true;

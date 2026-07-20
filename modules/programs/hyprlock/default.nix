@@ -61,7 +61,6 @@ with lib; let
         fail_color = "rgba(FF4D4DFF) rgba(C9184AFF) 45deg";
         fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
         swap_font_color = true;
-        ignore_empty_input = true;
         fade_on_empty = false;
         fade_timeout = 0;
         placeholder_text = "<i> </i>";
@@ -116,6 +115,15 @@ with lib; let
         halign = "center";
         valign = "center";
         border_size = 3;
+      }
+      {
+        monitor = "";
+        path = "/home/$USER/.wm";
+        size = 50;
+        position = "-30, 30";
+        halign = "right";
+        valign = "bottom";
+        border_size = 0;
       }
       {
         monitor = "";
