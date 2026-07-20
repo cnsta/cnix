@@ -8,6 +8,7 @@
   when = clib.mkWhen host;
   all = clib.mkAllEn host;
   allWhen = clib.mkAll host;
+  per = clib.mkPer host;
   none = clib.mkNone host;
 in {
   config.cnix = {
@@ -111,6 +112,12 @@ in {
     services = {
       agenix = all;
       blueman = none;
+      cifs = per {
+        t = {
+          enable = true;
+          shares."/mnt/share".device = "//192.168.88.223/libellux";
+        };
+      };
       dbus = all;
       flatpak = en "kbt";
       fwupd = en "kbts";

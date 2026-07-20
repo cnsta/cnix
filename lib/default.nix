@@ -32,6 +32,14 @@ in {
   mkAllEn = _host: {enable = true;};
   mkNone = _host: lib.mkIf false {enable = true;};
 
+  mkPer = host: let
+    match = matchScopes "mkPer" host;
+  in
+    cases:
+      lib.mkMerge (
+        lib.mapAttrsToList (letters: attrs: lib.mkIf (match letters) attrs) cases
+      );
+
   # hyprland-specific
   inherit (import ./hyprlua.nix {inherit lib;}) toHyprlua;
 

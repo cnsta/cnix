@@ -486,19 +486,6 @@
       };
     };
 
-    qui = when "s" {
-      enable = false;
-      subdomain = "qui";
-      exposure = "local";
-      port = 7476;
-      homepage = {
-        name = "qui";
-        description = "A web interface for qBittorrent";
-        icon = "qui.svg";
-        category = "Downloads";
-      };
-    };
-
     home-assistant = when "s" {
       enable = true;
       subdomain = "ha";

@@ -64,7 +64,6 @@ in {
   "sportarrEnvironment.age".publicKeys = sobotka;
   "sabnzbdEnvironment.age".publicKeys = sobotka;
   "qbtEnvironment.age".publicKeys = sobotka;
-  "quiEnvironment.age".publicKeys = sobotka;
   "minifluxEnvironment.age".publicKeys = sobotka;
   "minifluxPgPwd.age".publicKeys = sobotka;
   "harmoniaSignKey.age".publicKeys = sobotka;
@@ -85,5 +84,5 @@ in {
   "traefikEnv.age".publicKeys = sobotka ++ ziggy;
 
   # toothpc-specific
-  "smb-credentials.age".publicKeys = toothpc;
+  "toothpcSmbCredentials.age".publicKeys = toothpc;
 }
