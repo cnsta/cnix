@@ -34,6 +34,30 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    systemd = {
+      slices.system-dns = {
+        description = "Latency-sensitive DNS services";
+        sliceConfig.MemoryMin = "512M";
+      };
+      services = {
+        unbound.serviceConfig.Slice = "system-dns.slice";
+        dns-io-latency = {
+          description = "Apply io.latency protection to system-dns.slice";
+          wantedBy = ["multi-user.target"];
+          after = ["unbound.service" "podman-pihole.service"];
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+          };
+          script = ''
+            p=/sys/fs/cgroup/system.slice/system-dns.slice/io.latency
+            echo "259:0 target=20" > "$p"
+            echo "254:2 target=20" > "$p"
+          '';
+        };
+      };
+    };
+
     services = {
       # resolved.enable = lib.mkForce false;
       unbound = {

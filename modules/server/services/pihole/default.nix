@@ -47,6 +47,7 @@ in {
           "--cap-add=NET_ADMIN"
           "--cap-add=SYS_NICE"
           "--cap-add=SYS_TIME"
+          "--cgroup-parent=system-dns.slice"
         ];
       };
     };

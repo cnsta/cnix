@@ -60,7 +60,7 @@ in {
 
         staticConfigOptions = {
           log = {
-            level = "DEBUG";
+            level = "INFO";
           };
 
           accesslog = {

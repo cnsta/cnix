@@ -29,7 +29,10 @@
     fsType = "xfs";
   };
 
-  boot.initrd.luks.devices."luks-9e7336d1-190e-447e-a5db-2541c74c4d6e".device = "/dev/disk/by-uuid/9e7336d1-190e-447e-a5db-2541c74c4d6e";
+  boot.initrd.luks.devices."luks-9e7336d1-190e-447e-a5db-2541c74c4d6e" = {
+    device = "/dev/disk/by-uuid/9e7336d1-190e-447e-a5db-2541c74c4d6e";
+    bypassWorkqueues = true;
+  };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/C455-BE5D";
@@ -45,7 +48,10 @@
     fsType = "xfs";
   };
 
-  boot.initrd.luks.devices."luks-49e04615-805e-4a08-a625-c6e464e02697".device = "/dev/disk/by-uuid/49e04615-805e-4a08-a625-c6e464e02697";
+  boot.initrd.luks.devices."luks-49e04615-805e-4a08-a625-c6e464e02697" = {
+    device = "/dev/disk/by-uuid/49e04615-805e-4a08-a625-c6e464e02697";
+    bypassWorkqueues = true;
+  };
 
   swapDevices = [];
 

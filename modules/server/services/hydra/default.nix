@@ -47,12 +47,20 @@ in {
       }
     ];
 
-    systemd.services.hydra-evaluator.environment.GC_DONT_GC = "true";
     boot.binfmt.emulatedSystems = ["aarch64-linux"];
-    systemd.services.hydra-evaluator.serviceConfig = {
-      MemoryHigh = "8G";
-      MemoryMax = "12G";
-      CPUWeight = 30;
+    systemd = {
+      services.hydra-evaluator = {
+        environment.GC_DONT_GC = "true";
+        serviceConfig = {
+          MemoryHigh = "8G";
+          MemoryMax = "12G";
+          CPUWeight = 30;
+        };
+      };
+      slices.system-hydra.sliceConfig = {
+        IOWriteBandwidthMax = "/dev/nvme0n1 100M";
+        IOWriteIOPSMax = "/dev/nvme0n1 10000";
+      };
     };
 
     services.hydra = {
@@ -73,7 +81,7 @@ in {
               "i686-linux"
               "aarch64-linux"
             ];
-            maxJobs = 8;
+            maxJobs = 3;
             supportedFeatures = [
               "kvm"
               "big-parallel"

@@ -10,8 +10,14 @@
 
   boot.initrd.luks.devices = {
     # root
-    "luks-4f289fde-55ed-4b05-a6ee-d396db2a887b".device = "/dev/disk/by-uuid/4f289fde-55ed-4b05-a6ee-d396db2a887b";
-    "luks-47b35d4b-467a-4637-a5f9-45177da62897".device = "/dev/disk/by-uuid/47b35d4b-467a-4637-a5f9-45177da62897";
+    "luks-4f289fde-55ed-4b05-a6ee-d396db2a887b" = {
+      device = "/dev/disk/by-uuid/4f289fde-55ed-4b05-a6ee-d396db2a887b";
+      bypassWorkqueues = true;
+    };
+    "luks-47b35d4b-467a-4637-a5f9-45177da62897" = {
+      device = "/dev/disk/by-uuid/47b35d4b-467a-4637-a5f9-45177da62897";
+      bypassWorkqueues = true;
+    };
 
     # zpool
     # sda
@@ -23,9 +29,15 @@
     # sdd
     "luks-96118bd7-e67a-4016-a787-6d83b04f3579".device = "/dev/disk/by-uuid/96118bd7-e67a-4016-a787-6d83b04f3579";
     # logs
-    "luks-3c46303f-b8b5-476a-98f4-e0d455880ca5".device = "/dev/disk/by-uuid/3c46303f-b8b5-476a-98f4-e0d455880ca5";
+    "luks-3c46303f-b8b5-476a-98f4-e0d455880ca5" = {
+      device = "/dev/disk/by-uuid/3c46303f-b8b5-476a-98f4-e0d455880ca5";
+      bypassWorkqueues = true;
+    };
     # cache
-    "luks-b9191e25-9baa-4e0c-b18c-b927d56841ad".device = "/dev/disk/by-uuid/b9191e25-9baa-4e0c-b18c-b927d56841ad";
+    "luks-b9191e25-9baa-4e0c-b18c-b927d56841ad" = {
+      device = "/dev/disk/by-uuid/b9191e25-9baa-4e0c-b18c-b927d56841ad";
+      bypassWorkqueues = true;
+    };
   };
 
   networking = {

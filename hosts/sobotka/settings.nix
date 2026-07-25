@@ -68,12 +68,13 @@
     nix = {
       enable = true;
       cpuWeight = 30;
-      ioWeight = 30;
       cpuQuota = "2400%";
       memoryHigh = "32G";
       memoryMax = "40G";
       maxJobs = 4;
       cores = 6;
+      ioWriteBandwidthMax = ["/dev/nvme0n1 200M"];
+      ioWriteIOPSMax = ["/dev/nvme0n1 20000"];
     };
 
     peripherals = {
