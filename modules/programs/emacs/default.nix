@@ -4,7 +4,6 @@
   pkgs,
   config,
   lib,
-  inputs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
@@ -22,10 +21,6 @@ in {
     cnix.programs.emacs.enable = mkEnableOption "Enables anyrun";
   };
   config = mkIf cfg.enable {
-    nixpkgs.overlays = [
-      inputs.emacs-overlay.overlays.default
-    ];
-
     user.packages = with pkgs; [
       ## Emacs itself
       binutils # native-comp needs 'as', provided by this

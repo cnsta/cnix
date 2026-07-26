@@ -7,7 +7,6 @@
   ...
 }: {
   imports = [
-    ./nixpkgs.nix
     ./substituters.nix
     ./users.nix
     ./variables.nix

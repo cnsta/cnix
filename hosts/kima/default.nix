@@ -4,10 +4,6 @@
     ./settings.nix
   ];
 
-  networking = {
-    hostName = "kima";
-  };
-
   # Remove when 'finished' with lightcrazy dev work
   services.udev.extraRules = ''
     # Pulsar X2 CrazyLight (wired) - USB

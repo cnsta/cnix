@@ -1,65 +1,56 @@
 {
   inputs,
   self,
+  withSystem,
+  lib,
   ...
-}: {
-  flake.nixosConfigurations = let
-    inherit (inputs.nixpkgs.lib) nixosSystem;
-    inherit (self) outputs;
+}: let
+  hosts = import ./registry.nix;
 
-    specialArgs = {
-      inherit inputs outputs self;
-      bgs = inputs.dotfiles.lib.bgs;
-    };
-
-    commonModules = [
-      {_module.args.clib = self.lib.clib;}
-      (self + "/system")
-      (self + "/scripts")
-      self.modules.cnix.programs
-      self.modules.cnix.services
-      self.modules.cnix.settings
-      inputs.nix-index-database.nixosModules.default
-      inputs.hjem.nixosModules.default
-    ];
-
-    userModule = {config, ...}: let
-      user = config.cnix.settings.accounts.username;
-    in {
-      cnix.settings.accounts.defaultUsers = [user];
-
-      hjem.users.${user} = {
-        inherit user;
-        directory = "/home/" + user;
-      };
-    };
-
-    workstationModules = [
-      userModule
-    ];
-
-    mkWorkstation = host:
-      nixosSystem {
-        inherit specialArgs;
-        modules = commonModules ++ [host] ++ workstationModules;
-      };
-
-    mkServer = host:
-      nixosSystem {
-        inherit specialArgs;
-        modules =
-          commonModules
-          ++ [
-            host
-            userModule
-            self.modules.cnix.server
-          ];
-      };
+  userModule = {config, ...}: let
+    user = config.cnix.settings.accounts.username;
   in {
-    kima = mkWorkstation ./kima;
-    bunk = mkWorkstation ./bunk;
-    toothpc = mkWorkstation ./toothpc;
-    sobotka = mkServer ./sobotka;
-    ziggy = mkServer ./ziggy;
+    cnix.settings.accounts.defaultUsers = [user];
+
+    hjem.users.${user} = {
+      inherit user;
+      directory = "/home/" + user;
+    };
   };
+
+  mkHost = name: {
+    system,
+    class,
+    ...
+  }:
+    withSystem system ({pkgs, ...}:
+      inputs.nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules =
+          [
+            inputs.nixpkgs.nixosModules.readOnlyPkgs
+            {
+              nixpkgs.pkgs = pkgs;
+              networking.hostName = name;
+              _module.args = {
+                inherit hosts;
+                clib = self.lib.clib;
+                bgs = inputs.dotfiles.lib.bgs;
+                inherit self;
+              };
+            }
+            ./${name}
+            (self + "/system")
+            (self + "/scripts")
+            self.modules.nixos.programs
+            self.modules.nixos.services
+            self.modules.nixos.settings
+            inputs.nix-index-database.nixosModules.default
+            inputs.hjem.nixosModules.default
+            userModule
+          ]
+          ++ lib.optional (class == "server") self.modules.nixos.server;
+      });
+in {
+  flake.nixosConfigurations = lib.mapAttrs mkHost hosts;
 }

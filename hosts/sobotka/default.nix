@@ -41,7 +41,6 @@
   };
 
   networking = {
-    hostName = "sobotka";
     hostId = "784991aa";
   };
 

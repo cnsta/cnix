@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  outputs,
+  hosts,
   ...
 }: let
   inherit
@@ -18,8 +18,9 @@
   acct = config.cnix.settings.accounts;
 
   hostnames = builtins.filter (h: h != config.networking.hostName) (
-    builtins.attrNames outputs.nixosConfigurations
+    builtins.attrNames hosts
   );
+
   hostPatterns = concatStringsSep "," hostnames;
 
   sshConfig = ''

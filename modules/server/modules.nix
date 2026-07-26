@@ -10,7 +10,7 @@
   ip = config.cnix.settings.network.localIp;
   en = clib.mkEn host;
   when = clib.mkWhen host;
-  none = clib.mkNone host;
+  none = lib.mkIf false {};
 
   serviceDefs = {
     homepage = when "s" {

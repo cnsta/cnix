@@ -19,8 +19,21 @@
       perSystem = {
         config,
         pkgs,
+        system,
         ...
       }: {
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          config = {
+            allowUnfree = true;
+            input-fonts.acceptLicense = true;
+            permittedInsecurePackages = ["olm-3.2.16"];
+          };
+          overlays = [
+            inputs.emacs-overlay.overlays.default
+          ];
+        };
+
         treefmt.imports = [./treefmt.nix];
         devShells.default = pkgs.mkShell {
           name = "dots";
@@ -33,16 +46,17 @@
   inputs = {
     # Nix environment
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    systems.url = "github:nix-systems/default-linux";
-    hardware.url = "github:nixos/nixos-hardware";
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -53,51 +67,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Hyprland environment
     hyprland.url = "github:hyprwm/hyprland";
 
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "hyprland/nixpkgs";
-    };
-
-    hyprlock = {
-      url = "github:hyprwm/hyprlock";
-      inputs = {
-        hyprlang.follows = "hyprland/hyprlang";
-        hyprutils.follows = "hyprland/hyprutils";
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
-      };
-    };
-
-    hypridle = {
-      url = "github:hyprwm/hypridle";
-      inputs = {
-        hyprlang.follows = "hyprland/hyprlang";
-        hyprutils.follows = "hyprland/hyprutils";
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
-      };
-    };
-
-    hyprpaper = {
-      url = "github:hyprwm/hyprpaper";
-      inputs = {
-        aquamarine.follows = "hyprland/aquamarine";
-        hyprlang.follows = "hyprland/hyprlang";
-        hyprutils.follows = "hyprland/hyprutils";
-        hyprgraphics.follows = "hyprland/hyprgraphics";
-        hyprwire.follows = "hyprland/hyprwire";
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
-      };
-    };
-
     # Miscellaneous
-    nvf.url = "github:notashelf/nvf";
-    agenix.url = "github:ryantm/agenix";
     helix-flake.url = "github:helix-editor/helix";
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ashell = {
+      url = "github:MalpenZibo/ashell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -109,20 +97,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    git-hooks = {
-      url = "github:cachix/git-hooks.nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ashell = {
-      url = "github:MalpenZibo/ashell";
     };
 
     quickshell = {
@@ -148,6 +125,7 @@
 
     dotfiles = {
       url = "git+https://git.cnst.dev/cnst/dotfiles.git";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     lightcrazy = {
@@ -160,6 +138,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    fonts.url = "git+https://git.cnst.dev/cnst/fonts.git";
+    fonts = {
+      url = "git+https://git.cnst.dev/cnst/fonts.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

@@ -1,26 +1,25 @@
 {
   config,
-  outputs,
+  hosts,
   lib,
   self,
   ...
 }: let
-  hosts = lib.attrNames outputs.nixosConfigurations;
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.openssh;
 
   hostsWithKeys =
     builtins.filter (
-      hostname: builtins.pathExists "${self}/hosts/${hostname}/ssh_host_ed25519_key.pub"
+      hostname: builtins.pathExists (self + "/hosts/${hostname}/ssh_host_ed25519_key.pub")
     )
-    hosts;
+    (builtins.attrNames hosts);
 in {
   options.cnix.services.openssh.enable = mkEnableOption "Enables openssh";
 
   config = mkIf cfg.enable {
     programs.ssh = {
       knownHosts = lib.genAttrs hostsWithKeys (hostname: {
-        publicKeyFile = "${self}/hosts/${hostname}/ssh_host_ed25519_key.pub";
+        publicKeyFile = self + "/hosts/${hostname}/ssh_host_ed25519_key.pub";
       });
     };
 

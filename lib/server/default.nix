@@ -1,26 +1,24 @@
 {lib}: let
+  publicExposures = [
+    "tunnel"
+    "dedicated-tunnel"
+    "public"
+  ];
+
   server = {
     mkDomain = config: service: let
-      localDomain = config.cnix.settings.accounts.domains.local;
-      publicDomain = config.cnix.settings.accounts.domains.public;
-      tailscaleDomain = "ts.${publicDomain}";
+      inherit (config.cnix.settings.accounts.domains) local public;
     in
-      if service.exposure == "tunnel" || service.exposure == "dedicated-tunnel" || service.exposure == "public"
-      then publicDomain
+      if lib.elem service.exposure publicExposures
+      then public
       else if service.exposure == "tailscale"
-      then tailscaleDomain
-      else localDomain;
+      then "ts.${public}"
+      else local;
 
-    mkFullDomain = config: service: let
-      domain = server.mkDomain config service;
-    in "${service.subdomain}.${domain}";
+    mkFullDomain = config: service: "${service.subdomain}.${server.mkDomain config service}";
 
-    mkHostDomain = config: service: let
-      domain = server.mkDomain config service;
-    in "${domain}";
-
-    mkSubDomain = config: service: "${service.subdomain}";
+    mkHostDomain = server.mkDomain;
   };
 in {
-  server = server;
+  inherit server;
 }

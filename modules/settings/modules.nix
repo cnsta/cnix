@@ -1,15 +1,16 @@
 {
   config,
   clib,
+  lib,
   ...
 }: let
   host = config.networking.hostName;
   en = clib.mkEn host;
   when = clib.mkWhen host;
-  all = clib.mkAllEn host;
-  allWhen = clib.mkAll host;
   per = clib.mkPer host;
-  none = clib.mkNone host;
+
+  all = {enable = true;};
+  none = lib.mkIf false {};
 in {
   config.cnix = {
     programs = {
@@ -30,7 +31,7 @@ in {
       inkscape = en "k";
       lact = en "k";
       mysql-workbench = none;
-      nh = allWhen {
+      nh = {
         enable = true;
         clean = {
           enable = true;
