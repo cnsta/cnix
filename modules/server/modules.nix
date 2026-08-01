@@ -6,60 +6,17 @@
   ...
 }: let
   inherit (lib) mkMerge genAttrs;
-  # inherit (clib) all none;
   host = config.networking.hostName;
   ip = config.cnix.settings.network.localIp;
   en = clib.mkEn host;
   when = clib.mkWhen host;
 
   serviceDefs = {
+    # infra
     homepage = when "s" {
       enable = true;
       subdomain = "dash";
-      exposure = "local";
       port = 8082;
-    };
-
-    arr = when "s" {
-      enable = true;
-      routed = false;
-    };
-
-    headscale = when "s" {
-      enable = true;
-      subdomain = "hs";
-      exposure = "tunnel";
-      auth = false;
-      middlewares = ["headscale-cors"];
-      tunnelViaTraefik = true;
-      port = 3004;
-      homepage = {
-        name = "Headscale";
-        description = "Coordination server for Tailscale";
-        icon = "headscale.svg";
-        path = "/admin";
-        category = "Infra";
-      };
-    };
-
-    hydra = when "s" {
-      enable = true;
-      subdomain = "hydra";
-      exposure = "local";
-      port = 3000;
-      homepage = {
-        name = "Hydra";
-        description = "Nix continuous integration";
-        icon = "hydra.svg";
-        category = "Dev";
-      };
-    };
-
-    harmonia = when "s" {
-      enable = true;
-      subdomain = "cache";
-      exposure = "tunnel";
-      port = 5000;
     };
 
     authelia = when "s" {
@@ -72,251 +29,192 @@
         credentialsFile = config.age.secrets.autheliaCloudflared.path;
       };
       homepage = {
-        name = "Authelia";
         description = "Authentication and authorization server";
-        icon = "authelia.svg";
         category = "Infra";
       };
     };
 
-    fluxer = when "s" {
+    lldap = when "s" {
       enable = true;
-      subdomain = "chat";
-      exposure = "tailscale";
-      port = 8480;
+      auth = false;
+      port = 17170;
       homepage = {
-        name = "Fluxer";
-        description = "Open source chat for friends and communities";
-        icon = "fluxer.svg";
-        category = "Communication";
+        name = "lldap";
+        description = "Light LDAP implementation for authentication";
+        category = "Infra";
       };
     };
 
-    cinny = when "s" {
-      enable = false;
-      subdomain = "cinny";
+    headscale = when "s" {
+      enable = true;
+      subdomain = "hs";
       exposure = "tunnel";
-      port = 8088;
+      tunnelViaTraefik = true;
+      auth = false;
+      middlewares = ["headscale-cors"];
+      port = 3004;
       homepage = {
-        name = "Cinny";
-        description = "Matrix client";
-        icon = "cinny.svg";
-        category = "Communication";
+        description = "Coordination server for Tailscale";
+        path = "/admin";
+        category = "Infra";
       };
     };
 
-    memos = when "s" {
+    pihole = when "sz" {
       enable = true;
-      subdomain = "memos";
-      exposure = "tailscale";
-      port = 5230;
+      port = 8053;
       homepage = {
-        name = "Memos";
-        description = "Open-source, self-hosted note-taking";
-        icon = "memos.svg";
-        category = "Cloud";
+        name = "PiHole";
+        icon = "pi-hole.svg";
+        description = "Adblocking and DNS service";
+        path = "/admin";
+        category = "Infra";
       };
     };
 
-    n8n = {
-      enable = false;
-      subdomain = "n8n";
-      exposure = "local";
-      port = 5678;
+    grafana = when "s" {
+      enable = true;
+      port = 3002;
       homepage = {
-        name = "n8n";
-        description = "A workflow automation platform";
-        icon = "n8n.svg";
-        category = "Automation";
+        description = "Full-stack observability";
+        category = "Infra";
       };
     };
 
-    freshrss = {
-      enable = false;
-      subdomain = "rss";
-      exposure = "local";
-      port = 8002;
+    uptime-kuma = when "s" {
+      enable = true;
+      subdomain = "uptime";
+      port = 3001;
       homepage = {
-        name = "FreshRSS";
-        description = "Self-hosted RSS and Atom feed aggregator";
-        icon = "freshrss.svg";
+        description = "Service monitoring tool";
+        category = "Infra";
+      };
+    };
+
+    # dev
+    forgejo = when "s" {
+      enable = true;
+      subdomain = "git";
+      exposure = "dedicated-tunnel";
+      port = 3031;
+      ingress."ssh.git" = "ssh://localhost:22";
+      homepage = {
+        description = "A painless, self-hosted Git service";
+        category = "Dev";
+      };
+    };
+
+    hydra = when "s" {
+      enable = true;
+      port = 3000;
+      homepage = {
+        description = "Nix continuous integration";
+        category = "Dev";
+      };
+    };
+
+    harmonia = when "s" {
+      enable = true;
+      subdomain = "cache";
+      exposure = "tunnel";
+      port = 5000;
+    };
+
+    # media
+    arr = when "s" {
+      enable = true;
+      routed = false;
+    };
+
+    sonarr = when "s" {
+      enable = true;
+      auth = false;
+      port = 8989;
+      homepage = {
+        description = "Internet PVR for Usenet and Torrents";
         category = "Media";
       };
     };
 
-    searxng = when "s" {
-      enable = false;
-      subdomain = "search";
-      exposure = "local";
-      port = 8084;
-      homepage = {
-        name = "SearXNG";
-        description = "Internet metasearch engine";
-        icon = "searxng.svg";
-        category = "Cloud";
-      };
-    };
-
-    ollama = {
-      enable = false;
-      subdomain = "ai";
-      exposure = "local";
-      port = 8001;
-      homepage = {
-        name = "ollama";
-        description = "AI platform";
-        icon = "ollama.svg";
-        category = "Automation";
-      };
-    };
-
-    bazarr = when "s" {
-      enable = false;
-      subdomain = "bazarr";
-      exposure = "local";
+    radarr = when "s" {
+      enable = true;
       auth = false;
-      port = 6767;
+      port = 7878;
       homepage = {
-        name = "Bazarr";
-        description = "Subtitle manager";
-        icon = "bazarr.svg";
+        description = "Movie collection manager";
+        category = "Media";
+      };
+    };
+
+    lidarr = when "s" {
+      enable = true;
+      auth = false;
+      port = 8686;
+      homepage = {
+        description = "Music collection manager";
         category = "Media";
       };
     };
 
     prowlarr = when "s" {
       enable = true;
-      subdomain = "prowlarr";
-      exposure = "local";
       auth = false;
       port = 9696;
       homepage = {
-        name = "Prowlarr";
         description = "PVR indexer";
-        icon = "prowlarr.svg";
-        category = "Media";
-      };
-    };
-
-    flaresolverr = when "s" {
-      enable = true;
-      subdomain = "flaresolverr";
-      exposure = "local";
-      auth = false;
-      port = 8191;
-      homepage = {
-        name = "FlareSolverr";
-        description = "Proxy to bypass Cloudflare/DDoS-GUARD protection";
-        icon = "flaresolverr.svg";
-        category = "Downloads";
-      };
-    };
-
-    grafana = when "s" {
-      enable = true;
-      subdomain = "grafana";
-      exposure = "local";
-      port = 3002;
-      homepage = {
-        name = "Grafana";
-        description = "Full-stack observability";
-        icon = "grafana.svg";
-        category = "Infra";
-      };
-    };
-
-    immich = when "s" {
-      enable = true;
-      subdomain = "immich";
-      exposure = "tailscale";
-      port = 2283;
-      homepage = {
-        name = "immich";
-        description = "Photo collection manager";
-        icon = "immich.svg";
-        category = "Cloud";
-      };
-    };
-
-    lidarr = when "s" {
-      enable = true;
-      subdomain = "lidarr";
-      exposure = "local";
-      auth = false;
-      port = 8686;
-      homepage = {
-        name = "Lidarr";
-        description = "Music collection manager";
-        icon = "lidarr.svg";
-        category = "Media";
-      };
-    };
-
-    sonarr = when "s" {
-      enable = true;
-      subdomain = "sonarr";
-      exposure = "local";
-      auth = false;
-      port = 8989;
-      homepage = {
-        name = "Sonarr";
-        description = "Internet PVR for Usenet and Torrents";
-        icon = "sonarr.svg";
         category = "Media";
       };
     };
 
     sportarr = when "s" {
       enable = false;
-      subdomain = "sportarr";
       exposure = "local";
       port = 1867;
       homepage = {
-        name = "Sportarr";
         description = "Sports PVR for Usenet and Torrents";
-        icon = "sportarr.svg";
         category = "Media";
       };
     };
 
-    sabnzbd = when "s" {
+    seerr = when "s" {
       enable = true;
-      subdomain = "sabnzbd";
-      exposure = "local";
-      auth = false;
-      port = 8085;
+      exposure = "tailscale";
+      port = 5055;
       homepage = {
-        name = "SABnzbd";
-        description = "Free and easy binary newsreader";
-        icon = "sabnzbd.svg";
-        category = "Downloads";
+        description = "Media request and discovery manager";
+        category = "Media";
       };
     };
 
-    radarr = when "s" {
+    jellyfin = when "s" {
       enable = true;
-      subdomain = "radarr";
-      exposure = "local";
-      auth = false;
-      port = 7878;
+      subdomain = "fin";
+      exposure = "tailscale";
+      port = 8096;
       homepage = {
-        name = "Radarr";
-        description = "Movie collection manager";
-        icon = "radarr.svg";
+        description = "The Free Software Media System";
+        category = "Media";
+      };
+    };
+
+    tdarr = when "s" {
+      enable = true;
+      auth = false;
+      port = 8265;
+      homepage = {
+        icon = "tdarr.webp";
+        description = "Media transcoding application";
         category = "Media";
       };
     };
 
     navidrome = when "s" {
       enable = true;
-      subdomain = "navidrome";
-      exposure = "local";
       auth = false;
       port = 4533;
       homepage = {
-        name = "Navidrome";
-        description = "Music streaming service";
         icon = "navidrome.webp";
+        description = "Music streaming service";
         category = "Media";
       };
     };
@@ -328,91 +226,76 @@
       port = 8089;
       homepage = {
         name = "Octo-Fiesta";
-        description = "Subsonic proxy";
         icon = "navidrome.webp";
+        description = "Subsonic proxy";
         category = "Media";
       };
     };
 
-    roundcube = when "s" {
+    # downloads
+    qbittorrent = when "s" {
       enable = true;
-      subdomain = "mail";
-      exposure = "local";
-      port = 5679;
-      homepage = {
-        name = "Roundcube";
-        description = "Browser-based multilingual IMAP client";
-        icon = "roundcube.svg";
-        category = "Communication";
-      };
-    };
-
-    seerr = when "s" {
-      enable = true;
-      subdomain = "seerr";
-      exposure = "tailscale";
-      port = 5055;
-      homepage = {
-        name = "Seerr";
-        description = "Media request and discovery manager";
-        icon = "seerr.svg";
-        category = "Media";
-      };
-    };
-
-    jellyfin = when "s" {
-      enable = true;
-      subdomain = "fin";
-      exposure = "tailscale";
-      port = 8096;
-      homepage = {
-        name = "Jellyfin";
-        description = "The Free Software Media System";
-        icon = "jellyfin.svg";
-        category = "Media";
-      };
-    };
-
-    uptime-kuma = when "s" {
-      enable = true;
-      subdomain = "uptime";
-      exposure = "local";
-      port = 3001;
-      homepage = {
-        name = "Uptime Kuma";
-        description = "Service monitoring tool";
-        icon = "uptime-kuma.svg";
-        category = "Infra";
-      };
-    };
-
-    lldap = when "s" {
-      enable = true;
-      subdomain = "lldap";
-      exposure = "local";
+      subdomain = "qbt";
       auth = false;
-      port = 17170;
+      port = 8081;
       homepage = {
-        name = "lldap";
-        description = "Light LDAP implementation for authentication";
-        icon = "lldap.svg";
-        category = "Infra";
+        name = "qBittorrent";
+        description = "Torrent client";
+        category = "Downloads";
       };
     };
 
-    forgejo = when "s" {
+    sabnzbd = when "s" {
       enable = true;
-      subdomain = "git";
-      exposure = "dedicated-tunnel";
-      port = 3031;
-      ingress = {
-        "ssh.git" = "ssh://localhost:22";
-      };
+      auth = false;
+      port = 8085;
       homepage = {
-        name = "Forgejo";
-        description = "A painless, self-hosted Git service";
-        icon = "forgejo.svg";
-        category = "Dev";
+        name = "SABnzbd";
+        description = "Free and easy binary newsreader";
+        category = "Downloads";
+      };
+    };
+
+    slskd = {
+      enable = false;
+      exposure = "local";
+      port = 5030;
+      homepage = {
+        name = "Soulseek";
+        description = "Web-based Soulseek client";
+        category = "Downloads";
+      };
+    };
+
+    flaresolverr = when "s" {
+      enable = true;
+      auth = false;
+      port = 8191;
+      homepage = {
+        name = "FlareSolverr";
+        description = "Proxy to bypass Cloudflare/DDoS-GUARD protection";
+        category = "Downloads";
+      };
+    };
+
+    # cloud
+    immich = when "s" {
+      enable = true;
+      exposure = "tailscale";
+      port = 2283;
+      homepage = {
+        description = "Photo collection manager";
+        category = "Cloud";
+      };
+    };
+
+    memos = when "s" {
+      enable = true;
+      exposure = "tailscale";
+      port = 5230;
+      homepage = {
+        description = "Open-source, self-hosted note-taking";
+        category = "Cloud";
       };
     };
 
@@ -426,49 +309,9 @@
         credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
       };
       homepage = {
-        name = "Vaultwarden";
-        description = "Password manager";
         icon = "vaultwarden-light.svg";
+        description = "Password manager";
         category = "Cloud";
-      };
-    };
-
-    element = when "s" {
-      enable = false;
-      subdomain = "element";
-      exposure = "tunnel";
-      port = 11341;
-      homepage = {
-        name = "Element";
-        description = "Element web UI";
-        icon = "element.svg";
-        category = "Communication";
-      };
-    };
-
-    continuwuity = when "s" {
-      enable = false;
-      subdomain = "matrix";
-      exposure = "tunnel";
-      port = 6167;
-      homepage = {
-        name = "Continuwuity";
-        description = "Continuwuity homeserver";
-        icon = "matrix.svg";
-        category = "Communication";
-      };
-    };
-
-    miniflux = when "s" {
-      enable = true;
-      subdomain = "feed";
-      exposure = "local";
-      port = 8087;
-      homepage = {
-        name = "Miniflux";
-        description = "A minimalist and opinionated feed reader";
-        icon = "miniflux.svg";
-        category = "Communication";
       };
     };
 
@@ -478,92 +321,95 @@
       exposure = "local";
       port = 8182;
       homepage = {
-        name = "Nextcloud";
         description = "A safe home for all your data";
-        icon = "nextcloud.svg";
         category = "Cloud";
       };
     };
 
-    qbittorrent = when "s" {
-      enable = true;
-      subdomain = "qbt";
+    searxng = when "s" {
+      enable = false;
+      subdomain = "search";
       exposure = "local";
-      auth = false;
-      port = 8081;
+      port = 8084;
       homepage = {
-        name = "qBittorrent";
-        description = "Torrent client";
-        icon = "qbittorrent.svg";
-        category = "Downloads";
+        name = "SearXNG";
+        description = "Internet metasearch engine";
+        category = "Cloud";
       };
     };
 
+    # communication
+    fluxer = when "s" {
+      enable = true;
+      subdomain = "chat";
+      exposure = "tailscale";
+      port = 8480;
+      homepage = {
+        description = "Open source chat for friends and communities";
+        category = "Communication";
+      };
+    };
+
+    miniflux = when "s" {
+      enable = true;
+      subdomain = "feed";
+      port = 8087;
+      homepage = {
+        description = "A minimalist and opinionated feed reader";
+        category = "Communication";
+      };
+    };
+
+    roundcube = when "s" {
+      enable = true;
+      subdomain = "mail";
+      port = 5679;
+      homepage = {
+        description = "Browser-based multilingual IMAP client";
+        category = "Communication";
+      };
+    };
+
+    # automation
     home-assistant = when "s" {
       enable = true;
       subdomain = "ha";
-      exposure = "local";
       auth = false;
       port = 8123;
       homepage = {
-        name = "Home Assistant";
         description = "Awaken your home";
-        icon = "home-assistant.svg";
         category = "Automation";
       };
     };
 
-    slskd = {
+    ollama = {
       enable = false;
-      subdomain = "slskd";
       exposure = "local";
-      port = 5030;
+      port = 8001;
       homepage = {
-        name = "Soulseek";
-        description = "Web-based Soulseek client";
-        icon = "slskd.svg";
-        category = "Downloads";
+        description = "AI platform";
+        category = "Automation";
       };
     };
 
-    tdarr = when "s" {
-      enable = true;
-      subdomain = "tdarr";
+    n8n = {
+      enable = false;
       exposure = "local";
-      auth = false;
-      port = 8265;
+      port = 5678;
       homepage = {
-        name = "Tdarr";
-        description = "Media transcoding application";
-        icon = "tdarr.webp";
-        category = "Media";
+        name = "n8n";
+        description = "A workflow automation platform";
+        category = "Automation";
       };
     };
 
     turnstone = {
       enable = false;
-      subdomain = "ts";
       exposure = "tailscale";
       port = 8098;
       homepage = {
-        name = "Turnstone";
         description = "Multi-node AI orchestration platform";
-        # icon = "turnstone.svg";
         category = "Automation";
-      };
-    };
-
-    pihole = when "sz" {
-      enable = true;
-      subdomain = "pihole";
-      exposure = "local";
-      port = 8053;
-      homepage = {
-        name = "PiHole";
-        description = "Adblocking and DNS service";
-        icon = "pi-hole.svg";
-        path = "/admin";
-        category = "Infra";
       };
     };
   };
@@ -581,6 +427,9 @@ in {
     infra = {
       traefik = en "s";
       tailscale = en "s";
+      gluetun = en "s";
+      podman = en "sz";
+
       unbound = when {
         "sz" = {
           enable = true;
@@ -592,37 +441,6 @@ in {
         };
         "z".profile = "small";
       };
-      gluetun = en "s";
-      podman = en "sz";
-
-      # cnixpost = {
-      #   enable = none;
-      #   clamav.enable = true;
-      #   accounts."cnst@cnix.dev" = {
-      #     quota = "10G";
-      #     aliases = [
-      #       "postmaster@cnix.dev"
-      #       "abuse@cnix.dev"
-      #       "tls-reports@cnix.dev"
-      #     ];
-      #   };
-      #   dkimSelector = "mail";
-      #   mtaSts = {
-      #     enable = true;
-      #     mode = "testing";
-      #     policyId = "20250101000000"; # TODO: update when policy content changes
-      #     mxHosts = ["mail.cnix.dev"];
-      #   };
-      #   spamScoreAddHeader = 4.0;
-      #   spamScoreGreylist = 6.0;
-      #   spamScoreReject = 15.0;
-      # };
-
-      fail2ban = when "s" {
-        enable = true;
-        apiKeyFile = config.age.secrets.cloudflareFirewallApiKey.path;
-        zoneId = "0027acdfb8bbe010f55b676ad8698dfb";
-      };
 
       keepalived = when "sz" {
         enable = true;
@@ -631,6 +449,12 @@ in {
           "s" = "enp6s0";
           "z" = "enu1u1";
         };
+      };
+
+      fail2ban = when "s" {
+        enable = true;
+        apiKeyFile = config.age.secrets.cloudflareFirewallApiKey.path;
+        zoneId = "0027acdfb8bbe010f55b676ad8698dfb";
       };
 
       www = when "s" {

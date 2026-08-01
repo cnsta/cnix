@@ -4,8 +4,8 @@
   ...
 }: let
   inherit (lib) mkOption types;
-  ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
   cfg = config.cnix.server;
+  ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
   options.cnix.server = {
     enable = lib.mkEnableOption "The server services and configuration variables";
@@ -66,9 +66,17 @@ in {
     services = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule (
-          svcArgs: let
+          {name, ...} @ svcArgs: let
             svc = svcArgs.config;
-            name = svcArgs.name;
+            displayName = titleCase name;
+            iconName = "${name}.svg";
+            titleCase = s:
+              lib.concatMapStringsSep " "
+              (w:
+                if w == ""
+                then w
+                else lib.toUpper (lib.substring 0 1 w) + lib.substring 1 (-1) w)
+              (lib.splitString "-" s);
           in {
             options = {
               enable = lib.mkEnableOption "the service";
@@ -79,14 +87,12 @@ in {
               };
               subdomain = lib.mkOption {
                 type = lib.types.str;
-                default = "";
-                description = "The subdomain for the service (e.g., 'jellyfin')";
-              };
-              path = lib.mkOption {
-                type = lib.types.str;
-                default = "";
-                example = "/admin";
-                description = "Optional path suffix for homepage links (e.g. /admin).";
+                default = name;
+                defaultText = lib.literalExpression "the attribute name";
+                description = ''
+                  Subdomain for the service. Defaults to the attribute name;
+                  override only when the public name differs (forgejo -> git).
+                '';
               };
               exposure = lib.mkOption {
                 type = lib.types.enum [
@@ -164,7 +170,8 @@ in {
                   options = {
                     name = lib.mkOption {
                       type = lib.types.str;
-                      default = "";
+                      default = displayName;
+                      defaultText = lib.literalExpression "the attribute name, title-cased";
                       description = "Display name on the homepage.";
                     };
                     description = lib.mkOption {
@@ -174,8 +181,9 @@ in {
                     };
                     icon = lib.mkOption {
                       type = lib.types.str;
-                      default = "Zervices c00l stuff";
-                      description = "Icon file name for the homepage tile.";
+                      default = iconName;
+                      defaultText = lib.literalExpression "\"\${name}.svg\"";
+                      description = "Icon filename for the homepage tile.";
                     };
                     category = lib.mkOption {
                       type = lib.types.str;

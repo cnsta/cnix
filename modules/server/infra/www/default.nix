@@ -94,54 +94,6 @@ in {
                 try_files /robots.txt =404;
               '';
             };
-
-            locations."= /.well-known/matrix/server" = {
-              extraConfig = let
-                matrixDomain = "${config.cnix.server.services.continuwuity.subdomain}.${cfg.url}";
-              in ''
-                default_type application/json;
-                return 200 '{"m.server": "${matrixDomain}:443"}';
-              '';
-            };
-
-            locations."= /.well-known/matrix/client" = {
-              extraConfig = let
-                matrixDomain = "${config.cnix.server.services.continuwuity.subdomain}.${cfg.url}";
-                clientConfig = builtins.toJSON {
-                  "m.homeserver" = {
-                    base_url = "https://${matrixDomain}";
-                  };
-                  "org.matrix.msc4143.rtc_foci" = [
-                    {
-                      type = "livekit";
-                      livekit_service_url = "https://${matrixDomain}/livekit/jwt";
-                    }
-                  ];
-                };
-              in ''
-                default_type application/json;
-                add_header Access-Control-Allow-Origin *;
-                return 200 '${clientConfig}';
-              '';
-            };
-
-            locations."= /.well-known/matrix/support" = {
-              extraConfig = ''
-                default_type application/json;
-                add_header Access-Control-Allow-Origin *;
-                return 200 '${
-                  builtins.toJSON {
-                    contacts = [
-                      {
-                        email_address = "cnst@cnix.dev";
-                        matrix_id = "@cnst:cnst.dev";
-                        role = "m.role.admin";
-                      }
-                    ];
-                  }
-                }';
-              '';
-            };
           };
 
           "ts" = {

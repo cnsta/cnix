@@ -1,10 +1,6 @@
 {
   imports = [
     ./authelia
-    ./bazarr
-    ./cinny
-    ./continuwuity
-    ./element
     ./flaresolverr
     ./fluxer
     ./harmonia
@@ -18,7 +14,6 @@
     ./lldap
     ./lidarr
     ./forgejo
-    ./freshrss
     ./memos
     ./miniflux
     ./navidrome
