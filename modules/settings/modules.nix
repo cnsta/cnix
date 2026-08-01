@@ -1,16 +1,12 @@
 {
   config,
   clib,
-  lib,
   ...
 }: let
+  inherit (clib) all none;
   host = config.networking.hostName;
   en = clib.mkEn host;
   when = clib.mkWhen host;
-  per = clib.mkPer host;
-
-  all = {enable = true;};
-  none = lib.mkIf false {};
 in {
   config.cnix = {
     programs = {
@@ -113,8 +109,8 @@ in {
     services = {
       agenix = all;
       blueman = none;
-      cifs = per {
-        t = {
+      cifs = when {
+        "t" = {
           enable = true;
           shares."/mnt/share".device = "//192.168.88.223/libellux";
         };

@@ -6,12 +6,11 @@
   ...
 }: let
   inherit (lib) mkMerge genAttrs;
+  # inherit (clib) all none;
   host = config.networking.hostName;
   ip = config.cnix.settings.network.localIp;
   en = clib.mkEn host;
   when = clib.mkWhen host;
-  per = clib.mkPer host;
-  none = lib.mkIf false {};
 
   serviceDefs = {
     homepage = when "s" {
@@ -175,6 +174,7 @@
       enable = false;
       subdomain = "bazarr";
       exposure = "local";
+      auth = false;
       port = 6767;
       homepage = {
         name = "Bazarr";
@@ -188,6 +188,7 @@
       enable = true;
       subdomain = "prowlarr";
       exposure = "local";
+      auth = false;
       port = 9696;
       homepage = {
         name = "Prowlarr";
@@ -201,6 +202,7 @@
       enable = true;
       subdomain = "flaresolverr";
       exposure = "local";
+      auth = false;
       port = 8191;
       homepage = {
         name = "FlareSolverr";
@@ -240,6 +242,7 @@
       enable = true;
       subdomain = "lidarr";
       exposure = "local";
+      auth = false;
       port = 8686;
       homepage = {
         name = "Lidarr";
@@ -253,6 +256,7 @@
       enable = true;
       subdomain = "sonarr";
       exposure = "local";
+      auth = false;
       port = 8989;
       homepage = {
         name = "Sonarr";
@@ -279,6 +283,7 @@
       enable = true;
       subdomain = "sabnzbd";
       exposure = "local";
+      auth = false;
       port = 8085;
       homepage = {
         name = "SABnzbd";
@@ -292,6 +297,7 @@
       enable = true;
       subdomain = "radarr";
       exposure = "local";
+      auth = false;
       port = 7878;
       homepage = {
         name = "Radarr";
@@ -305,6 +311,7 @@
       enable = true;
       subdomain = "navidrome";
       exposure = "local";
+      auth = false;
       port = 4533;
       homepage = {
         name = "Navidrome";
@@ -383,6 +390,7 @@
       enable = true;
       subdomain = "lldap";
       exposure = "local";
+      auth = false;
       port = 17170;
       homepage = {
         name = "lldap";
@@ -481,6 +489,7 @@
       enable = true;
       subdomain = "qbt";
       exposure = "local";
+      auth = false;
       port = 8081;
       homepage = {
         name = "qBittorrent";
@@ -494,6 +503,7 @@
       enable = true;
       subdomain = "ha";
       exposure = "local";
+      auth = false;
       port = 8123;
       homepage = {
         name = "Home Assistant";
@@ -520,6 +530,7 @@
       enable = true;
       subdomain = "tdarr";
       exposure = "local";
+      auth = false;
       port = 8265;
       homepage = {
         name = "Tdarr";
@@ -570,18 +581,16 @@ in {
     infra = {
       traefik = en "s";
       tailscale = en "s";
-      unbound = per {
-        "s" = {
+      unbound = when {
+        "sz" = {
           enable = true;
-          profile = "large";
           serviceIp = "192.168.88.14";
+        };
+        "s" = {
+          profile = "large";
           ioLatencyDevices = ["259:0" "254:2"];
         };
-        "z" = {
-          enable = true;
-          profile = "small";
-          serviceIp = "192.168.88.14";
-        };
+        "z".profile = "small";
       };
       gluetun = en "s";
       podman = en "sz";
@@ -618,10 +627,10 @@ in {
       keepalived = when "sz" {
         enable = true;
         healthCheck = "${pkgs.ldns}/bin/drill -Q -p 5335 @127.0.0.1 . SOA";
-        interface = mkMerge [
-          (when "s" "enp6s0")
-          (when "z" "enu1u1")
-        ];
+        interface = when {
+          "s" = "enp6s0";
+          "z" = "enu1u1";
+        };
       };
 
       www = when "s" {
