@@ -66,7 +66,10 @@ in {
     services = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule (
-          {name, ...}: {
+          svcArgs: let
+            svc = svcArgs.config;
+            name = svcArgs.name;
+          in {
             options = {
               enable = lib.mkEnableOption "the service";
               routed = lib.mkOption {
@@ -96,6 +99,14 @@ in {
                 default = "local";
                 description = "Controls where the service is exposed";
               };
+              tunnelViaTraefik = mkOption {
+                type = types.bool;
+                default = false;
+                description = ''
+                  Send this service's tunnel ingress to Traefik on loopback instead of
+                  straight to its port. Needed when several routers share a hostname.
+                '';
+              };
               ingress = lib.mkOption {
                 type = lib.types.attrsOf lib.types.str;
                 default = {};
@@ -103,6 +114,20 @@ in {
                 example = {
                   "matrix" = "http://127.0.0.1:11338";
                 };
+              };
+              auth = mkOption {
+                type = types.bool;
+                default = svc.exposure == "local";
+                description = ''
+                  Put Authelia forwardAuth in front of this service's Traefik router.
+                  Disable for services with their own auth, or whose native clients
+                  can't complete a browser redirect (mobile apps, API consumers).
+                '';
+              };
+              middlewares = mkOption {
+                type = types.listOf types.str;
+                default = [];
+                description = "Extra Traefik middlewares, applied after the access gate.";
               };
               port = lib.mkOption {
                 type = lib.types.int;

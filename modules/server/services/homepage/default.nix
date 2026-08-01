@@ -118,13 +118,6 @@ in {
             };
           }
           {
-            search = {
-              provider = "custom";
-              url = "https://search.cnix.dev/search?q=";
-              target = "_blank";
-            };
-          }
-          {
             resources = {
               label = "SYSTEM";
               memory = true;

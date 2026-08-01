@@ -10,90 +10,95 @@
   cfg = config.cnix.server.infra.traefik;
   srv = config.cnix.server;
 
-  generateRouters = services: config:
-    lib.mapAttrs' (
-      name: service:
-        lib.nameValuePair name {
-          entryPoints = ["websecure"];
-          rule = "Host(`${clib.server.mkFullDomain config service}`)";
-          service = name;
-          tls.certResolver = "letsencrypt";
-        }
-    ) (lib.filterAttrs (_: s: s.enable && s.routed) services);
+  localDomain = config.cnix.settings.accounts.domains.local;
+  publicDomain = config.cnix.settings.accounts.domains.public;
+
+  # trust boundaries
+  loopback = ["127.0.0.1/32" "::1/128"];
+  podman = ["10.88.0.0/24"];
+  lan = ["192.168.88.0/24"];
+  tailnet = ["100.64.88.0/24" "fd7a:115c:a1e0:88::/64"];
+
+  autheliaUp = srv.services.authelia.enable;
+
+  gateFor = service:
+    if service.exposure == "tailscale"
+    then "tailnet-only"
+    else "lan-only";
+
+  middlewaresFor = service:
+    [(gateFor service)]
+    ++ lib.optional (service.auth && autheliaUp) "authelia"
+    ++ service.middlewares;
+
+  routable =
+    lib.filterAttrs
+    (_: s: s.enable && s.routed && s.subdomain != "")
+    srv.services;
+
+  generateRouters = services:
+    lib.mapAttrs (name: service: {
+      entryPoints = ["websecure"];
+      rule = "Host(`${clib.server.mkFullDomain config service}`)";
+      service = name;
+      middlewares = middlewaresFor service;
+      tls = {};
+    })
+    services;
 
   generateServices = services:
-    lib.mapAttrs' (
-      name: service:
-        lib.nameValuePair name {
-          loadBalancer.servers = [{url = "http://localhost:${toString service.port}";}];
-        }
-    ) (lib.filterAttrs (_: s: s.enable && s.routed) services);
+    lib.mapAttrs (_: service: {
+      loadBalancer.servers = [{url = "http://localhost:${toString service.port}";}];
+    })
+    services;
 in {
   options.cnix.server.infra.traefik = {
     enable = mkEnableOption "Enable global Traefik reverse proxy with ACME";
   };
 
   config = mkIf cfg.enable {
-    age.secrets = {
-      traefikEnv = {
-        file = "${self}/secrets/traefikEnv.age";
-        mode = "640";
-        owner = "traefik";
-        group = "traefik";
-      };
+    age.secrets.traefikEnv = {
+      file = "${self}/secrets/traefikEnv.age";
+      mode = "640";
+      owner = "traefik";
+      group = "traefik";
     };
 
-    systemd.services.traefik = {
-      serviceConfig = {
-        EnvironmentFile = [config.age.secrets.traefikEnv.path];
-      };
-    };
-    networking.firewall.allowedTCPPorts = [
-      80
-      443
+    systemd.services.traefik.serviceConfig.EnvironmentFile = [
+      config.age.secrets.traefikEnv.path
     ];
+
+    networking.firewall.allowedTCPPorts = [80 443];
 
     services = {
       tailscale.permitCertUid = "traefik";
+
       traefik = {
         enable = true;
 
         staticConfigOptions = {
-          log = {
-            level = "INFO";
-          };
-
-          accesslog = {
-            filepath = "/var/lib/traefik/logs/access.log";
-          };
-
-          tracing = {};
+          log.level = "INFO";
+          accesslog.filepath = "/var/lib/traefik/logs/access.log";
           api = {
             dashboard = true;
             insecure = false;
           };
 
-          certificatesResolvers = {
-            vpn.tailscale = {};
-            letsencrypt = {
-              acme = {
-                email = "adam@cnst.dev";
-                storage = "/var/lib/traefik/cert.json";
-                dnsChallenge = {
-                  provider = "cloudflare";
-                  resolvers = [
-                    "1.1.1.1:53"
-                    "1.0.0.1:53"
-                  ];
-                };
-              };
+          certificatesResolvers.letsencrypt.acme = {
+            email = srv.email;
+            storage = "/var/lib/traefik/cert.json";
+            dnsChallenge = {
+              provider = "cloudflare";
+              resolvers = ["1.1.1.1:53" "1.0.0.1:53"];
             };
           };
 
-          entryPoints = {
+          entryPoints = let
+            trustedProxies = loopback ++ podman ++ lan ++ tailnet;
+          in {
             web = {
               address = ":80";
-              forwardedHeaders.insecure = true;
+              forwardedHeaders.trustedIPs = trustedProxies;
               http.redirections.entryPoint = {
                 to = "websecure";
                 scheme = "https";
@@ -103,50 +108,56 @@ in {
 
             websecure = {
               address = ":443";
-              forwardedHeaders.insecure = true;
+              forwardedHeaders.trustedIPs = trustedProxies;
               http.tls = {
                 certResolver = "letsencrypt";
                 domains = [
                   {
-                    main = "cnix.dev";
-                    sans = ["*.cnix.dev"];
+                    main = localDomain;
+                    sans = ["*.${localDomain}"];
                   }
                   {
-                    main = "ts.cnst.dev";
-                    sans = ["*.ts.cnst.dev"];
+                    main = publicDomain;
+                    sans = ["*.${publicDomain}"];
+                  }
+                  {
+                    main = "ts.${publicDomain}";
+                    sans = ["*.ts.${publicDomain}"];
                   }
                 ];
               };
             };
-
-            experimental = {
-              address = ":1111";
-              forwardedHeaders.insecure = true;
-            };
           };
         };
 
-        dynamicConfigOptions = {
-          http = {
-            services = generateServices srv.services;
+        dynamicConfigOptions.http = {
+          services = generateServices routable;
 
-            routers =
-              (generateRouters srv.services config)
-              // {
-                api = {
-                  entryPoints = ["websecure"];
-                  rule = "Host(`traefik.${srv.domain}`)";
-                  service = "api@internal";
-                  tls.certResolver = "letsencrypt";
-                };
-                authelia-local = {
-                  entryPoints = ["websecure"];
-                  rule = "Host(`login.${srv.domain}`)";
-                  service = "authelia";
-                  tls.certResolver = "letsencrypt";
-                };
-              };
+          middlewares = {
+            lan-only.ipAllowList.sourceRange = loopback ++ podman ++ lan ++ tailnet;
+            tailnet-only.ipAllowList.sourceRange = loopback ++ tailnet;
           };
+
+          routers =
+            generateRouters routable
+            // {
+              api = {
+                entryPoints = ["websecure"];
+                rule = "Host(`traefik.${localDomain}`)";
+                service = "api@internal";
+                middlewares = ["lan-only"] ++ lib.optional autheliaUp "authelia";
+                tls = {};
+              };
+            }
+            // lib.optionalAttrs autheliaUp {
+              authelia-local = {
+                entryPoints = ["websecure"];
+                rule = "Host(`login.${localDomain}`)";
+                service = "authelia";
+                middlewares = ["lan-only"];
+                tls = {};
+              };
+            };
         };
       };
     };

@@ -10,6 +10,7 @@
   ip = config.cnix.settings.network.localIp;
   en = clib.mkEn host;
   when = clib.mkWhen host;
+  per = clib.mkPer host;
   none = lib.mkIf false {};
 
   serviceDefs = {
@@ -28,7 +29,10 @@
     headscale = when "s" {
       enable = true;
       subdomain = "hs";
-      exposure = "public";
+      exposure = "tunnel";
+      auth = false;
+      middlewares = ["headscale-cors"];
+      tunnelViaTraefik = true;
       port = 3004;
       homepage = {
         name = "Headscale";
@@ -564,9 +568,21 @@ in {
     gid = 993;
 
     infra = {
-      traefik = en "sz";
+      traefik = en "s";
       tailscale = en "s";
-      unbound = en "sz";
+      unbound = per {
+        "s" = {
+          enable = true;
+          profile = "large";
+          serviceIp = "192.168.88.14";
+          ioLatencyDevices = ["259:0" "254:2"];
+        };
+        "z" = {
+          enable = true;
+          profile = "small";
+          serviceIp = "192.168.88.14";
+        };
+      };
       gluetun = en "s";
       podman = en "sz";
 

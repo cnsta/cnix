@@ -1,0 +1,964 @@
+diff --git a/hosts/sobotka/settings.nix b/hosts/sobotka/settings.nix
+index 550802b7..50229251 100644
+--- a/hosts/sobotka/settings.nix
++++ b/hosts/sobotka/settings.nix
+@@ -55,11 +55,8 @@
+             22
+             80
+             443
+-            8090
+           ];
+           allowedUDPPorts = [
+-            58846
+-            6881
+           ];
+         };
+       };
+diff --git a/hosts/ziggy/default.nix b/hosts/ziggy/default.nix
+index 628fffbb..58e9b9c9 100644
+--- a/hosts/ziggy/default.nix
++++ b/hosts/ziggy/default.nix
+@@ -4,5 +4,13 @@
+     ./settings.nix
+   ];
+ 
++  documentation = {
++    enable = false;
++    nixos.enable = false;
++    man.enable = false;
++  };
++
++  boot.tmp.useTmpfs = false;
++
+   system.stateVersion = lib.mkDefault "25.11";
+ }
+diff --git a/hosts/ziggy/settings.nix b/hosts/ziggy/settings.nix
+index 34e22215..17a9d501 100644
+--- a/hosts/ziggy/settings.nix
++++ b/hosts/ziggy/settings.nix
+@@ -4,6 +4,10 @@
+       username = "cnst";
+       mail = "adam@cnst.dev";
+       sshUser = "ziggy";
++      domains = {
++        local = "cnix.dev";
++        public = "cnst.dev";
++      };
+     };
+ 
+     boot = {
+@@ -45,18 +49,26 @@
+         "enu1u1" = {
+           allowedTCPPorts = [
+             22
+-            80
+-            443
+-            8090
++            8053
+           ];
+           allowedUDPPorts = [
+-            58846
+-            6881
+           ];
+         };
+       };
+     };
+ 
++    nix = {
++      enable = true;
++      cpuWeight = 20;
++      cpuQuota = "200%";
++      memoryHigh = "256M";
++      memoryMax = "384M";
++      maxJobs = 1;
++      cores = 2;
++      ioWriteBandwidthMax = ["/dev/mmcblk0 10M"];
++      ioWriteIOPSMax = ["/dev/mmcblk0 500"];
++    };
++
+     peripherals = {
+       logitech.enable = false;
+       kanata.enable = false;
+@@ -65,7 +77,7 @@
+         manager.enable = false;
+         touch-detector.enable = false;
+       };
+-      pcscd.enable = true;
++      pcscd.enable = false;
+       utils.enable = false;
+     };
+   };
+diff --git a/modules/server/infra/traefik/default.nix b/modules/server/infra/traefik/default.nix
+index dded165d..38bc84ed 100644
+--- a/modules/server/infra/traefik/default.nix
++++ b/modules/server/infra/traefik/default.nix
+@@ -10,90 +10,95 @@
+   cfg = config.cnix.server.infra.traefik;
+   srv = config.cnix.server;
+ 
+-  generateRouters = services: config:
+-    lib.mapAttrs' (
+-      name: service:
+-        lib.nameValuePair name {
+-          entryPoints = ["websecure"];
+-          rule = "Host(`${clib.server.mkFullDomain config service}`)";
+-          service = name;
+-          tls.certResolver = "letsencrypt";
+-        }
+-    ) (lib.filterAttrs (_: s: s.enable && s.routed) services);
++  localDomain = config.cnix.settings.accounts.domains.local;
++  publicDomain = config.cnix.settings.accounts.domains.public;
++
++  # trust boundaries
++  loopback = ["127.0.0.1/32" "::1/128"];
++  podman = ["10.88.0.0/24"];
++  lan = ["192.168.88.0/24"];
++  tailnet = ["100.64.88.0/24" "fd7a:115c:a1e0:88::/64"];
++
++  autheliaUp = srv.services.authelia.enable;
++
++  gateFor = service:
++    if service.exposure == "tailscale"
++    then "tailnet-only"
++    else "lan-only";
++
++  middlewaresFor = service:
++    [(gateFor service)]
++    ++ lib.optional (service.auth && autheliaUp) "authelia"
++    ++ service.middlewares;
++
++  routable =
++    lib.filterAttrs
++    (_: s: s.enable && s.routed && s.subdomain != null)
++    srv.services;
++
++  generateRouters = services:
++    lib.mapAttrs (name: service: {
++      entryPoints = ["websecure"];
++      rule = "Host(`${clib.server.mkFullDomain config service}`)";
++      service = name;
++      middlewares = middlewaresFor service;
++      tls.certResolver = "letsencrypt";
++    })
++    services;
+ 
+   generateServices = services:
+-    lib.mapAttrs' (
+-      name: service:
+-        lib.nameValuePair name {
+-          loadBalancer.servers = [{url = "http://localhost:${toString service.port}";}];
+-        }
+-    ) (lib.filterAttrs (_: s: s.enable && s.routed) services);
++    lib.mapAttrs (_: service: {
++      loadBalancer.servers = [{url = "http://localhost:${toString service.port}";}];
++    })
++    services;
+ in {
+   options.cnix.server.infra.traefik = {
+     enable = mkEnableOption "Enable global Traefik reverse proxy with ACME";
+   };
+ 
+   config = mkIf cfg.enable {
+-    age.secrets = {
+-      traefikEnv = {
+-        file = "${self}/secrets/traefikEnv.age";
+-        mode = "640";
+-        owner = "traefik";
+-        group = "traefik";
+-      };
++    age.secrets.traefikEnv = {
++      file = "${self}/secrets/traefikEnv.age";
++      mode = "640";
++      owner = "traefik";
++      group = "traefik";
+     };
+ 
+-    systemd.services.traefik = {
+-      serviceConfig = {
+-        EnvironmentFile = [config.age.secrets.traefikEnv.path];
+-      };
+-    };
+-    networking.firewall.allowedTCPPorts = [
+-      80
+-      443
++    systemd.services.traefik.serviceConfig.EnvironmentFile = [
++      config.age.secrets.traefikEnv.path
+     ];
+ 
++    networking.firewall.allowedTCPPorts = [80 443];
++
+     services = {
+       tailscale.permitCertUid = "traefik";
++
+       traefik = {
+         enable = true;
+ 
+         staticConfigOptions = {
+-          log = {
+-            level = "INFO";
+-          };
+-
+-          accesslog = {
+-            filepath = "/var/lib/traefik/logs/access.log";
+-          };
+-
+-          tracing = {};
++          log.level = "INFO";
++          accesslog.filepath = "/var/lib/traefik/logs/access.log";
+           api = {
+             dashboard = true;
+             insecure = false;
+           };
+ 
+-          certificatesResolvers = {
+-            vpn.tailscale = {};
+-            letsencrypt = {
+-              acme = {
+-                email = "adam@cnst.dev";
+-                storage = "/var/lib/traefik/cert.json";
+-                dnsChallenge = {
+-                  provider = "cloudflare";
+-                  resolvers = [
+-                    "1.1.1.1:53"
+-                    "1.0.0.1:53"
+-                  ];
+-                };
+-              };
++          certificatesResolvers.letsencrypt.acme = {
++            email = srv.email;
++            storage = "/var/lib/traefik/cert.json";
++            dnsChallenge = {
++              provider = "cloudflare";
++              resolvers = ["1.1.1.1:53" "1.0.0.1:53"];
+             };
+           };
+ 
+-          entryPoints = {
++          entryPoints = let
++            trustedProxies = loopback ++ podman ++ lan ++ tailnet;
++          in {
+             web = {
+               address = ":80";
+-              forwardedHeaders.insecure = true;
++              forwardedHeaders.trustedIPs = trustedProxies;
+               http.redirections.entryPoint = {
+                 to = "websecure";
+                 scheme = "https";
+@@ -103,50 +108,56 @@ in {
+ 
+             websecure = {
+               address = ":443";
+-              forwardedHeaders.insecure = true;
++              forwardedHeaders.trustedIPs = trustedProxies;
+               http.tls = {
+                 certResolver = "letsencrypt";
+                 domains = [
+                   {
+-                    main = "cnix.dev";
+-                    sans = ["*.cnix.dev"];
++                    main = localDomain;
++                    sans = ["*.${localDomain}"];
+                   }
+                   {
+-                    main = "ts.cnst.dev";
+-                    sans = ["*.ts.cnst.dev"];
++                    main = publicDomain;
++                    sans = ["*.${publicDomain}"];
++                  }
++                  {
++                    main = "ts.${publicDomain}";
++                    sans = ["*.ts.${publicDomain}"];
+                   }
+                 ];
+               };
+             };
+-
+-            experimental = {
+-              address = ":1111";
+-              forwardedHeaders.insecure = true;
+-            };
+           };
+         };
+ 
+-        dynamicConfigOptions = {
+-          http = {
+-            services = generateServices srv.services;
++        dynamicConfigOptions.http = {
++          services = generateServices routable;
+ 
+-            routers =
+-              (generateRouters srv.services config)
+-              // {
+-                api = {
+-                  entryPoints = ["websecure"];
+-                  rule = "Host(`traefik.${srv.domain}`)";
+-                  service = "api@internal";
+-                  tls.certResolver = "letsencrypt";
+-                };
+-                authelia-local = {
+-                  entryPoints = ["websecure"];
+-                  rule = "Host(`login.${srv.domain}`)";
+-                  service = "authelia";
+-                  tls.certResolver = "letsencrypt";
+-                };
+-              };
++          middlewares = {
++            lan-only.ipAllowList.sourceRange = loopback ++ podman ++ lan ++ tailnet;
++            tailnet-only.ipAllowList.sourceRange = loopback ++ tailnet;
+           };
++
++          routers =
++            generateRouters routable
++            // {
++              api = {
++                entryPoints = ["websecure"];
++                rule = "Host(`traefik.${localDomain}`)";
++                service = "api@internal";
++                middlewares = ["lan-only"] ++ lib.optional autheliaUp "authelia";
++                tls.certResolver = "letsencrypt";
++              };
++            }
++            // lib.optionalAttrs autheliaUp {
++              authelia-local = {
++                entryPoints = ["websecure"];
++                rule = "Host(`login.${localDomain}`)";
++                service = "authelia";
++                middlewares = ["lan-only"];
++                tls.certResolver = "letsencrypt";
++              };
++            };
+         };
+       };
+     };
+diff --git a/modules/server/infra/unbound/default.nix b/modules/server/infra/unbound/default.nix
+index e1acd045..34311e17 100644
+--- a/modules/server/infra/unbound/default.nix
++++ b/modules/server/infra/unbound/default.nix
+@@ -5,43 +5,155 @@
+   config,
+   ...
+ }: let
++  inherit (lib) mkOption mkEnableOption types mkIf;
++
+   unit = "unbound";
+   cfg = config.cnix.server.infra.${unit};
+   srv = config.cnix.server;
+-  webIp = "192.168.88.14";
+-  domain = config.cnix.server.domain;
++
+   localIp = config.cnix.settings.network.localIp;
++  domains = config.cnix.settings.accounts.domains;
+ 
+-  svcNames = lib.attrNames srv.services;
++  tuning =
++    {
++      small = {
++        package = pkgs.unbound-with-systemd;
++        threads = 2;
++        slabs = 2;
++        msgCache = "16m";
++        rrsetCache = "32m";
++        negCache = "4m";
++        outgoingRange = 1024;
++        queriesPerThread = 512;
++        sockBuf = "512k";
++        memoryMin = "96M";
++        memoryHigh = "192M";
++      };
++      large = {
++        package = pkgs.unbound-full;
++        threads = 4;
++        slabs = 8;
++        msgCache = "256m";
++        rrsetCache = "256m";
++        negCache = "16m";
++        outgoingRange = 8192;
++        queriesPerThread = 4096;
++        sockBuf = "2m";
++        memoryMin = "512M";
++        memoryHigh = "1G";
++      };
++    }
++    .${
++      cfg.profile
++    };
+ 
+-  localARecords = builtins.concatLists (
+-    map (
+-      name: let
+-        s = srv.services.${name};
+-        fqdn = clib.server.mkFullDomain config s;
+-      in
+-        if s != null && s.enable && s.routed && s.subdomain != null
+-        then [''"${fqdn}. A ${webIp}"'']
+-        else []
+-    )
+-    svcNames
+-  );
++  localARecords =
++    lib.mapAttrsToList
++    (_: s: ''"${clib.server.mkFullDomain config s}. A ${cfg.serviceIp}"'')
++    (lib.filterAttrs
++      (_: s: s.enable && s.routed && s.subdomain != "")
++      srv.services);
+ in {
+   options.cnix.server.infra.${unit} = {
+-    enable = lib.mkEnableOption {
+-      description = "Enable ${unit}";
++    enable = mkEnableOption "recursive DNS resolution with unbound";
++
++    profile = mkOption {
++      type = types.enum ["small" "large"];
++      default = "large";
++      description = ''
++        Resource envelope for cache sizes, thread count and socket buffers.
++        Use "small" on hosts with 1GB RAM or less.
++      '';
++    };
++
++    serviceIp = mkOption {
++      type = types.str;
++      default = srv.ip;
++      defaultText = lib.literalExpression "config.cnix.server.ip";
++      description = ''
++        Address that generated A records point at. This is the host running
++        Traefik, which is not necessarily the host running unbound, the DNS
++        backup resolves service names to the primary, not to itself.
++      '';
++    };
++
++    listenPort = mkOption {
++      type = types.port;
++      default = 5335;
++      description = "Port unbound listens on. Pi-hole holds :53 and forwards here.";
++    };
++
++    openFirewall = mkOption {
++      type = types.bool;
++      default = true;
++      description = ''
++        Open :53 for Pi-hole and :5335 for the podman bridge. Required on
++        every host that can hold the keepalived VIP.
++      '';
++    };
++
++    ioLatencyDevices = mkOption {
++      type = types.listOf types.str;
++      default = [];
++      example = ["259:0" "254:2"];
++      description = ''
++        major:minor of block devices backing the DNS working set, for
++        io.latency protection. Find them with `lsblk -o NAME,MAJ:MIN`.
++        Leave empty to skip; wrong values are ignored rather than fatal.
++      '';
+     };
+   };
+ 
+-  config = lib.mkIf cfg.enable {
++  config = mkIf cfg.enable {
++    assertions = [
++      {
++        assertion = localIp != "" && localIp != "127.0.0.1";
++        message = ''
++          cnix.server.infra.unbound: cnix.settings.network.localIp is unset on
++          ${config.networking.hostName}. unbound would bind loopback twice and
++          never answer on the LAN.
++        '';
++      }
++      {
++        assertion = domains.local != "" && domains.public != "";
++        message = ''
++          cnix.server.infra.unbound: cnix.settings.accounts.domains is unset on
++          ${config.networking.hostName}. Generated records would be nonsense
++          (this is what produced `pihole.127.0.0.1`).
++        '';
++      }
++    ];
++
++    boot.kernel.sysctl = {
++      "net.core.rmem_max" = lib.mkDefault 4194304;
++      "net.core.wmem_max" = lib.mkDefault 4194304;
++    };
++
++    networking.firewall = mkIf cfg.openFirewall {
++      allowedTCPPorts = [53];
++      allowedUDPPorts = [53];
++      interfaces."podman0" = {
++        allowedTCPPorts = [cfg.listenPort];
++        allowedUDPPorts = [cfg.listenPort];
++      };
++    };
++
+     systemd = {
+       slices.system-dns = {
+         description = "Latency-sensitive DNS services";
+-        sliceConfig.MemoryMin = "512M";
++        sliceConfig = {
++          MemoryMin = tuning.memoryMin;
++          MemoryHigh = tuning.memoryHigh;
++        };
+       };
++
+       services = {
+-        unbound.serviceConfig.Slice = "system-dns.slice";
+-        dns-io-latency = {
++        unbound.serviceConfig = {
++          Slice = "system-dns.slice";
++          LimitNOFILE = tuning.threads * tuning.outgoingRange + 4096;
++        };
++
++        dns-io-latency = mkIf (cfg.ioLatencyDevices != []) {
+           description = "Apply io.latency protection to system-dns.slice";
+           wantedBy = ["multi-user.target"];
+           after = ["unbound.service" "podman-pihole.service"];
+@@ -51,112 +163,130 @@ in {
+           };
+           script = ''
+             p=/sys/fs/cgroup/system.slice/system-dns.slice/io.latency
+-            echo "259:0 target=20" > "$p"
+-            echo "254:2 target=20" > "$p"
++            if [ ! -e "$p" ]; then
++              echo "io.latency unavailable (no cgroup v2 io controller); skipping"
++              exit 0
++            fi
++            ${lib.concatMapStringsSep "\n" (dev: ''
++                echo "${dev} target=20" > "$p" \
++                  || echo "warning: could not set io.latency for ${dev}"
++              '')
++              cfg.ioLatencyDevices}
+           '';
+         };
+       };
+     };
+ 
+-    services = {
+-      # resolved.enable = lib.mkForce false;
+-      unbound = {
+-        enable = true;
+-        enableRootTrustAnchor = true;
+-        localControlSocketPath = "/run/unbound/unbound.ctl";
+-        resolveLocalQueries = true;
+-        package = pkgs.unbound-full;
+-        settings = {
+-          server = {
+-            access-control = [
+-              "127.0.0.0/8 allow"
+-              "::1 allow"
+-              "10.88.0.0/24 allow"
+-              "192.168.88.0/24 allow"
+-              "100.64.88.0/24 allow"
+-              "fd7a:115c:a1e0:88::/64 allow"
+-              "0.0.0.0/0 refuse"
+-              "::0/0 refuse"
+-            ];
+-            aggressive-nsec = true;
+-            cache-max-ttl = 86400;
+-            cache-min-ttl = 300;
+-            delay-close = 10000;
+-            deny-any = true;
+-            do-ip4 = true;
+-            do-ip6 = true;
+-            do-tcp = true;
+-            do-udp = true;
+-            prefer-ip6 = false;
+-            edns-buffer-size = "1232";
+-            extended-statistics = true;
+-            harden-algo-downgrade = true;
+-            harden-below-nxdomain = true;
+-            harden-dnssec-stripped = true;
+-            harden-glue = true;
+-            harden-large-queries = true;
+-            harden-short-bufsize = true;
+-            hide-identity = true;
+-            hide-version = true;
+-            infra-cache-slabs = 8;
+-            interface = [
+-              "127.0.0.1@5335"
+-              "::1@5335"
+-              "${toString localIp}@5335"
+-            ];
+-            key-cache-slabs = 8;
+-            msg-cache-size = "256m";
+-            msg-cache-slabs = 8;
+-            neg-cache-size = "256m";
+-            num-queries-per-thread = 4096;
+-            num-threads = 4;
+-            outgoing-range = 8192;
+-            prefetch = true;
+-            prefetch-key = true;
+-            qname-minimisation = true;
+-            rrset-cache-size = "256m";
+-            rrset-cache-slabs = 8;
+-            rrset-roundrobin = true;
+-            serve-expired = true;
+-            serve-expired-ttl = 86400;
+-            serve-expired-client-timeout = 1800;
+-            so-rcvbuf = "2m";
+-            so-reuseport = true;
+-            so-sndbuf = "2m";
+-            statistics-cumulative = true;
+-            statistics-interval = 0;
+-            tls-cert-bundle = "/etc/ssl/certs/ca-certificates.crt";
+-            unwanted-reply-threshold = 10000000;
+-            use-caps-for-id = false;
+-            verbosity = 1;
+-            private-address = [
+-              "10.0.0.0/8"
+-              "169.254.0.0/16"
+-              "172.16.0.0/12"
+-              "192.168.0.0/16"
+-              "fd00::/8"
+-              "fe80::/10"
++    services.${unit} = {
++      enable = true;
++      package = tuning.package;
++      enableRootTrustAnchor = true;
++      localControlSocketPath = "/run/unbound/unbound.ctl";
++      resolveLocalQueries = true;
+ 
+-              "192.0.2.0/24"
+-              "198.51.100.0/24"
+-              "203.0.113.0/24"
+-              "255.255.255.255/32"
+-              "2001:db8::/32"
+-            ];
+-            local-zone = [
+-              ''"cnix.dev." transparent''
+-              ''"cnst.dev." transparent''
+-              ''"ts.cnst.dev." transparent''
+-            ];
+-            local-data =
+-              [
+-                ''"traefik.${domain}. A ${webIp}"''
+-                ''"rspamd.${domain}. A ${webIp}"''
+-                ''"login.${domain}. A ${webIp}"''
+-              ]
+-              ++ localARecords;
+-          };
+-        };
++      settings.server = {
++        interface = [
++          "127.0.0.1@${toString cfg.listenPort}"
++          "::1@${toString cfg.listenPort}"
++          "${localIp}@${toString cfg.listenPort}"
++        ];
++
++        access-control = [
++          "127.0.0.0/8 allow"
++          "::1 allow"
++          "10.88.0.0/24 allow"
++          "192.168.88.0/24 allow"
++          "192.168.20.0/24 allow"
++          "100.64.88.0/24 allow"
++          "fd7a:115c:a1e0:88::/64 allow"
++          "0.0.0.0/0 refuse"
++          "::0/0 refuse"
++        ];
++
++        # sizing
++        num-threads = tuning.threads;
++        infra-cache-slabs = tuning.slabs;
++        key-cache-slabs = tuning.slabs;
++        msg-cache-slabs = tuning.slabs;
++        rrset-cache-slabs = tuning.slabs;
++        msg-cache-size = tuning.msgCache;
++        rrset-cache-size = tuning.rrsetCache;
++        neg-cache-size = tuning.negCache;
++        outgoing-range = tuning.outgoingRange;
++        num-queries-per-thread = tuning.queriesPerThread;
++        so-rcvbuf = tuning.sockBuf;
++        so-sndbuf = tuning.sockBuf;
++        so-reuseport = true;
++
++        # caching behaviour
++        cache-max-ttl = 86400;
++        cache-min-ttl = 300;
++        prefetch = true;
++        prefetch-key = true;
++        serve-expired = true;
++        serve-expired-ttl = 86400;
++        serve-expired-client-timeout = 1800;
++        rrset-roundrobin = true;
++
++        # hardening
++        aggressive-nsec = true;
++        deny-any = true;
++        harden-algo-downgrade = true;
++        harden-below-nxdomain = true;
++        harden-dnssec-stripped = true;
++        harden-glue = true;
++        harden-large-queries = true;
++        harden-short-bufsize = true;
++        hide-identity = true;
++        hide-version = true;
++        qname-minimisation = true;
++        use-caps-for-id = false;
++        unwanted-reply-threshold = 10000000;
++        delay-close = 10000;
++
++        private-address = [
++          "10.0.0.0/8"
++          "169.254.0.0/16"
++          "172.16.0.0/12"
++          "192.168.0.0/16"
++          "fd00::/8"
++          "fe80::/10"
++          "192.0.2.0/24"
++          "198.51.100.0/24"
++          "203.0.113.0/24"
++          "255.255.255.255/32"
++          "2001:db8::/32"
++        ];
++
++        # transport
++        do-ip4 = true;
++        do-ip6 = true;
++        do-tcp = true;
++        do-udp = true;
++        prefer-ip6 = false;
++        edns-buffer-size = "1232";
++        ip-freebind = true;
++        tls-cert-bundle = "/etc/ssl/certs/ca-certificates.crt";
++
++        # observability
++        extended-statistics = true;
++        statistics-cumulative = true;
++        statistics-interval = 0;
++        verbosity = 1;
++
++        # local authority
++        local-zone = [
++          ''"${domains.local}." transparent''
++          ''"${domains.public}." transparent''
++          ''"ts.${domains.public}." transparent''
++        ];
++
++        local-data =
++          [
++            ''"traefik.${domains.local}. A ${cfg.serviceIp}"''
++            ''"login.${domains.local}. A ${cfg.serviceIp}"''
++          ]
++          ++ localARecords;
+       };
+     };
+   };
+diff --git a/modules/server/infra/www/default.nix b/modules/server/infra/www/default.nix
+index d147f246..7521217d 100644
+--- a/modules/server/infra/www/default.nix
++++ b/modules/server/infra/www/default.nix
+@@ -173,13 +173,24 @@ in {
+               config.cnix.server.services;
+             autoIngress =
+               lib.mapAttrs' (
+-                _: svc:
+-                  lib.nameValuePair "${svc.subdomain}.${cfg.url}" {
+-                    service = "http://127.0.0.1:${toString svc.port}";
+-                  }
++                _: svc: let
++                  fqdn = "${svc.subdomain}.${cfg.url}";
++                in
++                  lib.nameValuePair fqdn (
++                    if svc.tunnelViaTraefik
++                    then {
++                      service = "https://127.0.0.1:443";
++                      originRequest = {
++                        originServerName = fqdn;
++                        httpHostHeader = fqdn;
++                      };
++                    }
++                    else {
++                      service = "http://127.0.0.1:${toString svc.port}";
++                    }
++                  )
+               )
+               tunnelServices;
+-            # Collect extra ingress from all services
+             extraIngress = lib.foldlAttrs (
+               acc: _: svc:
+                 acc
+diff --git a/modules/server/modules.nix b/modules/server/modules.nix
+index b764c9e5..0156f1a6 100644
+--- a/modules/server/modules.nix
++++ b/modules/server/modules.nix
+@@ -10,6 +10,7 @@
+   ip = config.cnix.settings.network.localIp;
+   en = clib.mkEn host;
+   when = clib.mkWhen host;
++  per = clib.mkPer host;
+   none = lib.mkIf false {};
+ 
+   serviceDefs = {
+@@ -28,7 +29,10 @@
+     headscale = when "s" {
+       enable = true;
+       subdomain = "hs";
+-      exposure = "public";
++      exposure = "tunnel";
++      auth = false;
++      middlewares = ["headscale-cors"];
++      tunnelViaTraefik = true;
+       port = 3004;
+       homepage = {
+         name = "Headscale";
+@@ -564,9 +568,21 @@ in {
+     gid = 993;
+ 
+     infra = {
+-      traefik = en "sz";
++      traefik = en "s";
+       tailscale = en "s";
+-      unbound = en "sz";
++      unbound = per {
++        "s" = {
++          enable = true;
++          profile = "large";
++          serviceIp = "192.168.88.14";
++          ioLatencyDevices = ["259:0" "254:2"];
++        };
++        "z" = {
++          enable = true;
++          profile = "small";
++          serviceIp = "192.168.88.14";
++        };
++      };
+       gluetun = en "s";
+       podman = en "sz";
+ 
+diff --git a/modules/server/options.nix b/modules/server/options.nix
+index 90e0d32b..99bffff3 100644
+--- a/modules/server/options.nix
++++ b/modules/server/options.nix
+@@ -66,7 +66,10 @@ in {
+     services = lib.mkOption {
+       type = lib.types.attrsOf (
+         lib.types.submodule (
+-          {name, ...}: {
++          svcArgs: let
++            svc = svcArgs.config;
++            name = svcArgs.name;
++          in {
+             options = {
+               enable = lib.mkEnableOption "the service";
+               routed = lib.mkOption {
+@@ -96,6 +99,14 @@ in {
+                 default = "local";
+                 description = "Controls where the service is exposed";
+               };
++              tunnelViaTraefik = mkOption {
++                type = types.bool;
++                default = false;
++                description = ''
++                  Send this service's tunnel ingress to Traefik on loopback instead of
++                  straight to its port. Needed when several routers share a hostname.
++                '';
++              };
+               ingress = lib.mkOption {
+                 type = lib.types.attrsOf lib.types.str;
+                 default = {};
+@@ -104,6 +115,20 @@ in {
+                   "matrix" = "http://127.0.0.1:11338";
+                 };
+               };
++              auth = mkOption {
++                type = types.bool;
++                default = svc.exposure == "local";
++                description = ''
++                  Put Authelia forwardAuth in front of this service's Traefik router.
++                  Disable for services with their own auth, or whose native clients
++                  can't complete a browser redirect (mobile apps, API consumers).
++                '';
++              };
++              middlewares = mkOption {
++                type = types.listOf types.str;
++                default = [];
++                description = "Extra Traefik middlewares, applied after the access gate.";
++              };
+               port = lib.mkOption {
+                 type = lib.types.int;
+                 default = 80;
+diff --git a/modules/server/services/headscale/default.nix b/modules/server/services/headscale/default.nix
+index f5ebf0d3..d7fc7f45 100644
+--- a/modules/server/services/headscale/default.nix
++++ b/modules/server/services/headscale/default.nix
+@@ -25,7 +25,6 @@
+       base_url = "https://${fqdn}";
+       cookie_secure = true;
+       cookie_max_age = 86400;
+-      cookie_secret = "00000000000000000000000000000000";
+       data_path = "/var/lib/headplane";
+     };
+     headscale = {
+@@ -67,8 +66,6 @@ in {
+       headplaneEnv.file = "${self}/secrets/headplaneEnv.age";
+     };
+ 
+-    networking.firewall.allowedUDPPorts = [3478];
+-
+     services.${unit} = {
+       enable = true;
+       address = "127.0.0.1";
+@@ -91,11 +88,6 @@ in {
+         };
+ 
+         derp = {
+-          server = {
+-            enable = true;
+-            region_id = 999;
+-            stun_listen_addr = "0.0.0.0:3478";
+-          };
+           urls = ["https://controlplane.tailscale.com/derpmap/default"];
+           auto_update_enabled = true;
+           update_frequency = "24h";
+@@ -179,8 +171,6 @@ in {
+ 
+     services.traefik.dynamicConfigOptions.http = {
+       routers = {
+-        headscale.middlewares = ["headscale-cors"];
+-
+         headplane = {
+           entryPoints = ["websecure"];
+           rule = "Host(`${fqdn}`) && PathPrefix(`/admin`)";
+diff --git a/modules/services/zram/default.nix b/modules/services/zram/default.nix
+index 4d3d0599..6ed312a5 100644
+--- a/modules/services/zram/default.nix
++++ b/modules/services/zram/default.nix
+@@ -3,12 +3,23 @@
+   lib,
+   ...
+ }: let
+-  inherit (lib) mkIf mkEnableOption;
++  inherit (lib) mkIf mkEnableOption mkOption types;
+   cfg = config.cnix.services.zram;
+ in {
+-  options.cnix.services.zram.enable = mkEnableOption "Enables zram";
++  options.cnix.services.zram = {
++    enable = mkEnableOption "Enables zram";
++    memoryPercent = mkOption {
++      type = types.int;
++      default = 50;
++      description = "Percentage of RAM to use as compressed swap.";
++    };
++  };
+ 
+   config = mkIf cfg.enable {
+-    zramSwap.enable = true;
++    zramSwap = {
++      enable = true;
++      inherit (cfg) memoryPercent;
++      algorithm = "zstd";
++    };
+   };
+ }
+diff --git a/modules/settings/modules.nix b/modules/settings/modules.nix
+index 2e9a45b6..977fd8d2 100644
+--- a/modules/settings/modules.nix
++++ b/modules/settings/modules.nix
+@@ -128,7 +128,7 @@ in {
+       };
+       greetd = en "kbt";
+       gvfs = en "kbt";
+-      locate = all;
++      locate = en "kbts";
+       mullvad = none;
+       nfs = none;
+       openssh = all;

@@ -173,13 +173,24 @@ in {
               config.cnix.server.services;
             autoIngress =
               lib.mapAttrs' (
-                _: svc:
-                  lib.nameValuePair "${svc.subdomain}.${cfg.url}" {
-                    service = "http://127.0.0.1:${toString svc.port}";
-                  }
+                _: svc: let
+                  fqdn = "${svc.subdomain}.${cfg.url}";
+                in
+                  lib.nameValuePair fqdn (
+                    if svc.tunnelViaTraefik
+                    then {
+                      service = "https://127.0.0.1:443";
+                      originRequest = {
+                        originServerName = fqdn;
+                        httpHostHeader = fqdn;
+                      };
+                    }
+                    else {
+                      service = "http://127.0.0.1:${toString svc.port}";
+                    }
+                  )
               )
               tunnelServices;
-            # Collect extra ingress from all services
             extraIngress = lib.foldlAttrs (
               acc: _: svc:
                 acc
@@ -200,14 +211,18 @@ in {
             entryPoints = ["websecure"];
             rule = "Host(`${cfg.url}`) && PathPrefix(`/.well-known/`)";
             service = "www";
-            tls.certResolver = "letsencrypt";
+            tls = {};
+            # tls.certResolver = "letsencrypt";
+            middlewares = ["lan-only"];
           };
 
           ts = {
             entryPoints = ["websecure"];
             rule = "Host(`ts.${cfg.url}`)";
             service = "ts";
-            tls.certResolver = "letsencrypt";
+            tls = {};
+            # tls.certResolver = "letsencrypt";
+            middlewares = ["lan-only"];
           };
         };
 

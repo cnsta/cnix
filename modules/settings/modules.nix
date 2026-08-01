@@ -128,7 +128,7 @@ in {
       };
       greetd = en "kbt";
       gvfs = en "kbt";
-      locate = all;
+      locate = en "kbts";
       mullvad = none;
       nfs = none;
       openssh = all;

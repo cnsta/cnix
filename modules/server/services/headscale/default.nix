@@ -25,7 +25,6 @@
       base_url = "https://${fqdn}";
       cookie_secure = true;
       cookie_max_age = 86400;
-      cookie_secret = "00000000000000000000000000000000";
       data_path = "/var/lib/headplane";
     };
     headscale = {
@@ -67,8 +66,6 @@ in {
       headplaneEnv.file = "${self}/secrets/headplaneEnv.age";
     };
 
-    networking.firewall.allowedUDPPorts = [3478];
-
     services.${unit} = {
       enable = true;
       address = "127.0.0.1";
@@ -91,11 +88,6 @@ in {
         };
 
         derp = {
-          server = {
-            enable = true;
-            region_id = 999;
-            stun_listen_addr = "0.0.0.0:3478";
-          };
           urls = ["https://controlplane.tailscale.com/derpmap/default"];
           auto_update_enabled = true;
           update_frequency = "24h";
@@ -179,8 +171,6 @@ in {
 
     services.traefik.dynamicConfigOptions.http = {
       routers = {
-        headscale.middlewares = ["headscale-cors"];
-
         headplane = {
           entryPoints = ["websecure"];
           rule = "Host(`${fqdn}`) && PathPrefix(`/admin`)";

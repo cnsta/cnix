@@ -4,6 +4,10 @@
       username = "cnst";
       mail = "adam@cnst.dev";
       sshUser = "ziggy";
+      domains = {
+        local = "cnix.dev";
+        public = "cnst.dev";
+      };
     };
 
     boot = {
@@ -45,16 +49,24 @@
         "enu1u1" = {
           allowedTCPPorts = [
             22
-            80
-            443
-            8090
+            8053
           ];
           allowedUDPPorts = [
-            58846
-            6881
           ];
         };
       };
+    };
+
+    nix = {
+      enable = true;
+      cpuWeight = 20;
+      cpuQuota = "200%";
+      memoryHigh = "256M";
+      memoryMax = "384M";
+      maxJobs = 1;
+      cores = 2;
+      ioWriteBandwidthMax = ["/dev/mmcblk0 10M"];
+      ioWriteIOPSMax = ["/dev/mmcblk0 500"];
     };
 
     peripherals = {
@@ -65,7 +77,7 @@
         manager.enable = false;
         touch-detector.enable = false;
       };
-      pcscd.enable = true;
+      pcscd.enable = false;
       utils.enable = false;
     };
   };
