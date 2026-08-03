@@ -120,10 +120,9 @@ in {
       fwupd = en "kbts";
       gnome = when "kbt" {
         keyring.enable = true;
-        evolution-data-server.enable = true;
+        gvfs.enable = true;
       };
       greetd = en "kbt";
-      gvfs = en "kbt";
       locate = en "kbts";
       mullvad = none;
       nfs = none;

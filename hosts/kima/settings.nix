@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   cnix.settings = {
     accounts = {
       username = "cnst";
@@ -99,10 +99,13 @@
         touch-detector.enable = true;
       };
       pcscd.enable = true;
-      lightcrazy = {
+      litecrazy = {
         enable = true;
         service = {
           enable = true;
+          browser = pkgs.chromium;
+          batteryInterval = 60;
+          lowBatteryThreshold = 20;
         };
       };
       utils.enable = true;

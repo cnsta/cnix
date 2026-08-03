@@ -5,12 +5,12 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkIf;
-  inherit (lib.options) mkEnableOption;
+  inherit (lib) mkIf types;
+  inherit (lib.options) mkEnableOption mkOption;
   cfg = config.cnix.settings.peripherals;
 in {
   imports = [
-    inputs.lightcrazy.nixosModules.default
+    inputs.litecrazy.nixosModules.default
   ];
   options = {
     cnix.settings.peripherals = {
@@ -22,18 +22,40 @@ in {
         touch-detector.enable = mkEnableOption "Enables yubikey touch detector";
       };
       pcscd.enable = mkEnableOption "Enables pcscd";
-      lightcrazy = {
-        enable = mkEnableOption "Enables lightcrazy";
+      litecrazy = {
+        enable = mkEnableOption "Enables litecrazy";
         service = {
           enable = mkEnableOption ''
-            Lightcrazy systemd user service.
+            Systemd user service.
 
-            Runs `lightcrazy` (tray mode) as a systemd user service that starts
-            automatically with your graphical session. The tray icon gives access
-            to battery status and can launch the settings panel via your terminal.
+            Runs `litecrazy` in tray mode as a systemd user service, started
+            automatically with your graphical session.
 
-            Requires `hardware.lightcrazy.enable = true`.
+            Requires `hardware.litecrazy.enable = true`.
           '';
+          browser = mkOption {
+            type = types.nullOr (types.either types.package types.str);
+            default = null;
+            example = lib.literalExpression "pkgs.chromium";
+            description = ''
+              Browser used for the configurator. When null, litecrazy searches
+              for a Chromium-based browser itself.
+
+              The configurator drives the mouse over WebHID, which only
+              Chromium-derived browsers implement — Firefox will load the page
+              but never see the device.
+            '';
+          };
+          batteryInterval = mkOption {
+            type = types.ints.between 10 3600;
+            default = 60;
+            description = "Seconds between battery polls.";
+          };
+          lowBatteryThreshold = mkOption {
+            type = types.ints.between 0 100;
+            default = 20;
+            description = "Battery percentage that triggers a notification. 0 disables them.";
+          };
         };
       };
       utils.enable = mkEnableOption "Miscellaneous utility packages";
@@ -45,10 +67,13 @@ in {
         enable = true;
         enableGraphical = true;
       };
-      lightcrazy = mkIf cfg.lightcrazy.enable {
+      litecrazy = mkIf cfg.litecrazy.enable {
         enable = true;
-        service = mkIf cfg.lightcrazy.service.enable {
+        service = mkIf cfg.litecrazy.service.enable {
           enable = true;
+          browser = cfg.litecrazy.service.browser;
+          batteryInterval = cfg.litecrazy.service.batteryInterval;
+          lowBatteryThreshold = cfg.litecrazy.service.lowBatteryThreshold;
         };
       };
     };

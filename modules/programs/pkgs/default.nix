@@ -158,10 +158,14 @@
     nufmt
     nu-lint
   ];
+  devNix = with pkgs; [
+    nixpkgs-review
+    nix-update
+  ];
   devOther = with pkgs; [
     nfs-utils
   ];
-  devCommon = devLsps ++ devBuild ++ devRuntimes ++ devDbs ++ devFormatters ++ devOther;
+  devCommon = devLsps ++ devBuild ++ devRuntimes ++ devDbs ++ devFormatters ++ devNix ++ devOther;
   devRust = [];
   devPhp = with pkgs; [
     php

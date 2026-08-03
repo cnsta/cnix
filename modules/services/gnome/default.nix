@@ -1,38 +1,24 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.services.gnome;
-  srv = config.cnix.services;
 in {
   options = {
     cnix.services.gnome = {
       keyring.enable = mkEnableOption "Enables gnome-keyring";
-      evolution-data-server.enable = mkEnableOption "Enables evolution data server (calendar)";
+      gvfs.enable = mkEnableOption "Enables gnome virtual files ystem";
     };
   };
 
   config = {
-    environment.systemPackages = with pkgs; [
-      evolution-data-server
-      gcr_4
-    ];
-    security.pam.services = {
-      login = mkIf cfg.keyring.enable {
-        enable = true;
-        enableGnomeKeyring = true;
+    services = {
+      gnome = {
+        gnome-keyring.enable = mkIf cfg.keyring.enable true;
       };
-      greetd = mkIf (cfg.keyring.enable && srv.greetd.enable) {
-        enable = true;
-        enableGnomeKeyring = true;
-      };
-    };
-    services.gnome = {
-      gnome-keyring.enable = mkIf cfg.keyring.enable true;
-      evolution-data-server.enable = mkIf cfg.evolution-data-server.enable true;
+      gvfs.enable = mkIf cfg.gvfs.enable true;
     };
   };
 }

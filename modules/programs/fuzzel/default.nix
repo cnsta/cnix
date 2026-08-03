@@ -12,7 +12,7 @@ with lib; let
     main = {
       layer = "overlay";
       font = "Input Sans Narrow Light:size=12";
-      launch-prefix = "uwsm-app --";
+      launch-prefix = "app2unit --";
       lines = 8;
     };
     colors = {

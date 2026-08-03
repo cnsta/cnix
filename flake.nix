@@ -30,6 +30,9 @@
             permittedInsecurePackages = ["olm-3.2.16"];
           };
           overlays = [
+            (final: prev: {
+              app2unit = inputs.nixpkgs-master.legacyPackages.${prev.system}.app2unit;
+            })
             inputs.emacs-overlay.overlays.default
           ];
         };
@@ -46,6 +49,8 @@
   inputs = {
     # Nix environment
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -128,8 +133,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lightcrazy = {
-      url = "github:cnsta/lightcrazy";
+    litecrazy = {
+      url = "github:cnsta/litecrazy";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
