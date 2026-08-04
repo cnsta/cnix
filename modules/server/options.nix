@@ -164,7 +164,7 @@ in {
                 };
                 description = "Cloudflare tunnel configuration for this service.";
               };
-              homepage = lib.mkOption {
+              dashboard = lib.mkOption {
                 default = {};
                 type = lib.types.submodule {
                   options = {
@@ -172,12 +172,7 @@ in {
                       type = lib.types.str;
                       default = displayName;
                       defaultText = lib.literalExpression "the attribute name, title-cased";
-                      description = "Display name on the homepage.";
-                    };
-                    description = lib.mkOption {
-                      type = lib.types.str;
-                      default = "";
-                      description = "A short description for the homepage tile.";
+                      description = "Display name on the dashboard.";
                     };
                     icon = lib.mkOption {
                       type = lib.types.str;
@@ -188,17 +183,99 @@ in {
                     category = lib.mkOption {
                       type = lib.types.str;
                       default = "";
-                      description = "Homepage category grouping.";
+                      description = ''
+                        Dashboard grouping. Each non-empty category becomes one Glance
+                        `monitor` widget. Empty means the service is not shown.
+                      '';
                     };
                     path = lib.mkOption {
                       type = lib.types.str;
                       default = "";
                       example = "/admin";
-                      description = "Optional path suffix for homepage links (e.g. /admin).";
+                      description = "Optional path suffix for the dashboard link (e.g. /admin).";
+                    };
+                    check = lib.mkOption {
+                      type = lib.types.enum ["local" "public"];
+                      default = "local";
+                      description = ''
+                        "local" hits http://127.0.0.1:<port> directly, bypassing Traefik
+                        and Authelia.
+
+                        "public" checks the same URL the tile links to.
+                      '';
+                    };
+                    checkPath = lib.mkOption {
+                      type = lib.types.str;
+                      default = "";
+                      example = "/health";
+                      description = ''
+                        Path appended to the loopback health check URL. Useful when a
+                        service answers non-200 on / but exposes a health endpoint.
+                      '';
+                    };
+                    altStatusCodes = lib.mkOption {
+                      type = lib.types.listOf lib.types.int;
+                      default = [];
+                      example = [401 403];
+                      description = "Extra HTTP status codes that should count as up.";
+                    };
+                    checkUrl = lib.mkOption {
+                      type = lib.types.str;
+                      default = "";
+                      example = "http://localhost:2283/api/server/ping";
+                      description = ''
+                        Explicit health check URL, bypassing the derived
+                        http://127.0.0.1:<port><checkPath>. Note that "localhost" and
+                        "127.0.0.1" are not interchangeable here: Node-based services that bind
+                        to "localhost" often end up on ::1 only.
+                      '';
+                    };
+
+                    timeout = lib.mkOption {
+                      type = lib.types.str;
+                      default = "5s";
+                      description = "How long Glance waits for the health check to answer.";
+                    };
+
+                    container = lib.mkOption {
+                      default = {};
+                      description = ''
+                        Marks this service as backed by an OCI/podman container, which adds it
+                        to Glance's docker-containers widget alongside its monitor entry.
+                      '';
+                      type = lib.types.submodule {
+                        options = {
+                          name = lib.mkOption {
+                            type = lib.types.str;
+                            default = "";
+                            example = "immich_server";
+                            description = ''
+                              The container's name as podman reports it (`podman ps --format
+                              '{{.Names}}'`). With virtualisation.oci-containers this is the
+                              attribute name from oci-containers.containers, which is not
+                              necessarily the same as this service's attribute name. Empty
+                              means the service isn't containerised.
+                            '';
+                          };
+                          children = lib.mkOption {
+                            type = lib.types.attrsOf lib.types.str;
+                            default = {};
+                            example = {
+                              immich_postgres = "DB";
+                              immich_redis = "Redis";
+                            };
+                            description = ''
+                              Sidecar containers to nest under this one, as container name ->
+                              display label. They collapse into the parent's tile and a failure
+                              in any of them propagates up to it.
+                            '';
+                          };
+                        };
+                      };
                     };
                   };
                 };
-                description = "Homepage metadata for this service.";
+                description = "Dashboard metadata for this service.";
               };
             };
           }

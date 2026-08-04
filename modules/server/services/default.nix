@@ -5,8 +5,8 @@
     ./fluxer
     ./harmonia
     ./headscale
-    ./homepage
     ./hydra
+    ./glance
     ./grafana
     ./immich
     ./jellyfin

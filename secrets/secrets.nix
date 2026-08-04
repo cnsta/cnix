@@ -72,6 +72,7 @@ in {
   "tailscaleOidcSecret.age".publicKeys = sobotka;
   "jellyfinEnvironment.age".publicKeys = sobotka;
   "fluxerEnvironment.age".publicKeys = sobotka;
+  "glanceEnvironment.age".publicKeys = sobotka;
 
   # ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

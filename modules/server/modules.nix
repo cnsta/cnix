@@ -13,7 +13,7 @@
 
   serviceDefs = {
     # infra
-    homepage = when "s" {
+    glance = when "s" {
       enable = true;
       subdomain = "dash";
       port = 8082;
@@ -28,8 +28,7 @@
         tunnelId = "5c598772-1ea9-495f-bf3b-1feb064bfc29";
         credentialsFile = config.age.secrets.autheliaCloudflared.path;
       };
-      homepage = {
-        description = "Authentication and authorization server";
+      dashboard = {
         category = "Infra";
       };
     };
@@ -38,9 +37,8 @@
       enable = true;
       auth = false;
       port = 17170;
-      homepage = {
+      dashboard = {
         name = "lldap";
-        description = "Light LDAP implementation for authentication";
         category = "Infra";
       };
     };
@@ -53,8 +51,7 @@
       auth = false;
       middlewares = ["headscale-cors"];
       port = 3004;
-      homepage = {
-        description = "Coordination server for Tailscale";
+      dashboard = {
         path = "/admin";
         category = "Infra";
       };
@@ -63,20 +60,20 @@
     pihole = when "sz" {
       enable = true;
       port = 8053;
-      homepage = {
+      dashboard = {
         name = "PiHole";
         icon = "pi-hole.svg";
-        description = "Adblocking and DNS service";
         path = "/admin";
+        checkPath = "/admin";
         category = "Infra";
+        container.name = "pihole";
       };
     };
 
     grafana = when "s" {
       enable = true;
       port = 3002;
-      homepage = {
-        description = "Full-stack observability";
+      dashboard = {
         category = "Infra";
       };
     };
@@ -85,8 +82,7 @@
       enable = true;
       subdomain = "uptime";
       port = 3001;
-      homepage = {
-        description = "Service monitoring tool";
+      dashboard = {
         category = "Infra";
       };
     };
@@ -98,8 +94,7 @@
       exposure = "dedicated-tunnel";
       port = 3031;
       ingress."ssh.git" = "ssh://localhost:22";
-      homepage = {
-        description = "A painless, self-hosted Git service";
+      dashboard = {
         category = "Dev";
       };
     };
@@ -107,8 +102,7 @@
     hydra = when "s" {
       enable = true;
       port = 3000;
-      homepage = {
-        description = "Nix continuous integration";
+      dashboard = {
         category = "Dev";
       };
     };
@@ -130,9 +124,9 @@
       enable = true;
       auth = false;
       port = 8989;
-      homepage = {
-        description = "Internet PVR for Usenet and Torrents";
+      dashboard = {
         category = "Media";
+        container.name = "sonarr";
       };
     };
 
@@ -140,9 +134,9 @@
       enable = true;
       auth = false;
       port = 7878;
-      homepage = {
-        description = "Movie collection manager";
+      dashboard = {
         category = "Media";
+        container.name = "radarr";
       };
     };
 
@@ -150,9 +144,9 @@
       enable = true;
       auth = false;
       port = 8686;
-      homepage = {
-        description = "Music collection manager";
+      dashboard = {
         category = "Media";
+        container.name = "lidarr";
       };
     };
 
@@ -160,9 +154,9 @@
       enable = true;
       auth = false;
       port = 9696;
-      homepage = {
-        description = "PVR indexer";
+      dashboard = {
         category = "Media";
+        container.name = "prowlarr";
       };
     };
 
@@ -170,8 +164,7 @@
       enable = false;
       exposure = "local";
       port = 1867;
-      homepage = {
-        description = "Sports PVR for Usenet and Torrents";
+      dashboard = {
         category = "Media";
       };
     };
@@ -180,8 +173,7 @@
       enable = true;
       exposure = "tailscale";
       port = 5055;
-      homepage = {
-        description = "Media request and discovery manager";
+      dashboard = {
         category = "Media";
       };
     };
@@ -191,9 +183,9 @@
       subdomain = "fin";
       exposure = "tailscale";
       port = 8096;
-      homepage = {
-        description = "The Free Software Media System";
+      dashboard = {
         category = "Media";
+        container.name = "jellyfin";
       };
     };
 
@@ -201,10 +193,13 @@
       enable = true;
       auth = false;
       port = 8265;
-      homepage = {
+      dashboard = {
         icon = "tdarr.webp";
-        description = "Media transcoding application";
         category = "Media";
+        container = {
+          name = "tdarr";
+          children.node0 = "Node";
+        };
       };
     };
 
@@ -212,10 +207,10 @@
       enable = true;
       auth = false;
       port = 4533;
-      homepage = {
+      dashboard = {
         icon = "navidrome.webp";
-        description = "Music streaming service";
         category = "Media";
+        container.name = "navidrome";
       };
     };
 
@@ -224,11 +219,11 @@
       subdomain = "music";
       exposure = "tunnel";
       port = 8089;
-      homepage = {
+      dashboard = {
         name = "Octo-Fiesta";
         icon = "navidrome.webp";
-        description = "Subsonic proxy";
         category = "Media";
+        container.name = "octo-fiesta";
       };
     };
 
@@ -238,10 +233,10 @@
       subdomain = "qbt";
       auth = false;
       port = 8081;
-      homepage = {
+      dashboard = {
         name = "qBittorrent";
-        description = "Torrent client";
         category = "Downloads";
+        container.name = "qbittorrent";
       };
     };
 
@@ -249,10 +244,10 @@
       enable = true;
       auth = false;
       port = 8085;
-      homepage = {
+      dashboard = {
         name = "SABnzbd";
-        description = "Free and easy binary newsreader";
         category = "Downloads";
+        container.name = "sabnzbd";
       };
     };
 
@@ -260,9 +255,8 @@
       enable = false;
       exposure = "local";
       port = 5030;
-      homepage = {
+      dashboard = {
         name = "Soulseek";
-        description = "Web-based Soulseek client";
         category = "Downloads";
       };
     };
@@ -271,10 +265,10 @@
       enable = true;
       auth = false;
       port = 8191;
-      homepage = {
+      dashboard = {
         name = "FlareSolverr";
-        description = "Proxy to bypass Cloudflare/DDoS-GUARD protection";
         category = "Downloads";
+        container.name = "flaresolverr";
       };
     };
 
@@ -283,9 +277,9 @@
       enable = true;
       exposure = "tailscale";
       port = 2283;
-      homepage = {
-        description = "Photo collection manager";
+      dashboard = {
         category = "Cloud";
+        checkUrl = "http://localhost:2283/api/server/ping";
       };
     };
 
@@ -293,8 +287,7 @@
       enable = true;
       exposure = "tailscale";
       port = 5230;
-      homepage = {
-        description = "Open-source, self-hosted note-taking";
+      dashboard = {
         category = "Cloud";
       };
     };
@@ -308,9 +301,8 @@
         tunnelId = "fdd98086-6a4c-44f2-bba0-eb86b833cce5";
         credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
       };
-      homepage = {
+      dashboard = {
         icon = "vaultwarden-light.svg";
-        description = "Password manager";
         category = "Cloud";
       };
     };
@@ -320,8 +312,7 @@
       subdomain = "cloud";
       exposure = "local";
       port = 8182;
-      homepage = {
-        description = "A safe home for all your data";
+      dashboard = {
         category = "Cloud";
       };
     };
@@ -331,9 +322,8 @@
       subdomain = "search";
       exposure = "local";
       port = 8084;
-      homepage = {
+      dashboard = {
         name = "SearXNG";
-        description = "Internet metasearch engine";
         category = "Cloud";
       };
     };
@@ -344,8 +334,7 @@
       subdomain = "chat";
       exposure = "tailscale";
       port = 8480;
-      homepage = {
-        description = "Open source chat for friends and communities";
+      dashboard = {
         category = "Communication";
       };
     };
@@ -354,9 +343,9 @@
       enable = true;
       subdomain = "feed";
       port = 8087;
-      homepage = {
-        description = "A minimalist and opinionated feed reader";
+      dashboard = {
         category = "Communication";
+        container.name = "miniflux";
       };
     };
 
@@ -364,8 +353,7 @@
       enable = true;
       subdomain = "mail";
       port = 5679;
-      homepage = {
-        description = "Browser-based multilingual IMAP client";
+      dashboard = {
         category = "Communication";
       };
     };
@@ -376,9 +364,9 @@
       subdomain = "ha";
       auth = false;
       port = 8123;
-      homepage = {
-        description = "Awaken your home";
+      dashboard = {
         category = "Automation";
+        container.name = "home-assistant";
       };
     };
 
@@ -386,8 +374,7 @@
       enable = false;
       exposure = "local";
       port = 8001;
-      homepage = {
-        description = "AI platform";
+      dashboard = {
         category = "Automation";
       };
     };
@@ -396,9 +383,8 @@
       enable = false;
       exposure = "local";
       port = 5678;
-      homepage = {
+      dashboard = {
         name = "n8n";
-        description = "A workflow automation platform";
         category = "Automation";
       };
     };
@@ -407,8 +393,7 @@
       enable = false;
       exposure = "tailscale";
       port = 8098;
-      homepage = {
-        description = "Multi-node AI orchestration platform";
+      dashboard = {
         category = "Automation";
       };
     };
