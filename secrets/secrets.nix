@@ -71,6 +71,7 @@ in {
   "headplaneEnv.age".publicKeys = sobotka;
   "tailscaleOidcSecret.age".publicKeys = sobotka;
   "jellyfinEnvironment.age".publicKeys = sobotka;
+  "jellyfinCloudflared.age".publicKeys = sobotka;
   "fluxerEnvironment.age".publicKeys = sobotka;
   "glanceEnvironment.age".publicKeys = sobotka;
 

@@ -171,7 +171,7 @@
 
     seerr = when "s" {
       enable = true;
-      exposure = "tailscale";
+      exposure = "tunnel";
       port = 5055;
       dashboard = {
         category = "Media";
@@ -181,7 +181,7 @@
     jellyfin = when "s" {
       enable = true;
       subdomain = "fin";
-      exposure = "tailscale";
+      exposure = "dedicated-tunnel";
       port = 8096;
       dashboard = {
         category = "Media";
