@@ -30,9 +30,6 @@
             permittedInsecurePackages = ["olm-3.2.16"];
           };
           overlays = [
-            (final: prev: {
-              app2unit = inputs.nixpkgs-master.legacyPackages.${prev.system}.app2unit;
-            })
             inputs.emacs-overlay.overlays.default
           ];
         };
