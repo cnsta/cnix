@@ -37,5 +37,6 @@
     ./vaultwarden
     ./qbittorrent
     ./home-assistant
+    ./music-assistant
   ];
 }

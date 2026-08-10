@@ -104,7 +104,7 @@
         service = {
           enable = true;
           browser = pkgs.chromium;
-          batteryInterval = 60;
+          batteryInterval = 180;
           lowBatteryThreshold = 20;
         };
       };

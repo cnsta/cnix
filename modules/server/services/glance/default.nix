@@ -192,7 +192,10 @@ in {
                               hide = false;
                               name = "Root";
                             };
-                            # "/mnt/media" = { hide = false; name = "Media"; };
+                            "/mnt/data" = {
+                              hide = false;
+                              name = "Media";
+                            };
                           };
                         }
                       ];
@@ -201,7 +204,7 @@ in {
                   ++ [
                     {
                       type = "split-column";
-                      "max-columns" = 2;
+                      "max-columns" = 3;
                       widgets = monitors;
                     }
                   ]

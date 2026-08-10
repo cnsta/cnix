@@ -137,6 +137,7 @@
   server = with pkgs; [
     nvtopPackages.intel
     zfstools
+    beets
   ];
   # dev
   devLsps = with pkgs; [

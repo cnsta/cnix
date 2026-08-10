@@ -38,7 +38,7 @@
       auth = false;
       port = 17170;
       dashboard = {
-        name = "lldap";
+        icon = "lldap-dark.svg";
         category = "Infra";
       };
     };
@@ -224,6 +224,17 @@
         icon = "navidrome.webp";
         category = "Media";
         container.name = "octo-fiesta";
+      };
+    };
+
+    music-assistant = when "s" {
+      enable = true;
+      subdomain = "ma";
+      auth = false;
+      port = 8095;
+      dashboard = {
+        category = "Media";
+        container.name = "music-assistant";
       };
     };
 
