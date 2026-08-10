@@ -19,6 +19,7 @@ IMAGES=(
   ghcr.io/v1ck3s/octo-fiesta:dev
   ghcr.io/qdm12/gluetun:latest
   docker.io/miniflux/miniflux:latest
+  ghcr.io/music-assistant/server:latest
 )
 
 if [[ $EUID -ne 0 ]]; then
