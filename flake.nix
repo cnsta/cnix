@@ -30,6 +30,9 @@
             permittedInsecurePackages = ["olm-3.2.16"];
           };
           overlays = [
+            (final: prev: {
+              wf-recorder = inputs.nixpkgs-master.legacyPackages.${prev.system}.wf-recorder;
+            })
             inputs.emacs-overlay.overlays.default
           ];
         };
