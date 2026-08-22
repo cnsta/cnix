@@ -30,9 +30,6 @@
             permittedInsecurePackages = ["olm-3.2.16"];
           };
           overlays = [
-            (final: prev: {
-              wf-recorder = inputs.nixpkgs-master.legacyPackages.${prev.system}.wf-recorder;
-            })
             inputs.emacs-overlay.overlays.default
           ];
         };
@@ -104,11 +101,6 @@
 
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    quickshell = {
-      url = "github:quickshell-mirror/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

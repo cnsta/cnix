@@ -1,0 +1,22 @@
+{{ if eq .Response.StatusCode 200 }} {{ $ip := (.JSON.String "public_ip") }} {{
+$city := (.JSON.String "city") }} {{ $country := (.JSON.String "country") }} {{
+if eq $ip "" }} {{ $ip = "-" }} {{ $city = "-" }} {{ $country = "-" }} {{ end }}
+<div class="flex justify-between text-center">
+  <div>
+    <div class="color-highlight size-h4">{{ $ip }}</div>
+    <div class="size-h6">PUBLIC IP</div>
+  </div>
+  <div>
+    <div class="color-highlight size-h4">{{ $country }}</div>
+    <div class="size-h6">COUNTRY</div>
+  </div>
+  <div>
+    <div class="color-highlight size-h4">{{ $city }}</div>
+    <div class="size-h6">CITY</div>
+  </div>
+</div>
+{{ else }}
+<div style="text-align: center; color: var(--color-negative)">
+  Error: {{ .Response.StatusCode }} - {{ .Response.Status }}
+</div>
+{{ end }}

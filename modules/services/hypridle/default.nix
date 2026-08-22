@@ -9,15 +9,16 @@ with lib; let
   cfg = config.cnix.services.hypridle;
   acct = config.cnix.settings.accounts;
 
-  lock = "${pkgs.systemd}/bin/loginctl lock-session";
-  wlopm = pkgs.wlopm;
+  lock = getExe' pkgs.systemd "loginctl" + " lock-session";
+  wlopm = getExe' pkgs.wlopm "wlopm";
+  pgrep = getExe' pkgs.procps "pgrep";
   timeout = 300;
 
   hyprlock = getExe config.programs.hyprlock.package;
 
   settings = {
     general = {
-      lock_cmd = "pgrep -x hyprlock || ${hyprlock}";
+      lock_cmd = "${pgrep} -x hyprlock || ${hyprlock}";
       before_sleep_cmd = lock;
       after_sleep_cmd = "${wlopm} --on";
       ignore_dbus_inhibit = false;

@@ -146,7 +146,6 @@ in {
       hypridle = en "kbt";
       hyprpaper = en "kbt";
       dunst = none;
-      quickshell = none;
       syncthing = none;
       tailray = en "kbt";
       udiskie = en "kbt";

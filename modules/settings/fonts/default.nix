@@ -36,6 +36,7 @@ in {
         ])
         ++ (with pkgs.nerd-fonts; [
           jetbrains-mono
+          bigblue-terminal
           departure-mono
           fira-code
           fira-mono

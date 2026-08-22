@@ -81,7 +81,7 @@ in {
     {
       hjem.users = genAttrs acct.defaultUsers (_: {
         packages = [pkgs.ghostty];
-        files.".config/ghostty/config" = {
+        files.".config/ghostty/config.ghostty" = {
           source = pkgs.writeText "ghostty-config" ghosttyConfig;
           clobber = true;
         };

@@ -120,6 +120,7 @@
     qt6.qtwayland
   ];
   guiMedia = with pkgs; [
+    krita
     feishin
     nautilus
     file-roller

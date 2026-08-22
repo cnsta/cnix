@@ -30,7 +30,6 @@
     ./udisks
     ./tailray
     ./udiskie
-    ./quickshell
     ./waybar
     ./xdg
     ./zram
