@@ -21,13 +21,15 @@
 
   autheliaUp = srv.services.authelia.enable;
 
+  accessLog = "/var/lib/traefik/logs/access.log";
+
   gateFor = service:
     if service.exposure == "tailscale"
     then "tailnet-only"
     else "lan-only";
 
   middlewaresFor = service:
-    [(gateFor service)]
+    ["security-headers" (gateFor service)]
     ++ lib.optional (service.auth && autheliaUp) "authelia"
     ++ service.middlewares;
 
@@ -70,6 +72,19 @@ in {
 
     networking.firewall.allowedTCPPorts = [80 443];
 
+    services.logrotate.settings.traefik-access = {
+      files = accessLog;
+      su = "traefik traefik";
+      create = "0640 traefik traefik";
+      rotate = 7;
+      frequency = "daily";
+      compress = true;
+      delaycompress = true;
+      missingok = true;
+      notifempty = true;
+      postrotate = "systemctl kill -s USR1 traefik.service";
+    };
+
     services = {
       tailscale.permitCertUid = "traefik";
 
@@ -78,7 +93,7 @@ in {
 
         staticConfigOptions = {
           log.level = "INFO";
-          accesslog.filepath = "/var/lib/traefik/logs/access.log";
+          accesslog.filepath = accessLog;
           api = {
             dashboard = true;
             insecure = false;
@@ -94,7 +109,7 @@ in {
           };
 
           entryPoints = let
-            trustedProxies = loopback ++ podman ++ lan ++ tailnet;
+            trustedProxies = loopback ++ podman;
           in {
             web = {
               address = ":80";
@@ -130,34 +145,53 @@ in {
           };
         };
 
-        dynamicConfigOptions.http = {
-          services = generateServices routable;
-
-          middlewares = {
-            lan-only.ipAllowList.sourceRange = loopback ++ podman ++ lan ++ tailnet;
-            tailnet-only.ipAllowList.sourceRange = loopback ++ tailnet;
+        dynamicConfigOptions = {
+          tls.options.default = {
+            minVersion = "VersionTLS12";
+            sniStrict = true;
           };
 
-          routers =
-            generateRouters routable
-            // {
-              api = {
-                entryPoints = ["websecure"];
-                rule = "Host(`traefik.${localDomain}`)";
-                service = "api@internal";
-                middlewares = ["lan-only"] ++ lib.optional autheliaUp "authelia";
-                tls = {};
-              };
-            }
-            // lib.optionalAttrs autheliaUp {
-              authelia-local = {
-                entryPoints = ["websecure"];
-                rule = "Host(`login.${localDomain}`)";
-                service = "authelia";
-                middlewares = ["lan-only"];
-                tls = {};
+          http = {
+            services = generateServices routable;
+
+            middlewares = {
+              lan-only.ipAllowList.sourceRange = loopback ++ podman ++ lan ++ tailnet;
+              tailnet-only.ipAllowList.sourceRange = loopback ++ tailnet;
+
+              security-headers.headers = {
+                stsSeconds = 31536000;
+                stsIncludeSubdomains = true;
+                stsPreload = false;
+                contentTypeNosniff = true;
+                browserXssFilter = true;
+                referrerPolicy = "strict-origin-when-cross-origin";
+                frameDeny = true;
               };
             };
+
+            routers =
+              generateRouters routable
+              // {
+                api = {
+                  entryPoints = ["websecure"];
+                  rule = "Host(`traefik.${localDomain}`)";
+                  service = "api@internal";
+                  middlewares =
+                    ["security-headers" "lan-only"]
+                    ++ lib.optional autheliaUp "authelia";
+                  tls = {};
+                };
+              }
+              // lib.optionalAttrs autheliaUp {
+                authelia-local = {
+                  entryPoints = ["websecure"];
+                  rule = "Host(`login.${localDomain}`)";
+                  service = "authelia";
+                  middlewares = ["security-headers" "lan-only"];
+                  tls = {};
+                };
+              };
+          };
         };
       };
     };

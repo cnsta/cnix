@@ -97,6 +97,7 @@ in {
         image = "ghcr.io/qdm12/gluetun:latest";
         pull = "newer";
         ports = [
+          "127.0.0.1:8003:8000/tcp"
           "8191:8191"
           "9696:9696"
           "8989:8989"

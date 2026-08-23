@@ -74,6 +74,7 @@ in {
   "jellyfinCloudflared.age".publicKeys = sobotka;
   "fluxerEnvironment.age".publicKeys = sobotka;
   "glanceEnvironment.age".publicKeys = sobotka;
+  "speedtestEnvironment.age".publicKeys = sobotka;
 
   # ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

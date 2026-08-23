@@ -26,11 +26,12 @@
     ./prowlarr
     ./radarr
     ./roundcube
+    ./sabnzbd
     ./searxng
     ./slskd
     ./sonarr
+    ./speedtest-tracker
     ./sportarr
-    ./sabnzbd
     ./tdarr
     ./turnstone
     ./uptime-kuma

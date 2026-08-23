@@ -90,6 +90,7 @@ in {
           middlewares.authelia.forwardAuth = {
             address = "http://localhost:${toString cfg.port}/api/authz/forward-auth";
             trustForwardHeader = true;
+            maxResponseBodySize = 8192;
             authResponseHeaders = [
               "Remote-User"
               "Remote-Groups"
@@ -189,7 +190,7 @@ in {
             #   sender = "${config.site.domain} — Authentication <services.authentication@${config.site.domain}>";
             #   subject = "{title}";
             # };
-            log.level = "debug";
+            log.level = "info";
             identity_providers.oidc = {
               cors = {
                 endpoints = [

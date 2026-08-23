@@ -160,6 +160,19 @@
       };
     };
 
+    speedtest-tracker = when "s" {
+      enable = true;
+      subdomain = "speedtest";
+      auth = false;
+      exposure = "local";
+      port = 8280;
+      dashboard = {
+        category = "Infra";
+        icon = "speedtest-tracker.webp";
+        container.name = "speedtest-tracker";
+      };
+    };
+
     sportarr = when "s" {
       enable = false;
       exposure = "local";
