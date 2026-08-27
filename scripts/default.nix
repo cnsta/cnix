@@ -16,15 +16,22 @@
       text = builtins.readFile file;
     };
 
+  niriPkg = config.programs.niri.package;
+
   scriptDefs = with pkgs; {
-    spawn = {
-      runtimeInputs = [niri];
-      file = ./bin/spawn.sh;
+    niri-autostack = {
+      runtimeInputs = [niriPkg jq];
+      file = ./bin/niri-autostack.sh;
     };
 
-    spawn-or-focus = {
-      runtimeInputs = [niri];
-      file = ./bin/spawn-or-focus.sh;
+    niri-spawn-or-focus = {
+      runtimeInputs = [niriPkg jq];
+      file = ./bin/niri-spawn-or-focus.sh;
+    };
+
+    screenshot = {
+      runtimeInputs = with pkgs; [grim slurp wl-clipboard libnotify tesseract coreutils];
+      file = ./bin/screenshot.sh;
     };
 
     vpnswitcher = {
@@ -118,13 +125,21 @@
   };
 in {
   options.cnix.scripts =
-    lib.mapAttrs (name: _: {
+    lib.mapAttrs (name: def: {
       enable = lib.mkEnableOption "${name} script";
+
+      package = lib.mkOption {
+        type = lib.types.package;
+        readOnly = true;
+        default = mkScript name def;
+        defaultText = lib.literalMD "built from `./bin/${name}.sh`";
+        description = "The built ${name} script.";
+      };
     })
     scriptDefs;
 
   config.environment.systemPackages = lib.pipe scriptDefs [
     (lib.filterAttrs (name: _: cfg.${name}.enable))
-    (lib.mapAttrsToList mkScript)
+    (lib.mapAttrsToList (name: _: cfg.${name}.package))
   ];
 }

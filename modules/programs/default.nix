@@ -29,6 +29,7 @@
     ./lact
     ./librewolf
     ./lutris
+    ./maccel
     ./microfetch
     ./niri
     ./nushell
@@ -42,6 +43,8 @@
     ./nh
     ./npm
     ./obsidian
+    ./river
+    ./river-delta
     ./steam
     ./pkgs
     ./thunar

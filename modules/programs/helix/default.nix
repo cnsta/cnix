@@ -40,6 +40,8 @@
     lua-language-server
     markdown-oxide
     nixd
+    zls
+    lldb
   ];
 
   formatters = with pkgs; [
@@ -47,6 +49,7 @@
     prettier
     shfmt
     stylua
+    zig
   ];
 
   mkConfigToml = user: let
@@ -267,6 +270,36 @@
       command = "/run/current-system/sw/bin/rustfmt"
 
       [[language]]
+      name = "zig"
+      file-types = ["zig", "zon"]
+      auto-format = true
+      language-servers = [ "zls" ]
+      formatter = { command = "/run/current-system/sw/bin/zig" , args = ["fmt", "--stdin"] }
+
+      [language.debugger]
+      name = "lldb-dap"
+      transport = "stdio"
+      command = "/run/current-system/sw/bin/lldb-dap"
+
+      [[language.debugger.templates]]
+      name = "binary"
+      request = "launch"
+      completion = [ { name = "binary", completion = "filename" } ]
+      args = { console = "internalConsole", program = "{0}" }
+
+      [[language.debugger.templates]]
+      name = "attach"
+      request = "attach"
+      completion = [ "pid" ]
+      args = { console = "internalConsole", pid = "{0}" }
+
+      [[language.debugger.templates]]
+      name = "gdbserver attach"
+      request = "attach"
+      completion = [ { name = "lldb connect url", default = "connect://localhost:3333" }, { name = "file", completion = "filename" }, "pid" ]
+      args = { console = "internalConsole", attachCommands = [ "platform select remote-gdb-server", "platform connect {0}", "file {1}", "attach {2}" ] }
+
+      [[language]]
       name = "scss"
 
       [language.formatter]
@@ -350,6 +383,9 @@
       [language-server.typescript-language-server]
       args = ["--stdio"]
       command = "/run/current-system/sw/bin/typescript-language-server"
+
+      [language-server.zls]
+      command = "/run/current-system/sw/bin/zls"
 
       [language-server.typescript-language-server.config]
       hostInfo = "helix"

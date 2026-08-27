@@ -19,13 +19,14 @@ in {
       gamescope = none;
       gimp = en "k";
       gnome = none;
-      hyprland = when "kbt" {
+      hyprland = when "bt" {
         enable = true;
         withUWSM = true;
       };
-      hyprlock = en "kbt";
+      hyprlock = en "bt";
       inkscape = en "k";
       lact = en "k";
+      maccel = en "k";
       mysql-workbench = none;
       nh = {
         enable = true;
@@ -88,6 +89,8 @@ in {
         frontend = en "kt";
       };
       microfetch = all;
+      river = none;
+      river-delta = en "k";
       ssh = en "kbt";
       zen-browser = en "kbt";
       # bundles
@@ -108,6 +111,7 @@ in {
 
     services = {
       agenix = all;
+      ashell = en "k";
       blueman = none;
       cifs = when {
         "t" = {
@@ -143,10 +147,12 @@ in {
       udisks = en "kbt";
       virtualisation = none;
       zram = all;
-      hypridle = en "kbt";
-      hyprpaper = en "kbt";
+      hypridle = en "bt";
+      hyprpaper = en "bt";
       dunst = none;
       syncthing = none;
+      swaybg = en "k";
+      swayidle = en "k";
       tailray = en "kbt";
       udiskie = en "kbt";
       dconf = en "kbt";
@@ -157,8 +163,9 @@ in {
     };
 
     scripts = {
-      spawn = none;
-      spawn-or-focus = none;
+      niri-autostack = en "k";
+      niri-spawn-or-focus = en "k";
+      screenshot = en "k";
       vpnswitcher = none;
       cnix-update-available = none;
       choosepaper = en "kbt";

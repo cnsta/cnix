@@ -35,7 +35,7 @@
               _module.args = {
                 inherit hosts;
                 clib = self.lib.clib;
-                bgs = inputs.dotfiles.lib.bgs;
+                bgs = inputs.dotfiles.lib.bgs {inherit lib;};
                 inherit self;
               };
             }

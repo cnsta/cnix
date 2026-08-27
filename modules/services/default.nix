@@ -1,6 +1,7 @@
 {
   imports = [
     ./agenix
+    ./ashell
     ./blueman
     ./cifs
     ./dbus
@@ -27,6 +28,8 @@
     ./psd
     ./samba
     ./scx
+    ./swaybg
+    ./swayidle
     ./udisks
     ./tailray
     ./udiskie

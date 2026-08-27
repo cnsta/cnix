@@ -114,15 +114,28 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    maccel.url = "github:Gnarus-G/maccel";
+
     # Custom
     cnixpost = {
       url = "git+https://git.cnst.dev/cnst/cnixpost.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    river-rhine = {
+      # url = "path:/home/cnst/.repositories/river-rhine";
+      url = "git+https://git.cnst.dev/cnst/river-rhine.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    river-delta = {
+      # url = "path:/home/cnst/.repositories/river-rhine";
+      url = "git+https://git.cnst.dev/cnst/river-delta.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     dotfiles = {
       url = "git+https://git.cnst.dev/cnst/dotfiles.git";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     litecrazy = {

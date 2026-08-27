@@ -20,6 +20,7 @@
   l ö ä
   -
   z x ralt
+  lalt lmet
 )
 
 (deflayer default
@@ -28,8 +29,8 @@
   _ _ _
   _
   _ _ @level3
+  lmet lalt
 )
-
 
 (deflayer level3
   RA-2 RA-3 S-4 RA-5 S-¨ RA-7 RA-8 RA-9 RA-0 RA-+ ⇥ ⇤ kp*
@@ -37,6 +38,7 @@
   ◀ ▼ ▶
   RA-<
   RA-S-z RA-S-x @level3
+  _ _ 
 )
 
 (defoverrides
