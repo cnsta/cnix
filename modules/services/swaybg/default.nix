@@ -72,10 +72,10 @@ in {
       partOf = ["graphical-session.target"];
       after = ["graphical-session.target"];
       serviceConfig = {
+        Type = "simple";
         ExecStart = "${cfg.package}/bin/swaybg ${args}";
-        Restart = "always";
-        RestartSec = 1;
-        Slice = "session.slice";
+        Restart = "on-failure";
+        RestartSec = 0;
       };
     };
 

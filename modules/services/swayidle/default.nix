@@ -48,7 +48,7 @@
       command = "${wpctl} set-mute @DEFAULT_AUDIO_SOURCE@ 1";
       resumeCommand = "${wpctl} set-mute @DEFAULT_AUDIO_SOURCE@ 0";
     })
-    ++ (optionals config.programs.river-rhine.enable (afterLock {
+    ++ (optionals config.cnix.programs.river.enable (afterLock {
       timeout = 20;
       command = "${wlopm} --off \\*";
       resumeCommand = "${wlopm} --on \\*";

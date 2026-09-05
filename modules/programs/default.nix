@@ -16,15 +16,12 @@
     ./ghostty
     ./helix
     ./corectrl
-    ./emacs
     ./fish
     ./gamemode
     ./gamescope
     ./git
     ./gimp
     ./gnome
-    ./hyprland
-    ./hyprlock
     ./inkscape
     ./lact
     ./librewolf
@@ -44,7 +41,6 @@
     ./npm
     ./obsidian
     ./river
-    ./river-delta
     ./steam
     ./pkgs
     ./thunar

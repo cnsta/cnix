@@ -53,8 +53,6 @@
         '';
 in rec {
   inherit (import ./server {inherit lib;}) server;
-  inherit (import ./hyprlua.nix {inherit lib;}) toHyprlua;
-  inherit (import ./hyprconf.nix {inherit lib;}) toHyprconf;
 
   mkWhen = mkScoped "mkWhen";
 

@@ -71,11 +71,6 @@ in {
             clobber = true;
           };
 
-          ".config/fish/functions/up-or-search.fish" = {
-            source = ./up-or-search.fish;
-            clobber = true;
-          };
-
           ".config/fish/functions/fish_greeting.fish" = {
             text = ''
               function fish_greeting
@@ -93,6 +88,26 @@ in {
                       | sort | uniq
               end
             '';
+            clobber = true;
+          };
+
+          ".config/fish/functions/nixup.fish" = {
+            source = ./nixup.fish;
+            clobber = true;
+          };
+
+          ".config/fish/functions/flakeup.fish" = {
+            source = ./flakeup.fish;
+            clobber = true;
+          };
+
+          ".config/fish/completions/nixup.fish" = {
+            source = ./nixup-comp.fish;
+            clobber = true;
+          };
+
+          ".config/fish/completions/flakeup.fish" = {
+            source = ./flakeup-comp.fish;
             clobber = true;
           };
         };

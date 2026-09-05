@@ -14,8 +14,6 @@
     ./greetd
     ./gvfs
     ./gtk
-    ./hypridle
-    ./hyprpaper
     ./virtualisation
     ./locate
     ./mullvad

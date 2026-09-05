@@ -30,7 +30,6 @@
             permittedInsecurePackages = ["olm-3.2.16"];
           };
           overlays = [
-            inputs.emacs-overlay.overlays.default
           ];
         };
 
@@ -69,8 +68,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/hyprland";
-
     # Miscellaneous
     helix-flake.url = "github:helix-editor/helix";
 
@@ -104,11 +101,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -122,15 +114,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    river-rhine = {
-      # url = "path:/home/cnst/.repositories/river-rhine";
-      url = "git+https://git.cnst.dev/cnst/river-rhine.git";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     river-delta = {
-      # url = "path:/home/cnst/.repositories/river-rhine";
-      url = "git+https://git.cnst.dev/cnst/river-delta.git";
+      url = "git+https://git.cnst.dev/cnst/delta.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

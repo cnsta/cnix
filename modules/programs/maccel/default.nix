@@ -6,6 +6,7 @@
 }: let
   inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.maccel;
+  user = config.cnix.settings.accounts.username;
 in {
   imports = [
     inputs.maccel.nixosModules.default
@@ -17,12 +18,17 @@ in {
       enable = true;
       enableCli = true;
       parameters = {
-        mode = "linear";
         sensMultiplier = 1.0;
-        acceleration = 0.3;
-        offset = 2.0;
-        outputCap = 2.0;
+        yxRatio = 1.0;
+        inputDpi = 1000.0;
+        angleRotation = 0.0;
+        mode = "synchronous";
+        gamma = 0.8;
+        smooth = 1.0;
+        motivity = 1.3;
+        syncSpeed = 8.0;
       };
     };
+    users.groups.maccel.members = [user];
   };
 }

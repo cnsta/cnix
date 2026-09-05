@@ -55,7 +55,7 @@
   mkConfigToml = user: let
   in
     pkgs.writeText "helix-config-${user}.toml" ''
-      theme = "gruvbox_dark_hard"
+      theme = "darcula-solid"
 
       [editor]
       color-modes = true

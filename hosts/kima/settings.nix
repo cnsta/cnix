@@ -99,6 +99,7 @@
         touch-detector.enable = true;
       };
       pcscd.enable = true;
+      libinput.enable = true;
       litecrazy = {
         enable = true;
         service = {

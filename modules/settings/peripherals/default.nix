@@ -22,6 +22,7 @@ in {
         touch-detector.enable = mkEnableOption "Enables yubikey touch detector";
       };
       pcscd.enable = mkEnableOption "Enables pcscd";
+      libinput.enable = mkEnableOption "Enables libinput";
       litecrazy = {
         enable = mkEnableOption "Enables litecrazy";
         service = {
@@ -61,6 +62,7 @@ in {
       utils.enable = mkEnableOption "Miscellaneous utility packages";
     };
   };
+
   config = {
     hardware = {
       logitech.wireless = mkIf cfg.logitech.enable {
@@ -77,6 +79,7 @@ in {
         };
       };
     };
+
     services = {
       kanata = mkIf cfg.kanata.enable {
         enable = true;
@@ -99,12 +102,22 @@ in {
           config = builtins.readFile (./. + "/hhkbse.kbd");
         };
       };
+
       pcscd.enable = mkIf cfg.pcscd.enable true;
+
+      libinput = mkIf cfg.libinput.enable {
+        enable = true;
+        mouse = {
+          accelProfile = "flat";
+        };
+      };
     };
+
     programs = {
       yubikey-manager.enable = mkIf cfg.yubikey.manager.enable true;
       yubikey-touch-detector.enable = mkIf cfg.yubikey.touch-detector.enable true;
     };
+
     environment.systemPackages = with pkgs;
       lib.optionals cfg.utils.enable [
         usbutils

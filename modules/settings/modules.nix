@@ -14,16 +14,10 @@ in {
       blender = en "k";
       byt = en "kbt";
       corectrl = none;
-      emacs = en "k";
       gamemode = none;
       gamescope = none;
       gimp = en "k";
       gnome = none;
-      hyprland = when "bt" {
-        enable = true;
-        withUWSM = true;
-      };
-      hyprlock = en "bt";
       inkscape = en "k";
       lact = en "k";
       maccel = en "k";
@@ -89,8 +83,7 @@ in {
         frontend = en "kt";
       };
       microfetch = all;
-      river = none;
-      river-delta = en "k";
+      river = en "k";
       ssh = en "kbt";
       zen-browser = en "kbt";
       # bundles
@@ -111,7 +104,10 @@ in {
 
     services = {
       agenix = all;
-      ashell = en "k";
+      ashell = when "k" {
+        enable = true;
+        delta.enable = true;
+      };
       blueman = none;
       cifs = when {
         "t" = {
@@ -147,12 +143,10 @@ in {
       udisks = en "kbt";
       virtualisation = none;
       zram = all;
-      hypridle = en "bt";
-      hyprpaper = en "bt";
       dunst = none;
       syncthing = none;
       swaybg = en "k";
-      swayidle = en "k";
+      swayidle = none;
       tailray = en "kbt";
       udiskie = en "kbt";
       dconf = en "kbt";
@@ -163,8 +157,8 @@ in {
     };
 
     scripts = {
-      niri-autostack = en "k";
-      niri-spawn-or-focus = en "k";
+      niri-autostack = none;
+      niri-spawn-or-focus = none;
       screenshot = en "k";
       vpnswitcher = none;
       cnix-update-available = none;

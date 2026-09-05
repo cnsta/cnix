@@ -2,12 +2,13 @@
 
 > [!NOTE]
 > This repository's listed contributors are bugged after I accidentally force
-> pushed a cloned repo here.
+> pushed a cloned repo.
 
-My NixOS daily driver. Started as a single-machine
-**[Hyprland](https://hypr.land/)** desktop and grew sideways, more workstations,
-a Raspberry Pi, and a homelab server. The configuration leans on small per-tool
-modules with a tiny custom helper (`clib`) for host-scoped enables.
+My NixOS daily driver. Desktop running on
+[River](https://codeberg.org/river/river) and my own window manager,
+[delta](https://github.com/cnsta/delta), currently in alpha state. The
+configuration leans on small per-tool modules with a tiny custom helper (`clib`)
+for host-scoped enables.
 
 Some tools and apps I use:
 
@@ -16,12 +17,18 @@ Some tools and apps I use:
 - **[hjem](https://github.com/feel-co/hjem)**: Nix home management.
 - **[helix](https://github.com/helix-editor/helix)**: Neat vim-like editor.
 - **[kanata](https://github.com/jtroo/kanata)**: Keyboard mapping, good stuff.
-- **[quickshell](https://quickshell.outfoxxed.me/)**: Wayland shell, replaced
-  waybar.
+- **[ashell](https://github.com/MalpenZibo/ashell)**: Status bar without
+  needless bloat.
 - **[fuzzel](https://codeberg.org/dnkl/fuzzel)**: App launcher, does what it
   says.
 - **[microfetch](https://github.com/NotAShelf/microfetch)**: It's neofetch but
   better.
+- **[river](https://codeberg.org/river/river)**: Awesome wlroots compositor.
+- **[delta](https://github.com/cnsta/delta)**: Simple, with one job: to manage
+  windows.
+- **[byt](https://github.com/cnsta/byt)**: A little VPN switcher I wrote.
+- **[byt](https://github.com/cnsta/litecrazy)**: VERY niche mouse software.
+  Perhaps I'll expand on it whenever I swap mouse next?
 
 ## Hosts
 

@@ -63,7 +63,7 @@ in {
         user: let
           home = "/home/${user}";
         in {
-          packages = [pkgs.gh];
+          packages = [pkgs.gh pkgs.gitui];
 
           files = {
             ".config/git/config" = {

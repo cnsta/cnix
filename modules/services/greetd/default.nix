@@ -21,27 +21,17 @@
     ;
 
   cfg = config.cnix.services.greetd;
-  hyprcfg = config.cnix.programs.hyprland;
   niricfg = config.cnix.programs.niri;
   rivercfg = config.cnix.programs.river;
-  riverDeltacfg = config.cnix.programs.river-delta;
   username = config.cnix.settings.accounts.username;
 
   compositors = {
-    hyprland = {
-      enable = hyprcfg.enable;
-      command = "${getExe config.programs.uwsm.package} start hyprland.desktop";
-    };
     niri = {
       enable = niricfg.enable;
       command = "${config.programs.niri.package}/bin/niri-session";
     };
     river = {
       enable = rivercfg.enable;
-      command = "${config.programs.river-rhine.sessionScript}";
-    };
-    river-delta = {
-      enable = riverDeltacfg.enable;
       command = "${config.programs.river-delta.sessionScript}";
     };
   };

@@ -22,10 +22,8 @@
     nsrv = "$EDITOR $NH_FLAKE/modules/server/modules.nix";
     fnix = "nix-shell --run fish -p";
     extract = "extract.sh";
-    flakeup = "nix flake update";
     nixclean = "nh clean all --keep 3";
     nixdev = "nix develop $NH_FLAKE -c $SHELL";
-    nixup = "nh os switch -d always -H $hostname";
     nixupb = "nh os boot -d always -H $hostname";
     nixupn = "nh os switch -d always -n -H $hostname";
     nixupv = "nh os switch -d always -v --show-trace -H $hostname";
@@ -76,8 +74,4 @@
     set -x fish_pager_color_prefix        'white' '--bold' '--underline'
     set -x fish_pager_color_progress      'brwhite' '--background=cyan'
   '';
-
-  functions = {
-    fish_greeting = "";
-  };
 }
