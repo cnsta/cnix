@@ -27,8 +27,8 @@ Some tools and apps I use:
 - **[delta](https://github.com/cnsta/delta)**: Simple, with one job: to manage
   windows.
 - **[byt](https://github.com/cnsta/byt)**: A little VPN switcher I wrote.
-- **[byt](https://github.com/cnsta/litecrazy)**: VERY niche mouse software.
-  Perhaps I'll expand on it whenever I swap mouse next?
+- **[litecrazy](https://github.com/cnsta/litecrazy)**: VERY niche mouse
+  software.
 
 ## Hosts
 
