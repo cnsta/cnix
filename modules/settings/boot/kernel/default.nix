@@ -75,7 +75,7 @@ in {
         else if variant == "latest"
         then pkgs.linuxPackages_latest
         else if variant == "zfsLatest"
-        then pkgs.linuxPackages_6_18
+        then pkgs.linuxPackages_7_2
         else throw "Unknown kernel variant: ${variant}";
 
       kernelParams =

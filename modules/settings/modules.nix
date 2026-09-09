@@ -36,7 +36,7 @@ in {
       tmux = en "ks";
       thunar = none;
       wireshark = none;
-      alacritty = when "bt" {
+      alacritty = when "t" {
         enable = true;
         primary = true;
       };
@@ -53,7 +53,7 @@ in {
       floorp = none;
       foot = en "kbt";
       fuzzel = en "kbt";
-      ghostty = when "k" {
+      ghostty = when "kb" {
         enable = true;
         primary = true;
       };
@@ -83,7 +83,7 @@ in {
         frontend = en "kt";
       };
       microfetch = all;
-      river = en "k";
+      river = en "kb";
       ssh = en "kbt";
       zen-browser = en "kbt";
       # bundles
@@ -104,7 +104,7 @@ in {
 
     services = {
       agenix = all;
-      ashell = when "k" {
+      ashell = when "kb" {
         enable = true;
         delta.enable = true;
       };
@@ -145,7 +145,7 @@ in {
       zram = all;
       dunst = none;
       syncthing = none;
-      swaybg = en "k";
+      swaybg = en "kb";
       swayidle = none;
       tailray = en "kbt";
       udiskie = en "kbt";
@@ -164,7 +164,7 @@ in {
       cnix-update-available = none;
       choosepaper = en "kbt";
       pwvucontrol-toggle = en "kbt";
-      calcurse-toggle = en "k";
+      calcurse-toggle = none;
       volume-control = none;
       extract = all;
       update-images = en "sz";
