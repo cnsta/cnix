@@ -26,7 +26,7 @@
   };
 
   frontendToolchain = with pkgs; [
-    phpactor
+    intelephense
     typescript-language-server
     vscode-langservers-extracted
     kdePackages.qtdeclarative
@@ -371,7 +371,7 @@
 
       [language-server.phpactor]
       args = ["language-server"]
-      command = "/run/current-system/sw/bin/phpactor"
+      command = "/run/current-system/sw/bin/intelephense"
 
       [language-server.qmlls]
       args = ["-E"]

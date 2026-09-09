@@ -164,36 +164,26 @@ in {
   options.cnix.services.xdg.enable =
     mkEnableOption "XDG base dirs, user dirs, MIME defaults, and session vars";
 
-  config = mkIf cfg.enable (mkMerge [
-    {
-      environment.systemPackages = [pkgs.xdg-utils];
-      environment.sessionVariables.XDG_CACHE_HOME = "$HOME/.local/cache";
-      systemd.user.tmpfiles.rules = userDirRules;
+  config = mkIf cfg.enable {
+    environment.systemPackages = [pkgs.xdg-utils];
+    environment.sessionVariables.XDG_CACHE_HOME = "$HOME/.local/cache";
+    systemd.user.tmpfiles.rules = userDirRules;
 
-      hjem.users = genAttrs acct.defaultUsers (_: {
-        files = {
-          ".config/user-dirs.dirs" = {
-            text = userDirsText;
-            clobber = true;
-          };
-
-          ".config/mimeapps.list" = {
-            generator = toMimeAppsList;
-            value = {
-              "Default Applications" = defaultApplications;
-            };
-            clobber = true;
-          };
+    hjem.users = genAttrs acct.defaultUsers (_: {
+      files = {
+        ".config/user-dirs.dirs" = {
+          text = userDirsText;
+          clobber = true;
         };
-      });
-    }
 
-    (mkIf config.cnix.programs.hyprland.enable {
-      environment.sessionVariables = {
-        XDG_CURRENT_DESKTOP = "Hyprland";
-        XDG_SESSION_DESKTOP = "Hyprland";
-        XDG_SESSION_TYPE = "wayland";
+        ".config/mimeapps.list" = {
+          generator = toMimeAppsList;
+          value = {
+            "Default Applications" = defaultApplications;
+          };
+          clobber = true;
+        };
       };
-    })
-  ]);
+    });
+  };
 }
