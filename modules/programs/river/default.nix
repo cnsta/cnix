@@ -4,9 +4,8 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mkOption types genAttrs;
+  inherit (lib) mkIf mkEnableOption;
   cfg = config.cnix.programs.river;
-  acct = config.cnix.settings.accounts;
 
   monitors = config.cnix.settings.monitors;
   transforms = ["normal" "90" "180" "270" "flipped" "flipped-90" "flipped-180" "flipped-270"];
@@ -29,11 +28,6 @@
     lib.concatStringsSep "\n" (["profile ${name} {"] ++ lib.concatMap outputBlock mons ++ ["}"]);
 
   connected = builtins.filter (m: m.enable) monitors;
-
-  procPattern = name: "^\\.?${name}(-wrapped)?$";
-
-  toggle = name: cmd: "pkill '${procPattern name}' || ${cmd}";
-  runOnce = name: cmd: "pgrep '${procPattern name}' >/dev/null || ${cmd}";
 in {
   imports = [inputs.river-delta.nixosModules.default];
 
@@ -51,6 +45,10 @@ in {
     programs.river-delta = {
       enable = true;
       renderer = "vulkan";
+      levee = {
+        enable = true;
+        idle.enable = true;
+      };
       kanshi = {
         enable = true;
         config =
@@ -62,12 +60,5 @@ in {
           + "\n";
       };
     };
-
-    # hjem.users = genAttrs acct.defaultUsers (_user: {
-    #   files.".config/river/config.rh" = {
-    #     text = cfg.config;
-    #     clobber = true;
-    #   };
-    # });
   };
 }
