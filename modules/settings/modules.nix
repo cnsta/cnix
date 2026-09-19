@@ -142,7 +142,15 @@ in {
       };
       udisks = en "kbt";
       virtualisation = none;
-      zram = all;
+      zram = when {
+        "kbtz" = {
+          enable = true;
+        };
+        "s" = {
+          enable = true;
+          memoryPercent = 15;
+        };
+      };
       dunst = none;
       syncthing = none;
       swaybg = en "kb";

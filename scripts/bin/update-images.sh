@@ -3,7 +3,7 @@
 
 IMAGES=(
   ghcr.io/haveagitgat/tdarr:latest
-  ghcr.io/kfalabs/tdarr-battlemage:latest
+  ghcr.io/haveagitgat/tdarr_node:latest
   docker.io/pihole/pihole:latest
   ghcr.io/hotio/qbittorrent:latest
   ghcr.io/hotio/radarr:latest
@@ -16,10 +16,10 @@ IMAGES=(
   docker.io/deluan/navidrome:latest
   docker.io/homeassistant/home-assistant:stable
   ghcr.io/tale/headplane:latest
-  ghcr.io/v1ck3s/octo-fiesta:dev
   ghcr.io/qdm12/gluetun:latest
   docker.io/miniflux/miniflux:latest
   ghcr.io/music-assistant/server:latest
+  ghcr.io/dispatcharr/dispatcharr:latest
 )
 
 if [[ $EUID -ne 0 ]]; then

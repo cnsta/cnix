@@ -49,7 +49,7 @@ in {
       };
 
       node0 = {
-        image = "ghcr.io/kfalabs/tdarr-battlemage:latest";
+        image = "ghcr.io/haveagitgat/tdarr_node:latest";
         autoStart = true;
         environment = {
           serverIP = "host.containers.internal";

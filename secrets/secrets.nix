@@ -16,16 +16,15 @@ in {
   "homepageEnvironment.age".publicKeys = sobotka;
   "cloudflareFirewallApiKey.age".publicKeys = sobotka;
   "vaultwardenCloudflared.age".publicKeys = sobotka;
-  "nextcloudCloudflared.age".publicKeys = sobotka;
-  "nextcloudAdminPass.age".publicKeys = sobotka;
   "cloudflareDnsApiToken.age".publicKeys = sobotka;
   "cloudflareDnsCredentials.age".publicKeys = sobotka;
   "wgCredentials.age".publicKeys = sobotka;
   "wgSobotkaPrivateKey.age".publicKeys = sobotka;
   "gluetunQbtEnvironment.age".publicKeys = sobotka;
   "gluetunSlskdEnvironment.age".publicKeys = sobotka;
-  "gluetunSearxngEnvironment.age".publicKeys = sobotka;
+  "gluetunDispatcharrEnvironment.age".publicKeys = sobotka;
   "gluetunArrEnvironment.age".publicKeys = sobotka;
+  "gluetunSearxngEnvironment.age".publicKeys = sobotka;
   "sobotkaPihole.age".publicKeys = sobotka;
   "slskd.age".publicKeys = sobotka;
   "wwwCloudflared.age".publicKeys = sobotka;
@@ -75,6 +74,8 @@ in {
   "fluxerEnvironment.age".publicKeys = sobotka;
   "glanceEnvironment.age".publicKeys = sobotka;
   "speedtestEnvironment.age".publicKeys = sobotka;
+  "dispatcharrEnvironment.age".publicKeys = sobotka;
+  "dispatcharrCloudflared.age".publicKeys = sobotka;
 
   # ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

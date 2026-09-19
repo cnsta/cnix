@@ -1,6 +1,7 @@
 {
   imports = [
     ./authelia
+    ./dispatcharr
     ./flaresolverr
     ./fluxer
     ./harmonia
@@ -18,7 +19,6 @@
     ./miniflux
     ./navidrome
     ./n8n
-    ./nextcloud
     ./octo-fiesta
     ./ollama
     ./pihole
@@ -31,7 +31,6 @@
     ./slskd
     ./sonarr
     ./speedtest-tracker
-    ./sportarr
     ./tdarr
     ./turnstone
     ./uptime-kuma

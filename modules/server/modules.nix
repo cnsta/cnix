@@ -173,21 +173,23 @@
       };
     };
 
-    sportarr = when "s" {
-      enable = false;
-      exposure = "local";
-      port = 1867;
-      dashboard = {
-        category = "Media";
-      };
-    };
-
     seerr = when "s" {
       enable = true;
       exposure = "tunnel";
       port = 5055;
       dashboard = {
         category = "Media";
+      };
+    };
+
+    dispatcharr = when "s" {
+      enable = true;
+      subdomain = "tv";
+      exposure = "local";
+      port = 9191;
+      dashboard = {
+        category = "Media";
+        container.name = "dispatcharr";
       };
     };
 
@@ -218,7 +220,8 @@
 
     navidrome = when "s" {
       enable = true;
-      auth = false;
+      subdomain = "music";
+      exposure = "tunnel";
       port = 4533;
       dashboard = {
         icon = "navidrome.webp";
@@ -228,7 +231,7 @@
     };
 
     octo-fiesta = when "s" {
-      enable = true;
+      enable = false;
       subdomain = "music";
       exposure = "tunnel";
       port = 8089;
@@ -331,16 +334,6 @@
       };
     };
 
-    nextcloud = {
-      enable = false;
-      subdomain = "cloud";
-      exposure = "local";
-      port = 8182;
-      dashboard = {
-        category = "Cloud";
-      };
-    };
-
     searxng = when "s" {
       enable = false;
       subdomain = "search";
@@ -354,7 +347,7 @@
 
     # communication
     fluxer = when "s" {
-      enable = true;
+      enable = false;
       subdomain = "chat";
       exposure = "tailscale";
       port = 8480;
@@ -374,7 +367,7 @@
     };
 
     roundcube = when "s" {
-      enable = true;
+      enable = false;
       subdomain = "mail";
       port = 5679;
       dashboard = {

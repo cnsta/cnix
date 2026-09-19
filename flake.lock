@@ -32,11 +32,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1788335137,
-        "narHash": "sha256-iuIenQZuMS8Njd0/DQL0HKmhtqp7/3eGDpvXaiqAP8I=",
+        "lastModified": 1789680601,
+        "narHash": "sha256-wPi6tYcLSd5liA0FmXKXOrjTl3/9aCKeVp0iKnNbK4w=",
         "owner": "MalpenZibo",
         "repo": "ashell",
-        "rev": "50c155991e820649ea48b2932ebaa11c07453f5d",
+        "rev": "c09de984557ca4c9fc7ecd7f6a2bfb6037038ec9",
         "type": "github"
       },
       "original": {
@@ -53,11 +53,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1789314746,
-        "narHash": "sha256-67kMjpyHMWNYaJ5j/dmBuYxwyoCzKlujjaZgf3EunBA=",
+        "lastModified": 1789580293,
+        "narHash": "sha256-SEJmI+YfUuRSCfHKQ/XdDQ5j7tnoCapHfwXS4t0CJF0=",
         "ref": "refs/heads/main",
-        "rev": "ee0dbedb854afdaafe3561c01b5b55b8183edf22",
-        "revCount": 56,
+        "rev": "0f8635e222934b4dbd7a97927320950d46156f1b",
+        "revCount": 63,
         "type": "git",
         "url": "https://git.cnst.dev/cnst/byt.git"
       },
@@ -330,11 +330,11 @@
         "rust-overlay": "rust-overlay_4"
       },
       "locked": {
-        "lastModified": 1788769372,
-        "narHash": "sha256-VkqjGPfG3aQGv+cgS/VbwNIR7yiXoLcUJih/tAdLv50=",
+        "lastModified": 1789586975,
+        "narHash": "sha256-N5qhvQXNFluy1sFvcVhIEvwm5QeCxFrpZHw/pwE+szU=",
         "owner": "nix-community",
         "repo": "lanzaboote",
-        "rev": "03bc477f555adfe314af48ec0d3554f10d3390d8",
+        "rev": "8a34c6af53de5d0de742f35b5d764db93b53c5df",
         "type": "github"
       },
       "original": {
@@ -482,11 +482,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1789310659,
-        "narHash": "sha256-gY7HPyNkz+b6kVGJ+KIoKA3a/LkUa8W3WoVSFHb1t8U=",
+        "lastModified": 1789804398,
+        "narHash": "sha256-0gUX2u5tQMPyu+MPh5cDLIO6sbrtB94EoVPljKjiLvI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c3d5394937b9c1d5c1b73b6a32d39e5761a4414c",
+        "rev": "5a43e367a47932f1c9cbc301b873b532a1bede5f",
         "type": "github"
       },
       "original": {
@@ -514,11 +514,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1789149629,
-        "narHash": "sha256-H6GwaZzZf+4npqv0tph94w9tZddSjFjmQrVsW0z78uk=",
+        "lastModified": 1789684949,
+        "narHash": "sha256-ZKhUe/2IJUq1JhKxKMu8rbkgSGmPP2ZCqlIPn40aGCM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "eaad089433ca2bb662274377d33df3d0e51ef28b",
+        "rev": "e554fab72f81915600f3f449b786fd9af40439a5",
         "type": "github"
       },
       "original": {
@@ -537,11 +537,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789172534,
-        "narHash": "sha256-LV26WEThZ7U+L274lSY1xNOmxTb8Y9yrE3mOR6CAOZg=",
+        "lastModified": 1789510188,
+        "narHash": "sha256-umec9LKkWjK89Yx4XpvQStkgfKvhK7GjVf5m21bjzKU=",
         "owner": "notashelf",
         "repo": "nvf",
-        "rev": "9c1d99771b443055f5cd428f11b5a4b04c7b7e2e",
+        "rev": "cdc7e7aaa7eb521bba1b38f54c3228d52cc31703",
         "type": "github"
       },
       "original": {
@@ -559,11 +559,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788267358,
-        "narHash": "sha256-nt+lUqYVpc9Y6JeMd2WmXzCDojasdadKo0mWcluvY2Y=",
+        "lastModified": 1789514889,
+        "narHash": "sha256-PFD1nxptCXJyJoiYO1gf/5Vv43yqGpHtMC6LUhl9/pQ=",
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "27555e2624241fb116b49095df4caaee85a25691",
+        "rev": "59f4ca0d063a1a3ec722c88b51a33004862e5379",
         "type": "github"
       },
       "original": {
@@ -583,11 +583,11 @@
         "zon2nix": "zon2nix"
       },
       "locked": {
-        "lastModified": 1789313663,
-        "narHash": "sha256-LFRQCrtxojhWEEq6VnikU1j183rpoRCd0elamioxIXc=",
+        "lastModified": 1789579420,
+        "narHash": "sha256-HQCGADF3SuQBqTSKRvEAWWigunMcusQzZ+AUrgRVbIk=",
         "ref": "refs/heads/main",
-        "rev": "09cec17d0dca77d112cada16dd79117039f79971",
-        "revCount": 217,
+        "rev": "3ae24b31c3705d80a92f933f40a98300de6a340f",
+        "revCount": 222,
         "type": "git",
         "url": "https://git.cnst.dev/cnst/delta.git"
       },
@@ -692,11 +692,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788678114,
-        "narHash": "sha256-pcqbpV4ZI79al6KAlr+WJjaEo/PYfgctRlG43D5BSJM=",
+        "lastModified": 1789543870,
+        "narHash": "sha256-45ikFmtfgBZgMePIm4GevJ9VjDSWO3PGQgOuuwHDpes=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "4748ec2f5ed4a881474ed4c98aa71a5308cdac8d",
+        "rev": "35ca0490d13a3d38c4602d0eb9600a30fa63a367",
         "type": "github"
       },
       "original": {
@@ -712,11 +712,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789284144,
-        "narHash": "sha256-Slc8gCNYzyuq2f0NIACIYxl55ZeeGcy0SN6LAwixDkY=",
+        "lastModified": 1789802016,
+        "narHash": "sha256-QVFfArbYaQMGK4dFV+5RUL72Ci+hNHVhaF/R9qJfDhs=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "9c72e6db1fc10cdb18e5ef01e31c1f4951e197e0",
+        "rev": "26a71e661c47bd21a05d06fec749f3f7c75e9d12",
         "type": "github"
       },
       "original": {
@@ -802,11 +802,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789289402,
-        "narHash": "sha256-7HHAIxdoDAJv09/I6DrMsAJFgol2cqJumaPCCZ+XdAU=",
+        "lastModified": 1789636270,
+        "narHash": "sha256-sexm8hHHB2jOB/G70czjQxdxeX68zID6G1BomFIGI+w=",
         "owner": "youwen5",
         "repo": "zen-browser-flake",
-        "rev": "4036109214cf20632000558935bd823b901fa886",
+        "rev": "9c1767f705262bf08498877fd1053b6a6db12a9f",
         "type": "github"
       },
       "original": {
@@ -828,11 +828,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789260992,
-        "narHash": "sha256-i1HdDZLt4ZorjbEDbXiOemVxeOp5JIY67DY1TV1f8DQ=",
+        "lastModified": 1789388970,
+        "narHash": "sha256-FLe1anYsV+/kqj6fb1kuHpIofnO358ggDRCsv9hRA4I=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "9464147b1b5eb692804bc2cc28dcef7d47bdbcb8",
+        "rev": "45488791fd332ace7ef242acbc4f631990a48c7f",
         "type": "github"
       },
       "original": {

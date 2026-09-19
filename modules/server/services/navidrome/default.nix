@@ -12,8 +12,13 @@ in {
       ${unit} = {
         image = "docker.io/deluan/navidrome:latest";
         autoStart = true;
+        dependsOn = ["gluetun-arr"];
+
         ports = [
           "${toString cfg.port}:${toString cfg.port}"
+        ];
+        extraOptions = [
+          "--network=container:gluetun-arr"
         ];
         volumes = [
           "/mnt/data:/data"

@@ -14,7 +14,7 @@ in {
   config = lib.mkIf infra.gluetun.enable {
     age.secrets = {
       gluetunQbtEnvironment.file = self + "/secrets/gluetunQbtEnvironment.age";
-      gluetunSearxngEnvironment.file = self + "/secrets/gluetunSearxngEnvironment.age";
+      gluetunDispatcharrEnvironment.file = self + "/secrets/gluetunDispatcharrEnvironment.age";
       gluetunSlskdEnvironment.file = self + "/secrets/gluetunSlskdEnvironment.age";
       gluetunArrEnvironment.file = self + "/secrets/gluetunArrEnvironment.age";
     };
@@ -46,11 +46,11 @@ in {
         };
       };
 
-      gluetun-searxng = lib.mkIf cfg.searxng.enable {
+      gluetun-dispatcharr = lib.mkIf cfg.dispatcharr.enable {
         image = "ghcr.io/qdm12/gluetun:latest";
         pull = "newer";
         ports = [
-          "8084:8084"
+          "9191:9191"
         ];
         devices = ["/dev/net/tun:/dev/net/tun"];
         autoStart = true;
@@ -59,9 +59,9 @@ in {
           "--cap-add=NET_RAW"
           "--label=io.containers.autoupdate=registry"
         ];
-        volumes = ["/var/lib/gluetun-searxng:/gluetun"];
+        volumes = ["/var/lib/gluetun-dispatcharr:/gluetun"];
         environmentFiles = [
-          config.age.secrets.gluetunSearxngEnvironment.path
+          config.age.secrets.gluetunDispatcharrEnvironment.path
         ];
         environment = {
           DEV_MODE = "false";
@@ -106,7 +106,7 @@ in {
           "7476:7476"
           "1867:1867"
           "8085:8085"
-          "8089:8089"
+          "4533:4533"
         ];
         devices = ["/dev/net/tun:/dev/net/tun"];
         autoStart = true;

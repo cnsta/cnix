@@ -14,7 +14,7 @@
       kernel = {
         variant = "zfsLatest";
         hardware = ["amd"];
-        extraKernelParams = [];
+        extraKernelParams = ["zfs.zfs_arc_max=34359738368"];
       };
       loader = {
         default = {
