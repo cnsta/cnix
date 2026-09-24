@@ -34,19 +34,6 @@
       file = ./bin/screenshot.sh;
     };
 
-    vpnswitcher = {
-      runtimeInputs = [
-        fzf
-        networkmanager
-      ];
-      file = ./bin/vpnswitcher.sh;
-    };
-
-    cnix-update-available = {
-      runtimeInputs = [waybar];
-      file = ./bin/cnix-update-available.sh;
-    };
-
     choosepaper = {
       runtimeInputs = [
         fzf
@@ -59,11 +46,6 @@
     pwvucontrol-toggle = {
       runtimeInputs = [pwvucontrol];
       file = ./bin/pwvucontrol-toggle.sh;
-    };
-
-    calcurse-toggle = {
-      runtimeInputs = [calcurse];
-      file = ./bin/calcurse-toggle.sh;
     };
 
     volume-control = {

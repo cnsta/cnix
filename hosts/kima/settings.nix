@@ -101,7 +101,7 @@
       pcscd.enable = true;
       libinput.enable = true;
       litecrazy = {
-        enable = true;
+        enable = false;
         service = {
           enable = true;
           browser = pkgs.chromium;
