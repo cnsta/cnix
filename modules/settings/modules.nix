@@ -168,19 +168,11 @@ in {
       niri-autostack = none;
       niri-spawn-or-focus = none;
       screenshot = en "k";
-      vpnswitcher = none;
-      cnix-update-available = none;
       choosepaper = en "kbt";
       pwvucontrol-toggle = en "kbt";
-      calcurse-toggle = none;
       volume-control = none;
       extract = all;
       update-images = en "sz";
-      waybar-systemd = none;
-      waybar-progress = none;
-      dunst = none;
-      mako = none;
-      mako-toggle = none;
     };
   };
 }

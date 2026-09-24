@@ -96,7 +96,6 @@
     wf-recorder
     wl-screenrec
     wl-clipboard
-    hyprpicker
     cava
     sniffnet
   ];

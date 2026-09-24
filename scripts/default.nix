@@ -94,34 +94,6 @@
       runtimeInputs = [podman];
       file = ./bin/update-images.sh;
     };
-
-    waybar-systemd = {
-      runtimeInputs = [hyprland];
-      file = ./bin/waybar-systemd.sh;
-    };
-
-    waybar-progress = {
-      runtimeInputs = [hyprland];
-      file = ./bin/waybar-progress.sh;
-    };
-
-    dunst = {
-      runtimeInputs = [
-        hyprland
-        dbus
-      ];
-      file = ./bin/dunst.sh;
-    };
-
-    mako = {
-      runtimeInputs = [hyprland];
-      file = ./bin/mako.sh;
-    };
-
-    mako-toggle = {
-      runtimeInputs = [hyprland];
-      file = ./bin/mako-toggle.sh;
-    };
   };
 in {
   options.cnix.scripts =

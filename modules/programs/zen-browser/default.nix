@@ -12,7 +12,15 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+      (pkgs.symlinkJoin {
+        name = "zen-browser-ffmpeg";
+        paths = [inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default];
+        nativeBuildInputs = [pkgs.makeWrapper];
+        postBuild = ''
+          wrapProgram $out/bin/zen \
+            --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [pkgs.ffmpeg]}
+        '';
+      })
     ];
   };
 }
