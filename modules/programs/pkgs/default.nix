@@ -132,6 +132,8 @@
     geekbench
     obs-studio
     protontricks
+    claude-code
+    rtk
   ];
   laptop = [];
   server = with pkgs; [

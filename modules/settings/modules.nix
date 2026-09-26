@@ -53,7 +53,7 @@ in {
       floorp = none;
       foot = en "kbt";
       fuzzel = en "kbt";
-      ghostty = when "kb" {
+      ghostty = when "kbt" {
         enable = true;
         primary = true;
       };
@@ -83,7 +83,7 @@ in {
         frontend = en "kt";
       };
       microfetch = all;
-      river = en "kb";
+      river = en "kbt";
       ssh = en "kbt";
       zen-browser = en "kbt";
       # bundles
@@ -104,7 +104,7 @@ in {
 
     services = {
       agenix = all;
-      ashell = when "kb" {
+      ashell = when "kbt" {
         enable = true;
         delta.enable = true;
       };
@@ -153,7 +153,7 @@ in {
       };
       dunst = none;
       syncthing = none;
-      swaybg = en "kb";
+      swaybg = en "kbt";
       swayidle = none;
       tailray = en "kbt";
       udiskie = en "kbt";
