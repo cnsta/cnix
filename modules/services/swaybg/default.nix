@@ -30,7 +30,7 @@ in {
     outputs = mkOption {
       type = types.attrsOf (types.nullOr types.str);
       default = {
-        "DP-3" = bg.primary;
+        "DP-1" = bg.primary;
         "HDMI-A-1" = bg.secondary;
         "eDP-1" = bg.primary;
         "DVI-D-1" = bg.primary;

@@ -17,12 +17,12 @@ in {
     xdg.configFile."nwg-bar/bar.json".text = builtins.toJSON [
       {
         label = "Lock";
-        exec = "hyprlock";
+        exec = "levee";
         icon = "${config.gtk.iconTheme.package}/share/icons/Papirus-Dark/symbolic/status/system-lock-screen-symbolic.svg";
       }
       {
         label = "Logout";
-        exec = "hyprctl dispatch exit";
+        exec = "delctl action exit";
         icon = "${config.gtk.iconTheme.package}/share/icons/Papirus-Dark/symbolic/actions/system-log-out-symbolic.svg";
       }
       {

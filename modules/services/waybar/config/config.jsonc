@@ -13,7 +13,7 @@
       "group/cnix"
     ],
     "modules-center": [
-      "hyprland/workspaces"
+      "river/workspaces"
     ],
     "modules-right": [
       "custom/progress",
@@ -127,7 +127,7 @@
       "menu-file": "~/.nix-config/modules/home/programs/waybar/assets/power_menu.xml",
       "menu-actions": {
         "resources": "uwsm-app -- resources",
-        "lock": "uwsm-app -- hyprlock",
+        "lock": "uwsm-app -- levee",
         "reboot": "systemctl reboot",
         "shutdown": "systemctl poweroff"
       }
@@ -166,7 +166,7 @@
       ],
       "orientation": "inherit"
     },
-    "hyprland/workspaces": {
+    "river/workspaces": {
       "active-only": false,
       "all-outputs": false,
       "format": "{icon}",
@@ -188,8 +188,6 @@
       },
       "on-click": "activate",
       "show-special": false,
-      "on-scroll-up": "hyprctl dispatch workspace r-1",
-      "on-scroll-down": "hyprctl dispatch workspace r+1",
       "persistent-workspaces": {
         "1": [],
         "2": [],

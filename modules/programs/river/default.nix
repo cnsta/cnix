@@ -4,20 +4,18 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption;
+  inherit (lib) mkIf mkEnableOption types;
   cfg = config.cnix.programs.river;
+  # set = config.cnix.settings;
 
   monitors = config.cnix.settings.monitors;
   transforms = ["normal" "90" "180" "270" "flipped" "flipped-90" "flipped-180" "flipped-270"];
 
   outputBlock = m: let
-    rate =
-      if lib.hasSuffix "Hz" m.refreshRate || lib.hasSuffix "hz" m.refreshRate
-      then m.refreshRate
-      else "${m.refreshRate}Hz";
     body =
-      ["mode ${toString m.width}x${toString m.height}@${rate}"]
+      ["mode ${lib.optionalString m.customMode "--custom "}${toString m.width}x${toString m.height}@${m.refreshRate}Hz"]
       ++ lib.optional (m.position != "auto") "position ${lib.replaceStrings ["x"] [","] m.position}"
+      ++ lib.optional (m.adaptiveSync != false) "adaptive_sync on"
       ++ ["scale ${m.scale}" "transform ${builtins.elemAt transforms m.transform}"];
   in
     if !m.enable
@@ -33,6 +31,12 @@ in {
 
   options.cnix.programs.river = {
     enable = mkEnableOption "Enables river with the delta window manager";
+    monitor = {
+      mkOption = {
+        type = types.list;
+        example = 1920;
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -45,6 +49,8 @@ in {
     programs.river-delta = {
       enable = true;
       renderer = "vulkan";
+      hdr.outputs = ["DP-1"];
+      renderBitDepth = 10;
       levee = {
         enable = true;
         idle.enable = true;

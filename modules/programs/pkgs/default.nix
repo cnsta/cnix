@@ -134,6 +134,7 @@
     protontricks
     claude-code
     rtk
+    faugus-launcher
   ];
   laptop = [];
   server = with pkgs; [
