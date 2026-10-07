@@ -45,23 +45,21 @@
         position = "0x0";
         transform = 0;
         bitDepth = 10;
-        workspace = "1";
       }
       {
         name = "HDMI-A-1";
+        wallpaper = "secondary";
         width = 1920;
         height = 1080;
         refreshRate = "60";
         position = "2560x0";
         # transform = 3;
-        workspace = "5";
       }
       {
         name = "eDP-1";
         width = 1920;
         height = 1200;
         refreshRate = "60";
-        workspace = "1";
       }
     ];
 

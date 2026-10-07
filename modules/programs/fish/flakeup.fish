@@ -6,7 +6,7 @@ function flakeup -d "Update Nix flake inputs"
         case 1
             switch $argv[1]
                 case delta
-                    nix flake update --flake "$NH_FLAKE" river-delta
+                    nix flake update --flake "$NH_FLAKE" river-delta river
 
                 case '*'
                     echo "flakeup: unknown input '$argv[1]'" >&2

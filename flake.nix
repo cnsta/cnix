@@ -114,9 +114,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    river = {
+      url = "git+https://codeberg.org/river/river?ref=main&shallow=1";
+      flake = false;
+    };
+
     river-delta = {
       url = "git+https://git.cnst.dev/cnst/delta.git";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.river.follows = "river";
     };
 
     dotfiles = {

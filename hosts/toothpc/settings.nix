@@ -48,7 +48,6 @@
         refreshRate = "144";
         position = "0x0";
         transform = 0;
-        workspace = "1";
       }
     ];
 

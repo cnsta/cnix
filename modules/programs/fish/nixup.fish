@@ -1,30 +1,20 @@
-function nixup -d "Rebuild NixOS"
-    switch (count $argv)
-        case 0
+function nixup -d "Rebuild NixOS: 'delta' updates delta and river first"
+    switch "$argv"
+        case ''
             nh os switch -d always -H $hostname
 
-        case 1
-            switch $argv[1]
-                case delta
-                    set -l repo "$HOME/.repositories/delta"
+        case delta
+            # river follows into river-delta, so both move together.
+            nix flake update --flake "$NH_FLAKE" river-delta river
+            or return
 
-                    if not test -d "$repo"
-                        echo "nixup: delta repository not found: $repo" >&2
-                        return 1
-                    end
-
-                    "$repo/nix/builder.sh" --sync delta
-                    or return $status
-
-                    sudo systemd-run --collect --pipe --wait \
-                        nh os switch -d always -H $hostname
-                case '*'
-                    echo "nixup: unknown target '$argv[1]'" >&2
-                    echo "usage: nixup [delta]" >&2
-                    return 2
-            end
+            # A new river or delta restarts the session unit, which would take
+            # this terminal (and nh) with it, run the switch outside the session.
+            sudo systemd-run --collect --pipe --wait \
+                nh os switch "$NH_FLAKE" -d always -H $hostname
 
         case '*'
+            echo "nixup: unknown target '$argv'" >&2
             echo "usage: nixup [delta]" >&2
             return 2
     end

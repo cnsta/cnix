@@ -5,7 +5,7 @@
   bgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mkOption types escapeShellArgs concatMap attrNames filterAttrs;
+  inherit (lib) mkIf mkEnableOption mkOption types escapeShellArgs concatMap attrNames filterAttrs filter listToAttrs;
 
   cfg = config.cnix.services.swaybg;
   bg = config.cnix.settings.theme.background;
@@ -29,20 +29,11 @@ in {
 
     outputs = mkOption {
       type = types.attrsOf (types.nullOr types.str);
-      default = {
-        "DP-1" = bg.primary;
-        "HDMI-A-1" = bg.secondary;
-        "eDP-1" = bg.primary;
-        "DVI-D-1" = bg.primary;
-      };
-      defaultText = lib.literalExpression ''
-        {
-          "DP-3" = background.primary;
-          "HDMI-A-1" = background.secondary;
-          "eDP-1" = background.primary;
-          "DVI-D-1" = background.primary;
-        }
-      '';
+      default = listToAttrs (map (m: {
+        inherit (m) name;
+        value = bg.${m.wallpaper};
+      }) (filter (m: m.enable && m.wallpaper != null) config.cnix.settings.monitors));
+      defaultText = lib.literalMD "each enabled monitor's `wallpaper` from cnix.settings.monitors";
       example = {"DP-3" = "resadversae_2k";};
       description = ''
         Output name to wallpaper name. Names are the keys of the wallpaper set,
