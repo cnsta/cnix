@@ -1,4 +1,3 @@
-# taken and modified from @Misterio77
 {
   config,
   lib,
@@ -9,30 +8,7 @@
   unit = "hydra";
   cfg = config.cnix.server.services.${unit};
   domain = clib.server.mkFullDomain config cfg;
-
-  mkBuildMachine = {
-    uri ? null,
-    systems ? null,
-    sshKey ? null,
-    maxJobs ? 1,
-    speedFactor ? 1,
-    supportedFeatures ? null,
-    mandatoryFeatures ? null,
-    publicHostKey ? null,
-  }: let
-    field = x:
-      if (x == null || x == [] || x == "")
-      then "-"
-      else if (builtins.isInt x)
-      then (toString x)
-      else if (builtins.isList x)
-      then (builtins.concatStringsSep "," x)
-      else x;
-  in ''
-    ${field uri} ${field systems} ${field sshKey} ${field maxJobs} ${field speedFactor} ${field supportedFeatures} ${field mandatoryFeatures} ${field publicHostKey}
-  '';
-
-  mkBuildMachines = machines: builtins.toFile "machines" (lib.concatStringsSep "\n" (map mkBuildMachine machines));
+  qr = config.services.hydra.queueRunner;
 in {
   config = lib.mkIf cfg.enable {
     cnix.server.infra.postgresql.databases = [
@@ -72,32 +48,43 @@ in {
       port = cfg.port;
       smtpHost = "localhost";
       useSubstitutes = true;
-      buildMachinesFiles = [
-        (mkBuildMachines [
-          {
-            uri = "localhost";
-            systems = [
-              "x86_64-linux"
-              "i686-linux"
-              "aarch64-linux"
-            ];
-            maxJobs = 3;
-            supportedFeatures = [
-              "kvm"
-              "big-parallel"
-              "nixos-test"
-              "benchmark"
-            ];
-          }
-        ])
-      ];
+
+      queueRunner = {
+        rest.port = 8083;
+        grpc = {
+          address = "[::1]";
+          port = 50051;
+        };
+        settings = {
+          maxUnsupportedTimeInS = 30;
+        };
+      };
+
       extraConfig = ''
-        max_unsupported_time = 30
         allow_import_from_derivation = true
         max_concurrent_evals = 1
       '';
       extraEnv = {
         HYDRA_DISALLOW_UNFREE = "0";
+      };
+    };
+
+    services.hydra-builder = {
+      enable = true;
+      queueRunnerAddr = "http://${qr.grpc.address}:${toString qr.grpc.port}";
+      settings = {
+        systems = [
+          "x86_64-linux"
+          "i686-linux"
+          "aarch64-linux"
+        ];
+        maxJobs = 3;
+        supportedFeatures = [
+          "kvm"
+          "big-parallel"
+          "nixos-test"
+          "benchmark"
+        ];
       };
     };
   };
