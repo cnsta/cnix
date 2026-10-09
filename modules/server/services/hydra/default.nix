@@ -18,6 +18,7 @@ in {
           "hydra"
           "hydra-queue-runner"
           "hydra-www"
+          "hydra-ws"
           "root"
         ];
       }
