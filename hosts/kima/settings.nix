@@ -48,7 +48,8 @@
         adaptiveSync = false;
         position = "0x0";
         transform = 0;
-        bitDepth = 8;
+        bitDepth = 10;
+        hdr = true;
       }
       {
         name = "HDMI-A-1";
