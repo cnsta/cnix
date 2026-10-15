@@ -9,10 +9,8 @@
     mkDomain = config: service: let
       inherit (config.cnix.settings.accounts.domains) local public;
     in
-      if lib.elem service.exposure publicExposures
+      if lib.elem service.exposure (publicExposures ++ ["tailscale"])
       then public
-      else if service.exposure == "tailscale"
-      then "ts.${public}"
       else local;
 
     mkFullDomain = config: service: "${service.subdomain}.${server.mkDomain config service}";

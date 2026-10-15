@@ -27,7 +27,7 @@
 
   frontendToolchain = with pkgs; [
     intelephense
-    typescript-language-server
+    # typescript-language-server
     vscode-langservers-extracted
     kdePackages.qtdeclarative
     deno
