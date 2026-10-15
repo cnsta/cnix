@@ -47,6 +47,7 @@
       enable = true;
       subdomain = "hs";
       exposure = "tunnel";
+      groups = ["admins" "family"];
       tunnelViaTraefik = true;
       auth = false;
       middlewares = ["headscale-cors"];
@@ -303,6 +304,7 @@
     immich = when "s" {
       enable = true;
       exposure = "tailscale";
+      groups = ["admins" "family"];
       port = 2283;
       dashboard = {
         category = "Cloud";
@@ -313,6 +315,7 @@
     memos = when "s" {
       enable = true;
       exposure = "tailscale";
+      groups = ["admins" "family"];
       port = 5230;
       dashboard = {
         category = "Cloud";
@@ -425,6 +428,11 @@ in {
     group = "share";
     uid = 994;
     gid = 993;
+
+    tailnet.groups = {
+      admins = ["cnst@cnix.dev"];
+      family = ["fredrik@libellux.com"];
+    };
 
     infra = {
       traefik = en "s";
