@@ -63,6 +63,26 @@ in {
         Time zone to be used for the server services
       '';
     };
+    tailnet = {
+      ip = mkOption {
+        type = types.str;
+        default = "100.64.88.2";
+        description = "This server's tailnet IPv4 address. Tailnet service names resolve to it.";
+      };
+      groups = mkOption {
+        type = types.attrsOf (types.listOf types.str);
+        default = {};
+        example = {
+          admins = ["adam@cnst.dev"];
+          family = ["someone@example.com"];
+        };
+        description = ''
+          Headscale ACL groups as group name -> headscale users (email for OIDC users,
+          see `headscale users list`). `admins` reach everything, every other group
+          reaches only this server's DNS and HTTPS.
+        '';
+      };
+    };
     services = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule (
@@ -128,6 +148,15 @@ in {
                   Put Authelia forwardAuth in front of this service's Traefik router.
                   Disable for services with their own auth, or whose native clients
                   can't complete a browser redirect (mobile apps, API consumers).
+                '';
+              };
+              groups = mkOption {
+                type = types.listOf types.str;
+                default = ["admins"];
+                description = ''
+                  lldap groups allowed to use this service, enforced by Authelia (forwardAuth
+                  when `auth` is set, and the OIDC client's authorization policy). Services
+                  with neither are gated only by the network.
                 '';
               };
               middlewares = mkOption {
