@@ -21,7 +21,10 @@
   nix = let
     flakeInputs = lib.filterAttrs (_: v: lib.isType "flake" v) inputs;
   in {
-    package = pkgs.lix;
+    # TODO: drop once nixos-unstable has NixOS/nixpkgs#573942
+    package = pkgs.lix.overrideAttrs (old: {
+      mesonFlags = lib.remove "-Dmimalloc=disabled" old.mesonFlags;
+    });
     # pin the registry to avoid downloading and evaling a new nixpkgs version every time
     registry = lib.mapAttrs (_: v: {flake = v;}) flakeInputs;
 
