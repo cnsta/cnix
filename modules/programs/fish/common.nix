@@ -22,7 +22,7 @@
     nsrv = "$EDITOR $NH_FLAKE/modules/server/modules.nix";
     fnix = "nix-shell --run fish -p";
     extract = "extract.sh";
-    nixclean = "nh clean all --keep 3";
+    nixclean = "nh clean all --keep 3 --keep-one";
     nixdev = "nix develop $NH_FLAKE -c $SHELL";
     nixupb = "nh os boot -d always -H $hostname";
     nixupn = "nh os switch -d always -n -H $hostname";

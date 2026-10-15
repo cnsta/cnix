@@ -304,7 +304,7 @@
     immich = when "s" {
       enable = true;
       exposure = "tailscale";
-      groups = ["admins" "family"];
+      groups = ["admins" "users"];
       port = 2283;
       dashboard = {
         category = "Cloud";
@@ -315,7 +315,7 @@
     memos = when "s" {
       enable = true;
       exposure = "tailscale";
-      groups = ["admins" "family"];
+      groups = ["admins" "users"];
       port = 5230;
       dashboard = {
         category = "Cloud";
@@ -431,7 +431,7 @@ in {
 
     tailnet.groups = {
       admins = ["cnst@cnix.dev"];
-      family = ["fredrik@libellux.com"];
+      users = ["fredrik@libellux.com"];
     };
 
     infra = {

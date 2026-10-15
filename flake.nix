@@ -84,6 +84,7 @@
     ashell = {
       url = "github:MalpenZibo/ashell";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
 
     rust-overlay = {
@@ -142,6 +143,7 @@
     fonts = {
       url = "git+https://git.cnst.dev/cnst/fonts.git";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
     };
   };
 }

@@ -64,11 +64,11 @@ in {
   };
 
   config = {
+    programs.solaar = mkIf cfg.logitech.enable {
+      enable = true;
+    };
+
     hardware = {
-      logitech.wireless = mkIf cfg.logitech.enable {
-        enable = true;
-        enableGraphical = true;
-      };
       litecrazy = mkIf cfg.litecrazy.enable {
         enable = true;
         service = mkIf cfg.litecrazy.service.enable {

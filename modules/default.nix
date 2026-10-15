@@ -3,8 +3,6 @@
   lib,
   ...
 }: {
-  imports = [inputs.flake-parts.flakeModules.modules];
-
   options.flake.lib = lib.mkOption {
     type = lib.types.lazyAttrsOf lib.types.raw;
     default = {};
@@ -16,7 +14,7 @@
       inherit (inputs.nixpkgs) lib;
       hosts = import ../hosts/registry.nix;
     };
-    modules.nixos = {
+    nixosModules = {
       programs.imports = [./programs];
       services.imports = [./services];
       server.imports = [./server];

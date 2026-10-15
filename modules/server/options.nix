@@ -74,7 +74,7 @@ in {
         default = {};
         example = {
           admins = ["adam@cnst.dev"];
-          family = ["someone@example.com"];
+          users = ["someone@example.com"];
         };
         description = ''
           Headscale ACL groups as group name -> headscale users (email for OIDC users,

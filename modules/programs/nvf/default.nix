@@ -138,6 +138,12 @@ in {
           statusline = {
             lualine = {
               enable = true;
+              integrations = {
+                breadcrumbs = {
+                  nvim-navic.enable = true;
+                  navbuddy.enable = true;
+                };
+              };
               setupOpts = {
                 options.theme = "gruvbox-material";
               };
@@ -194,11 +200,6 @@ in {
             gitsigns.codeActions.enable = false; # throws an annoying debug message
           };
 
-          minimap = {
-            minimap-vim.enable = false;
-            codewindow.enable = false; # lighter, faster, and uses lua for configuration
-          };
-
           dashboard = {
             dashboard-nvim.enable = false;
             alpha.enable = true;
@@ -252,10 +253,6 @@ in {
             modes-nvim.enable = false; # the theme looks terrible with catppuccin
             illuminate.enable = true;
             # fastaction.enable = true;
-            breadcrumbs = {
-              enable = true;
-              navbuddy.enable = true;
-            };
             smartcolumn = {
               enable = true;
               setupOpts.custom_colorcolumn = {

@@ -26,7 +26,7 @@ in {
         enable = true;
         clean = {
           enable = true;
-          extraArgs = "--keep 3 --keep-since 21d";
+          extraArgs = "--keep 3 --keep-since 21d --keep-one";
         };
       };
       niri = none;
@@ -36,9 +36,9 @@ in {
       tmux = en "ks";
       thunar = none;
       wireshark = none;
-      alacritty = when "t" {
+      alacritty = when "kbt" {
         enable = true;
-        primary = true;
+        primary = false;
       };
       lutris = en "k";
       chromium = en "kt";

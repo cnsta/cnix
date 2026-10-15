@@ -42,14 +42,14 @@
             ./${name}
             (self + "/system")
             (self + "/scripts")
-            self.modules.nixos.programs
-            self.modules.nixos.services
-            self.modules.nixos.settings
+            self.nixosModules.programs
+            self.nixosModules.services
+            self.nixosModules.settings
             inputs.nix-index-database.nixosModules.default
             inputs.hjem.nixosModules.default
             userModule
           ]
-          ++ lib.optional (class == "server") self.modules.nixos.server;
+          ++ lib.optional (class == "server") self.nixosModules.server;
       });
 in {
   flake.nixosConfigurations = lib.mapAttrs mkHost hosts;
