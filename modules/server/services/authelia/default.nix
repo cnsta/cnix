@@ -9,6 +9,14 @@
   cfg = config.cnix.server.services.${unit};
   srv = config.cnix.server;
   domain = clib.server.mkHostDomain config cfg;
+
+  subjectsFor = groups: map (g: "group:${g}") groups;
+
+  serviceRules = lib.mapAttrsToList (_: s: {
+    domain = clib.server.mkFullDomain config s;
+    subject = subjectsFor s.groups;
+    policy = "one_factor";
+  }) (lib.filterAttrs (_: s: s.enable && s.routed && s.auth && s.subdomain != "") srv.services);
 in {
   imports = [
     ./clients.nix
@@ -134,16 +142,14 @@ in {
             };
             access_control = {
               default_policy = "deny";
-              rules = lib.mkAfter [
-                {
-                  domain = "*.${domain}";
-                  policy = "one_factor";
-                }
-                {
-                  domain = "*.${srv.domain}";
-                  policy = "one_factor";
-                }
-              ];
+              rules = lib.mkAfter (serviceRules
+                ++ [
+                  {
+                    domain = ["*.${domain}" "*.${srv.domain}"];
+                    subject = subjectsFor ["admins"];
+                    policy = "one_factor";
+                  }
+                ]);
             };
             password_policy.standard = {
               enabled = true;
