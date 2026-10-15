@@ -69,7 +69,6 @@ in {
           group = "users";
           file = "${self}/secrets/lldapAdminPassword.age";
         };
-        autheliaCloudflared.file = "${self}/secrets/autheliaCloudflared.age";
       };
 
       cnix.server.infra = {
@@ -85,15 +84,6 @@ in {
       };
 
       services = {
-        cloudflared = {
-          enable = true;
-          tunnels.${cfg.cloudflared.tunnelId} = {
-            credentialsFile = cfg.cloudflared.credentialsFile;
-            default = "http_status:404";
-            ingress."${cfg.subdomain}.${domain}".service = "http://localhost:${toString cfg.port}";
-          };
-        };
-
         traefik.dynamicConfigOptions.http = {
           middlewares.authelia.forwardAuth = {
             address = "http://localhost:${toString cfg.port}/api/authz/forward-auth";

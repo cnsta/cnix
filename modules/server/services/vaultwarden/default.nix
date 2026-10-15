@@ -11,7 +11,6 @@
 in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
-      vaultwardenCloudflared.file = "${self}/secrets/vaultwardenCloudflared.age";
       vaultwardenEnvironment.file = "${self}/secrets/vaultwardenEnvironment.age";
     };
 
@@ -21,15 +20,6 @@ in {
     };
 
     services = {
-      cloudflared = {
-        enable = true;
-        tunnels.${cfg.cloudflared.tunnelId} = {
-          credentialsFile = cfg.cloudflared.credentialsFile;
-          default = "http_status:404";
-          ingress."${domain}".service = "http://localhost:${toString cfg.port}";
-        };
-      };
-
       vaultwarden = {
         enable = true;
         environmentFile = config.age.secrets.vaultwardenEnvironment.path;

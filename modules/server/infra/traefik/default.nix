@@ -29,7 +29,8 @@
     else "private";
 
   middlewaresFor = service:
-    ["security-headers" (gateFor service)]
+    ["security-headers"]
+    ++ lib.optional (service.exposure != "public") (gateFor service)
     ++ lib.optional (service.auth && autheliaUp) "authelia"
     ++ service.middlewares;
 

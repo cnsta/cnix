@@ -22,12 +22,8 @@
     authelia = when "s" {
       enable = true;
       subdomain = "login";
-      exposure = "tunnel";
+      exposure = "dedicated-tunnel";
       port = 3011;
-      cloudflared = {
-        tunnelId = "5c598772-1ea9-495f-bf3b-1feb064bfc29";
-        credentialsFile = config.age.secrets.autheliaCloudflared.path;
-      };
       dashboard = {
         category = "Infra";
       };
@@ -46,9 +42,8 @@
     headscale = when "s" {
       enable = true;
       subdomain = "hs";
-      exposure = "tunnel";
-      groups = ["admins" "family"];
-      tunnelViaTraefik = true;
+      exposure = "public";
+      groups = ["admins" "users"];
       auth = false;
       middlewares = ["headscale-cors"];
       port = 3004;
@@ -325,12 +320,8 @@
     vaultwarden = when "s" {
       enable = true;
       subdomain = "vault";
-      exposure = "tunnel";
+      exposure = "dedicated-tunnel";
       port = 8222;
-      cloudflared = {
-        tunnelId = "fdd98086-6a4c-44f2-bba0-eb86b833cce5";
-        credentialsFile = config.age.secrets.vaultwardenCloudflared.path;
-      };
       dashboard = {
         icon = "vaultwarden-light.svg";
         category = "Cloud";

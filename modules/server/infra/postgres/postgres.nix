@@ -99,7 +99,14 @@ in {
         cfg.databases
       );
 
-      identMap = identMapLines;
+      identMap = lib.concatStringsSep "\n" (
+        map (osUser: "superuser ${osUser} postgres") [
+          "postgres"
+          "root"
+          config.cnix.settings.accounts.username
+        ]
+        ++ [identMapLines]
+      );
 
       authentication = lib.mkForce (
         let
@@ -134,7 +141,7 @@ in {
             )
             dbsWithPassword;
         in ''
-          local all postgres peer
+          local all postgres peer map=superuser
           ${localAuth}
           ${tcpPassword}
         ''

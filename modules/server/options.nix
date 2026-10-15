@@ -125,14 +125,6 @@ in {
                 default = "local";
                 description = "Controls where the service is exposed";
               };
-              tunnelViaTraefik = mkOption {
-                type = types.bool;
-                default = false;
-                description = ''
-                  Send this service's tunnel ingress to Traefik on loopback instead of
-                  straight to its port. Needed when several routers share a hostname.
-                '';
-              };
               ingress = lib.mkOption {
                 type = lib.types.attrsOf lib.types.str;
                 default = {};
@@ -173,25 +165,6 @@ in {
                 type = lib.types.path;
                 default = "/var/lib/${name}";
                 description = "Configuration directory for ${name}.";
-              };
-              cloudflared = lib.mkOption {
-                type = lib.types.submodule {
-                  options = {
-                    credentialsFile = lib.mkOption {
-                      type = lib.types.str;
-                      example = lib.literalExpression ''
-                        pkgs.writeText "cloudflare-credentials.json" '''
-                        {"AccountTag":"secret","TunnelSecret":"secret","TunnelID":"secret"}
-                        '''
-                      '';
-                    };
-                    tunnelId = lib.mkOption {
-                      type = lib.types.str;
-                      example = "00000000-0000-0000-0000-000000000000";
-                    };
-                  };
-                };
-                description = "Cloudflare tunnel configuration for this service.";
               };
               dashboard = lib.mkOption {
                 default = {};

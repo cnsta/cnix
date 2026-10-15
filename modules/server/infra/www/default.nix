@@ -125,22 +125,10 @@ in {
               config.cnix.server.services;
             autoIngress =
               lib.mapAttrs' (
-                _: svc: let
-                  fqdn = "${svc.subdomain}.${cfg.url}";
-                in
-                  lib.nameValuePair fqdn (
-                    if svc.tunnelViaTraefik
-                    then {
-                      service = "https://127.0.0.1:443";
-                      originRequest = {
-                        originServerName = fqdn;
-                        httpHostHeader = fqdn;
-                      };
-                    }
-                    else {
-                      service = "http://127.0.0.1:${toString svc.port}";
-                    }
-                  )
+                _: svc:
+                  lib.nameValuePair "${svc.subdomain}.${cfg.url}" {
+                    service = "http://127.0.0.1:${toString svc.port}";
+                  }
               )
               tunnelServices;
             extraIngress = lib.foldlAttrs (
