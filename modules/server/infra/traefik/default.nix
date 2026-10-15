@@ -24,9 +24,9 @@
   accessLog = "/var/lib/traefik/logs/access.log";
 
   gateFor = service:
-    if service.exposure == "tailscale"
-    then "tailnet-only"
-    else "lan-only";
+    if service.exposure == "local" && !(service.auth && autheliaUp)
+    then "lan-only"
+    else "private";
 
   middlewaresFor = service:
     ["security-headers" (gateFor service)]
@@ -135,10 +135,6 @@ in {
                     main = publicDomain;
                     sans = ["*.${publicDomain}"];
                   }
-                  {
-                    main = "ts.${publicDomain}";
-                    sans = ["*.ts.${publicDomain}"];
-                  }
                 ];
               };
             };
@@ -155,8 +151,8 @@ in {
             services = generateServices routable;
 
             middlewares = {
-              lan-only.ipAllowList.sourceRange = loopback ++ podman ++ lan ++ tailnet;
-              tailnet-only.ipAllowList.sourceRange = loopback ++ tailnet;
+              lan-only.ipAllowList.sourceRange = loopback ++ podman ++ lan;
+              private.ipAllowList.sourceRange = loopback ++ podman ++ lan ++ tailnet;
 
               security-headers.headers = {
                 stsSeconds = 31536000;
@@ -177,7 +173,7 @@ in {
                   rule = "Host(`traefik.${localDomain}`)";
                   service = "api@internal";
                   middlewares =
-                    ["security-headers" "lan-only"]
+                    ["security-headers" "private"]
                     ++ lib.optional autheliaUp "authelia";
                   tls = {};
                 };
@@ -187,7 +183,7 @@ in {
                   entryPoints = ["websecure"];
                   rule = "Host(`login.${localDomain}`)";
                   service = "authelia";
-                  middlewares = ["security-headers" "lan-only"];
+                  middlewares = ["security-headers" "private"];
                   tls = {};
                 };
               };
