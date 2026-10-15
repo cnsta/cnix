@@ -165,7 +165,7 @@ in {
             service = "www";
             tls = {};
             # tls.certResolver = "letsencrypt";
-            middlewares = ["lan-only"];
+            middlewares = ["private"];
           };
 
           ts = {
@@ -174,7 +174,7 @@ in {
             service = "ts";
             tls = {};
             # tls.certResolver = "letsencrypt";
-            middlewares = ["lan-only"];
+            middlewares = ["private"];
           };
         };
 
