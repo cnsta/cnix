@@ -16,7 +16,6 @@
     client_name ? client_id,
     redirect_paths ? [],
     redirect_uris ? [],
-    authorization_policy ? "default",
     require_pkce ? true,
     token_endpoint_auth_method ? "client_secret_basic",
     scopes ? [
@@ -28,27 +27,18 @@
     response_types ? ["code"],
     extra ? {},
   }: let
-    baseUrl = clib.server.mkFullDomain config service;
-    allUrls =
-      if service.exposure == "tailscale"
-      then let
-        publicUrl = "${service.subdomain}.${config.cnix.settings.accounts.domains.public}";
-      in [
-        baseUrl
-        publicUrl
-      ]
-      else [baseUrl];
+    url = clib.server.mkFullDomain config service;
   in
     {
       inherit
         client_id
         client_name
-        authorization_policy
         require_pkce
         token_endpoint_auth_method
         scopes
         response_types
         ;
+      authorization_policy = client_id;
       client_secret = readSecret client_id;
       public = false;
       consent_mode = "implicit";
@@ -59,12 +49,11 @@
       grant_types = ["authorization_code"];
       userinfo_signed_response_alg = "none";
       redirect_uris =
-        (lib.concatMap (url: map (p: "https://${url}/${p}") redirect_paths) allUrls) ++ redirect_uris;
+        (map (p: "https://${url}/${p}") redirect_paths) ++ redirect_uris;
     }
     // extra;
-in {
-  services.authelia.instances.main.settings.identity_providers.oidc.clients = [
-    (mkClient {
+  clientDefs = [
+    {
       client_id = "immich";
       client_name = "Immich";
       service = services.immich;
@@ -75,25 +64,23 @@ in {
       redirect_uris = ["app.immich:///oauth-callback"];
       require_pkce = false;
       token_endpoint_auth_method = "client_secret_post";
-    })
-
-    (mkClient {
+    }
+    {
       client_id = "memos";
       client_name = "Memos";
       service = services.memos;
       redirect_paths = ["auth/callback"];
       require_pkce = false;
       token_endpoint_auth_method = "client_secret_post";
-    })
-
-    (mkClient {
+    }
+    {
       client_id = "forgejo";
       client_name = "Forgejo";
       service = services.forgejo;
       redirect_paths = ["user/oauth2/authelia/callback"];
-    })
+    }
 
-    (mkClient {
+    {
       client_id = "headscale";
       client_name = "Headscale";
       service = services.headscale;
@@ -101,9 +88,8 @@ in {
         "oidc/callback"
         "admin/oidc/callback"
       ];
-    })
-
-    (mkClient {
+    }
+    {
       client_id = "tailscale";
       client_name = "Tailscale";
       service = services.headscale;
@@ -115,6 +101,28 @@ in {
         "email"
         "profile"
       ];
-    })
+    }
   ];
+
+  # deny unless the user is in one of the service's groups.
+  policyFor = def: {
+    default_policy = "deny";
+    rules = [
+      {
+        policy = "deny";
+        subject = "group:lldap_strict_readonly";
+      }
+      {
+        policy = "one_factor";
+        subject = map (g: "group:${g}") def.service.groups;
+      }
+    ];
+  };
+in {
+  services.authelia.instances.main.settings.identity_providers.oidc = {
+    clients = map mkClient clientDefs;
+    authorization_policies = lib.listToAttrs (
+      map (def: lib.nameValuePair def.client_id (policyFor def)) clientDefs
+    );
+  };
 }
