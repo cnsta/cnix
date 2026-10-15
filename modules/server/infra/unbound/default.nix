@@ -278,7 +278,6 @@ in {
         local-zone = [
           ''"${domains.local}." transparent''
           ''"${domains.public}." transparent''
-          ''"ts.${domains.public}." transparent''
         ];
 
         local-data =
