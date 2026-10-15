@@ -16,7 +16,23 @@
 
   headplanePort = 3005;
 
-  sobotkaTailnetIp = "100.64.88.2";
+  tailnet = srv.tailnet;
+
+  policy = pkgs.writeText "headscale-policy.json" (builtins.toJSON {
+    groups = lib.mapAttrs' (g: users: lib.nameValuePair "group:${g}" users) tailnet.groups;
+    hosts.server = "${tailnet.ip}/32";
+    acls =
+      lib.optional (tailnet.groups ? admins) {
+        action = "accept";
+        src = ["group:admins"];
+        dst = ["*:*" "autogroup:internet:*"];
+      }
+      ++ lib.mapAttrsToList (g: _: {
+        action = "accept";
+        src = ["group:${g}"];
+        dst = ["server:53,443" "autogroup:internet:*"];
+      }) (removeAttrs tailnet.groups ["admins"]);
+  });
 
   headplaneConfig = (pkgs.formats.yaml {}).generate "headplane-config.yaml" {
     server = {
@@ -95,8 +111,8 @@ in {
 
         dns = {
           magic_dns = true;
-          base_domain = "ts.cnst.dev";
-          nameservers.global = ["192.168.88.69"];
+          base_domain = "cnst.internal";
+          nameservers.global = [tailnet.ip];
           search_domains = [];
           extra_records = lib.concatLists (
             lib.mapAttrsToList (
@@ -104,14 +120,17 @@ in {
                 lib.optional (s.enable && s.routed && s.subdomain != null && s.exposure == "tailscale") {
                   type = "A";
                   name = clib.server.mkFullDomain config s;
-                  value = sobotkaTailnetIp;
+                  value = tailnet.ip;
                 }
             )
             srv.services
           );
         };
 
-        policy.mode = "database";
+        policy = {
+          mode = "file";
+          path = policy;
+        };
 
         oidc = {
           issuer = autheliaUrl;
