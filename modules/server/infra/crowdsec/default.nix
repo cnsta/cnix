@@ -51,7 +51,7 @@ in {
 
       hub.collections =
         [
-          "crowdsecurity/linux" # sshd, private-range whitelist
+          "crowdsecurity/linux" # sshd
           "crowdsecurity/base-http-scenarios"
           "crowdsecurity/http-cve"
           "crowdsecurity/whitelist-good-actors"
@@ -100,14 +100,23 @@ in {
           }
         ];
 
-        # crowdsecurity/whitelists covers RFC 1918 and loopback, not the tailnet.
         parsers.s02Enrich = [
           {
-            name = "cnix/tailnet-whitelist";
-            description = "Never ban tailnet peers";
+            name = "cnix/private-whitelist";
+            description = "Never ban this host, the LAN, podman or tailnet peers";
             whitelist = {
-              reason = "tailnet";
-              cidr = ["100.64.0.0/10" "fd7a:115c:a1e0::/48"];
+              reason = "private";
+              cidr = [
+                "127.0.0.0/8"
+                "::1/128"
+                "10.0.0.0/8"
+                "172.16.0.0/12"
+                "192.168.0.0/16"
+                "fc00::/7"
+                "fe80::/10"
+                "100.64.0.0/10"
+                "fd7a:115c:a1e0::/48"
+              ];
             };
           }
         ];
