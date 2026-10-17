@@ -53,6 +53,8 @@
     (lib.filterAttrs
       (_: s: s.enable && s.routed && s.subdomain != "")
       srv.services);
+
+  wwwRecord = lib.optional srv.infra.www.enable ''"${srv.infra.www.url}. A ${cfg.serviceIp}"'';
 in {
   options.cnix.server.infra.${unit} = {
     enable = mkEnableOption "recursive DNS resolution with unbound";
@@ -285,7 +287,8 @@ in {
             ''"traefik.${domains.local}. A ${cfg.serviceIp}"''
             ''"login.${domains.local}. A ${cfg.serviceIp}"''
           ]
-          ++ localARecords;
+          ++ localARecords
+          ++ wwwRecord;
       };
     };
   };
