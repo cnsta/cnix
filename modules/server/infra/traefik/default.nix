@@ -21,7 +21,7 @@
 
   autheliaUp = srv.services.authelia.enable;
 
-  accessLog = "/var/lib/traefik/logs/access.log";
+  accessLog = "/var/log/traefik/access.log";
 
   gateFor = service:
     if service.exposure == "local" && !(service.auth && autheliaUp)
@@ -67,9 +67,11 @@ in {
       group = "traefik";
     };
 
-    systemd.services.traefik.serviceConfig.EnvironmentFile = [
-      config.age.secrets.traefikEnv.path
-    ];
+    systemd.services.traefik.serviceConfig = {
+      EnvironmentFile = [config.age.secrets.traefikEnv.path];
+      LogsDirectory = "traefik";
+      LogsDirectoryMode = "0750";
+    };
 
     networking.firewall.allowedTCPPorts = [80 443];
 
