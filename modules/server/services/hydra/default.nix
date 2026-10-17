@@ -24,10 +24,11 @@ in {
       }
     ];
 
+    nix.package = lib.mkForce pkgs.nix;
+
     boot.binfmt.emulatedSystems = ["aarch64-linux"];
     systemd = {
       services.hydra-evaluator = {
-        environment.GC_DONT_GC = "true";
         serviceConfig = {
           MemoryHigh = "8G";
           MemoryMax = "12G";
@@ -61,9 +62,10 @@ in {
         };
       };
 
+      evaluatorSettings.max_concurrent_evals = 1;
+
       extraConfig = ''
         allow_import_from_derivation = true
-        max_concurrent_evals = 1
       '';
       extraEnv = {
         HYDRA_DISALLOW_UNFREE = "0";
