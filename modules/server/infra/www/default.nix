@@ -53,17 +53,10 @@ in {
       wwwCloudflared.file = "${self}/secrets/wwwCloudflared.age";
     };
 
-    cnix.server.infra = {
-      fail2ban = {
-        jails = {
-          nginx-404 = {
-            serviceName = "nginx";
-            failRegex = ''^.*\[error\].*directory index of.* is forbidden.*client: <HOST>.*$'';
-            ignoreRegex = "";
-            maxRetry = 5;
-          };
-        };
-      };
+    cnix.server.infra.anubis.sites.www = {
+      host = cfg.url;
+      target = "http://127.0.0.1:${toString cfg.port}";
+      port = 8923;
     };
 
     services = {
@@ -72,7 +65,7 @@ in {
         defaultListen = [
           {
             addr = "127.0.0.1";
-            port = 8283;
+            port = cfg.port;
           }
         ];
         virtualHosts = {
@@ -138,24 +131,12 @@ in {
             ) {} (lib.filterAttrs (_: svc: svc.enable && svc.exposure != "dedicated-tunnel") config.cnix.server.services);
           in
             autoIngress
-            // extraIngress
-            // {
-              "${cfg.url}".service = "http://127.0.0.1:8283";
-            };
+            // extraIngress;
         };
       };
 
       traefik.dynamicConfigOptions.http = {
         routers = {
-          www = {
-            entryPoints = ["websecure"];
-            rule = "Host(`${cfg.url}`) && PathPrefix(`/.well-known/`)";
-            service = "www";
-            tls = {};
-            # tls.certResolver = "letsencrypt";
-            middlewares = ["private"];
-          };
-
           ts = {
             entryPoints = ["websecure"];
             rule = "Host(`ts.${cfg.url}`)";
@@ -167,12 +148,8 @@ in {
         };
 
         services = {
-          www.loadBalancer.servers = [
-            {url = "http://127.0.0.1:8283";}
-          ];
-
           ts.loadBalancer.servers = [
-            {url = "http://127.0.0.1:8283";}
+            {url = "http://127.0.0.1:${toString cfg.port}";}
           ];
         };
       };

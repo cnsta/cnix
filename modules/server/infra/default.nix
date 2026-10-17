@@ -1,6 +1,8 @@
 {
   imports = [
     # ./cnixpost
+    ./anubis
+    ./crowdsec
     ./fail2ban
     ./gluetun
     ./keepalived
