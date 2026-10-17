@@ -452,6 +452,8 @@ in {
         };
       };
 
+      crowdsec = en "s";
+
       fail2ban = when "s" {
         enable = true;
         apiKeyFile = config.age.secrets.cloudflareFirewallApiKey.path;

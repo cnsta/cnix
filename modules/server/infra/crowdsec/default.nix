@@ -1,14 +1,20 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf mkOption optional types;
+  inherit (lib) getExe getExe' mkEnableOption mkIf mkOption optional types;
 
   cfg = config.cnix.server.infra.crowdsec;
   traefik = config.services.traefik;
   traefikLog = traefik.staticConfigOptions.accesslog.filepath or null;
   stateDir = "/var/lib/crowdsec/state";
+
+  cs = config.services.crowdsec;
+  cscli = "${getExe' cs.package "cscli"} -c=${(pkgs.formats.yaml {}).generate "crowdsec.yaml" cs.settings.general}";
+  bouncerName = "crowdsec-firewall-bouncer";
+  bouncerKey = "${stateDir}/firewall-bouncer.key";
 in {
   options.cnix.server.infra.crowdsec = {
     enable = mkEnableOption ''
@@ -69,6 +75,31 @@ in {
           }
           ++ cfg.acquisitions;
 
+        profiles = [
+          {
+            name = "default_ip_remediation";
+            filters = ["Alert.Remediation == true && Alert.GetScope() == \"Ip\""];
+            decisions = [
+              {
+                type = "ban";
+                duration = "4h";
+              }
+            ];
+            on_success = "break";
+          }
+          {
+            name = "default_range_remediation";
+            filters = ["Alert.Remediation == true && Alert.GetScope() == \"Range\""];
+            decisions = [
+              {
+                type = "ban";
+                duration = "4h";
+              }
+            ];
+            on_success = "break";
+          }
+        ];
+
         # crowdsecurity/whitelists covers RFC 1918 and loopback, not the tailnet.
         parsers.s02Enrich = [
           {
@@ -92,7 +123,28 @@ in {
       };
     };
 
-    services.crowdsec-firewall-bouncer.enable = true;
+    services.crowdsec-firewall-bouncer = {
+      enable = true;
+      registerBouncer.enable = false;
+      secrets.apiKeyPath = bouncerKey;
+    };
+
+    systemd.tmpfiles.settings."11-crowdsec"."${stateDir}/online_api_credentials.yaml".f = {
+      user = config.services.crowdsec.user;
+      group = config.services.crowdsec.group;
+      mode = "0600";
+    };
+
+    systemd.services.crowdsec.serviceConfig.ExecStartPost = getExe (pkgs.writeShellScriptBin "crowdsec-register-bouncer" ''
+      set -eu
+      umask 077
+      if [ ! -s ${bouncerKey} ]; then
+        ${getExe' pkgs.coreutils "tr"} -dc A-Za-z0-9 </dev/urandom | ${getExe' pkgs.coreutils "head"} -c 40 >${bouncerKey}
+      fi
+      if ! ${cscli} bouncers list -o json | ${getExe pkgs.jq} -e 'any(.[]?; .name == "${bouncerName}")' >/dev/null; then
+        ${cscli} bouncers add ${bouncerName} -k "$(${getExe' pkgs.coreutils "cat"} ${bouncerKey})" >/dev/null
+      fi
+    '');
 
     users.users.${config.services.crowdsec.user}.extraGroups = optional traefik.enable traefik.group;
   };
