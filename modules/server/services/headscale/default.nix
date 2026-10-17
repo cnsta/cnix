@@ -18,6 +18,21 @@
 
   tailnet = srv.tailnet;
 
+  autheliaUp = srv.services.authelia.enable;
+  localDomain = config.cnix.settings.accounts.domains.local;
+  tailnetNames =
+    lib.mapAttrsToList (_: clib.server.mkFullDomain config) (lib.filterAttrs (
+        _: s:
+          s.enable
+          && s.routed
+          && s.subdomain != ""
+          && s.exposure != "public"
+          && !(s.exposure == "local" && !(s.auth && autheliaUp))
+      )
+      srv.services)
+    ++ ["traefik.${localDomain}"]
+    ++ lib.optional autheliaUp "login.${localDomain}";
+
   policy = pkgs.writeText "headscale-policy.json" (builtins.toJSON {
     groups = lib.mapAttrs' (g: users: lib.nameValuePair "group:${g}" users) tailnet.groups;
     hosts.server = "${tailnet.ip}/32";
@@ -114,17 +129,13 @@ in {
           base_domain = "cnst.internal";
           nameservers.global = [tailnet.ip];
           search_domains = [];
-          extra_records = lib.concatLists (
-            lib.mapAttrsToList (
-              _: s:
-                lib.optional (s.enable && s.routed && s.subdomain != null && s.exposure == "tailscale") {
-                  type = "A";
-                  name = clib.server.mkFullDomain config s;
-                  value = tailnet.ip;
-                }
-            )
-            srv.services
-          );
+          extra_records =
+            map (name: {
+              type = "A";
+              inherit name;
+              value = tailnet.ip;
+            })
+            tailnetNames;
         };
 
         policy = {
