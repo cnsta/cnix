@@ -60,6 +60,7 @@ in {
   "sonarrEnvironment.age".publicKeys = sobotka;
   "radarrEnvironment.age".publicKeys = sobotka;
   "lidarrEnvironment.age".publicKeys = sobotka;
+  "bazarrEnvironment.age".publicKeys = sobotka;
   "sportarrEnvironment.age".publicKeys = sobotka;
   "sabnzbdEnvironment.age".publicKeys = sobotka;
   "qbtEnvironment.age".publicKeys = sobotka;

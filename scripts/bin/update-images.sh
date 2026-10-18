@@ -9,6 +9,7 @@ IMAGES=(
   ghcr.io/hotio/radarr:latest
   ghcr.io/hotio/sonarr:latest
   ghcr.io/hotio/lidarr:latest
+  ghcr.io/hotio/bazarr:latest
   ghcr.io/hotio/prowlarr:latest
   ghcr.io/hotio/sabnzbd:latest
   ghcr.io/hotio/jellyfin:latest

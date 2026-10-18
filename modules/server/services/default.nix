@@ -1,6 +1,7 @@
 {
   imports = [
     ./authelia
+    ./bazarr
     ./dispatcharr
     ./flaresolverr
     ./fluxer

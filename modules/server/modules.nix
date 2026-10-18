@@ -116,6 +116,16 @@
       routed = false;
     };
 
+    bazarr = when "s" {
+      enable = true;
+      auth = false;
+      port = 8687;
+      dashboard = {
+        category = "Media";
+        container.name = "bazarr";
+      };
+    };
+
     sonarr = when "s" {
       enable = true;
       auth = false;
