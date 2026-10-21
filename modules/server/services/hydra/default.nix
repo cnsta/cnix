@@ -24,7 +24,11 @@ in {
       }
     ];
 
-    nix.package = lib.mkForce pkgs.nix;
+    nix = {
+      package = lib.mkForce pkgs.nix;
+      daemonCPUSchedPolicy = "batch";
+      daemonIOSchedClass = "idle";
+    };
 
     boot.binfmt.emulatedSystems = ["aarch64-linux"];
     systemd = {
@@ -81,7 +85,7 @@ in {
           "i686-linux"
           "aarch64-linux"
         ];
-        maxJobs = 3;
+        maxJobs = 4;
         supportedFeatures = [
           "kvm"
           "big-parallel"
