@@ -144,6 +144,8 @@ in {
       mode = "0600";
     };
 
+    systemd.services.crowdsec.restartTriggers = [(builtins.toJSON cs.localConfig) (builtins.toJSON cs.hub)];
+
     systemd.services.crowdsec.serviceConfig.ExecStartPost = getExe (pkgs.writeShellScriptBin "crowdsec-register-bouncer" ''
       set -eu
       umask 077

@@ -1,13 +1,19 @@
 {
+  config,
+  lib,
+  ...
+}: {
   nix.settings = {
-    substituters = [
+    substituters =
+      lib.optional (!(config.cnix.server.services.harmonia.enable or false))
       "https://cache.cnst.dev?priority=20"
-      "https://cache.nixos.org?priority=10"
-      "https://helix.cachix.org"
-      "https://nix-community.cachix.org"
-      "https://yazi.cachix.org"
-      "https://niri.cachix.org"
-    ];
+      ++ [
+        "https://cache.nixos.org?priority=10"
+        "https://helix.cachix.org"
+        "https://nix-community.cachix.org"
+        "https://yazi.cachix.org"
+        "https://niri.cachix.org"
+      ];
 
     trusted-public-keys = [
       "cache.cnst.dev-1:3yhqzi3xAXkgMsnsxyZVuB23ynVtoZm/J9fI9omutqU="

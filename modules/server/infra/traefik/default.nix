@@ -164,7 +164,7 @@ in {
                 contentTypeNosniff = true;
                 browserXssFilter = true;
                 referrerPolicy = "strict-origin-when-cross-origin";
-                frameDeny = true;
+                customFrameOptionsValue = "SAMEORIGIN";
               };
             };
 
