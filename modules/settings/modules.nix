@@ -20,7 +20,7 @@ in {
       gnome = none;
       inkscape = en "k";
       lact = en "k";
-      maccel = en "k";
+      maccel = none;
       mysql-workbench = none;
       nh = {
         enable = true;

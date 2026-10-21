@@ -30,6 +30,7 @@
             permittedInsecurePackages = ["olm-3.2.16"];
           };
           overlays = [
+            inputs.nixgl.overlay
           ];
         };
 
@@ -62,6 +63,8 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixgl.url = "github:nix-community/nixGL";
 
     hjem = {
       url = "github:feel-co/hjem";
@@ -103,7 +106,7 @@
     };
 
     zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
+      url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
