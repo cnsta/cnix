@@ -63,6 +63,35 @@ in {
         Time zone to be used for the server services
       '';
     };
+    smtp = mkOption {
+      default = null;
+      description = ''
+        Outgoing mail relay for server notifications (Grafana alerts). Null
+        disables mail: alert rules still evaluate but nothing is sent.
+      '';
+      type = types.nullOr (types.submodule {
+        options = {
+          host = mkOption {
+            type = types.str;
+            example = "smtp.example.com:587";
+            description = "Relay as host:port (STARTTLS).";
+          };
+          user = mkOption {
+            type = types.str;
+            description = "SMTP login.";
+          };
+          from = mkOption {
+            type = types.str;
+            example = "alerts@cnst.dev";
+            description = "Sender address.";
+          };
+          passwordFile = mkOption {
+            type = types.path;
+            description = "File holding the SMTP password, readable by the consuming service.";
+          };
+        };
+      });
+    };
     tailnet = {
       ip = mkOption {
         type = types.str;

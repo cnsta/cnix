@@ -112,7 +112,7 @@ in {
           settings = {
             theme = "auto";
             server = {
-              address = "tcp://:${toString cfg.port}";
+              address = "tcp://127.0.0.1:${toString cfg.port}";
               # asset_path = assets-no-symlinks;
             };
             session = {

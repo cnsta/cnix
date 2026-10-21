@@ -46,6 +46,8 @@ in {
   "memosOidcSecret.age".publicKeys = sobotka;
   "autheliaCloudflared.age".publicKeys = sobotka;
   "grafanaSecretKey.age".publicKeys = sobotka;
+  "grafanaOidcSecret.age".publicKeys = sobotka;
+  "grafanaSmtp.age".publicKeys = sobotka;
   "matrixCloudflared.age".publicKeys = sobotka;
   "continuwuityLiveKit.age".publicKeys = sobotka;
   "continuwuityEnvironment.age".publicKeys = sobotka;

@@ -70,6 +70,7 @@ in {
           };
 
           server = {
+            HTTP_ADDR = "127.0.0.1";
             DOMAIN = domain;
             LANDING_PAGE = "explore";
             HTTP_PORT = cfg.port;

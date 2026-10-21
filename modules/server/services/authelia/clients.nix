@@ -79,6 +79,12 @@
       service = services.forgejo;
       redirect_paths = ["user/oauth2/authelia/callback"];
     }
+    {
+      client_id = "grafana";
+      client_name = "Grafana";
+      service = services.grafana;
+      redirect_paths = ["login/generic_oauth"];
+    }
 
     {
       client_id = "headscale";

@@ -74,6 +74,12 @@
       };
     };
 
+    prometheus = when "s" {
+      enable = true;
+      routed = false;
+      port = 9090;
+    };
+
     uptime-kuma = when "s" {
       enable = true;
       subdomain = "uptime";
@@ -429,6 +435,13 @@ in {
     group = "share";
     uid = 994;
     gid = 993;
+
+    smtp = {
+      host = "smtp.protonmail.ch:587";
+      user = "alerts@cnst.dev";
+      from = "alerts@cnst.dev";
+      passwordFile = config.age.secrets.grafanaSmtp.path;
+    };
 
     tailnet.groups = {
       admins = ["cnst@cnix.dev"];
