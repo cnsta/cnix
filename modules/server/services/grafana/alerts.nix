@@ -53,6 +53,8 @@
     annotations.summary = summary;
   };
 
+  ignoredUnits = ["fwupd-refresh.service"];
+
   rules = [
     (rule {
       uid = "target-down";
@@ -63,7 +65,7 @@
     (rule {
       uid = "unit-failed";
       title = "systemd unit failed";
-      expr = ''systemd_unit_state{state="failed"}'';
+      expr = ''systemd_unit_state{state="failed", name!~"${lib.concatStringsSep "|" ignoredUnits}"}'';
       summary = "{{ $labels.name }} is in the failed state.";
     })
     (rule {

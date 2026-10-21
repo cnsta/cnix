@@ -5,7 +5,8 @@
   ...
 }: let
   unit = "speedtest-tracker";
-  cfg = config.cnix.server.services.${unit};
+  srv = config.cnix.server;
+  cfg = srv.services.${unit};
 in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
@@ -30,6 +31,9 @@ in {
           DB_CONNECTION = "sqlite";
           SPEEDTEST_SCHEDULE = "17 */4 * * *";
           PRUNE_RESULTS_OLDER_THAN = "365";
+          DISPLAY_TIMEZONE = srv.timeZone;
+          DATETIME_FORMAT = "j M Y, H:i";
+          CHART_DATETIME_FORMAT = "j/n H:i";
         };
         environmentFiles = [config.age.secrets.speedtestEnvironment.path];
       };
