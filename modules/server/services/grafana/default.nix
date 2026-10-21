@@ -83,6 +83,10 @@ in {
 
       provision = {
         enable = true;
+        datasources.settings.deleteDatasources = lib.optional prometheus.enable {
+          name = "Prometheus";
+          orgId = 1;
+        };
         datasources.settings.datasources = lib.optional prometheus.enable {
           name = "Prometheus";
           type = "prometheus";

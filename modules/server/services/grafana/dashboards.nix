@@ -46,8 +46,11 @@
       inherit (d) hash;
     };
 
+  home = pkgs.writeText "home.json" (builtins.toJSON (import ./home.nix {inherit lib;}));
+
   dir = pkgs.runCommand "grafana-dashboards" {} ''
     mkdir $out
+    cp ${home} $out/home.json
     ${lib.concatStrings (lib.mapAttrsToList (name: d: ''
         sed 's/''${DS_PROMETHEUS}/prometheus/g' ${fetchDashboard name d} > $out/${name}.json
       '')
@@ -55,6 +58,8 @@
   '';
 in {
   config = lib.mkIf (cfg.enable && config.cnix.server.services.prometheus.enable) {
+    services.grafana.settings.dashboards.default_home_dashboard_path = "${dir}/home.json";
+
     services.grafana.provision.dashboards.settings.providers = [
       {
         name = "sobotka";
