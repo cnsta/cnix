@@ -62,6 +62,13 @@ in {
         ++ lib.optional srv.services.grafana.enable (job "grafana" (local srv.services.grafana.port))
         ++ lib.optional srv.services.hydra.enable (
           job "hydra" "[::1]:${toString config.services.hydra.queueRunner.rest.port}"
+        )
+        ++ lib.optional srv.services.speedtest-tracker.enable (
+          job "speedtest" (local srv.services.speedtest-tracker.port)
+          // {
+            metrics_path = "/prometheus";
+            scrape_interval = "60s";
+          }
         );
 
       exporters = {

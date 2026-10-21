@@ -24,7 +24,6 @@ in {
       ${unit} = {
         image = "ghcr.io/dispatcharr/dispatcharr:latest";
         autoStart = true;
-        ports = ["${toString cfg.port}:${toString cfg.port}"];
         volumes = [
           "/var/lib/dispatcharr:/data"
         ];

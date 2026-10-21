@@ -20,7 +20,7 @@ in {
       ${unit} = {
         image = "lscr.io/linuxserver/speedtest-tracker:latest";
         autoStart = true;
-        ports = ["0.0.0.0:${toString cfg.port}:80"];
+        ports = ["127.0.0.1:${toString cfg.port}:80"];
         volumes = [
           "/var/lib/speedtest-tracker:/config:rw"
         ];
@@ -28,6 +28,8 @@ in {
           PUID = "1000";
           PGID = "1000";
           DB_CONNECTION = "sqlite";
+          SPEEDTEST_SCHEDULE = "17 */4 * * *";
+          PRUNE_RESULTS_OLDER_THAN = "365";
         };
         environmentFiles = [config.age.secrets.speedtestEnvironment.path];
       };

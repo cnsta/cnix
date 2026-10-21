@@ -41,7 +41,7 @@ in {
         ports = [
           "53:53/tcp"
           "53:53/udp"
-          "8053:80/tcp"
+          "${lib.optionalString srv.infra.traefik.enable "127.0.0.1:"}8053:80/tcp"
         ];
         extraOptions = [
           "--cap-add=NET_ADMIN"

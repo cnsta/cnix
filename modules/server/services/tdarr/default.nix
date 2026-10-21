@@ -41,10 +41,7 @@ in {
           PUID = "0";
           PGID = "0";
         };
-        ports = [
-          "8265:8265"
-          "8266:8266"
-        ];
+        ports = ["127.0.0.1:8265:8265"];
         volumes = sharedVolumes;
       };
 
@@ -52,7 +49,7 @@ in {
         image = "ghcr.io/haveagitgat/tdarr_node:latest";
         autoStart = true;
         environment = {
-          serverIP = "host.containers.internal";
+          serverIP = "127.0.0.1";
           serverPort = "8266";
           nodeIP = "0.0.0.0";
           nodeID = "node0";
@@ -60,9 +57,8 @@ in {
           PUID = "0";
           PGID = "0";
         };
-        ports = [
-          "8267:8267"
-        ];
+        dependsOn = [unit];
+        extraOptions = ["--network=container:${unit}"];
         devices = [
           "/dev/dri/card1:/dev/dri/card1"
           "/dev/dri/renderD129:/dev/dri/renderD129"

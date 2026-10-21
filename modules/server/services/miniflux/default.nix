@@ -33,7 +33,7 @@ in {
         image = "docker.io/miniflux/miniflux:latest";
         autoStart = true;
         ports = [
-          "${toString cfg.port}:8080"
+          "127.0.0.1:${toString cfg.port}:8080"
         ];
         environmentFiles = [config.age.secrets.minifluxEnvironment.path];
         extraOptions = [

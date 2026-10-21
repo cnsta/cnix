@@ -7,6 +7,8 @@
   infra = config.cnix.server.infra;
   cfg = config.cnix.server.services;
   arr = config.cnix.server.services.arr;
+
+  qbtIp = "10.88.0.250";
 in {
   options.cnix.server.infra = {
     gluetun.enable = lib.mkEnableOption "Enables gluetun";
@@ -24,13 +26,14 @@ in {
         image = "ghcr.io/qdm12/gluetun:latest";
         pull = "newer";
         ports = [
-          "8081:8081"
+          "127.0.0.1:8081:8081"
         ];
         devices = ["/dev/net/tun:/dev/net/tun"];
         autoStart = true;
         extraOptions = [
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
+          "--ip=${qbtIp}"
           "--label=io.containers.autoupdate=registry"
           "--health-cmd=wget -qO- https://ipinfo.io/ip || exit 1"
           "--health-interval=10s"
@@ -50,7 +53,7 @@ in {
         image = "ghcr.io/qdm12/gluetun:latest";
         pull = "newer";
         ports = [
-          "9191:9191"
+          "127.0.0.1:9191:9191"
         ];
         devices = ["/dev/net/tun:/dev/net/tun"];
         autoStart = true;
@@ -73,8 +76,8 @@ in {
         pull = "newer";
         ports = [
           "8388:8388"
-          "5030:5030"
-          "5031:5031"
+          "127.0.0.1:5030:5030"
+          "127.0.0.1:5031:5031"
           "50323:50323"
         ];
         devices = ["/dev/net/tun:/dev/net/tun"];
@@ -98,16 +101,16 @@ in {
         pull = "newer";
         ports = [
           "127.0.0.1:8003:8000/tcp"
-          "8191:8191"
-          "9696:9696"
-          "8989:8989"
-          "7878:7878"
-          "8686:8686"
-          "8687:8687"
-          "7476:7476"
-          "1867:1867"
-          "8085:8085"
-          "4533:4533"
+          "127.0.0.1:8191:8191"
+          "127.0.0.1:9696:9696"
+          "127.0.0.1:8989:8989"
+          "127.0.0.1:7878:7878"
+          "127.0.0.1:8686:8686"
+          "127.0.0.1:8687:8687"
+          "127.0.0.1:7476:7476"
+          "127.0.0.1:1867:1867"
+          "127.0.0.1:8085:8085"
+          "127.0.0.1:4533:4533"
         ];
         devices = ["/dev/net/tun:/dev/net/tun"];
         autoStart = true;
@@ -116,6 +119,7 @@ in {
           "--cap-add=NET_RAW"
           "--sysctl=net.ipv6.conf.all.disable_ipv6=1"
           "--sysctl=net.ipv6.conf.default.disable_ipv6=1"
+          "--add-host=gluetun-qbt:${qbtIp}"
           "--label=io.containers.autoupdate=registry"
         ];
         volumes = ["/var/lib/gluetun-arr:/gluetun"];

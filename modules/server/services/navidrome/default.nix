@@ -14,9 +14,6 @@ in {
         autoStart = true;
         dependsOn = ["gluetun-arr"];
 
-        ports = [
-          "${toString cfg.port}:${toString cfg.port}"
-        ];
         extraOptions = [
           "--network=container:gluetun-arr"
         ];
