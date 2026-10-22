@@ -49,7 +49,7 @@
         position = "0x0";
         transform = 0;
         bitDepth = 10;
-        hdr = true;
+        hdr = false;
       }
       {
         name = "HDMI-A-1";

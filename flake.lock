@@ -31,11 +31,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792504107,
-        "narHash": "sha256-Q21fW/VHwqVOAcnJJ5YRQXU/nqa3JMV8OFtSVQrz3Zo=",
+        "lastModified": 1792665483,
+        "narHash": "sha256-77RB8YrOcwpXnU0kTijmJdmuy6CaqtGDsvYvzvhUYCg=",
         "owner": "MalpenZibo",
         "repo": "ashell",
-        "rev": "4efea2ddb613a7f162c9a80d6de14d4512096efc",
+        "rev": "4834c9142e2d1661a4a1b47c54a49b8729d65c51",
         "type": "github"
       },
       "original": {
@@ -265,11 +265,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792374494,
-        "narHash": "sha256-E3vrGA6k5Suh2NDP18PO+HTaL5zCQMfGW5toKoVqcQ8=",
+        "lastModified": 1792547720,
+        "narHash": "sha256-xj1hq1P05Lekx9tAtyJGSMFw8Z5oK4jh+n7Qr0Q1m5k=",
         "owner": "feel-co",
         "repo": "hjem",
-        "rev": "7fec35f695f1d8784d2485be6871f85dc0d0f522",
+        "rev": "4cd448d5b3220b8bbccdb6e7e8185b515f63a776",
         "type": "github"
       },
       "original": {
@@ -342,11 +342,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791976307,
-        "narHash": "sha256-py6u7txg7qC8q/cTn6olCQxoeplTp6oSr3X847xOwro=",
+        "lastModified": 1792680262,
+        "narHash": "sha256-duIodGBMv5DuKDt49pkbBtnV/qWMSonRIFsKaEaKDyM=",
         "ref": "refs/heads/main",
-        "rev": "1f61a2e482dbc66eb483597e1705780f9f39fd9f",
-        "revCount": 93,
+        "rev": "ae1f5aaeb2ab95198769cb0c05bb23793719cf9e",
+        "revCount": 94,
         "type": "git",
         "url": "https://git.cnst.dev/cnst/levee.git"
       },
@@ -465,11 +465,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1792506237,
-        "narHash": "sha256-Q/8KLB6jNfpaUN1HAedE/u/Et9feE/zYSsutBLKrCFk=",
+        "lastModified": 1792681458,
+        "narHash": "sha256-ogL1B0HzqHk46AUJYptQHGuDR5eHESWZkWPsFe2fMAM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5adc50831c259f87faeb09ddf930d43597197473",
+        "rev": "e2e7f9768e99938699707b661c82dbd3fab4657f",
         "type": "github"
       },
       "original": {
@@ -512,11 +512,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1792210252,
-        "narHash": "sha256-Mh0PUaIv4nFY+8wAGonaEh8iBzwsmdNlwjVHmFg1Biw=",
+        "lastModified": 1792502884,
+        "narHash": "sha256-IoNisKcGbUjdd45qCqywGMCYmZ5EnkxezvLII0FWwNA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "09063bd1f2b36fd9fd793c36dfade7bd40a93dfc",
+        "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
         "type": "github"
       },
       "original": {
@@ -602,11 +602,11 @@
         "zon2nix": "zon2nix"
       },
       "locked": {
-        "lastModified": 1791976365,
-        "narHash": "sha256-3C4ET5ArEuo1nKzeeoJG+sTbIw1mJJJVpy2TaIbhIjU=",
+        "lastModified": 1792680328,
+        "narHash": "sha256-c+ZsNnvqLBzPrYeApJNui8Xxnf6Zu44CiLH0Wq/CTHA=",
         "ref": "refs/heads/main",
-        "rev": "be24ee1630931539d704b544895ebafb0f8ba6d5",
-        "revCount": 288,
+        "rev": "917bc3b139684f2f0c37c66bb572285cf753b8d9",
+        "revCount": 289,
         "type": "git",
         "url": "https://git.cnst.dev/cnst/delta.git"
       },
@@ -712,11 +712,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792480937,
-        "narHash": "sha256-arni7i+yH5ZnkvAN9UotvhMml5+fZyXcMHpiOvI3WFY=",
+        "lastModified": 1792653800,
+        "narHash": "sha256-E8zFJilWlORqzIUJizyhZ/0WKBOizuM6s1nRSgPRomo=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "5424e1e6dda30b0626935d2a03a6526db4858d60",
+        "rev": "5f267b7f323a4d6df0b9c0e3eaa043cbe85386f2",
         "type": "github"
       },
       "original": {
@@ -803,11 +803,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792412429,
-        "narHash": "sha256-01La/n5mmzoHiAuBxMNNUx3EFPxJoNxr4uTWh3kk5m0=",
+        "lastModified": 1792595242,
+        "narHash": "sha256-kH/E0uJDslOgYcnmU+c0cm6HrUjsEtvZQKZtuQ1+uvo=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "dfc5cd756966ccfc924f8925628acb1fe6f51651",
+        "rev": "f19490ac889eabb05bdb7e8dcb85225ee75bd87b",
         "type": "github"
       },
       "original": {

@@ -54,7 +54,7 @@ in {
           (job "smartctl" (local exporters.smartctl.port))
         ]
         ++ lib.optional srv.infra.traefik.enable (job "traefik" (local ports.traefik))
-        ++ lib.optional srv.infra.crowdsec.enable (job "crowdsec" (local config.services.crowdsec.settings.general.prometheus.listen_port))
+        ++ lib.optional srv.infra.crowdsec.enable (job "crowdsec" (local (config.services.crowdsec.settings.config.prometheus.listen_port or 6060)))
         ++ lib.optional srv.infra.unbound.enable (job "unbound" (local exporters.unbound.port))
         ++ lib.optional config.services.postgresql.enable (job "postgres" (local exporters.postgres.port))
         ++ lib.optional srv.services.headscale.enable (job "headscale" config.services.headscale.settings.metrics_listen_addr)

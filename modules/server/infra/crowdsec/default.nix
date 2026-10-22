@@ -12,7 +12,7 @@
   stateDir = "/var/lib/crowdsec/state";
 
   cs = config.services.crowdsec;
-  cscli = "${getExe' cs.package "cscli"} -c=${(pkgs.formats.yaml {}).generate "crowdsec.yaml" cs.settings.general}";
+  cscli = getExe' cs.package "cscli";
   bouncerName = "crowdsec-firewall-bouncer";
   bouncerKey = "${stateDir}/firewall-bouncer.key";
 in {
@@ -59,7 +59,17 @@ in {
         ++ optional traefik.enable "crowdsecurity/traefik"
         ++ cfg.collections;
 
-      localConfig = {
+      settings = {
+        config.config_paths.data_dir = stateDir;
+        config.api = {
+          server = {
+            enable = true;
+            listen_uri = "127.0.0.1:8090";
+            online_client.credentials_path = "${stateDir}/online_api_credentials.yaml";
+          };
+          client.credentials_path = "${stateDir}/local_api_credentials.yaml";
+        };
+
         acquisitions =
           [
             {
@@ -122,14 +132,7 @@ in {
         ];
       };
 
-      settings = {
-        general.api.server = {
-          enable = true;
-          listen_uri = "127.0.0.1:8090";
-        };
-        lapi.credentialsFile = "${stateDir}/local_api_credentials.yaml";
-        capi.credentialsFile = "${stateDir}/online_api_credentials.yaml";
-      };
+      extraGroups = optional traefik.enable traefik.group;
     };
 
     services.crowdsec-firewall-bouncer = {
@@ -144,10 +147,7 @@ in {
       mode = "0600";
     };
 
-    systemd.services.crowdsec.restartTriggers = [(builtins.toJSON cs.localConfig) (builtins.toJSON cs.hub)];
-
-    systemd.services.crowdsec-update-hub.serviceConfig.ExecStartPost =
-      lib.mkForce "+${getExe' config.systemd.package "systemctl"} reload crowdsec.service";
+    systemd.services.crowdsec.restartTriggers = [(builtins.toJSON cs.settings) (builtins.toJSON cs.hub)];
 
     systemd.services.crowdsec.serviceConfig.ExecStartPost = getExe (pkgs.writeShellScriptBin "crowdsec-register-bouncer" ''
       set -eu
@@ -159,7 +159,5 @@ in {
         ${cscli} bouncers add ${bouncerName} -k "$(${getExe' pkgs.coreutils "cat"} ${bouncerKey})" >/dev/null
       fi
     '');
-
-    users.users.${config.services.crowdsec.user}.extraGroups = optional traefik.enable traefik.group;
   };
 }
