@@ -42,11 +42,12 @@ in {
       package = mkOption {
         type = types.enum [
           "stable"
-          "beta"
           "production"
           "latest"
         ];
         default = "stable";
+        # No "beta": nixpkgs' beta only moves on NVIDIA beta releases and can
+        # lag behind stable (595.45 vs 595.104, no kernel 7.x support).
         description = "Nvidia driver package to use.";
       };
     };

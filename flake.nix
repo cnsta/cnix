@@ -31,6 +31,28 @@
           };
           overlays = [
             inputs.nixgl.overlay
+
+            # TODO: drop once nixpkgs fixes diff-cover.
+            (_: prev: {
+              pythonPackagesExtensions =
+                prev.pythonPackagesExtensions
+                ++ [
+                  (_: pyPrev: {
+                    diff-cover = pyPrev.diff-cover.overridePythonAttrs (old: {
+                      disabledTests =
+                        (old.disabledTests or [])
+                        ++ [
+                          "test_added_file_pycodestyle_html"
+                          "test_added_file_pyflakes_html"
+                          "test_added_file_pylint_html"
+                          "test_all_reports"
+                          "test_fail_under_html"
+                          "test_fail_under_pass_html"
+                        ];
+                    });
+                  })
+                ];
+            })
           ];
         };
 
