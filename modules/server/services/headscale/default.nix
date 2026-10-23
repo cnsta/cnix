@@ -22,11 +22,11 @@
   localDomain = config.cnix.settings.accounts.domains.local;
   tailnetNames =
     lib.mapAttrsToList (_: clib.server.mkFullDomain config) (lib.filterAttrs (
-        _: s:
+        name: s:
           s.enable
           && s.routed
           && s.subdomain != ""
-          && s.exposure != "public"
+          && name != unit
           && !(s.exposure == "local" && !(s.auth && autheliaUp))
       )
       srv.services)

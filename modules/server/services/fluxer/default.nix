@@ -21,30 +21,37 @@
   dataDir = "/var/lib/fluxer";
   envFile = config.age.secrets.fluxerEnvironment.path;
 
+  mail = "fluxer@cnst.dev";
+
   netOpts = alias: ["--network=${network}" "--network-alias=${alias}"];
 
-  base = alias: {
+  plain = alias: {
     autoStart = true;
     extraOptions = netOpts alias;
-    environmentFiles = [envFile];
   };
+  base = alias: plain alias // {environmentFiles = [envFile];};
+
+  mediaPolicy = "report";
 
   commonEnv = {
     FLUXER_ENV = "production";
-    NODE_ENV = "production";
     FLUXER_SELF_HOSTED = "true";
     FLUXER_BASE_DOMAIN = domain;
     FLUXER_PUBLIC_SCHEME = "https";
     FLUXER_PUBLIC_PORT = "443";
     FLUXER_TRUST_CLIENT_IP_HEADER = "true";
-    FLUXER_CLIENT_IP_HEADER_NAME = "x-forwarded-for";
+    FLUXER_BREACHED_PASSWORD_CHECK_ENABLED = "true";
+
+    FLUXER_APP_ENDPOINT = publicUrl;
+    FLUXER_MEDIA_ENDPOINT = "${publicUrl}/media";
+    FLUXER_MEDIA_PROXY_PUBLIC_ENDPOINT = "${publicUrl}/media";
+    FLUXER_ADMIN_ENDPOINT = "${publicUrl}/admin";
+    FLUXER_MARKETING_ENDPOINT = publicUrl;
 
     FLUXER_DATABASE_BACKEND = "postgres";
     FLUXER_POSTGRES_HOST = "postgres";
-    FLUXER_POSTGRES_PORT = "5432";
     FLUXER_POSTGRES_DATABASE = "fluxer";
     FLUXER_POSTGRES_USERNAME = "fluxer";
-    FLUXER_POSTGRES_SSL = "false";
 
     FLUXER_KV_URL = "redis://valkey:6379/0";
     FLUXER_NATS_URL = "nats://nats:4222";
@@ -62,53 +69,53 @@
     FLUXER_S3_FORCE_PATH_STYLE = "true";
     FLUXER_S3_BUCKET_CDN = "fluxer";
     FLUXER_S3_BUCKET_UPLOADS = "fluxer-uploads";
-    FLUXER_S3_BUCKET_DOWNLOADS = "fluxer-downloads";
     FLUXER_S3_BUCKET_REPORTS = "fluxer-reports";
     FLUXER_S3_BUCKET_HARVESTS = "fluxer-harvests";
-    AWS_ACCESS_KEY_ID = "fluxer";
-    AWS_DEFAULT_REGION = "us-east-1";
-    AWS_EC2_METADATA_DISABLED = "true";
+    FLUXER_API_PRESIGNED_HARVEST_DOWNLOADS_ENABLED = "false";
 
     FLUXER_LIVEKIT_ENABLED = "true";
     FLUXER_LIVEKIT_API_KEY = "fluxer";
-    FLUXER_LIVEKIT_WEBHOOK_URL = "http://api:8080/webhooks/livekit";
+    FLUXER_LIVEKIT_INTERNAL_URL = "http://host.containers.internal:7880";
+    FLUXER_LIVEKIT_URL = "wss://${domain}/livekit";
     FLUXER_LIVEKIT_DEFAULT_REGION = ''{"id":"default","name":"Default","emoji":"🌍","latitude":0,"longitude":0}'';
 
-    FLUXER_EMAIL_ENABLED = "false"; # flip on + add SMTP vars once mail is up
-    FLUXER_EMAIL_PROVIDER = "none";
-    FLUXER_EMAIL_FROM_EMAIL = "noreply@${domain}";
-    FLUXER_EMAIL_FROM_NAME = "Fluxer";
+    FLUXER_ACCOUNT_IDENTITY = "email";
+    FLUXER_TAG_STYLE = "none";
 
-    FLUXER_SMS_ENABLED = "false";
-    FLUXER_CAPTCHA_ENABLED = "false";
-    FLUXER_CAPTCHA_PROVIDER = "none";
-    FLUXER_STRIPE_ENABLED = "false";
-    FLUXER_NCMEC_ENABLED = "false";
-    FLUXER_CLAMAV_ENABLED = "false";
-    FLUXER_DISCOVERY_ENABLED = "true";
+    FLUXER_EMAIL_ENABLED = "true";
+    FLUXER_EMAIL_PROVIDER = "smtp";
+    FLUXER_EMAIL_FROM_EMAIL = mail;
+    FLUXER_EMAIL_SMTP_HOST = "smtp.protonmail.ch";
+    FLUXER_EMAIL_SMTP_PORT = "587";
+    FLUXER_EMAIL_SMTP_USERNAME = mail;
+    FLUXER_EMAIL_SMTP_TLS_MODE = "starttls";
 
     FLUXER_VAPID_EMAIL = "admin@${domain}";
+    FLUXER_PASSKEY_RP_ID = domain;
+    FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS = publicUrl;
 
     FLUXER_INTERNAL_API_ENDPOINT = "http://api:8080";
-    FLUXER_INTERNAL_GATEWAY_ENDPOINT = "http://gateway:8080";
     FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT = "http://media-proxy:8080";
-    FLUXER_MARKETING_ENDPOINT = publicUrl;
-    FLUXER_MEDIA_PROXY_ENDPOINT = "http://media-proxy:8080";
-    FLUXER_MEDIA_ENDPOINT = "${publicUrl}/media";
     FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT = "${publicUrl}/media";
   };
 
-  gifsEnv = {
-    FLUXER_SVC_NAME = "gifs";
-    FLUXER_MEDIA_PROXY_PUBLIC_ENDPOINT = "${publicUrl}/media";
+  nodeEnv = {
+    NODE_OPTIONS = "--enable-source-maps";
+    NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/ca-certificates.crt";
+    FLUXER_POSTGRES_MAX_CONNECTIONS = "25";
   };
 
-  mkRouterShard = name: extraEnv: {
+  mkRouterShard = name: shardEnv: {
     "${unit}-${name}" =
       base name
       // {
         image = img name;
-        environment = commonEnv // extraEnv // {FLUXER_SVC_MODE = "router";};
+        environment =
+          commonEnv
+          // {
+            FLUXER_SVC_NAME = name;
+            FLUXER_SVC_MODE = "router";
+          };
         dependsOn = ["${unit}-nats"];
       };
     "${unit}-${name}-shard" =
@@ -117,8 +124,9 @@
         image = img name;
         environment =
           commonEnv
-          // extraEnv
+          // shardEnv
           // {
+            FLUXER_SVC_NAME = name;
             FLUXER_SVC_MODE = "shard";
             FLUXER_SVC_SHARD_ID = "0";
           };
@@ -130,11 +138,16 @@
     {
     	servers {
     		trusted_proxies static private_ranges
+    		trusted_proxies_strict
     	}
     }
 
-    :80 {
+    :8080 {
     	encode zstd gzip
+
+    	handle /_health {
+    		respond "OK" 200
+    	}
 
     	handle_path /api/* {
     		reverse_proxy api:8080
@@ -153,15 +166,7 @@
     		reverse_proxy media-proxy:8080
     	}
 
-    	# Not in upstream's Caddyfile, deliberately added: the desktop client
-    	# validates an instance by fetching /.well-known/fluxer at the origin
-    	# root, which otherwise falls through to the SPA and fails with
-    	# "Not a valid Fluxer instance". The api serves the document at this
-    	# exact path (same one app-proxy's discovery cache consumes).
-    	handle /.well-known/fluxer {
-    		reverse_proxy api:8080
-    	}
-
+    	# LiveKit runs on the host network.
     	handle_path /livekit/* {
     		reverse_proxy host.containers.internal:7880
     	}
@@ -175,9 +180,13 @@
     		reverse_proxy admin:8080
     	}
 
-    	@staticAssets path /fonts/* /web/* /emoji/* /libs/* /avatars/* /badges/* /desktop/* /embeds/*
+    	@staticAssets path /web/* /emoji/* /libs/* /avatars/* /badges/* /desktop/*
     	handle @staticAssets {
     		reverse_proxy static-proxy:8080
+    	}
+
+    	handle /.well-known/fluxer {
+    		reverse_proxy api:8080
     	}
 
     	handle {
@@ -186,7 +195,7 @@
     }
 
     :8088 {
-    	handle_path /api/* {
+    	handle /.well-known/fluxer {
     		reverse_proxy api:8080
     	}
     }
@@ -199,7 +208,7 @@
     rtc:
       tcp_port: 7881
       udp_port: 7882
-      use_external_ip: false
+      use_external_ip: true
 
     webhook:
       api_key: fluxer
@@ -211,15 +220,21 @@ in {
     age.secrets = {
       fluxerEnvironment = {
         file = self + "/secrets/fluxerEnvironment.age";
-        mode = "0444";
+        mode = "0400";
       };
     };
 
+    services.traefik.dynamicConfigOptions.http.routers."${unit}-admin" = lib.mkIf srv.infra.traefik.enable {
+      entryPoints = ["websecure"];
+      rule = "Host(`${domain}`) && (Path(`/admin`) || PathPrefix(`/admin/`))";
+      service = unit;
+      middlewares = ["security-headers" "private"];
+      tls = {};
+    };
+
     networking.firewall = {
-      interfaces."tailscale0" = {
-        allowedTCPPorts = [7881];
-        allowedUDPPorts = [7882];
-      };
+      allowedTCPPorts = [7881];
+      allowedUDPPorts = [7882];
       interfaces."fluxer0" = {
         allowedTCPPorts = [7880 5533];
         allowedUDPPorts = [5533];
@@ -229,11 +244,12 @@ in {
     systemd.tmpfiles.rules = [
       "d ${dataDir} 0750 root root -"
       "d ${dataDir}/postgres 0750 root root -"
+      "d ${dataDir}/valkey 0750 root root -"
       "d ${dataDir}/nats 0750 root root -"
       "d ${dataDir}/meilisearch 0750 root root -"
       "d ${dataDir}/seaweedfs 0750 root root -"
-      "d ${dataDir}/caddy-data 0750 root root -"
-      "d ${dataDir}/caddy-config 0750 root root -"
+      "d ${dataDir}/edge-data 0750 root root -"
+      "d ${dataDir}/edge-config 0750 root root -"
     ];
 
     systemd.services = lib.mkMerge [
@@ -252,13 +268,14 @@ in {
         };
 
         "${unit}-seaweedfs-init" = {
-          description = "Create Fluxer SeaweedFS buckets";
+          description = "Create Fluxer SeaweedFS buckets and S3 identity";
           after = ["podman-${unit}-seaweedfs.service"];
           requires = ["podman-${unit}-seaweedfs.service"];
           wantedBy = ["multi-user.target"];
           serviceConfig = {
             Type = "oneshot";
             RemainAfterExit = true;
+            EnvironmentFile = envFile;
           };
           script = ''
             weedshell() {
@@ -266,30 +283,33 @@ in {
                 weed shell -master=localhost:9333
             }
 
-            ok=0
+            buckets="fluxer fluxer-uploads fluxer-reports fluxer-harvests"
             for i in $(seq 1 90); do
-              for b in fluxer fluxer-uploads fluxer-downloads fluxer-reports fluxer-harvests; do
+              listed=$(echo "s3.bucket.list" | weedshell 2>/dev/null || true)
+              missing=""
+              for b in $buckets; do
+                echo "$listed" | grep -q "^[[:space:]]*$b[[:space:]]" || missing="$missing $b"
+              done
+              if [ -z "$missing" ]; then
+                echo "s3.configure -user=fluxer -access_key=fluxer -secret_key=$FLUXER_S3_SECRET_ACCESS_KEY -actions=Admin,Read,Write,List,Tagging -apply" \
+                  | weedshell >/dev/null
+                echo "buckets ready"
+                exit 0
+              fi
+              for b in $missing; do
                 echo "s3.bucket.create -name $b" | weedshell >/dev/null 2>&1 || true
               done
-              if echo "s3.bucket.list" | weedshell 2>/dev/null | grep -q "fluxer-harvests"; then
-                ok=1
-                break
-              fi
               sleep 2
             done
-            if [ "$ok" != 1 ]; then
-              echo "SeaweedFS bucket creation failed; s3.bucket.list output:" >&2
-              echo "s3.bucket.list" | weedshell >&2 || true
-              exit 1
-            fi
-            echo "buckets ready"
+            echo "SeaweedFS bucket creation failed; missing:$missing" >&2
+            exit 1
           '';
         };
       }
 
       (lib.genAttrs
         (map (n: "podman-${unit}-${n}") [
-          "caddy"
+          "edge"
           "postgres"
           "valkey"
           "nats"
@@ -299,6 +319,7 @@ in {
           "worker"
           "gateway"
           "media-proxy"
+          "push"
           "static-proxy"
           "app-proxy"
           "admin"
@@ -317,19 +338,13 @@ in {
           after = ["init-${unit}-network.service"];
           requires = ["init-${unit}-network.service"];
         }))
+      (lib.genAttrs
+        (map (n: "podman-${unit}-${n}") ["api" "worker" "media-proxy"])
+        (_: {
+          after = ["${unit}-seaweedfs-init.service"];
+          wants = ["${unit}-seaweedfs-init.service"];
+        }))
       {
-        "podman-${unit}-api" = {
-          after = ["${unit}-seaweedfs-init.service"];
-          wants = ["${unit}-seaweedfs-init.service"];
-        };
-        "podman-${unit}-worker" = {
-          after = ["${unit}-seaweedfs-init.service"];
-          wants = ["${unit}-seaweedfs-init.service"];
-        };
-        "podman-${unit}-media-proxy" = {
-          after = ["${unit}-seaweedfs-init.service"];
-          wants = ["${unit}-seaweedfs-init.service"];
-        };
         "podman-${unit}-app-proxy" = {
           preStart = ''
             for i in $(seq 1 150); do
@@ -347,16 +362,15 @@ in {
 
     virtualisation.oci-containers.containers = lib.mkMerge [
       {
-        "${unit}-caddy" =
-          base "caddy"
+        "${unit}-edge" =
+          plain "edge"
           // {
-            image = "caddy:2.10-alpine";
-            ports = ["127.0.0.1:${toString cfg.port}:80"];
-            environment.FLUXER_CADDY_SITE_ADDRESS = ":80";
+            image = "docker.io/library/caddy:2.11-alpine";
+            ports = ["127.0.0.1:${toString cfg.port}:8080"];
             volumes = [
               "${caddyfile}:/etc/caddy/Caddyfile:ro"
-              "${dataDir}/caddy-data:/data"
-              "${dataDir}/caddy-config:/config"
+              "${dataDir}/edge-data:/data"
+              "${dataDir}/edge-config:/config"
             ];
             dependsOn = [
               "${unit}-api"
@@ -370,7 +384,32 @@ in {
         "${unit}-postgres" =
           base "postgres"
           // {
-            image = "postgres:16-alpine";
+            image = "docker.io/library/postgres:16-alpine";
+            extraOptions = netOpts "postgres" ++ ["--shm-size=1g"];
+            cmd = lib.concatMap (s: ["-c" s]) [
+              "max_connections=150"
+              "shared_buffers=512MB"
+              "effective_cache_size=2GB"
+              "work_mem=8MB"
+              "maintenance_work_mem=256MB"
+              "autovacuum_work_mem=128MB"
+              "random_page_cost=1.1"
+              "effective_io_concurrency=200"
+              "default_statistics_target=200"
+              "jit=off"
+              "min_wal_size=512MB"
+              "max_wal_size=2GB"
+              "checkpoint_completion_target=0.9"
+              "wal_buffers=16MB"
+              "wal_compression=zstd"
+              "bgwriter_delay=50ms"
+              "bgwriter_lru_maxpages=1000"
+              "autovacuum_vacuum_scale_factor=0.05"
+              "autovacuum_analyze_scale_factor=0.02"
+              "autovacuum_vacuum_cost_limit=2000"
+              "track_io_timing=on"
+              "shared_preload_libraries=pg_stat_statements"
+            ];
             environment = {
               POSTGRES_DB = "fluxer";
               POSTGRES_USER = "fluxer";
@@ -379,16 +418,29 @@ in {
           };
 
         "${unit}-valkey" =
-          base "valkey"
+          plain "valkey"
           // {
-            image = "valkey/valkey:8.1-alpine";
-            cmd = ["valkey-server" "--save" "" "--appendonly" "no"];
+            image = "docker.io/valkey/valkey:9.1-alpine";
+            cmd = [
+              "valkey-server"
+              "--appendonly"
+              "yes"
+              "--appendfsync"
+              "everysec"
+              "--dir"
+              "/data"
+              "--maxmemory"
+              "192mb"
+              "--maxmemory-policy"
+              "noeviction"
+            ];
+            volumes = ["${dataDir}/valkey:/data"];
           };
 
         "${unit}-nats" =
-          base "nats"
+          plain "nats"
           // {
-            image = "nats:2.14-alpine";
+            image = "docker.io/library/nats:2.14-alpine";
             cmd = ["-js" "-sd" "/data" "-m" "8222"];
             volumes = ["${dataDir}/nats:/data"];
           };
@@ -396,25 +448,32 @@ in {
         "${unit}-meilisearch" =
           base "meilisearch"
           // {
-            image = "getmeili/meilisearch:v1.12";
+            image = "docker.io/getmeili/meilisearch:v1.53";
             environment = {
               MEILI_ENV = "production";
               MEILI_NO_ANALYTICS = "true";
+              MEILI_UPGRADE_DB = "true";
+              MEILI_MAX_INDEXING_MEMORY = "256mb";
+              MEILI_MAX_INDEXING_THREADS = "2";
             };
             volumes = ["${dataDir}/meilisearch:/meili_data"];
           };
 
         "${unit}-seaweedfs" =
-          base "seaweedfs"
+          plain "seaweedfs"
           // {
-            image = "chrislusf/seaweedfs:4.34";
-            cmd = ["server" "-s3" "-dir=/data"];
+            image = "docker.io/chrislusf/seaweedfs:4.47";
+            cmd = ["server" "-s3" "-dir=/data" "-master.telemetry=false"];
+            environment = {
+              GOMEMLIMIT = "1536MiB";
+              WEED_MASTER_VOLUME_GROWTH_COPY_1 = "1";
+            };
             volumes = ["${dataDir}/seaweedfs:/data"];
           };
 
         "${unit}-livekit" = {
           autoStart = true;
-          image = "livekit/livekit-server:v1.12.0";
+          image = "docker.io/livekit/livekit-server:v1.12.0";
           cmd = ["--config" "/etc/livekit.yaml"];
           environmentFiles = [envFile];
           volumes = ["${livekitConfig}:/etc/livekit.yaml:ro"];
@@ -427,6 +486,7 @@ in {
             image = img "api";
             environment =
               commonEnv
+              // nodeEnv
               // {
                 FLUXER_API_PORT = "8080";
                 FLUXER_API_PRESIGNED_ATTACHMENT_UPLOADS_ENABLED = "true";
@@ -452,14 +512,13 @@ in {
           base "worker"
           // {
             image = img "api";
-            workdir = "/usr/src/app/fluxer_api";
-            cmd = ["./node_modules/.bin/tsx" "src/WorkerEntrypoint.ts"];
+            cmd = ["node" "dist/WorkerEntrypoint.js"];
             environment =
               commonEnv
+              // nodeEnv
               // {
                 FLUXER_API_WORKER_MODE = "all_lanes";
                 FLUXER_API_WORKER_ENABLE_CRON_SCHEDULER = "true";
-                FLUXER_API_WORKER_ENABLE_VOICE_RECONCILIATION = "true";
               };
             dependsOn = [
               "${unit}-postgres"
@@ -482,7 +541,6 @@ in {
                 FLUXER_GATEWAY_PORT = "8080";
                 FLUXER_GATEWAY_MEDIA_PROXY_ENDPOINT = "${publicUrl}/media";
                 FLUXER_GATEWAY_STATIC_CDN_ENDPOINT = publicUrl;
-                FLUXER_GATEWAY_LOGGER_LEVEL = "info";
               };
             dependsOn = ["${unit}-nats" "${unit}-valkey"];
           };
@@ -502,22 +560,34 @@ in {
             environment =
               commonEnv
               // {
-                FLUXER_MEDIA_PROXY_HOST = "0.0.0.0";
                 FLUXER_MEDIA_PROXY_PORT = "8080";
                 FLUXER_MEDIA_PROXY_MODE = "upload";
                 FLUXER_MEDIA_PROXY_STORAGE_BACKEND = "s3";
+                FLUXER_MEDIA_PROXY_ATTACHMENT_SIGNATURE_MODE = mediaPolicy;
+                FLUXER_MEDIA_PROXY_CORS_MODE = mediaPolicy;
+                FLUXER_MEDIA_PROXY_CORS_ALLOWED_ORIGINS = publicUrl;
+                # seaweedfs-init installs an S3 identity, so anonymous reads fail.
+                FLUXER_S3_READ_SIGNED = "true";
               };
             dependsOn = ["${unit}-seaweedfs" "${unit}-nats"];
           };
 
+        "${unit}-push" =
+          base "push"
+          // {
+            image = img "push";
+            environment = commonEnv;
+            dependsOn = ["${unit}-nats" "${unit}-api"];
+          };
+
         "${unit}-static-proxy" =
-          base "static-proxy"
+          plain "static-proxy"
           // {
             image = img "static";
           };
 
         "${unit}-app-proxy" =
-          base "app-proxy"
+          plain "app-proxy"
           // {
             image = img "app-proxy-self-hosted";
             extraOptions =
@@ -529,13 +599,14 @@ in {
                 "--health-timeout=15s"
               ];
             environment = {
-              FLUXER_APP_PROXY_HOST = "0.0.0.0";
               FLUXER_APP_PROXY_PORT = "8080";
-              DISCOVERY_UPSTREAM_URL = "http://caddy:8088/api/.well-known/fluxer";
-              PUBLIC_BOOTSTRAP_API_ENDPOINT = "/api";
-              PUBLIC_BOOTSTRAP_API_PUBLIC_ENDPOINT = "${publicUrl}/api";
+              FLUXER_S3_BUCKET_UPLOADS = "fluxer-uploads";
+              FLUXER_MEDIA_ENDPOINT = "${publicUrl}/media";
+              FLUXER_STATIC_CDN_ENDPOINT = publicUrl;
+              # The :8088 edge listener sets the client-IP header the API requires.
+              DISCOVERY_UPSTREAM_URL = "http://edge:8088/.well-known/fluxer";
             };
-            dependsOn = ["${unit}-api" "${unit}-caddy"];
+            dependsOn = ["${unit}-api" "${unit}-edge"];
           };
 
         "${unit}-admin" =
@@ -545,25 +616,20 @@ in {
             environment =
               commonEnv
               // {
-                FLUXER_ADMIN_HOST = "0.0.0.0";
                 FLUXER_ADMIN_PORT = "8080";
                 FLUXER_ADMIN_BASE_PATH = "/admin";
                 FLUXER_API_ENDPOINT = "http://api:8080";
-                FLUXER_ADMIN_ENDPOINT = "${publicUrl}/admin";
-                FLUXER_APP_ENDPOINT = publicUrl;
-                FLUXER_MEDIA_ENDPOINT = "${publicUrl}/media";
                 FLUXER_STATIC_CDN_ENDPOINT = publicUrl;
-                FLUXER_ADMIN_OAUTH_REDIRECT_URI = "${publicUrl}/admin/oauth2_callback";
               };
             dependsOn = ["${unit}-api"];
           };
       }
 
       (mkRouterShard "snowflakes" {})
-      (mkRouterShard "users" {})
-      (mkRouterShard "messages" {})
-      (mkRouterShard "unfurl" {})
-      (mkRouterShard "gifs" gifsEnv)
+      (mkRouterShard "users" {FLUXER_POSTGRES_MAX_CONNECTIONS = "20";})
+      (mkRouterShard "messages" {FLUXER_POSTGRES_MAX_CONNECTIONS = "20";})
+      (mkRouterShard "unfurl" {FLUXER_MEDIA_PROXY_ENDPOINT = "http://media-proxy:8080";})
+      (mkRouterShard "gifs" {})
     ];
   };
 }

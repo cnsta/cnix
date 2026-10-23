@@ -127,6 +127,10 @@ in {
             websecure = {
               address = ":443";
               forwardedHeaders.trustedIPs = trustedProxies;
+              transport.respondingTimeouts = {
+                readTimeout = "0s";
+                idleTimeout = "3600s";
+              };
               http.tls = {
                 certResolver = "letsencrypt";
                 domains = [

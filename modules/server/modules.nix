@@ -357,9 +357,9 @@
 
     # communication
     fluxer = when "s" {
-      enable = false;
+      enable = true;
       subdomain = "chat";
-      exposure = "tailscale";
+      exposure = "public";
       port = 8480;
       dashboard = {
         category = "Communication";
@@ -436,6 +436,8 @@ in {
     uid = 994;
     gid = 993;
 
+    # Proton SMTP submission token (Settings → IMAP/SMTP → SMTP tokens),
+    # bound to this address. Until the edge mail server exists.
     smtp = {
       host = "smtp.protonmail.ch:587";
       user = "alerts@cnst.dev";
