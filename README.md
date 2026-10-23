@@ -1,9 +1,5 @@
 # cnix
 
-> [!NOTE]
-> This repository's listed contributors are bugged after I accidentally force
-> pushed a cloned repo.
-
 My NixOS daily driver. Desktop running on
 [River](https://codeberg.org/river/river) and my own window manager,
 [delta](https://github.com/cnsta/delta), currently in alpha state. The
