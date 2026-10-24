@@ -17,7 +17,7 @@ with lib; let
         "kima"
         "bunk"
       ]
-    then "zen.desktop"
+    then "zen-beta.desktop"
     else "firefox.desktop";
 
   videoApps = [

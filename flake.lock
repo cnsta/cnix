@@ -299,6 +299,24 @@
         "type": "github"
       }
     },
+    "hushmic": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1792720496,
+        "narHash": "sha256-VVTviktDm+SkCeXZC5BQOGeFnQ4sCLuJUKbTpNFGlFM=",
+        "owner": "Fovty",
+        "repo": "hushmic-nix",
+        "rev": "dbef3a6ac548aaf488af4d0a2e38283218a8f17e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Fovty",
+        "repo": "hushmic-nix",
+        "type": "github"
+      }
+    },
     "lanzaboote": {
       "inputs": {
         "crane": "crane_2",
@@ -377,7 +395,7 @@
     },
     "maccel": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1785636477,
@@ -431,7 +449,7 @@
     "nixgl": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1762090880,
@@ -481,6 +499,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1792502884,
+        "narHash": "sha256-IoNisKcGbUjdd45qCqywGMCYmZ5EnkxezvLII0FWwNA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1785571196,
         "narHash": "sha256-KoTsyMQqnXQZq8deCEnu4QkyldkwH/bpMMhUcfMdGIw=",
         "owner": "NixOS",
@@ -495,7 +529,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1746378225,
         "narHash": "sha256-OeRSuL8PUjIfL3Q0fTbNJD/fmv1R+K2JAOqWJd3Oceg=",
@@ -510,7 +544,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1792502884,
         "narHash": "sha256-IoNisKcGbUjdd45qCqywGMCYmZ5EnkxezvLII0FWwNA=",
@@ -626,12 +660,13 @@
         "fonts": "fonts",
         "helix-flake": "helix-flake",
         "hjem": "hjem",
+        "hushmic": "hushmic",
         "lanzaboote": "lanzaboote",
         "litecrazy": "litecrazy",
         "maccel": "maccel",
         "nix-index-database": "nix-index-database",
         "nixgl": "nixgl",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_5",
         "nixpkgs-master": "nixpkgs-master",
         "nvf": "nvf",
         "river": "river",

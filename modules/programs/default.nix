@@ -15,6 +15,7 @@
     ./fuzzel
     ./ghostty
     ./helix
+    ./hushmic
     ./corectrl
     ./fish
     ./gamemode

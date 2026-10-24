@@ -18,6 +18,7 @@ in {
       gamescope = none;
       gimp = en "k";
       gnome = none;
+      hushmic = en "k";
       inkscape = en "k";
       lact = en "k";
       maccel = none;
