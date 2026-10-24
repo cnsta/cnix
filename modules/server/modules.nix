@@ -357,7 +357,7 @@
 
     # communication
     fluxer = when "s" {
-      enable = true;
+      enable = false;
       subdomain = "chat";
       exposure = "public";
       port = 8480;
@@ -435,9 +435,6 @@ in {
     group = "share";
     uid = 994;
     gid = 993;
-
-    # Proton SMTP submission token (Settings → IMAP/SMTP → SMTP tokens),
-    # bound to this address. Until the edge mail server exists.
     smtp = {
       host = "smtp.protonmail.ch:587";
       user = "alerts@cnst.dev";
@@ -478,6 +475,13 @@ in {
       };
 
       crowdsec = en "s";
+
+      cron.jobs = when "s" {
+        update-images = {
+          script = "update-images";
+          schedule = "Mon *-*-* 04:00";
+        };
+      };
 
       fail2ban = when "s" {
         enable = true;

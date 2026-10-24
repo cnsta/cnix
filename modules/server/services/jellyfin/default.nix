@@ -16,8 +16,8 @@ in {
 
     cnix.server.infra = {
       fail2ban.jails.${unit} = {
-        serviceName = "${unit}";
-        failRegex = ".*(Failed authentication attempt|invalid credentials|Attempted access of unknown user).* from <HOST>";
+        serviceName = "podman-${unit}";
+        failRegex = ''Authentication request for .* has been denied \(IP: "?<ADDR>"?\)'';
       };
     };
 

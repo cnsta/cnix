@@ -3,6 +3,7 @@
     # ./cnixpost
     ./anubis
     ./crowdsec
+    ./cron
     ./fail2ban
     ./gluetun
     ./keepalived

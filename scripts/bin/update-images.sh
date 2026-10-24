@@ -21,6 +21,19 @@ IMAGES=(
   docker.io/miniflux/miniflux:latest
   ghcr.io/music-assistant/server:latest
   ghcr.io/dispatcharr/dispatcharr:latest
+  lscr.io/linuxserver/speedtest-tracker:latest
+  ghcr.io/fluxerapp/fluxer-admin:v1
+  ghcr.io/fluxerapp/fluxer-api:v1
+  ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted:v1
+  ghcr.io/fluxerapp/fluxer-gateway:v1
+  ghcr.io/fluxerapp/fluxer-gifs:v1
+  ghcr.io/fluxerapp/fluxer-media-proxy:v1
+  ghcr.io/fluxerapp/fluxer-messages:v1
+  ghcr.io/fluxerapp/fluxer-push:v1
+  ghcr.io/fluxerapp/fluxer-snowflakes:v1
+  ghcr.io/fluxerapp/fluxer-static:v1
+  ghcr.io/fluxerapp/fluxer-unfurl:v1
+  ghcr.io/fluxerapp/fluxer-users:v1
 )
 
 if [[ $EUID -ne 0 ]]; then

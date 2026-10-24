@@ -73,8 +73,8 @@ in {
 
       cnix.server.infra = {
         fail2ban.jails.${unit} = {
-          serviceName = "${unit}";
-          failRegex = ''^.*?Username or password is incorrect\. Try again\. IP: <ADDR>\. Username:.*$'';
+          serviceName = "${unit}-main";
+          failRegex = ''"msg":"Unsuccessful \S+ authentication attempt.*"remote_ip":"<ADDR>"'';
         };
         postgresql.databases = [
           {

@@ -71,7 +71,8 @@ in {
       ];
 
       jails =
-        lib.attrsets.mapAttrs (name: value: {
+        {sshd.enabled = false;}
+        // lib.attrsets.mapAttrs (name: value: {
           settings = {
             bantime = "24h";
             findtime = "10m";
@@ -80,7 +81,7 @@ in {
             journalmatch = "_SYSTEMD_UNIT=${value.serviceName}.service";
             port = "http,https";
             filter = "${name}";
-            maxretry = 3;
+            maxretry = value.maxRetry;
             action = "cloudflare-token-agenix";
           };
         })
