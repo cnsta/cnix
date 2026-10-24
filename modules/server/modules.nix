@@ -3,6 +3,7 @@
   clib,
   lib,
   pkgs,
+  self,
   ...
 }: let
   inherit (lib) mkMerge genAttrs;
@@ -426,6 +427,10 @@
     };
   };
 in {
+  config.age.secrets.smtp = when "s" {
+    file = "${self}/secrets/smtp.age";
+  };
+
   config.cnix.server = {
     enable = true;
     email = "adam@cnst.dev";
@@ -435,11 +440,12 @@ in {
     group = "share";
     uid = 994;
     gid = 993;
-    smtp = {
+
+    smtp = when "s" {
       host = "smtp.protonmail.ch:587";
-      user = "alerts@cnst.dev";
-      from = "alerts@cnst.dev";
-      passwordFile = config.age.secrets.grafanaSmtp.path;
+      user = "noreply@cnst.dev";
+      from = "noreply@cnst.dev";
+      passwordFile = config.age.secrets.smtp.path;
     };
 
     tailnet.groups = {

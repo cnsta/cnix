@@ -7,7 +7,10 @@
 }: let
   unit = "forgejo";
   cfg = config.cnix.server.services.${unit};
+  srv = config.cnix.server;
   domain = clib.server.mkFullDomain config cfg;
+  appName = "cnix forge";
+  relay = lib.splitString ":" srv.smtp.host;
 in {
   config = lib.mkIf cfg.enable {
     cnix.server.infra = {
@@ -35,9 +38,11 @@ in {
         lfs.enable = true;
         package = pkgs.forgejo;
 
+        secrets.mailer.PASSWD = lib.mkIf (srv.smtp != null) srv.smtp.passwordFile;
+
         settings = {
           overall = {
-            APP_NAME = "cnix forge";
+            APP_NAME = appName;
           };
           cors = {
             ENABLED = true;
@@ -47,11 +52,13 @@ in {
 
           log.MODE = "console";
 
-          mailer = {
-            ENABLED = false;
-            PROTOCOL = "sendmail";
-            FROM = "noreply+adam@cnst.dev";
-            SENDMAIL_PATH = "/run/wrappers/bin/sendmail";
+          mailer = lib.mkIf (srv.smtp != null) {
+            ENABLED = true;
+            PROTOCOL = "smtp+starttls";
+            SMTP_ADDR = builtins.elemAt relay 0;
+            SMTP_PORT = lib.toInt (builtins.elemAt relay 1);
+            USER = srv.smtp.user;
+            FROM = "\"${appName}\" <${srv.smtp.from}>";
           };
 
           picture.DISABLE_GRAVATAR = true;
@@ -82,7 +89,10 @@ in {
           };
 
           security.DISABLE_GIT_HOOKS = false;
-          service.DISABLE_REGISTRATION = true;
+          service = {
+            DISABLE_REGISTRATION = true;
+            ENABLE_NOTIFY_MAIL = srv.smtp != null;
+          };
           session.COOKIE_SECURE = true;
         };
       };

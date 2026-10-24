@@ -30,10 +30,9 @@ in {
         group = unit;
         file = "${self}/secrets/grafanaOidcSecret.age";
       };
-      grafanaSmtp = lib.mkIf (srv.smtp != null) {
+      smtp = lib.mkIf (srv.smtp != null) {
         owner = unit;
         group = unit;
-        file = "${self}/secrets/grafanaSmtp.age";
       };
     };
 
@@ -76,7 +75,7 @@ in {
           inherit (srv.smtp) host user;
           password = file srv.smtp.passwordFile;
           from_address = srv.smtp.from;
-          from_name = "Grafana (sobotka)";
+          from_name = "cnix alerts";
           startTLS_policy = "MandatoryStartTLS";
         };
       };

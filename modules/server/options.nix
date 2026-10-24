@@ -66,8 +66,9 @@ in {
     smtp = mkOption {
       default = null;
       description = ''
-        Outgoing mail relay for server notifications (Grafana alerts). Null
-        disables mail: alert rules still evaluate but nothing is sent.
+        Outgoing mail relay shared by server services (Grafana alerts, Forgejo
+        notifications). Null disables mail: alert rules still evaluate but
+        nothing is sent.
       '';
       type = types.nullOr (types.submodule {
         options = {
@@ -82,8 +83,8 @@ in {
           };
           from = mkOption {
             type = types.str;
-            example = "alerts@cnst.dev";
-            description = "Sender address.";
+            example = "noreply@cnst.dev";
+            description = "Sender address: the one the token is bound to. Services may add a display name.";
           };
           passwordFile = mkOption {
             type = types.path;
@@ -342,7 +343,7 @@ in {
           "share"
           "render"
           "input"
-          "authentik"
+          "authelia"
           "traefik"
         ];
       };
