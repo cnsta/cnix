@@ -97,6 +97,10 @@
       exposure = "dedicated-tunnel";
       port = 3031;
       ingress."ssh.git" = "ssh://localhost:22";
+      anubis = {
+        port = 8925;
+        extraBots = [{import = "(data)/apps/gitea-rss-feeds.yaml";}];
+      };
       dashboard = {
         category = "Dev";
       };
@@ -190,6 +194,7 @@
       enable = true;
       exposure = "tunnel";
       port = 5055;
+      anubis.port = 8924;
       dashboard = {
         category = "Media";
       };

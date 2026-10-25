@@ -163,6 +163,23 @@ in {
                   "matrix" = "http://127.0.0.1:11338";
                 };
               };
+              anubis = {
+                port = mkOption {
+                  type = types.nullOr types.port;
+                  default = null;
+                  description = ''
+                    Loopback port for an Anubis proof-of-work gate on this service's
+                    Cloudflare tunnel (exposure "tunnel" or "dedicated-tunnel"): the
+                    tunnel targets Anubis, which proxies to `port`. LAN and tailnet
+                    traffic through Traefik skips it. Null disables it.
+                  '';
+                };
+                extraBots = mkOption {
+                  type = types.listOf types.attrs;
+                  default = [];
+                  description = "Extra Anubis policy rules, after its defaults.";
+                };
+              };
               auth = mkOption {
                 type = types.bool;
                 default = svc.exposure == "local";

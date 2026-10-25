@@ -87,19 +87,10 @@ in {
                 try_files /robots.txt =404;
               '';
             };
-          };
 
-          "ts" = {
-            forceSSL = false;
-            serverName = "ts.${cfg.url}";
-            root = "/var/www";
-
-            locations."/" = {
-              extraConfig = ''
-                index ts.html;
-                try_files $uri $uri/ =404;
-              '';
-            };
+            locations."~ /\\.(?!well-known/)".extraConfig = "deny all;";
+            locations."~ (bak|~)$".extraConfig = "deny all;";
+            locations."^~ /jsbak/".extraConfig = "deny all;";
           };
         };
       };
@@ -110,7 +101,6 @@ in {
           credentialsFile = cfg.cloudflared.credentialsFile;
           default = "http_status:404";
           ingress = let
-            # Auto-generate from services with exposure = "tunnel"
             tunnelServices =
               lib.filterAttrs (
                 _: svc: svc.enable && svc.exposure == "tunnel" && svc.subdomain != ""
@@ -120,7 +110,11 @@ in {
               lib.mapAttrs' (
                 _: svc:
                   lib.nameValuePair "${svc.subdomain}.${cfg.url}" {
-                    service = "http://127.0.0.1:${toString svc.port}";
+                    service = "http://127.0.0.1:${toString (
+                      if svc.anubis.port != null
+                      then svc.anubis.port
+                      else svc.port
+                    )}";
                   }
               )
               tunnelServices;
@@ -132,25 +126,6 @@ in {
           in
             autoIngress
             // extraIngress;
-        };
-      };
-
-      traefik.dynamicConfigOptions.http = {
-        routers = {
-          ts = {
-            entryPoints = ["websecure"];
-            rule = "Host(`ts.${cfg.url}`)";
-            service = "ts";
-            tls = {};
-            # tls.certResolver = "letsencrypt";
-            middlewares = ["private"];
-          };
-        };
-
-        services = {
-          ts.loadBalancer.servers = [
-            {url = "http://127.0.0.1:${toString cfg.port}";}
-          ];
         };
       };
     };

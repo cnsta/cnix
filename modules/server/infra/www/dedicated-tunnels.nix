@@ -56,7 +56,11 @@ in {
               default = "http_status:404";
               ingress =
                 {
-                  "${svc.subdomain}.${www.url}".service = "http://127.0.0.1:${toString svc.port}";
+                  "${svc.subdomain}.${www.url}".service = "http://127.0.0.1:${toString (
+                    if svc.anubis.port != null
+                    then svc.anubis.port
+                    else svc.port
+                  )}";
                 }
                 // mapAttrs' (sub: url: nameValuePair "${sub}.${www.url}" {service = url;}) svc.ingress;
             }
