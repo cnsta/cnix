@@ -100,8 +100,10 @@
     sniffnet
   ];
   guiImage = with pkgs; [
+    (swayimg.overrideAttrs (old: {
+      patches = (old.patches or []) ++ [./swayimg-commit-on-configure.patch];
+    }))
     imagemagick
-    swayimg
     tesseract
   ];
   guiTheming = with pkgs; [

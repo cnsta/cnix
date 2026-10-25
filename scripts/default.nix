@@ -30,7 +30,7 @@
     };
 
     screenshot = {
-      runtimeInputs = with pkgs; [grim slurp wl-clipboard libnotify tesseract coreutils];
+      runtimeInputs = with pkgs; [grim slurp wl-clipboard libnotify tesseract coreutils jq procps];
       file = ./bin/screenshot.sh;
     };
 

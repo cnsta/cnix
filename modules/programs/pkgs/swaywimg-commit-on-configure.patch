@@ -1,0 +1,12 @@
+--- a/src/ui_wayland.cpp
++++ b/src/ui_wayland.cpp
+@@ -625,6 +625,9 @@
+ 
+         if (window.width == ui->wnd_buffer.width() &&
+             window.height == ui->wnd_buffer.height()) {
++            // commit to apply the ack: River blocks rendering until the
++            // configured surface commits
++            wl_surface_commit(ui->wl.surface);
+             return; // reuse existing buffer
+         }
+ 
