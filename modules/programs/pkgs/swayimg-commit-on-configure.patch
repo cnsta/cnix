@@ -4,9 +4,9 @@
  
          if (window.width == ui->wnd_buffer.width() &&
              window.height == ui->wnd_buffer.height()) {
-+            // commit to apply the ack: River blocks rendering until the
-+            // configured surface commits
-+            wl_surface_commit(ui->wl.surface);
++            // redraw (and so commit) to apply the ack: River blocks rendering
++            // until the configured surface commits
++            Application::self().add_event(AppEvent::WindowRedraw {});
              return; // reuse existing buffer
          }
  
