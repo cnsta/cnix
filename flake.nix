@@ -134,7 +134,7 @@
 
     maccel.url = "github:Gnarus-G/maccel";
 
-    hushmic.url = "github:Fovty/hushmic-nix";
+    hushmic.url = "github:crowquillx/hushmic-nix";
 
     # Custom
     cnixpost = {
