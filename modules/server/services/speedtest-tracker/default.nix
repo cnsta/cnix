@@ -19,7 +19,7 @@ in {
 
     virtualisation.oci-containers.containers = {
       ${unit} = {
-        image = "lscr.io/linuxserver/speedtest-tracker:latest";
+        image = "ghcr.io/linuxserver/speedtest-tracker:latest";
         autoStart = true;
         ports = ["127.0.0.1:${toString cfg.port}:80"];
         volumes = [

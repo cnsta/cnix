@@ -21,7 +21,7 @@ IMAGES=(
   docker.io/miniflux/miniflux:latest
   ghcr.io/music-assistant/server:latest
   ghcr.io/dispatcharr/dispatcharr:latest
-  lscr.io/linuxserver/speedtest-tracker:latest
+  ghcr.io/linuxserver/speedtest-tracker:latest
   ghcr.io/fluxerapp/fluxer-admin:v1
   ghcr.io/fluxerapp/fluxer-api:v1
   ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted:v1
