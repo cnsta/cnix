@@ -132,9 +132,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    maccel.url = "github:Gnarus-G/maccel";
+    hushmic = {
+      url = "github:crowquillx/hushmic-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    hushmic.url = "github:crowquillx/hushmic-nix";
+    maccel.url = "github:Gnarus-G/maccel";
 
     # Custom
     cnixpost = {
