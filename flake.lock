@@ -299,26 +299,6 @@
         "type": "github"
       }
     },
-    "hushmic": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1793192924,
-        "narHash": "sha256-3+jq51Ctv5rfkL1XmD26XhmmVomqoQGj2zDFWwZX3Zc=",
-        "owner": "crowquillx",
-        "repo": "hushmic-nix",
-        "rev": "e6c32bd4687de9d5e677acc9da209e35678436a6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "crowquillx",
-        "repo": "hushmic-nix",
-        "type": "github"
-      }
-    },
     "lanzaboote": {
       "inputs": {
         "crane": "crane_2",
@@ -485,11 +465,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1793289206,
-        "narHash": "sha256-DoT8dSdvsriW0If4R9gE4LObixfIjiHnV+/UsI5VtVA=",
+        "lastModified": 1793299117,
+        "narHash": "sha256-lHBVqGkPv3qqL2EEDTKSucFh6zrLTtiTmdEQm1LAEMc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "87996c5bd0e782e44f804a1989705250184bd317",
+        "rev": "bf0fc86eb25f0bab78ea66c4d29f3e053700b76c",
         "type": "github"
       },
       "original": {
@@ -646,7 +626,6 @@
         "fonts": "fonts",
         "helix-flake": "helix-flake",
         "hjem": "hjem",
-        "hushmic": "hushmic",
         "lanzaboote": "lanzaboote",
         "litecrazy": "litecrazy",
         "maccel": "maccel",
