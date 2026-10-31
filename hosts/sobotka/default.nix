@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -41,6 +42,32 @@
       device = "/dev/disk/by-uuid/b9191e25-9baa-4e0c-b18c-b927d56841ad";
       bypassWorkqueues = true;
       allowDiscards = true;
+    };
+  };
+
+  boot.initrd = {
+    availableKernelModules = ["igb"];
+    network = {
+      enable = true;
+      flushBeforeStage2 = true;
+      ssh = {
+        enable = true;
+        port = 2222;
+        hostKeys = ["/etc/secrets/initrd/ssh_host_ed25519_key"];
+        authorizedKeys = with config.cnix.settings.accounts.sshKeys; [
+          kima
+          bunk
+        ];
+      };
+    };
+    systemd = {
+      users.root.shell = "/bin/systemd-tty-ask-password-agent";
+      network.networks."10-lan" = {
+        matchConfig.Name = "enp6s0";
+        address = ["192.168.88.14/24"];
+        gateway = ["192.168.88.1"];
+        linkConfig.RequiredForOnline = "routable";
+      };
     };
   };
 

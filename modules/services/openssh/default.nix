@@ -13,14 +13,29 @@
       hostname: builtins.pathExists (self + "/hosts/${hostname}/ssh_host_ed25519_key.pub")
     )
     (builtins.attrNames hosts);
+
+  # Initrd sshd (remote LUKS unlock) uses its own host key on port 2222.
+  initrdKey = hostname: self + "/hosts/${hostname}/initrd_ssh_host_ed25519_key.pub";
+  hostsWithInitrdKeys = builtins.filter (hostname: builtins.pathExists (initrdKey hostname)) (
+    builtins.attrNames hosts
+  );
 in {
   options.cnix.services.openssh.enable = mkEnableOption "Enables openssh";
 
   config = mkIf cfg.enable {
     programs.ssh = {
-      knownHosts = lib.genAttrs hostsWithKeys (hostname: {
-        publicKeyFile = self + "/hosts/${hostname}/ssh_host_ed25519_key.pub";
-      });
+      knownHosts =
+        lib.genAttrs hostsWithKeys (hostname: {
+          publicKeyFile = self + "/hosts/${hostname}/ssh_host_ed25519_key.pub";
+        })
+        // lib.listToAttrs (map (hostname: {
+            name = "${hostname}-initrd";
+            value = {
+              hostNames = ["[${hostname}]:2222"];
+              publicKeyFile = initrdKey hostname;
+            };
+          })
+          hostsWithInitrdKeys);
     };
 
     services.openssh = {
