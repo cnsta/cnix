@@ -49,7 +49,6 @@
     availableKernelModules = ["igb"];
     network = {
       enable = true;
-      flushBeforeStage2 = true;
       ssh = {
         enable = true;
         port = 2222;
@@ -68,6 +67,21 @@
         gateway = ["192.168.88.1"];
         linkConfig.RequiredForOnline = "routable";
       };
+    };
+  };
+
+  systemd.services.flush-initrd-network = {
+    description = "Flush initrd network config on enp6s0";
+    wantedBy = ["NetworkManager.service"];
+    before = ["NetworkManager.service" "keepalived.service"];
+    restartIfChanged = false;
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = [
+        "${pkgs.iproute2}/bin/ip route flush dev enp6s0"
+        "${pkgs.iproute2}/bin/ip address flush dev enp6s0"
+      ];
     };
   };
 
