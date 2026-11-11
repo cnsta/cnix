@@ -12,7 +12,7 @@
 
     boot = {
       kernel = {
-        variant = "zfsLatest";
+        variant = "stable";
         hardware = [];
         extraKernelParams = [];
       };

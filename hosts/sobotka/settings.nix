@@ -12,7 +12,7 @@
 
     boot = {
       kernel = {
-        variant = "zfsLatest";
+        variant = "stable";
         hardware = ["amd"];
         extraKernelParams = ["zfs.zfs_arc_max=34359738368"];
       };

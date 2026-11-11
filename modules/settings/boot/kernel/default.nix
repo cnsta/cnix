@@ -25,10 +25,12 @@ in {
         type = types.enum [
           "stable"
           "latest"
-          "zfsLatest"
         ];
         default = "latest";
-        description = "Kernel variant to use.";
+        description = ''
+          Kernel variant to use. `stable` is nixpkgs' default kernel (the newest
+          LTS); use it on ZFS hosts.
+        '';
       };
 
       hardware = mkOption {
@@ -74,8 +76,6 @@ in {
         then pkgs.linuxPackages
         else if variant == "latest"
         then pkgs.linuxPackages_latest
-        else if variant == "zfsLatest"
-        then pkgs.linuxPackages_6_18
         else throw "Unknown kernel variant: ${variant}";
 
       kernelParams =
