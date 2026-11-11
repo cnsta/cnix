@@ -342,11 +342,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792680262,
-        "narHash": "sha256-duIodGBMv5DuKDt49pkbBtnV/qWMSonRIFsKaEaKDyM=",
+        "lastModified": 1794424489,
+        "narHash": "sha256-G+Ep8xZ/FSnWhx+yVrkrwNA4GMP2k7AX1O0UTyyR+y0=",
         "ref": "refs/heads/main",
-        "rev": "ae1f5aaeb2ab95198769cb0c05bb23793719cf9e",
-        "revCount": 94,
+        "rev": "7193da826450f3b9c3cb2a74c9cbb926d5ea5936",
+        "revCount": 98,
         "type": "git",
         "url": "https://git.cnst.dev/cnst/levee.git"
       },
@@ -602,11 +602,11 @@
         "zon2nix": "zon2nix"
       },
       "locked": {
-        "lastModified": 1792680328,
-        "narHash": "sha256-c+ZsNnvqLBzPrYeApJNui8Xxnf6Zu44CiLH0Wq/CTHA=",
+        "lastModified": 1794427482,
+        "narHash": "sha256-u4fK4FQ9XGBvN4UMy3X6CnMHOyUTZ1AX1l100EO5M4M=",
         "ref": "refs/heads/main",
-        "rev": "917bc3b139684f2f0c37c66bb572285cf753b8d9",
-        "revCount": 289,
+        "rev": "7d57d9fb0c4ce28db51f02dcbd3eff43c7118f47",
+        "revCount": 300,
         "type": "git",
         "url": "https://git.cnst.dev/cnst/delta.git"
       },
@@ -829,11 +829,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791894697,
-        "narHash": "sha256-VoA0Lc/lnsaPxyTN24C4kvmF5Ys8naySwqjyy/kN6jQ=",
+        "lastModified": 1794399419,
+        "narHash": "sha256-KQWeEG3VbPvx7QKfRxL5zBfKBsnvqDOcL8eJFaSyU7M=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "ee6a6d65335b28d1462168b0e90f0ba12a263e44",
+        "rev": "2a2e6c1d56de3dc40626c869df85388e7972b52a",
         "type": "github"
       },
       "original": {

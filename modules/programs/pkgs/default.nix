@@ -97,7 +97,6 @@
     wl-screenrec
     wl-clipboard
     cava
-    sniffnet
   ];
   guiImage = with pkgs; [
     (swayimg.overrideAttrs (old: {
@@ -161,8 +160,6 @@
     sql-formatter
     prettierd
     black
-    nufmt
-    nu-lint
   ];
   devNix = with pkgs; [
     nixpkgs-review

@@ -31,6 +31,12 @@
           };
           overlays = [
             inputs.nixgl.overlay
+            (final: prev: {
+              protonup-rs = prev.protonup-rs.overrideAttrs (old: {
+                nativeBuildInputs = (old.nativeBuildInputs or []) ++ [final.pkg-config];
+                buildInputs = (old.buildInputs or []) ++ [final.zstd final.aws-lc];
+              });
+            })
           ];
         };
 
