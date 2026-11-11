@@ -7,6 +7,7 @@
   inherit
     (lib)
     mkIf
+    mkMerge
     filterAttrs
     mapAttrs'
     mapAttrsToList
@@ -26,46 +27,60 @@
   tunnelIdFile = name: "${self}/secrets/${name}Cloudflared.tunnelId";
   tunnelIdOf = name: trim (builtins.readFile (tunnelIdFile name));
 in {
-  config = mkIf (dedicated != {}) {
-    assertions =
-      mapAttrsToList (name: _: {
-        assertion =
-          builtins.pathExists (secretFile name)
-          && builtins.pathExists (tunnelIdFile name);
-        message = ''
-          cnix.server.services.${name}: exposure = "dedicated-tunnel" expects
-          secrets/${name}Cloudflared.age and secrets/${name}Cloudflared.tunnelId
-        '';
-      })
-      dedicated;
+  config = mkMerge [
+    (mkIf (dedicated != {}) {
+      assertions =
+        mapAttrsToList (name: _: {
+          assertion =
+            builtins.pathExists (secretFile name)
+            && builtins.pathExists (tunnelIdFile name);
+          message = ''
+            cnix.server.services.${name}: exposure = "dedicated-tunnel" expects
+            secrets/${name}Cloudflared.age and secrets/${name}Cloudflared.tunnelId
+          '';
+        })
+        dedicated;
 
-    age.secrets =
-      mapAttrs' (
-        name: _:
-          nameValuePair "${name}Cloudflared" {file = secretFile name;}
-      )
-      dedicated;
-
-    services.cloudflared = {
-      enable = true;
-      tunnels =
+      age.secrets =
         mapAttrs' (
-          name: svc:
-            nameValuePair (tunnelIdOf name) {
-              credentialsFile = config.age.secrets."${name}Cloudflared".path;
-              default = "http_status:404";
-              ingress =
-                {
-                  "${svc.subdomain}.${www.url}".service = "http://127.0.0.1:${toString (
-                    if svc.anubis.port != null
-                    then svc.anubis.port
-                    else svc.port
-                  )}";
-                }
-                // mapAttrs' (sub: url: nameValuePair "${sub}.${www.url}" {service = url;}) svc.ingress;
-            }
+          name: _:
+            nameValuePair "${name}Cloudflared" {file = secretFile name;}
         )
         dedicated;
-    };
-  };
+
+      services.cloudflared = {
+        enable = true;
+        tunnels =
+          mapAttrs' (
+            name: svc:
+              nameValuePair (tunnelIdOf name) {
+                credentialsFile = config.age.secrets."${name}Cloudflared".path;
+                default = "http_status:404";
+                ingress =
+                  {
+                    "${svc.subdomain}.${www.url}".service = "http://127.0.0.1:${toString (
+                      if svc.anubis.port != null
+                      then svc.anubis.port
+                      else svc.port
+                    )}";
+                  }
+                  // mapAttrs' (sub: url: nameValuePair "${sub}.${www.url}" {service = url;}) svc.ingress;
+              }
+          )
+          dedicated;
+      };
+    })
+
+    (mkIf config.services.cloudflared.enable {
+      systemd.services =
+        mapAttrs' (
+          id: _:
+            nameValuePair "cloudflared-tunnel-${id}" {
+              startLimitIntervalSec = 0;
+              serviceConfig.RestartSec = 5;
+            }
+        )
+        config.services.cloudflared.tunnels;
+    })
+  ];
 }
