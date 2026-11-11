@@ -203,6 +203,14 @@ in {
                 default = [];
                 description = "Extra Traefik middlewares, applied after the access gate.";
               };
+              securityHeaders = mkOption {
+                type = types.bool;
+                default = true;
+                description = ''
+                  Apply Traefik's shared security-headers middleware. Disable for services
+                  that send their own (it overrides theirs, e.g. vaultwarden's).
+                '';
+              };
               port = lib.mkOption {
                 type = lib.types.int;
                 default = 80;

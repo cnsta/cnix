@@ -344,6 +344,7 @@
       subdomain = "vault";
       exposure = "dedicated-tunnel";
       port = 8222;
+      securityHeaders = false;
       dashboard = {
         icon = "vaultwarden-light.svg";
         category = "Cloud";

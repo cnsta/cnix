@@ -31,7 +31,8 @@
       )
       srv.services)
     ++ ["traefik.${localDomain}"]
-    ++ lib.optional autheliaUp "login.${localDomain}";
+    ++ lib.optional autheliaUp "login.${localDomain}"
+    ++ lib.optional srv.infra.www.enable srv.infra.www.url;
 
   policy = pkgs.writeText "headscale-policy.json" (builtins.toJSON {
     groups = lib.mapAttrs' (g: users: lib.nameValuePair "group:${g}" users) tailnet.groups;
