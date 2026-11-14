@@ -20,16 +20,22 @@
 
   autheliaUp = srv.services.authelia.enable;
   localDomain = config.cnix.settings.accounts.domains.local;
+  tailnetServices =
+    lib.filterAttrs (
+      _: s:
+        s.enable
+        && s.routed
+        && s.subdomain != ""
+        && !(s.exposure == "local" && !(s.auth && autheliaUp))
+    )
+    srv.services;
+
   tailnetNames =
-    lib.mapAttrsToList (_: clib.server.mkFullDomain config) (lib.filterAttrs (
-        name: s:
-          s.enable
-          && s.routed
-          && s.subdomain != ""
-          && name != unit
-          && !(s.exposure == "local" && !(s.auth && autheliaUp))
+    lib.mapAttrsToList (_: clib.server.mkFullDomain config) tailnetServices
+    ++ lib.concatLists (lib.mapAttrsToList (
+        _: s: map (sub: "${sub}.${clib.server.mkDomain config s}") (lib.attrNames s.ingress)
       )
-      srv.services)
+      tailnetServices)
     ++ ["traefik.${localDomain}"]
     ++ lib.optional autheliaUp "login.${localDomain}"
     ++ lib.optional srv.infra.www.enable srv.infra.www.url;
