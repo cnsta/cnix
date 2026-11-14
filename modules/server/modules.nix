@@ -396,7 +396,7 @@
     home-assistant = when "s" {
       enable = true;
       subdomain = "ha";
-      auth = false;
+      exposure = "tailscale";
       port = 8123;
       dashboard = {
         category = "Automation";
