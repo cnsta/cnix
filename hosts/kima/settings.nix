@@ -40,7 +40,7 @@
 
     monitors = [
       {
-        name = "DP-3";
+        name = "DP-1";
         width = 2560;
         height = 1440;
         refreshRate = "240";
@@ -48,7 +48,7 @@
         adaptiveSync = false;
         position = "0x0";
         transform = 0;
-        bitDepth = 10;
+        bitDepth = 8;
         hdr = false;
       }
       {
