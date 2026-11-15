@@ -85,7 +85,10 @@
     };
 
     ashell = {
-      url = "github:MalpenZibo/ashell";
+      # url = "github:MalpenZibo/ashell";
+      # TODO: unpin once upstream's Cargo.lock matches crates/*/Cargo.toml
+      # again (c690a4be: lock says 0.12.0, workspace crates still 0.11.0).
+      url = "github:MalpenZibo/ashell/6d9fefdb632d72a4e864535950dcae3687cf69c7";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
     };
@@ -140,6 +143,11 @@
 
     byt = {
       url = "git+https://git.cnst.dev/cnst/byt.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    silt = {
+      url = "git+https://git.cnst.dev/cnst/silt.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

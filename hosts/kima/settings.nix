@@ -43,7 +43,7 @@
         name = "DP-1";
         width = 2560;
         height = 1440;
-        refreshRate = "240";
+        refreshRate = "144";
         customMode = false;
         adaptiveSync = false;
         position = "0x0";

@@ -99,7 +99,14 @@
       ingress."ssh.git" = "ssh://localhost:22";
       anubis = {
         port = 8925;
-        extraBots = [{import = "(data)/apps/gitea-rss-feeds.yaml";}];
+        extraBots = [
+          {import = "(data)/apps/gitea-rss-feeds.yaml";}
+          {
+            name = "git-smart-http";
+            path_regex = "^/[^/]+/[^/]+/(info/refs|git-upload-pack|git-receive-pack|info/lfs/.*)$";
+            action = "ALLOW";
+          }
+        ];
       };
       dashboard = {
         category = "Dev";

@@ -96,7 +96,10 @@ in {
 
         staticConfigOptions = {
           log.level = "INFO";
-          accesslog.filepath = accessLog;
+          accesslog = {
+            filepath = accessLog;
+            format = "json";
+          };
           api = {
             dashboard = true;
             insecure = false;
@@ -117,10 +120,13 @@ in {
             web = {
               address = ":80";
               forwardedHeaders.trustedIPs = trustedProxies;
-              http.redirections.entryPoint = {
-                to = "websecure";
-                scheme = "https";
-                permanent = true;
+              http = {
+                aliasHeadersStrategy = "delete";
+                redirections.entryPoint = {
+                  to = "websecure";
+                  scheme = "https";
+                  permanent = true;
+                };
               };
             };
 
@@ -131,18 +137,21 @@ in {
                 readTimeout = "0s";
                 idleTimeout = "3600s";
               };
-              http.tls = {
-                certResolver = "letsencrypt";
-                domains = [
-                  {
-                    main = localDomain;
-                    sans = ["*.${localDomain}"];
-                  }
-                  {
-                    main = publicDomain;
-                    sans = ["*.${publicDomain}"];
-                  }
-                ];
+              http = {
+                aliasHeadersStrategy = "delete";
+                tls = {
+                  certResolver = "letsencrypt";
+                  domains = [
+                    {
+                      main = localDomain;
+                      sans = ["*.${localDomain}"];
+                    }
+                    {
+                      main = publicDomain;
+                      sans = ["*.${publicDomain}"];
+                    }
+                  ];
+                };
               };
             };
           };

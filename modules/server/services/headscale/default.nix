@@ -213,6 +213,7 @@ in {
           entryPoints = ["websecure"];
           rule = "Host(`${fqdn}`) && PathPrefix(`/admin`)";
           service = "headplane";
+          middlewares = ["security-headers" "private"];
           tls.certResolver = "letsencrypt";
         };
 
@@ -220,7 +221,7 @@ in {
           entryPoints = ["websecure"];
           rule = "Host(`${fqdn}`) && Path(`/`)";
           service = unit;
-          middlewares = ["headscale-rewrite"];
+          middlewares = ["security-headers" "private" "headscale-rewrite"];
           tls.certResolver = "letsencrypt";
         };
       };

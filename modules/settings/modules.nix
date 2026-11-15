@@ -84,6 +84,7 @@ in {
       };
       microfetch = all;
       river = en "kbt";
+      silt = en "kbts";
       ssh = en "kbt";
       zen-browser = en "kbt";
       # bundles

@@ -33,6 +33,7 @@
     ./nvf
     ./mpv
     ./thunderbird
+    ./silt
     ./ssh
     ./vscode
     ./pkgs

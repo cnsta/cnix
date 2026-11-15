@@ -58,6 +58,15 @@ in {
               where cloudflared targets Anubis directly.
             '';
           };
+          ogPassthrough = mkOption {
+            type = types.bool;
+            default = true;
+            description = ''
+              Copy the target page's OpenGraph tags into the challenge page (link
+              previews). Costs one backend fetch per challenged request, so keep it
+              off where pages are expensive to render.
+            '';
+          };
           realIpHeader = mkOption {
             type = types.nullOr types.str;
             default = null;
@@ -85,8 +94,19 @@ in {
         mapAttrs (_: svc: {
           host = "${svc.subdomain}.${config.cnix.server.infra.www.url}";
           target = "http://127.0.0.1:${toString svc.port}";
-          inherit (svc.anubis) port extraBots;
+          inherit (svc.anubis) port;
+          extraBots =
+            [
+              {
+                name = "cloudflare-tunnel";
+                action = "WEIGH";
+                expression = ''"Cf-Ray" in headers'';
+                weight.adjust = -15;
+              }
+            ]
+            ++ svc.anubis.extraBots;
           traefik = false;
+          ogPassthrough = false;
           realIpHeader = "Cf-Connecting-Ip";
         })
         gated;
@@ -100,7 +120,7 @@ in {
               BIND_NETWORK = "tcp";
               BIND = "127.0.0.1:${toString site.port}";
               TARGET = site.target;
-              OG_PASSTHROUGH = true;
+              OG_PASSTHROUGH = site.ogPassthrough;
             }
             // lib.optionalAttrs (site.realIpHeader != null) {
               CUSTOM_REAL_IP_HEADER = site.realIpHeader;
