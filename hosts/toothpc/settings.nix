@@ -10,6 +10,7 @@
       kernel = {
         variant = "latest";
         hardware = ["nvidia"];
+        extraBlacklistedModules = ["ucsi_ccg" "i2c_nvidia_gpu"];
       };
       loader = {
         default = {

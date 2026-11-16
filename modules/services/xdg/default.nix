@@ -167,7 +167,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = [pkgs.xdg-utils];
     environment.sessionVariables.XDG_CACHE_HOME = "$HOME/.local/cache";
-    systemd.user.tmpfiles.rules = userDirRules;
+    systemd.user.tmpfiles.users = genAttrs acct.defaultUsers (_: {rules = userDirRules;});
 
     hjem.users = genAttrs acct.defaultUsers (_: {
       files = {

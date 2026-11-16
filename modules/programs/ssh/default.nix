@@ -55,7 +55,10 @@ in {
     (mkIf (acct.defaultUsers != []) {
       hjem.users = genAttrs acct.defaultUsers (_: {
         files = {
-          ".ssh/config".text = sshConfig;
+          ".ssh/config" = {
+            text = sshConfig;
+            clobber = true;
+          };
         };
       });
     })
