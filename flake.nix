@@ -85,10 +85,7 @@
     };
 
     ashell = {
-      # url = "github:MalpenZibo/ashell";
-      # TODO: unpin once upstream's Cargo.lock matches crates/*/Cargo.toml
-      # again (c690a4be: lock says 0.12.0, workspace crates still 0.11.0).
-      url = "github:MalpenZibo/ashell/6d9fefdb632d72a4e864535950dcae3687cf69c7";
+      url = "github:MalpenZibo/ashell";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
     };
