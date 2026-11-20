@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  clib,
   self,
   ...
 }:
@@ -36,9 +37,12 @@ in {
           "127.0.0.1:${toString cfg.port}:8080"
         ];
         environmentFiles = [config.age.secrets.minifluxEnvironment.path];
-        extraOptions = [
-          "--add-host=host.containers.internal:host-gateway"
-        ];
+        extraOptions =
+          [
+            "--add-host=host.containers.internal:host-gateway"
+          ]
+          ++ lib.optional srv.services.ntfy.enable
+          "--add-host=${clib.server.mkFullDomain config srv.services.ntfy}:host-gateway";
       };
     };
   };

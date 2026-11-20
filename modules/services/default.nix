@@ -18,6 +18,7 @@
     ./locate
     ./mullvad
     ./nfs
+    ./ntfy-client
     ./openssh
     ./syncthing
     ./pipewire

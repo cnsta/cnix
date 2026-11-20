@@ -157,6 +157,7 @@ in {
       swaybg = en "kbt";
       swayidle = none;
       tailray = en "kbt";
+      ntfy-client = en "k";
       udiskie = en "kbt";
       dconf = en "kbt";
       gpg = en "kbt";

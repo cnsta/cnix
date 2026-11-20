@@ -68,6 +68,7 @@ in {
   "qbtEnvironment.age".publicKeys = sobotka;
   "minifluxEnvironment.age".publicKeys = sobotka;
   "minifluxPgPwd.age".publicKeys = sobotka;
+  "ntfyEnvironment.age".publicKeys = sobotka;
   "harmoniaSignKey.age".publicKeys = sobotka;
   "headscaleOidc.age".publicKeys = sobotka;
   "headplaneEnv.age".publicKeys = sobotka;
@@ -79,6 +80,9 @@ in {
   "speedtestEnvironment.age".publicKeys = sobotka;
   "dispatcharrEnvironment.age".publicKeys = sobotka;
   "dispatcharrCloudflared.age".publicKeys = sobotka;
+
+  # kima-specific
+  "ntfyClientToken.age".publicKeys = kima;
 
   # ziggy-specific
   "cloudflareDnsCredentialsZiggy.age".publicKeys = ziggy;

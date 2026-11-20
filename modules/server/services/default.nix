@@ -19,6 +19,7 @@
     ./memos
     ./miniflux
     ./navidrome
+    ./ntfy
     ./n8n
     ./octo-fiesta
     ./ollama

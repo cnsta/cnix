@@ -391,6 +391,16 @@
       };
     };
 
+    ntfy = when "s" {
+      enable = true;
+      port = 2586;
+      exposure = "tailscale";
+      auth = false;
+      dashboard = {
+        category = "Communication";
+      };
+    };
+
     roundcube = when "s" {
       enable = false;
       subdomain = "mail";
