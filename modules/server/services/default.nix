@@ -1,5 +1,6 @@
 {
   imports = [
+    ./aurral
     ./authelia
     ./bazarr
     ./dispatcharr

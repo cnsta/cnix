@@ -135,6 +135,18 @@
       routed = false;
     };
 
+    aurral = when "s" {
+      enable = true;
+      subdomain = "aurral";
+      exposure = "tunnel";
+      port = 3003;
+      dashboard = {
+        icon = "aurral.webp";
+        category = "Media";
+        container.name = "Aurral";
+      };
+    };
+
     bazarr = when "s" {
       enable = true;
       auth = false;
