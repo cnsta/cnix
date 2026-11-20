@@ -21,6 +21,7 @@ in {
           network = {
             dns_bind_port = 5533;
           };
+          engine.healthcheck_events = false;
         };
       };
     };

@@ -90,7 +90,7 @@ in {
       tailscale = mkIf cfg.tailscale.enable {
         enable = true;
         extraUpFlags = ["--login-server=https://hs.cnst.dev"];
-        extraSetFlags = ["--accept-routes"];
+        extraSetFlags = ["--accept-routes" "--operator=${config.cnix.settings.accounts.username}"];
       };
     };
 

@@ -47,6 +47,9 @@ in {
         };
         security.secret_key = file config.age.secrets.grafanaSecretKey.path;
         analytics.reporting_enabled = false;
+        # The alert scheduler logs every query (info), the manifest watcher an
+        # empty poll (warn): ~65k lines per boot together.
+        log.filters = "plugin.prometheus:warn search-manifest-watcher:error plugins.update.checker:warn";
 
         "auth.generic_oauth" = {
           enabled = true;

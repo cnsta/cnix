@@ -93,6 +93,15 @@ in {
         };
       });
     };
+    publicIp = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      example = "203.0.113.7";
+      description = ''
+        WAN IPv4 the public A records point at. Tailnet clients reach headscale
+        through it, never through the tunnel headscale itself provides.
+      '';
+    };
     tailnet = {
       ip = mkOption {
         type = types.str;

@@ -12,5 +12,6 @@ in {
       enable = true;
       port = cfg.port;
     };
+    systemd.services.${unit}.environment.LOG_LEVEL = "info";
   };
 }

@@ -101,6 +101,7 @@
         port = 8925;
         extraBots = [
           {import = "(data)/apps/gitea-rss-feeds.yaml";}
+          # git over HTTPS can't solve a challenge, Forgejo does the auth
           {
             name = "git-smart-http";
             path_regex = "^/[^/]+/[^/]+/(info/refs|git-upload-pack|git-receive-pack|info/lfs/.*)$";
@@ -449,6 +450,7 @@ in {
     email = "adam@cnst.dev";
     domain = "cnix.dev";
     ip = ip;
+    publicIp = "185.147.236.7";
     user = "share";
     group = "share";
     uid = 994;

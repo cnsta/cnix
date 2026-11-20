@@ -95,6 +95,13 @@
   };
 in {
   config = lib.mkIf (cfg.enable && srv.infra.podman.enable) {
+    assertions = [
+      {
+        assertion = srv.publicIp != null;
+        message = "cnix.server.publicIp must be set: tailnet clients resolve ${fqdn} to it (the tailnet IP deadlocks them after a server restart).";
+      }
+    ];
+
     age.secrets = {
       headscaleOidc = {
         owner = unit;
@@ -141,7 +148,10 @@ in {
             map (name: {
               type = "A";
               inherit name;
-              value = tailnet.ip;
+              value =
+                if name == fqdn
+                then srv.publicIp
+                else tailnet.ip;
             })
             tailnetNames;
         };
@@ -167,7 +177,7 @@ in {
           };
         };
 
-        log.level = "info";
+        log.level = "warn";
       };
     };
 

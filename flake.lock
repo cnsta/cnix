@@ -751,11 +751,11 @@
         "zig": "zig_2"
       },
       "locked": {
-        "lastModified": 1794586926,
-        "narHash": "sha256-RaPP9uy2Tgx4GpaPwgONzmix8CaUzWiJNjsEzydv7U4=",
+        "lastModified": 1795157273,
+        "narHash": "sha256-zCoqMYAro2eijkZFBsMjI7H9GNT6Xv782v3Gnmfsyrc=",
         "ref": "refs/heads/main",
-        "rev": "3d9f43df96b5de1418806ecb62a9eb8b5be17bd0",
-        "revCount": 27,
+        "rev": "cf15b0e67152c736e88ec0c17e926acae9fe266a",
+        "revCount": 30,
         "type": "git",
         "url": "https://git.cnst.dev/cnst/silt.git"
       },

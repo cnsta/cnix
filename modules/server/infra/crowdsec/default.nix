@@ -65,6 +65,7 @@ in {
           server = {
             enable = true;
             listen_uri = "127.0.0.1:8090";
+            log_level = "warning";
             online_client.credentials_path = "${stateDir}/online_api_credentials.yaml";
           };
           client.credentials_path = "${stateDir}/local_api_credentials.yaml";
