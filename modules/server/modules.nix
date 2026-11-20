@@ -139,7 +139,7 @@
       enable = true;
       subdomain = "aurral";
       exposure = "tunnel";
-      port = 3003;
+      port = 3009;
       dashboard = {
         icon = "aurral.webp";
         category = "Media";
