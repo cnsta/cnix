@@ -9,6 +9,7 @@
   arr = config.cnix.server.services.arr;
 
   qbtIp = "10.88.0.250";
+  arrIp = "10.88.0.251";
 in {
   options.cnix.server.infra = {
     gluetun.enable = lib.mkEnableOption "Enables gluetun";
@@ -103,7 +104,6 @@ in {
           "127.0.0.1:8003:8000/tcp"
           "127.0.0.1:8191:8191"
           "127.0.0.1:9696:9696"
-          "10.88.0.1:9696:9696"
           "127.0.0.1:8989:8989"
           "127.0.0.1:7878:7878"
           "127.0.0.1:8686:8686"
@@ -119,6 +119,7 @@ in {
           "--cap-add=NET_RAW"
           "--sysctl=net.ipv6.conf.all.disable_ipv6=1"
           "--sysctl=net.ipv6.conf.default.disable_ipv6=1"
+          "--ip=${arrIp}"
           "--add-host=gluetun-qbt:${qbtIp}"
           "--label=io.containers.autoupdate=registry"
         ];

@@ -16,15 +16,17 @@ in {
       ${unit} = {
         image = "ghcr.io/lklynet/aurral:latest";
         autoStart = true;
-        ports = ["${toString cfg.port}:3001"];
+        ports = ["127.0.0.1:${toString cfg.port}:3001"];
         environment = {
           TZ = "Europe/Stockholm";
           PUID = toString config.users.users.${srv.user}.uid;
           PGID = toString config.users.groups.${srv.group}.gid;
+          BRAINZMASH_BASE_URL = "https://api.lidarr.audio/api/v0.4";
         };
         volumes = [
           "/var/lib/aurral:/config:rw"
-          "/mnt/data:/data:rw"
+          "/mnt/data/media/music:/data/media/music:rw"
+          "/mnt/data/downloads:/data/downloads:rw"
         ];
       };
     };

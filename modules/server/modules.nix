@@ -178,7 +178,7 @@
     };
 
     lidarr = when "s" {
-      enable = true;
+      enable = false;
       auth = false;
       port = 8686;
       dashboard = {
@@ -475,8 +475,8 @@ in {
     publicIp = "185.147.236.7";
     user = "share";
     group = "share";
-    uid = 994;
-    gid = 993;
+    uid = 2000;
+    gid = 2000;
 
     smtp = when "s" {
       host = "smtp.protonmail.ch:587";

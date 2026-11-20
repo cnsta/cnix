@@ -32,6 +32,10 @@ in {
           "/mnt/data:/data:rw"
         ];
         environmentFiles = [config.age.secrets.qbtEnvironment.path];
+        environment = {
+          PUID = toString config.users.users.${srv.user}.uid;
+          PGID = toString config.users.groups.${srv.group}.gid;
+        };
       };
     };
   };

@@ -43,6 +43,10 @@ in {
           "--network=host"
         ];
         environmentFiles = [config.age.secrets.jellyfinEnvironment.path];
+        environment = {
+          PUID = toString config.users.users.${srv.user}.uid;
+          PGID = toString config.users.groups.${srv.group}.gid;
+        };
       };
     };
 
