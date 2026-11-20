@@ -2,6 +2,7 @@
 # received a new version (image ID changed after the pull).
 
 IMAGES=(
+  ghcr.io/lklynet/aurral:latest
   ghcr.io/haveagitgat/tdarr:latest
   ghcr.io/haveagitgat/tdarr_node:latest
   docker.io/pihole/pihole:latest
