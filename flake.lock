@@ -31,11 +31,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795162171,
-        "narHash": "sha256-8T3z+6VpTMrRVSMeI5pst3MibQi1lKV3N8a+mZ7j5mE=",
+        "lastModified": 1795262394,
+        "narHash": "sha256-wFB445c8j7AFfh8X7VlaQojowu9uLCFIslkN4C+1w3Y=",
         "owner": "MalpenZibo",
         "repo": "ashell",
-        "rev": "6104eee0ad00e2f1dbbb4b6818e728c9c007fdaa",
+        "rev": "105aee54b5c7c7d509982c5e63166d1c677c24b5",
         "type": "github"
       },
       "original": {
@@ -497,11 +497,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1795188322,
-        "narHash": "sha256-W6Z8qDb/HwL7/LQ0yr2ucQQlJgCJ7yCkoSobwQjEPic=",
+        "lastModified": 1795283620,
+        "narHash": "sha256-UdXo+i1STugjIkXs50CoKwU5aZ4nmlVQINMxg+b9+VU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "bd5b7d01ccc48cbc8241bda0c3554a4cbbcbc375",
+        "rev": "e81f23b19c2a5ec3028a02f37bafcceb74bc14c8",
         "type": "github"
       },
       "original": {
@@ -544,11 +544,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1795085501,
-        "narHash": "sha256-S5keGWzaKpuXo9MNoIC2FfTIuTyTnx8P4NhYJMEsTLI=",
+        "lastModified": 1795234589,
+        "narHash": "sha256-f/VVvxf5RsQgWVhUtefoca5ktVg0DA2bnkMOcmSnozo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0bb8272318b4ca41bf0edc6224df3e3e3046b70d",
+        "rev": "2786a2a72088ecf32aea5b3ec52099e6a7cff78f",
         "type": "github"
       },
       "original": {
@@ -634,11 +634,11 @@
         "zon2nix": "zon2nix"
       },
       "locked": {
-        "lastModified": 1795164568,
-        "narHash": "sha256-+1mXpKRaJh4D0hY6it8KG031NReorhJlXrgXlhs3FKw=",
+        "lastModified": 1795276954,
+        "narHash": "sha256-YkttW69mHJQAQfZx3BsPyE++CidJ4otkVyVNdGls20k=",
         "ref": "refs/heads/main",
-        "rev": "d0acdd7763a9753a9ab08c21d0f8a22c96805d63",
-        "revCount": 305,
+        "rev": "6e0bdd8f9a9d5ba37fab1c1606de338298f9f60c",
+        "revCount": 315,
         "type": "git",
         "url": "https://git.cnst.dev/cnst/delta.git"
       },
@@ -746,11 +746,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795168384,
-        "narHash": "sha256-aQ4Ns5O78Pg6B1i2hNRbI1HpRtnZst/jW34MSOOeaX4=",
+        "lastModified": 1795253373,
+        "narHash": "sha256-Vg6Sg8gJCDG9qpVEdOZX+72Z50MLwdnwtfZ8FNBwiYI=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "a5c999945da3991d7aa3cc2a6075cfd22bd387e9",
+        "rev": "52db20539ec0ba063479d66092992d9efcf456ff",
         "type": "github"
       },
       "original": {
