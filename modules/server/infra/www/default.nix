@@ -12,6 +12,15 @@
     types
     ;
   cfg = config.cnix.server.infra.www;
+  srv = config.cnix.server;
+  localDomain = config.cnix.settings.accounts.domains.local;
+  autheliaUp = srv.services.authelia.enable;
+
+  denyLocations = {
+    "~ /\\.(?!well-known/)".extraConfig = "deny all;";
+    "~ (bak|~)$".extraConfig = "deny all;";
+    "^~ /jsbak/".extraConfig = "deny all;";
+  };
 in {
   imports = [./dedicated-tunnels.nix];
 
@@ -70,29 +79,68 @@ in {
         ];
         virtualHosts = {
           "www" = {
+            default = true;
             forceSSL = false;
             serverName = cfg.url;
             root = "/var/www";
 
-            locations."= /.well-known/webfinger" = {
-              extraConfig = ''
-                default_type application/jrd+json;
-                try_files /.well-known/webfinger =404;
-              '';
-            };
+            locations =
+              denyLocations
+              // {
+                "= /.well-known/webfinger".extraConfig = ''
+                  default_type application/jrd+json;
+                  try_files /.well-known/webfinger =404;
+                '';
 
-            locations."= /robots.txt" = {
-              extraConfig = ''
-                default_type text/plain;
-                try_files /robots.txt =404;
-              '';
-            };
+                "= /robots.txt".extraConfig = ''
+                  default_type text/plain;
+                  try_files /robots.txt =404;
+                '';
 
-            locations."~ /\\.(?!well-known/)".extraConfig = "deny all;";
-            locations."~ (bak|~)$".extraConfig = "deny all;";
-            locations."^~ /jsbak/".extraConfig = "deny all;";
+                "^~ /cnix/".return = "404";
+              };
+          };
+
+          "cnix" = {
+            forceSSL = false;
+            serverName = localDomain;
+            root = "/var/www";
+
+            locations =
+              denyLocations
+              // {
+                "= /".extraConfig = "try_files /cnix/index.html =404;";
+              };
           };
         };
+      };
+
+      traefik.dynamicConfigOptions.http = {
+        routers =
+          {
+            www-local = {
+              entryPoints = ["websecure"];
+              rule = "Host(`${localDomain}`)";
+              service = "www-local";
+              middlewares = ["security-headers" "private"];
+              tls = {};
+            };
+          }
+          // lib.optionalAttrs autheliaUp {
+            www-auth-state = {
+              entryPoints = ["websecure"];
+              rule = "(Host(`${cfg.url}`) || Host(`${localDomain}`)) && Path(`/auth/state`) && Method(`GET`)";
+              service = "authelia";
+              middlewares = ["www-auth-state"];
+              tls = {};
+            };
+          };
+
+        middlewares = lib.optionalAttrs autheliaUp {
+          www-auth-state.replacePath.path = "/api/state";
+        };
+
+        services.www-local.loadBalancer.servers = [{url = "http://127.0.0.1:${toString cfg.port}";}];
       };
 
       cloudflared = {

@@ -80,6 +80,7 @@ in {
   "speedtestEnvironment.age".publicKeys = sobotka;
   "dispatcharrEnvironment.age".publicKeys = sobotka;
   "dispatcharrCloudflared.age".publicKeys = sobotka;
+  "aurralEnvironment.age".publicKeys = sobotka;
 
   # kima-specific
   "ntfyClientToken.age".publicKeys = kima;

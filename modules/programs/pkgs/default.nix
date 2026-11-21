@@ -143,6 +143,14 @@
     zfstools
     beets
   ];
+  agent = with pkgs; [
+    python3
+    shellcheck
+    hyperfine
+    yq-go
+    gdb
+    perf
+  ];
   # dev
   devLsps = with pkgs; [
     marksman
@@ -188,6 +196,7 @@ in {
     gui.enable = mkEnableOption "gui-specific packages";
     laptop.enable = mkEnableOption "laptop-specific packages";
     server.enable = mkEnableOption "server-specific packages";
+    agent.enable = mkEnableOption "tools for coding agents";
     dev = {
       common.enable = mkEnableOption "generic development packages";
       rust.enable = mkEnableOption "rust packages";
@@ -202,6 +211,7 @@ in {
     (mkIf cfg.desktop.enable desktop)
     (mkIf cfg.laptop.enable laptop)
     (mkIf cfg.server.enable server)
+    (mkIf cfg.agent.enable agent)
     (mkIf cfg.dev.common.enable devCommon)
     (mkIf cfg.dev.rust.enable devRust)
     (mkIf cfg.dev.php.enable devPhp)

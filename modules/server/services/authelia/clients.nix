@@ -85,6 +85,12 @@
       service = services.grafana;
       redirect_paths = ["login/generic_oauth"];
     }
+    {
+      client_id = "aurral";
+      client_name = "Aurral";
+      service = services.aurral;
+      redirect_paths = ["sso/callback"];
+    }
 
     {
       client_id = "headscale";

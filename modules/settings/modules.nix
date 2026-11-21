@@ -94,6 +94,7 @@ in {
         desktop = en "kbt";
         gui = en "kbt";
         server = en "s";
+        agent = en "kt";
         dev = {
           common = en "kt";
           rust = en "k";

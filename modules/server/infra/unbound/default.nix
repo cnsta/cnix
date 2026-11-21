@@ -54,7 +54,10 @@
       (_: s: s.enable && s.routed && s.subdomain != "")
       srv.services);
 
-  wwwRecord = lib.optional srv.infra.www.enable ''"${srv.infra.www.url}. A ${cfg.serviceIp}"'';
+  wwwRecord = lib.optionals srv.infra.www.enable [
+    ''"${srv.infra.www.url}. A ${cfg.serviceIp}"''
+    ''"${domains.local}. A ${cfg.serviceIp}"''
+  ];
 in {
   options.cnix.server.infra.${unit} = {
     enable = mkEnableOption "recursive DNS resolution with unbound";

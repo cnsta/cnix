@@ -139,6 +139,7 @@
       enable = true;
       subdomain = "aurral";
       exposure = "tunnel";
+      groups = ["admins" "users"];
       port = 3009;
       dashboard = {
         icon = "aurral.webp";
