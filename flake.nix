@@ -123,8 +123,8 @@
       flake = false;
     };
 
-    flexoki-dark-yazi = {
-      url = "github:gosxrgxx/flexoki-dark.yazi";
+    kanagawa-paper-yazi = {
+      url = "github:melindachang/kanagawa-paper.yazi";
       flake = false;
     };
 

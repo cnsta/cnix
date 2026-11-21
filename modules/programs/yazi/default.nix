@@ -15,19 +15,19 @@ in {
     assertions = [
       {
         assertion = versionAtLeast yazi.version "26.9.1";
-        message = "flexoki-dark.yazi needs yazi >= 26.9.1, got ${yazi.version}; update nixpkgs";
+        message = "kanagawa-paper.yazi needs yazi >= 26.9.1, got ${yazi.version}; update nixpkgs";
       }
     ];
 
     programs.yazi = {
       enable = true;
       package = pkgs.yazi.override {_7zz = pkgs._7zz-rar;};
-      flavors.flexoki-dark = inputs.flexoki-dark-yazi;
+      flavors.kanagawa-paper = inputs.kanagawa-paper-yazi;
       settings = {
         yazi.mgr.sort_sensitive = true;
         theme.flavor = {
-          dark = "flexoki-dark";
-          light = "flexoki-dark";
+          dark = "kanagawa-paper";
+          light = "kanagawa-paper";
         };
       };
     };

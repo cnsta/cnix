@@ -232,22 +232,6 @@
         "type": "github"
       }
     },
-    "flexoki-dark-yazi": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1792459376,
-        "narHash": "sha256-uQEcTQ5N0DaQuM2AeYnjXys2RjHDwt+6/71YRu4okbg=",
-        "owner": "gosxrgxx",
-        "repo": "flexoki-dark.yazi",
-        "rev": "649e569d9e78f7573703a04135c6c62942b98a34",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gosxrgxx",
-        "repo": "flexoki-dark.yazi",
-        "type": "github"
-      }
-    },
     "fonts": {
       "inputs": {
         "flake-parts": [
@@ -328,6 +312,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "kanagawa-paper-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791251072,
+        "narHash": "sha256-EhVkRR+zHnCRLfP7Wrf916XhmIkRhlo18aOXhIj0iww=",
+        "owner": "melindachang",
+        "repo": "kanagawa-paper.yazi",
+        "rev": "bcd029852b3a36114be267afedd4907c114a775a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "melindachang",
+        "repo": "kanagawa-paper.yazi",
         "type": "github"
       }
     },
@@ -655,10 +655,10 @@
         "cnixpost": "cnixpost",
         "dotfiles": "dotfiles",
         "flake-parts": "flake-parts",
-        "flexoki-dark-yazi": "flexoki-dark-yazi",
         "fonts": "fonts",
         "helix-flake": "helix-flake",
         "hjem": "hjem",
+        "kanagawa-paper-yazi": "kanagawa-paper-yazi",
         "lanzaboote": "lanzaboote",
         "litecrazy": "litecrazy",
         "maccel": "maccel",
