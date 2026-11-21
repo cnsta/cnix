@@ -27,7 +27,7 @@ in {
           TZ = "Europe/Stockholm";
           PUID = toString config.users.users.${srv.user}.uid;
           PGID = toString config.users.groups.${srv.group}.gid;
-          BRAINZMASH_BASE_URL = "https://brainzmash.kell.ly";
+          BRAINZMASH_BASE_URL = "api.lidarr.audio/api/v0.4";
 
           AURRAL_PUBLIC_URL = url;
           OIDC_ENABLED = "true";

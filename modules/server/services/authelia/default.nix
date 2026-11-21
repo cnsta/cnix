@@ -11,17 +11,32 @@
   srv = config.cnix.server;
   domain = clib.server.mkHostDomain config cfg;
 
-  themed = pkgs.authelia.override {
-    authelia-web = pkgs.authelia.web.overrideAttrs (old: {
-      postPatch =
-        (old.postPatch or "")
-        + ''
-          cp -r ${./theme} src/cnix-theme
-          chmod -R u+w src/cnix-theme
-          cat src/cnix-theme/theme.css >> src/index.css
-        '';
-    });
-  };
+  www = srv.infra.www;
+  bgOrigin = "https://${www.url}";
+  themed =
+    (pkgs.authelia.override {
+      authelia-web = pkgs.authelia.web.overrideAttrs (old: {
+        postPatch =
+          (old.postPatch or "")
+          + ''
+            cp -r ${./theme} src/cnix-theme
+            chmod -R u+w src/cnix-theme
+            cat src/cnix-theme/theme.css >> src/index.css
+          ''
+          + lib.optionalString www.enable ''
+            printf '\n:root { --cnix-bg: url("%s/assets/bg.webp"); }\n' ${bgOrigin} >> src/index.css
+          '';
+      });
+    }).overrideAttrs (old:
+      lib.optionalAttrs www.enable {
+        postPatch =
+          (old.postPatch or "")
+          + ''
+            substituteInPlace internal/server/gen.go --replace-quiet \
+              "\"default-src 'self'; base-uri 'self';" \
+              "\"default-src 'self'; img-src 'self' ${bgOrigin}; base-uri 'self';"
+          '';
+      });
 
   subjectsFor = groups: map (g: "group:${g}") groups;
 

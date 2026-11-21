@@ -47,6 +47,7 @@
     ./thunar
     ./tmux
     ./wireshark
+    ./yazi
     ./zathura
     ./zed-editor
     ./zsh

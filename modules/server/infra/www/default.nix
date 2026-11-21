@@ -66,6 +66,13 @@ in {
       host = cfg.url;
       target = "http://127.0.0.1:${toString cfg.port}";
       port = 8923;
+      extraBots = [
+        {
+          name = "login-background";
+          path_regex = "^/assets/bg\\.webp$";
+          action = "ALLOW";
+        }
+      ];
     };
 
     services = {

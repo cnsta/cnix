@@ -2,7 +2,7 @@
    Only stable hooks are used: shadcn's CSS variables, body, pseudo-elements
    and heading tags. If Authelia renames them, these rules stop matching and
    the stock look returns; nothing here can break the login flow.
-   CSP: no data: URIs (img-src/font-src fall back to 'self'), and Vite
+   CSP: no data: URIs (font-src falls back to 'self'), and Vite
    inlines url() assets under 4 KB as data:, so every file here is larger. */
 
 @font-face {
@@ -70,9 +70,19 @@
   color-scheme: dark;
 }
 
+/* The landing page's own background, borrowed at runtime: default.nix sets
+   --cnix-bg to https://<www.url>/assets/bg.webp (and allows that origin in
+   img-src) only when the site is enabled. If it is unset or fails to load,
+   this gradient in the image's tones shows instead. */
 body {
   font-family: "DepartureMono Nerd Font", monospace;
-  background: #0b0c0b url("./cnix-theme/bg.webp") center / cover fixed;
+  background-color: #1f2a26;
+  background-image:
+    var(--cnix-bg, none),
+    radial-gradient(ellipse at 25% 15%, #5b5a4a 0%, #3b453d 45%, #1f2a26 100%);
+  background-size: cover, cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 /* Scanlines + vignette, then grain: behind the page content, above the
