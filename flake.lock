@@ -232,6 +232,22 @@
         "type": "github"
       }
     },
+    "flexoki-dark-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792459376,
+        "narHash": "sha256-uQEcTQ5N0DaQuM2AeYnjXys2RjHDwt+6/71YRu4okbg=",
+        "owner": "gosxrgxx",
+        "repo": "flexoki-dark.yazi",
+        "rev": "649e569d9e78f7573703a04135c6c62942b98a34",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gosxrgxx",
+        "repo": "flexoki-dark.yazi",
+        "type": "github"
+      }
+    },
     "fonts": {
       "inputs": {
         "flake-parts": [
@@ -639,6 +655,7 @@
         "cnixpost": "cnixpost",
         "dotfiles": "dotfiles",
         "flake-parts": "flake-parts",
+        "flexoki-dark-yazi": "flexoki-dark-yazi",
         "fonts": "fonts",
         "helix-flake": "helix-flake",
         "hjem": "hjem",

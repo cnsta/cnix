@@ -37,6 +37,9 @@ in {
           "127.0.0.1:${toString cfg.port}:8080"
         ];
         environmentFiles = [config.age.secrets.minifluxEnvironment.path];
+        environment = lib.mkIf srv.services.ntfy.enable {
+          INTEGRATION_ALLOW_PRIVATE_NETWORKS = "1";
+        };
         extraOptions =
           [
             "--add-host=host.containers.internal:host-gateway"

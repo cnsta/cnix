@@ -65,7 +65,7 @@ in {
       # thunderbird = en "kbt";
       # vscode = en "t";
       # wezterm = none;
-      # yazi = en "kbt";
+      yazi = en "kbt";
       # zathura = en "kbt";
       zed-editor = none;
       # zellij = none;

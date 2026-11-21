@@ -1,0 +1,110 @@
+/* ---- cnix theme (appended to Authelia's web/src/index.css at build time) ----
+   Only stable hooks are used: shadcn's CSS variables, body, pseudo-elements
+   and heading tags. If Authelia renames them, these rules stop matching and
+   the stock look returns; nothing here can break the login flow.
+   CSP: no data: URIs (img-src/font-src fall back to 'self'), and Vite
+   inlines url() assets under 4 KB as data:, so every file here is larger. */
+
+@font-face {
+  font-family: "DepartureMono Nerd Font";
+  src: url("./cnix-theme/DepartureMono-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Doto";
+  src: url("./cnix-theme/Doto-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* Authelia sets data-theme on <html> (JS) and <body> (Go template), each
+   re-applying its palette; (0,2,0) beats its [data-theme="…"] blocks on
+   either, whatever the order. */
+:root,
+:root[data-theme],
+:root [data-theme] {
+  --background: #0b0c0b;
+  --foreground: #f5f5dc;
+
+  --card: #121310;
+  --card-foreground: #f5f5dc;
+
+  --popover: #121310;
+  --popover-foreground: #f5f5dc;
+
+  --primary: #f5f5dc;
+  --primary-foreground: #0b0c0b;
+
+  --secondary: #ffb36b;
+  --secondary-foreground: #0b0c0b;
+
+  --muted: #1a1b17;
+  --muted-foreground: #a8a891;
+
+  --accent: #23241f;
+  --accent-foreground: #f5f5dc;
+
+  --destructive: #ff004d;
+  --destructive-foreground: #ffffff;
+
+  --success: #7bd88f;
+  --success-foreground: #0b0c0b;
+
+  --warning: #ffc66b;
+  --warning-foreground: #0b0c0b;
+
+  --info: #00f2ff;
+  --info-foreground: #0b0c0b;
+
+  --border: #3a3b33;
+  --input: #5a5b4f;
+  --ring: #ffd68c;
+
+  --radius: 0.25rem;
+
+  --custom-icon: #f5f5dc;
+  --custom-loading-bar: #f5f5dc;
+
+  --divider: rgb(245 245 220 / 0.15);
+
+  color-scheme: dark;
+}
+
+body {
+  font-family: "DepartureMono Nerd Font", monospace;
+  background: #0b0c0b url("./cnix-theme/bg.webp") center / cover fixed;
+}
+
+/* Scanlines + vignette, then grain: behind the page content, above the
+   background (body's background paints on the canvas). */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+body::before {
+  background:
+    radial-gradient(circle at center, transparent 40%, rgb(0 0 0 / 0.55) 100%),
+    linear-gradient(to bottom, transparent 50%, rgb(0 0 0 / 0.25) 50%) 0 0 /
+      100% 4px;
+}
+body::after {
+  background: url("./cnix-theme/grain.png");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Doto", "DepartureMono Nerd Font", monospace;
+  font-weight: 900;
+  font-variation-settings: "ROND" 100;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px rgb(245 245 220 / 0.3);
+}

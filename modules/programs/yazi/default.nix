@@ -1,46 +1,48 @@
 {
-  pkgs,
   config,
   lib,
+  pkgs,
+  inputs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption;
+  inherit (lib) mkIf mkEnableOption versionAtLeast;
   cfg = config.cnix.programs.yazi;
+  yazi = config.programs.yazi.package;
 in {
-  imports = [
-    ./theme
-  ];
+  options.cnix.programs.yazi.enable = mkEnableOption "yazi";
 
-  options = {
-    cnix.programs.yazi.enable = mkEnableOption "Enables yazi";
-  };
   config = mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = versionAtLeast yazi.version "26.9.1";
+        message = "flexoki-dark.yazi needs yazi >= 26.9.1, got ${yazi.version}; update nixpkgs";
+      }
+    ];
+
     programs.yazi = {
       enable = true;
-      package = pkgs.yazi;
+      package = pkgs.yazi.override {_7zz = pkgs._7zz-rar;};
+      flavors.flexoki-dark = inputs.flexoki-dark-yazi;
       settings = {
-        manager = {
-          layout = [
-            1
-            4
-            3
-          ];
-          sort_by = "alphabetical";
-          sort_sensitive = true;
-          sort_reverse = false;
-          sort_dir_first = true;
-          linemode = "none";
-          show_hidden = false;
-          show_symlink = true;
-        };
-
-        preview = {
-          tab_size = 2;
-          max_width = 600;
-          max_height = 900;
-          cache_dir = config.xdg.cacheHome;
+        yazi.mgr.sort_sensitive = true;
+        theme.flavor = {
+          dark = "flexoki-dark";
+          light = "flexoki-dark";
         };
       };
     };
+
+    environment.systemPackages = mkIf config.programs.fish.enable [
+      (pkgs.writeTextDir "share/fish/vendor_functions.d/y.fish" ''
+        function y
+            set tmp (mktemp -t "yazi-cwd.XXXXXX")
+            command yazi $argv --cwd-file="$tmp"
+            if read -z cwd < "$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
+                builtin cd -- "$cwd"
+            end
+            command rm -f -- "$tmp"
+        end
+      '')
+    ];
   };
 }

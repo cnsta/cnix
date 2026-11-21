@@ -2,6 +2,7 @@
   config,
   lib,
   clib,
+  pkgs,
   self,
   ...
 }: let
@@ -9,6 +10,18 @@
   cfg = config.cnix.server.services.${unit};
   srv = config.cnix.server;
   domain = clib.server.mkHostDomain config cfg;
+
+  themed = pkgs.authelia.override {
+    authelia-web = pkgs.authelia.web.overrideAttrs (old: {
+      postPatch =
+        (old.postPatch or "")
+        + ''
+          cp -r ${./theme} src/cnix-theme
+          chmod -R u+w src/cnix-theme
+          cat src/cnix-theme/theme.css >> src/index.css
+        '';
+    });
+  };
 
   subjectsFor = groups: map (g: "group:${g}") groups;
 
@@ -102,6 +115,7 @@ in {
           enable = true;
           user = unit;
           group = unit;
+          package = themed;
           secrets = {
             jwtSecretFile = config.age.secrets.autheliaJwt.path;
             oidcHmacSecretFile = config.age.secrets.autheliaOidcHmac.path;
@@ -110,10 +124,11 @@ in {
             storageEncryptionKeyFile = config.age.secrets.autheliaStorage.path;
           };
           settings = {
-            theme = "auto";
+            theme = "dark";
             server = {
               address = "tcp://127.0.0.1:${toString cfg.port}";
-              # asset_path = assets-no-symlinks;
+              # logo.png (shown above the form) + favicon.ico
+              asset_path = "${./assets}";
             };
             session = {
               cookies = [

@@ -123,6 +123,11 @@
       flake = false;
     };
 
+    flexoki-dark-yazi = {
+      url = "github:gosxrgxx/flexoki-dark.yazi";
+      flake = false;
+    };
+
     river-delta = {
       url = "git+https://git.cnst.dev/cnst/delta.git";
       inputs.nixpkgs.follows = "nixpkgs";
