@@ -634,11 +634,11 @@
         "zon2nix": "zon2nix"
       },
       "locked": {
-        "lastModified": 1795343186,
-        "narHash": "sha256-BEMS6+ZEfIxmbUpfXSnrI3lTp/exBaabctZZ+1rkwTk=",
+        "lastModified": 1795358876,
+        "narHash": "sha256-OVzhxbFfKP6pIoT55jLzcu8zWx86r5XqMDrBgyhIksM=",
         "ref": "refs/heads/main",
-        "rev": "9107e433afe842f9f7987a421f71f7d3d0674afb",
-        "revCount": 325,
+        "rev": "6c19c7176000d5c33e54e1419bef75d6f6c8f3d8",
+        "revCount": 350,
         "type": "git",
         "url": "https://git.cnst.dev/cnst/delta.git"
       },
@@ -768,11 +768,11 @@
         "zig": "zig_2"
       },
       "locked": {
-        "lastModified": 1795159335,
-        "narHash": "sha256-jjDq1ns4AXSVRZrTvOZSOPnDfIRvl+sFFDCibOItaRU=",
+        "lastModified": 1795371094,
+        "narHash": "sha256-njmaf1A8MDrvaPvq2HLAsjLkeehEBZjDu9KJ9VC+ESI=",
         "ref": "refs/heads/main",
-        "rev": "a2ad7d9b2c6ad01e8af7148503af348ac0b880df",
-        "revCount": 31,
+        "rev": "62d2c20375ca9eead68730d485b6ca0073e4c0a0",
+        "revCount": 34,
         "type": "git",
         "url": "https://git.cnst.dev/cnst/silt.git"
       },
