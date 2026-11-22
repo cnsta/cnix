@@ -41,6 +41,7 @@ in {
       partOf = ["graphical-session.target"];
       after = ["graphical-session.target"];
       wantedBy = ["graphical-session.target"];
+      environment.ICED_BACKEND = "tiny-skia";
       serviceConfig = {
         ExecStart = lib.getExe cfg.package;
         Restart = "always";
