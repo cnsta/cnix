@@ -634,11 +634,11 @@
         "zon2nix": "zon2nix"
       },
       "locked": {
-        "lastModified": 1795276954,
-        "narHash": "sha256-YkttW69mHJQAQfZx3BsPyE++CidJ4otkVyVNdGls20k=",
+        "lastModified": 1795343186,
+        "narHash": "sha256-BEMS6+ZEfIxmbUpfXSnrI3lTp/exBaabctZZ+1rkwTk=",
         "ref": "refs/heads/main",
-        "rev": "6e0bdd8f9a9d5ba37fab1c1606de338298f9f60c",
-        "revCount": 315,
+        "rev": "9107e433afe842f9f7987a421f71f7d3d0674afb",
+        "revCount": 325,
         "type": "git",
         "url": "https://git.cnst.dev/cnst/delta.git"
       },
