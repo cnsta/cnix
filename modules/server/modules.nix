@@ -12,17 +12,19 @@
   en = clib.mkEn host;
   when = clib.mkWhen host;
 
-  # Service definitions. Each applies on sobotka unless it sets `hosts`
-  # (clib scope letters); elsewhere it stays declared but disabled.
+  # Service definitions. `hosts` (clib scope letters) is required: the
+  # service applies there and stays declared but disabled elsewhere.
   serviceDefs = {
     # infra
     glance = {
+      hosts = "s";
       enable = true;
       subdomain = "dash";
       port = 8082;
     };
 
     authelia = {
+      hosts = "s";
       enable = true;
       subdomain = "login";
       exposure = "dedicated-tunnel";
@@ -34,6 +36,7 @@
     };
 
     lldap = {
+      hosts = "s";
       enable = true;
       auth = false;
       port = 17170;
@@ -44,6 +47,7 @@
     };
 
     headscale = {
+      hosts = "s";
       enable = true;
       subdomain = "hs";
       exposure = "public";
@@ -72,6 +76,7 @@
     };
 
     grafana = {
+      hosts = "s";
       enable = true;
       port = 3002;
       dashboard = {
@@ -80,12 +85,14 @@
     };
 
     prometheus = {
+      hosts = "s";
       enable = true;
       routed = false;
       port = 9090;
     };
 
     uptime-kuma = {
+      hosts = "s";
       enable = true;
       subdomain = "uptime";
       port = 3001;
@@ -96,6 +103,7 @@
 
     # dev
     forgejo = {
+      hosts = "s";
       enable = true;
       subdomain = "git";
       exposure = "dedicated-tunnel";
@@ -119,6 +127,7 @@
     };
 
     hydra = {
+      hosts = "s";
       enable = true;
       port = 3000;
       io = {
@@ -131,6 +140,7 @@
     };
 
     harmonia = {
+      hosts = "s";
       enable = true;
       subdomain = "cache";
       exposure = "tunnel";
@@ -139,6 +149,7 @@
 
     # media
     aurral = {
+      hosts = "s";
       enable = true;
       subdomain = "aurral";
       exposure = "tunnel";
@@ -152,6 +163,7 @@
     };
 
     bazarr = {
+      hosts = "s";
       enable = true;
       vpn = "arr";
       auth = false;
@@ -163,6 +175,7 @@
     };
 
     sonarr = {
+      hosts = "s";
       enable = true;
       vpn = "arr";
       auth = false;
@@ -174,6 +187,7 @@
     };
 
     radarr = {
+      hosts = "s";
       enable = true;
       vpn = "arr";
       auth = false;
@@ -185,6 +199,7 @@
     };
 
     prowlarr = {
+      hosts = "s";
       enable = true;
       vpn = "arr";
       auth = false;
@@ -196,6 +211,7 @@
     };
 
     speedtest-tracker = {
+      hosts = "s";
       enable = true;
       subdomain = "speedtest";
       auth = false;
@@ -209,6 +225,7 @@
     };
 
     seerr = {
+      hosts = "s";
       enable = true;
       exposure = "tunnel";
       port = 5055;
@@ -219,6 +236,7 @@
     };
 
     dispatcharr = {
+      hosts = "s";
       enable = true;
       vpn = "dispatcharr";
       subdomain = "tv";
@@ -231,6 +249,7 @@
     };
 
     jellyfin = {
+      hosts = "s";
       enable = true;
       subdomain = "fin";
       exposure = "dedicated-tunnel";
@@ -242,6 +261,7 @@
     };
 
     tdarr = {
+      hosts = "s";
       enable = true;
       auth = false;
       port = 8265;
@@ -256,6 +276,7 @@
     };
 
     navidrome = {
+      hosts = "s";
       enable = true;
       subdomain = "music";
       exposure = "tunnel";
@@ -268,6 +289,7 @@
     };
 
     music-assistant = {
+      hosts = "s";
       enable = true;
       subdomain = "ma";
       auth = false;
@@ -280,6 +302,7 @@
 
     # downloads
     qbittorrent = {
+      hosts = "s";
       enable = true;
       vpn = "qbt";
       subdomain = "qbt";
@@ -293,6 +316,7 @@
     };
 
     sabnzbd = {
+      hosts = "s";
       enable = true;
       vpn = "arr";
       auth = false;
@@ -305,6 +329,7 @@
     };
 
     slskd = {
+      hosts = "s";
       enable = false;
       vpn = "slskd";
       exposure = "local";
@@ -316,6 +341,7 @@
     };
 
     flaresolverr = {
+      hosts = "s";
       enable = true;
       vpn = "arr";
       auth = false;
@@ -329,6 +355,7 @@
 
     # cloud
     immich = {
+      hosts = "s";
       enable = true;
       exposure = "tailscale";
       groups = ["admins" "users"];
@@ -340,6 +367,7 @@
     };
 
     memos = {
+      hosts = "s";
       enable = true;
       exposure = "tailscale";
       groups = ["admins" "users"];
@@ -350,6 +378,7 @@
     };
 
     vaultwarden = {
+      hosts = "s";
       enable = true;
       subdomain = "vault";
       exposure = "dedicated-tunnel";
@@ -363,6 +392,7 @@
 
     # communication
     fluxer = {
+      hosts = "s";
       enable = false;
       subdomain = "chat";
       exposure = "public";
@@ -373,6 +403,7 @@
     };
 
     miniflux = {
+      hosts = "s";
       enable = true;
       subdomain = "feed";
       port = 8087;
@@ -383,6 +414,7 @@
     };
 
     ntfy = {
+      hosts = "s";
       enable = true;
       port = 2586;
       exposure = "tailscale";
@@ -393,6 +425,7 @@
     };
 
     roundcube = {
+      hosts = "s";
       enable = false;
       subdomain = "mail";
       port = 5679;
@@ -403,6 +436,7 @@
 
     # automation
     home-assistant = {
+      hosts = "s";
       enable = true;
       subdomain = "ha";
       exposure = "tailscale";
@@ -414,6 +448,7 @@
     };
 
     ollama = {
+      hosts = "s";
       enable = false;
       exposure = "local";
       port = 8001;
@@ -534,7 +569,10 @@ in {
 
     services = mkMerge [
       (genAttrs (builtins.attrNames serviceDefs) (_: {}))
-      (mapAttrs (_: d: when (d.hosts or "s") (removeAttrs d ["hosts"])) serviceDefs)
+      (mapAttrs (name: d:
+        when (d.hosts or (throw "modules/server/modules.nix: service `${name}` needs `hosts`"))
+        (removeAttrs d ["hosts"]))
+      serviceDefs)
     ];
   };
 }
