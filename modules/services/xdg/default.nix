@@ -11,20 +11,52 @@ with lib; let
   fileManager = "org.gnome.Nautilus.desktop";
   imageManager = "swayimg.desktop";
   textEditor = "Helix.desktop";
-  browser =
-    if
-      builtins.elem config.networking.hostName [
-        "kima"
-        "bunk"
-      ]
-    then "zen-beta.desktop"
-    else "firefox.desktop";
-
-  videoApps = [
-    "mpv.desktop"
-    "vlc.desktop"
-  ];
+  inherit (cfg) browser;
+  mediaPlayer = "mpv.desktop";
+  pdfViewer = "org.pwmt.zathura-pdf-mupdf.desktop";
   archiveApp = "org.gnome.FileRoller.desktop";
+
+  videoMimeTypes = [
+    "video/H264"
+    "video/x-msvideo"
+    "video/mp4"
+    "video/mpeg"
+    "video/ogg"
+    "video/mp2t"
+    "video/webm"
+    "video/3gpp"
+    "video/3gpp2"
+    "video/x-matroska"
+    "video/quicktime"
+  ];
+
+  audioMimeTypes = [
+    "audio/mpeg"
+    "audio/flac"
+    "audio/x-flac"
+    "audio/ogg"
+    "audio/opus"
+    "audio/wav"
+    "audio/x-wav"
+    "audio/aac"
+    "audio/mp4"
+    "audio/x-m4a"
+    "audio/webm"
+  ];
+
+  archiveMimeTypes = [
+    "application/x-7z-compressed"
+    "application/zip"
+    "application/vnd.rar"
+    "application/x-bzip"
+    "application/x-bzip2"
+    "application/x-tar"
+    "application/gzip"
+    "application/x-xz"
+    "application/zstd"
+    "application/x-compressed-tar"
+    "application/x-xz-compressed-tar"
+  ];
 
   textEditorMimeTypes = [
     "text/plain"
@@ -92,7 +124,7 @@ with lib; let
       "application/x-extension-xht" = browser;
       "application/xhtml+xml" = browser;
       "application/json" = browser;
-      "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
+      "application/pdf" = pdfViewer;
       "inode/directory" = fileManager;
 
       "image/apng" = imageManager;
@@ -104,25 +136,9 @@ with lib; let
       "image/svg+xml" = imageManager;
       "image/tiff" = imageManager;
       "image/webp" = imageManager;
-
-      "video/H264" = videoApps;
-      "video/x-msvideo" = videoApps;
-      "video/mp4" = videoApps;
-      "video/mpeg" = videoApps;
-      "video/ogg" = videoApps;
-      "video/mp2t" = videoApps;
-      "video/webm" = videoApps;
-      "video/3gpp" = videoApps;
-      "video/3gpp2" = videoApps;
-
-      "application/x-7z-compressed" = archiveApp;
-      "application/zip" = archiveApp;
-      "application/vnd.rar" = archiveApp;
-      "application/x-bzip" = archiveApp;
-      "application/x-bzip2" = archiveApp;
-      "application/x-tar" = archiveApp;
-      "application/gzip" = archiveApp;
     }
+    // genAttrs (videoMimeTypes ++ audioMimeTypes) (_: mediaPlayer)
+    // genAttrs archiveMimeTypes (_: archiveApp)
     // genAttrs textEditorMimeTypes (_: textEditor);
 
   mimeValueString = v: let
@@ -161,8 +177,14 @@ with lib; let
     "%h/.local/cache"
   ];
 in {
-  options.cnix.services.xdg.enable =
-    mkEnableOption "XDG base dirs, user dirs, MIME defaults, and session vars";
+  options.cnix.services.xdg = {
+    enable = mkEnableOption "XDG base dirs, user dirs, MIME defaults, and session vars";
+    browser = mkOption {
+      type = types.str;
+      example = "firefox.desktop";
+      description = "Desktop file that opens web content (set per host in modules.nix).";
+    };
+  };
 
   config = mkIf cfg.enable {
     environment.systemPackages = [pkgs.xdg-utils];

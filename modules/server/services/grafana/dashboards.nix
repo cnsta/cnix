@@ -46,7 +46,10 @@
       inherit (d) hash;
     };
 
-  home = pkgs.writeText "home.json" (builtins.toJSON (import ./home.nix {inherit lib;}));
+  home = pkgs.writeText "home.json" (builtins.toJSON (import ./home.nix {
+    inherit lib;
+    host = config.networking.hostName;
+  }));
 
   dir = pkgs.runCommand "grafana-dashboards" {} ''
     mkdir $out
@@ -62,8 +65,8 @@ in {
 
     services.grafana.provision.dashboards.settings.providers = [
       {
-        name = "sobotka";
-        folder = "sobotka";
+        name = config.networking.hostName;
+        folder = config.networking.hostName;
         options.path = dir;
         # store paths are read-only, edits in the UI would be lost anyway.
         allowUiUpdates = false;

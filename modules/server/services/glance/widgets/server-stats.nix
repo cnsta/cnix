@@ -1,4 +1,8 @@
-{config, ...}: [
+{
+  config,
+  srv,
+  ...
+}: [
   {
     type = "server-stats";
     servers = [
@@ -11,7 +15,7 @@
             hide = false;
             name = "Root";
           };
-          "/mnt/data" = {
+          ${srv.mediaDir} = {
             hide = false;
             name = "Media";
           };

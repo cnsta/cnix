@@ -9,26 +9,22 @@
   unit = "headscale";
   cfg = config.cnix.server.services.${unit};
   srv = config.cnix.server;
-  domain = clib.server.mkHostDomain config cfg;
+  domain = clib.server.mkDomain config cfg;
   fqdn = "${cfg.subdomain}.${domain}";
 
-  autheliaUrl = "https://login.${domain}";
+  autheliaUrl = clib.server.autheliaUrl config cfg;
 
   headplanePort = 3005;
 
   tailnet = srv.tailnet;
 
   autheliaUp = srv.services.authelia.enable;
-  localDomain = config.cnix.settings.accounts.domains.local;
+  site = config.cnix.settings.site;
   tailnetServices =
     lib.filterAttrs (
-      _: s:
-        s.enable
-        && s.routed
-        && s.subdomain != ""
-        && !(s.exposure == "local" && !(s.auth && autheliaUp))
+      _: s: !(s.exposure == "local" && !(s.auth && autheliaUp))
     )
-    srv.services;
+    (clib.server.routable config);
 
   tailnetNames =
     lib.mapAttrsToList (_: clib.server.mkFullDomain config) tailnetServices
@@ -36,8 +32,7 @@
         _: s: map (sub: "${sub}.${clib.server.mkDomain config s}") (lib.attrNames s.ingress)
       )
       tailnetServices)
-    ++ ["traefik.${localDomain}"]
-    ++ lib.optional autheliaUp "login.${localDomain}"
+    ++ clib.server.localAliases config
     ++ lib.optional srv.infra.www.enable srv.infra.www.url;
 
   policy = pkgs.writeText "headscale-policy.json" (builtins.toJSON {
@@ -128,8 +123,8 @@ in {
         };
 
         prefixes = {
-          v4 = "100.64.88.0/24";
-          v6 = "fd7a:115c:a1e0:88::/64";
+          v4 = site.subnets.tailnet4;
+          v6 = site.subnets.tailnet6;
           allocation = "sequential";
         };
 
@@ -190,7 +185,7 @@ in {
         "${config.services.headscale.configFile}:/etc/headscale/config.yaml:ro"
       ];
       environment = {
-        TZ = "Europe/Stockholm";
+        TZ = config.cnix.server.timeZone;
       };
       environmentFiles = [config.age.secrets.headplaneEnv.path];
       extraOptions = ["--network=host"];

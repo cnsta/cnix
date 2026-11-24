@@ -1,37 +1,28 @@
 {
   lib,
   config,
+  hosts,
   self,
   ...
 }: let
   unit = "keepalived";
   cfg = config.cnix.server.infra.${unit};
 
-  hostCfg = hostname:
-    if hostname == "sobotka"
-    then {
-      ip = "192.168.88.14";
-      priority = 20;
-    }
-    else if hostname == "ziggy"
-    then {
-      ip = "192.168.88.12";
-      priority = 10;
-    }
-    else throw "No keepalived config defined for host ${hostname}";
-
-  _self = hostCfg config.networking.hostName;
-
-  allPeers = [
-    "192.168.88.12"
-    "192.168.88.14"
-  ];
-  peers = builtins.filter (ip: ip != _self.ip) allPeers;
+  selfIp = config.cnix.settings.network.localIp;
+  peers = map (h: hosts.${h}.ip) (lib.filter (h: h != config.networking.hostName) cfg.members);
 
   hasCheck = cfg.healthCheck != null;
 in {
   options.cnix.server.infra.${unit} = {
     enable = lib.mkEnableOption "Enable ${unit}";
+    members = lib.mkOption {
+      type = lib.types.listOf (lib.types.enum (lib.attrNames hosts));
+      description = "Hosts (hosts/registry.nix names, each with an `ip`) sharing the VIP.";
+    };
+    priority = lib.mkOption {
+      type = lib.types.ints.between 1 254;
+      description = "VRRP priority; the highest healthy member holds the VIP.";
+    };
     interface = lib.mkOption {
       type = lib.types.str;
       example = "eth0";
@@ -80,10 +71,10 @@ in {
         state = "BACKUP";
         interface = cfg.interface;
         virtualRouterId = 69;
-        priority = _self.priority;
-        unicastSrcIp = _self.ip;
+        inherit (cfg) priority;
+        unicastSrcIp = selfIp;
         unicastPeers = peers;
-        virtualIps = [{addr = "192.168.88.69/24";}];
+        virtualIps = [{addr = "${config.cnix.settings.site.dnsVip}/24";}];
         trackScripts = lib.optionals hasCheck ["chk_service"];
         extraConfig = ''
           garp_master_refresh 5

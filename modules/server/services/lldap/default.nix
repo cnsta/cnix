@@ -1,14 +1,13 @@
 {
   config,
+  clib,
   lib,
   self,
   ...
 }:
 with lib; let
   lldap-user = "lldap";
-  lldap-base-dn = lib.strings.concatMapStringsSep "," (dc: "dc=" + dc) (
-    lib.splitString "." config.cnix.server.domain
-  );
+  lldap-base-dn = clib.server.ldapBaseDn config.cnix.settings.site.domains.local;
   cfg = config.cnix.server.services.lldap;
   srv = config.cnix.server.infra;
 in {
@@ -40,6 +39,7 @@ in {
     services.lldap = {
       enable = true;
       settings = {
+        http_port = cfg.port;
         ldap_base_dn = lldap-base-dn;
         ldap_user_dn = "admin";
         ldap_user_email = "mail@${srv.www.url}";

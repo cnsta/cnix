@@ -10,6 +10,7 @@
     ./network
     ./nix
     ./peripherals
+    ./site
     ./theme
   ];
 }

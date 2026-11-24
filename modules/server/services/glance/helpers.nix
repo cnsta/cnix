@@ -19,6 +19,5 @@
     then "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/${ext}/${base}.${ext}"
     else "di:${icon}";
 
-  getDomain = s: clib.server.mkHostDomain config s;
-  publicUrl = s: "https://${s.subdomain}.${getDomain s}${s.dashboard.path}";
+  publicUrl = s: "${clib.server.mkUrl config s}${s.dashboard.path}";
 }

@@ -1,5 +1,6 @@
 {
   config,
+  clib,
   lib,
   ...
 }: let
@@ -8,19 +9,17 @@
   cfg = config.cnix.server.services.${unit};
 in {
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
-    systemd.tmpfiles.rules = ["d /var/lib/home-assistant 0775 ${srv.user} ${srv.group} - -"];
+    systemd.tmpfiles.rules = ["d ${cfg.configDir} 0775 ${srv.user} ${srv.group} - -"];
     virtualisation.oci-containers.containers = {
       ${unit} = {
         autoStart = true;
         image = "docker.io/homeassistant/home-assistant:stable";
         volumes = [
-          "/var/lib/home-assistant:/config"
+          "${cfg.configDir}:/config"
           "/run/dbus:/run/dbus:ro"
         ];
         environment = {
-          TZ = "Europe/Stockholm";
-          PUID = toString config.users.users.${srv.user}.uid;
-          PGID = toString config.users.groups.${srv.group}.gid;
+          inherit (clib.server.containerEnv config) TZ PUID PGID;
         };
         extraOptions = [
           "--network=host"

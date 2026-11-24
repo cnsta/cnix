@@ -1,8 +1,8 @@
 {
   imports = [
+    ./arr
     ./aurral
     ./authelia
-    ./bazarr
     ./dispatcharr
     ./flaresolverr
     ./fluxer
@@ -15,30 +15,20 @@
     ./jellyfin
     ./seerr
     ./lldap
-    ./lidarr
     ./forgejo
     ./memos
     ./miniflux
     ./navidrome
     ./ntfy
-    ./n8n
-    ./octo-fiesta
     ./ollama
     ./pihole
     ./prometheus
-    ./prowlarr
-    ./radarr
     ./roundcube
-    ./sabnzbd
-    ./searxng
     ./slskd
-    ./sonarr
     ./speedtest-tracker
     ./tdarr
-    ./turnstone
     ./uptime-kuma
     ./vaultwarden
-    ./qbittorrent
     ./home-assistant
     ./music-assistant
   ];

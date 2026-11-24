@@ -2,28 +2,19 @@
   cnix.settings = {
     accounts = {
       username = "toothpick";
-      mail = "fredrik@libellux";
-      sshUser = "toothpc";
+      mail = "fredrik@libellux.com";
     };
 
     boot = {
       kernel = {
         variant = "latest";
-        hardware = ["nvidia"];
         extraBlacklistedModules = ["ucsi_ccg" "i2c_nvidia_gpu"];
       };
       loader = {
-        default = {
-          enable = false;
-        };
         lanzaboote = {
           enable = true;
         };
       };
-    };
-
-    fonts = {
-      enable = true;
     };
 
     graphics = {
@@ -32,13 +23,6 @@
         package = "latest";
         open = true;
       };
-    };
-
-    locale = {
-      defaultLocale = "en_US.UTF-8";
-      enable = true;
-      extraLocale = "sv_SE.UTF-8";
-      timeZone = "Europe/Stockholm";
     };
 
     monitors = [
@@ -55,14 +39,9 @@
     network = {
       enable = true;
       tailscale.enable = true;
-      bluetooth.enable = false;
       interfaces = {
         "enp4s0" = {
-          allowedTCPPorts = [
-            22
-            80
-            443
-          ];
+          allowedTCPPorts = [22];
         };
       };
     };
@@ -76,8 +55,6 @@
 
     peripherals = {
       logitech.enable = true;
-      kanata.enable = false;
-      adb.enable = false;
       yubikey = {
         manager.enable = true;
         touch-detector.enable = true;

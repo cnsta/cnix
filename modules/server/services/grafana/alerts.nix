@@ -122,8 +122,8 @@ in {
         groups = [
           {
             orgId = 1;
-            name = "sobotka";
-            folder = "sobotka";
+            name = config.networking.hostName;
+            folder = config.networking.hostName;
             interval = "1m";
             inherit rules;
           }
@@ -140,7 +140,7 @@ in {
               {
                 uid = "email";
                 type = "email";
-                settings.addresses = srv.email;
+                settings.addresses = config.cnix.settings.site.mail;
               }
             ];
           }

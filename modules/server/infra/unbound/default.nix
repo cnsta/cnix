@@ -12,7 +12,8 @@
   srv = config.cnix.server;
 
   localIp = config.cnix.settings.network.localIp;
-  domains = config.cnix.settings.accounts.domains;
+  site = config.cnix.settings.site;
+  domains = site.domains;
 
   tuning =
     {
@@ -47,17 +48,13 @@
       cfg.profile
     };
 
-  localARecords =
-    lib.mapAttrsToList
-    (_: s: ''"${clib.server.mkFullDomain config s}. A ${cfg.serviceIp}"'')
-    (lib.filterAttrs
-      (_: s: s.enable && s.routed && s.subdomain != "")
-      srv.services);
+  aRecord = name: ''"${name}. A ${cfg.serviceIp}"'';
 
-  wwwRecord = lib.optionals srv.infra.www.enable [
-    ''"${srv.infra.www.url}. A ${cfg.serviceIp}"''
-    ''"${domains.local}. A ${cfg.serviceIp}"''
-  ];
+  localARecords =
+    map aRecord cfg.extraNames
+    ++ lib.mapAttrsToList (_: s: aRecord (clib.server.mkFullDomain config s)) (clib.server.routable config);
+
+  wwwRecord = lib.optionals srv.infra.www.enable (map aRecord [srv.infra.www.url domains.local]);
 in {
   options.cnix.server.infra.${unit} = {
     enable = mkEnableOption "recursive DNS resolution with unbound";
@@ -73,13 +70,26 @@ in {
 
     serviceIp = mkOption {
       type = types.str;
-      default = srv.ip;
-      defaultText = lib.literalExpression "config.cnix.server.ip";
+      default = localIp;
+      defaultText = lib.literalExpression "config.cnix.settings.network.localIp";
       description = ''
         Address that generated A records point at. This is the host running
         Traefik, which is not necessarily the host running unbound, the DNS
         backup resolves service names to the primary, not to itself.
       '';
+    };
+
+    extraNames = mkOption {
+      type = types.listOf types.str;
+      default = clib.server.localAliases config;
+      defaultText = lib.literalMD "`clib.server.localAliases config` (Traefik dashboard, `localAlias` services)";
+      description = "Extra FQDNs that resolve to serviceIp.";
+    };
+
+    extraAllowedSubnets = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      description = "Client subnets allowed besides loopback, LAN, podman and the tailnet.";
     };
 
     listenPort = mkOption {
@@ -122,7 +132,7 @@ in {
       {
         assertion = domains.local != "" && domains.public != "";
         message = ''
-          cnix.server.infra.unbound: cnix.settings.accounts.domains is unset on
+          cnix.server.infra.unbound: cnix.settings.site.domains is unset on
           ${config.networking.hostName}. Generated records would be nonsense
           (this is what produced `pihole.127.0.0.1`).
         '';
@@ -196,17 +206,14 @@ in {
           "${localIp}@${toString cfg.listenPort}"
         ];
 
-        access-control = [
-          "127.0.0.0/8 allow"
-          "::1 allow"
-          "10.88.0.0/24 allow"
-          "192.168.88.0/24 allow"
-          "192.168.20.0/24 allow"
-          "100.64.88.0/24 allow"
-          "fd7a:115c:a1e0:88::/64 allow"
-          "0.0.0.0/0 refuse"
-          "::0/0 refuse"
-        ];
+        access-control =
+          map (n: "${n} allow") (
+            ["127.0.0.0/8" "::1"]
+            ++ (with site.subnets; [podman lan])
+            ++ cfg.extraAllowedSubnets
+            ++ (with site.subnets; [tailnet4 tailnet6])
+          )
+          ++ ["0.0.0.0/0 refuse" "::0/0 refuse"];
 
         # sizing
         num-threads = tuning.threads;
@@ -285,13 +292,7 @@ in {
           ''"${domains.public}." transparent''
         ];
 
-        local-data =
-          [
-            ''"traefik.${domains.local}. A ${cfg.serviceIp}"''
-            ''"login.${domains.local}. A ${cfg.serviceIp}"''
-          ]
-          ++ localARecords
-          ++ wwwRecord;
+        local-data = localARecords ++ wwwRecord;
       };
     };
   };

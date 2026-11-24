@@ -9,8 +9,34 @@
   cfg = config.cnix.server.services.${unit};
   domain = clib.server.mkFullDomain config cfg;
   qr = config.services.hydra.queueRunner;
+  buildDevice = config.cnix.settings.nix.buildDevice;
 in {
+  # Hydra-only fields on the service submodule; values live in modules.nix.
+  options.cnix.server.services = lib.mkOption {
+    type = lib.types.attrsOf (lib.types.submodule {
+      options.io = {
+        writeBandwidthMax = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          default = null;
+          description = "Write bandwidth cap for system-hydra.slice on settings.nix.buildDevice.";
+        };
+        writeIOPSMax = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          default = null;
+          description = "Write IOPS cap for system-hydra.slice on settings.nix.buildDevice.";
+        };
+      };
+    });
+  };
+
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = (cfg.io.writeBandwidthMax != null || cfg.io.writeIOPSMax != null) -> buildDevice != null;
+        message = "cnix.server.services.hydra.io needs cnix.settings.nix.buildDevice.";
+      }
+    ];
+
     cnix.server.infra.postgresql.databases = [
       {
         database = "hydra";
@@ -39,9 +65,9 @@ in {
           CPUWeight = 30;
         };
       };
-      slices.system-hydra.sliceConfig = {
-        IOWriteBandwidthMax = "/dev/nvme0n1 100M";
-        IOWriteIOPSMax = "/dev/nvme0n1 10000";
+      slices.system-hydra.sliceConfig = lib.filterAttrs (_: v: v != null) {
+        IOWriteBandwidthMax = lib.mapNullable (v: "${buildDevice} ${v}") cfg.io.writeBandwidthMax;
+        IOWriteIOPSMax = lib.mapNullable (v: "${buildDevice} ${v}") cfg.io.writeIOPSMax;
       };
     };
 
@@ -49,7 +75,7 @@ in {
       enable = true;
       package = pkgs.hydra;
       hydraURL = "https://${domain}";
-      notificationSender = "hydra@${config.cnix.settings.accounts.domains.public}";
+      notificationSender = "hydra@${config.cnix.settings.site.domains.public}";
       listenHost = "localhost";
       port = cfg.port;
       smtpHost = "localhost";

@@ -20,12 +20,8 @@
   acct = config.cnix.settings.accounts;
 
   shellCommand =
-    if config.cnix.programs.nushell.enable or false
-    then "${getExe pkgs.nushell}"
-    else if config.cnix.programs.fish.enable or false
+    if config.cnix.programs.fish.enable
     then "${getExe pkgs.fish}"
-    else if config.cnix.programs.zsh.enable or false
-    then "${getExe pkgs.zsh}"
     else null;
 
   settings =

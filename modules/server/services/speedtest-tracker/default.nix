@@ -1,5 +1,6 @@
 {
   config,
+  clib,
   lib,
   self,
   ...
@@ -14,7 +15,7 @@ in {
     };
 
     systemd.tmpfiles.rules = [
-      "d /var/lib/speedtest-tracker 0750 1000 1000 -"
+      "d ${cfg.configDir} 0750 ${srv.user} ${srv.group} -"
     ];
 
     virtualisation.oci-containers.containers = {
@@ -23,11 +24,10 @@ in {
         autoStart = true;
         ports = ["127.0.0.1:${toString cfg.port}:80"];
         volumes = [
-          "/var/lib/speedtest-tracker:/config:rw"
+          "${cfg.configDir}:/config:rw"
         ];
         environment = {
-          PUID = "1000";
-          PGID = "1000";
+          inherit (clib.server.containerEnv config) PUID PGID;
           DB_CONNECTION = "sqlite";
           SPEEDTEST_SCHEDULE = "17 */4 * * *";
           PRUNE_RESULTS_OLDER_THAN = "365";

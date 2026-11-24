@@ -12,8 +12,6 @@ in {
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
-      enableBashIntegration = mkIf cfg.bash.enable true;
-      enableZshIntegration = mkIf cfg.zsh.enable true;
       enableFishIntegration = mkIf cfg.fish.enable true;
     };
   };

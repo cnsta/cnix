@@ -1,39 +1,18 @@
-{
+{config, ...}: {
   cnix.settings = {
-    accounts = {
-      username = "cnst";
-      mail = "adam@cnst.dev";
-      sshUser = "bunk";
-    };
-
     boot = {
       kernel = {
         variant = "latest";
-        hardware = ["amd"];
       };
       loader = {
         default = {
           enable = true;
         };
-        lanzaboote = {
-          enable = false;
-        };
       };
-    };
-
-    fonts = {
-      enable = true;
     };
 
     graphics = {
       vendors = ["amd"];
-    };
-
-    locale = {
-      defaultLocale = "en_US.UTF-8";
-      enable = true;
-      extraLocale = "sv_SE.UTF-8";
-      timeZone = "Europe/Stockholm";
     };
 
     monitors = [
@@ -48,7 +27,6 @@
       }
       {
         name = "HDMI-A-1";
-        wallpaper = "secondary";
         width = 1920;
         height = 1080;
         refreshRate = "60";
@@ -67,20 +45,13 @@
       enable = true;
       tailscale.enable = true;
       bluetooth.enable = true;
-      nameservers = [
-        "192.168.88.1"
-        "192.168.88.69"
-      ];
+      nameservers = with config.cnix.settings.site; [router dnsVip];
       search = [
         "stalk-regulus.ts.net"
       ];
       interfaces = {
         "wlp6s0" = {
-          allowedTCPPorts = [
-            22
-            80
-            443
-          ];
+          allowedTCPPorts = [22];
         };
       };
     };
@@ -93,8 +64,6 @@
     };
 
     peripherals = {
-      logitech.enable = false;
-      kanata.enable = false;
       adb.enable = true;
       yubikey = {
         manager.enable = true;

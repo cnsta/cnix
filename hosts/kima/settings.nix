@@ -1,41 +1,19 @@
 {pkgs, ...}: {
   cnix.settings = {
-    accounts = {
-      username = "cnst";
-      mail = "adam@cnst.dev";
-      sshUser = "kima";
-    };
-
     boot = {
       kernel = {
         variant = "latest";
-        hardware = ["amd"];
-        extraKernelParams = [];
         amdOverdrive.enable = true;
       };
       loader = {
-        default = {
-          enable = false;
-        };
         lanzaboote = {
           enable = true;
         };
       };
     };
 
-    fonts = {
-      enable = true;
-    };
-
     graphics = {
       vendors = ["amd"];
-    };
-
-    locale = {
-      enable = true;
-      defaultLocale = "en_US.UTF-8";
-      extraLocale = "sv_SE.UTF-8";
-      timeZone = "Europe/Stockholm";
     };
 
     monitors = [
@@ -66,14 +44,9 @@
       enable = true;
       tailscale.enable = true;
       bluetooth.enable = true;
-      localIp = "192.168.88.13";
       interfaces = {
         "eno1" = {
-          allowedTCPPorts = [
-            22
-            80
-            443
-          ];
+          allowedTCPPorts = [22];
         };
       };
     };
@@ -86,7 +59,6 @@
     };
 
     peripherals = {
-      logitech.enable = false;
       kanata.enable = true;
       adb.enable = true;
       yubikey = {

@@ -4,9 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption;
-  cfg = config.home.programs.zathura;
+  inherit (lib) mkIf mkEnableOption genAttrs concatStringsSep mapAttrsToList isBool boolToString;
+  cfg = config.cnix.programs.zathura;
+  acct = config.cnix.settings.accounts;
 
+  # gruvbox, matching foot
   options = {
     selection-clipboard = "clipboard";
     notification-error-bg = "rgba(40,40,40,1)";
@@ -48,11 +50,26 @@
     recolor = true;
     recolor-keephue = true;
   };
+
+  zathurarc =
+    concatStringsSep "\n" (mapAttrsToList (k: v: ''set ${k} "${
+        if isBool v
+        then boolToString v
+        else v
+      }"'')
+    options)
+    + "\n";
 in {
-  options = {
-    home.programs.zathura.enable = mkEnableOption "Enables zathura";
-  };
+  options.cnix.programs.zathura.enable = mkEnableOption "zathura (PDF viewer)";
+
   config = mkIf cfg.enable {
     environment.systemPackages = [pkgs.zathura];
+
+    hjem.users = genAttrs acct.defaultUsers (_: {
+      files.".config/zathura/zathurarc" = {
+        text = zathurarc;
+        clobber = true;
+      };
+    });
   };
 }

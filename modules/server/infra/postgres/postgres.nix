@@ -77,7 +77,8 @@ in {
 
     trustedSubnets = mkOption {
       type = types.listOf types.str;
-      default = ["10.88.0.0/16"];
+      default = [config.cnix.settings.site.subnets.podman];
+      defaultText = lib.literalExpression "[config.cnix.settings.site.subnets.podman]";
       description = ''
         CIDRs allowed to connect over TCP with password auth.
         Defaults to podman's default bridge subnet.

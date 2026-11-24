@@ -1,4 +1,9 @@
-{srv, ...}: [
+{
+  lib,
+  srv,
+  ...
+}:
+lib.optionals srv.services.pihole.enable [
   {
     type = "dns-stats";
     service = "pihole-v6";

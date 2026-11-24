@@ -1,5 +1,6 @@
 {
   config,
+  clib,
   lib,
   ...
 }: let
@@ -92,7 +93,7 @@ in {
 
       cnix.server.infra.anubis.sites =
         mapAttrs (_: svc: {
-          host = "${svc.subdomain}.${config.cnix.server.infra.www.url}";
+          host = clib.server.mkFullDomain config svc;
           target = "http://127.0.0.1:${toString svc.port}";
           inherit (svc.anubis) port;
           extraBots =

@@ -1,27 +1,13 @@
 {
   cnix.settings = {
-    accounts = {
-      username = "cnst";
-      mail = "adam@cnst.dev";
-      sshUser = "sobotka";
-      domains = {
-        local = "cnix.dev";
-        public = "cnst.dev";
-      };
-    };
-
     boot = {
       kernel = {
         variant = "stable";
-        hardware = ["amd"];
         extraKernelParams = ["zfs.zfs_arc_max=34359738368"];
       };
       loader = {
         default = {
           enable = true;
-        };
-        lanzaboote = {
-          enable = false;
         };
       };
     };
@@ -37,26 +23,15 @@
       ];
     };
 
-    locale = {
-      enable = true;
-      defaultLocale = "en_US.UTF-8";
-      extraLocale = "sv_SE.UTF-8";
-      timeZone = "Europe/Stockholm";
-    };
-
     network = {
       enable = true;
-      tailscale.enable = false;
       bluetooth.enable = true;
-      localIp = "192.168.88.14";
       interfaces = {
         "enp6s0" = {
           allowedTCPPorts = [
             22
             80
             443
-          ];
-          allowedUDPPorts = [
           ];
         };
       };
@@ -70,18 +45,12 @@
       memoryMax = "40G";
       maxJobs = 4;
       cores = 6;
-      ioWriteBandwidthMax = ["/dev/nvme0n1 200M"];
-      ioWriteIOPSMax = ["/dev/nvme0n1 20000"];
+      buildDevice = "/dev/nvme0n1";
+      ioWriteBandwidthMax = "200M";
+      ioWriteIOPSMax = "20000";
     };
 
     peripherals = {
-      logitech.enable = false;
-      kanata.enable = false;
-      adb.enable = false;
-      yubikey = {
-        manager.enable = false;
-        touch-detector.enable = false;
-      };
       pcscd.enable = true;
       utils.enable = true;
     };

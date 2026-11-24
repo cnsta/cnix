@@ -1,5 +1,6 @@
 {
   config,
+  hosts,
   lib,
   ...
 }: let
@@ -29,8 +30,9 @@ in {
       };
       localIp = lib.mkOption {
         type = lib.types.str;
-        default = "127.0.0.1";
-        description = "The local IP of the service.";
+        default = hosts.${config.networking.hostName}.ip or "127.0.0.1";
+        defaultText = lib.literalMD "the host's `ip` in hosts/registry.nix, else 127.0.0.1";
+        description = "This host's static LAN IPv4.";
       };
       interfaces = mkOption {
         type = types.attrsOf (
@@ -86,10 +88,10 @@ in {
     };
 
     services = {
-      timesyncd.servers = ["192.168.88.1"];
+      timesyncd.servers = [config.cnix.settings.site.router];
       tailscale = mkIf cfg.tailscale.enable {
         enable = true;
-        extraUpFlags = ["--login-server=https://hs.cnst.dev"];
+        extraUpFlags = ["--login-server=${config.cnix.settings.site.loginServer}"];
         extraSetFlags = ["--accept-routes" "--operator=${config.cnix.settings.accounts.username}"];
       };
     };

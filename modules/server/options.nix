@@ -9,25 +9,6 @@
 in {
   options.cnix.server = {
     enable = lib.mkEnableOption "The server services and configuration variables";
-    email = mkOption {
-      default = "";
-      type = types.str;
-      description = ''
-        Email name to be used to access the server services via Caddy reverse proxy
-      '';
-    };
-    domain = mkOption {
-      default = "";
-      type = types.str;
-      description = ''
-        Domain name to be used to access the server services via Caddy reverse proxy
-      '';
-    };
-    ip = lib.mkOption {
-      type = lib.types.str;
-      default = "127.0.0.1";
-      description = "The local IP of the service.";
-    };
     user = lib.mkOption {
       default = "share";
       type = lib.types.str;
@@ -57,7 +38,8 @@ in {
       '';
     };
     timeZone = lib.mkOption {
-      default = "Europe/Stockholm";
+      default = config.time.timeZone;
+      defaultText = lib.literalExpression "config.time.timeZone";
       type = lib.types.str;
       description = ''
         Time zone to be used for the server services
@@ -93,6 +75,11 @@ in {
         };
       });
     };
+    mediaDir = mkOption {
+      type = types.str;
+      default = "/mnt/data";
+      description = "Media/downloads root, mounted as /data in the media containers.";
+    };
     publicIp = mkOption {
       type = types.nullOr types.str;
       default = null;
@@ -105,8 +92,7 @@ in {
     tailnet = {
       ip = mkOption {
         type = types.str;
-        default = "100.64.88.2";
-        description = "This server's tailnet IPv4 address. Tailnet service names resolve to it.";
+        description = "This server's tailnet IPv4 address (inside site.subnets.tailnet4). Tailnet service names resolve to it.";
       };
       groups = mkOption {
         type = types.attrsOf (types.listOf types.str);
@@ -163,6 +149,24 @@ in {
                 ];
                 default = "local";
                 description = "Controls where the service is exposed";
+              };
+              localAlias = mkOption {
+                type = types.bool;
+                default = false;
+                description = ''
+                  Also answer on <subdomain>.<local domain> (Traefik router, unbound
+                  record, tailnet name), for services whose public name LAN clients
+                  shouldn't need (Authelia).
+                '';
+              };
+              vpn = mkOption {
+                type = types.nullOr types.str;
+                default = null;
+                example = "arr";
+                description = ''
+                  Run inside this cnix.server.infra.gluetun instance's network
+                  namespace; the instance publishes `port` on 127.0.0.1.
+                '';
               };
               ingress = lib.mkOption {
                 type = lib.types.attrsOf lib.types.str;
@@ -362,22 +366,11 @@ in {
         extraGroups = ifTheyExist [
           "audio"
           "video"
-          "docker"
-          "libvirtd"
-          "qemu-libvirtd"
           "fail2ban"
           "vaultwarden"
-          "qbittorrent"
-          "lidarr"
-          "prowlarr"
-          "bazarr"
-          "sonarr"
-          "radarr"
-          "media"
           "share"
           "render"
           "input"
-          "authelia"
           "traefik"
         ];
       };

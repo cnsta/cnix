@@ -10,14 +10,15 @@
   cfg = config.cnix.server.infra.traefik;
   srv = config.cnix.server;
 
-  localDomain = config.cnix.settings.accounts.domains.local;
-  publicDomain = config.cnix.settings.accounts.domains.public;
+  site = config.cnix.settings.site;
+  localDomain = site.domains.local;
+  publicDomain = site.domains.public;
 
   # trust boundaries
   loopback = ["127.0.0.1/32" "::1/128"];
-  podman = ["10.88.0.0/24"];
-  lan = ["192.168.88.0/24"];
-  tailnet = ["100.64.88.0/24" "fd7a:115c:a1e0:88::/64"];
+  podman = [site.subnets.podman];
+  lan = [site.subnets.lan];
+  tailnet = [site.subnets.tailnet4 site.subnets.tailnet6];
 
   autheliaUp = srv.services.authelia.enable;
 
@@ -34,10 +35,7 @@
     ++ lib.optional (service.auth && autheliaUp) "authelia"
     ++ service.middlewares;
 
-  routable =
-    lib.filterAttrs
-    (_: s: s.enable && s.routed && s.subdomain != "")
-    srv.services;
+  routable = clib.server.routable config;
 
   generateRouters = services:
     lib.mapAttrs (name: service: {
@@ -57,6 +55,11 @@
 in {
   options.cnix.server.infra.traefik = {
     enable = mkEnableOption "Enable global Traefik reverse proxy with ACME";
+    subdomain = lib.mkOption {
+      type = lib.types.str;
+      default = "traefik";
+      description = "Dashboard name on the local domain.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -106,7 +109,7 @@ in {
           };
 
           certificatesResolvers.letsencrypt.acme = {
-            email = srv.email;
+            email = site.mail;
             storage = "/var/lib/traefik/cert.json";
             dnsChallenge = {
               provider = "cloudflare";
@@ -186,7 +189,7 @@ in {
               // {
                 api = {
                   entryPoints = ["websecure"];
-                  rule = "Host(`traefik.${localDomain}`)";
+                  rule = "Host(`${cfg.subdomain}.${localDomain}`)";
                   service = "api@internal";
                   middlewares =
                     ["security-headers" "private"]
@@ -194,15 +197,14 @@ in {
                   tls = {};
                 };
               }
-              // lib.optionalAttrs autheliaUp {
-                authelia-local = {
+              // lib.mapAttrs' (name: s:
+                lib.nameValuePair "${name}-local" {
                   entryPoints = ["websecure"];
-                  rule = "Host(`login.${localDomain}`)";
-                  service = "authelia";
-                  middlewares = ["security-headers" "private"];
+                  rule = "Host(`${s.subdomain}.${localDomain}`)";
+                  service = name;
+                  middlewares = lib.optional s.securityHeaders "security-headers" ++ ["private"] ++ s.middlewares;
                   tls = {};
-                };
-              };
+                }) (lib.filterAttrs (_: s: s.localAlias) routable);
           };
         };
       };

@@ -9,7 +9,6 @@
     packages = {
       # instant repl with automatic flake loading
       repl = pkgs.callPackage ./repl {};
-      # ashell = pkgs.callPackage ./ashell-delta {};
     };
   };
 }

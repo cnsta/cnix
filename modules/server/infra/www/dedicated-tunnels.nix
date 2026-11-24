@@ -1,5 +1,6 @@
 {
   lib,
+  clib,
   config,
   self,
   ...
@@ -14,8 +15,6 @@
     nameValuePair
     trim
     ;
-
-  www = config.cnix.server.infra.www;
 
   dedicated =
     filterAttrs (
@@ -58,13 +57,9 @@ in {
                 default = "http_status:404";
                 ingress =
                   {
-                    "${svc.subdomain}.${www.url}".service = "http://127.0.0.1:${toString (
-                      if svc.anubis.port != null
-                      then svc.anubis.port
-                      else svc.port
-                    )}";
+                    ${clib.server.mkFullDomain config svc}.service = clib.server.tunnelTarget svc;
                   }
-                  // mapAttrs' (sub: url: nameValuePair "${sub}.${www.url}" {service = url;}) svc.ingress;
+                  // mapAttrs' (sub: url: nameValuePair "${sub}.${clib.server.mkDomain config svc}" {service = url;}) svc.ingress;
               }
           )
           dedicated;

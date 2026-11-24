@@ -1,5 +1,6 @@
 {
   config,
+  clib,
   lib,
   self,
   pkgs,
@@ -23,7 +24,7 @@ in {
 
     # This is needed for LAN access
     networking.firewall = {
-      allowedTCPPorts = [8096];
+      allowedTCPPorts = [cfg.port];
       allowedUDPPorts = [1900 7359];
     };
 
@@ -33,7 +34,7 @@ in {
         autoStart = true;
         ports = ["${toString cfg.port}:8096"];
         volumes = [
-          "/var/lib/jellyfin:/config"
+          "${cfg.configDir}:/config"
           "/var/cache/jellyfin:/cache"
           "/mnt/data/media/series:/series:ro"
           "/mnt/data/media/films:/films:ro"
@@ -44,8 +45,7 @@ in {
         ];
         environmentFiles = [config.age.secrets.jellyfinEnvironment.path];
         environment = {
-          PUID = toString config.users.users.${srv.user}.uid;
-          PGID = toString config.users.groups.${srv.group}.gid;
+          inherit (clib.server.containerEnv config) PUID PGID;
         };
       };
     };

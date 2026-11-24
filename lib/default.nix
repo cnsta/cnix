@@ -58,8 +58,6 @@ in rec {
 
   mkEn = host: letters: mkWhen host letters {enable = true;};
 
-  mkPer = mkScoped "mkPer";
-
   all = {enable = true;};
   none = lib.mkIf false {};
 }

@@ -1,5 +1,6 @@
 {
   lib,
+  clib,
   config,
   self,
   ...
@@ -13,7 +14,7 @@
     ;
   cfg = config.cnix.server.infra.www;
   srv = config.cnix.server;
-  localDomain = config.cnix.settings.accounts.domains.local;
+  localDomain = config.cnix.settings.site.domains.local;
   autheliaUp = srv.services.authelia.enable;
 
   denyLocations = {
@@ -29,7 +30,8 @@ in {
       description = "Enable personal website";
     };
     url = mkOption {
-      default = "";
+      default = config.cnix.settings.site.domains.public;
+      defaultText = lib.literalExpression "config.cnix.settings.site.domains.public";
       type = types.str;
       description = ''
         Public domain name to be used to access the server services via Traefik reverse proxy
@@ -164,19 +166,15 @@ in {
             autoIngress =
               lib.mapAttrs' (
                 _: svc:
-                  lib.nameValuePair "${svc.subdomain}.${cfg.url}" {
-                    service = "http://127.0.0.1:${toString (
-                      if svc.anubis.port != null
-                      then svc.anubis.port
-                      else svc.port
-                    )}";
+                  lib.nameValuePair (clib.server.mkFullDomain config svc) {
+                    service = clib.server.tunnelTarget svc;
                   }
               )
               tunnelServices;
             extraIngress = lib.foldlAttrs (
               acc: _: svc:
                 acc
-                // lib.mapAttrs' (sub: url: lib.nameValuePair "${sub}.${cfg.url}" {service = url;}) svc.ingress
+                // lib.mapAttrs' (sub: url: lib.nameValuePair "${sub}.${clib.server.mkDomain config svc}" {service = url;}) svc.ingress
             ) {} (lib.filterAttrs (_: svc: svc.enable && svc.exposure != "dedicated-tunnel") config.cnix.server.services);
           in
             autoIngress

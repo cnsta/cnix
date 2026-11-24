@@ -7,9 +7,8 @@
   unit = "slskd";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
-  arr = config.cnix.server.services.arr;
 in {
-  config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
+  config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
     age.secrets = {
       slskd.file = self + "/secrets/slskd.age";
     };

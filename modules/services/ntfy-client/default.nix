@@ -13,7 +13,8 @@ in {
     enable = mkEnableOption "desktop notifications from an ntfy topic";
     url = mkOption {
       type = types.str;
-      default = "https://ntfy.cnst.dev";
+      default = "https://ntfy.${config.cnix.settings.site.domains.public}";
+      defaultText = lib.literalExpression ''"https://ntfy.''${config.cnix.settings.site.domains.public}"'';
       description = "ntfy server URL.";
     };
     topic = mkOption {

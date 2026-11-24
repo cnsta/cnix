@@ -9,7 +9,7 @@
   cfg = config.cnix.server.services.${unit};
   srv = config.cnix.server;
   domain = clib.server.mkFullDomain config cfg;
-  autheliaUrl = "https://login.${clib.server.mkHostDomain config cfg}";
+  autheliaUrl = clib.server.autheliaUrl config cfg;
   prometheus = srv.services.prometheus;
   file = path: "$__file{${path}}";
 in {

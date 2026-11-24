@@ -27,7 +27,7 @@ in {
       };
       environment = {
         TAILRAY_THEME = "dark";
-        TAILRAY_ADMIN_URL = "https://hs.cnst.dev/admin";
+        TAILRAY_ADMIN_URL = "${config.cnix.settings.site.loginServer}/admin";
       };
     };
   };

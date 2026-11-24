@@ -1,5 +1,9 @@
-{lib, ...}: let
-  enable = true;
+{
+  lib,
+  srv,
+  ...
+}: let
+  enable = srv.infra.gluetun.enable;
 in
   lib.optional enable {
     type = "custom-api";

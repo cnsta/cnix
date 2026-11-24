@@ -1,5 +1,6 @@
 {
   config,
+  clib,
   lib,
   ...
 }: let
@@ -8,9 +9,9 @@
   cfg = config.cnix.server.services.${unit};
 in {
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
-    systemd.tmpfiles.rules = ["d /var/lib/music-assistant 0775 ${srv.user} ${srv.group} - -"];
+    systemd.tmpfiles.rules = ["d ${cfg.configDir} 0775 ${srv.user} ${srv.group} - -"];
     networking.firewall = {
-      allowedTCPPorts = [8095 8097];
+      allowedTCPPorts = [cfg.port 8097];
       allowedUDPPorts = [1900 5353];
     };
     virtualisation.oci-containers.containers = {
@@ -18,13 +19,11 @@ in {
         autoStart = true;
         image = "ghcr.io/music-assistant/server:latest";
         volumes = [
-          "/var/lib/music-assistant:/data"
+          "${cfg.configDir}:/data"
           "/mnt/data/media/music:/media:ro"
         ];
         environment = {
-          TZ = "Europe/Stockholm";
-          PUID = toString config.users.users.${srv.user}.uid;
-          PGID = toString config.users.groups.${srv.group}.gid;
+          inherit (clib.server.containerEnv config) TZ PUID PGID;
         };
         extraOptions = [
           "--network=host"

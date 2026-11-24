@@ -58,7 +58,7 @@ in {
         useRoutingFeatures = "server";
         authKeyFile = config.age.secrets.hsPreauth.path;
         extraUpFlags = [
-          "--login-server=https://hs.cnst.dev"
+          "--login-server=${config.cnix.settings.site.loginServer}"
           "--accept-dns=false"
         ];
         extraSetFlags = [

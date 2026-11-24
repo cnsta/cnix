@@ -7,7 +7,7 @@
 }: let
   unit = "immich";
   cfg = config.cnix.server.services.${unit};
-  autheliaUrl = clib.server.mkFullDomain config config.cnix.server.services.authelia;
+  autheliaUrl = clib.server.autheliaUrl config cfg;
 in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
@@ -26,6 +26,7 @@ in {
 
     services.${unit} = {
       enable = true;
+      inherit (cfg) port;
       settings = {
         server.externalDomain = "https://${clib.server.mkFullDomain config cfg}";
         oauth = {
@@ -36,7 +37,7 @@ in {
           clientId = "immich";
           clientSecret._secret = config.age.secrets.immichOidc.path;
           defaultStorageQuota = 0;
-          issuerUrl = "https://${autheliaUrl}/.well-known/openid-configuration";
+          issuerUrl = "${autheliaUrl}/.well-known/openid-configuration";
           scope = "openid email profile";
           signingAlgorithm = "RS256";
           profileSigningAlgorithm = "none";

@@ -9,15 +9,6 @@ with lib; let
 
   keys = import "${self}/secrets/keys.nix";
   userKeys = mapAttrs (_: v: v.user) (filterAttrs (_: v: v ? user) keys);
-
-  keyName =
-    if cfg.sshUser != null
-    then cfg.sshUser
-    else config.networking.hostName;
-
-  selectedKey =
-    userKeys.${keyName}
-      or (abort "accounts: no user key for ${keyName} in secrets/keys.nix");
 in {
   options.cnix.settings.accounts = {
     username = mkOption {
@@ -28,8 +19,9 @@ in {
 
     mail = mkOption {
       type = types.str;
-      default = "adam@cnst.dev";
-      description = "Set the desired email";
+      default = config.cnix.settings.site.mail;
+      defaultText = lib.literalExpression "config.cnix.settings.site.mail";
+      description = "The user's mail (git identity).";
     };
 
     terminal = mkOption {
@@ -45,41 +37,11 @@ in {
       example = ["cnst"];
     };
 
-    sshKey = mkOption {
-      type = types.str;
-      default = selectedKey;
-      readOnly = true;
-      description = "This host's SSH public key, read from hosts/<name>/id_ed25519.pub";
-    };
-
     sshKeys = mkOption {
       type = types.attrsOf types.str;
       default = userKeys;
       readOnly = true;
       description = "All hosts' SSH public keys, keyed by host directory name";
-    };
-
-    sshUser = mkOption {
-      type = types.nullOr types.str;
-      default = null;
-      description = "Override which hosts/<name> key to use (defaults to networking.hostName)";
-    };
-
-    domains = mkOption {
-      type = types.submodule {
-        options = {
-          local = mkOption {
-            type = types.str;
-            default = "127.0.0.1";
-            description = "The local domain of the host";
-          };
-          public = mkOption {
-            type = types.str;
-            default = "example.com";
-            description = "The public domain of the host";
-          };
-        };
-      };
     };
   };
 

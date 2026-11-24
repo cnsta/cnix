@@ -2,25 +2,18 @@
   imports = [
     ./agenix
     ./ashell
-    ./blueman
     ./cifs
     ./dbus
-    ./dconf
-    ./dunst
     ./gnupg
     ./flatpak
     ./fwupd
     ./gnome
     ./greetd
-    ./gvfs
     ./gtk
-    ./virtualisation
     ./locate
-    ./mullvad
     ./nfs
     ./ntfy-client
     ./openssh
-    ./syncthing
     ./pipewire
     ./polkit
     ./power
@@ -28,11 +21,9 @@
     ./samba
     ./scx
     ./swaybg
-    ./swayidle
     ./udisks
     ./tailray
     ./udiskie
-    ./waybar
     ./xdg
     ./zram
   ];

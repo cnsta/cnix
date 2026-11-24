@@ -4,133 +4,105 @@
   self,
   ...
 }: let
-  infra = config.cnix.server.infra;
-  cfg = config.cnix.server.services;
-  arr = config.cnix.server.services.arr;
+  inherit (lib) mkOption types;
+  cfg = config.cnix.server.infra.gluetun;
+  srv = config.cnix.server;
 
-  qbtIp = "10.88.0.250";
-  arrIp = "10.88.0.251";
-in {
-  options.cnix.server.infra = {
-    gluetun.enable = lib.mkEnableOption "Enables gluetun";
+  # Enabled services routed through each instance (services.<x>.vpn).
+  membersOf = name: lib.filterAttrs (_: s: s.enable && s.vpn == name) srv.services;
+  active = lib.filterAttrs (name: _: membersOf name != {}) cfg.instances;
+
+  # agenix secret per instance: secrets/gluetun<Name>Environment.age
+  secretName = name: "gluetun${lib.toUpper (lib.substring 0 1 name)}${lib.substring 1 (-1) name}Environment";
+
+  mkGluetun = name: inst: {
+    image = "ghcr.io/qdm12/gluetun:latest";
+    pull = "newer";
+    ports =
+      lib.optional (inst.controlPort != null) "127.0.0.1:${toString inst.controlPort}:8000/tcp"
+      ++ lib.mapAttrsToList (_: s: "127.0.0.1:${toString s.port}:${toString s.port}") (membersOf name)
+      ++ inst.extraPorts;
+    devices = ["/dev/net/tun:/dev/net/tun"];
+    autoStart = true;
+    extraOptions =
+      ["--cap-add=NET_ADMIN" "--cap-add=NET_RAW"]
+      ++ lib.optionals inst.disableIpv6 [
+        "--sysctl=net.ipv6.conf.all.disable_ipv6=1"
+        "--sysctl=net.ipv6.conf.default.disable_ipv6=1"
+      ]
+      ++ lib.optional (inst.ip != null) "--ip=${inst.ip}"
+      ++ map (peer: "--add-host=gluetun-${peer}:${cfg.instances.${peer}.ip}") inst.peers
+      ++ ["--label=io.containers.autoupdate=registry"]
+      ++ inst.extraOptions;
+    volumes = ["/var/lib/gluetun-${name}:/gluetun"];
+    environmentFiles = [config.age.secrets.${secretName name}.path];
+    environment.DEV_MODE = "false";
   };
-  config = lib.mkIf infra.gluetun.enable {
-    age.secrets = {
-      gluetunQbtEnvironment.file = self + "/secrets/gluetunQbtEnvironment.age";
-      gluetunDispatcharrEnvironment.file = self + "/secrets/gluetunDispatcharrEnvironment.age";
-      gluetunSlskdEnvironment.file = self + "/secrets/gluetunSlskdEnvironment.age";
-      gluetunArrEnvironment.file = self + "/secrets/gluetunArrEnvironment.age";
+in {
+  options.cnix.server.infra.gluetun = {
+    enable = lib.mkEnableOption "gluetun VPN containers";
+    instances = mkOption {
+      default = {};
+      description = ''
+        One gluetun container (`gluetun-<name>`) per entry. An instance runs only
+        while some enabled service sets `vpn = "<name>"`; those services join its
+        network namespace and get their `port` published on 127.0.0.1.
+      '';
+      type = types.attrsOf (types.submodule {
+        options = {
+          ip = mkOption {
+            type = types.nullOr types.str;
+            default = null;
+            description = "Fixed podman address, for instances other containers reach by name.";
+          };
+          controlPort = mkOption {
+            type = types.nullOr types.port;
+            default = null;
+            description = "Publish gluetun's control server (:8000) on this loopback port.";
+          };
+          peers = mkOption {
+            type = types.listOf types.str;
+            default = [];
+            description = "Other instances (with an `ip`) resolvable as gluetun-<peer> from inside this one.";
+          };
+          disableIpv6 = mkOption {
+            type = types.bool;
+            default = false;
+          };
+          extraPorts = mkOption {
+            type = types.listOf types.str;
+            default = [];
+            description = "Port mappings besides the members' HTTP ports.";
+          };
+          extraOptions = mkOption {
+            type = types.listOf types.str;
+            default = [];
+          };
+        };
+      });
     };
+  };
 
-    virtualisation.oci-containers.containers = {
-      gluetun-qbt = lib.mkIf cfg.qbittorrent.enable {
-        image = "ghcr.io/qdm12/gluetun:latest";
-        pull = "newer";
-        ports = [
-          "127.0.0.1:8081:8081"
-        ];
-        devices = ["/dev/net/tun:/dev/net/tun"];
-        autoStart = true;
-        extraOptions = [
-          "--cap-add=NET_ADMIN"
-          "--cap-add=NET_RAW"
-          "--ip=${qbtIp}"
-          "--label=io.containers.autoupdate=registry"
-          "--health-cmd=wget -qO- https://ipinfo.io/ip || exit 1"
-          "--health-interval=10s"
-          "--health-retries=6"
-          "--health-start-period=30s"
-        ];
-        volumes = ["/var/lib/gluetun-qbt:/gluetun"];
-        environmentFiles = [
-          config.age.secrets.gluetunQbtEnvironment.path
-        ];
-        environment = {
-          DEV_MODE = "false";
-        };
-      };
+  config = lib.mkIf cfg.enable {
+    assertions =
+      lib.mapAttrsToList (n: s: {
+        assertion = s.vpn == null || cfg.instances ? ${s.vpn};
+        message = "cnix.server.services.${n}.vpn = \"${s.vpn}\" has no cnix.server.infra.gluetun.instances.${s.vpn}.";
+      })
+      srv.services
+      ++ lib.concatLists (lib.mapAttrsToList (n: inst:
+        map (peer: {
+          assertion = (cfg.instances.${peer} or {ip = null;}).ip != null;
+          message = "gluetun instance ${n}: peer ${peer} needs an ip.";
+        })
+        inst.peers)
+      cfg.instances);
 
-      gluetun-dispatcharr = lib.mkIf cfg.dispatcharr.enable {
-        image = "ghcr.io/qdm12/gluetun:latest";
-        pull = "newer";
-        ports = [
-          "127.0.0.1:9191:9191"
-        ];
-        devices = ["/dev/net/tun:/dev/net/tun"];
-        autoStart = true;
-        extraOptions = [
-          "--cap-add=NET_ADMIN"
-          "--cap-add=NET_RAW"
-          "--label=io.containers.autoupdate=registry"
-        ];
-        volumes = ["/var/lib/gluetun-dispatcharr:/gluetun"];
-        environmentFiles = [
-          config.age.secrets.gluetunDispatcharrEnvironment.path
-        ];
-        environment = {
-          DEV_MODE = "false";
-        };
-      };
+    age.secrets = lib.mapAttrs' (name: _:
+      lib.nameValuePair (secretName name) {file = self + "/secrets/${secretName name}.age";})
+    active;
 
-      gluetun-slskd = lib.mkIf cfg.slskd.enable {
-        image = "ghcr.io/qdm12/gluetun:latest";
-        pull = "newer";
-        ports = [
-          "8388:8388"
-          "127.0.0.1:5030:5030"
-          "127.0.0.1:5031:5031"
-          "50323:50323"
-        ];
-        devices = ["/dev/net/tun:/dev/net/tun"];
-        autoStart = true;
-        extraOptions = [
-          "--cap-add=NET_ADMIN"
-          "--cap-add=NET_RAW"
-          "--label=io.containers.autoupdate=registry"
-        ];
-        volumes = ["/var/lib/gluetun-slskd:/gluetun"];
-        environmentFiles = [
-          config.age.secrets.gluetunSlskdEnvironment.path
-        ];
-        environment = {
-          DEV_MODE = "false";
-        };
-      };
-
-      gluetun-arr = lib.mkIf arr.enable {
-        image = "ghcr.io/qdm12/gluetun:latest";
-        pull = "newer";
-        ports = [
-          "127.0.0.1:8003:8000/tcp"
-          "127.0.0.1:8191:8191"
-          "127.0.0.1:9696:9696"
-          "127.0.0.1:8989:8989"
-          "127.0.0.1:7878:7878"
-          "127.0.0.1:8686:8686"
-          "127.0.0.1:8687:8687"
-          "127.0.0.1:7476:7476"
-          "127.0.0.1:1867:1867"
-          "127.0.0.1:8085:8085"
-        ];
-        devices = ["/dev/net/tun:/dev/net/tun"];
-        autoStart = true;
-        extraOptions = [
-          "--cap-add=NET_ADMIN"
-          "--cap-add=NET_RAW"
-          "--sysctl=net.ipv6.conf.all.disable_ipv6=1"
-          "--sysctl=net.ipv6.conf.default.disable_ipv6=1"
-          "--ip=${arrIp}"
-          "--add-host=gluetun-qbt:${qbtIp}"
-          "--label=io.containers.autoupdate=registry"
-        ];
-        volumes = ["/var/lib/gluetun-arr:/gluetun"];
-        environmentFiles = [
-          config.age.secrets.gluetunArrEnvironment.path
-        ];
-        environment = {
-          DEV_MODE = "false";
-        };
-      };
-    };
+    virtualisation.oci-containers.containers =
+      lib.mapAttrs' (name: inst: lib.nameValuePair "gluetun-${name}" (mkGluetun name inst)) active;
   };
 }

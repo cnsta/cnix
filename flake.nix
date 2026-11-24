@@ -29,9 +29,6 @@
             input-fonts.acceptLicense = true;
             permittedInsecurePackages = ["olm-3.2.16"];
           };
-          overlays = [
-            inputs.nixgl.overlay
-          ];
         };
 
         treefmt.imports = [./treefmt.nix];
@@ -63,8 +60,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixgl.url = "github:nix-community/nixGL";
 
     hjem = {
       url = "github:feel-co/hjem";
@@ -109,8 +104,6 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    maccel.url = "github:Gnarus-G/maccel";
 
     # Custom
     cnixpost = {

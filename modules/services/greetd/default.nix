@@ -21,15 +21,10 @@
     ;
 
   cfg = config.cnix.services.greetd;
-  niricfg = config.cnix.programs.niri;
   rivercfg = config.cnix.programs.river;
   username = config.cnix.settings.accounts.username;
 
   compositors = {
-    niri = {
-      enable = niricfg.enable;
-      command = "${config.programs.niri.package}/bin/niri-session";
-    };
     river = {
       enable = rivercfg.enable;
       command = "${config.programs.river-delta.sessionScript}";

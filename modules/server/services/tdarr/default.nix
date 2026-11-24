@@ -6,23 +6,22 @@
   unit = "tdarr";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
-  arr = config.cnix.server.services.arr;
 
   sharedVolumes = [
     "/mnt/data/media:/media"
     "/mnt/data/downloads:/downloads"
-    "/var/lib/tdarr/configs:/app/configs"
-    "/var/lib/tdarr/logs:/app/logs"
-    "/var/lib/tdarr/server:/app/server"
-    "/var/lib/tdarr/transcode_cache:/temp"
+    "${cfg.configDir}/configs:/app/configs"
+    "${cfg.configDir}/logs:/app/logs"
+    "${cfg.configDir}/server:/app/server"
+    "${cfg.configDir}/transcode_cache:/temp"
   ];
 in {
-  config = lib.mkIf (srv.infra.podman.enable && arr.enable && cfg.enable) {
+  config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
     systemd.tmpfiles.rules = [
-      "d /var/lib/tdarr/transcode_cache 0755 root root - -"
-      "d /var/lib/tdarr/configs          0755 root root - -"
-      "d /var/lib/tdarr/logs             0755 root root - -"
-      "d /var/lib/tdarr/server           0755 root root - -"
+      "d ${cfg.configDir}/transcode_cache 0755 root root - -"
+      "d ${cfg.configDir}/configs          0755 root root - -"
+      "d ${cfg.configDir}/logs             0755 root root - -"
+      "d ${cfg.configDir}/server           0755 root root - -"
     ];
 
     virtualisation.oci-containers.containers = {
@@ -32,16 +31,16 @@ in {
         environment = {
           serverIP = "0.0.0.0";
           serverPort = "8266";
-          webUIPort = "8265";
+          webUIPort = toString cfg.port;
           inContainer = "true";
           ffmpegVersion = "7";
           auth = "false";
           maxLogSizeMB = "10";
-          TZ = "Europe/Stockholm";
+          TZ = config.cnix.server.timeZone;
           PUID = "0";
           PGID = "0";
         };
-        ports = ["127.0.0.1:8265:8265"];
+        ports = ["127.0.0.1:${toString cfg.port}:${toString cfg.port}"];
         volumes = sharedVolumes;
       };
 
@@ -53,7 +52,7 @@ in {
           serverPort = "8266";
           nodeIP = "0.0.0.0";
           nodeID = "node0";
-          TZ = "Europe/Stockholm";
+          TZ = config.cnix.server.timeZone;
           PUID = "0";
           PGID = "0";
         };

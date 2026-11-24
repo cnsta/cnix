@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  inputs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mkMerge;
@@ -86,7 +85,6 @@
     brightnessctl
     gnome-calculator
     overskride
-    nwg-bar
   ];
   guiCapture = with pkgs; [
     swappy
@@ -106,7 +104,6 @@
     tesseract
   ];
   guiTheming = with pkgs; [
-    inputs.ashell.packages.${pkgs.stdenv.hostPlatform.system}.default
     kdePackages.qt6ct
     libsForQt5.qt5ct
     nwg-look
@@ -128,7 +125,7 @@
   ];
   gui = guiSystem ++ guiCapture ++ guiImage ++ guiTheming ++ guiWayland ++ guiMedia;
 
-  # desktop/laptop/server
+  # desktop/server
   desktop = with pkgs; [
     geekbench
     obs-studio
@@ -137,7 +134,6 @@
     rtk
     faugus-launcher
   ];
-  laptop = [];
   server = with pkgs; [
     nvtopPackages.intel
     zfstools
@@ -177,7 +173,6 @@
     nfs-utils
   ];
   devCommon = devLsps ++ devBuild ++ devRuntimes ++ devDbs ++ devFormatters ++ devNix ++ devOther;
-  devRust = [];
   devPhp = with pkgs; [
     php
   ];
@@ -194,12 +189,10 @@ in {
     common.enable = mkEnableOption "core packages";
     desktop.enable = mkEnableOption "desktop-specific packages";
     gui.enable = mkEnableOption "gui-specific packages";
-    laptop.enable = mkEnableOption "laptop-specific packages";
     server.enable = mkEnableOption "server-specific packages";
     agent.enable = mkEnableOption "tools for coding agents";
     dev = {
       common.enable = mkEnableOption "generic development packages";
-      rust.enable = mkEnableOption "rust packages";
       php.enable = mkEnableOption "php packages";
       python.enable = mkEnableOption "python packages";
     };
@@ -209,11 +202,9 @@ in {
     (mkIf cfg.common.enable common)
     (mkIf cfg.gui.enable gui)
     (mkIf cfg.desktop.enable desktop)
-    (mkIf cfg.laptop.enable laptop)
     (mkIf cfg.server.enable server)
     (mkIf cfg.agent.enable agent)
     (mkIf cfg.dev.common.enable devCommon)
-    (mkIf cfg.dev.rust.enable devRust)
     (mkIf cfg.dev.php.enable devPhp)
     (mkIf cfg.dev.python.enable devPython)
   ];

@@ -1,5 +1,9 @@
-{lib, ...}: let
-  enable = true;
+{
+  lib,
+  srv,
+  ...
+}: let
+  enable = srv.services.speedtest-tracker.enable;
 
   auth = {
     "Authorization" = "Bearer \${SPEEDTEST_TRACKER_API_TOKEN}";

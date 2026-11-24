@@ -63,8 +63,8 @@
       users.root.shell = "/bin/systemd-tty-ask-password-agent";
       network.networks."10-lan" = {
         matchConfig.Name = "enp6s0";
-        address = ["192.168.88.14/24"];
-        gateway = ["192.168.88.1"];
+        address = ["${config.cnix.settings.network.localIp}/24"];
+        gateway = [config.cnix.settings.site.router];
         linkConfig.RequiredForOnline = "routable";
       };
     };
@@ -101,7 +101,7 @@
     zfs = {
       package = pkgs.zfs_unstable;
       extraPools = ["data"];
-      forceImportRoot = "false";
+      forceImportRoot = false;
     };
   };
 

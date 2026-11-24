@@ -17,7 +17,6 @@ with lib; let
 in {
   options.cnix.programs.fish = {
     enable = mkEnableOption "fish (system-wide)";
-    homeless.enable = mkEnableOption "system-level fish dotfiles for hosts without per-user config";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -32,23 +31,6 @@ in {
         };
       };
     }
-
-    (mkIf cfg.homeless.enable {
-      environment.systemPackages = with pkgs; [
-        eza
-        carapace
-        starship
-      ];
-      programs.starship.enable = true;
-      programs.fish = {
-        shellAbbrs = common.abbrs;
-        shellAliases = common.aliases;
-        interactiveShellInit = ''
-          ${common.interactiveInit}
-          ${getExe pkgs.carapace} _carapace fish | source
-        '';
-      };
-    })
 
     (mkIf hasUsers {
       hjem.users = genAttrs acct.defaultUsers (_: {

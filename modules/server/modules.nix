@@ -1,36 +1,39 @@
 {
   config,
   clib,
+  hosts,
   lib,
   pkgs,
   self,
   ...
 }: let
-  inherit (lib) mkMerge genAttrs;
+  inherit (lib) mkMerge genAttrs mapAttrs;
   host = config.networking.hostName;
-  ip = config.cnix.settings.network.localIp;
   en = clib.mkEn host;
   when = clib.mkWhen host;
 
+  # Service definitions. Each applies on sobotka unless it sets `hosts`
+  # (clib scope letters); elsewhere it stays declared but disabled.
   serviceDefs = {
     # infra
-    glance = when "s" {
+    glance = {
       enable = true;
       subdomain = "dash";
       port = 8082;
     };
 
-    authelia = when "s" {
+    authelia = {
       enable = true;
       subdomain = "login";
       exposure = "dedicated-tunnel";
+      localAlias = true;
       port = 3011;
       dashboard = {
         category = "Infra";
       };
     };
 
-    lldap = when "s" {
+    lldap = {
       enable = true;
       auth = false;
       port = 17170;
@@ -40,7 +43,7 @@
       };
     };
 
-    headscale = when "s" {
+    headscale = {
       enable = true;
       subdomain = "hs";
       exposure = "public";
@@ -54,7 +57,8 @@
       };
     };
 
-    pihole = when "sz" {
+    pihole = {
+      hosts = "sz";
       enable = true;
       port = 8053;
       dashboard = {
@@ -67,7 +71,7 @@
       };
     };
 
-    grafana = when "s" {
+    grafana = {
       enable = true;
       port = 3002;
       dashboard = {
@@ -75,13 +79,13 @@
       };
     };
 
-    prometheus = when "s" {
+    prometheus = {
       enable = true;
       routed = false;
       port = 9090;
     };
 
-    uptime-kuma = when "s" {
+    uptime-kuma = {
       enable = true;
       subdomain = "uptime";
       port = 3001;
@@ -91,7 +95,7 @@
     };
 
     # dev
-    forgejo = when "s" {
+    forgejo = {
       enable = true;
       subdomain = "git";
       exposure = "dedicated-tunnel";
@@ -114,15 +118,19 @@
       };
     };
 
-    hydra = when "s" {
+    hydra = {
       enable = true;
       port = 3000;
+      io = {
+        writeBandwidthMax = "100M";
+        writeIOPSMax = "10000";
+      };
       dashboard = {
         category = "Dev";
       };
     };
 
-    harmonia = when "s" {
+    harmonia = {
       enable = true;
       subdomain = "cache";
       exposure = "tunnel";
@@ -130,12 +138,7 @@
     };
 
     # media
-    arr = when "s" {
-      enable = true;
-      routed = false;
-    };
-
-    aurral = when "s" {
+    aurral = {
       enable = true;
       subdomain = "aurral";
       exposure = "tunnel";
@@ -148,8 +151,9 @@
       };
     };
 
-    bazarr = when "s" {
+    bazarr = {
       enable = true;
+      vpn = "arr";
       auth = false;
       port = 8687;
       dashboard = {
@@ -158,8 +162,9 @@
       };
     };
 
-    sonarr = when "s" {
+    sonarr = {
       enable = true;
+      vpn = "arr";
       auth = false;
       port = 8989;
       dashboard = {
@@ -168,8 +173,9 @@
       };
     };
 
-    radarr = when "s" {
+    radarr = {
       enable = true;
+      vpn = "arr";
       auth = false;
       port = 7878;
       dashboard = {
@@ -178,18 +184,9 @@
       };
     };
 
-    lidarr = when "s" {
-      enable = false;
-      auth = false;
-      port = 8686;
-      dashboard = {
-        category = "Media";
-        container.name = "lidarr";
-      };
-    };
-
-    prowlarr = when "s" {
+    prowlarr = {
       enable = true;
+      vpn = "arr";
       auth = false;
       port = 9696;
       dashboard = {
@@ -198,7 +195,7 @@
       };
     };
 
-    speedtest-tracker = when "s" {
+    speedtest-tracker = {
       enable = true;
       subdomain = "speedtest";
       auth = false;
@@ -211,7 +208,7 @@
       };
     };
 
-    seerr = when "s" {
+    seerr = {
       enable = true;
       exposure = "tunnel";
       port = 5055;
@@ -221,8 +218,9 @@
       };
     };
 
-    dispatcharr = when "s" {
+    dispatcharr = {
       enable = true;
+      vpn = "dispatcharr";
       subdomain = "tv";
       exposure = "local";
       port = 9191;
@@ -232,7 +230,7 @@
       };
     };
 
-    jellyfin = when "s" {
+    jellyfin = {
       enable = true;
       subdomain = "fin";
       exposure = "dedicated-tunnel";
@@ -243,7 +241,7 @@
       };
     };
 
-    tdarr = when "s" {
+    tdarr = {
       enable = true;
       auth = false;
       port = 8265;
@@ -257,7 +255,7 @@
       };
     };
 
-    navidrome = when "s" {
+    navidrome = {
       enable = true;
       subdomain = "music";
       exposure = "tunnel";
@@ -269,20 +267,7 @@
       };
     };
 
-    octo-fiesta = when "s" {
-      enable = false;
-      subdomain = "music";
-      exposure = "tunnel";
-      port = 8089;
-      dashboard = {
-        name = "Octo-Fiesta";
-        icon = "navidrome.webp";
-        category = "Media";
-        container.name = "octo-fiesta";
-      };
-    };
-
-    music-assistant = when "s" {
+    music-assistant = {
       enable = true;
       subdomain = "ma";
       auth = false;
@@ -294,8 +279,9 @@
     };
 
     # downloads
-    qbittorrent = when "s" {
+    qbittorrent = {
       enable = true;
+      vpn = "qbt";
       subdomain = "qbt";
       auth = false;
       port = 8081;
@@ -306,8 +292,9 @@
       };
     };
 
-    sabnzbd = when "s" {
+    sabnzbd = {
       enable = true;
+      vpn = "arr";
       auth = false;
       port = 8085;
       dashboard = {
@@ -319,6 +306,7 @@
 
     slskd = {
       enable = false;
+      vpn = "slskd";
       exposure = "local";
       port = 5030;
       dashboard = {
@@ -327,8 +315,9 @@
       };
     };
 
-    flaresolverr = when "s" {
+    flaresolverr = {
       enable = true;
+      vpn = "arr";
       auth = false;
       port = 8191;
       dashboard = {
@@ -339,7 +328,7 @@
     };
 
     # cloud
-    immich = when "s" {
+    immich = {
       enable = true;
       exposure = "tailscale";
       groups = ["admins" "users"];
@@ -350,7 +339,7 @@
       };
     };
 
-    memos = when "s" {
+    memos = {
       enable = true;
       exposure = "tailscale";
       groups = ["admins" "users"];
@@ -360,7 +349,7 @@
       };
     };
 
-    vaultwarden = when "s" {
+    vaultwarden = {
       enable = true;
       subdomain = "vault";
       exposure = "dedicated-tunnel";
@@ -372,19 +361,8 @@
       };
     };
 
-    searxng = when "s" {
-      enable = false;
-      subdomain = "search";
-      exposure = "local";
-      port = 8084;
-      dashboard = {
-        name = "SearXNG";
-        category = "Cloud";
-      };
-    };
-
     # communication
-    fluxer = when "s" {
+    fluxer = {
       enable = false;
       subdomain = "chat";
       exposure = "public";
@@ -394,7 +372,7 @@
       };
     };
 
-    miniflux = when "s" {
+    miniflux = {
       enable = true;
       subdomain = "feed";
       port = 8087;
@@ -404,7 +382,7 @@
       };
     };
 
-    ntfy = when "s" {
+    ntfy = {
       enable = true;
       port = 2586;
       exposure = "tailscale";
@@ -414,7 +392,7 @@
       };
     };
 
-    roundcube = when "s" {
+    roundcube = {
       enable = false;
       subdomain = "mail";
       port = 5679;
@@ -424,7 +402,7 @@
     };
 
     # automation
-    home-assistant = when "s" {
+    home-assistant = {
       enable = true;
       subdomain = "ha";
       exposure = "tailscale";
@@ -443,25 +421,6 @@
         category = "Automation";
       };
     };
-
-    n8n = {
-      enable = false;
-      exposure = "local";
-      port = 5678;
-      dashboard = {
-        name = "n8n";
-        category = "Automation";
-      };
-    };
-
-    turnstone = {
-      enable = false;
-      exposure = "tailscale";
-      port = 8098;
-      dashboard = {
-        category = "Automation";
-      };
-    };
   };
 in {
   config.age.secrets.smtp = when "s" {
@@ -470,22 +429,21 @@ in {
 
   config.cnix.server = {
     enable = true;
-    email = "adam@cnst.dev";
-    domain = "cnix.dev";
-    ip = ip;
     publicIp = "185.147.236.7";
+    mediaDir = "/mnt/data";
     user = "share";
     group = "share";
     uid = 2000;
     gid = 2000;
 
-    smtp = when "s" {
+    smtp = {
       host = "smtp.protonmail.ch:587";
       user = "noreply@cnst.dev";
       from = "noreply@cnst.dev";
       passwordFile = config.age.secrets.smtp.path;
     };
 
+    tailnet.ip = "100.64.88.2";
     tailnet.groups = {
       admins = ["cnst@cnix.dev"];
       users = ["fredrik@libellux.com"];
@@ -494,23 +452,54 @@ in {
     infra = {
       traefik = en "s";
       tailscale = en "s";
-      gluetun = en "s";
+      gluetun = when "s" {
+        enable = true;
+        instances = {
+          qbt = {
+            ip = "10.88.0.250";
+            extraOptions = [
+              "--health-cmd=wget -qO- https://ipinfo.io/ip || exit 1"
+              "--health-interval=10s"
+              "--health-retries=6"
+              "--health-start-period=30s"
+            ];
+          };
+          arr = {
+            ip = "10.88.0.251";
+            controlPort = 8003; # glance's gluetun widget (GLUETUN_URL)
+            peers = ["qbt"];
+            disableIpv6 = true;
+          };
+          dispatcharr = {};
+          slskd.extraPorts = ["8388:8388" "127.0.0.1:5031:5031" "50323:50323"];
+        };
+      };
       podman = en "sz";
 
       unbound = when {
         "sz" = {
           enable = true;
-          serviceIp = "192.168.88.14";
+          serviceIp = hosts.sobotka.ip;
+          extraAllowedSubnets = ["192.168.20.0/24"];
         };
         "s" = {
           profile = "large";
           ioLatencyDevices = ["259:0" "254:2"];
         };
-        "z".profile = "small";
+        "z" = {
+          profile = "small";
+          # ziggy can't see sobotka's service defs; keep its two fixed names.
+          extraNames = map (s: "${s}.${config.cnix.settings.site.domains.local}") ["traefik" "login"];
+        };
       };
 
       keepalived = when "sz" {
         enable = true;
+        members = ["sobotka" "ziggy"];
+        priority = when {
+          "s" = 20;
+          "z" = 10;
+        };
         healthCheck = "${pkgs.ldns}/bin/drill -Q -p 5335 @127.0.0.1 . SOA";
         interface = when {
           "s" = "enp6s0";
@@ -535,7 +524,6 @@ in {
 
       www = when "s" {
         enable = true;
-        url = "cnst.dev";
         port = 8283;
         cloudflared = {
           tunnelId = "e5076186-efb7-405a-998c-6155af7fb221";
@@ -546,7 +534,7 @@ in {
 
     services = mkMerge [
       (genAttrs (builtins.attrNames serviceDefs) (_: {}))
-      serviceDefs
+      (mapAttrs (_: d: when (d.hosts or "s") (removeAttrs d ["hosts"])) serviceDefs)
     ];
   };
 }

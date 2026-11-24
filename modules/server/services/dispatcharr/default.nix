@@ -18,14 +18,12 @@ in {
         image = "ghcr.io/dispatcharr/dispatcharr:latest";
         autoStart = true;
         volumes = [
-          "/var/lib/dispatcharr:/data"
+          "${cfg.configDir}:/data"
         ];
-        dependsOn = [
-          "gluetun-dispatcharr"
-        ];
+        dependsOn = ["gluetun-${cfg.vpn}"];
 
         extraOptions = [
-          "--network=container:gluetun-dispatcharr"
+          "--network=container:gluetun-${cfg.vpn}"
           "--device=/dev/dri/renderD129:/dev/dri/renderD128"
         ];
         environmentFiles = [config.age.secrets.dispatcharrEnvironment.path];

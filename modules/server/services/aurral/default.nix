@@ -8,14 +8,14 @@
   unit = "aurral";
   srv = config.cnix.server;
   cfg = config.cnix.server.services.${unit};
-  url = "https://${clib.server.mkFullDomain config cfg}";
-  autheliaUrl = "https://${clib.server.mkFullDomain config srv.services.authelia}";
+  url = clib.server.mkUrl config cfg;
+  autheliaUrl = clib.server.autheliaUrl config cfg;
 in {
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
     age.secrets.aurralEnvironment.file = self + "/secrets/aurralEnvironment.age";
 
     systemd.tmpfiles.rules = [
-      "d /var/lib/aurral 0755 share share - -"
+      "d ${cfg.configDir} 0755 ${srv.user} ${srv.group} - -"
     ];
 
     virtualisation.oci-containers.containers = {
@@ -24,9 +24,7 @@ in {
         autoStart = true;
         ports = ["127.0.0.1:${toString cfg.port}:3001"];
         environment = {
-          TZ = "Europe/Stockholm";
-          PUID = toString config.users.users.${srv.user}.uid;
-          PGID = toString config.users.groups.${srv.group}.gid;
+          inherit (clib.server.containerEnv config) TZ PUID PGID;
           BRAINZMASH_BASE_URL = "api.lidarr.audio/api/v0.4";
 
           AURRAL_PUBLIC_URL = url;
@@ -41,7 +39,7 @@ in {
         };
         environmentFiles = [config.age.secrets.aurralEnvironment.path];
         volumes = [
-          "/var/lib/aurral:/config:rw"
+          "${cfg.configDir}:/config:rw"
           "/mnt/data/media/music:/data/media/music:rw"
           "/mnt/data/downloads:/data/downloads:rw"
         ];

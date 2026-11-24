@@ -1,4 +1,7 @@
-{lib}: let
+{
+  lib,
+  host,
+}: let
   ds = {
     type = "prometheus";
     uid = "prometheus";
@@ -500,8 +503,8 @@
       rows)
     .out;
 in {
-  uid = "sobotka-home";
-  title = "sobotka";
+  uid = "${host}-home";
+  title = host;
   tags = ["home"];
   timezone = "browser";
   refresh = "30s";

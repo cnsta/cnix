@@ -10,6 +10,7 @@ in {
     services = {
       ${unit} = {
         enable = true;
+        settings.PORT = toString cfg.port;
       };
     };
   };

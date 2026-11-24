@@ -1,56 +1,34 @@
 {
   imports = [
     ./alacritty
-    ./bash
-    ./beekeeper
     ./blender
     ./byt
     ./chromium
     ./direnv
-    ./discord
     ./element-desktop
-    ./floorp
     ./firefox
     ./foot
     ./fuzzel
     ./ghostty
     ./helix
-    ./corectrl
     ./fish
-    ./gamemode
-    ./gamescope
     ./git
     ./gimp
-    ./gnome
     ./inkscape
     ./lact
-    ./librewolf
     ./lutris
-    ./maccel
     ./microfetch
-    ./niri
-    ./nushell
     ./nvf
     ./mpv
-    ./thunderbird
     ./silt
     ./ssh
-    ./vscode
     ./pkgs
-    ./mysql-workbench
     ./nh
-    ./npm
-    ./obsidian
     ./river
     ./steam
-    ./pkgs
-    ./thunar
     ./tmux
-    ./wireshark
     ./yazi
     ./zathura
-    ./zed-editor
-    ./zsh
     ./zen-browser
   ];
 }

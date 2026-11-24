@@ -23,7 +23,7 @@ in {
         behind-proxy = true;
         auth-default-access = "deny-all";
         enable-login = true;
-        visitor-request-limit-exempt-hosts = "10.88.0.0/16";
+        visitor-request-limit-exempt-hosts = config.cnix.settings.site.subnets.podman;
       };
     };
   };

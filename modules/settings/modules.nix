@@ -9,19 +9,35 @@
   when = clib.mkWhen host;
 in {
   config.cnix = {
+    settings.locale = {
+      defaultLocale = "en_US.UTF-8";
+      extraLocale = "sv_SE.UTF-8";
+      timeZone = "Europe/Stockholm";
+    };
+
+    settings.site = {
+      domains = {
+        local = "cnix.dev";
+        public = "cnst.dev";
+      };
+      mail = "adam@cnst.dev";
+      router = "192.168.88.1";
+      dnsVip = "192.168.88.69";
+      loginServer = "https://hs.cnst.dev";
+      subnets = {
+        lan = "192.168.88.0/24";
+        podman = "10.88.0.0/16";
+        tailnet4 = "100.64.88.0/24";
+        tailnet6 = "fd7a:115c:a1e0:88::/64";
+      };
+    };
+
     programs = {
-      beekeeper = none;
       blender = en "k";
       byt = en "kbt";
-      corectrl = none;
-      gamemode = none;
-      gamescope = none;
       gimp = en "k";
-      gnome = none;
       inkscape = en "k";
       lact = en "k";
-      maccel = none;
-      mysql-workbench = none;
       nh = {
         enable = true;
         clean = {
@@ -29,13 +45,8 @@ in {
           extraArgs = "--keep 3 --keep-since 21d --keep-one";
         };
       };
-      niri = none;
-      npm = none;
-      obsidian = none;
       steam = en "kt";
       tmux = en "ks";
-      thunar = none;
-      wireshark = none;
       alacritty = when "kbt" {
         enable = true;
         primary = false;
@@ -43,38 +54,19 @@ in {
       lutris = en "k";
       chromium = en "kt";
       direnv = en "kbt";
-      ## pnpm unsafe, install flatpak
-      # discord = when "kbt" {
-      #   enable = true;
-      #   variant = "vesktop";
-      # };
       element-desktop = en "k";
       firefox = en "kt";
-      floorp = none;
       foot = en "kbt";
       fuzzel = en "kbt";
       ghostty = when "kbt" {
         enable = true;
         primary = true;
       };
-      librewolf = none;
       mpv = en "kbt";
       nvf = en "t";
-      # nwg-bar = en "kbt";
-      # rofi = none;
-      # thunderbird = en "kbt";
-      # vscode = en "t";
-      # wezterm = none;
       yazi = en "kbt";
-      # zathura = en "kbt";
-      zed-editor = none;
-      # zellij = none;
-      # zsh = none;
-      bash = none;
-      fish = when "kbtsz" {
-        enable = true;
-        homeless = en "sz";
-      };
+      zathura = en "kbt";
+      fish = en "kbtsz";
       git = all;
       helix = when "kbts" {
         enable = true;
@@ -97,7 +89,6 @@ in {
         agent = en "kt";
         dev = {
           common = en "kt";
-          rust = en "k";
           php = en "t";
           python = none;
         };
@@ -110,7 +101,6 @@ in {
         enable = true;
         delta.enable = true;
       };
-      blueman = none;
       cifs = when {
         "t" = {
           enable = true;
@@ -126,7 +116,6 @@ in {
       };
       greetd = en "kbt";
       locate = en "kbts";
-      mullvad = none;
       nfs = none;
       openssh = all;
       pipewire = en "kbt";
@@ -143,7 +132,6 @@ in {
         flags = "--performance";
       };
       udisks = en "kbt";
-      virtualisation = none;
       zram = when {
         "kbtz" = {
           enable = true;
@@ -153,27 +141,23 @@ in {
           memoryPercent = 15;
         };
       };
-      dunst = none;
-      syncthing = none;
       swaybg = en "kbt";
-      swayidle = none;
       tailray = en "kbt";
       ntfy-client = en "k";
       udiskie = en "kbt";
-      dconf = en "kbt";
       gpg = en "kbt";
       gtk = en "kbt";
-      waybar = none;
-      xdg = en "kbt";
+      xdg = when {
+        "kbt".enable = true;
+        "kb".browser = "zen-beta.desktop";
+        "t".browser = "firefox.desktop";
+      };
     };
 
     scripts = {
-      niri-autostack = none;
-      niri-spawn-or-focus = none;
       screenshot = en "k";
       choosepaper = en "kbt";
       pwvucontrol-toggle = en "kbt";
-      volume-control = none;
       extract = all;
       update-images = en "sz";
     };

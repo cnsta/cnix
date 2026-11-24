@@ -7,7 +7,9 @@
 }: let
   inherit (helpers) mkIcon publicUrl;
 
-  categories = [
+  # Display order; categories not listed here are appended alphabetically,
+  # so a new category in modules.nix can never silently disappear.
+  order = [
     "Infra"
     "Media"
     "Downloads"
@@ -16,6 +18,9 @@
     "Communication"
     "Automation"
   ];
+
+  used = lib.unique (lib.filter (c: c != "") (lib.mapAttrsToList (_: s: s.dashboard.category) srv.services));
+  categories = lib.filter (c: lib.elem c used) order ++ lib.sort lib.lessThan (lib.subtractLists order used);
 
   servicesIn = category:
     lib.filterAttrs (
@@ -34,7 +39,7 @@
         title = s.dashboard.name;
         url = publicUrl s;
         icon = mkIcon s.dashboard.icon;
-        timeout = "5s";
+        inherit (s.dashboard) timeout;
       }
       // lib.optionalAttrs (s.dashboard.check == "local") {
         "check-url" = checkUrlFor s;

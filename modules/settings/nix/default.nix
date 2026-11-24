@@ -14,15 +14,18 @@
 
   dropUnset = lib.filterAttrs (_: v: v != null && v != []);
 
+  # "DEVICE LIMIT" on the build device, as systemd's IO*Max take them.
+  onDevice = limit: lib.optional (limit != null) "${cfg.buildDevice} ${limit}";
+
   resourceControl = dropUnset {
     CPUWeight = cfg.cpuWeight;
     CPUQuota = cfg.cpuQuota;
     AllowedCPUs = cfg.allowedCPUs;
     IOWeight = cfg.ioWeight;
-    IOReadBandwidthMax = cfg.ioReadBandwidthMax;
-    IOWriteBandwidthMax = cfg.ioWriteBandwidthMax;
-    IOReadIOPSMax = cfg.ioReadIOPSMax;
-    IOWriteIOPSMax = cfg.ioWriteIOPSMax;
+    IOReadBandwidthMax = onDevice cfg.ioReadBandwidthMax;
+    IOWriteBandwidthMax = onDevice cfg.ioWriteBandwidthMax;
+    IOReadIOPSMax = onDevice cfg.ioReadIOPSMax;
+    IOWriteIOPSMax = onDevice cfg.ioWriteIOPSMax;
     MemoryHigh = cfg.memoryHigh;
     MemoryMax = cfg.memoryMax;
     ManagedOOMMemoryPressure =
@@ -100,41 +103,50 @@ in {
         '';
       };
 
-      ioReadBandwidthMax = mkOption {
-        type = types.listOf types.str;
-        default = [];
-        example = ["/dev/nvme0n1 400M"];
+      buildDevice = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        example = "/dev/nvme0n1";
         description = ''
-          Hard read bandwidth caps, one "DEVICE RATE" entry per line.
-          Device may be a block node or a path on the filesystem in question.
+          Block device (or a path on its filesystem) that builds write to. The
+          io* caps below, and other build-heavy services (Hydra), apply to it.
         '';
       };
 
+      ioReadBandwidthMax = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        example = "400M";
+        description = "Hard read bandwidth cap on buildDevice.";
+      };
+
       ioWriteBandwidthMax = mkOption {
-        type = types.listOf types.str;
-        default = [];
-        example = ["/dev/nvme0n1 200M"];
+        type = types.nullOr types.str;
+        default = null;
+        example = "200M";
         description = ''
-          Hard write bandwidth caps. This is the effective lever for keeping
-          builds from saturating a device and stalling everything else on it.
+          Hard write bandwidth cap on buildDevice. This is the effective lever
+          for keeping builds from saturating a device and stalling everything
+          else on it.
         '';
       };
 
       ioReadIOPSMax = mkOption {
-        type = types.listOf types.str;
-        default = [];
-        example = ["/dev/nvme0n1 40000"];
-        description = "Hard read IOPS caps, one \"DEVICE COUNT\" entry per line.";
+        type = types.nullOr types.str;
+        default = null;
+        example = "40000";
+        description = "Hard read IOPS cap on buildDevice.";
       };
 
       ioWriteIOPSMax = mkOption {
-        type = types.listOf types.str;
-        default = [];
-        example = ["/dev/nvme0n1 20000"];
+        type = types.nullOr types.str;
+        default = null;
+        example = "20000";
         description = ''
-          Hard write IOPS caps. Bites harder than a bandwidth cap when the
-          workload is many small writes, which is typical of Nix builds and
-          Hydra evaluation, and is the worst pattern for DRAM-less SSDs.
+          Hard write IOPS cap on buildDevice. Bites harder than a bandwidth cap
+          when the workload is many small writes, which is typical of Nix
+          builds and Hydra evaluation, and is the worst pattern for DRAM-less
+          SSDs.
         '';
       };
 
@@ -187,6 +199,12 @@ in {
       {
         assertion = !(cfg.cpuQuota != null && cfg.allowedCPUs != null);
         message = "cnix.settings.nix: set either cpuQuota or allowedCPUs, not both.";
+      }
+      {
+        assertion =
+          lib.any (v: v != null) [cfg.ioReadBandwidthMax cfg.ioWriteBandwidthMax cfg.ioReadIOPSMax cfg.ioWriteIOPSMax]
+          -> cfg.buildDevice != null;
+        message = "cnix.settings.nix: io* caps need buildDevice.";
       }
     ];
 

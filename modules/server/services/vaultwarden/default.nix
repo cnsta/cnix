@@ -1,13 +1,14 @@
 # from @fufexan & @notthebee
 {
   config,
+  clib,
   lib,
   self,
   ...
 }: let
   unit = "vaultwarden";
   cfg = config.cnix.server.services.${unit};
-  domain = "${cfg.subdomain}.${config.cnix.server.infra.www.url}";
+  domain = clib.server.mkFullDomain config cfg;
 in {
   config = lib.mkIf cfg.enable {
     age.secrets = {

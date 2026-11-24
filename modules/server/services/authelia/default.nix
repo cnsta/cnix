@@ -9,7 +9,8 @@
   unit = "authelia";
   cfg = config.cnix.server.services.${unit};
   srv = config.cnix.server;
-  domain = clib.server.mkHostDomain config cfg;
+  domain = clib.server.mkDomain config cfg;
+  localDomain = config.cnix.settings.site.domains.local;
 
   www = srv.infra.www;
   bgOrigin = "https://${www.url}";
@@ -44,7 +45,7 @@
     domain = clib.server.mkFullDomain config s;
     subject = subjectsFor s.groups;
     policy = "one_factor";
-  }) (lib.filterAttrs (_: s: s.enable && s.routed && s.auth && s.subdomain != "") srv.services);
+  }) (lib.filterAttrs (_: s: s.auth) (clib.server.routable config));
 in {
   imports = [
     ./clients.nix
@@ -153,9 +154,9 @@ in {
                   default_redirection_url = "https://${domain}";
                 }
                 {
-                  domain = srv.domain;
-                  authelia_url = "https://${cfg.subdomain}.${srv.domain}";
-                  default_redirection_url = "https://${srv.domain}";
+                  domain = localDomain;
+                  authelia_url = "https://${cfg.subdomain}.${localDomain}";
+                  default_redirection_url = "https://${localDomain}";
                 }
               ];
               redis.host = "/run/redis-authelia-main/redis.sock";
@@ -165,7 +166,7 @@ in {
               rules = lib.mkAfter (serviceRules
                 ++ [
                   {
-                    domain = ["*.${domain}" "*.${srv.domain}"];
+                    domain = ["*.${domain}" "*.${localDomain}"];
                     subject = subjectsFor ["admins"];
                     policy = "one_factor";
                   }

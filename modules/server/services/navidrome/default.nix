@@ -9,7 +9,7 @@
 in {
   config = lib.mkIf (srv.infra.podman.enable && cfg.enable) {
     networking.firewall = {
-      allowedTCPPorts = [4533];
+      allowedTCPPorts = [cfg.port];
     };
 
     virtualisation.oci-containers.containers = {

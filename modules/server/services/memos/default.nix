@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  options,
   ...
 }: let
   unit = "memos";
@@ -10,8 +11,8 @@ in {
     services = {
       ${unit} = {
         enable = true;
-        user = "memos";
-        group = "memos";
+        # The option's default is one attrset; merge onto it, don't replace it.
+        settings = options.services.memos.settings.default // {MEMOS_PORT = toString cfg.port;};
       };
     };
   };
