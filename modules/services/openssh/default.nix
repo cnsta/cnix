@@ -14,7 +14,6 @@
     )
     (builtins.attrNames hosts);
 
-  # Initrd sshd (remote LUKS unlock) uses its own host key on port 2222.
   initrdKey = hostname: self + "/hosts/${hostname}/initrd_ssh_host_ed25519_key.pub";
   hostsWithInitrdKeys = builtins.filter (hostname: builtins.pathExists (initrdKey hostname)) (
     builtins.attrNames hosts

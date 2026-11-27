@@ -9,7 +9,6 @@
     ./firefox
     ./foot
     ./fuzzel
-    ./ghostty
     ./helix
     ./fish
     ./git

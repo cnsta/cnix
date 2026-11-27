@@ -49,7 +49,7 @@ in {
       tmux = en "ks";
       alacritty = when "kbt" {
         enable = true;
-        primary = false;
+        primary = true;
       };
       lutris = en "k";
       chromium = en "kt";
@@ -58,10 +58,6 @@ in {
       firefox = en "kt";
       foot = en "kbt";
       fuzzel = en "kbt";
-      ghostty = when "kbt" {
-        enable = true;
-        primary = true;
-      };
       mpv = en "kbt";
       nvf = en "t";
       yazi = en "kbt";
