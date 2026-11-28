@@ -133,6 +133,7 @@
     claude-code
     rtk
     faugus-launcher
+    tutanota-desktop
   ];
   server = with pkgs; [
     nvtopPackages.intel
